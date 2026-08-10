@@ -1,0 +1,28 @@
+/* Clause brand typeface — Aspekta (variable 100–900). Open-source
+   (github.com/ivodolenc/aspekta), self-hosted at public/fonts so we don't
+   depend on a third-party CDN. */
+@font-face {
+  font-family: 'Aspekta';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/AspektaVF.woff2') format('woff2-variations');
+}
+
+/* Display serif — Fraunces (variable, weight axis 100–900). Self-hosted so the
+   whole weight range is available and 500 renders as a true weight. Roman only. */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/FrauncesVF.woff2') format('woff2-variations');
+}
+
+/* The source app's Tailwind preflight zeroed body margin; the scoped homepage
+   CSS depends on it for edge-to-edge sections. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
