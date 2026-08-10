@@ -22,6 +22,19 @@ npm run e2e     # Playwright against a production build
 npm run build   # production build (/ prerenders static)
 ```
 
+## Deploys
+
+Pushing to `main` deploys to production automatically:
+
+**https://offboard-muo-marketing-site.vercel.app** — the shareable team preview.
+Public (no login) but `noindex`, so it stays out of search while we build.
+
+Branch pushes get their own preview URLs, but those are gated behind Vercel SSO —
+only team members signed into Vercel can open them.
+
+At launch: point `offboard.co` at this project (the apex is on Framer today) and
+flip the robots tag noted below.
+
 ## Notes
 
 - The page is deliberately backend-free — a test asserts zero network calls.
