@@ -6,29 +6,10 @@ import {
   type KeyboardEvent,
   type SetStateAction,
 } from "react";
-import {
-  Briefcase,
-  Calculator,
-  Check,
-  ChevronRight,
-  Clock3,
-  FileStack,
-  FileText,
-  GraduationCap,
-  LockKeyhole,
-  MessagesSquare,
-  Scale,
-  ShieldCheck,
-  Sparkles,
-  Users,
-} from "lucide-react";
+import { ChevronRight, Sparkles } from "lucide-react";
 
 import { JOURNEY_STAGES, type JourneyStageId } from "@/journey/stages";
-import {
-  MARKETING_STAGE_FIXTURES,
-  MAYA,
-  PACKET_OUTPUTS,
-} from "./fixtures";
+import { MARKETING_STAGE_FIXTURES } from "./fixtures";
 
 function handleTabKey<T extends string>(
   event: KeyboardEvent<HTMLButtonElement>,
@@ -57,61 +38,28 @@ export function BenefitsScene() {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="mh-scene mh-scene-benefits" aria-label="Illustrative California benefits summary">
-      <div className="mh-card mh-benefits-card">
-        <div className="mh-card-head">
-          <span className="mh-overline">Benefits</span>
-          <span className="mh-illustrative-chip">Illustrative</span>
-        </div>
-        <h3>What you may be entitled to</h3>
-        <p className="mh-card-context">{MAYA.state} · Role ended {MAYA.endedOn} · Sources checked Aug 4</p>
-        <div className="mh-benefit-rows">
-          <article>
-            <div className="mh-row-icon"><GraduationCap aria-hidden="true" /></div>
-            <div>
-              <span>Possible match</span>
-              <strong>California Training Benefits</strong>
-              <small>Approved training may change work-search requirements.</small>
-            </div>
-            <b>Review</b>
-          </article>
-          <article>
-            <div className="mh-row-icon"><Clock3 aria-hidden="true" /></div>
-            <div>
-              <span>Time-sensitive</span>
-              <strong>Training extension</strong>
-              <small>Contact EDD before week 16 to keep the option open.</small>
-            </div>
-            <b>11 weeks</b>
-          </article>
-        </div>
-        <button
-          className="mh-fine-print-toggle"
-          type="button"
-          aria-expanded={expanded}
-          onClick={() => setExpanded((value) => !value)}
-        >
-          What “possible match” means <ChevronRight aria-hidden="true" />
-        </button>
-        {expanded && (
-          <p className="mh-fine-print" role="status">
-            Offboard matches verified program rules to the details in this sample. The agency decides eligibility and funding.
-          </p>
-        )}
-      </div>
-
-      <div className="mh-card mh-card-accent mh-claim-card">
-        <span className="mh-overline">Act now</span>
-        <h4>File your claim first.</h4>
-        <div className="mh-ready-list">
-          <span><Check aria-hidden="true" /> Last day confirmed</span>
-          <span><Check aria-hidden="true" /> Employer details saved</span>
-        </div>
-        <div className="mh-source-stamp">
-          <ShieldCheck aria-hidden="true" />
-          <span><small>Official source</small><b>California EDD</b><em>Reviewed Aug 4, 2026</em></span>
-        </div>
-      </div>
+    <div className="mh-scene mh-generated-scene" aria-label="Illustrative California benefits summary">
+      <img
+        className="mh-generated-scene-image"
+        src="/marketing/homepage/product-scenes/benefits-summary.webp"
+        alt="Benefits illustration showing California Training Benefits, a time-sensitive training extension, and an official California EDD source beside the next action."
+        width="1536"
+        height="1024"
+        loading="lazy"
+      />
+      <button
+        className="mh-generated-disclosure"
+        type="button"
+        aria-expanded={expanded}
+        onClick={() => setExpanded((value) => !value)}
+      >
+        What “possible match” means <ChevronRight aria-hidden="true" />
+      </button>
+      {expanded && (
+        <p className="mh-generated-note" role="status">
+          Offboard matches verified program rules to the details in this sample. The agency decides eligibility and funding.
+        </p>
+      )}
     </div>
   );
 }
@@ -120,16 +68,19 @@ export function InteractivePathScene() {
   const [activeId, setActiveId] = useState<JourneyStageId>("land-the-blow");
   const stageIds = JOURNEY_STAGES.map((item) => item.id);
   const stage = JOURNEY_STAGES.find((item) => item.id === activeId) ?? JOURNEY_STAGES[0];
-  const stageName = stage.name;
   const fixture = MARKETING_STAGE_FIXTURES[activeId];
 
   return (
-    <div className="mh-scene mh-scene-path" aria-label="Interactive seven-stage Offboard path">
-      <div className="mh-card mh-path-card">
-        <div className="mh-card-head">
-          <span className="mh-overline">Your path</span>
-          <small className="mh-stage-count">Stage {stage.number} of 7</small>
-        </div>
+    <div className="mh-scene mh-generated-scene mh-generated-path" aria-label="Interactive seven-stage Offboard path">
+      <img
+        className="mh-generated-scene-image"
+        src="/marketing/homepage/product-scenes/path-seven-stage.webp"
+        alt="Seven-stage Offboard path illustration with Protect the first week highlighted and its first three tasks connected to LUMO."
+        width="1536"
+        height="1024"
+        loading="lazy"
+      />
+      <div className="mh-generated-stage-control">
         <div className="mh-stage-tabs" role="tablist" aria-label="Choose a stage to preview">
           {JOURNEY_STAGES.map((item) => (
             <button
@@ -152,228 +103,185 @@ export function InteractivePathScene() {
           id="marketing-stage-panel"
           role="tabpanel"
           aria-labelledby={`marketing-stage-tab-${activeId}`}
-          className="mh-stage-panel"
+          className="mh-generated-stage-panel"
         >
-          <span className="mh-stage-marker"><i /> {activeId === "land-the-blow" ? "You are here" : `Stage ${stage.number} preview`}</span>
-          <h3>{stageName}</h3>
-          <h4>{stage.question}</h4>
-          <div className="mh-stage-step-list">
-            {fixture.steps.map((step, index) => (
-              <article key={step.title} className={step.status ? `is-${step.status}` : undefined}>
-                <span>{step.status === "done" ? <Check aria-hidden="true" /> : null}</span>
-                <div><strong>{step.title}</strong><small>{step.detail}</small></div>
-                {index === 0 && <em>{fixture.timing}</em>}
-              </article>
-            ))}
+          <span>{activeId === "land-the-blow" ? "You are here" : `Stage ${stage.number} preview`}</span>
+          <h3>{stage.question}</h3>
+          <p>{fixture.stakes}</p>
+          <div className="mh-generated-stage-steps">
+            {fixture.steps.map((step) => <strong key={step.title}>{step.title}</strong>)}
           </div>
-          <div className="mh-stage-source">
-            <ShieldCheck aria-hidden="true" />
-            <span><small>Guidance grounded in</small><strong>{fixture.source}</strong></span>
-          </div>
-          <p className="mh-stage-footnote">Stages open in any order. This is a suggested route, not a gate.</p>
+          <small>This is a suggested route, not a gate. Guidance grounded in {fixture.source}. Stages stay open in any order.</small>
         </div>
-      </div>
-
-      <div className="mh-card mh-lumo-card" aria-label="Illustrative page-aware LUMO guidance">
-        <span className="mh-lumo-tag"><Sparkles aria-hidden="true" /> LUMO</span>
-        <span className="mh-lumo-question">Can you help me with this stage?</span>
-        <p>Absolutely, {MAYA.firstName}. In <strong>{stageName}</strong>, the goal is to {fixture.stakes.toLowerCase()}</p>
-        <small>It knows the page you are on and your situation.</small>
       </div>
     </div>
   );
 }
-export function JobSearchBento() {
+
+type ToolkitCategory = "packets" | "resumes" | "applications" | "interviews";
+
+type ToolkitScene = {
+  id: ToolkitCategory;
+  number: string;
+  label: string;
+  kicker: string;
+  title: string;
+  body: string;
+  cta: string;
+  sheetTitle: string;
+  actionTitle: string;
+  lumo: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
+const TOOLKIT_SCENES: readonly ToolkitScene[] = [
+  {
+    id: "packets",
+    number: "01",
+    label: "Job Packets",
+    kicker: "Packet ready",
+    title: "Senior Product Designer · Northstar",
+    body: "Design products that help small teams do their best work, from first idea to launch and beyond.",
+    cta: "Build my first Job Packet",
+    sheetTitle: "Your Job Packet",
+    actionTitle: "Open your tailored resume",
+    lumo: "Strong match. Highlight your end-to-end product design experience and user research impact.",
+    imageSrc: "/marketing/homepage/product-scenes/toolkit-job-packets.webp",
+    imageAlt: "Your Job Packet for Senior Product Designer at Northstar, shown as three connected layers: Understand the role, Build your materials, and Find your way in, with a tailored resume ready to review.",
+  },
+  {
+    id: "resumes",
+    number: "02",
+    label: "Resumes",
+    kicker: "Version ready",
+    title: "Your experience, shaped for Northstar.",
+    body: "Keep one master resume and create a focused version without rewriting from scratch.",
+    cta: "Create my resume",
+    sheetTitle: "Senior Product Designer",
+    actionTitle: "Review the Northstar version",
+    lumo: "Your strongest evidence is the system work that improved adoption and reduced handoff time.",
+    imageSrc: "/marketing/homepage/product-scenes/toolkit-resumes.webp",
+    imageAlt: "Resume Studio illustration showing a master Senior Product Designer resume producing a Northstar tailored version that is ready to review.",
+  },
+  {
+    id: "applications",
+    number: "03",
+    label: "Applications",
+    kicker: "Application saved",
+    title: "Keep every next move attached to the role.",
+    body: "The posting, materials, contacts, and follow-ups stay together as the application moves.",
+    cta: "Track my applications",
+    sheetTitle: "Senior Product Designer",
+    actionTitle: "Prepare for the interview",
+    lumo: "Your materials are attached. Next, prepare examples about prioritization and cross-functional work.",
+    imageSrc: "/marketing/homepage/product-scenes/toolkit-applications.webp",
+    imageAlt: "Northstar application folder showing applied and materials attached, with interview next and a prompt to prepare for the interview.",
+  },
+  {
+    id: "interviews",
+    number: "04",
+    label: "Interviews",
+    kicker: "Prep ready",
+    title: "Walk in already knowing what to practice.",
+    body: "Use the role, company, and your experience to prepare, rehearse, and follow up.",
+    cta: "Prepare for an interview",
+    sheetTitle: "Northstar interview",
+    actionTitle: "Start interview practice",
+    lumo: "Lead with the launch you owned and be ready to explain what you cut, why, and what changed.",
+    imageSrc: "/marketing/homepage/product-scenes/toolkit-interviews.webp",
+    imageAlt: "Northstar interview preparation folio with likely questions, selected evidence, and a role-specific practice session ready to start.",
+  },
+];
+
+const TOOLKIT_CATEGORY_IDS = TOOLKIT_SCENES.map((scene) => scene.id);
+
+export function ToolkitShowcase({ signUpUrl }: { signUpUrl: string }) {
+  const [activeId, setActiveId] = useState<ToolkitCategory>("packets");
+  const activeScene = TOOLKIT_SCENES.find((scene) => scene.id === activeId) ?? TOOLKIT_SCENES[0];
+
   return (
-    <div className="mh-bento" aria-label="What Offboard gives you for the job search">
-      <article className="mh-card mh-bento-card mh-bento-lg">
-        <div className="mh-bento-art mh-bento-art-packet" aria-hidden="true">
-          {PACKET_OUTPUTS.map((output, index) => (
-            <span key={output.id} className={index < 3 ? "is-done" : undefined}>
-              {index < 3 ? <Check aria-hidden="true" /> : <i />}
-              {output.label}
-            </span>
-          ))}
-        </div>
-        <div className="mh-bento-copy">
-          <span className="mh-bento-icon" aria-hidden="true"><FileStack /></span>
-          <h3>One link becomes an application</h3>
-          <p>
-            Paste a job link and get the posting, a ghost check, company research, your role
-            match, a tailored resume, a cover letter, and a route to a real person. Your first
-            packet is free.
-          </p>
-        </div>
-      </article>
+    <div className="mh-toolkit" aria-label="Connected job-search toolkit">
+      <div className="mh-toolkit-tabs" role="tablist" aria-label="Choose a toolkit category">
+        {TOOLKIT_SCENES.map((scene) => (
+          <button
+            key={scene.id}
+            type="button"
+            role="tab"
+            id={`marketing-toolkit-tab-${scene.id}`}
+            aria-controls={`marketing-toolkit-panel-${scene.id}`}
+            aria-selected={scene.id === activeId}
+            className={scene.id === activeId ? "is-active" : undefined}
+            onClick={() => setActiveId(scene.id)}
+            onKeyDown={(event) => handleTabKey(
+              event,
+              TOOLKIT_CATEGORY_IDS,
+              activeId,
+              setActiveId,
+              "marketing-toolkit-tab-",
+            )}
+            tabIndex={scene.id === activeId ? 0 : -1}
+            aria-label={scene.label}
+          >
+            <span aria-hidden="true">{scene.number}</span>
+            {scene.label}
+          </button>
+        ))}
+      </div>
 
-      <article className="mh-card mh-bento-card mh-bento-lg">
-        <div className="mh-bento-art mh-bento-art-interview" aria-hidden="true">
-          <span>Tell me about a launch you owned.</span>
-          <span>How do you decide what to cut?</span>
-          <span className="is-muted">Where are you weakest here?</span>
-          <div className="mh-bento-wave">
-            {Array.from({ length: 18 }, (_, index) => <i key={index} />)}
+      <div
+        id={`marketing-toolkit-panel-${activeScene.id}`}
+        role="tabpanel"
+        aria-labelledby={`marketing-toolkit-tab-${activeScene.id}`}
+        className="mh-toolkit-theatre"
+      >
+        <div key={activeScene.id} className="mh-toolkit-stage-content">
+          <div className="mh-toolkit-copy">
+            <span>{activeScene.kicker}</span>
+            <h3>{activeScene.title}</h3>
+            <p>{activeScene.body}</p>
+            <a className="mh-primary-cta" href={signUpUrl}>
+              {activeScene.cta} <ChevronRight aria-hidden="true" />
+            </a>
+          </div>
+
+          <figure className="mh-toolkit-visual" aria-label={`${activeScene.label} product preview`}>
+            <img
+              src={activeScene.imageSrc}
+              alt={`${activeScene.imageAlt} ${activeScene.sheetTitle}. ${activeScene.actionTitle}.`}
+              width="1536"
+              height="1024"
+              loading="lazy"
+            />
+          </figure>
+
+          <div className="mh-toolkit-lumo" aria-label="Category-aware LUMO guidance">
+            <Sparkles aria-hidden="true" />
+            <strong>LUMO keeps this role in context</strong>
+            <i aria-hidden="true" />
+            <p>{activeScene.lumo}</p>
           </div>
         </div>
-        <div className="mh-bento-copy">
-          <span className="mh-bento-icon" aria-hidden="true"><MessagesSquare /></span>
-          <h3>Walk in with the questions already answered</h3>
-          <p>
-            A briefing with likely questions and your strongest evidence, out-loud practice
-            with feedback, and a debrief that drafts the thank-you and follow-up.
-          </p>
-        </div>
-      </article>
-
-      <article className="mh-card mh-bento-card">
-        <div className="mh-bento-art mh-bento-art-ghost" aria-hidden="true">
-          <strong>83</strong>
-          <small>Likely a real, active role</small>
-          <div className="mh-bento-bars"><i /><i /><i className="is-low" /><i /></div>
-        </div>
-        <div className="mh-bento-copy">
-          <span className="mh-bento-icon" aria-hidden="true"><ShieldCheck /></span>
-          <h3>Know if the job is even real</h3>
-          <p>
-            Check stale listings, broken apply flows, duplicate job IDs, and other warning
-            signs before you spend an hour tailoring.
-          </p>
-        </div>
-      </article>
-
-      <article className="mh-card mh-bento-card">
-        <div className="mh-bento-art mh-bento-art-resume" aria-hidden="true">
-          <b />
-          <i /><i /><i className="is-tailored" /><i className="is-short" />
-        </div>
-        <div className="mh-bento-copy">
-          <span className="mh-bento-icon" aria-hidden="true"><FileText /></span>
-          <h3>One master resume, tailored per role</h3>
-          <p>
-            Upload what you have, edit it in one place, and generate role-specific versions
-            without touching your original.
-          </p>
-        </div>
-      </article>
-
-      <article className="mh-card mh-bento-card">
-        <div className="mh-bento-art mh-bento-art-pipeline" aria-hidden="true">
-          {["Saved", "Applied", "Interview"].map((column, columnIndex) => (
-            <div key={column}>
-              <small>{column}</small>
-              {Array.from({ length: 3 - columnIndex }, (_, index) => <i key={index} />)}
-            </div>
-          ))}
-        </div>
-        <div className="mh-bento-copy">
-          <span className="mh-bento-icon" aria-hidden="true"><Briefcase /></span>
-          <h3>Every role in one place</h3>
-          <p>
-            Track each opportunity from first save through interview, with checks, materials,
-            and follow-ups attached to the same role.
-          </p>
-        </div>
-      </article>
-
-      <article className="mh-card mh-bento-card">
-        <div className="mh-bento-art mh-bento-art-paperwork" aria-hidden="true">
-          <i /><i />
-          <i className="is-flagged"><mark>Non-compete clause</mark></i>
-          <i className="is-short" />
-        </div>
-        <div className="mh-bento-copy">
-          <span className="mh-bento-icon" aria-hidden="true"><Scale /></span>
-          <h3>Paperwork review</h3>
-          <p>
-            Understand your severance and offer paperwork before you sign, clause by clause.
-          </p>
-        </div>
-      </article>
-
-      <article className="mh-card mh-bento-card">
-        <div className="mh-bento-art mh-bento-art-runway" aria-hidden="true">
-          <strong>5.5 months</strong>
-          <small>of runway at your current spend</small>
-          <div className="mh-bento-months">
-            {Array.from({ length: 8 }, (_, index) => <i key={index} className={index < 5 ? "is-covered" : undefined} />)}
-          </div>
-        </div>
-        <div className="mh-bento-copy">
-          <span className="mh-bento-icon" aria-hidden="true"><Calculator /></span>
-          <h3>Runway calculator</h3>
-          <p>
-            See how long your money lasts and what each decision changes.
-          </p>
-        </div>
-      </article>
-
-      <article className="mh-card mh-bento-card">
-        <div className="mh-bento-art mh-bento-art-training" aria-hidden="true">
-          <span><GraduationCap aria-hidden="true" /> Data analytics certificate</span>
-          <span><GraduationCap aria-hidden="true" /> Project management</span>
-          <span className="is-muted"><GraduationCap aria-hidden="true" /> Cloud fundamentals</span>
-        </div>
-        <div className="mh-bento-copy">
-          <span className="mh-bento-icon" aria-hidden="true"><GraduationCap /></span>
-          <h3>Funded training explorer</h3>
-          <p>
-            Search 27,000+ state-approved program records. Training may be paid for while
-            your benefits continue; the agency decides.
-          </p>
-        </div>
-      </article>
-
-      <article className="mh-card mh-bento-card mh-bento-wide">
-        <div className="mh-bento-copy">
-          <span className="mh-bento-icon" aria-hidden="true"><Sparkles /></span>
-          <h3>Ask LUMO</h3>
-          <p>
-            Ask anything, from "what deadlines am I coming up on?" to "help me prep for
-            tomorrow's interview." LUMO answers from your plan and your situation, not a
-            blank chat.
-          </p>
-        </div>
-        <div className="mh-bento-art mh-bento-art-lumo" aria-hidden="true">
-          <span>What deadlines am I coming up on?</span>
-          <span>Walk me through this severance agreement.</span>
-          <span>Help me prepare for tomorrow's interview.</span>
-        </div>
-      </article>
+      </div>
     </div>
   );
 }
 
 export function TrustScene() {
   return (
-    <div className="mh-scene mh-scene-trust" aria-label="What stays private and who can see it">
-      <div className="mh-privacy-grid">
-        <article className="mh-card mh-privacy-card">
-          <span className="mh-privacy-label">What you share</span>
-          <ul>
-            <li><Check aria-hidden="true" /> Severance terms</li>
-            <li><Check aria-hidden="true" /> Health and coverage details</li>
-            <li><Check aria-hidden="true" /> Savings and monthly costs</li>
-            <li><Check aria-hidden="true" /> Documents and applications</li>
-            <li><Check aria-hidden="true" /> Every LUMO conversation</li>
-          </ul>
-        </article>
-
-        <article className="mh-card mh-card-accent mh-privacy-card mh-privacy-answer">
-          <span className="mh-privacy-label">Who can see it</span>
-          <strong>Only you.</strong>
-          <p>Offboard never sells member data and never shares it with your former employer.</p>
-          <span className="mh-privacy-seal"><LockKeyhole aria-hidden="true" /> Private by default</span>
-        </article>
-
-        <article className="mh-card mh-privacy-card">
-          <span className="mh-privacy-label">What a sponsor sees</span>
-          <span className="mh-sponsor-dots" aria-hidden="true">
-            {Array.from({ length: 12 }, (_, index) => <i key={index} />)}
-          </span>
-          <span className="mh-sponsor-count"><Users aria-hidden="true" /> <strong>48 people</strong> activated their plans</span>
-          <small>No names, documents, conversations, or individual behaviour. If your employer paid for Offboard, that number is all they get.</small>
-        </article>
-      </div>
-    </div>
+    <figure className="mh-scene mh-generated-scene mh-scene-trust" aria-label="What stays private and who can see it">
+      <img
+        className="mh-generated-scene-image"
+        src="/marketing/homepage/product-scenes/privacy-by-default.webp"
+        alt="Privacy illustration showing personal information entering a private sleeve visible only to you, while a sponsor sees anonymous activation totals only."
+        width="1536"
+        height="1024"
+        loading="lazy"
+      />
+      <figcaption className="mh-generated-trust-caption">
+        <strong>Only you.</strong>
+        <span>Sponsors see anonymous participation totals, never names, documents, or conversations.</span>
+      </figcaption>
+    </figure>
   );
 }

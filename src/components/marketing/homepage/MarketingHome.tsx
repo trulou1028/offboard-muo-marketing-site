@@ -1,9 +1,9 @@
-import { ArrowDown, ArrowRight, Check, Menu } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, Menu, Plus } from "lucide-react";
 
 import {
   BenefitsScene,
   InteractivePathScene,
-  JobSearchBento,
+  ToolkitShowcase,
   TrustScene,
 } from "@/components/marketing/homepage/ProductScenes";
 import {
@@ -70,35 +70,32 @@ const HOW_IT_WORKS_STEPS = [
   },
 ];
 
-const LOGO_STRIP = [
-  { name: "Snowflake", file: "snowflake.svg" },
-  { name: "Microsoft", file: "microsoft.svg" },
-  { name: "Meta", file: "meta.svg" },
-  { name: "DoorDash", file: "doordash.svg" },
-  { name: "Oracle", file: "oracle.svg" },
-  { name: "Cisco", file: "cisco.svg" },
-  { name: "Starbucks", file: "starbucks.svg" },
-  { name: "DocuSign", file: "docusign.svg" },
-  { name: "Glassdoor", file: "glassdoor.svg" },
-  { name: "General Motors", file: "general-motors.svg" },
-];
+const MEMBER_COMPANIES = [
+  "Snowflake",
+  "Microsoft",
+  "Meta",
+  "DoorDash",
+  "Oracle",
+  "Cisco",
+  "Starbucks",
+] as const;
 
 const FAQS = [
   {
     question: "Is Offboard a government agency?",
-    answer: "No. Offboard is an independent company. We organize official information and help you understand the next step, but agencies decide eligibility and benefits.",
+    answer: "No. Offboard is independent. Government agencies decide eligibility and benefits.",
   },
   {
     question: "Do I have to follow the path in order?",
-    answer: "No. Your path suggests an order based on urgency and context, but every stage stays open. Start wherever your situation needs you.",
+    answer: "No. The order is suggested, and every stage stays open.",
   },
   {
     question: "What can a sponsor see?",
-    answer: "Only aggregate participation. Sponsors cannot see documents, applications, conversations, personal details, or individual behavior.",
+    answer: "Only aggregate participation, never documents, conversations, or personal details.",
   },
   {
     question: "What is included for free?",
-    answer: "The free plan includes the navigator, your first Job Packet, 30 monthly credits, and three Ask LUMO messages each day.",
+    answer: "Navigator, your first Application Packet, 30 credits, and daily LUMO messages.",
   },
 ];
 
@@ -146,9 +143,9 @@ export default function MarketingHome() {
 
         <section className="mh-logo-strip" aria-label="Where Offboard members come from">
           <span>Our members come from teams at</span>
-          <div className="mh-logo-row">
-            {LOGO_STRIP.map((logo) => (
-              <img key={logo.name} src={`/marketing/homepage/logos/${logo.file}`} alt={logo.name} loading="lazy" />
+          <div className="mh-logo-row" aria-label="Member companies">
+            {MEMBER_COMPANIES.map((company) => (
+              <span key={company}>{company}</span>
             ))}
           </div>
         </section>
@@ -201,13 +198,13 @@ export default function MarketingHome() {
         <section className="mh-search-section" id="job-search">
           <div className="mh-section-heading">
             <span className="mh-kicker">The toolkit</span>
-            <h2>Stop rebuilding your application for every role.</h2>
+            <h2>Every part of your search, connected.</h2>
             <p>
-              Paste a job link and Offboard assembles the application. Around it, every tool
-              for the transition shows up at the right moment, already knowing your situation.
+              Build the packet, tailor the resume, track the application, and prepare for the
+              interview without starting over.
             </p>
           </div>
-          <JobSearchBento />
+          <ToolkitShowcase signUpUrl={SIGN_UP_URL} />
         </section>
 
         <section className="mh-context-section">
@@ -255,30 +252,34 @@ export default function MarketingHome() {
             <h2>Start free. Add more support when you need it.</h2>
             <p>No setup fee. No hidden trial. Keep your workspace whether or not you upgrade.</p>
           </div>
-          <div className="mh-pricing-cards">
-            <article>
-              <span>Free</span>
-              <div><strong>$0</strong><small>forever</small></div>
-              <p>The essentials for getting oriented and making the first strong move.</p>
-              <ul>
-                <li><Check aria-hidden="true" /> Full navigator</li>
-                <li><Check aria-hidden="true" /> First Job Packet</li>
-                <li><Check aria-hidden="true" /> 30 monthly credits</li>
-                <li><Check aria-hidden="true" /> Three daily LUMO messages</li>
-              </ul>
-              <PrimaryCta />
+          <div className="mh-pricing-guide" aria-label="Offboard plans">
+            <article className="mh-pricing-row">
+              <div className="mh-pricing-label">
+                <strong>Start here</strong>
+                <span>Free forever</span>
+              </div>
+              <div className="mh-pricing-summary">
+                <h3>Free</h3>
+                <p>Everything you need to understand where you stand and make the first strong move.</p>
+              </div>
+              <div className="mh-pricing-action">
+                <p>Navigator · First Application Packet · 30 credits · Daily LUMO</p>
+                <PrimaryCta />
+              </div>
             </article>
-            <article className="is-pro">
-              <span>Pro</span>
-              <div><strong>$20</strong><small>/ month</small></div>
-              <p>More capacity for an active search, without losing the shared context.</p>
-              <ul>
-                <li><Check aria-hidden="true" /> Everything in Free</li>
-                <li><Check aria-hidden="true" /> 300 monthly credits</li>
-                <li><Check aria-hidden="true" /> Unlimited LUMO</li>
-                <li><Check aria-hidden="true" /> More Job Packets and tools</li>
-              </ul>
-              <a className="mh-primary-cta" href={SIGN_UP_URL}>Choose Pro <ArrowRight aria-hidden="true" /></a>
+            <article className="mh-pricing-row">
+              <div className="mh-pricing-label">
+                <strong>Need more help?</strong>
+                <span className="mh-pricing-tag">More support</span>
+              </div>
+              <div className="mh-pricing-summary">
+                <div className="mh-pricing-name"><h3>Plus</h3><span>$20 / month</span></div>
+                <p>Additional guidance, tools, and support when your search needs more capacity.</p>
+              </div>
+              <div className="mh-pricing-action">
+                <p>Everything in Free · 300 credits · Unlimited LUMO · More packets</p>
+                <a className="mh-secondary-cta" href={SIGN_UP_URL}>Choose Plus <ArrowRight aria-hidden="true" /></a>
+              </div>
             </article>
           </div>
         </section>
@@ -289,19 +290,22 @@ export default function MarketingHome() {
             <h2 id="community-title">Real people, in it with you.</h2>
           </div>
           <div className="mh-community-grid">
-            <article className="mh-card mh-community-card">
-              <h3>The Offboard newsletter</h3>
-              <p>Weekly job-market analysis and honest hiring takes. 5,000+ readers.</p>
+            <article className="mh-community-card">
+              <div className="mh-community-number"><span>01</span><i aria-hidden="true" /></div>
+              <h3>Find trusted expertise</h3>
+              <p>Weekly job-market analysis and honest hiring takes. Read by more than 5,000 people.</p>
               <a href="https://newsletter.offboard.co" target="_blank" rel="noreferrer">Subscribe free <ArrowRight aria-hidden="true" /></a>
             </article>
-            <article className="mh-card mh-community-card">
-              <h3>The Slack community</h3>
-              <p>Job seekers sharing leads and keeping each other accountable. Free to join.</p>
+            <article className="mh-community-card">
+              <div className="mh-community-number"><span>02</span><i aria-hidden="true" /></div>
+              <h3>Join the community</h3>
+              <p>Job seekers share leads, compare notes, and keep each other accountable. Free to join.</p>
               <a href="https://join.slack.com/t/offboardco/shared_invite/zt-34fsjpgfn-BcbibJ3d86P5RztYnHsA9w" target="_blank" rel="noreferrer">Join the Slack <ArrowRight aria-hidden="true" /></a>
             </article>
-            <article className="mh-card mh-community-card">
-              <h3>Meet with a Human</h3>
-              <p>Stuck? Share your situation and a real person on our team reviews it. Free.</p>
+            <article className="mh-community-card">
+              <div className="mh-community-number"><span>03</span><i aria-hidden="true" /></div>
+              <h3>Meet with a human</h3>
+              <p>When you are stuck, share your situation and a real person on our team will review it.</p>
               <a href="https://offboard.co/intake" target="_blank" rel="noreferrer">Meet with a Human <ArrowRight aria-hidden="true" /></a>
             </article>
           </div>
@@ -314,13 +318,16 @@ export default function MarketingHome() {
           </div>
           <div className="mh-faq-grid">
             {FAQS.map((item) => (
-              <article key={item.question}><h3>{item.question}</h3><p>{item.answer}</p></article>
+              <article key={item.question}>
+                <div><h3>{item.question}</h3><Plus aria-hidden="true" /></div>
+                <p>{item.answer}</p>
+              </article>
             ))}
           </div>
         </section>
 
         <section className="mh-final-section">
-          <div className="mh-final-photo"><img src="/marketing/homepage/forward-editorial-v2.webp" alt="A South Asian technology professional carrying her laptop toward a new opportunity" /></div>
+          <div className="mh-final-photo"><img src="/marketing/homepage/forward-editorial-paper.webp" alt="An Asian American technology professional carrying her portfolio and laptop into her next chapter" /></div>
           <div className="mh-final-copy">
             <Brand light />
             <span className="mh-kicker">Your next chapter can start here</span>

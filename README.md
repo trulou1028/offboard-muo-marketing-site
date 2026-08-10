@@ -41,8 +41,14 @@ flip the robots tag noted below.
 - `robots` is `noindex, nofollow, noarchive` while the site is pre-launch; flip it
   in [src/app/page.tsx](src/app/page.tsx) (and the test + e2e assertions) at launch.
 - `lucide-react` is pinned to the app repo's version so icon artwork matches.
-- To re-sync content from the app repo, diff against
-  `src/pages/marketing/MarketingHome.tsx` and
-  `src/components/marketing/homepage/` there; the only local deltas are the
-  removed Helmet block, the `"use client"` directive in ProductScenes, and the
-  inlined `JourneySituation` type in [stages.ts](src/journey/stages.ts).
+- **Last synced from `lumo-plan-builder` commit `88751f7a`** ("Match marketing
+  homepage to approved Paper design"). To re-sync, diff that repo's
+  `src/pages/marketing/MarketingHome.tsx`, `src/components/marketing/homepage/`,
+  and `public/marketing/homepage/` against here. The only local deltas are the
+  removed Helmet block (replaced by the Metadata API), the `"use client"`
+  directive in ProductScenes, and the inlined `JourneySituation` type in
+  [stages.ts](src/journey/stages.ts). Check out `origin/main` there first — a
+  stale local checkout is how this repo shipped an old design once already.
+- The e2e suite waits for React hydration before clicking. Next server-renders
+  the tab buttons, so a click can otherwise land before the listeners attach and
+  be silently dropped — the Vite original had no such window.

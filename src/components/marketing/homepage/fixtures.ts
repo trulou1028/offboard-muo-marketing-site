@@ -37,10 +37,10 @@ export const APPROVED_CUSTOMER_STORY: ApprovedCustomerStory | null = {
     { when: "Day 1", what: "Claim filed" },
     { when: "Week 1", what: "Separation details organized" },
     { when: "Week 2", what: "Training deadline protected" },
-    { when: "Week 3", what: "First Job Packet created" },
+    { when: "Week 3", what: "First Application Packet created" },
   ],
-  photoSrc: "/marketing/homepage/forward-editorial-v1.webp",
-  photoAlt: "A professional carrying her notebook through an open studio door",
+  photoSrc: "/marketing/homepage/maya-editorial-paper.webp",
+  photoAlt: "Maya walking through a bright modern workplace with her notebook and laptop",
 };
 
 export const MARKETING_STAGE_FIXTURES: Record<JourneyStageId, MarketingStageFixture> = {
@@ -93,7 +93,7 @@ export const MARKETING_STAGE_FIXTURES: Record<JourneyStageId, MarketingStageFixt
     timing: "For every serious role",
     stakes: "Research, tailor, and track without rebuilding the context each time.",
     steps: [
-      { title: "Build your first Job Packet", detail: "Ghost Check, research, resume, and cover letter" },
+      { title: "Build your first Application Packet", detail: "Ghost Check, research, resume, and cover letter" },
       { title: "Save the application", detail: "Keep the role and every artifact together" },
       { title: "Find a path to a person", detail: "Use your network with a specific reason to reach out" },
     ],
@@ -108,7 +108,7 @@ export const MARKETING_STAGE_FIXTURES: Record<JourneyStageId, MarketingStageFixt
       { title: "Practice out loud", detail: "Voice rehearsal with direct coaching" },
       { title: "Debrief while it is fresh", detail: "Capture signals and the follow-up" },
     ],
-    source: "Your Job Packet, interview details, and saved examples",
+    source: "Your Application Packet, interview details, and saved examples",
   },
   "land-and-give-back": {
     id: "land-and-give-back",
@@ -123,7 +123,7 @@ export const MARKETING_STAGE_FIXTURES: Record<JourneyStageId, MarketingStageFixt
   },
 };
 
-// The outputs a Job Packet actually produces, in pipeline order. Mirrors the
+// The outputs an Application Packet actually produces, in pipeline order. Mirrors the
 // shipped steps in src/hooks/useJobPacket.ts - an interview briefing is NOT one
 // of them (briefings generate on the Interview record), so it must not appear
 // here. Keep this list in sync with the pipeline before making packet claims.
@@ -178,4 +178,3 @@ export const PACKET_OUTPUTS = [
     body: "Offboard finds a plausible route to a real person at the company so outreach is not a cold guess.",
   },
 ] as const;
-
