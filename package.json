@@ -9,7 +9,9 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "imagery": "node scripts/generate-imagery.mjs",
+    "imagery:dry": "node scripts/generate-imagery.mjs --dry-run"
   },
   "dependencies": {
     "lucide-react": "^0.462.0",

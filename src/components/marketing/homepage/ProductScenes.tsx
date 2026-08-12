@@ -41,7 +41,7 @@ export function BenefitsScene() {
     <div className="mh-scene mh-generated-scene" aria-label="Illustrative California benefits summary">
       <img
         className="mh-generated-scene-image"
-        src="/marketing/homepage/product-scenes/benefits-summary.webp"
+        src="/marketing/homepage/renders/benefits-stack.webp"
         alt="Benefits illustration showing California Training Benefits, a time-sensitive training extension, and an official California EDD source beside the next action."
         width="1536"
         height="1024"
@@ -74,7 +74,7 @@ export function InteractivePathScene() {
     <div className="mh-scene mh-generated-scene mh-generated-path" aria-label="Interactive seven-stage Offboard path">
       <img
         className="mh-generated-scene-image"
-        src="/marketing/homepage/product-scenes/path-seven-stage.webp"
+        src="/marketing/homepage/renders/path-stage.webp"
         alt="Seven-stage Offboard path illustration with Protect the first week highlighted and its first three tasks connected to LUMO."
         width="1536"
         height="1024"
@@ -147,7 +147,7 @@ const TOOLKIT_SCENES: readonly ToolkitScene[] = [
     sheetTitle: "Your Job Packet",
     actionTitle: "Open your tailored resume",
     lumo: "Strong match. Highlight your end-to-end product design experience and user research impact.",
-    imageSrc: "/marketing/homepage/product-scenes/toolkit-job-packets.webp",
+    imageSrc: "/marketing/homepage/renders/toolkit-job-packets.webp",
     imageAlt: "Your Job Packet for Senior Product Designer at Northstar, shown as three connected layers: Understand the role, Build your materials, and Find your way in, with a tailored resume ready to review.",
   },
   {
@@ -161,7 +161,7 @@ const TOOLKIT_SCENES: readonly ToolkitScene[] = [
     sheetTitle: "Senior Product Designer",
     actionTitle: "Review the Northstar version",
     lumo: "Your strongest evidence is the system work that improved adoption and reduced handoff time.",
-    imageSrc: "/marketing/homepage/product-scenes/toolkit-resumes.webp",
+    imageSrc: "/marketing/homepage/renders/toolkit-resumes.webp",
     imageAlt: "Resume Studio illustration showing a master Senior Product Designer resume producing a Northstar tailored version that is ready to review.",
   },
   {
@@ -175,7 +175,7 @@ const TOOLKIT_SCENES: readonly ToolkitScene[] = [
     sheetTitle: "Senior Product Designer",
     actionTitle: "Prepare for the interview",
     lumo: "Your materials are attached. Next, prepare examples about prioritization and cross-functional work.",
-    imageSrc: "/marketing/homepage/product-scenes/toolkit-applications.webp",
+    imageSrc: "/marketing/homepage/renders/toolkit-applications.webp",
     imageAlt: "Northstar application folder showing applied and materials attached, with interview next and a prompt to prepare for the interview.",
   },
   {
@@ -189,7 +189,7 @@ const TOOLKIT_SCENES: readonly ToolkitScene[] = [
     sheetTitle: "Northstar interview",
     actionTitle: "Start interview practice",
     lumo: "Lead with the launch you owned and be ready to explain what you cut, why, and what changed.",
-    imageSrc: "/marketing/homepage/product-scenes/toolkit-interviews.webp",
+    imageSrc: "/marketing/homepage/renders/toolkit-interviews.webp",
     imageAlt: "Northstar interview preparation folio with likely questions, selected evidence, and a role-specific practice session ready to start.",
   },
 ];
@@ -272,7 +272,7 @@ export function TrustScene() {
     <figure className="mh-scene mh-generated-scene mh-scene-trust" aria-label="What stays private and who can see it">
       <img
         className="mh-generated-scene-image"
-        src="/marketing/homepage/product-scenes/privacy-by-default.webp"
+        src="/marketing/homepage/renders/privacy-three-panel.webp"
         alt="Privacy illustration showing personal information entering a private sleeve visible only to you, while a sponsor sees anonymous activation totals only."
         width="1536"
         height="1024"

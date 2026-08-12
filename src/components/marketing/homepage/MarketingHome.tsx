@@ -1,13 +1,23 @@
 import { ArrowDown, ArrowRight, Check, Menu, Plus } from "lucide-react";
 
+import { ComparisonTable } from "@/components/marketing/homepage/ComparisonTable";
+import {
+  CapabilitiesSection,
+  LifeStripSection,
+  ProofSection,
+  WhatsIncludedSection,
+} from "@/components/marketing/homepage/HomeSections";
 import {
   BenefitsScene,
   InteractivePathScene,
   ToolkitShowcase,
   TrustScene,
 } from "@/components/marketing/homepage/ProductScenes";
+import { SystemDiagram } from "@/components/marketing/homepage/SystemDiagram";
 import {
   APPROVED_CUSTOMER_STORY,
+  HOMEPAGE_FAQS,
+  TRANSFORMATION,
   type ApprovedCustomerStory,
 } from "@/components/marketing/homepage/fixtures";
 import "@/components/marketing/homepage/MarketingHomepage.css";
@@ -38,7 +48,7 @@ function CustomerStorySection({ story }: { story: ApprovedCustomerStory | null }
   if (!story) return null;
 
   return (
-    <section className="mh-customer-story" aria-labelledby="customer-story-title">
+    <section className="mh-customer-story mh-cream" aria-labelledby="customer-story-title">
       <div className="mh-customer-story-copy">
         <span className="mh-kicker">Follow Maya's first 30 days</span>
         <h2 id="customer-story-title">Know what to do today, what can wait, and what comes next.</h2>
@@ -50,25 +60,10 @@ function CustomerStorySection({ story }: { story: ApprovedCustomerStory | null }
         </ol>
         <small>{story.roleContext}</small>
       </div>
-      <img src={story.photoSrc} alt={story.photoAlt} />
+      <img src={story.photoSrc} alt={story.photoAlt} width="1100" height="1650" loading="lazy" />
     </section>
   );
 }
-
-const HOW_IT_WORKS_STEPS = [
-  {
-    title: "Tell us what happened",
-    body: "Share your role, location, dates, and priorities.",
-  },
-  {
-    title: "See what matters first",
-    body: "Offboard organizes deadlines, benefits, and job-search steps around your situation.",
-  },
-  {
-    title: "Work the plan",
-    body: "Complete each step with LUMO, your documents, and your saved context beside you.",
-  },
-];
 
 const MEMBER_COMPANIES = [
   "Snowflake",
@@ -80,24 +75,13 @@ const MEMBER_COMPANIES = [
   "Starbucks",
 ] as const;
 
-const FAQS = [
-  {
-    question: "Is Offboard a government agency?",
-    answer: "No. Offboard is independent. Government agencies decide eligibility and benefits.",
-  },
-  {
-    question: "Do I have to follow the path in order?",
-    answer: "No. The order is suggested, and every stage stays open.",
-  },
-  {
-    question: "What can a sponsor see?",
-    answer: "Only aggregate participation, never documents, conversations, or personal details.",
-  },
-  {
-    question: "What is included for free?",
-    answer: "Navigator, your first Application Packet, 30 credits, and daily LUMO messages.",
-  },
-];
+// Hero collage scraps: decorative torn-paper accents from the approved mockup.
+const HERO_COLLAGE = [
+  { src: "/marketing/homepage/collage/scrap-calendar.webp", className: "mh-collage-calendar" },
+  { src: "/marketing/homepage/collage/scrap-health.webp", className: "mh-collage-health" },
+  { src: "/marketing/homepage/collage/scrap-runway.webp", className: "mh-collage-runway" },
+  { src: "/marketing/homepage/collage/scrap-path.webp", className: "mh-collage-path" },
+] as const;
 
 export default function MarketingHome() {
   return (
@@ -105,7 +89,7 @@ export default function MarketingHome() {
       <a className="mh-skip-link" href="#main-content">Skip to content</a>
 
       <header className="mh-site-header">
-        <a className="mh-logo-link" href="#top" aria-label="Offboard home"><Brand /></a>
+        <a className="mh-logo-link" href="#top" aria-label="Offboard home"><Brand light /></a>
         <nav aria-label="Marketing navigation">
           <a href="#how-it-works">How it works</a>
           <a href="#benefits">Benefits</a>
@@ -121,13 +105,14 @@ export default function MarketingHome() {
       </header>
 
       <main id="main-content">
-        <section className="mh-hero" id="top">
+        {/* 01 — HERO */}
+        <section className="mh-hero mh-deep mh-section" id="top">
           <div className="mh-hero-copy">
             <span className="mh-kicker">Life after a layoff</span>
             <h1>The modern unemployment office.</h1>
             <p>
-              Tell us what happened. Offboard turns your layoff into a private, step-by-step
-              plan for benefits, deadlines, and finding your next job.
+              Everything you need after a layoff, organized into one clear plan. Know what
+              you're eligible for, what matters now, and what to do next.
             </p>
             <div className="mh-hero-actions">
               <PrimaryCta />
@@ -137,7 +122,26 @@ export default function MarketingHome() {
           </div>
 
           <div className="mh-hero-media">
-            <img src="/marketing/homepage/hero-editorial-v2.webp" alt="A person beginning the next chapter after a job loss" />
+            <img
+              src="/marketing/homepage/raw/hero-real-life.webp"
+              alt="A woman at her desk by the window, pen in hand, beginning to sort out what comes after a job loss"
+              width="1448"
+              height="1086"
+              loading="eager"
+              fetchPriority="high"
+            />
+            {HERO_COLLAGE.map((scrap) => (
+              <img
+                key={scrap.src}
+                className={`mh-hero-collage ${scrap.className}`}
+                src={scrap.src}
+                alt=""
+                aria-hidden="true"
+                width="800"
+                height="800"
+                loading="lazy"
+              />
+            ))}
           </div>
         </section>
 
@@ -150,18 +154,19 @@ export default function MarketingHome() {
           </div>
         </section>
 
-        <section className="mh-path-section" id="sample-path">
+        {/* 02 — TRANSFORMATION */}
+        <section className="mh-path-section mh-section" id="sample-path">
           <span id="how-it-works" className="mh-anchor-target" aria-hidden="true" />
           <div className="mh-feature-grid mh-feature-grid-path">
             <div className="mh-feature-copy">
               <span className="mh-kicker">How it works</span>
               <h2>Your next steps, in the right order.</h2>
-              <p>
-                Offboard builds your seven-stage plan in three steps, then stays with you
-                while you work it. Every stage stays open; the order is suggested, never gated.
-              </p>
+              <div className="mh-fromto">
+                <p className="mh-from">{TRANSFORMATION.fromQuote}</p>
+                <p className="mh-to mh-type-sub">{TRANSFORMATION.toQuote}</p>
+              </div>
               <ol className="mh-numbered-points">
-                {HOW_IT_WORKS_STEPS.map((step, index) => (
+                {TRANSFORMATION.steps.map((step, index) => (
                   <li key={step.title}>
                     <span>{index + 1}</span>
                     <div><strong>{step.title}</strong><p>{step.body}</p></div>
@@ -173,7 +178,8 @@ export default function MarketingHome() {
           </div>
         </section>
 
-        <section className="mh-help-section" id="benefits">
+        {/* 03 — DEEP BENEFIT */}
+        <section className="mh-help-section mh-cream mh-section" id="benefits">
           <div className="mh-feature-grid">
             <div className="mh-feature-copy">
               <span className="mh-kicker">The benefits counter, rebuilt</span>
@@ -183,9 +189,9 @@ export default function MarketingHome() {
                 what to handle first, and keeps the official sources beside each recommendation.
               </p>
               <ul className="mh-feature-points">
-                <li><Check aria-hidden="true" /><span><strong>Handle urgent steps first</strong></span></li>
-                <li><Check aria-hidden="true" /><span><strong>Know what is confirmed and what still needs review</strong></span></li>
-                <li><Check aria-hidden="true" /><span><strong>See the official source behind every recommendation</strong></span></li>
+                <li><Check aria-hidden="true" /><span><strong>Find programs you may qualify for</strong></span></li>
+                <li><Check aria-hidden="true" /><span><strong>Know which deadlines matter</strong></span></li>
+                <li><Check aria-hidden="true" /><span><strong>Understand what to do next</strong></span></li>
               </ul>
               <span className="mh-inline-disclaimer">
                 Offboard is independent and is not affiliated with, endorsed by, or acting on behalf of any government agency.
@@ -195,7 +201,37 @@ export default function MarketingHome() {
           </div>
         </section>
 
-        <section className="mh-search-section" id="job-search">
+        {/* 04 — THE SYSTEM */}
+        <section className="mh-system-section mh-section" aria-labelledby="system-title">
+          <div className="mh-context-story">
+            <div className="mh-context-photo">
+              <img
+                src="/marketing/homepage/raw/system-desk.webp"
+                alt="A man at a desk in his home office, writing notes in a notebook beside an open laptop"
+                width="1400"
+                height="933"
+                loading="lazy"
+              />
+            </div>
+            <div className="mh-context-intro">
+              <span className="mh-kicker">Built to remember what matters</span>
+              <h2 id="system-title">Tell us once. Never start from scratch again.</h2>
+              <p>
+                Offboard isn't one feature. Everything works from the same understanding of you —
+                your role, location, goals, deadlines, and documents stay connected across
+                benefits, resumes, applications, and interview preparation.
+              </p>
+              <SystemDiagram />
+              <small>Maya Chen is an illustrative California member used consistently throughout this demo.</small>
+            </div>
+          </div>
+        </section>
+
+        {/* 05 — CAPABILITIES */}
+        <CapabilitiesSection />
+
+        {/* 06 — PRODUCT DEEP DIVE */}
+        <section className="mh-search-section mh-dark mh-section" id="job-search">
           <div className="mh-section-heading">
             <span className="mh-kicker">The toolkit</span>
             <h2>Every part of your search, connected.</h2>
@@ -207,26 +243,30 @@ export default function MarketingHome() {
           <ToolkitShowcase signUpUrl={SIGN_UP_URL} />
         </section>
 
-        <section className="mh-context-section">
-          <div className="mh-context-story">
-            <div className="mh-context-photo">
-              <img src="/marketing/homepage/journey-editorial-v3.webp" alt="A Black technology professional reflecting and planning his next move" />
-            </div>
-            <div className="mh-context-intro">
-              <span className="mh-kicker">Built to remember what matters</span>
-              <h2>Tell us once. Never start from scratch again.</h2>
-              <p>
-                Your role, location, goals, deadlines, and documents stay connected across
-                benefits, resumes, applications, and interview preparation.
-              </p>
-              <small>Maya Chen is an illustrative California member used consistently throughout this demo.</small>
-            </div>
-          </div>
-        </section>
+        {/* 07 — PROOF + CTA */}
+        <ProofSection />
 
+        {/* 08 — WHAT'S INCLUDED */}
+        <WhatsIncludedSection />
+
+        {/* 09 — STORY */}
         <CustomerStorySection story={APPROVED_CUSTOMER_STORY} />
 
-        <section className="mh-trust-section" id="trust">
+        {/* 11 — COMPARISON */}
+        <section className="mh-comparison mh-white mh-section" aria-labelledby="comparison-title">
+          <div className="mh-section-heading">
+            <span className="mh-kicker">Why not piece it together?</span>
+            <h2 id="comparison-title">You can do this yourself. You shouldn't have to.</h2>
+            <p>
+              The unemployment experience is fragmented across agencies, tools, and advice.
+              Offboard's job is connecting it.
+            </p>
+          </div>
+          <ComparisonTable />
+        </section>
+
+        {/* 12 — PRIVACY */}
+        <section className="mh-trust-section mh-dark mh-section" id="trust">
           <div className="mh-section-heading mh-section-heading-split">
             <div>
               <span className="mh-kicker">Your information</span>
@@ -246,7 +286,8 @@ export default function MarketingHome() {
           <TrustScene />
         </section>
 
-        <section className="mh-pricing-section" id="pricing">
+        {/* 13 — PRICING */}
+        <section className="mh-pricing-section mh-section" id="pricing">
           <div className="mh-pricing-intro">
             <span className="mh-kicker">Support that grows with you</span>
             <h2>Start free. Add more support when you need it.</h2>
@@ -284,7 +325,8 @@ export default function MarketingHome() {
           </div>
         </section>
 
-        <section className="mh-community-section" aria-labelledby="community-title">
+        {/* 14 — HUMAN SUPPORT */}
+        <section className="mh-community-section mh-white mh-section" aria-labelledby="community-title">
           <div className="mh-section-heading">
             <span className="mh-kicker">You don't have to do this alone</span>
             <h2 id="community-title">Real people, in it with you.</h2>
@@ -311,13 +353,14 @@ export default function MarketingHome() {
           </div>
         </section>
 
-        <section className="mh-faq-section" aria-labelledby="faq-title">
+        {/* 15 — FAQ */}
+        <section className="mh-faq-section mh-cream mh-section" aria-labelledby="faq-title">
           <div>
             <span className="mh-kicker">Good questions</span>
             <h2 id="faq-title">A few things to know before you start.</h2>
           </div>
           <div className="mh-faq-grid">
-            {FAQS.map((item) => (
+            {HOMEPAGE_FAQS.map((item) => (
               <article key={item.question}>
                 <div><h3>{item.question}</h3><Plus aria-hidden="true" /></div>
                 <p>{item.answer}</p>
@@ -326,8 +369,20 @@ export default function MarketingHome() {
           </div>
         </section>
 
-        <section className="mh-final-section">
-          <div className="mh-final-photo"><img src="/marketing/homepage/forward-editorial-paper.webp" alt="An Asian American technology professional carrying her portfolio and laptop into her next chapter" /></div>
+        {/* 16 — LIFE AFTER LAYOFF */}
+        <LifeStripSection />
+
+        {/* 17 — FINAL CTA */}
+        <section className="mh-final-section mh-deep mh-section">
+          <div className="mh-final-photo">
+            <img
+              src="/marketing/homepage/raw/final-cta-portrait.webp"
+              alt="A woman stepping out of her front door into soft morning light, looking ahead with quiet determination"
+              width="1100"
+              height="1650"
+              loading="lazy"
+            />
+          </div>
           <div className="mh-final-copy">
             <Brand light />
             <span className="mh-kicker">Your next chapter can start here</span>
@@ -339,7 +394,7 @@ export default function MarketingHome() {
         </section>
       </main>
 
-      <footer className="mh-site-footer">
+      <footer className="mh-site-footer mh-deep">
         <Brand light />
         <p>Offboard is an independent company, not a government agency. We help you navigate official programs. Your benefits are yours, and claiming them is always free.</p>
         <div>

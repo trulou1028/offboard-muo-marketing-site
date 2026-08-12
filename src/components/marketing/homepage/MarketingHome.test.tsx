@@ -42,19 +42,35 @@ describe("MarketingHome", () => {
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
-  it("tells one step framework, not three", () => {
+  it("opens with the functional promise and the honest trust line", () => {
+    renderHomepage();
+
+    expect(
+      screen.getByText(/everything you need after a layoff, organized into one clear plan/i),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/know what you're eligible for, what matters now, and what to do next/i)).toBeInTheDocument();
+    expect(
+      screen.getByText("Private by default. Independent of government agencies. No credit card required."),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /see how it works/i })).toHaveAttribute("href", "#how-it-works");
+  });
+
+  it("reframes overwhelm into a clear plan with three steps", () => {
     renderHomepage();
 
     expect(screen.getByRole("heading", { name: /your next steps, in the right order/i })).toBeInTheDocument();
-    expect(screen.getByText("Tell us what happened")).toBeInTheDocument();
-    expect(screen.getByText("See what matters first")).toBeInTheDocument();
-    expect(screen.getByText("Work the plan")).toBeInTheDocument();
+    expect(screen.getByText(/i just lost my job\. what the hell do i do\?/i)).toBeInTheDocument();
+    expect(screen.getByText(/i know exactly what matters today, this week, and next/i)).toBeInTheDocument();
+    expect(screen.getByText("Understand where you stand")).toBeInTheDocument();
+    expect(screen.getByText("Build your plan")).toBeInTheDocument();
+    expect(screen.getByText("Move forward")).toBeInTheDocument();
 
-    // Retired frameworks must not resurface alongside the canonical steps.
+    // Retired step frameworks must not resurface alongside the canonical steps.
+    expect(screen.queryByText("Tell us what happened")).not.toBeInTheDocument();
+    expect(screen.queryByText("See what matters first")).not.toBeInTheDocument();
+    expect(screen.queryByText("Work the plan")).not.toBeInTheDocument();
     expect(screen.queryByText(/a simple framework for moving forward/i)).not.toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: /^know\.$/i })).not.toBeInTheDocument();
-    expect(screen.queryByText("You tell us what happened")).not.toBeInTheDocument();
-    expect(screen.queryByText("We verify what applies")).not.toBeInTheDocument();
   });
 
   it("keeps member-facing vocabulary: no layoff plan", () => {
@@ -78,10 +94,18 @@ describe("MarketingHome", () => {
   it("keeps the emotional hero photography unobstructed", () => {
     const { container } = renderHomepage();
 
-    const heroImage = screen.getByRole("img", { name: /beginning the next chapter after a job loss/i });
+    const heroImage = screen.getByRole("img", { name: /at her desk by the window.*after a job loss/i });
     expect(heroImage).toBeInTheDocument();
     expect(heroImage.parentElement).toHaveClass("mh-hero-media");
     expect(container.querySelector(".mh-hero-media .mh-card")).not.toBeInTheDocument();
+
+    // Torn-paper collage accents are decoration: hidden from assistive tech.
+    const collage = container.querySelectorAll(".mh-hero-collage");
+    expect(collage.length).toBeGreaterThanOrEqual(3);
+    collage.forEach((scrap) => {
+      expect(scrap).toHaveAttribute("aria-hidden", "true");
+      expect(scrap).toHaveAttribute("alt", "");
+    });
   });
 
   it("keeps every primary CTA portable to the app domain", () => {
@@ -126,6 +150,34 @@ describe("MarketingHome", () => {
     expect(screen.getByRole("heading", { name: "Which direction is mine?" })).toBeInTheDocument();
     expect(screen.getByText("Review funded training")).toBeInTheDocument();
     expect(screen.getByText(/suggested route, not a gate/i)).toBeInTheDocument();
+  });
+
+  it("connects everything through one understanding of you", () => {
+    renderHomepage();
+
+    expect(screen.getByRole("heading", { name: /tell us once\. never start from scratch again/i })).toBeInTheDocument();
+    expect(screen.getByText(/everything works from the same understanding of you/i)).toBeInTheDocument();
+
+    const diagram = screen.getByLabelText("How your information powers everything");
+    expect(within(diagram).getByText("You + your information")).toBeInTheDocument();
+    expect(within(diagram).getByText("Career plan")).toBeInTheDocument();
+    expect(within(diagram).getByText("Job search")).toBeInTheDocument();
+    expect(within(diagram).getByText("Support")).toBeInTheDocument();
+  });
+
+  it("lists six capabilities, one line each", () => {
+    renderHomepage();
+
+    const section = screen.getByLabelText(/everything you need to move forward/i);
+    const items = within(section).getAllByRole("heading", { level: 3 });
+    expect(items.map((h) => h.textContent)).toEqual([
+      "Know what you're eligible for",
+      "Build stronger applications",
+      "Stay organized",
+      "Prepare for interviews",
+      "Know what comes next",
+      "Get human support",
+    ]);
   });
 
   it("shows one connected toolkit category at a time", () => {
@@ -200,6 +252,102 @@ describe("MarketingHome", () => {
     fireEvent.keyDown(interviewsTab, { key: "Home" });
     await waitFor(() => expect(packetsTab).toHaveFocus());
     expect(within(toolkit).getByRole("img", { name: /your job packet/i })).toBeInTheDocument();
+  });
+
+  it("shows only verifiable proof and labels the illustrative quote", () => {
+    renderHomepage();
+
+    const proof = screen.getByLabelText(/thousands of job seekers shouldn't have to figure unemployment out alone/i);
+    expect(within(proof).getByText("5,000+")).toBeInTheDocument();
+    expect(within(proof).getByText(/read the offboard newsletter/i)).toBeInTheDocument();
+    expect(within(proof).getByText("An illustrative member quote, not a testimonial")).toBeInTheDocument();
+    expect(within(proof).getByRole("link", { name: /build my free plan/i })).toHaveAttribute(
+      "href",
+      "https://app.offboard.co/auth?tab=signup",
+    );
+
+    // No invented product metrics: the only number in the proof section is the
+    // verifiable newsletter readership.
+    expect(within(proof).queryByText(/members|applications created|interviews landed/i)).not.toBeInTheDocument();
+  });
+
+  it("itemizes the seven things included in your Offboard", () => {
+    renderHomepage();
+
+    const included = screen.getByLabelText(/everything in your offboard/i);
+    const titles = within(included).getAllByRole("listitem").map((li) => li.querySelector("strong")?.textContent);
+    expect(titles).toEqual([
+      "Your personalized plan",
+      "Benefits and deadlines",
+      "Job search workspace",
+      "Application support",
+      "Interview preparation",
+      "Community and human support",
+      "Your information and history",
+    ]);
+  });
+
+  it("compares on your own, point solutions, and Offboard honestly", () => {
+    renderHomepage();
+
+    expect(screen.getByRole("heading", { name: /you can do this yourself\. you shouldn't have to/i })).toBeInTheDocument();
+
+    const table = screen.getByRole("table", { name: /on your own.*point solutions.*offboard/i });
+    const columnHeaders = within(table).getAllByRole("columnheader").map((th) => th.textContent);
+    expect(columnHeaders).toEqual(["What you need", "On your own", "Point solutions", "Offboard"]);
+
+    const rowHeaders = within(table).getAllByRole("rowheader").map((th) => th.textContent);
+    expect(rowHeaders).toEqual([
+      "Benefits and deadlines",
+      "Personalized next steps",
+      "Application support",
+      "Job search organization",
+      "Ongoing guidance",
+      "Human and community support",
+    ]);
+
+    // Honest comparison: not every competitor cell is a red X.
+    expect(within(table).getAllByText("Included").length).toBeGreaterThan(6);
+    expect(within(table).getAllByText("Partial").length).toBeGreaterThanOrEqual(4);
+  });
+
+  it("answers the eight objection-killing FAQs without overpromising", () => {
+    renderHomepage();
+
+    [
+      "Is Offboard a government agency?",
+      "Is this only for people who were laid off?",
+      "Can I use Offboard if my employer didn't provide it?",
+      "What does Offboard actually help with?",
+      "How much does it cost?",
+      "What happens to my personal information?",
+      "Do I have to use everything?",
+      "Can I cancel anytime?",
+    ].forEach((question) => {
+      expect(screen.getByText(question)).toBeInTheDocument();
+    });
+
+    expect(screen.getByText(/government agencies decide eligibility and pay benefits/i)).toBeInTheDocument();
+    expect(screen.getByText(/your workspace, documents, and history stay yours/i)).toBeInTheDocument();
+    // Cancellation copy must not promise refunds.
+    expect(screen.queryByText(/refund/i)).not.toBeInTheDocument();
+  });
+
+  it("walks through life after a layoff as photography, not UI", () => {
+    renderHomepage();
+
+    const strip = screen.getByLabelText("Life after a layoff, in real moments");
+    const photos = within(strip).getAllByRole("img");
+    expect(photos).toHaveLength(5);
+    photos.forEach((photo) => {
+      expect(photo).toHaveAttribute("loading", "lazy");
+      expect(photo.getAttribute("alt")).toBeTruthy();
+    });
+
+    // The emotional payoff stays free of product chrome.
+    expect(within(strip).queryByRole("heading")).not.toBeInTheDocument();
+    expect(within(strip).queryByRole("link")).not.toBeInTheDocument();
+    expect(within(strip).queryByRole("button")).not.toBeInTheDocument();
   });
 
   it("offers the community: newsletter, Slack, and a human", () => {

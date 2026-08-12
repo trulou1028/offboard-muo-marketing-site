@@ -50,3 +50,6 @@ next-env.d.ts
 # supabase
 supabase/.temp/
 !.env.example
+
+# imagery pipeline
+/.imagery-cache/

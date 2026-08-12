@@ -39,9 +39,151 @@ export const APPROVED_CUSTOMER_STORY: ApprovedCustomerStory | null = {
     { when: "Week 2", what: "Training deadline protected" },
     { when: "Week 3", what: "First Application Packet created" },
   ],
-  photoSrc: "/marketing/homepage/maya-editorial-paper.webp",
-  photoAlt: "Maya walking through a bright modern workplace with her notebook and laptop",
+  photoSrc: "/marketing/homepage/raw/maya-walking.webp",
+  photoAlt: "Maya carrying her laptop and a folder of documents through the hallway of her home",
 };
+
+// The conversion framework's transformation section: the emotional reframe the
+// product performs, then the three-step journey that delivers it.
+export const TRANSFORMATION = {
+  fromQuote: "“I just lost my job. What the hell do I do?”",
+  toQuote: "“I know exactly what matters today, this week, and next.”",
+  steps: [
+    { title: "Understand where you stand", body: "Benefits, deadlines, finances, and eligibility, organized around your situation." },
+    { title: "Build your plan", body: "Prioritized next steps based on what is urgent and what can wait." },
+    { title: "Move forward", body: "Applications, interviews, support, and ongoing guidance as things change." },
+  ],
+} as const;
+
+// Scannable capabilities: the fast answer to "what can Offboard actually do?"
+export const CAPABILITIES = [
+  { title: "Know what you're eligible for", line: "Benefits, programs, and deadlines." },
+  { title: "Build stronger applications", line: "Materials informed by you and the opportunity." },
+  { title: "Stay organized", line: "Keep jobs, applications, and next steps together." },
+  { title: "Prepare for interviews", line: "Know the company, role, and story you need to tell." },
+  { title: "Know what comes next", line: "A plan that changes as your situation changes." },
+  { title: "Get human support", line: "Community and people when software isn't enough." },
+] as const;
+
+// Mid-page proof: only claims Offboard can verify today. Swap in real product
+// numbers (members, applications created) when they exist - never invent them.
+export const PROOF = {
+  headline: "Thousands of job seekers shouldn't have to figure unemployment out alone.",
+  qualitative:
+    "Offboard grew out of a weekly newsletter and community for people navigating layoffs. The product organizes what we kept explaining one person at a time.",
+  stat: "5,000+",
+  statLabel: "people read the Offboard newsletter's job-market analysis every week",
+  quote:
+    "“The first week after being laid off I was completely overwhelmed. Having one place that said what to do first gave me somewhere to start.”",
+  quoteLabel: "An illustrative member quote, not a testimonial",
+} as const;
+
+// "What's included": the contents of someone's personalized unemployment
+// system, not a software feature list.
+export const WHATS_INCLUDED = [
+  { title: "Your personalized plan", line: "What matters now and what can wait." },
+  { title: "Benefits and deadlines", line: "Programs and actions relevant to you." },
+  { title: "Job search workspace", line: "Applications and opportunities in one place." },
+  { title: "Application support", line: "Materials tailored to each opportunity." },
+  { title: "Interview preparation", line: "Briefings, practice, and follow-ups." },
+  { title: "Community and human support", line: "Real people when you need them." },
+  { title: "Your information and history", line: "Told once, remembered everywhere, always yours." },
+] as const;
+
+// Comparison: the category argument. Offboard's advantage is that the
+// unemployment experience is fragmented and Offboard connects it - not that
+// every individual feature is unprecedented.
+export type ComparisonCell = "yes" | "partial" | "no";
+export const COMPARISON_ROWS: ReadonlyArray<{
+  need: string;
+  onYourOwn: { state: ComparisonCell; note: string };
+  pointSolutions: { state: ComparisonCell; note: string };
+  offboard: { state: ComparisonCell; note: string };
+}> = [
+  {
+    need: "Benefits and deadlines",
+    onYourOwn: { state: "partial", note: "Research it all yourself" },
+    pointSolutions: { state: "partial", note: "Varies" },
+    offboard: { state: "yes", note: "Organized for your situation" },
+  },
+  {
+    need: "Personalized next steps",
+    onYourOwn: { state: "no", note: "You are the plan" },
+    pointSolutions: { state: "partial", note: "Varies" },
+    offboard: { state: "yes", note: "Prioritized and kept current" },
+  },
+  {
+    need: "Application support",
+    onYourOwn: { state: "partial", note: "Separate tools" },
+    pointSolutions: { state: "yes", note: "Per tool" },
+    offboard: { state: "yes", note: "Connected to your context" },
+  },
+  {
+    need: "Job search organization",
+    onYourOwn: { state: "partial", note: "Separate system" },
+    pointSolutions: { state: "yes", note: "Per tool" },
+    offboard: { state: "yes", note: "One workspace" },
+  },
+  {
+    need: "Ongoing guidance",
+    onYourOwn: { state: "no", note: "" },
+    pointSolutions: { state: "no", note: "" },
+    offboard: { state: "yes", note: "A plan that adapts" },
+  },
+  {
+    need: "Human and community support",
+    onYourOwn: { state: "partial", note: "Find it separately" },
+    pointSolutions: { state: "partial", note: "Varies" },
+    offboard: { state: "yes", note: "Built in" },
+  },
+];
+
+// Objection-killing FAQ. Compliance notes: agencies decide eligibility;
+// sponsors see aggregate participation only; no refund promises.
+export const HOMEPAGE_FAQS = [
+  {
+    question: "Is Offboard a government agency?",
+    answer: "No. Offboard is an independent company. Government agencies decide eligibility and pay benefits; we help you navigate them.",
+  },
+  {
+    question: "Is this only for people who were laid off?",
+    answer: "No. Offboard also helps if you're still employed but at risk, or have been searching for a while.",
+  },
+  {
+    question: "Can I use Offboard if my employer didn't provide it?",
+    answer: "Yes. Anyone can sign up directly - most members do. Employer sponsorship just means someone else paid.",
+  },
+  {
+    question: "What does Offboard actually help with?",
+    answer: "Understanding your benefits and deadlines, building a prioritized plan, and running your job search - applications, interviews, and what comes next.",
+  },
+  {
+    question: "How much does it cost?",
+    answer: "The free plan includes the navigator, your first Application Packet, 30 credits, and daily LUMO messages. Plus is $20/month for more capacity. Claiming your benefits is always free.",
+  },
+  {
+    question: "What happens to my personal information?",
+    answer: "It stays in your workspace. Never sold, never shared with your former employer. Sponsors see anonymous participation counts only.",
+  },
+  {
+    question: "Do I have to use everything?",
+    answer: "No. Start with what your situation needs - every part works on its own, and they get better together.",
+  },
+  {
+    question: "Can I cancel anytime?",
+    answer: "Yes. Cancel whenever you like - your workspace, documents, and history stay yours.",
+  },
+] as const;
+
+// Life-after-layoff photography strip: unemployment happens inside a person's
+// actual life. No UI, no cards, no features.
+export const LIFE_STRIP = [
+  { src: "/marketing/homepage/raw/strip-kitchen-table.webp", alt: "A man alone at his kitchen table in the early morning with coffee, mail, and a laptop", caption: "At the kitchen table" },
+  { src: "/marketing/homepage/raw/strip-school-dropoff.webp", alt: "A mother zipping her daughter's jacket outside an elementary school on an overcast morning", caption: "Dropping the kids at school" },
+  { src: "/marketing/homepage/raw/strip-interview-prep.webp", alt: "A woman practicing interview answers out loud in her bedroom mirror with notes taped to its edge", caption: "Preparing for an interview" },
+  { src: "/marketing/homepage/raw/strip-call-outside.webp", alt: "A man taking a phone call on his apartment balcony under a gray sky", caption: "Taking the call outside" },
+  { src: "/marketing/homepage/raw/strip-walking-in.webp", alt: "A woman walking through the glass door of an office building on her first day at a new job", caption: "Walking into the next job" },
+] as const;
 
 export const MARKETING_STAGE_FIXTURES: Record<JourneyStageId, MarketingStageFixture> = {
   "land-the-blow": {

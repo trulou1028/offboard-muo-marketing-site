@@ -52,12 +52,22 @@ test.describe("Marketing homepage", () => {
     await expect(toolkit.getByText(/strongest evidence is the system work/i)).toBeVisible();
     await expect(page.getByLabel("What stays private and who can see it").getByText("Only you.")).toBeVisible();
 
-    // The Paper design holds to a three-size type scale, 16px floor.
+    // Conversion-architecture sections all present.
+    await expect(page.getByText("5,000+")).toBeVisible();
+    await expect(page.getByText("An illustrative member quote, not a testimonial")).toBeVisible();
+    await expect(page.getByRole("table", { name: /on your own.*point solutions.*offboard/i })).toBeVisible();
+    await expect(page.getByText("Can I cancel anytime?")).toBeVisible();
+    await expect(page.getByLabel("Life after a layoff, in real moments").locator("img").first()).toHaveAttribute("loading", "lazy");
+
+    // The dark editorial design holds a closed four-size type scale (16/24/48/64
+    // — body, pull-quote/panel display, section, hero), 16px floor. Enforced by
+    // the same `* { font-size: … !important }` mechanism that held the old
+    // three-size scale, so this still catches drift.
     const desktopFontSizes = await page.locator(".marketing-homepage").evaluate((root) => {
       const elements = [root, ...root.querySelectorAll("*")];
       return [...new Set(elements.map((element) => Number.parseFloat(getComputedStyle(element).fontSize)))].sort((a, b) => a - b);
     });
-    expect(desktopFontSizes.length).toBeLessThanOrEqual(3);
+    expect(desktopFontSizes.length).toBeLessThanOrEqual(4);
     expect(desktopFontSizes[0]).toBeGreaterThanOrEqual(16);
 
     // The "possible match" disclosure still opens.
@@ -74,7 +84,7 @@ test.describe("Marketing homepage", () => {
     await waitForHydration(page);
 
     await expect(page.getByRole("heading", { level: 1, name: /modern unemployment office/i })).toBeVisible();
-    await expect(page.getByRole("img", { name: /beginning the next chapter after a job loss/i })).toBeVisible();
+    await expect(page.getByRole("img", { name: /at her desk by the window.*after a job loss/i })).toBeVisible();
     await expect(page.getByLabel("Illustrative California benefits summary")).toBeVisible();
 
     const toolkit = page.getByLabel("Connected job-search toolkit");
@@ -87,9 +97,12 @@ test.describe("Marketing homepage", () => {
       const elements = [root, ...root.querySelectorAll("*")];
       return [...new Set(elements.map((element) => Number.parseFloat(getComputedStyle(element).fontSize)))].sort((a, b) => a - b);
     });
-    expect(mobileFontSizes.length).toBeLessThanOrEqual(3);
+    expect(mobileFontSizes.length).toBeLessThanOrEqual(4);
     expect(mobileFontSizes[0]).toBeGreaterThanOrEqual(16);
 
+    // The comparison table is the widest content on the page; it must scroll
+    // inside its own wrapper, never the page.
+    await expect(page.getByRole("table", { name: /on your own.*point solutions.*offboard/i })).toBeVisible();
     await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
   });
 });
