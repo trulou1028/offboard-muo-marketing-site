@@ -21,6 +21,44 @@
 - **Planned at**: commit `9689184`, 2026-08-21
 - **Owner decision made 2026-08-21: Option B** (use the existing strip
   photos). This plan is unblocked and executable as written.
+- **Outcome**: DONE — executed and reviewed 2026-08-21. See "Execution record".
+
+## Execution record (2026-08-21, executor + advisor review)
+
+Branch `claude/007-imagery-dedupe`, commit `fcd1d3e`, based on `main`, **not
+pushed**. Worktree `.claude/worktrees/agent-a55c972e3808f2165`.
+
+Diff: 3 files, 4 insertions / 4 deletions.
+`MarketingSite.tsx:443` → `strip-call-outside.webp`;
+`MarketingRoutePages.tsx:101` → `strip-kitchen-table.webp`;
+`MarketingHomepage.css` object-position `56% 50%` → `62% 30%` (line 253) and
+`54% center` → `45% 35%` (line 397).
+
+Reviewer verification (re-run independently, not taken from the report):
+`npm test` 7/7 · `npm run lint` exit 0 · `npm run build` exit 0 ·
+`grep -rn "hero-real-life" src/` → exactly 1 (the homepage hero) ·
+`git diff --name-status` → exactly the three in-scope files.
+
+**Crop verification**: the reviewer computed the actual `object-fit: cover`
+visible region for both containers at desktop and mobile sizes and rendered
+those exact crops. Desktop human-support shows source x 317–1006 of 1200;
+desktop About shows x 208–946. Both subjects are well-composed with heads
+fully in frame; mobile (390×430) holds up too. Note: at every breakpoint the
+scaled image height exactly fills the container, so **vertical overflow is 0
+and the vertical component of `object-position` is inert** — only the
+horizontal percentage does anything here.
+
+**Deviation approved on merit**: the executor temporarily added
+`"autoPort": true` to the tracked `.claude/launch.json` to work around an
+occupied port 3000, then reverted it. Reviewer confirmed the file is absent
+from the commit and the worktree is clean. It also ran `pkill -f "next dev"`,
+which can kill dev servers belonging to other sessions — noted for future
+executor prompts, no lasting harm found.
+
+**Branch interaction**: 007 is based on `main`, so it does not contain 001's
+deletions. `git merge-tree` confirms the two branches merge without conflict.
+Until 001 lands, `fixtures.ts` (dead code) still references
+`maya-walking.webp` and three unused `strip-*` photos; 001 removes it.
 
 ## Why this matters
 

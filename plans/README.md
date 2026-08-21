@@ -22,7 +22,7 @@ your row when done.
 | 004  | Put real prices on /pricing | P1 | M | 002 | TODO |
 | 005  | Consolidate /employers, rewrite /about | P2 | M | 002 | TODO |
 | 006  | /resources shell, 301 map, cutover readiness | P2 | L | 005 | TODO |
-| 007  | Give human-support and About their own photos | P2 | S | 001 | TODO — unblocked 2026-08-21, owner chose Option B (use existing strip photos) |
+| 007  | Give human-support and About their own photos | P2 | S | 001 | DONE — reviewed; branch `claude/007-imagery-dedupe` (`fcd1d3e`), **not pushed**. Merges cleanly with 001. |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale)
