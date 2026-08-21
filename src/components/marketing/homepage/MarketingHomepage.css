@@ -250,7 +250,7 @@
 
 .mh-human { min-height: 800px; padding-top: 88px; padding-bottom: 88px; background: white; border-bottom: 1px solid var(--mh-line); }
 .mh-human-photo { position: relative; min-height: 624px; overflow: hidden; border-radius: 16px; }
-.mh-human-photo img { object-fit: cover; object-position: 56% 50%; }
+.mh-human-photo img { object-fit: cover; object-position: 62% 30%; }
 .mh-proof { min-height: 820px; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); padding-top: 88px; padding-bottom: 88px; background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
 .mh-plan-preview { display: flex; min-height: 610px; flex-direction: column; gap: 22px; padding: 34px; }
 .mh-plan-rows { border-top: 1px solid var(--mh-line); }
@@ -394,7 +394,7 @@
 
 .mh-route-story { min-height: 760px; padding-top: 86px; padding-bottom: 86px; background: white; }
 .mh-route-story-photo { position: relative; min-height: 610px; overflow: hidden; border-radius: 24px; }
-.mh-route-story-photo img { object-fit: cover; object-position: 54% center; }
+.mh-route-story-photo img { object-fit: cover; object-position: 45% 35%; }
 .mh-route-independence { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; padding-top: 100px; padding-bottom: 100px; background: var(--mh-forest); color: var(--mh-paper); }
 .mh-route-independence h2 { margin-top: 18px; font-size: clamp(46px, 4vw, 62px); line-height: 1.08; }
 .mh-route-independence > p { align-self: end; color: #d1ded9; font-size: 19px; line-height: 31px; }

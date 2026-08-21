@@ -98,7 +98,7 @@ export function MarketingAbout() {
           aside={<><span>Our role</span><strong>A quiet companion for the work ahead.</strong><p>Independent support that helps you decide what deserves attention next.</p></>}
         />
         <section className="mh-route-story mh-section mh-split" aria-labelledby="about-origin-title">
-          <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/hero-real-life.webp" alt="A woman at home planning what comes after a layoff" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
+          <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/strip-kitchen-table.webp" alt="A man at his desk with coffee and paperwork, looking out the window" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
           <div className="mh-copy-block">
             <span className="mh-kicker">The origin</span>
             <h2 id="about-origin-title">We kept hearing the same questions.</h2>
