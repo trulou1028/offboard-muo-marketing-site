@@ -1,17 +1,16 @@
 import { expect, test, type Page } from "@playwright/test";
 
-async function waitForHydration(page: Page) {
+async function waitForSearchHydration(page: Page) {
   await page.waitForFunction(() => {
     const tab = document.querySelector('[role="tab"]');
     return !!tab && Object.keys(tab).some((key) => key.startsWith("__reactFiber$"));
   });
 }
 
-test.describe("Marketing homepage", () => {
-  test("renders the complete Paper journey and keeps the product scene interactive", async ({ page }) => {
+test.describe("Offboard marketing site", () => {
+  test("keeps the homepage focused and routes visitors to deeper pages", async ({ page }) => {
     const consoleErrors: string[] = [];
     const backendRequests: string[] = [];
-
     page.on("console", (message) => {
       if (message.type() === "error") consoleErrors.push(message.text());
     });
@@ -20,21 +19,30 @@ test.describe("Marketing homepage", () => {
     });
 
     await page.goto("/");
-    await waitForHydration(page);
-
     await expect(page.getByRole("heading", { level: 1, name: /modern unemployment office/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /three jobs at once/i })).toBeVisible();
-    await expect(page.getByRole("img", { name: /desk scene representing financial planning/i })).toBeVisible();
-    await expect(page.getByRole("img", { name: /layered collage of the disconnected tools/i })).toBeVisible();
-    await expect(page.getByLabel("An abstracted preview of Offboard onboarding")).toBeVisible();
-    await expect(page.getByRole("heading", { name: /deserves attention before it becomes urgent/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /support you may qualify for/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /one connected system/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /one place for the decisions/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /your transition is yours/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /start free.*more support/i })).toBeVisible();
+    await expect(page.getByRole("tablist", { name: "Job search stages" })).toHaveCount(0);
 
-    await page.getByRole("link", { name: /see how offboard works/i }).first().click();
-    await expect(page).toHaveURL(/#how-it-works$/);
+    await page.getByRole("link", { name: "How it works" }).first().click();
+    await expect(page).toHaveURL(/\/how-it-works$/);
+    await expect(page.getByRole("heading", { level: 1, name: /start with your situation/i })).toBeVisible();
+    expect(backendRequests).toEqual([]);
+    expect(consoleErrors).toEqual([]);
+  });
+
+  test("keeps the complete connected product journey interactive", async ({ page }) => {
+    const consoleErrors: string[] = [];
+    page.on("console", (message) => {
+      if (message.type() === "error") consoleErrors.push(message.text());
+    });
+
+    await page.goto("/how-it-works");
+    await waitForSearchHydration(page);
+    await expect(page.getByRole("heading", { name: /every part of unemployment lives somewhere else/i })).toBeVisible();
+    await expect(page.getByLabel("An abstracted preview of Offboard onboarding")).toBeVisible();
+    await expect(page.getByLabel("Illustrative California benefits preview")).toBeVisible();
 
     const stages = page.getByRole("tablist", { name: "Job search stages" });
     const interview = stages.getByRole("tab", { name: /interview/i });
@@ -42,28 +50,31 @@ test.describe("Marketing homepage", () => {
     await expect(interview).toHaveAttribute("aria-selected", "true");
     await expect(page.getByRole("heading", { name: /walk in knowing what to practice/i })).toBeVisible();
     await expect(page.getByRole("img", { name: /role-specific interview preparation/i })).toBeVisible();
-
-    await expect(page.getByLabel("Illustrative California benefits preview")).toBeVisible();
-    await expect(page.getByLabel("How information moves through Offboard")).toBeVisible();
-    await expect(page.getByText("Is Offboard part of the government?")).toBeVisible();
-    await expect.poll(() => consoleErrors).toEqual([]);
-    expect(backendRequests).toEqual([]);
+    expect(consoleErrors).toEqual([]);
   });
 
-  test("reflows without horizontal overflow on mobile", async ({ page }) => {
-    const consoleErrors: string[] = [];
-    page.on("console", (message) => {
-      if (message.type() === "error") consoleErrors.push(message.text());
-    });
+  test("publishes distinct pricing, company, and partner routes", async ({ page }) => {
+    const routes = [
+      ["/pricing", /begin with a plan/i],
+      ["/about", /alone with a search box/i],
+      ["/employers", /clear place to start after separation/i],
+      ["/public-partners", /scattered information to a workable plan/i],
+    ] as const;
 
+    for (const [route, heading] of routes) {
+      await page.goto(route);
+      await expect(page.getByRole("heading", { level: 1, name: heading })).toBeVisible();
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow, noarchive");
+    }
+  });
+
+  test("reflows every route without horizontal overflow on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/");
-    await waitForHydration(page);
 
-    await expect(page.getByRole("heading", { level: 1, name: /modern unemployment office/i })).toBeVisible();
-    await expect(page.getByRole("img", { name: /woman at a desk by a window/i })).toBeVisible();
-    await expect(page.getByRole("tablist", { name: "Job search stages" }).getByRole("tab")).toHaveCount(5);
-    await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
-    await expect.poll(() => consoleErrors).toEqual([]);
+    for (const route of ["/", "/how-it-works", "/pricing", "/about", "/employers", "/public-partners"]) {
+      await page.goto(route);
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
+    }
   });
 });

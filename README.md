@@ -12,6 +12,7 @@ standalone Next.js project.
   `.marketing-homepage` scope, `--mh-*` tokens)
 - Self-hosted variable fonts (Aspekta, Fraunces) in `public/fonts`
 - [DESIGN.md](DESIGN.md) — the Clause design system this page follows
+- [docs/site-architecture.md](docs/site-architecture.md) - the sitemap, page responsibilities, and migration gates
 
 ## Commands
 
@@ -45,13 +46,28 @@ repo's `.env.local`. Regenerate a specific image with
 
 ## Deploys
 
-Pushing to `main` deploys to production automatically:
+GitHub `main` is the source of truth. Pushing a feature branch creates a Vercel
+preview. Merging a verified pull request to `main` deploys to production
+automatically:
 
 **https://offboard-muo-marketing-site.vercel.app** — the shareable team preview.
 Public (no login) but `noindex`, so it stays out of search while we build.
 
 Branch pushes get their own preview URLs, but those are gated behind Vercel SSO —
 only team members signed into Vercel can open them.
+
+Do not deploy production directly from a local worktree. In particular, do not
+run `vercel --prod` with modified or untracked files. A production deployment is
+considered synchronized only when Vercel reports the exact GitHub `main` commit
+and does not report a dirty Git source.
+
+Release workflow:
+
+1. Create a feature branch.
+2. Run `npm test`, `npm run build`, and `npm run e2e`.
+3. Push the branch and verify the Git-backed Vercel preview.
+4. Merge the pull request to `main`.
+5. Confirm the production deployment commit matches GitHub `main`.
 
 At launch: point `offboard.co` at this project (the apex is on Framer today) and
 flip the robots tag noted below.
