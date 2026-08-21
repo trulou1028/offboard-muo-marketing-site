@@ -168,18 +168,42 @@ what you saw. Keep the rest unchanged.
 **Verify**: `grep -rn "hero-real-life" src/` → exactly 1 match, at
 `MarketingSite.tsx` (the homepage hero)
 
-### Step 4: Make the landscape photos sit correctly in their containers
+### Step 4: Re-tune the crop for the new landscape photos
 
-In `MarketingHomepage.css`, check `.mh-human-photo` and
-`.mh-route-story-photo`. The photos are now landscape in containers designed
-for taller crops. Ensure the `img` inside each fills without distortion —
-`object-fit: cover` with a sensible `object-position` (favor the subject, not
-the center, if the subject sits off-center). Change nothing else in the file.
+`object-fit: cover` is **already set** on both containers — do not re-add it.
+What needs changing is `object-position`, which is currently tuned for the
+portrait photos being replaced. Current state in
+`src/components/marketing/homepage/MarketingHomepage.css`:
 
-**Verify**: `npm run build` → exit 0. Then, if a preview is available, load
-`/` and `/about` and confirm neither photo is stretched or crops the subject's
-head. If you cannot run a preview, say so plainly in your report — do not
-claim visual verification you did not perform.
+```css
+.mh-human-photo { position: relative; min-height: 624px; overflow: hidden; border-radius: 16px; }   /* line 252 */
+.mh-human-photo img { object-fit: cover; object-position: 56% 50%; }                                 /* line 253 */
+.mh-route-story-photo { position: relative; min-height: 610px; overflow: hidden; border-radius: 24px; } /* line 396 */
+.mh-route-story-photo img { object-fit: cover; object-position: 54% center; }                        /* line 397 */
+```
+
+The containers are tall (624px / 610px, with responsive overrides at lines
+444, 491, 522, 572) and the replacement photos are landscape (~3:2), so
+`cover` crops the sides away aggressively. Set `object-position` on lines 253
+and 397 so the subject stays in frame and no head is cut off:
+
+- `strip-call-outside.webp` — the man is right-of-center in the frame.
+- `strip-kitchen-table.webp` — the man is center-left, at a desk.
+
+Pick values from what you actually see. Change ONLY the `object-position`
+values on lines 253 and 397; leave the `min-height` values, the responsive
+overrides, and everything else in the file untouched.
+
+**Verify**: `npm run build` → exit 0, and
+`git diff --stat src/components/marketing/homepage/MarketingHomepage.css`
+shows a small diff (2 changed lines, no additions/deletions of rules).
+
+Then verify visually if you can: start the dev server and load `/` and
+`/about`, or render the images at the container aspect ratio. If you cannot
+verify visually, say so plainly in your report — do not claim visual
+verification you did not perform. Getting the crop wrong is the main risk in
+this plan, so an honest "not visually verified" is far more useful than a
+guess presented as confirmed.
 
 ### Step 5: Full verification
 
