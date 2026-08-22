@@ -17,6 +17,44 @@
   land, because they add CTAs this fix should also cover.
 - **Category**: bug (accessibility)
 - **Planned at**: commit `9689184`, 2026-08-21
+- **Outcome**: DONE — executed and reviewed 2026-08-21, approved first pass.
+
+## Execution record (2026-08-21, executor + advisor review)
+
+Branch `claude/008-cta-contrast`, commit `820bca5`, based on
+`claude/004-pricing-real-numbers`. Diff: 1 file, +2/-2 — CSS only, no markup.
+
+Three changes:
+1. Added `.marketing-homepage a.mh-primary-cta { color: var(--mh-deep); }`
+   immediately after the base rule.
+2. Raised `.mh-header-actions .mh-primary-cta` to
+   `.mh-header-actions a.mh-primary-cta` (see below).
+3. Deleted plan 004's now-redundant `.mh-price-deck .is-primary
+   .mh-primary-cta` patch.
+
+**THE PLAN'S PROPOSED FIX WAS INCOMPLETE, and the executor caught it by
+measuring.** This plan asserted the header rule would "still win" after the
+new rule landed. That was wrong: `.marketing-homepage a.mh-primary-cta` is
+(0,2,1) and `.mh-header-actions .mh-primary-cta` is (0,2,0), so the fix
+*broke* the header CTA to 1.0:1 (dark text on its dark background). The
+executor measured this rather than assuming, then resolved it in CSS alone by
+matching specificity at (0,2,1) — the header rule then wins on source order,
+being later in the file. It verified via the TSX that the header CTA always
+renders as an `<a>`, so the selector change is safe. Deviation approved: it
+was necessary, minimal, in scope, and disclosed.
+
+Reviewer verification (measured independently in a running browser, all 6
+routes, 1280px): **23 primary CTAs, zero below 4.5:1, worst case 12.05:1.**
+Header CTA confirmed still `rgb(255,255,255)` at 13.61:1 on every route.
+Visually confirmed the hero CTA now renders dark-on-lime and the header
+retains its white-on-bordered treatment. `npm test` 7/7 · lint 0 · build 0.
+`git merge-tree` shows 0 conflicts against the 001, 007, and launch-autoport
+branches.
+
+Note on colour: CTAs that previously *looked* correct were inheriting
+`--mh-ink` (14.67:1) by accident. They now use the button's own declared
+`--mh-deep` (12.05:1). Both pass AA comfortably; this is the intended colour
+finally being applied rather than a regression.
 
 ## Why this matters
 
