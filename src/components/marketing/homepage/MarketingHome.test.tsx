@@ -7,6 +7,7 @@ import { metadata as howMetadata } from "@/app/how-it-works/page";
 import { metadata as homeMetadata } from "@/app/page";
 import { metadata as pricingMetadata } from "@/app/pricing/page";
 import { metadata as publicPartnerMetadata } from "@/app/public-partners/page";
+import { metadata as resourcesMetadata } from "@/app/resources/page";
 
 import MarketingHome from "./MarketingHome";
 import {
@@ -15,6 +16,7 @@ import {
   MarketingHowItWorks,
   MarketingPricing,
   MarketingPublicPartners,
+  MarketingResources,
 } from "./MarketingRoutePages";
 
 describe("Offboard marketing routes", () => {
@@ -49,9 +51,10 @@ describe("Offboard marketing routes", () => {
 
     const headerNav = screen.getByRole("navigation", { name: "Marketing navigation" });
     const headerLinks = within(headerNav).getAllByRole("link");
-    expect(headerLinks).toHaveLength(4);
+    expect(headerLinks).toHaveLength(5);
     expect(within(headerNav).getByRole("link", { name: "How it works" })).toHaveAttribute("href", "/how-it-works");
     expect(within(headerNav).getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
+    expect(within(headerNav).getByRole("link", { name: "Guides" })).toHaveAttribute("href", "/resources");
     expect(within(headerNav).getByRole("link", { name: "About" })).toHaveAttribute("href", "/about");
     expect(within(headerNav).getByRole("link", { name: "For employers" })).toHaveAttribute("href", "/employers");
     expect(within(headerNav).queryByRole("link", { name: "For public partners" })).not.toBeInTheDocument();
@@ -118,8 +121,17 @@ describe("Offboard marketing routes", () => {
   });
 
   it("keeps every route out of search indexes while the site is pre-launch", () => {
-    [homeMetadata, howMetadata, pricingMetadata, aboutMetadata, employerMetadata, publicPartnerMetadata].forEach((metadata) => {
+    [homeMetadata, howMetadata, pricingMetadata, aboutMetadata, employerMetadata, publicPartnerMetadata, resourcesMetadata].forEach((metadata) => {
       expect(metadata.robots).toBe("noindex, nofollow, noarchive");
     });
+  });
+
+  it("gives resources a library shell that links out to the live guides", () => {
+    render(<MarketingResources />);
+
+    expect(screen.getByRole("heading", { level: 1, name: "Guides & resources" })).toBeInTheDocument();
+    expect(screen.getByText(/reported essays, practical guides/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The first week after a layoff" })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /read the guide/i })[0]).toHaveAttribute("href", expect.stringContaining("https://offboard.co/resources/"));
   });
 });

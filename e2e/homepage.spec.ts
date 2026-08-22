@@ -63,10 +63,11 @@ test.describe("Offboard marketing site", () => {
     }
   });
 
-  test("keeps the header nav to four marketing links and demotes public partners", async ({ page }) => {
+  test("keeps the header nav to five marketing links and demotes public partners", async ({ page }) => {
     await page.goto("/");
     const headerNav = page.getByRole("navigation", { name: "Marketing navigation" });
-    await expect(headerNav.getByRole("link")).toHaveCount(4);
+    await expect(headerNav.getByRole("link")).toHaveCount(5);
+    await expect(headerNav.getByRole("link", { name: "Guides" })).toHaveAttribute("href", "/resources");
     await expect(headerNav.getByRole("link", { name: "For public partners" })).toHaveCount(0);
 
     const footerNav = page.getByRole("navigation", { name: "Footer navigation" });
@@ -83,10 +84,47 @@ test.describe("Offboard marketing site", () => {
   test("reflows every route without horizontal overflow on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
 
-    for (const route of ["/", "/how-it-works", "/pricing", "/about", "/employers", "/public-partners"]) {
+    for (const route of ["/", "/how-it-works", "/pricing", "/resources", "/about", "/employers", "/public-partners"]) {
       await page.goto(route);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
     }
+  });
+
+  test("publishes the resources shell and links out to the live guides", async ({ page }) => {
+    const consoleErrors: string[] = [];
+    const backendRequests: string[] = [];
+    page.on("console", (message) => {
+      if (message.type() === "error") consoleErrors.push(message.text());
+    });
+    page.on("request", (request) => {
+      if (/supabase\.co|api\.offboard\.co/i.test(request.url())) backendRequests.push(request.url());
+    });
+
+    await page.goto("/resources");
+    await expect(page.getByRole("heading", { level: 1, name: "Guides & resources" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "The first week after a layoff" })).toBeVisible();
+    expect(backendRequests).toEqual([]);
+    expect(consoleErrors).toEqual([]);
+  });
+
+  test("redirects legacy production URLs to their new destinations", async ({ page }) => {
+    await page.goto("/product");
+    await expect(page).toHaveURL(/\/how-it-works$/);
+
+    await page.goto("/faq");
+    await expect(page).toHaveURL(/\/how-it-works#faq$/);
+
+    await page.goto("/community");
+    await expect(page).toHaveURL(/\/#community$/);
+
+    await page.goto("/tools/anything");
+    await expect(page).toHaveURL(/\/resources$/);
+  });
+
+  test("keeps /intake a live route, never a redirect", async ({ page }) => {
+    const response = await page.goto("/intake");
+    expect(response?.status()).toBe(200);
+    await expect(page).toHaveURL(/\/intake$/);
   });
 });
