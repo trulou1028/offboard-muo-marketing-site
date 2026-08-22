@@ -30,10 +30,15 @@ describe("Offboard marketing routes", () => {
     render(<MarketingHome />);
 
     expect(screen.getByRole("heading", { level: 1, name: "The Modern Unemployment Office" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /most people find out what they were entitled to/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A layoff gives you three jobs at once." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /\$12,000/ })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /one place for the decisions/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Your transition is yours." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /start free.*add support/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /checked by people, never generated/i })).toBeInTheDocument();
+    expect(screen.getByText("$0 forever")).toBeInTheDocument();
+    expect(screen.getByText("$20/month")).toBeInTheDocument();
+    expect(screen.getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /find out first/i })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Where are you right now?" })).not.toBeInTheDocument();
     expect(screen.queryByRole("tablist", { name: "Job search stages" })).not.toBeInTheDocument();
     expect(fetchSpy).not.toHaveBeenCalled();
