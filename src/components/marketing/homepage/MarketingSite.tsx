@@ -11,6 +11,7 @@ export type MarketingRoute =
   | "home"
   | "how-it-works"
   | "pricing"
+  | "resources"
   | "about"
   | "employers"
   | "public-partners"
