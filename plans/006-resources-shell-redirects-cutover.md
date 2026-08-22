@@ -18,6 +18,33 @@
   destroying ~80 indexed URLs at domain cutover)
 - **Depends on**: plans/005-employers-consolidation-about-rewrite.md
 - **Category**: migration
+- **Outcome**: DONE — executed and reviewed 2026-08-22, approved first pass.
+
+## Execution record (2026-08-22, executor + advisor review)
+
+Branch `claude/006-resources-and-redirects`, 5 commits, based on
+`claude/010-intake-port` (sibling of `claude/009-language-sweep`; merge-tree
+shows 0 conflicts between them). 8 files, +193/-8.
+
+Shipped: `/resources` shell (6 guide cards linking to live articles, all six
+URLs verified 200 by the reviewer), 12 permanent redirects in
+`next.config.ts`, `Guides` in nav (5 links) and footer, anchor ids
+`#toolkit`/`#faq`/`#community` added without renaming the `-title` heading
+ids, and `docs/cutover-checklist.md`.
+
+Reviewer verification (independent): 15/15 unit · lint 0 · build 0 ·
+12/12 e2e · redirect smoke re-run for 9 mapped paths (all 308 with correct
+Location) · `/intake` and `/resources` return 200 (nothing shadowed) ·
+rendered `/resources` at 1280 (clean) · `noindex` untouched.
+
+Sitemap accounting: 78 live URLs → 17 marketing paths, all mapped or
+deliberately kept; articles/tools covered by the slug rules; 0 unmapped.
+
+**Known gap, deliberate**: `/act` currently 404s in this repo. The plan
+allowed stub-or-checklist; the executor chose checklist
+(`docs/cutover-checklist.md` line 11). The operator must decide before
+cutover: port the `/act` page, add a redirect, or accept the 404 on a live
+B2G landing URL. This is the last open cutover item of this kind.
 - **Planned at**: commit `9689184`, 2026-08-21
 - **Amended 2026-08-22**: the `/intake` question is settled by evidence.
   The live `offboard.co/intake` is a real member-intake form (4-section

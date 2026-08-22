@@ -21,7 +21,7 @@ your row when done.
 | 003  | Rebuild /how-it-works (5 steps, toolkit, LUMO) | P1 | L | 002 | DONE — reviewed, approved first pass; branch `claude/003-how-it-works-rebuild` (`e691f86`), stacked on 002. |
 | 004  | Put real prices on /pricing | P1 | M | 002 | DONE — reviewed (1 revision); branch `claude/004-pricing-real-numbers` (`0eb0896`), stacked on 003. Highlight on Free per owner. |
 | 005  | Consolidate /employers, rewrite /about | P2 | M | 002 | DONE — reviewed, approved first pass; branch `claude/005-employers-about`, stacked on 008. Founder story shipped neutral (no approved copy). |
-| 006  | /resources shell, 301 map, cutover readiness | P2 | L | 005 | TODO |
+| 006  | /resources shell, 301 map, cutover readiness | P2 | L | 005 | DONE — reviewed, approved first pass; branch `claude/006-resources-and-redirects`, stacked on 010. Open cutover item: `/act` decision (checklist). |
 | 008  | Fix white-on-lime primary CTA sitewide (a11y) | P1 | S | — | DONE — reviewed, approved first pass; branch `claude/008-cta-contrast` (`820bca5`), stacked on 004. |
 | 007  | Give human-support and About their own photos | P2 | S | 001 | DONE — reviewed; branch `claude/007-imagery-dedupe` (`fcd1d3e`), **not pushed**. Merges cleanly with 001. |
 
