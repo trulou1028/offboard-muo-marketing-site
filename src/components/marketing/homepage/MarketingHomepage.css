@@ -512,6 +512,16 @@
 .mh-route-sponsor-card strong { font-family: var(--font-fraunces), Georgia, serif; font-size: 26px; font-weight: 500; }
 .mh-route-sponsor-card p { grid-column: 2; margin-bottom: 26px; color: var(--mh-muted); line-height: 25px; }
 
+.mh-route-hiring,
+.mh-route-community { padding-top: 90px; padding-bottom: 90px; background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
+.mh-route-hiring .mh-copy-block,
+.mh-route-community .mh-copy-block { max-width: 660px; }
+.mh-route-hiring .mh-section-link { border-bottom-color: var(--mh-ink); color: var(--mh-ink); }
+
+.mh-route-partners-note { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; max-width: 720px; padding-top: 90px; padding-bottom: 90px; background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
+.mh-route-partners-note p { color: var(--mh-muted); font-size: 18px; line-height: 29px; }
+.mh-route-partners-note .mh-section-link { border-bottom-color: var(--mh-ink); color: var(--mh-ink); }
+
 @media (max-width: 1180px) {
   .mh-site-header { grid-template-columns: auto 1fr; }
   .mh-site-header nav { display: none; }
@@ -634,7 +644,10 @@
   .mh-pricing-teaser,
   .mh-route-content,
   .mh-route-independence,
-  .mh-route-contact { padding-inline: 20px; padding-top: 72px; padding-bottom: 72px; }
+  .mh-route-contact,
+  .mh-route-hiring,
+  .mh-route-community,
+  .mh-route-partners-note { padding-inline: 20px; padding-top: 72px; padding-bottom: 72px; }
   .mh-home-trust h2,
   .mh-pricing-teaser h2,
   .mh-route-content-heading h2,
