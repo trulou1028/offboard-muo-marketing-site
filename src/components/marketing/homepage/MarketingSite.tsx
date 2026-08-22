@@ -30,9 +30,11 @@ export const PRODUCT_FAQS = [
 ] as const;
 
 export const PRICING_FAQS = [
-  ["Do I need a payment method to start?", "No. You can create a starting plan, add jobs, organize your search, and begin with the included tools without adding a payment method."],
-  ["When will I see a price?", "Offboard shows the price and what is included before you buy credits or book an eligible support option."],
-  ["Is human support included in the free plan?", "Availability, format, eligibility, and pricing vary by support option. The booking page shows the current details before you schedule."],
+  ["Do I need a payment method to start?", "No. The Free tier is not a trial. You can build your plan, see your runway and deadlines, track applications, and build your first Job Packet without adding a payment method."],
+  ["What happens when I run out of credits?", "The core plan, benefit sheets, and tracking keep working. Credits gate the heavier product work, and they refresh monthly on both tiers."],
+  ["Can I cancel Pro any time?", "Yes. Your plan, materials, and history remain yours on the Free tier after you cancel."],
+  ["Is human support included?", "Availability, format, eligibility, and pricing vary by support option. The booking page shows the current details before you schedule."],
+  ["Does any tier charge for government benefits?", "Never. Claiming your benefits is always free. Offboard charges for its own tools and support, not for access to public programs."],
 ] as const;
 
 export function Brand() {
