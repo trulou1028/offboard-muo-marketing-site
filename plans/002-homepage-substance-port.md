@@ -23,6 +23,61 @@
   executes correctly from `main` whether or not 001 has landed.
 - **Category**: direction
 - **Planned at**: commit `9689184`, 2026-08-21
+- **Outcome**: DONE — executed and reviewed 2026-08-21 over three rounds.
+  See "Execution record".
+
+## Execution record (2026-08-21, executor + advisor review)
+
+Branch `claude/002-homepage-substance-port`, 4 commits ending `2eea650`, based
+on `main`, **not merged**. Worktree `.claude/worktrees/agent-aa3917f56a94299f1`.
+Diff: 5 files, +263/-28 (all in scope).
+
+Homepage now renders the 9 target sections in order: Hero, Problem, Three
+jobs, Hook band, Connected plan, Verified facts, Pricing teaser, Community,
+Final CTA.
+
+Reviewer verification (re-run independently): `npm test` 7/7 · `npm run lint`
+exit 0 · `npm run build` exit 0 · `npm run e2e` 4/4 · zero em-dashes and zero
+banned vocabulary in new copy · the $12,000 example ships with its California
+/ week-16 conditions and "we never promise funding" small print · 18 spec
+strings spot-checked verbatim · tests assert real content (problem H2, the
+$12,000 hook, verified-facts, `$0 forever`, `$20/month`, `5,000+ subscribers`,
+"Find out first") and keep the no-backend-requests check.
+
+**A false start worth recording**: the first dispatch stopped without writing
+code because this plan listed "plan 001 has not landed" as a STOP condition
+and 001 was still in an unmerged PR. That was a plan defect, since the two
+plans share no files; corrected before the second dispatch.
+
+**Two bugs found in review, both invisible to every automated gate** (tests,
+lint, build, and e2e all passed on the broken layout):
+
+1. Community rows rendered with the CTA on the left and the title pushed
+   right. `.mh-community-rows a` was pinned to `grid-row: 1 / 3` with no
+   `grid-column`, so grid placed the row-locked link into column 1 and the
+   unplaced `<h3>` into column 2. Fixed with explicit `grid-column` on both.
+2. The follow-on fix regressed mobile: the `@media (max-width: 900px)`
+   override resets `grid-row` but not `grid-column`, so the link asked for a
+   column 2 that no longer existed and grid invented an implicit one. Fixed
+   by adding `grid-column: auto` to that override. (Reviewer-caused; the
+   first instruction was incomplete.)
+
+Both fixes verified by rendering at 1280 / 768 / 390: rows read title,
+description, CTA, with 0px horizontal overflow at every width.
+
+**Tooling note**: the Browser pane's screenshot tool returned black images
+with `visibilityState: "hidden"` across three attempts in two independent
+agents. Driving Playwright directly (`chromium.launch()` from the repo root
+so `@playwright/test` resolves) works and is how both bugs were caught.
+
+**Merge safety**: `git merge-tree` shows 0 conflicts against both
+`claude/001-dead-code-imagery-dedupe` and `claude/007-imagery-dedupe`, despite
+002 and 007 both editing `MarketingSite.tsx` and the CSS.
+
+**STILL OWNER-GATED**: the pricing numbers ($0 / $20 / 30 vs 300 credits /
+3 LUMO messages a day / first Job Packet free) and the "5,000+ subscribers"
+figure ship as specified but remain unconfirmed against the live app. Confirm
+before merging to production.
 
 ## Why this matters
 
