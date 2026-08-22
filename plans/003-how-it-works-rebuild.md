@@ -21,6 +21,49 @@
   that branch, not on `main`)
 - **Category**: direction
 - **Planned at**: commit `9689184`, 2026-08-21
+- **Outcome**: DONE — executed and reviewed 2026-08-21, approved first pass.
+
+## Execution record (2026-08-21, executor + advisor review)
+
+Branch `claude/003-how-it-works-rebuild`, 3 commits ending `e691f86`, based on
+`claude/002-homepage-substance-port` (002 was not yet merged). Diff vs that
+base: 6 files, +251/-178, all in scope.
+
+`/how-it-works` now renders: PageHero, FiveSteps, ToolkitSection, LumoSection,
+HumanSupportSection, ContextSection, FaqSection, FinalCta.
+
+Reviewer verification (re-run independently): `npm test` 7/7 · `npm run lint`
+exit 0 · `npm run build` exit 0 · zero em-dashes and zero banned vocabulary in
+the diff · "We never promise funding" present verbatim · rendered every new
+section at 1280 and 390 with 0px horizontal overflow.
+
+**The amendment worked**: `git diff` shows `HumanSupportSection` untouched
+(zero lines, including the `<Image>` inside it), and `git merge-tree` reports
+0 conflicts against `claude/007-imagery-dedupe`.
+
+**Deletions audited**: `SearchShowcase.tsx` deleted; `FragmentedSection`,
+`PersonalizedSection`, `RunwaySection`, `BenefitsSection` removed after the
+orphan check. The executor also removed their private-only helpers
+(`TransitionTimeline`, `BenefitsPreview`) and the `START_STEPS` const — beyond
+the plan's named list, but a direct mechanical consequence of deleting their
+sole callers, disclosed in its report. Reviewer confirmed **zero surviving
+references** to all eight deleted symbols. Deviation approved on merit.
+
+**Known leftovers, deliberately not pruned** (candidates for a future
+cleanup plan):
+- `StartingPlan` (exported) is now unreferenced; its only caller was the
+  deleted `PersonalizedSection`. The executor flagged it and left it, per the
+  plan's "if in doubt, leave it and say so". Note `StartingPlanPreview` is a
+  different component and is still in use.
+- CSS for the four deleted sections (`.mh-fragmented`, `.mh-personalized`,
+  `.mh-runway`, `.mh-benefits`) remains in `MarketingHomepage.css` as dead
+  rules; the plan scoped CSS changes as additive only.
+- `src/app/how-it-works/page.tsx` metadata left unchanged; still accurate.
+
+**Site-wide typography note** (not a defect in this plan): the codebase uses
+straight quotes and apostrophes throughout, while one line added by plan 002
+("California rules verified June 2026") uses curly quotes. Worth a single
+consistency pass someday; deliberately not fixed piecemeal here.
 
 ## Why this matters
 
