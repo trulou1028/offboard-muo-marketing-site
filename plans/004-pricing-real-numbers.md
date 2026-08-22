@@ -20,6 +20,48 @@
   reviewed and open as PR #6). Pricing figures are owner-confirmed.
 - **Category**: direction
 - **Planned at**: commit `9689184`, 2026-08-21
+- **Outcome**: DONE — executed and reviewed 2026-08-21 (one revision round).
+
+## Execution record (2026-08-21, executor + advisor review)
+
+Branch `claude/004-pricing-real-numbers`, 5 commits ending `fe8095a`, based on
+`claude/003-how-it-works-rebuild`. Diff vs that base: 5 files, all in scope.
+
+`/pricing` now shows three tiers: Free `$0 forever`, Offboard Pro `$20/month`,
+and Sponsored access `May be covered`, with the real feature lists, the
+credits explainer, and five rewritten billing FAQs.
+
+Reviewer verification (re-run independently): `npm test` 7/7 · lint 0 ·
+build 0 · e2e 4/4 · no em-dashes · no banned vocabulary ("outplacement"
+present only where this page permits it) · rendered at 1280 and 390 with 0px
+overflow.
+
+**Two executor judgment calls, both verified correct**: the plan's expected
+grep counts for "forever" and "always free" did not match, and the executor
+traced the extra matches to content plan 002 had already added on the base
+branch. Confirmed — the plan's counts were written pre-002 and were stale, not
+violated.
+
+**One defect found and fixed** (revision round 1): the Pro card's CTA rendered
+white on lime at **1.13:1**, an AA failure. The executor's root-cause
+diagnosis went deeper than the reviewer's and was correct: a global
+`.marketing-homepage a { color: inherit }` rule at specificity (0,1,1)
+out-specifies `.mh-primary-cta` at (0,1,0), so no CTA ever applies its own
+colour. Fixed here with a scoped rule; all three deck CTAs now measure
+14.67:1.
+
+**Escalated finding → plan 008**: that root cause is site-wide and
+**pre-existing on `main`**. The hero CTA measures 1.13:1 and route-page CTAs
+1.03:1 on unmodified `main`, visually confirmed as near-illegible white on
+lime. Not caused by this plan; tracked separately in
+`plans/008-cta-contrast-sitewide.md`, which also removes the scoped patch
+added here once the general fix lands.
+
+**Open design question for the owner** (not a defect): the executor moved the
+highlighted `is-primary` card from Free to Offboard Pro, reasoning from
+standard three-tier convention and the "For active transitions" badge. It is
+defensible, but this page's headline is "Start free" and the product brief
+says the worker side stays near-free. Left as-is pending the owner's call.
 
 ## Why this matters
 
