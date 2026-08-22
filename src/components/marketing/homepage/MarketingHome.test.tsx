@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from "vitest";
 
 import { metadata as aboutMetadata } from "@/app/about/page";
@@ -54,21 +54,23 @@ describe("Offboard marketing routes", () => {
     expect(screen.getAllByRole("link", { name: "For public partners" })[0]).toHaveAttribute("href", "/public-partners");
   });
 
-  it("moves the detailed product journey to how it works", () => {
+  it("gives how it works a five-step spine, a toolkit, and LUMO", () => {
     render(<MarketingHowItWorks />);
 
-    expect(screen.getByRole("heading", { level: 1, name: "Start with your situation. Build from there." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Every part of unemployment lives somewhere else." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Where are you right now?" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Know what deserves attention before it becomes urgent." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Find support you may qualify for before deadlines pass." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Run your search as one connected system." })).toBeInTheDocument();
-
-    const tabs = screen.getByRole("tablist", { name: "Job search stages" });
-    const interview = within(tabs).getByRole("tab", { name: "04Interview" });
-    fireEvent.click(interview);
-    expect(interview).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByRole("heading", { name: "Walk in knowing what to practice." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: "One plan that starts where you are." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /five steps from/i })).toBeInTheDocument();
+    expect(screen.getByText("Tell us where you are")).toBeInTheDocument();
+    expect(screen.getByText("See your money clearly")).toBeInTheDocument();
+    expect(screen.getByText("Claim what exists")).toBeInTheDocument();
+    expect(screen.getByText("Get ready, then run the search")).toBeInTheDocument();
+    expect(screen.getByText("Close it, and make it count")).toBeInTheDocument();
+    expect(screen.getByText(/we never promise funding/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /tools didn't go anywhere/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 3, name: "Job Packet" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "An AI guide that knows your actual situation." })).toBeInTheDocument();
+    expect(screen.getByText(/never invents a dollar figure/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "You can do this yourself. You should not have to do it alone." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Stop repeating your story to every new tool." })).toBeInTheDocument();
   });
 
   it("gives pricing a dedicated evaluation page", () => {
