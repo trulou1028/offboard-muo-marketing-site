@@ -15,12 +15,6 @@ export type MarketingRoute =
   | "employers"
   | "public-partners";
 
-const START_STEPS = [
-  ["Choose where you are now", "Start with the path that fits today, from newly laid off to preparing ahead."],
-  ["Answer one useful question at a time", "Add your state, timing, benefits, and severance only when it helps your path."],
-  ["Keep your context private", "Your answers personalize deadlines and priorities. They are never shown to employers or recruiters."],
-] as const;
-
 const HUMAN_STEPS = [
   ["Work independently", "Follow your plan, manage applications, and use the tools at your own pace."],
   ["Ask Lumo", "Get guidance that uses the context already in your Offboard workspace."],
@@ -429,99 +423,172 @@ export function VerifiedFactsStrip() {
   );
 }
 
-export function FragmentedSection() {
+const FIVE_STEPS = [
+  {
+    title: "Tell us where you are",
+    body: "A few questions: your situation, your state, your dates. That's enough to build a plan that's actually yours, not a template.",
+    tag: "Your situation & state",
+  },
+  {
+    title: "See your money clearly",
+    body: "Your runway, how long you can go, beside your money clock: which benefit deadlines are coming and what each one is worth.",
+    tag: "Runway calculator · Money clock",
+  },
+  {
+    title: "Claim what exists",
+    body: "Step-by-step paths to unemployment benefits, health coverage, and state-approved funded training, with verified official links. We never promise funding. We show you the exact path to find out.",
+    tag: "Benefit sheets · Funded training explorer",
+  },
+  {
+    title: "Get ready, then run the search",
+    body: "Resume, story, materials, then Job Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.",
+    tag: "Job Packet · Resume Studio",
+  },
+  {
+    title: "Close it, and make it count",
+    body: "Interview prep and practice, a paperwork review before you sign, and when you land: mark it, keep your career ledger, and pass what you learned back.",
+    tag: "Interview prep · Paperwork review",
+  },
+] as const;
+
+export function FiveSteps() {
   return (
-    <section className="mh-fragmented mh-section mh-split" aria-labelledby="fragmented-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">The problem is not a lack of information</span>
-        <h2 id="fragmented-title">Every part of unemployment lives somewhere else.</h2>
-        <p>Your state handles unemployment insurance. Benefits directories live on other websites. Your resume is in one document, applications are in another, and advice is scattered across search results, group chats, and AI tools. Offboard brings the work into one plan.</p>
-        <strong>Money and deadlines. Benefits and retraining. Applications and interviews. Answers when you get stuck.</strong>
-        <PrimaryCta>See my starting plan</PrimaryCta>
+    <section className="mh-five-steps mh-section" aria-labelledby="five-steps-title">
+      <div className="mh-section-heading">
+        <span className="mh-kicker">The plan, start to finish</span>
+        <h2 id="five-steps-title">Five steps from &quot;what just happened&quot; to &quot;what&apos;s next.&quot;</h2>
       </div>
-      <div className="mh-fragment-collage" aria-label="Fragmented tools organized into one connected Offboard plan">
-        <Image src="/marketing/homepage/fragmentation-collage-v1.png" alt="A layered collage of the disconnected tools people use after a layoff" fill sizes="(max-width: 900px) 100vw, 46vw" />
-        <span className="is-state"><i />State portal</span><span className="is-benefits"><i />Benefits directory</span><span className="is-resume"><i />Resume documents</span><span className="is-search"><i />Search, chats, and AI</span><span className="is-trackers"><i />Application trackers</span>
-      </div>
+      <ol className="mh-five-steps-rows">
+        {FIVE_STEPS.map((step, index) => (
+          <li key={step.title}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <strong>{step.title}</strong>
+              <p>{step.body}</p>
+            </div>
+            <em>{step.tag}</em>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }
 
-export function PersonalizedSection() {
+const TOOLKIT_FLAGSHIP_CHIPS = ["Ghost check", "Fit read", "Tailored materials", "Warm intro"] as const;
+
+const TOOLKIT_CARDS = [
+  ["Resume Studio", "Build and tailor resumes from your real history, ready for the role in front of you."],
+  ["Interview prep & practice", "Drills grounded in the role, the company, and your strongest stories."],
+  ["Application tracker", "Every application, stage, and follow-up stays current without extra busywork."],
+  ["Ghost-job checker", "Flags fake or stale listings before you waste an application on them."],
+  ["Paperwork review", "A read on your severance or offer paperwork before you sign anything."],
+  ["Runway calculator", "See how long your money lasts and which deadlines change the math."],
+  ["Funded training explorer", "Search state-approved programs that may be paid for while you train."],
+  ["Ask LUMO", "An AI guide that works from your plan, your benefit facts, and your search."],
+] as const;
+
+export function ToolkitSection() {
   return (
-    <section className="mh-personalized mh-section mh-split" aria-labelledby="personalized-title">
-      <StartingPlan />
-      <div className="mh-copy-block">
-        <span className="mh-kicker">Tell us once</span>
-        <h2 id="personalized-title">Start with your situation,<br />not a blank dashboard.</h2>
-        <p>Offboard starts with where you are now, then asks only what changes your path: your state, timing, benefits, and severance. Each answer is optional and editable.</p>
-        <NumberedRows rows={START_STEPS} />
-        <small><em>You can update or delete your information at any time.</em></small>
+    <section className="mh-toolkit mh-section" aria-labelledby="toolkit-title">
+      <div className="mh-section-heading">
+        <span className="mh-kicker">The toolkit</span>
+        <h2 id="toolkit-title">The tools didn&apos;t go anywhere. Now they show up at the right moment.</h2>
       </div>
-    </section>
-  );
-}
-
-function TransitionTimeline() {
-  const items = [
-    ["This week", "Review severance agreement", "Save questions for a qualified professional.", "Sep 5"],
-    ["Next", "Check unemployment steps", "Continue to the official state source.", "Sep 12"],
-    ["Later", "Review healthcare options", "Compare timing and official enrollment details.", "Sep 26"],
-  ] as const;
-  return (
-    <div className="mh-ui-card mh-timeline-card" aria-label="Illustrative transition timeline">
-      <div className="mh-ui-card-heading"><h3>Your transition timeline</h3><span>Illustrative plan</span></div>
-      <div className="mh-segmented"><b>Now</b><span>Next</span><span>Later</span></div>
-      <div className="mh-timeline-list">{items.map(([when, title, detail, date]) => <div key={title}><span>{when}</span><p><strong>{title}</strong><small>{detail}</small></p><time>{date}</time></div>)}</div>
-      <small className="mh-card-note">Dates and actions are illustrative. Verify program details with the responsible agency or qualified professional.</small>
-    </div>
-  );
-}
-
-export function RunwaySection() {
-  return (
-    <section className="mh-runway mh-section mh-split" aria-labelledby="runway-title">
-      <TransitionTimeline />
-      <div className="mh-copy-block">
-        <span className="mh-kicker">Job one</span>
-        <h2 id="runway-title">Know what deserves attention before it becomes urgent.</h2>
-        <p>Turn severance, benefits, health coverage, recurring expenses, and important dates into a practical timeline. Offboard helps you see what to handle now, what can wait, and which questions may require a qualified professional.</p>
-        <ul className="mh-plain-list"><li>01 Capture severance, coverage, and benefit dates</li><li>02 Track unemployment and healthcare actions</li><li>03 See how timing affects your weekly priorities</li><li>04 Save questions for the right professional</li></ul>
-        <PrimaryCta>Organize my runway</PrimaryCta>
-        <small>Offboard provides general information and planning support. It does not provide legal, tax, financial, or benefits determinations.</small>
-      </div>
-    </section>
-  );
-}
-
-function BenefitsPreview() {
-  return (
-    <div className="mh-benefits-preview" aria-label="Illustrative California benefits preview">
-      <header><div><h3>Benefits</h3><p>Possible support based on the details you choose to share.</p><small><i /> Official sources only · sample guidance</small></div><span>Sample · CA</span></header>
-      <div className="mh-benefits-body">
-        <div className="mh-benefit-matches">
-          <article className="is-deadline"><span>Deadline that expires silently</span><strong>11 weeks left</strong><p>Ask for the training extension before week 16 of your benefit payments.</p></article>
-          <small>Possible matches</small>
-          <article><strong>Funded training · tuition paid</strong><em>Possible match</em><p>Tuition paid provider-direct</p><a href="https://edd.ca.gov" target="_blank" rel="noreferrer">Official source ↗</a></article>
-          <article><strong>Training extension</strong><em>Deadline running</em><p>Up to 26 extra weeks</p><a href="https://edd.ca.gov" target="_blank" rel="noreferrer">Official source ↗</a></article>
+      <div className="mh-toolkit-layout">
+        <article className="mh-toolkit-flagship">
+          <span className="mh-kicker is-lime">Flagship</span>
+          <h3>Job Packet</h3>
+          <p>Paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person, all kept with the role.</p>
+          <ul>
+            {TOOLKIT_FLAGSHIP_CHIPS.map((chip) => <li key={chip}>{chip}</li>)}
+          </ul>
+          <a className="mh-section-link" href={SIGN_UP_URL}>Explore the Job Packet <ArrowRight aria-hidden="true" /></a>
+        </article>
+        <div className="mh-toolkit-grid">
+          {TOOLKIT_CARDS.map(([title, body]) => (
+            <article key={title}>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
         </div>
-        <aside><small>California resources</small><article><b>California unemployment office</b><p>The state&apos;s official unemployment portal.</p></article><article><b>Local job center</b><p>Career services near Concord.</p></article></aside>
       </div>
-    </div>
+    </section>
   );
 }
 
-export function BenefitsSection() {
+const LUMO_QUESTIONS = [
+  "What deadlines am I coming up on?",
+  "Am I eligible for funded training?",
+  "Walk me through this severance agreement.",
+  "Help me prepare for tomorrow's interview.",
+] as const;
+
+export function LumoSection() {
   return (
-    <section className="mh-benefits mh-section mh-split" aria-labelledby="benefits-title">
+    <section className="mh-lumo mh-section mh-split" aria-labelledby="lumo-title">
       <div className="mh-copy-block">
-        <span className="mh-kicker">Job two</span>
-        <h2 id="benefits-title">Find support you may qualify for before deadlines pass.</h2>
-        <p>Programs vary by state, county, household, and employment history. Offboard helps you identify relevant possibilities and get to the official application or local provider without starting your research from scratch.</p>
-        <ul className="mh-check-list"><li><Check aria-hidden="true" />Unemployment, healthcare, and household assistance</li><li><Check aria-hidden="true" />Training funds and local career services</li><li><Check aria-hidden="true" />Possible matches → official source</li></ul>
-        <small className="mh-top-rule">Eligibility and final decisions are made by the agency or provider responsible for each program.</small>
+        <span className="mh-kicker is-lime">Meet LUMO</span>
+        <h2 id="lumo-title">An AI guide that knows your actual situation.</h2>
+        <p>LUMO works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three.</p>
+        <div className="mh-lumo-trust">
+          <p>When LUMO talks about your benefits, it reads from human-verified state facts. It never invents a dollar figure or a deadline.</p>
+        </div>
       </div>
-      <BenefitsPreview />
+      <div className="mh-lumo-questions">
+        <span>Ask questions like</span>
+        <ol>
+          {LUMO_QUESTIONS.map((question, index) => (
+            <li key={question}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <p>{question}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+const CONTEXT_ADDS = ["Your situation & state", "Money clock", "Roles & resumes", "Network"] as const;
+const CONTEXT_IMPROVES = ["Applications", "Interviews", "Runway", "Offers"] as const;
+
+const INTEGRATIONS = [
+  { name: "Calendar", soon: false },
+  { name: "Gmail", soon: false },
+  { name: "Drive", soon: false },
+  { name: "Slack", soon: true },
+  { name: "Notion", soon: true },
+] as const;
+
+export function ContextSection() {
+  return (
+    <section className="mh-context mh-section" aria-labelledby="context-title">
+      <div className="mh-copy-block">
+        <span className="mh-kicker">Your context, kept</span>
+        <h2 id="context-title">Stop repeating your story to every new tool.</h2>
+        <p>Your situation, state, runway, roles, resumes, applications, interviews, and outcomes stay connected. Every step of the plan, and every tool, starts from your real context instead of a blank page.</p>
+      </div>
+      <div className="mh-context-chips">
+        <div>
+          <span>Adds context</span>
+          <ul>{CONTEXT_ADDS.map((chip) => <li key={chip}>{chip}</li>)}</ul>
+        </div>
+        <div>
+          <span>Improves next</span>
+          <ul>{CONTEXT_IMPROVES.map((chip) => <li key={chip}>{chip}</li>)}</ul>
+        </div>
+      </div>
+      <div className="mh-integrations">
+        <p>Connects to your stack. Your tools provide context. Offboard provides the plan.</p>
+        <ul>
+          {INTEGRATIONS.map((integration) => (
+            <li key={integration.name} className={integration.soon ? "is-soon" : undefined}>
+              {integration.name}{integration.soon ? " · soon" : ""}
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
