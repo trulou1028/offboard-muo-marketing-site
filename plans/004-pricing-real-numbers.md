@@ -57,11 +57,20 @@ lime. Not caused by this plan; tracked separately in
 `plans/008-cta-contrast-sitewide.md`, which also removes the scoped patch
 added here once the general fix lands.
 
-**Open design question for the owner** (not a defect): the executor moved the
-highlighted `is-primary` card from Free to Offboard Pro, reasoning from
-standard three-tier convention and the "For active transitions" badge. It is
-defensible, but this page's headline is "Start free" and the product brief
-says the worker side stays near-free. Left as-is pending the owner's call.
+**Design question RESOLVED by the owner 2026-08-22: highlight stays on Free.**
+The executor had moved `is-primary` to Offboard Pro (defensible by three-tier
+convention); the owner chose Free, consistent with the page headline "Start
+free" and the positioning that the worker side stays near-free. Applied in
+commit `0eb0896` as two one-line class changes; tier order, copy, prices,
+badges, and CTAs all unchanged.
+
+Contrast re-verified after the swap, with alpha compositing (the executor
+caught and fixed an alpha-discarding bug in its own measurement script first):
+Free card, now dark, worst text **6.03:1**; Offboard Pro, now light, worst
+**8.20:1**; Sponsored **14.67:1**. Reviewer reproduced these independently.
+Combined with plan 008 merged in, all three CTAs measure **12.05:1** and the
+worst text is 6.03:1. `git merge-tree` shows 0 conflicts between the updated
+004 tip and 008.
 
 ## Why this matters
 

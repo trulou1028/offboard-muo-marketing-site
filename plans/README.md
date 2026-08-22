@@ -19,7 +19,7 @@ your row when done.
 | 001  | Remove dead migration components (dead-code half) | P1 | S | — | DONE — reviewed; [PR #2](https://github.com/trulou1028/offboard-muo-marketing-site/pull/2) open, **awaiting owner merge**. Imagery half split out to 007. |
 | 002  | Rebuild the homepage with the approved v7 substance | P1 | L | — | DONE — reviewed (3 rounds); branch `claude/002-homepage-substance-port` (`2eea650`). Pricing figures owner-confirmed 2026-08-21. |
 | 003  | Rebuild /how-it-works (5 steps, toolkit, LUMO) | P1 | L | 002 | DONE — reviewed, approved first pass; branch `claude/003-how-it-works-rebuild` (`e691f86`), stacked on 002. |
-| 004  | Put real prices on /pricing | P1 | M | 002 | DONE — reviewed (1 revision); branch `claude/004-pricing-real-numbers` (`fe8095a`), stacked on 003. |
+| 004  | Put real prices on /pricing | P1 | M | 002 | DONE — reviewed (1 revision); branch `claude/004-pricing-real-numbers` (`0eb0896`), stacked on 003. Highlight on Free per owner. |
 | 005  | Consolidate /employers, rewrite /about | P2 | M | 002 | TODO |
 | 006  | /resources shell, 301 map, cutover readiness | P2 | L | 005 | TODO |
 | 008  | Fix white-on-lime primary CTA sitewide (a11y) | P1 | S | — | DONE — reviewed, approved first pass; branch `claude/008-cta-contrast` (`820bca5`), stacked on 004. |
