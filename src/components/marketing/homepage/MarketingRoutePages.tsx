@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 import {
   ContactBand,
@@ -186,30 +188,10 @@ export function MarketingPublicPartners() {
           ctaHref="mailto:hello@offboard.co?subject=Public%20partner%20support"
           aside={<><span>A clear boundary</span><strong>Planning support, not an eligibility authority.</strong><p>Offboard organizes information and routes people to official providers.</p></>}
         />
-        <EditorialGrid
-          kicker="The member journey"
-          title="Connect the practical work around the official system."
-          body="Residents often move between state portals, local programs, training providers, healthcare options, and job-search tools. Offboard gives that work one understandable frame."
-          items={[
-            { title: "Orient", body: "Start with the resident's situation and identify what may deserve attention now." },
-            { title: "Route", body: "Present possible programs with the responsible official source or local provider beside the guidance." },
-            { title: "Follow through", body: "Keep deadlines, questions, jobs, materials, and next steps in one private workspace." },
-          ]}
-        />
-        <section className="mh-route-independence mh-section" aria-labelledby="public-boundary-title">
-          <div><span className="mh-kicker is-lime">Roles stay clear</span><h2 id="public-boundary-title">Agencies decide. Offboard helps people prepare and continue.</h2></div>
-          <p>Offboard does not determine eligibility, calculate benefits, approve applications, or replace case workers and qualified professionals. It helps people understand what may be relevant, prepare questions, and reach the correct official destination.</p>
+        <section className="mh-route-partners-note mh-section" aria-label="Partner details">
+          <p>The full public and workforce partner program, including sponsorship terms and the resident journey, now lives on the employers page alongside our employer sponsorship program.</p>
+          <Link className="mh-section-link" href="/employers">See partner details on the employers page <ArrowRight aria-hidden="true" /></Link>
         </section>
-        <EditorialGrid
-          kicker="Program design"
-          title="Make privacy and visibility explicit."
-          body="Sponsored access should be understandable before enrollment and limited to the terms of the program."
-          items={[
-            { title: "Member choice", body: "People choose what they share and which Offboard support they request." },
-            { title: "Defined sponsor visibility", body: "The program notice explains what the sponsoring organization can and cannot see." },
-            { title: "Official-source handoff", body: "Residents continue to the responsible agency or provider for applications and decisions." },
-          ]}
-        />
         <ContactBand kicker="Public partnership" title="Build a clearer route through the transition." body="Tell us which residents you serve, which systems they navigate, and where the current handoff breaks down." cta="Discuss a public partnership" href="mailto:hello@offboard.co?subject=Public%20partner%20support" />
       </main>
     </MarketingShell>
