@@ -17,7 +17,7 @@ your row when done.
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
 | 001  | Remove dead migration components (dead-code half) | P1 | S | — | DONE — reviewed; [PR #2](https://github.com/trulou1028/offboard-muo-marketing-site/pull/2) open, **awaiting owner merge**. Imagery half split out to 007. |
-| 002  | Rebuild the homepage with the approved v7 substance | P1 | L | — | DONE — reviewed (3 rounds); branch `claude/002-homepage-substance-port` (`2eea650`). **Pricing numbers + subscriber count still owner-unconfirmed.** |
+| 002  | Rebuild the homepage with the approved v7 substance | P1 | L | — | DONE — reviewed (3 rounds); branch `claude/002-homepage-substance-port` (`2eea650`). Pricing figures owner-confirmed 2026-08-21. |
 | 003  | Rebuild /how-it-works (5 steps, toolkit, LUMO) | P1 | L | 002 | TODO |
 | 004  | Put real prices on /pricing | P1 | M | 002 | TODO |
 | 005  | Consolidate /employers, rewrite /about | P2 | M | 002 | TODO |

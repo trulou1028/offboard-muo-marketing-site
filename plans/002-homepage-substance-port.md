@@ -74,10 +74,11 @@ so `@playwright/test` resolves) works and is how both bugs were caught.
 `claude/001-dead-code-imagery-dedupe` and `claude/007-imagery-dedupe`, despite
 002 and 007 both editing `MarketingSite.tsx` and the CSS.
 
-**STILL OWNER-GATED**: the pricing numbers ($0 / $20 / 30 vs 300 credits /
-3 LUMO messages a day / first Job Packet free) and the "5,000+ subscribers"
-figure ship as specified but remain unconfirmed against the live app. Confirm
-before merging to production.
+**Owner gate CLEARED 2026-08-21**: the owner confirmed the pricing figures
+($0 / $20 per month / 30 vs 300 monthly credits / 3 LUMO messages a day /
+first Job Packet free) and confirmed "5,000+ subscribers" is the correct
+number (the strategy doc's 8,000+ is superseded). No blocker remains on this
+plan.
 
 ## Why this matters
 
@@ -298,14 +299,8 @@ Primary CTA label `Build my free transition plan`. Keep the secondary
 
 ## STOP conditions
 
-- **Pricing numbers**: before merge, the operator must confirm `$0 / $20 /
-  30-vs-300 credits / 3 LUMO messages a day / first Job Packet free` against
-  the live app (app.offboard.co). If you cannot get confirmation, complete
-  the work but mark the plan BLOCKED in `plans/README.md` with reason
-  "pricing numbers unconfirmed" instead of calling it DONE.
-- **Subscriber count**: same rule for `5,000+ subscribers` (sources conflict:
-  5,000+ vs 8,000+). Ship the lower verified number; if neither is
-  confirmable, BLOCKED.
+- ~~Pricing numbers / subscriber count~~ — CONFIRMED by the owner
+  2026-08-21. Both figures are settled; no gate remains.
 - A copy line in this spec conflicts with the em-dash/voice rules — report,
   do not rewrite on your own.
 

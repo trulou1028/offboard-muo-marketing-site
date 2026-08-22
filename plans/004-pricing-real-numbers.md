@@ -15,7 +15,9 @@
 - **Priority**: P1
 - **Effort**: M
 - **Risk**: MED
-- **Depends on**: plans/002-homepage-substance-port.md (copy source of truth for the card contents)
+- **Depends on**: plans/002-homepage-substance-port.md (copy source of truth
+  for the card contents; its branch `claude/002-homepage-substance-port` is
+  reviewed and open as PR #6). Pricing figures are owner-confirmed.
 - **Category**: direction
 - **Planned at**: commit `9689184`, 2026-08-21
 
@@ -172,11 +174,11 @@ Items: `Included monthly` / `Free includes 30 credits a month, Pro includes 300.
 
 ## STOP conditions
 
-- **Owner confirmation**: the numbers (`$0`, `$20/month`, `30`/`300` monthly
-  credits, `3 LUMO messages per day`, `First Job Packet free`, quarterly
-  billing) must be confirmed by the operator against the live app before
-  merge. Unconfirmed → finish the work, mark BLOCKED with reason
-  "pricing numbers unconfirmed".
+- ~~Owner confirmation of the numbers~~ — CONFIRMED 2026-08-21: `$0`,
+  `$20/month`, `30`/`300` monthly credits, `3 LUMO messages per day`, and
+  `First Job Packet free` are all correct, as is `5,000+ subscribers`. Ship
+  them as written. (Quarterly billing specifics remain deferred to checkout,
+  as the plan already says.)
 - The homepage teaser (plan 002) shows different numbers than this spec.
 - Legal-adjacent copy (`Claiming your benefits is always free`) is asked to
   be removed or weakened — that line is a positioning guardrail; escalate.
