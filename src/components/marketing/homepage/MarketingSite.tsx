@@ -494,7 +494,7 @@ const TOOLKIT_CARDS = [
 
 export function ToolkitSection() {
   return (
-    <section className="mh-toolkit mh-section" aria-labelledby="toolkit-title">
+    <section className="mh-toolkit mh-section" id="toolkit" aria-labelledby="toolkit-title">
       <div className="mh-section-heading">
         <span className="mh-kicker">The toolkit</span>
         <h2 id="toolkit-title">The tools didn&apos;t go anywhere. Now they show up at the right moment.</h2>
@@ -736,7 +736,7 @@ export function FaqSection({
   items: readonly (readonly [string, string])[];
 }) {
   return (
-    <section className="mh-faq mh-section" aria-labelledby="faq-title">
+    <section className="mh-faq mh-section" id="faq" aria-labelledby="faq-title">
       <div><span className="mh-kicker">Good questions</span><h2 id="faq-title">{title}</h2></div>
       <div className="mh-faq-list">{items.map(([question, answer]) => <article key={question}><header><h3>{question}</h3></header><p>{answer}</p></article>)}</div>
     </section>
@@ -766,7 +766,7 @@ const COMMUNITY_ROWS = [
 
 export function CommunityStrip() {
   return (
-    <section className="mh-community mh-section" aria-labelledby="community-title">
+    <section className="mh-community mh-section" id="community" aria-labelledby="community-title">
       <div className="mh-copy-block">
         <span className="mh-kicker">Community</span>
         <h2 id="community-title">Job searching is hard enough without doing it alone.</h2>
