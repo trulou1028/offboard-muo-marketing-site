@@ -70,6 +70,7 @@ export function PrimaryCta({
 const NAV_LINKS: ReadonlyArray<{ route: MarketingRoute; href: string; label: string }> = [
   { route: "how-it-works", href: "/how-it-works", label: "How it works" },
   { route: "pricing", href: "/pricing", label: "Pricing" },
+  { route: "resources", href: "/resources", label: "Guides" },
   { route: "about", href: "/about", label: "About" },
   { route: "employers", href: "/employers", label: "For employers" },
 ];
@@ -125,6 +126,7 @@ export function MarketingFooter() {
             <strong>Product</strong>
             <Link href="/how-it-works">How it works</Link>
             <Link href="/pricing">Pricing</Link>
+            <Link href="/resources">Guides</Link>
           </div>
           <div>
             <strong>Partners</strong>
