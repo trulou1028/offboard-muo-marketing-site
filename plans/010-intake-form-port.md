@@ -81,6 +81,33 @@ line in plan 006, not code in this plan).
   (the service-role client bypasses RLS; the table must not be readable or
   writable by anon).
 
+## Key availability (verified 2026-08-22 — read before Step 1)
+
+What exists on this machine (names only):
+- Repo `.env.local` (in the MAIN checkout `/Users/louissakoda/code/offboard-muo-marketing-site/.env.local` — worktrees do NOT inherit untracked files, copy it in):
+  `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`,
+  `SUPABASE_PROJECT_REF`, `SUPABASE_DB_PASSWORD`.
+- `psql` 16 and `supabase` CLI 2.109 are installed.
+
+What does NOT exist locally: `SUPABASE_SERVICE_ROLE_KEY` for this project,
+and `RESEND_API_KEY` (the old site holds it only in its deployment platform's
+env). Therefore:
+
+- **Table DDL**: use the direct Postgres connection with
+  `SUPABASE_DB_PASSWORD` (host `db.<SUPABASE_PROJECT_REF>.supabase.co`,
+  db `postgres`, user `postgres`). Do not wait for a service key to create
+  the table.
+- **Server action code**: write it to read `SUPABASE_SERVICE_ROLE_KEY` and
+  `RESEND_API_KEY` from env as designed, add both NAMES to `.env.example`
+  with comments, and treat missing-at-runtime as a logged, graceful failure
+  path (the form shows the try-again error; email absence never crashes).
+- **Step 7 (real end-to-end proof) is expected to be BLOCKED** until the
+  operator pastes both keys into `.env.local` and the Vercel project env.
+  That is not a failure of this plan: complete Steps 1–6, prove the insert
+  path at the DB level via psql (insert a row as the executor, then delete
+  it), and report Step 7 as "ready — awaiting operator keys" with the exact
+  smoke-test commands the operator should run after adding them.
+
 ## Commands you will need
 
 | Purpose | Command | Expected |
@@ -132,8 +159,9 @@ migrate historical rows (cutover-day task, plan 006's checklist).
 
 ## STOP conditions
 
-- The Resend API key or Supabase service-role key for this repo's project is
-  not available in the environment — report, do not hardcode or invent.
+- ~~Missing service-role/Resend keys~~ — downgraded 2026-08-22 from a STOP
+  to the documented Step-7-blocked path above. STOP only if
+  `SUPABASE_DB_PASSWORD` itself is missing or the DB connection is refused.
 - The source form's field list differs materially from `schema.ts` (drift in
   the TanStack repo since 2026-08-22).
 - Anything would require committing a secret.

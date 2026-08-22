@@ -29,7 +29,7 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale)
 
 | 010  | Port the /intake form (cutover prerequisite) | P1 | M | 002 | TODO |
-| 009  | Sweep never-say vocabulary from copy | P3 | S | 002-005, 008 | BLOCKED — owner must decide whether "outplacement" may stay in Sponsored-tier pricing copy |
+| 009  | Sweep never-say vocabulary from copy | P3 | S | 002-005, 008 | TODO — owner chose Option A (2026-08-22): outplacement stays in Sponsored-tier copy; rule narrowed. Only the workspace sweep remains. |
 
 ## Dependency notes
 

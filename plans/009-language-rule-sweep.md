@@ -13,8 +13,11 @@
 - **Risk**: LOW
 - **Depends on**: plans 002–005 and 008 (sweep last, so it covers their copy)
 - **Category**: docs / copy consistency
-- **BLOCKED ON OWNER DECISION** — see "Owner decision required". Do not
-  dispatch an executor until the "outplacement" question is answered.
+- **UNBLOCKED 2026-08-22** — owner chose **Option A**: "outplacement" stays
+  in the Sponsored-tier pricing copy; the language rule is narrowed to
+  *"outplacement" may appear on `/employers` and in Sponsored-tier copy,
+  nowhere else*. This plan is now just the "workspace" sweep (Step 2) plus
+  recording the narrowed rule (Step 3, Option A branch).
 
 ## Why this matters
 
@@ -156,7 +159,6 @@ assertion over weakening it to a looser regex.
 
 ## STOP conditions
 
-- The owner has not answered the "outplacement" question.
 - A replacement phrasing would change the meaning of a claim (particularly
   anything about privacy or sponsor visibility) rather than just its wording.
   Report the sentence rather than guessing.
