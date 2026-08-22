@@ -28,6 +28,8 @@ your row when done.
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale)
 
+| 009  | Sweep never-say vocabulary from copy | P3 | S | 002-005, 008 | BLOCKED — owner must decide whether "outplacement" may stay in Sponsored-tier pricing copy |
+
 ## Dependency notes
 
 - **001 first, alone**: pure deletion + two image swaps; de-risks everything after.
