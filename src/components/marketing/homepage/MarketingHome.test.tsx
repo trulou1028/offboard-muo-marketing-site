@@ -76,10 +76,14 @@ describe("Offboard marketing routes", () => {
   it("gives pricing a dedicated evaluation page", () => {
     render(<MarketingPricing />);
 
-    expect(screen.getByRole("heading", { level: 1, name: /begin with a plan/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /start free.*more support/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: /start free\. upgrade when you need more support/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Do I need a payment method to start?" })).toBeInTheDocument();
-    expect(screen.getByText(/shows the price and what is included before you buy/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Does any tier charge for government benefits?" })).toBeInTheDocument();
+    expect(screen.getByText("$0")).toBeInTheDocument();
+    expect(screen.getByText("$20")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Sponsored access" })).toBeInTheDocument();
+    expect(screen.getByText(/claiming your government benefits is always free/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /learn about sponsored access/i })).toHaveAttribute("href", "/employers");
   });
 
   it("separates the company story from member conversion", () => {

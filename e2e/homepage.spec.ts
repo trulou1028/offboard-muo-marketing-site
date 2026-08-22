@@ -50,7 +50,7 @@ test.describe("Offboard marketing site", () => {
 
   test("publishes distinct pricing, company, and partner routes", async ({ page }) => {
     const routes = [
-      ["/pricing", /begin with a plan/i],
+      ["/pricing", /start free\. upgrade when you need more support/i],
       ["/about", /alone with a search box/i],
       ["/employers", /clear place to start after separation/i],
       ["/public-partners", /scattered information to a workable plan/i],
