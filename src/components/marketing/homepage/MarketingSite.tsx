@@ -644,7 +644,7 @@ const COMMUNITY_ROWS = [
   {
     title: "Meet with a human",
     body: "Stuck on your search? Share where you are and our team reaches out directly. Free.",
-    cta: "Meet with a human",
+    cta: "Say hello",
     href: HUMAN_SUPPORT_URL,
   },
 ] as const;

@@ -345,9 +345,9 @@
 .mh-community-rows { display: flex; flex-direction: column; }
 .mh-community-rows article { display: grid; grid-template-columns: 1fr auto; gap: 8px 24px; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--mh-line); }
 .mh-community-rows article:first-child { border-top: 1px solid var(--mh-line); }
-.mh-community-rows h3 { font-size: 20px; line-height: 27px; }
+.mh-community-rows h3 { grid-column: 1; font-size: 20px; line-height: 27px; }
 .mh-community-rows p { grid-column: 1; color: var(--mh-muted); font-size: 15px; line-height: 22px; }
-.mh-community-rows a { grid-row: 1 / 3; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 650; white-space: nowrap; }
+.mh-community-rows a { grid-column: 2; grid-row: 1 / 3; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 650; white-space: nowrap; }
 .mh-community-rows a svg { width: 15px; height: 15px; }
 
 .mh-faq { min-height: 1340px; display: grid; grid-template-columns: 36fr 64fr; gap: 72px; padding-top: 80px; padding-bottom: 80px; background: var(--mh-paper-soft); }
