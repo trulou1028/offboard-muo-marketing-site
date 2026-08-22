@@ -4,7 +4,7 @@ import { MarketingAbout } from "@/components/marketing/homepage/MarketingRoutePa
 
 export const metadata: Metadata = {
   title: "Why Offboard exists | About Offboard",
-  description: "Learn why Offboard was built to make the work after a layoff clearer, more connected, and easier to navigate.",
+  description: "Why Offboard exists: a clear plan, verified facts, and human support for the whole moment a layoff changes, not only the resume.",
   robots: "noindex, nofollow, noarchive",
 };
 

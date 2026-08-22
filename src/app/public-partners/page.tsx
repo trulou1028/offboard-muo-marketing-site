@@ -4,7 +4,7 @@ import { MarketingPublicPartners } from "@/components/marketing/homepage/Marketi
 
 export const metadata: Metadata = {
   title: "Transition support for public partners | Offboard",
-  description: "Help residents organize transition work, identify possible support, and continue to the responsible official source or local provider.",
+  description: "Public and workforce partner details now live on the employers page. See how Offboard organizes practical transition work for the residents you serve.",
   robots: "noindex, nofollow, noarchive",
 };
 

@@ -4,7 +4,7 @@ import { MarketingEmployers } from "@/components/marketing/homepage/MarketingRou
 
 export const metadata: Metadata = {
   title: "Transition support for employers | Offboard",
-  description: "Give departing employees independent transition support for runway, possible benefits, the job search, and what comes next.",
+  description: "Sponsor outplacement, modernized: self-serve, one-time per-employee access with a private member experience, free job postings, and a public and workforce partner program.",
   robots: "noindex, nofollow, noarchive",
 };
 

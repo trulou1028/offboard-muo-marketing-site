@@ -1,24 +1,23 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-import { SearchShowcase } from "./SearchShowcase";
 import {
-  BenefitsSection,
   ContactBand,
+  ContextSection,
   EditorialGrid,
   FaqSection,
   FinalCta,
-  FragmentedSection,
+  FiveSteps,
   HUMAN_SUPPORT_URL,
   HumanSupportSection,
+  LumoSection,
   MarketingShell,
   PageHero,
-  PersonalizedSection,
   PricingSection,
   PRICING_FAQS,
   PRODUCT_FAQS,
-  RunwaySection,
-  SIGN_UP_URL,
-  StartingPlanPreview,
+  ToolkitSection,
 } from "./MarketingSite";
 
 export function MarketingHowItWorks() {
@@ -27,26 +26,17 @@ export function MarketingHowItWorks() {
       <main id="main-content">
         <PageHero
           current="how-it-works"
-          kicker="One connected plan"
-          title="Start with your situation. Build from there."
-          body="Offboard organizes the work after a layoff around three jobs: protect your runway, find available support, and build what comes next."
-          aside={<><span>Three jobs, one plan</span><strong>Runway. Support. Next role.</strong><p>Your answers stay connected to the work you choose to do.</p></>}
+          kicker="How it works"
+          title="One plan that starts where you are."
+          body="Whether you were laid off yesterday, have been searching for months, or are still employed and reading the room, your plan starts from your situation and your state, not a template."
+          cta="Build my free transition plan"
+          aside={<><span>The spine and the muscle</span><strong>The plan is the spine. The tools are the muscle.</strong><p>Every step links straight into the tool that does the heavy lifting. No blank pages, no starting over.</p></>}
         />
-        <FragmentedSection />
-        <PersonalizedSection />
-        <RunwaySection />
-        <BenefitsSection />
-        <SearchShowcase signUpUrl={SIGN_UP_URL} />
+        <FiveSteps />
+        <ToolkitSection />
+        <LumoSection />
         <HumanSupportSection />
-        <section className="mh-proof mh-section mh-split" aria-labelledby="product-proof-title">
-          <div className="mh-copy-block">
-            <span className="mh-kicker">Built around the work after a layoff</span>
-            <h2 id="product-proof-title">One plan that keeps the context attached.</h2>
-            <p>Your priorities, possible support, saved roles, materials, and next steps stay connected so you do not have to rebuild the story every time you move.</p>
-            <ul className="mh-plain-list ruled"><li>01 A starting plan organized around your situation</li><li>02 One workspace connecting each role and application</li><li>03 Official sources and clear follow-through</li></ul>
-          </div>
-          <div><StartingPlanPreview /><small className="mh-card-note">Example information shown. Your plan reflects the details you choose to provide.</small></div>
-        </section>
+        <ContextSection />
         <FaqSection title="What to know about the product." items={PRODUCT_FAQS} />
         <FinalCta />
       </main>
@@ -60,21 +50,21 @@ export function MarketingPricing() {
       <main id="main-content">
         <PageHero
           current="pricing"
-          kicker="Start free"
-          title="Begin with a plan. Add support when it earns its place."
-          body="Create your starting plan and organize your search without adding a payment method. Offboard shows the price and what is included before you choose anything paid."
-          aside={<><span>Clear before you pay</span><strong>No hidden starting fee.</strong><p>Use the core tools first, then decide whether deeper research, tailored materials, or human support would help.</p></>}
+          kicker="Pricing"
+          title="Start free. Upgrade when you need more support."
+          body="Begin with the next role in front of you. Move to Pro when your search needs more room, or see whether an organization can sponsor your access."
+          aside={<><span>Clear before you pay</span><strong>No hidden starting fee.</strong><p>Free is a real tier, not a trial. You see every price and what is included before you pay.</p></>}
           cta="Start free"
         />
         <PricingSection />
         <EditorialGrid
-          kicker="Choose with context"
-          title="Pay only when the added support fits the moment."
-          body="The free plan is the starting point. Paid options are for moments when you want more capacity or a different kind of help."
+          kicker="How credits work"
+          title="Pay only for the work that needs more horsepower."
+          body="Credits cover the heavier product work: deeper research, tailored materials, and interview preparation. Every credit-spending action shows its cost before you run it."
           items={[
-            { title: "Deeper product work", body: "Use credits for eligible research, tailored materials, and interview preparation." },
-            { title: "Human support", body: "Book an available support option when your situation needs more context than software can provide." },
-            { title: "A clear decision", body: "Review the price, scope, and availability before you pay or schedule." },
+            { title: "Included monthly", body: "Free includes 30 credits a month, Pro includes 300. They refresh monthly." },
+            { title: "Clear costs", body: "The price in credits is shown on the button before you spend anything." },
+            { title: "Human support", body: "Eligible one-on-one support options are booked separately, with price and scope shown before you schedule." },
           ]}
         />
         <FaqSection title="Pricing and support, without surprises." items={PRICING_FAQS} />
@@ -91,8 +81,8 @@ export function MarketingAbout() {
         <PageHero
           current="about"
           kicker="Why Offboard exists"
-          title="A layoff should not leave you alone with a search box."
-          body="Offboard was built to turn a fragmented, stressful transition into a clear plan with practical tools, official sources, and human support when it matters."
+          title="Built for the moment work stops making sense."
+          body="Losing a job changes more than a resume. It can change your routine, confidence, finances, relationships, and sense of what comes next. Offboard was built to meet that whole moment with a clear plan, verified facts, and human support."
           cta="Talk to the team"
           ctaHref="mailto:hello@offboard.co"
           aside={<><span>Our role</span><strong>A quiet companion for the work ahead.</strong><p>Independent support that helps you decide what deserves attention next.</p></>}
@@ -101,9 +91,16 @@ export function MarketingAbout() {
           <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/strip-kitchen-table.webp" alt="A man at his desk with coffee and paperwork, looking out the window" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
           <div className="mh-copy-block">
             <span className="mh-kicker">The origin</span>
-            <h2 id="about-origin-title">We kept hearing the same questions.</h2>
+            <h2 id="about-origin-title">It started with the same questions, over and over.</h2>
             <p>What should I do first? Which deadlines matter? Where do benefits, training, and the job search fit together? Offboard grew from conversations, a weekly newsletter, and a community for people navigating those questions.</p>
             <p>The product organizes what people were otherwise piecing together across portals, documents, messages, and separate tools.</p>
+          </div>
+        </section>
+        <section className="mh-route-community mh-section" aria-labelledby="about-community-title">
+          <div className="mh-copy-block">
+            <span className="mh-kicker">Where it grew</span>
+            <h2 id="about-community-title">A newsletter and a community came first.</h2>
+            <p>Before the product, Offboard was a weekly newsletter on the job market read by 5,000+ subscribers, and a community of people navigating the same uncertainty. The product organizes what those people were piecing together by hand.</p>
           </div>
         </section>
         <EditorialGrid
@@ -134,37 +131,45 @@ export function MarketingEmployers() {
         <PageHero
           current="employers"
           kicker="For employers"
-          title="Give people a clear place to start after separation."
-          body="Offboard provides independent transition support for the practical work that follows a layoff, from runway and possible benefits to the job search and human guidance."
+          title="Outplacement, modernized."
+          body="Give the people you're letting go a real starting point: the modern unemployment office in their pocket. Sponsored access is self-serve, priced one-time per employee, and private by design for the people who use it."
           cta="Talk about sponsored access"
           ctaHref="mailto:hello@offboard.co?subject=Employer%20support"
-          aside={<><span>The member experience</span><strong>Private, practical, and independent.</strong><p>People get a starting plan while sponsor visibility is explained before enrollment.</p></>}
+          aside={<><span>How sponsorship works</span><strong>Self-serve. One-time per employee.</strong><p>Buy seats for a departing group, send invitations, and see aggregate program reporting. No enterprise contract.</p></>}
         />
         <EditorialGrid
-          kicker="A better starting point"
-          title="Support the whole transition, not only the resume."
-          body="A layoff creates financial, benefits, and job-search work at the same time. Offboard helps members organize all three without positioning the former employer as their case manager."
+          kicker="The member experience"
+          title="Support for the whole transition, not only the resume."
+          body="A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Job Packets, and human support options."
           items={[
-            { title: "A starting plan", body: "Members begin with their own situation and see what may deserve attention first." },
-            { title: "Connected job-search tools", body: "Roles, research, materials, interviews, and next steps remain attached to the opportunity." },
-            { title: "Human support", body: "Members can use self-serve tools, ask Lumo, or review available support from a person." },
+            { title: "A plan from day one", body: "Members start from their situation and state, and see what deserves attention first." },
+            { title: "Verified benefit facts", body: "Deadlines and dollar figures checked by people, with official links. Claiming benefits is always free." },
+            { title: "The full toolkit", body: "Job Packets, resume tailoring, interview prep, application tracking, and LUMO." },
           ]}
         />
         <section className="mh-route-sponsor mh-section mh-split" aria-labelledby="employer-privacy-title">
           <div className="mh-copy-block"><span className="mh-kicker">Clear sponsor terms</span><h2 id="employer-privacy-title">People should know what a sponsor can see.</h2><p>Before a sponsored member enrolls, Offboard explains what the program sponsor can and cannot see. Visibility depends on the program notice. Personal benefit decisions remain with responsible agencies and providers.</p></div>
-          <div className="mh-route-sponsor-card"><span>Member workspace</span><strong>Chosen by the member</strong><p>Transition details, saved roles, documents, and requested support stay in the member experience according to the applicable notice.</p><span>Sponsor view</span><strong>Explained before enrollment</strong><p>Program reporting and visibility are defined before participation begins.</p></div>
+          <div className="mh-route-sponsor-card"><span>Member workspace</span><strong>Chosen by the member</strong><p>Transition details, saved roles, documents, and requested support stay in the member experience according to the applicable notice.</p><span>Sponsor view</span><strong>Explained before enrollment</strong><p>Program reporting and visibility are defined before participation begins. Sponsors receive aggregate participation and outcome reporting, never individual applications, conversations, finances, or reflections.</p></div>
+        </section>
+        <section className="mh-route-hiring mh-section" aria-labelledby="employer-hiring-title">
+          <div className="mh-copy-block">
+            <span className="mh-kicker">Also for employers</span>
+            <h2 id="employer-hiring-title">Hiring? Post roles free.</h2>
+            <p>Offboard employers can post open roles at no cost. Postings reach members actively searching, with materials prepared and context attached.</p>
+            <a className="mh-section-link" href="mailto:hello@offboard.co?subject=Hiring%20on%20Offboard">Post a role <ArrowRight aria-hidden="true" /></a>
+          </div>
         </section>
         <EditorialGrid
-          kicker="A simple program path"
-          title="Make the handoff clear from day one."
-          body="A sponsored program should be easy to explain, easy to enter, and explicit about who is responsible for each decision."
+          kicker="Public & workforce partners"
+          title="Agencies decide. Offboard helps people prepare and continue."
+          body="For workforce boards, education partners, and public programs: Offboard organizes the practical work around the official system and routes residents to the responsible agency or provider for decisions and applications. Offboard does not determine eligibility, calculate benefits, or replace case workers."
           items={[
-            { title: "Define the program", body: "Agree on eligibility, access, sponsor visibility, and available support." },
-            { title: "Explain it before enrollment", body: "Give members a clear notice before they choose whether to participate." },
-            { title: "Let Offboard support the transition", body: "Members use their plan and tools while official agencies remain responsible for program decisions." },
+            { title: "Orient", body: "Start from the resident's situation and surface what may deserve attention now." },
+            { title: "Route", body: "Possible programs appear beside their responsible official source or local provider." },
+            { title: "Follow through", body: "Deadlines, questions, materials, and next steps stay in one private workspace." },
           ]}
         />
-        <ContactBand kicker="Sponsored access" title="Design a program people can understand." body="Tell us who you want to support, when the handoff happens, and what your team needs to know." cta="Talk about employer support" href="mailto:hello@offboard.co?subject=Employer%20support" />
+        <ContactBand kicker="Public partnership" title="Build a clearer route through the transition." body="Tell us which residents you serve and where the current handoff breaks down." cta="Discuss a public partnership" href="mailto:hello@offboard.co?subject=Public%20partner%20support" />
       </main>
     </MarketingShell>
   );
@@ -183,30 +188,10 @@ export function MarketingPublicPartners() {
           ctaHref="mailto:hello@offboard.co?subject=Public%20partner%20support"
           aside={<><span>A clear boundary</span><strong>Planning support, not an eligibility authority.</strong><p>Offboard organizes information and routes people to official providers.</p></>}
         />
-        <EditorialGrid
-          kicker="The member journey"
-          title="Connect the practical work around the official system."
-          body="Residents often move between state portals, local programs, training providers, healthcare options, and job-search tools. Offboard gives that work one understandable frame."
-          items={[
-            { title: "Orient", body: "Start with the resident's situation and identify what may deserve attention now." },
-            { title: "Route", body: "Present possible programs with the responsible official source or local provider beside the guidance." },
-            { title: "Follow through", body: "Keep deadlines, questions, jobs, materials, and next steps in one private workspace." },
-          ]}
-        />
-        <section className="mh-route-independence mh-section" aria-labelledby="public-boundary-title">
-          <div><span className="mh-kicker is-lime">Roles stay clear</span><h2 id="public-boundary-title">Agencies decide. Offboard helps people prepare and continue.</h2></div>
-          <p>Offboard does not determine eligibility, calculate benefits, approve applications, or replace case workers and qualified professionals. It helps people understand what may be relevant, prepare questions, and reach the correct official destination.</p>
+        <section className="mh-route-partners-note mh-section" aria-label="Partner details">
+          <p>The full public and workforce partner program, including sponsorship terms and the resident journey, now lives on the employers page alongside our employer sponsorship program.</p>
+          <Link className="mh-section-link" href="/employers">See partner details on the employers page <ArrowRight aria-hidden="true" /></Link>
         </section>
-        <EditorialGrid
-          kicker="Program design"
-          title="Make privacy and visibility explicit."
-          body="Sponsored access should be understandable before enrollment and limited to the terms of the program."
-          items={[
-            { title: "Member choice", body: "People choose what they share and which Offboard support they request." },
-            { title: "Defined sponsor visibility", body: "The program notice explains what the sponsoring organization can and cannot see." },
-            { title: "Official-source handoff", body: "Residents continue to the responsible agency or provider for applications and decisions." },
-          ]}
-        />
         <ContactBand kicker="Public partnership" title="Build a clearer route through the transition." body="Tell us which residents you serve, which systems they navigate, and where the current handoff breaks down." cta="Discuss a public partnership" href="mailto:hello@offboard.co?subject=Public%20partner%20support" />
       </main>
     </MarketingShell>
