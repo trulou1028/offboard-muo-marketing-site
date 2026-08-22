@@ -377,20 +377,24 @@
 .mh-pricing-heading > div { display: flex; flex-direction: column; gap: 12px; }
 .mh-pricing-heading h2 { font-size: 48px; line-height: 50px; }
 .mh-pricing-heading > p { color: var(--mh-muted); font-size: 16px; line-height: 26px; }
-.mh-price-deck { display: grid; grid-template-columns: 42fr 58fr; gap: 16px; min-height: 300px; margin-top: 36px; }
-.mh-price-deck > article { display: flex; flex-direction: column; justify-content: space-between; gap: 14px; padding: 28px; background: white; border: 1px solid var(--mh-line); border-radius: 16px; }
-.mh-price-deck header { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
-.mh-price-deck h3 { font-size: 40px; line-height: 42px; }
+.mh-price-deck { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; min-height: 300px; margin-top: 36px; align-items: stretch; }
+.mh-price-deck > article { display: flex; flex-direction: column; gap: 14px; padding: 28px; background: white; border: 1px solid var(--mh-line); border-radius: 16px; }
+.mh-price-deck > article > :last-child { margin-top: auto; }
+.mh-price-deck header { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.mh-price-deck h3 { font-size: 24px; line-height: 28px; font-weight: 650; letter-spacing: normal; text-transform: none; }
 .mh-price-deck p { font-size: 15px; line-height: 22px; }
-.mh-price-deck > article > strong { font-size: 14px; }
+.mh-price-deck .mh-price-value { display: flex; align-items: baseline; gap: 6px; }
+.mh-price-deck .mh-price-value b { font-size: 40px; line-height: 1; font-weight: 650; }
+.mh-price-deck .mh-price-value small { font-size: 15px; color: var(--mh-muted); }
 .mh-price-deck .mh-primary-cta { width: 100%; min-height: 48px; }
 .mh-price-deck .is-primary { background: var(--mh-forest); border-color: var(--mh-forest); color: white; }
-.mh-price-deck .is-primary header { color: var(--mh-lime); }
-.mh-price-deck > article:not(.is-primary) header b { padding: 6px 10px; background: var(--mh-lime); color: var(--mh-ink); font-size: 13px; }
-.mh-price-deck > article:not(.is-primary) > div { display: grid; grid-template-columns: 1.15fr .85fr; gap: 36px; }
+.mh-price-deck .is-primary .mh-price-value small { color: rgba(255, 255, 255, .7); }
+.mh-price-deck .is-primary li svg { border-color: rgba(255, 255, 255, .55); }
+.mh-price-deck header b.is-badge { padding: 6px 10px; background: var(--mh-lime); border-radius: 999px; color: var(--mh-ink); font-size: 12px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
 .mh-price-deck ul { display: flex; flex-direction: column; gap: 8px; }
 .mh-price-deck li { display: flex; align-items: center; gap: 10px; font-size: 14px; }
-.mh-price-deck li svg { width: 18px; height: 18px; padding: 3px; border: 1px solid #7f9b92; border-radius: 50%; }
+.mh-price-deck li svg { width: 18px; height: 18px; flex: 0 0 18px; padding: 3px; border: 1px solid #7f9b92; border-radius: 50%; }
+.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; line-height: 22px; text-align: center; }
 
 .mh-community { min-height: 480px; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(48px, 5.42vw, 82px); padding-top: 86px; padding-bottom: 86px; background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
 .mh-community-rows { display: flex; flex-direction: column; }
@@ -520,7 +524,6 @@
   .mh-onboarding-screen { padding-inline: 38px; }
   .mh-information-flow { overflow-x: auto; }
   .mh-information-flow > div { min-width: 1160px; }
-  .mh-price-deck { grid-template-columns: 1fr 1.2fr; }
 }
 
 @media (max-width: 900px) {
@@ -611,7 +614,6 @@
   .mh-human-photo { min-height: 560px; }
   .mh-privacy-heading { gap: 44px; }
   .mh-information-flow { padding: 28px; }
-  .mh-price-deck > article:not(.is-primary) > div { grid-template-columns: 1fr; }
   .mh-price-deck > article { min-height: 330px; }
   .mh-faq { gap: 48px; }
   .mh-site-footer nav { grid-template-columns: repeat(2, 1fr); }

@@ -628,9 +628,52 @@ export function PricingSection() {
     <section className="mh-pricing mh-section" id="pricing" aria-labelledby="pricing-title">
       <div className="mh-pricing-heading"><div><span className="mh-kicker">A simple place to start</span><h2 id="pricing-title">Start free. Add more support when you need it.</h2></div><p>Begin with a transition plan and the core tools. Add credits or human support only when you choose to go further. You will see the price and what is included before you pay.</p></div>
       <div className="mh-price-deck">
-        <article className="is-primary"><header><span>01 · Start free</span><span>No payment required</span></header><h3>Start free</h3><p>Create your starting plan, add jobs, organize your search, and use the included Offboard tools. No payment is required to begin.</p><strong>Starting plan · Jobs · Search tools</strong><PrimaryCta /></article>
-        <article><header><span>02 · Add support</span><b>Choose when needed</b></header><div><h3>Go further when you need to</h3><p>Add credits for deeper research, tailored materials, and interview preparation. Book eligible human-support options separately when available.</p><ul><li><Check aria-hidden="true" />Deeper research</li><li><Check aria-hidden="true" />Tailored materials</li><li><Check aria-hidden="true" />Interview preparation</li><li><Check aria-hidden="true" />Human support when available</li></ul></div><PrimaryCta>See plans and support</PrimaryCta></article>
+        <article>
+          <header>
+            <h3>Free</h3>
+          </header>
+          <p className="mh-price-value"><b>$0</b><small>forever</small></p>
+          <p>See your plan, your runway, and your benefit deadlines. Then build your first Job Packet.</p>
+          <ul>
+            <li><Check aria-hidden="true" />Transition plan &amp; benefit sheets</li>
+            <li><Check aria-hidden="true" />Runway calculator</li>
+            <li><Check aria-hidden="true" />First Job Packet free</li>
+            <li><Check aria-hidden="true" />Application tracking</li>
+            <li><Check aria-hidden="true" />3 LUMO messages per day</li>
+            <li><Check aria-hidden="true" />30 monthly credits</li>
+          </ul>
+          <PrimaryCta>Build my free transition plan</PrimaryCta>
+        </article>
+        <article className="is-primary">
+          <header>
+            <h3>Offboard Pro</h3>
+            <b className="is-badge">For active transitions</b>
+          </header>
+          <p className="mh-price-value"><b>$20</b><small>/month</small></p>
+          <p>For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited LUMO.</p>
+          <ul>
+            <li><Check aria-hidden="true" />Unlimited conversations with LUMO</li>
+            <li><Check aria-hidden="true" />More room for Job Packets and tailoring</li>
+            <li><Check aria-hidden="true" />Deeper application and interview support</li>
+            <li><Check aria-hidden="true" />300 monthly credits</li>
+          </ul>
+          <PrimaryCta>Upgrade to Pro</PrimaryCta>
+        </article>
+        <article>
+          <header>
+            <h3>Sponsored access</h3>
+            <b className="is-badge">May be covered</b>
+          </header>
+          <p>Outplacement, modernized. Your former employer, school, or workforce organization may cover your access.</p>
+          <ul>
+            <li><Check aria-hidden="true" />The full sponsored benefit is delivered to you</li>
+            <li><Check aria-hidden="true" />Your private career activity remains yours</li>
+            <li><Check aria-hidden="true" />Sponsors receive aggregate reporting only</li>
+          </ul>
+          <Link className="mh-primary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
+        </article>
       </div>
+      <p className="mh-price-note">Quarterly billing details and the full feature comparison are shown at checkout. Claiming your government benefits is always free, on any tier.</p>
     </section>
   );
 }
