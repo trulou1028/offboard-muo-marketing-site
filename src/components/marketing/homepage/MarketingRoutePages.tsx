@@ -48,21 +48,21 @@ export function MarketingPricing() {
       <main id="main-content">
         <PageHero
           current="pricing"
-          kicker="Start free"
-          title="Begin with a plan. Add support when it earns its place."
-          body="Create your starting plan and organize your search without adding a payment method. Offboard shows the price and what is included before you choose anything paid."
-          aside={<><span>Clear before you pay</span><strong>No hidden starting fee.</strong><p>Use the core tools first, then decide whether deeper research, tailored materials, or human support would help.</p></>}
+          kicker="Pricing"
+          title="Start free. Upgrade when you need more support."
+          body="Begin with the next role in front of you. Move to Pro when your search needs more room, or see whether an organization can sponsor your access."
+          aside={<><span>Clear before you pay</span><strong>No hidden starting fee.</strong><p>Free is a real tier, not a trial. You see every price and what is included before you pay.</p></>}
           cta="Start free"
         />
         <PricingSection />
         <EditorialGrid
-          kicker="Choose with context"
-          title="Pay only when the added support fits the moment."
-          body="The free plan is the starting point. Paid options are for moments when you want more capacity or a different kind of help."
+          kicker="How credits work"
+          title="Pay only for the work that needs more horsepower."
+          body="Credits cover the heavier product work: deeper research, tailored materials, and interview preparation. Every credit-spending action shows its cost before you run it."
           items={[
-            { title: "Deeper product work", body: "Use credits for eligible research, tailored materials, and interview preparation." },
-            { title: "Human support", body: "Book an available support option when your situation needs more context than software can provide." },
-            { title: "A clear decision", body: "Review the price, scope, and availability before you pay or schedule." },
+            { title: "Included monthly", body: "Free includes 30 credits a month, Pro includes 300. They refresh monthly." },
+            { title: "Clear costs", body: "The price in credits is shown on the button before you spend anything." },
+            { title: "Human support", body: "Eligible one-on-one support options are booked separately, with price and scope shown before you schedule." },
           ]}
         />
         <FaqSection title="Pricing and support, without surprises." items={PRICING_FAQS} />
