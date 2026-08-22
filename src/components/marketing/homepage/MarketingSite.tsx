@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 
 export const SIGN_UP_URL = "https://app.offboard.co/auth?tab=signup";
 export const SIGN_IN_URL = "https://app.offboard.co/auth?tab=signin";
-export const HUMAN_SUPPORT_URL = "https://offboard.co/intake";
+export const HUMAN_SUPPORT_URL = "/intake";
 
 export type MarketingRoute =
   | "home"
@@ -13,7 +13,8 @@ export type MarketingRoute =
   | "pricing"
   | "about"
   | "employers"
-  | "public-partners";
+  | "public-partners"
+  | "intake";
 
 const HUMAN_STEPS = [
   ["Work independently", "Follow your plan, manage applications, and use the tools at your own pace."],
