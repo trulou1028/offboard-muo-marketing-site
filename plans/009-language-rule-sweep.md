@@ -13,6 +13,23 @@
 - **Risk**: LOW
 - **Depends on**: plans 002–005 and 008 (sweep last, so it covers their copy)
 - **Category**: docs / copy consistency
+- **Outcome**: DONE — executed and reviewed 2026-08-22, approved first pass.
+
+## Execution record (2026-08-22, executor + advisor review)
+
+Branch `claude/009-language-sweep`, 1 commit, based on `claude/010-intake-port`.
+2 files, +7/-7. All seven rendered "workspace" occurrences rewritten with
+meaning preserved (trust copy verified line by line; "Member view" keeps the
+contrast with "Sponsor view"). Option A applied: "outplacement" untouched.
+Reviewer re-ran gates: 14/14 unit · lint 0 · build 0 · rendered copy greps 0.
+
+**Executor over-reported one thing, caught in review**: it flagged 5 more
+hits in `fixtures.ts` as "rendered live via ComparisonTable/HomeSections."
+False — nothing imports that chain; it is the dead code plan 001 deletes
+(PR #2). Verified by grep for importers: zero. No owner decision needed;
+the hits vanish when #2 merges. The plan's Step-1 inventory command DID
+under-glob (`*.tsx` missed the `.ts` fixtures file) — noted for accuracy,
+consequence nil.
 - **UNBLOCKED 2026-08-22** — owner chose **Option A**: "outplacement" stays
   in the Sponsored-tier pricing copy; the language rule is narrowed to
   *"outplacement" may appear on `/employers` and in Sponsored-tier copy,

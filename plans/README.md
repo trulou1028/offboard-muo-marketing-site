@@ -29,7 +29,7 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale)
 
 | 010  | Port the /intake form (cutover prerequisite) | P1 | M | 002 | DONE — reviewed, approved first pass; branch `claude/010-intake-port`, stacked on 005. Live email proof awaits operator keys (handoff in plan). |
-| 009  | Sweep never-say vocabulary from copy | P3 | S | 002-005, 008 | TODO — owner chose Option A (2026-08-22): outplacement stays in Sponsored-tier copy; rule narrowed. Only the workspace sweep remains. |
+| 009  | Sweep never-say vocabulary from copy | P3 | S | 002-005, 008 | DONE — reviewed, approved first pass; branch `claude/009-language-sweep`, stacked on 010. Leftover hits are 001's dead code only. |
 
 ## Dependency notes
 
