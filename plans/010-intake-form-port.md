@@ -14,6 +14,52 @@
 - **Depends on**: plans/002-homepage-substance-port.md (shell/styling conventions). Independent of 006's redirects.
 - **Category**: migration
 - **Planned at**: 2026-08-22, against the stack head `claude/005-employers-about`
+- **Outcome**: DONE — executed and reviewed 2026-08-22, approved first pass.
+  Step 7 (live email proof) is "ready, awaiting operator keys" as designed.
+
+## Execution record (2026-08-22, executor + advisor review)
+
+Branch `claude/010-intake-port`, 6 commits on `claude/005-employers-about`
+(base `3b84ac1`). 16 files, +1218/-10.
+
+What shipped: `/intake` (five-section form) and `/intake/confirmed`; a
+`"use server"` action doing zod validate → REST insert → two Resend emails;
+`server-only`-guarded helpers (`src/lib/intake/supabase-admin.ts`,
+`src/lib/email/resend.ts`); the `intake_submissions` table created live in
+`omsvpaaexfujzheybhat` with RLS on and zero policies, plus a checked-in
+migration; `HUMAN_SUPPORT_URL` flipped to `/intake`; 7 schema unit tests and
+3 intake e2e tests that never touch real Supabase/Resend.
+
+Reviewer verification (independent): gates re-run — 14/14 unit, lint 0,
+build 0 with both routes, 9/9 e2e · full-range secret audit with token/JWT/
+connection-string patterns: zero hits · both helpers import `server-only`
+and no client file references either key name · insert failure fails the
+submission with a fallback contact email while email failure never does
+(matches the source's semantics) · anon REST probe re-run: INSERT refused,
+SELECT returns `[]` · rendered the form at 1280 and 390: all five sections,
+clean lanes, no clipping.
+
+**Executor beat the plan's prose**: the source form has FIVE sections, not
+the four this plan's summary claimed ("Logistics" — timezone/availability —
+did not surface in the advisor's h2 scrape of the live page). The executor
+ported what the code actually contains rather than trimming to match the
+summary. Correct call, exactly per the faithful-port instruction.
+
+**Approved deviations**: Resend called directly with `RESEND_API_KEY`
+instead of through the source's Lovable gateway (this repo has no such
+gateway; same two emails); no `@supabase/supabase-js` dependency — a single
+REST insert did not justify it.
+
+**Operator handoff (the remaining 5 percent)**: add
+`SUPABASE_SERVICE_ROLE_KEY` (Supabase dashboard → project
+`omsvpaaexfujzheybhat` → API keys) and `RESEND_API_KEY` (Resend dashboard;
+the old site kept it only in its deployment platform env) to `.env.local`
+AND the Vercel project env. Then run the smoke test in the PR description:
+one real submission → row lands in `intake_submissions`, confirmation email
+to the submitter, notification to louie@/steph@ → delete the test row.
+Note: the third intake e2e currently asserts the graceful key-absent error;
+once keys exist in CI it should assert the redirect instead (documented in
+the test file).
 
 ## Why this matters
 
