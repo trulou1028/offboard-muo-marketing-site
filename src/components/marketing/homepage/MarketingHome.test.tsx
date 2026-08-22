@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from "vitest";
 
 import { metadata as aboutMetadata } from "@/app/about/page";
@@ -47,11 +47,17 @@ describe("Offboard marketing routes", () => {
   it("uses real routes for product, company, and partner navigation", () => {
     render(<MarketingHome />);
 
-    expect(screen.getAllByRole("link", { name: "How it works" })[0]).toHaveAttribute("href", "/how-it-works");
-    expect(screen.getAllByRole("link", { name: "Pricing" })[0]).toHaveAttribute("href", "/pricing");
-    expect(screen.getAllByRole("link", { name: "About" })[0]).toHaveAttribute("href", "/about");
-    expect(screen.getAllByRole("link", { name: "For employers" })[0]).toHaveAttribute("href", "/employers");
-    expect(screen.getAllByRole("link", { name: "For public partners" })[0]).toHaveAttribute("href", "/public-partners");
+    const headerNav = screen.getByRole("navigation", { name: "Marketing navigation" });
+    const headerLinks = within(headerNav).getAllByRole("link");
+    expect(headerLinks).toHaveLength(4);
+    expect(within(headerNav).getByRole("link", { name: "How it works" })).toHaveAttribute("href", "/how-it-works");
+    expect(within(headerNav).getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
+    expect(within(headerNav).getByRole("link", { name: "About" })).toHaveAttribute("href", "/about");
+    expect(within(headerNav).getByRole("link", { name: "For employers" })).toHaveAttribute("href", "/employers");
+    expect(within(headerNav).queryByRole("link", { name: "For public partners" })).not.toBeInTheDocument();
+
+    const footerNav = screen.getByRole("navigation", { name: "Footer navigation" });
+    expect(within(footerNav).getByRole("link", { name: "For public partners" })).toHaveAttribute("href", "/public-partners");
   });
 
   it("gives how it works a five-step spine, a toolkit, and LUMO", () => {
@@ -89,20 +95,25 @@ describe("Offboard marketing routes", () => {
   it("separates the company story from member conversion", () => {
     render(<MarketingAbout />);
 
-    expect(screen.getByRole("heading", { level: 1, name: /should not leave you alone with a search box/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "We kept hearing the same questions." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: /built for the moment work stops making sense/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "It started with the same questions, over and over." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A newsletter and a community came first." })).toBeInTheDocument();
+    expect(screen.getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Calm is part of the product." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Offboard is not a government agency." })).toBeInTheDocument();
   });
 
   it("gives employers and public partners distinct messages and CTAs", () => {
     const employerView = render(<MarketingEmployers />);
-    expect(screen.getByRole("heading", { level: 1, name: /clear place to start after separation/i })).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /talk about employer support|talk about sponsored access/i })[0]).toHaveAttribute("href", expect.stringContaining("Employer%20support"));
+    expect(screen.getByRole("heading", { level: 1, name: /outplacement, modernized/i })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /talk about sponsored access/i })[0]).toHaveAttribute("href", expect.stringContaining("Employer%20support"));
+    expect(screen.getByRole("link", { name: /post a role/i })).toHaveAttribute("href", expect.stringContaining("Hiring%20on%20Offboard"));
+    expect(screen.getByRole("heading", { name: "Agencies decide. Offboard helps people prepare and continue." })).toBeInTheDocument();
     employerView.unmount();
 
     render(<MarketingPublicPartners />);
     expect(screen.getByRole("heading", { level: 1, name: /scattered information to a workable plan/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /see partner details on the employers page/i })).toHaveAttribute("href", "/employers");
     expect(screen.getAllByRole("link", { name: /discuss a public partnership|discuss a partnership/i })[0]).toHaveAttribute("href", expect.stringContaining("Public%20partner%20support"));
   });
 

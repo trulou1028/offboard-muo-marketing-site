@@ -51,8 +51,8 @@ test.describe("Offboard marketing site", () => {
   test("publishes distinct pricing, company, and partner routes", async ({ page }) => {
     const routes = [
       ["/pricing", /start free\. upgrade when you need more support/i],
-      ["/about", /alone with a search box/i],
-      ["/employers", /clear place to start after separation/i],
+      ["/about", /built for the moment work stops making sense/i],
+      ["/employers", /outplacement, modernized/i],
       ["/public-partners", /scattered information to a workable plan/i],
     ] as const;
 
@@ -61,6 +61,23 @@ test.describe("Offboard marketing site", () => {
       await expect(page.getByRole("heading", { level: 1, name: heading })).toBeVisible();
       await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow, noarchive");
     }
+  });
+
+  test("keeps the header nav to four marketing links and demotes public partners", async ({ page }) => {
+    await page.goto("/");
+    const headerNav = page.getByRole("navigation", { name: "Marketing navigation" });
+    await expect(headerNav.getByRole("link")).toHaveCount(4);
+    await expect(headerNav.getByRole("link", { name: "For public partners" })).toHaveCount(0);
+
+    const footerNav = page.getByRole("navigation", { name: "Footer navigation" });
+    await expect(footerNav.getByRole("link", { name: "For public partners" })).toBeVisible();
+    await expect(footerNav.getByRole("link", { name: "For employers" })).toBeVisible();
+  });
+
+  test("keeps the public-partners route live with a crosslink to employers", async ({ page }) => {
+    await page.goto("/public-partners");
+    await expect(page.getByRole("heading", { level: 1, name: /scattered information to a workable plan/i })).toBeVisible();
+    await expect(page.getByRole("link", { name: /see partner details on the employers page/i })).toHaveAttribute("href", "/employers");
   });
 
   test("reflows every route without horizontal overflow on mobile", async ({ page }) => {
