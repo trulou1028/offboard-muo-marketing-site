@@ -18,6 +18,45 @@
 - **Depends on**: plans/002-homepage-substance-port.md (voice and section patterns)
 - **Category**: direction
 - **Planned at**: commit `9689184`, 2026-08-21
+- **Outcome**: DONE — executed and reviewed 2026-08-22, approved first pass.
+
+## Execution record (2026-08-22, executor + advisor review)
+
+Branch `claude/005-employers-about`, 5 commits, based on
+`claude/008-cta-contrast` (top of the 002→003→004→008 stack). 8 files, all in
+scope.
+
+Reviewer verification (independent): header nav renders exactly
+`How it works · Pricing · About · For employers`; `/public-partners` still
+builds and renders its H1; the footer still carries BOTH partner links;
+`grep -c public-partners` in `MarketingSite.tsx` = 2 (type union + footer).
+`npm test` 7/7 · lint 0 · build 0 · **e2e 6/6** (the executor added two
+tests). No em-dashes. `git merge-tree` shows 0 conflicts against
+`claude/007-imagery-dedupe`, which also edits the About origin section.
+
+**Founder story correctly left neutral.** The origin section keeps the
+existing non-biographical paragraphs verbatim; only the kicker and H2 changed.
+No names, dates, or family details were invented. Confirmed by reading the
+rendered paragraphs.
+
+**Executor flagged a genuine cross-plan contradiction** (credit where due):
+"Outplacement" appears in `PricingSection` and `PricingTeaser`, outside
+`/employers`. It correctly declined to fix it as out of scope. Root cause is
+**this advisor's own inconsistency**, not the executor's: plans 002 and 004
+specified that phrase for the Sponsored tier, while plan 005 carries the rule
+that "outplacement" is `/employers`-only. See plan 009.
+
+**Reviewer found a second instance of the same class**: the word "workspace"
+is on the never-say list and appears 7 times in user-facing copy. Only ONE is
+new here (`Follow through ... one private workspace`, which came from this
+plan's own copy spec); the other six pre-date the rebuild. Not a defect of
+this plan, and deliberately NOT revised here — fixing one instance while six
+remain would be theatre. Swept in plan 009 instead.
+
+**Not changed, correctly**: the About origin photo is still
+`hero-real-life.webp` on this branch, because plan 007 (which changes it to
+`strip-kitchen-table.webp`) is on an independent branch outside this stack.
+The two merge without conflict.
 
 ## Why this matters
 
