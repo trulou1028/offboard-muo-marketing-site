@@ -18,7 +18,7 @@ export type MarketingRoute =
 
 const HUMAN_STEPS = [
   ["Work independently", "Follow your plan, manage applications, and use the tools at your own pace."],
-  ["Ask Lumo", "Get guidance that uses the context already in your Offboard workspace."],
+  ["Ask Lumo", "Get guidance that uses the context already in your Offboard plan."],
   ["Talk with a person", "Book available one-on-one support online or visit the Offboard office in Concord, California."],
 ] as const;
 
@@ -27,7 +27,7 @@ export const PRODUCT_FAQS = [
   ["Is Offboard only for people in tech?", "No. Offboard is designed for people navigating a layoff or job transition. Some job-search tools may be most developed for professional and knowledge-work roles today, and we will be clear when a feature is better suited to a particular kind of work."],
   ["What if I only need help with one part of my transition?", "Start with what feels most urgent. You can organize a single application, research possible support, or build a broader transition plan. You do not need to complete every part at once."],
   ["Does Offboard guarantee benefits, interviews, offers, or placement?", "No. Offboard helps you organize and improve the work of a transition, but it cannot guarantee eligibility decisions, interviews, offers, or job placement."],
-  ["How is Lumo different from a general AI assistant?", "Lumo works inside your Offboard workspace, so it can use the transition, role, and application context you choose to save. It is designed to help with the work in Offboard, while still requiring your review and judgment."],
+  ["How is Lumo different from a general AI assistant?", "Lumo works inside your Offboard plan, so it can use the transition, role, and application context you choose to save. It is designed to help with the work in Offboard, while still requiring your review and judgment."],
 ] as const;
 
 export const PRICING_FAQS = [
@@ -384,7 +384,7 @@ export function ConnectedPlanSummary() {
         <p>Offboard brings the practical work of a transition into one place, so you can spend less time rebuilding context and more time taking the next useful step.</p>
         <ul className="mh-plain-list ruled">
           <li>01 A starting plan organized around your situation</li>
-          <li>02 One workspace connecting each role, application, and next step</li>
+          <li>02 One place connecting each role, application, and next step</li>
           <li>03 Possible support with official sources and clear follow-through</li>
         </ul>
         <Link className="mh-primary-cta" href="/how-it-works"><span>See how Offboard works</span><ArrowRight aria-hidden="true" /></Link>
@@ -617,7 +617,7 @@ export function PrivacySummary() {
       <div><span className="mh-kicker is-lime">Private by default</span><h2 id="trust-summary-title">Your transition is yours.</h2></div>
       <div className="mh-home-trust-grid">
         <article><span>01</span><strong>Independent</strong><p>Offboard is not affiliated with any state or federal agency.</p></article>
-        <article><span>02</span><strong>Your choice</strong><p>You choose what enters your workspace and which support you request.</p></article>
+        <article><span>02</span><strong>Your choice</strong><p>You choose what enters your plan and which support you request.</p></article>
         <article><span>03</span><strong>Clear sponsor terms</strong><p>Sponsored programs explain what a sponsor can and cannot see before enrollment.</p></article>
       </div>
       <a href="https://app.offboard.co/privacy">Read the privacy policy <ArrowRight aria-hidden="true" /></a>

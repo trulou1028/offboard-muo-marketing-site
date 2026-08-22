@@ -110,7 +110,7 @@ export function MarketingAbout() {
           items={[
             { title: "Clarity before volume", body: "Show what deserves attention now instead of presenting every possible task at once." },
             { title: "Official sources", body: "Use responsible agencies and providers for eligibility, applications, and final decisions." },
-            { title: "Private by default", body: "Let people choose what enters their workspace and explain sponsor visibility before enrollment." },
+            { title: "Private by default", body: "Let people choose what enters their plan and explain sponsor visibility before enrollment." },
             { title: "Human when needed", body: "Software should not pretend every transition can be solved without context or conversation." },
           ]}
         />
@@ -149,7 +149,7 @@ export function MarketingEmployers() {
         />
         <section className="mh-route-sponsor mh-section mh-split" aria-labelledby="employer-privacy-title">
           <div className="mh-copy-block"><span className="mh-kicker">Clear sponsor terms</span><h2 id="employer-privacy-title">People should know what a sponsor can see.</h2><p>Before a sponsored member enrolls, Offboard explains what the program sponsor can and cannot see. Visibility depends on the program notice. Personal benefit decisions remain with responsible agencies and providers.</p></div>
-          <div className="mh-route-sponsor-card"><span>Member workspace</span><strong>Chosen by the member</strong><p>Transition details, saved roles, documents, and requested support stay in the member experience according to the applicable notice.</p><span>Sponsor view</span><strong>Explained before enrollment</strong><p>Program reporting and visibility are defined before participation begins. Sponsors receive aggregate participation and outcome reporting, never individual applications, conversations, finances, or reflections.</p></div>
+          <div className="mh-route-sponsor-card"><span>Member view</span><strong>Chosen by the member</strong><p>Transition details, saved roles, documents, and requested support stay in the member experience according to the applicable notice.</p><span>Sponsor view</span><strong>Explained before enrollment</strong><p>Program reporting and visibility are defined before participation begins. Sponsors receive aggregate participation and outcome reporting, never individual applications, conversations, finances, or reflections.</p></div>
         </section>
         <section className="mh-route-hiring mh-section" aria-labelledby="employer-hiring-title">
           <div className="mh-copy-block">
@@ -166,7 +166,7 @@ export function MarketingEmployers() {
           items={[
             { title: "Orient", body: "Start from the resident's situation and surface what may deserve attention now." },
             { title: "Route", body: "Possible programs appear beside their responsible official source or local provider." },
-            { title: "Follow through", body: "Deadlines, questions, materials, and next steps stay in one private workspace." },
+            { title: "Follow through", body: "Deadlines, questions, materials, and next steps stay in one private place." },
           ]}
         />
         <ContactBand kicker="Public partnership" title="Build a clearer route through the transition." body="Tell us which residents you serve and where the current handoff breaks down." cta="Discuss a public partnership" href="mailto:hello@offboard.co?subject=Public%20partner%20support" />
