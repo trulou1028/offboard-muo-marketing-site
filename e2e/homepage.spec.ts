@@ -1,11 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
-
-async function waitForSearchHydration(page: Page) {
-  await page.waitForFunction(() => {
-    const tab = document.querySelector('[role="tab"]');
-    return !!tab && Object.keys(tab).some((key) => key.startsWith("__reactFiber$"));
-  });
-}
+import { expect, test } from "@playwright/test";
 
 test.describe("Offboard marketing site", () => {
   test("keeps the homepage focused and routes visitors to deeper pages", async ({ page }) => {
@@ -28,29 +21,30 @@ test.describe("Offboard marketing site", () => {
 
     await page.getByRole("link", { name: "How it works" }).first().click();
     await expect(page).toHaveURL(/\/how-it-works$/);
-    await expect(page.getByRole("heading", { level: 1, name: /start with your situation/i })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: /one plan that starts where you are/i })).toBeVisible();
     expect(backendRequests).toEqual([]);
     expect(consoleErrors).toEqual([]);
   });
 
-  test("keeps the complete connected product journey interactive", async ({ page }) => {
+  test("gives how it works its five-step spine, toolkit, and LUMO", async ({ page }) => {
     const consoleErrors: string[] = [];
+    const backendRequests: string[] = [];
     page.on("console", (message) => {
       if (message.type() === "error") consoleErrors.push(message.text());
     });
+    page.on("request", (request) => {
+      if (/supabase\.co|api\.offboard\.co/i.test(request.url())) backendRequests.push(request.url());
+    });
 
     await page.goto("/how-it-works");
-    await waitForSearchHydration(page);
-    await expect(page.getByRole("heading", { name: /every part of unemployment lives somewhere else/i })).toBeVisible();
-    await expect(page.getByLabel("An abstracted preview of Offboard onboarding")).toBeVisible();
-    await expect(page.getByLabel("Illustrative California benefits preview")).toBeVisible();
-
-    const stages = page.getByRole("tablist", { name: "Job search stages" });
-    const interview = stages.getByRole("tab", { name: /interview/i });
-    await interview.click();
-    await expect(interview).toHaveAttribute("aria-selected", "true");
-    await expect(page.getByRole("heading", { name: /walk in knowing what to practice/i })).toBeVisible();
-    await expect(page.getByRole("img", { name: /role-specific interview preparation/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /five steps from/i })).toBeVisible();
+    await expect(page.getByText("Tell us where you are")).toBeVisible();
+    await expect(page.getByRole("heading", { name: /tools didn't go anywhere/i })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 3, name: "Job Packet" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "An AI guide that knows your actual situation." })).toBeVisible();
+    await expect(page.getByText(/never invents a dollar figure/i)).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Stop repeating your story to every new tool." })).toBeVisible();
+    expect(backendRequests).toEqual([]);
     expect(consoleErrors).toEqual([]);
   });
 
