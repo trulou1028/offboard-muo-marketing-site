@@ -29,5 +29,20 @@ export default defineConfig({
         url: baseURL,
         reuseExistingServer: false,
         timeout: 120_000,
+        // e2e/intake.spec.ts's third test relies on SUPABASE_SERVICE_ROLE_KEY
+        // and RESEND_API_KEY being absent so the intake server action takes
+        // its graceful-degradation path instead of actually writing to
+        // Supabase / sending through Resend. Without this override, a
+        // developer's .env.local (which the webServer inherits) supplies
+        // real keys and every e2e run would insert a live row into
+        // production Supabase. Blanking them here — before Next.js starts
+        // and reads .env.local — keeps e2e deterministic and side-effect
+        // free: Next.js only fills in a var from .env.local when it is not
+        // already present in process.env, so an explicit "" here wins.
+        env: {
+          ...process.env,
+          SUPABASE_SERVICE_ROLE_KEY: "",
+          RESEND_API_KEY: "",
+        },
       },
 });
