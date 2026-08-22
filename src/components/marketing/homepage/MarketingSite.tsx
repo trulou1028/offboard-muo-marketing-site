@@ -70,7 +70,6 @@ const NAV_LINKS: ReadonlyArray<{ route: MarketingRoute; href: string; label: str
   { route: "pricing", href: "/pricing", label: "Pricing" },
   { route: "about", href: "/about", label: "About" },
   { route: "employers", href: "/employers", label: "For employers" },
-  { route: "public-partners", href: "/public-partners", label: "For public partners" },
 ];
 
 export function MarketingHeader({ current }: { current: MarketingRoute }) {
