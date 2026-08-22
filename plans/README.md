@@ -28,6 +28,7 @@ your row when done.
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale)
 
+| 010  | Port the /intake form (cutover prerequisite) | P1 | M | 002 | TODO |
 | 009  | Sweep never-say vocabulary from copy | P3 | S | 002-005, 008 | BLOCKED — owner must decide whether "outplacement" may stay in Sponsored-tier pricing copy |
 
 ## Dependency notes
