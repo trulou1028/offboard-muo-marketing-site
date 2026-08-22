@@ -487,7 +487,7 @@
   .mh-community { grid-template-columns: 1fr; }
   .mh-verified-heading { flex-direction: column; align-items: flex-start; gap: 20px; }
   .mh-community-rows article { grid-template-columns: 1fr; }
-  .mh-community-rows a { grid-row: auto; }
+  .mh-community-rows a { grid-column: auto; grid-row: auto; }
   .mh-home-trust-grid { grid-template-columns: 1fr; }
   .mh-home-trust-grid article { min-height: 190px; }
   .mh-home-trust-grid strong { margin-top: 36px; }
