@@ -30,6 +30,10 @@ REJECTED (with one-line rationale)
 ## Dependency notes
 
 - **001 first, alone**: pure deletion + two image swaps; de-risks everything after.
+- **001 is NOT a hard prerequisite for 002** (corrected 2026-08-21): the
+  original wording made it a STOP condition, which blocked an executor
+  needlessly. Verified that no in-scope file of 002 imports anything 001
+  deletes. Plans 002+ can run from `main` while 001 sits in review.
 - **002 before 003/004/005**: 002 establishes the copy voice, the shared
   section patterns, and the pricing numbers the other pages must agree with.
 - **003 and 004 can run in parallel** after 002 (they touch disjoint route

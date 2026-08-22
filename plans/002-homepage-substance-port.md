@@ -7,16 +7,20 @@
 > in `plans/README.md`.
 >
 > **Drift check (run first)**: `git diff --stat 9689184..HEAD -- src/app/page.tsx src/components/marketing/homepage/ e2e/homepage.spec.ts`
-> Plan 001 legitimately touches `MarketingSite.tsx` (one image line) and
-> deletes dead files — that is expected drift. Any OTHER change to the
-> excerpted code below is a STOP condition.
+> Expected, harmless drift if those plans have landed: 001 deletes dead files
+> (no overlap with this plan), and 007 changes one image line in
+> `MarketingSite.tsx` plus two `object-position` values in the CSS. Any OTHER
+> change to the excerpted code below is a STOP condition.
 
 ## Status
 
 - **Priority**: P1
 - **Effort**: L
 - **Risk**: MED
-- **Depends on**: plans/001-dead-code-and-imagery-dedupe.md
+- **Depends on**: none (hard). Plan 001 is *recommended* first for tidiness,
+  but it is not a technical prerequisite: verified 2026-08-21 that none of
+  this plan's in-scope files import any module 001 deletes, so this plan
+  executes correctly from `main` whether or not 001 has landed.
 - **Category**: direction
 - **Planned at**: commit `9689184`, 2026-08-21
 
@@ -247,7 +251,6 @@ Primary CTA label `Build my free transition plan`. Keep the secondary
 - **Subscriber count**: same rule for `5,000+ subscribers` (sources conflict:
   5,000+ vs 8,000+). Ship the lower verified number; if neither is
   confirmable, BLOCKED.
-- Plan 001 has not landed (dead files still present) — execute 001 first.
 - A copy line in this spec conflicts with the em-dash/voice rules — report,
   do not rewrite on your own.
 
