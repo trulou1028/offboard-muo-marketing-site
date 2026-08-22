@@ -16,7 +16,9 @@
 - **Priority**: P1
 - **Effort**: L
 - **Risk**: MED
-- **Depends on**: plans/002-homepage-substance-port.md
+- **Depends on**: plans/002-homepage-substance-port.md (reviewed, open as
+  PR #6 on branch `claude/002-homepage-substance-port`; base your work on
+  that branch, not on `main`)
 - **Category**: direction
 - **Planned at**: commit `9689184`, 2026-08-21
 
@@ -67,8 +69,27 @@ section, and integrations. This plan implements that page.
 ```
 
 `FragmentedSection`, `PersonalizedSection`, `RunwaySection`,
-`BenefitsSection`, `SearchShowcase`, `HumanSupportSection`, and the inline
-product-proof section leave this page.
+`BenefitsSection`, `SearchShowcase`, and the inline product-proof section
+leave this page. **`HumanSupportSection` stays.**
+
+### Why human support stays (amended 2026-08-21)
+
+An earlier draft of this plan dropped `HumanSupportSection` from this page.
+Two reasons that was wrong:
+
+1. **Product completeness.** After plan 002, this page is the section's only
+   remaining render on the whole site. Dropping it would leave the product's
+   "human when needed" pillar represented by nothing but a one-line link in
+   the homepage community strip. It also completes the escalation ladder the
+   page is already telling: work on your own, ask LUMO, talk to a person.
+   Placed directly after `LumoSection`, it reads as the natural next rung.
+2. **It would collide with shipped work.** Plan 007 (branch
+   `claude/007-imagery-dedupe`, PR #3) changed the photo inside
+   `HumanSupportSection`. Deleting the component would conflict with that
+   branch and discard the change.
+
+So: keep it, render it with no `compact` prop, and do NOT delete its
+definition.
 
 ## Copy specification (inline, authoritative)
 
@@ -150,11 +171,14 @@ Chips: `Calendar` `Gmail` `Drive` `Slack · soon` `Notion · soon` (the two
   (`MarketingPricing`, `MarketingAbout`, `MarketingEmployers`,
   `MarketingPublicPartners`) — even where they render sections this plan
   retires from `/how-it-works`. They are rebuilt in plans 004–005.
+- **`HumanSupportSection` — do NOT delete or modify it.** It stays in this
+  page's composition (see "Why human support stays"). Another open branch
+  edits the photo inside it; touching it here would conflict.
 - Component definitions of `FragmentedSection` / `PersonalizedSection` /
-  `RunwaySection` / `BenefitsSection` / `HumanSupportSection` in
-  `MarketingSite.tsx`: remove them from this page's composition only. After
-  recomposition, grep each name across `src/`; delete a definition ONLY if
-  it has zero remaining renders (record which ones you deleted in the PR).
+  `RunwaySection` / `BenefitsSection` in `MarketingSite.tsx`: remove them
+  from this page's composition only. After recomposition, grep each name
+  across `src/`; delete a definition ONLY if it has zero remaining renders
+  (record which ones you deleted in the PR). If in doubt, leave it and say so.
 - Nav, footer, homepage.
 
 ## Git workflow
@@ -174,7 +198,11 @@ Chips: `Calendar` `Gmail` `Drive` `Slack · soon` `Notion · soon` (the two
 3. **Add `ToolkitSection`** (flagship card + 2-column grid of 8; server
    component, static). Verify: `grep -c "Job Packet" src/components/marketing/homepage/MarketingSite.tsx` ≥ 2.
 4. **Add `LumoSection`**. Verify: `grep -n "never invents a dollar figure" src/components/marketing/homepage/MarketingSite.tsx` → 1.
-5. **Add `ContextSection`** with the integrations strip. Verify: build passes.
+5. **Add `ContextSection`** with the integrations strip, and keep
+   `<HumanSupportSection />` in the composition between `LumoSection` and
+   `ContextSection`. Verify: build passes, and
+   `grep -c "HumanSupportSection" src/components/marketing/homepage/MarketingRoutePages.tsx`
+   → 2 (the import and the render).
 6. **Recompose `MarketingHowItWorks`** to the target order; delete
    `SearchShowcase.tsx`; run the orphan check from Scope (grep each retired
    section name; delete only zero-render definitions). Verify: `npm test`
