@@ -1,12 +1,14 @@
 import {
+  CommunityStrip,
   ConnectedPlanSummary,
   FinalCta,
   HomeHero,
+  HookBand,
   HowItWorksOverview,
-  HumanSupportSection,
   MarketingShell,
   PricingTeaser,
-  PrivacySummary,
+  ProblemSection,
+  VerifiedFactsStrip,
 } from "./MarketingSite";
 
 export default function MarketingHome() {
@@ -14,11 +16,13 @@ export default function MarketingHome() {
     <MarketingShell current="home">
       <main id="main-content">
         <HomeHero />
+        <ProblemSection />
         <HowItWorksOverview />
+        <HookBand />
         <ConnectedPlanSummary />
-        <PrivacySummary />
-        <HumanSupportSection compact />
+        <VerifiedFactsStrip />
         <PricingTeaser />
+        <CommunityStrip />
         <FinalCta />
       </main>
     </MarketingShell>

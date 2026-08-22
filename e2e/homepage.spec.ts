@@ -21,8 +21,9 @@ test.describe("Offboard marketing site", () => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1, name: /modern unemployment office/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /three jobs at once/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /\$12,000/ })).toBeVisible();
     await expect(page.getByRole("heading", { name: /one place for the decisions/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /your transition is yours/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /checked by people, never generated/i })).toBeVisible();
     await expect(page.getByRole("tablist", { name: "Job search stages" })).toHaveCount(0);
 
     await page.getByRole("link", { name: "How it works" }).first().click();
