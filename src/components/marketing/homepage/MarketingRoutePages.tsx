@@ -1,24 +1,21 @@
 import Image from "next/image";
 
-import { SearchShowcase } from "./SearchShowcase";
 import {
-  BenefitsSection,
   ContactBand,
+  ContextSection,
   EditorialGrid,
   FaqSection,
   FinalCta,
-  FragmentedSection,
+  FiveSteps,
   HUMAN_SUPPORT_URL,
   HumanSupportSection,
+  LumoSection,
   MarketingShell,
   PageHero,
-  PersonalizedSection,
   PricingSection,
   PRICING_FAQS,
   PRODUCT_FAQS,
-  RunwaySection,
-  SIGN_UP_URL,
-  StartingPlanPreview,
+  ToolkitSection,
 } from "./MarketingSite";
 
 export function MarketingHowItWorks() {
@@ -27,26 +24,17 @@ export function MarketingHowItWorks() {
       <main id="main-content">
         <PageHero
           current="how-it-works"
-          kicker="One connected plan"
-          title="Start with your situation. Build from there."
-          body="Offboard organizes the work after a layoff around three jobs: protect your runway, find available support, and build what comes next."
-          aside={<><span>Three jobs, one plan</span><strong>Runway. Support. Next role.</strong><p>Your answers stay connected to the work you choose to do.</p></>}
+          kicker="How it works"
+          title="One plan that starts where you are."
+          body="Whether you were laid off yesterday, have been searching for months, or are still employed and reading the room, your plan starts from your situation and your state, not a template."
+          cta="Build my free transition plan"
+          aside={<><span>The spine and the muscle</span><strong>The plan is the spine. The tools are the muscle.</strong><p>Every step links straight into the tool that does the heavy lifting. No blank pages, no starting over.</p></>}
         />
-        <FragmentedSection />
-        <PersonalizedSection />
-        <RunwaySection />
-        <BenefitsSection />
-        <SearchShowcase signUpUrl={SIGN_UP_URL} />
+        <FiveSteps />
+        <ToolkitSection />
+        <LumoSection />
         <HumanSupportSection />
-        <section className="mh-proof mh-section mh-split" aria-labelledby="product-proof-title">
-          <div className="mh-copy-block">
-            <span className="mh-kicker">Built around the work after a layoff</span>
-            <h2 id="product-proof-title">One plan that keeps the context attached.</h2>
-            <p>Your priorities, possible support, saved roles, materials, and next steps stay connected so you do not have to rebuild the story every time you move.</p>
-            <ul className="mh-plain-list ruled"><li>01 A starting plan organized around your situation</li><li>02 One workspace connecting each role and application</li><li>03 Official sources and clear follow-through</li></ul>
-          </div>
-          <div><StartingPlanPreview /><small className="mh-card-note">Example information shown. Your plan reflects the details you choose to provide.</small></div>
-        </section>
+        <ContextSection />
         <FaqSection title="What to know about the product." items={PRODUCT_FAQS} />
         <FinalCta />
       </main>
