@@ -440,7 +440,7 @@ export function BenefitsSection() {
 export function HumanSupportSection({ compact = false }: { compact?: boolean }) {
   return (
     <section className={`mh-human mh-section mh-split ${compact ? "is-compact" : ""}`.trim()} aria-labelledby="human-title">
-      <div className="mh-human-photo"><Image src="/marketing/homepage/raw/hero-real-life.webp" alt="A woman sitting at her desk with a notebook and laptop" fill sizes="(max-width: 900px) 100vw, 42vw" /></div>
+      <div className="mh-human-photo"><Image src="/marketing/homepage/raw/strip-call-outside.webp" alt="A man on a balcony, phone to his ear, looking out over the street" fill sizes="(max-width: 900px) 100vw, 42vw" /></div>
       <div className="mh-copy-block">
         <span className="mh-kicker">Use the support that fits the moment</span>
         <h2 id="human-title">You can do this yourself. You should not have to do it alone.</h2>
