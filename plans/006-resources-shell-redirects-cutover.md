@@ -19,6 +19,15 @@
 - **Depends on**: plans/005-employers-consolidation-about-rewrite.md
 - **Category**: migration
 - **Planned at**: commit `9689184`, 2026-08-21
+- **Amended 2026-08-22**: the `/intake` question is settled by evidence.
+  The live `offboard.co/intake` is a real member-intake form (4-section
+  form → Supabase `intake_submissions` → two Resend emails to the team);
+  the app has NO intake route (its 200s are SPA catch-alls). The v2 spec's
+  `/intake → signup` redirect predated the form and is removed from the map.
+  Plan 010 has since ported the form into this repo (DONE, verified live
+  end-to-end 2026-08-22), so `/intake` is a native route here and must not
+  be redirected. A first amendment attempt on 2026-08-22 silently failed
+  (string mismatch); this one is verified by assertion.
 
 ## Why this matters
 
@@ -68,7 +77,7 @@ separate effort** — this plan ships the shell and the redirects, and keeps
 | `/for-organizations` | `/employers` | |
 | `/for-recruiters` | `/employers` | |
 | `/gift` | `/pricing` | `[VERIFY]` gift program still exists; if yes → `/pricing#gift` once a gift section ships |
-| `/intake` | `https://app.offboard.co/auth?tab=signup` | external redirect — CHECK with operator first; `/intake` may still be the live human-support scheduler (`HUMAN_SUPPORT_URL` in `MarketingSite.tsx` points at it) |
+| `/intake` | **NO REDIRECT** | Settled 2026-08-22 by evidence: the live `/intake` is a working member-intake form; plan 010 (DONE) ports it into this repo and `HUMAN_SUPPORT_URL` is now relative `/intake`. Wiring any redirect here would shadow the ported route. |
 | `/resources/:slug*` | `/resources/:slug*` | same-path: routes must exist or fall through to `/resources` index |
 | `/tools/:slug*` | `/resources` | until the tool directory is ported `[VERIFY count ~45]` |
 | `/act` | kept live, NO redirect | B2G landing URL — out of scope here, but it must not 404: add a stub route or keep the redirect list free of it and note it in the launch checklist |
@@ -174,10 +183,8 @@ separate effort** — this plan ships the shell and the redirects, and keeps
 - `https://offboard.co/sitemap.xml` is unreachable or its inventory differs
   wildly (>20 unmapped marketing paths) from the map — the map needs
   re-scoping, report back.
-- `/intake` ambiguity: `HUMAN_SUPPORT_URL` in this repo points at
-  `https://offboard.co/intake`. If `/intake` redirects to signup per the map,
-  the human-support CTA breaks. Resolve with the operator BEFORE wiring that
-  redirect; if unresolved, omit the `/intake` rule and note it.
+- A redirect rule for `/intake` appears in `next.config.ts` — that would
+  shadow the route plan 010 shipped. Never add one; if you find one, STOP.
 - The operator asks to remove `noindex` in this plan — decline; it is a
   separate launch decision.
 - Anchor targets (`#toolkit`, `#faq`, `#community`) don't exist because
