@@ -8,9 +8,11 @@ here for the operator to execute deliberately, in order.
       working member-intake form (ported by plan 010). Do not add a
       redirect for it. Verify one more time on the deployed preview before
       cutover that `/intake` returns 200, not a 3xx.
-- [ ] Verify the `/act` decision: `/act` (a B2G landing URL) is kept live
-      with no redirect. Confirm before cutover whether it needs a stub
-      route in this repo or whether it is out of scope for this launch.
+- [x] `/act` decision resolved (plan 017): `/act` is now a real route in
+      this repo, rebuilt as a resident-first ACT pilot landing page. It has
+      no redirect and stays out of the nav by design. Verify one more time
+      on the deployed preview before cutover that `/act` returns 200, not
+      a 3xx.
 - [ ] Remove `noindex`: flip the `robots` metadata off `noindex, nofollow,
       noarchive` on every route once the cutover is confirmed. This is a
       separate, deliberate operator decision, not part of any plan-006
@@ -30,6 +32,8 @@ here for the operator to execute deliberately, in order.
 - [ ] Crawl the 301 map live against the production domain (every source
       path in `next.config.ts` `redirects()`) and confirm each returns the
       expected 301/308 and destination.
+- [ ] Crawl `/intake` and `/act` live against the production domain and
+      confirm each returns 200, not a 3xx.
 - [ ] Submit the new sitemap in Search Console.
 - [ ] Watch organic traffic daily for 30 days. Kill-threshold: a -20% drop
       in organic traffic relative to the pre-cutover baseline triggers an
