@@ -40,6 +40,7 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByText("$0 forever")).toBeInTheDocument();
     expect(screen.getByText("$20/month")).toBeInTheDocument();
     expect(screen.getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /subscribe free/i })).toHaveAttribute("href", "https://newsletter.offboard.co");
     expect(screen.getByRole("heading", { name: /find out first/i })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Where are you right now?" })).not.toBeInTheDocument();
     expect(screen.queryByRole("tablist", { name: "Job search stages" })).not.toBeInTheDocument();
