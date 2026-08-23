@@ -48,14 +48,15 @@ The homepage does not contain the full onboarding demo, benefits demo, job-searc
 
 ### How it works
 
-1. Product promise and the three connected jobs.
-2. The fragmentation problem.
-3. Starting-plan onboarding.
-4. Runway and deadline planning.
-5. Possible benefits and official-source handoff.
-6. Connected job-search workflow.
+1. Product promise: one plan that starts from your situation, not a template.
+2. The five-step spine, from "what just happened" to "what's next."
+3. Starting-plan onboarding, shown with the actual onboarding screen.
+4. The toolkit: the flagship Job Packet and the supporting tools, several shown as product renders.
+5. Meet LUMO, an AI guide grounded in your plan and verified benefit facts.
+6. Possible benefits and official-source handoff, backed by the verified-facts strip.
 7. Self-serve, Lumo, and human support.
-8. Product proof and product FAQ.
+8. Your context, kept across every tool.
+9. Product proof and product FAQ.
 
 ### Pricing
 

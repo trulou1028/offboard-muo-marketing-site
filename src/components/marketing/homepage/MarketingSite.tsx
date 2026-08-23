@@ -447,6 +447,19 @@ export function ConnectedPlanSummary() {
   );
 }
 
+export function StartingPlanSection() {
+  return (
+    <section className="mh-starting-plan mh-section mh-split" aria-labelledby="starting-plan-title">
+      <div className="mh-copy-block">
+        <span className="mh-kicker">The first ten minutes</span>
+        <h2 id="starting-plan-title">A few questions. A plan that&apos;s actually yours.</h2>
+        <p>Your situation, your state, your dates. That&apos;s enough to build a starting plan around what changed, with the option to skip straight to the tools if you already know what you need. Private by default, and you can change your answers any time.</p>
+      </div>
+      <StartingPlan />
+    </section>
+  );
+}
+
 const VERIFIED_FACTS_COLUMNS = [
   ["A verification date on every rule", "Every state rule in Offboard shows when a person last checked it: \"California rules verified June 2026.\""],
   ["Deepest coverage in California", "Including 4,000+ state-approved training programs, with verified official links for every state."],
@@ -531,16 +544,16 @@ export function FiveSteps() {
 
 const TOOLKIT_FLAGSHIP_CHIPS = ["Ghost check", "Fit read", "Tailored materials", "Warm intro"] as const;
 
-const TOOLKIT_CARDS = [
-  ["Resume Studio", "Build and tailor resumes from your real history, ready for the role in front of you."],
-  ["Interview prep & practice", "Drills grounded in the role, the company, and your strongest stories."],
-  ["Application tracker", "Every application, stage, and follow-up stays current without extra busywork."],
-  ["Ghost-job checker", "Flags fake or stale listings before you waste an application on them."],
-  ["Paperwork review", "A read on your severance or offer paperwork before you sign anything."],
-  ["Runway calculator", "See how long your money lasts and which deadlines change the math."],
-  ["Funded training explorer", "Search state-approved programs that may be paid for while you train."],
-  ["Ask LUMO", "An AI guide that works from your plan, your benefit facts, and your search."],
-] as const;
+const TOOLKIT_CARDS: Array<{ title: string; body: string; image?: string; alt?: string }> = [
+  { title: "Resume Studio", body: "Build and tailor resumes from your real history, ready for the role in front of you.", image: "/marketing/homepage/renders/toolkit-resumes.webp", alt: "Product render of the Resume Studio view, a resume tailored into role-specific cards" },
+  { title: "Interview prep & practice", body: "Drills grounded in the role, the company, and your strongest stories.", image: "/marketing/homepage/renders/toolkit-interviews.webp", alt: "Product render of interview prep, two message cards exchanging practice questions" },
+  { title: "Application tracker", body: "Every application, stage, and follow-up stays current without extra busywork.", image: "/marketing/homepage/renders/toolkit-applications.webp", alt: "Product render of the application tracker, cards filed by stage" },
+  { title: "Ghost-job checker", body: "Flags fake or stale listings before you waste an application on them." },
+  { title: "Paperwork review", body: "A read on your severance or offer paperwork before you sign anything." },
+  { title: "Runway calculator", body: "See how long your money lasts and which deadlines change the math." },
+  { title: "Funded training explorer", body: "Search state-approved programs that may be paid for while you train." },
+  { title: "Ask LUMO", body: "An AI guide that works from your plan, your benefit facts, and your search." },
+];
 
 export function ToolkitSection() {
   return (
@@ -551,6 +564,9 @@ export function ToolkitSection() {
       </div>
       <div className="mh-toolkit-layout">
         <article className="mh-toolkit-flagship">
+          <div className="mh-toolkit-flagship-visual">
+            <Image src="/marketing/homepage/renders/toolkit-job-packets.webp" alt="Product render of the Job Packet view, a document linked to its tailored materials" fill sizes="(max-width: 900px) 100vw, 38vw" />
+          </div>
           <span className="mh-kicker is-lime">Flagship</span>
           <h3>Job Packet</h3>
           <p>Paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person, all kept with the role.</p>
@@ -560,8 +576,13 @@ export function ToolkitSection() {
           <a className="mh-section-link" href={SIGN_UP_URL}>Explore the Job Packet <ArrowRight aria-hidden="true" /></a>
         </article>
         <div className="mh-toolkit-grid">
-          {TOOLKIT_CARDS.map(([title, body]) => (
+          {TOOLKIT_CARDS.map(({ title, body, image, alt }) => (
             <article key={title}>
+              {image && (
+                <div className="mh-toolkit-card-visual">
+                  <Image src={image} alt={alt ?? ""} fill sizes="(max-width: 900px) 100vw, 22vw" />
+                </div>
+              )}
               <h3>{title}</h3>
               <p>{body}</p>
             </article>
@@ -585,7 +606,7 @@ export function LumoSection() {
       <div className="mh-copy-block">
         <span className="mh-kicker is-lime">Meet LUMO</span>
         <h2 id="lumo-title">An AI guide that knows your actual situation.</h2>
-        <p>LUMO works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three.</p>
+        <p>LUMO works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three. Like a caseworker who answers in seconds, remembers everything, and never has a line.</p>
         <div className="mh-lumo-trust">
           <p>When LUMO talks about your benefits, it reads from human-verified state facts. It never invents a dollar figure or a deadline.</p>
         </div>

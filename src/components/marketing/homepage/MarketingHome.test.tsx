@@ -98,10 +98,14 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByText("Get ready, then run the search")).toBeInTheDocument();
     expect(screen.getByText("Close it, and make it count")).toBeInTheDocument();
     expect(screen.getByText(/we never promise funding/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /a few questions\. a plan that's actually yours/i })).toBeInTheDocument();
+    expect(screen.getByText("Where are you right now?")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /tools didn't go anywhere/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 3, name: "Job Packet" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "An AI guide that knows your actual situation." })).toBeInTheDocument();
     expect(screen.getByText(/never invents a dollar figure/i)).toBeInTheDocument();
+    expect(screen.getByText(/like a caseworker/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /checked by people, never generated/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "You can do this yourself. You should not have to do it alone." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Stop repeating your story to every new tool." })).toBeInTheDocument();
   });
