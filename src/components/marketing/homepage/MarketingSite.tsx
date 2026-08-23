@@ -15,7 +15,8 @@ export type MarketingRoute =
   | "about"
   | "employers"
   | "public-partners"
-  | "intake";
+  | "intake"
+  | "act";
 
 const HUMAN_STEPS = [
   ["Work independently", "Follow your plan, manage applications, and use the tools at your own pace."],
