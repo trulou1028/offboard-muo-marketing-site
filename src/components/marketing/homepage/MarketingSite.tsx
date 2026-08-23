@@ -118,7 +118,7 @@ export function MarketingFooter() {
         <div>
           <strong>Offboard</strong>
           <p>
-            Offboard is an independent career-transition service and is not affiliated with any state or federal agency. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
+            Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
           </p>
         </div>
         <nav aria-label="Footer navigation">
@@ -280,6 +280,41 @@ export function ProblemSection() {
           ))}
         </ol>
       </div>
+    </section>
+  );
+}
+
+const IDENTITY_BODY =
+  "The system that catches you after a layoff is real: unemployment insurance, health-coverage windows, and billions of dollars a year in federal retraining money, delivered through 2,000+ job centers. It's also fifty different portals, hostile paperwork, and deadlines that expire silently. Offboard is the modern layer on top: one calm place that knows how the whole system works, watches your clocks, and walks with you to the next job. One situation. One plan. One clear next move.";
+
+const IDENTITY_LEDGER = [
+  ["You find out what you were owed after the deadline passes.", "Your entitlements, dollar amounts, and deadlines surface on day one."],
+  ["Paperwork written for the agency. Hold music for you.", "Plain-language steps with verified official links."],
+  ["A weekly check, then you're on your own.", "Money, paperwork, and the job search connected in one plan."],
+  ["Closes at 4 p.m.", "Open whenever you are, with a guide that knows your situation."],
+] as const;
+
+export function IdentityContrast() {
+  return (
+    <section className="mh-identity mh-section" aria-labelledby="identity-title">
+      <div className="mh-copy-block">
+        <span className="mh-kicker">Why &quot;unemployment office&quot;</span>
+        <h2 id="identity-title">There&apos;s an office for this moment. It just hasn&apos;t been modern until now.</h2>
+        <p>{IDENTITY_BODY}</p>
+      </div>
+      <div className="mh-identity-ledger">
+        <div className="mh-identity-ledger-head">
+          <span>The old office</span>
+          <span>The modern one</span>
+        </div>
+        {IDENTITY_LEDGER.map(([oldRow, newRow]) => (
+          <div className="mh-identity-ledger-row" key={oldRow}>
+            <p className="mh-identity-old">{oldRow}</p>
+            <p className="mh-identity-new">{newRow}</p>
+          </div>
+        ))}
+      </div>
+      <small>Offboard is independent and not affiliated with any government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free.</small>
     </section>
   );
 }
@@ -723,6 +758,19 @@ export function PricingTeaser() {
             <small>{card.features}</small>
           </article>
         ))}
+      </div>
+    </section>
+  );
+}
+
+export function EmployerStrip() {
+  return (
+    <section className="mh-employer-strip mh-section" aria-labelledby="employer-strip-title">
+      <div className="mh-copy-block">
+        <span className="mh-kicker">For employers</span>
+        <h2 id="employer-strip-title">Letting people go? Hand them the modern unemployment office on the way out.</h2>
+        <p>Real, private help for each departing person. Self-serve and one-time per seat, live in under 15 minutes. No enterprise contract, no sales call.</p>
+        <Link className="mh-section-link" href="/employers">Offboard for employers <ArrowRight aria-hidden="true" /></Link>
       </div>
     </section>
   );

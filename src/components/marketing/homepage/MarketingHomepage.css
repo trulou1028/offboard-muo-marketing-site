@@ -98,6 +98,22 @@
 .mh-problem-list > span { color: var(--mh-muted); font-size: 13px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
 .mh-problem-list .mh-plain-list li { font-size: 16px; }
 
+.mh-identity { padding-top: 88px; padding-bottom: 88px; background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
+.mh-identity .mh-copy-block { max-width: 800px; }
+.mh-identity-ledger { width: 100%; margin-top: 46px; border-top: 1px solid var(--mh-ink); }
+.mh-identity-ledger-head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 14px 0; border-bottom: 1px solid var(--mh-line); color: var(--mh-muted); font-size: 13px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+.mh-identity-ledger-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-identity-ledger-row:last-child { border-bottom: 0; }
+.mh-identity-old { color: var(--mh-muted); font-size: 16px; line-height: 24px; }
+.mh-identity-new { color: var(--mh-ink); font-size: 16px; font-weight: 650; line-height: 24px; }
+.mh-identity > small { display: block; margin-top: 32px; color: var(--mh-muted); font-size: 12px; line-height: 19px; }
+
+.mh-employer-strip { padding-top: 64px; padding-bottom: 64px; background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
+.mh-employer-strip .mh-copy-block { max-width: 680px; gap: 14px; }
+.mh-employer-strip .mh-copy-block h2 { font-size: clamp(26px, 2.4vw, 34px); line-height: 1.25; }
+.mh-employer-strip .mh-copy-block > p { font-size: 16px; line-height: 25px; }
+.mh-employer-strip .mh-section-link { margin-top: 6px; }
+
 .mh-three-jobs { min-height: 1120px; padding-top: 86px; padding-bottom: 88px; background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
 .mh-section-heading { display: flex; flex-direction: column; gap: 16px; }
 .mh-section-heading h2 { font-size: clamp(44px, 3.7vw, 56px); line-height: 1.14; }
@@ -687,7 +703,14 @@
   .mh-five-steps,
   .mh-toolkit,
   .mh-lumo,
-  .mh-context { min-height: 0; padding-top: 72px; padding-bottom: 72px; }
+  .mh-context,
+  .mh-identity { min-height: 0; padding-top: 72px; padding-bottom: 72px; }
+  .mh-identity-ledger-head { display: none; }
+  .mh-identity-ledger-row { grid-template-columns: 1fr; gap: 10px; padding: 18px 0; }
+  .mh-identity-old::before,
+  .mh-identity-new::before { display: block; margin-bottom: 4px; font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+  .mh-identity-old::before { content: "Old office"; color: var(--mh-muted); }
+  .mh-identity-new::before { content: "Modern one"; color: var(--mh-forest); }
   .mh-five-steps-rows li { grid-template-columns: 40px 1fr; row-gap: 12px; padding: 24px 0; }
   .mh-five-steps-rows li > span { width: 40px; flex: 0 0 40px; font-size: 26px; line-height: 32px; }
   .mh-five-steps-rows em { grid-column: 2; justify-self: start; }
