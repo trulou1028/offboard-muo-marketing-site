@@ -23,6 +23,13 @@ const HUMAN_STEPS = [
   ["Talk with a person", "Book available one-on-one support online or visit the Offboard office in Concord, California."],
 ] as const;
 
+export const ABOUT_FAQS = [
+  ["Isn't calling it 'unemployment' depressing?", "Because pretending is worse. You were just laid off, and a euphemism like 'career transition' reads as marketing at the exact moment you need candor. The word does the targeting. The warmth does the differentiating."],
+  ["How is this different from an AI resume tool?", "Those tools help with one document. Offboard is accountable for the whole passage: the money, the programs, the paperwork, the search, and the landing. AI is how it scales. It isn't the product."],
+  ["Are you a government website?", "No. Offboard is independent, not a government agency. It helps you organize your transition and reach official sources, and government agencies and providers make the eligibility and benefit decisions."],
+  ["What about people who aren't unemployed right now?", "Offboard starts from the laid-off moment on purpose, since that is when the deadlines are most urgent. But transitions are not limited to unemployment, and most people move between jobs while still employed at some point. The office is built for the whole transition, not only the week after a layoff."],
+] as const;
+
 export const PRODUCT_FAQS = [
   ["Can Offboard tell me whether I qualify for benefits?", "Offboard can help you find programs that may be relevant and get to the official source. The agency or provider responsible for the program decides eligibility, benefit amounts, and approval."],
   ["Is Offboard only for people in tech?", "No. Offboard is designed for people navigating a layoff or job transition. Some job-search tools may be most developed for professional and knowledge-work roles today, and we will be clear when a feature is better suited to a particular kind of work."],

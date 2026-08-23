@@ -5,6 +5,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { categoryMeta, categoryOrder, getByCategory } from "@/content/resources/registry";
 
 import {
+  ABOUT_FAQS,
   ContactBand,
   ContextSection,
   EditorialGrid,
@@ -157,9 +158,10 @@ export function MarketingAbout() {
           <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/strip-kitchen-table.webp" alt="A man at his desk with coffee and paperwork, looking out the window" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
           <div className="mh-copy-block">
             <span className="mh-kicker">The origin</span>
-            <h2 id="about-origin-title">It started with the same questions, over and over.</h2>
-            <p>What should I do first? Which deadlines matter? Where do benefits, training, and the job search fit together? Offboard grew from conversations, a weekly newsletter, and a community for people navigating those questions.</p>
-            <p>The product organizes what people were otherwise piecing together across portals, documents, messages, and separate tools.</p>
+            <h2 id="about-origin-title">It started with our own layoffs.</h2>
+            <p>Offboard started with our own layoffs. Going through it, what surprised us was how much you&apos;re left to figure out alone. Unemployment rules that change depending on your state. Retraining money that exists but that nobody tells you about. A resume you haven&apos;t opened in four years. A job market that works differently than it did the last time you were looking.</p>
+            <p>There&apos;s an office for this in the physical world. It has fluorescent lights and a line, and most people never go. So we&apos;ve spent the last four years working with job seekers and building what we think that office should be.</p>
+            <p>Stephanie, founder and CEO, built Offboard from a family history of helping people navigate that entire transition. Louie, co-founder, leads product and technology.</p>
           </div>
         </section>
         <section className="mh-route-community mh-section" aria-labelledby="about-community-title">
@@ -180,6 +182,30 @@ export function MarketingAbout() {
             { title: "Human when needed", body: "Software should not pretend every transition can be solved without context or conversation." },
           ]}
         />
+        <section className="mh-route-ethos mh-section mh-split" aria-labelledby="about-ethos-title">
+          <div className="mh-copy-block">
+            <span className="mh-kicker">The promise</span>
+            <h2 id="about-ethos-title">Our job is to get you out of here.</h2>
+            <p>We measure ourselves by how fast you leave, which is the opposite of the legacy incentive to bill more months. Landing well, and passing back what you learned, is the proof the office works.</p>
+            <small>Some of what we do is software, and some of it is a 1-on-1 call or a chair across a desk in Concord, CA. Both matter.</small>
+          </div>
+          <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/maya-walking.webp" alt="A woman walking outside carrying a bag, mid-stride between one thing and the next" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
+        </section>
+        <FaqSection title="Fair questions." items={ABOUT_FAQS} />
+        <section className="mh-route-privacy mh-section" aria-labelledby="about-privacy-title">
+          <div className="mh-copy-block">
+            <span className="mh-kicker">Trust and privacy</span>
+            <h2 id="about-privacy-title">Your job search is personal. It should remain private.</h2>
+          </div>
+          <ul className="mh-plain-list ruled">
+            <li>You choose what is edited, shared, or submitted.</li>
+            <li>Resumes, applications, saved jobs, and career history remain private.</li>
+            <li>Lumo conversations and reflections are not sponsor dashboard content.</li>
+            <li>Financial planning, severance details, and runway remain private.</li>
+            <li>Benefits status and plan are yours alone.</li>
+            <li>Sponsored programs see aggregate participation and outcomes, never your individual search.</li>
+          </ul>
+        </section>
         <section className="mh-route-independence mh-section" aria-labelledby="independence-title">
           <div><span className="mh-kicker is-lime">Independent by design</span><h2 id="independence-title">Offboard is not a government agency.</h2></div>
           <p>Offboard helps people organize their transition and reach official sources. Government agencies and program providers make eligibility, benefit, and approval decisions. Offboard does not replace qualified legal, tax, financial, healthcare, or benefits guidance.</p>

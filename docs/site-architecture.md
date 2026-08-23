@@ -68,10 +68,11 @@ The homepage does not contain the full onboarding demo, benefits demo, job-searc
 ### About
 
 1. Why Offboard exists.
-2. Origin in repeated transition questions and community work.
+2. Founder origin story and community work.
 3. Product principles: clarity, official sources, privacy, and human support.
-4. Independence and professional-guidance boundary.
-5. Online and Concord contact route.
+4. The ethos: get you out of here, plus common objections answered.
+5. Privacy commitments and the independence and professional-guidance boundary.
+6. Online and Concord contact route.
 
 ### Employers
 
