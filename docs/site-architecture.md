@@ -19,6 +19,8 @@ This keeps the homepage useful as an orientation page, not a compressed version 
 | `/` | A person navigating a layoff or job transition | Understand what Offboard is, who it serves, and the three jobs it connects | Build my plan |
 | `/how-it-works` | A person evaluating the product | See the complete connected journey across runway, support, and the next role | See my starting plan |
 | `/pricing` | A person deciding whether to start or pay | Understand what is free and when optional paid support appears | Start free |
+| `/resources` | A person searching for a specific, urgent answer (SEO entry point) | Find the guide or essay that matches what they are looking for right now | Read the guide |
+| `/resources/:slug` | Same, landed from search or a `/resources` card | Answer the one question in the title, then route back into the product | More guides / Build my plan |
 | `/about` | Members, press, community, and prospective partners | Understand why Offboard exists, its principles, and its independence | Talk to the team |
 | `/employers` | People and HR leaders supporting separated employees | Understand sponsored access, the member experience, and visibility boundaries | Talk about sponsored access |
 | `/public-partners` | Workforce, benefits, and public-service organizations | Understand how Offboard complements official systems without making eligibility decisions | Discuss a partnership |

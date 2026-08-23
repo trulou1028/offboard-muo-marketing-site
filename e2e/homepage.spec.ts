@@ -84,14 +84,14 @@ test.describe("Offboard marketing site", () => {
   test("reflows every route without horizontal overflow on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
 
-    for (const route of ["/", "/how-it-works", "/pricing", "/resources", "/about", "/employers", "/public-partners"]) {
+    for (const route of ["/", "/how-it-works", "/pricing", "/resources", "/resources/first-week-after-a-layoff", "/about", "/employers", "/public-partners"]) {
       await page.goto(route);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
     }
   });
 
-  test("publishes the resources shell and links out to the live guides", async ({ page }) => {
+  test("publishes a real resources library with local article routes", async ({ page }) => {
     const consoleErrors: string[] = [];
     const backendRequests: string[] = [];
     page.on("console", (message) => {
@@ -103,9 +103,22 @@ test.describe("Offboard marketing site", () => {
 
     await page.goto("/resources");
     await expect(page.getByRole("heading", { level: 1, name: "Guides & resources" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "The first week after a layoff" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "What to do in your first week after a layoff" })).toBeVisible();
+
+    await page.getByRole("link", { name: /read the guide/i }).first().click();
+    await expect(page).toHaveURL(/\/resources\/first-week-after-a-layoff$/);
+    await expect(page.getByRole("heading", { level: 1, name: "What to do in your first week after a layoff" })).toBeVisible();
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow, noarchive");
     expect(backendRequests).toEqual([]);
     expect(consoleErrors).toEqual([]);
+  });
+
+  test("redirects unported essay and policy slugs to the resources index", async ({ page }) => {
+    await page.goto("/resources/this-is-not-charity-it-is-reconstruction");
+    await expect(page).toHaveURL(/\/resources$/);
+
+    await page.goto("/resources/alameda-d2-safety-net-transparency");
+    await expect(page).toHaveURL(/\/resources$/);
   });
 
   test("redirects legacy production URLs to their new destinations", async ({ page }) => {

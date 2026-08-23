@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 
+import { categoryMeta, categoryOrder, getByCategory } from "@/content/resources/registry";
+
 import {
   ContactBand,
   ContextSection,
@@ -91,20 +93,15 @@ export function MarketingPricing() {
   );
 }
 
-// These guides still live on the current production site. They are
-// temporary outbound links until article content migrates into this repo
-// (tracked as a separate effort in plans/006); replace with local
-// `/resources/:slug` routes at that point.
-const RESOURCE_GUIDES = [
-  { title: "The first week after a layoff", body: "What to do, and what to skip, in the first seven days.", href: "https://offboard.co/resources/first-week-after-a-layoff" },
-  { title: "Negotiating your severance", body: "What is usually negotiable, and how to ask.", href: "https://offboard.co/resources/negotiating-your-severance" },
-  { title: "Rebuild your resume after a layoff", body: "Turning a sudden ending into a clear next chapter on paper.", href: "https://offboard.co/resources/rebuild-your-resume-after-a-layoff" },
-  { title: "Health insurance after a layoff", body: "COBRA, marketplace plans, and the deadlines that matter.", href: "https://offboard.co/resources/health-insurance-after-a-layoff" },
-  { title: "A career changer's guide to job offer negotiations", body: "Negotiating pay and terms when you are also changing direction.", href: "https://offboard.co/resources/career-changers-guide-to-job-offer-negotiations" },
-  { title: "The best job application trackers in 2026", body: "A practical comparison for keeping a search organized.", href: "https://offboard.co/resources/best-job-application-trackers-2026" },
-] as const;
+function categoryHeadingId(category: string): string {
+  return `resources-${category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}-title`;
+}
 
 export function MarketingResources() {
+  const sections = categoryOrder
+    .map((category) => ({ category, posts: getByCategory(category) }))
+    .filter(({ posts }) => posts.length > 0);
+
   return (
     <MarketingShell current="resources">
       <main id="main-content">
@@ -115,21 +112,28 @@ export function MarketingResources() {
           body="Reported essays, practical guides, and the slow work of making layoffs less brutal."
           aside={<><span>Written from experience</span><strong>Practical, not theoretical.</strong><p>Guides drawn from the newsletter, the community, and the questions people actually ask.</p></>}
         />
-        <section className="mh-route-resources mh-section" aria-labelledby="resources-list-title">
-          <div className="mh-section-heading">
-            <span className="mh-kicker">Current guides</span>
-            <h2 id="resources-list-title">Start with what applies to you right now.</h2>
-          </div>
-          <div className="mh-route-resources-grid">
-            {RESOURCE_GUIDES.map((guide) => (
-              <article key={guide.href}>
-                <h3>{guide.title}</h3>
-                <p>{guide.body}</p>
-                <a className="mh-section-link" href={guide.href}>Read the guide <ArrowRight aria-hidden="true" /></a>
-              </article>
-            ))}
-          </div>
-        </section>
+        {sections.map(({ category, posts }) => {
+          const headingId = categoryHeadingId(category);
+          return (
+            <section key={category} className="mh-route-resources mh-section" aria-labelledby={headingId}>
+              <div className="mh-section-heading">
+                <span className="mh-kicker">Guides & resources</span>
+                <h2 id={headingId}>{category}</h2>
+                <p>{categoryMeta[category].description}</p>
+              </div>
+              <div className="mh-route-resources-grid">
+                {posts.map((post) => (
+                  <article key={post.slug}>
+                    <h3>{post.title}</h3>
+                    <p>{post.excerpt}</p>
+                    <span className="mh-route-resources-reading">{post.readingTime}</span>
+                    <Link className="mh-section-link" href={`/resources/${post.slug}`}>Read the guide <ArrowRight aria-hidden="true" /></Link>
+                  </article>
+                ))}
+              </div>
+            </section>
+          );
+        })}
         <FinalCta title="Bring your situation. We will help you sort the rest." body="A layoff is rarely just one problem. Build a plan that covers the money, the benefits, and the search, in one place." />
       </main>
     </MarketingShell>
