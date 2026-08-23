@@ -75,9 +75,14 @@ The homepage does not contain the full onboarding demo, benefits demo, job-searc
 
 1. Independent transition support after separation.
 2. Whole-transition value, beyond resume help.
-3. Sponsored access and member privacy boundaries.
-4. Program setup and handoff.
-5. Employer partnership inquiry.
+3. Pricing and the legacy-outplacement comparison.
+4. How sponsorship works: roster, invites, member access, sponsor visibility.
+5. Sponsored access and member privacy boundaries, with a concrete visibility example.
+6. Why companies do this, and the SB 617 filing-disclosure context.
+7. Hiring: free job postings.
+8. Public and workforce partner program.
+9. Employer FAQ.
+10. Employer partnership inquiry.
 
 ### Public partners
 

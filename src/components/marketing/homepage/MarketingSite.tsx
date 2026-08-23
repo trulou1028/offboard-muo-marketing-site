@@ -39,6 +39,14 @@ export const PRICING_FAQS = [
   ["Does any tier charge for government benefits?", "Never. Claiming your benefits is always free. Offboard charges for its own tools and support, not for access to public programs."],
 ] as const;
 
+export const EMPLOYER_FAQS = [
+  ["Is there a minimum number of seats?", "No minimum. Buy for two people or two hundred, with no contract. Pricing is $199 per employee, one-time, and drops to $169 per seat at 50 or more."],
+  ["How fast can this be live?", "Invitations go out the same day you upload a roster. Setup takes minutes, not weeks."],
+  ["What exactly can we see?", "Aggregate engagement only. For example, a sponsor can see that 19 of 24 people claimed access and 14 are active, but never anyone's resume, applications, or conversations. Not the CEO, not HR, nobody. That privacy line is contractual, not a preference."],
+  ["How do people pay?", "$199 per employee, one-time. Card or NET-30 invoice. No renewal, no SOW, no procurement cycle."],
+  ["What does each person get?", "90 days of full Offboard Pro: a personal plan, verified benefit deadlines, resume and application help, interview prep, and a real job feed."],
+] as const;
+
 export function Brand() {
   return (
     <Image

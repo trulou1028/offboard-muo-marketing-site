@@ -130,8 +130,13 @@ describe("Offboard marketing routes", () => {
     const employerView = render(<MarketingEmployers />);
     expect(screen.getByRole("heading", { level: 1, name: /outplacement, modernized/i })).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /talk about sponsored access/i })[0]).toHaveAttribute("href", expect.stringContaining("Employer%20support"));
-    expect(screen.getByRole("link", { name: /post a role/i })).toHaveAttribute("href", expect.stringContaining("Hiring%20on%20Offboard"));
+    expect(screen.getByRole("link", { name: /post a role/i })).toHaveAttribute("href", expect.stringContaining("intent=recruit"));
     expect(screen.getByRole("heading", { name: "Agencies decide. Offboard helps people prepare and continue." })).toBeInTheDocument();
+    expect(screen.getAllByText(/\$199/).length).toBeGreaterThan(0);
+    expect(screen.getByRole("heading", { name: /cheapest line item/i })).toBeInTheDocument();
+    expect(screen.getByText("Why companies do this")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /what employers ask/i })).toBeInTheDocument();
+    expect(screen.getAllByText(/19 of 24 people claimed access/i).length).toBeGreaterThan(0);
     employerView.unmount();
 
     render(<MarketingPublicPartners />);

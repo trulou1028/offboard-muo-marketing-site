@@ -527,12 +527,36 @@
 .mh-route-sponsor-card span { color: var(--mh-muted); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .mh-route-sponsor-card strong { font-family: var(--font-fraunces), Georgia, serif; font-size: 26px; font-weight: 500; }
 .mh-route-sponsor-card p { grid-column: 2; margin-bottom: 26px; color: var(--mh-muted); line-height: 25px; }
+.mh-employer-privacy-quote { padding: 18px 20px; background: var(--mh-paper-soft); border-left: 3px solid var(--mh-forest); border-radius: 4px; }
+.mh-employer-privacy-quote p { color: var(--mh-ink); font-size: 16px; line-height: 25px; }
+
+.mh-employer-pricing { padding-top: 96px; padding-bottom: 96px; background: white; border-bottom: 1px solid var(--mh-line); }
+.mh-employer-pricing .mh-section-heading h2 { max-width: 760px; }
+.mh-employer-pricing-layout { display: grid; grid-template-columns: minmax(260px, 340px) 1fr; gap: 54px; align-items: center; margin-top: 48px; }
+.mh-employer-price-card { display: flex; flex-direction: column; gap: 20px; padding: 32px; background: var(--mh-forest); border-radius: 20px; color: white; }
+.mh-employer-price-card .mh-price-value { display: flex; align-items: baseline; gap: 8px; font-variant-numeric: tabular-nums; }
+.mh-employer-price-card .mh-price-value b { font-size: 52px; line-height: 1; font-weight: 650; }
+.mh-employer-price-card .mh-price-value small { color: rgba(255,255,255,.72); font-size: 15px; }
+.mh-employer-price-card ul { display: flex; flex-direction: column; gap: 12px; }
+.mh-employer-price-card li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 21px; font-variant-numeric: tabular-nums; }
+.mh-employer-price-card li svg { width: 18px; height: 18px; flex: 0 0 18px; margin-top: 2px; padding: 3px; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; }
+.mh-employer-pricing-comparison { color: var(--mh-muted); font-size: 18px; line-height: 29px; }
+
+.mh-employer-steps { padding-top: 90px; padding-bottom: 90px; background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
+.mh-employer-steps .mh-section-heading h2 { max-width: 760px; }
+.mh-employer-steps .mh-numbered-rows { max-width: 860px; margin-top: 48px; }
+
+.mh-employer-sb617 { padding-top: 48px; padding-bottom: 64px; background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
+.mh-employer-sb617 > div { display: flex; flex-direction: column; gap: 12px; max-width: 700px; }
+.mh-employer-sb617 p { color: var(--mh-muted); font-size: 15px; line-height: 24px; }
+.mh-employer-sb617 p:last-child { color: var(--mh-ink); font-weight: 650; }
 
 .mh-route-hiring,
 .mh-route-community { padding-top: 90px; padding-bottom: 90px; background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
 .mh-route-hiring .mh-copy-block,
 .mh-route-community .mh-copy-block { max-width: 660px; }
 .mh-route-hiring .mh-section-link { border-bottom-color: var(--mh-ink); color: var(--mh-ink); }
+.mh-employer-hiring-secondary { display: inline-block; margin-top: 14px; color: var(--mh-muted); font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
 
 .mh-route-partners-note { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; max-width: 720px; padding-top: 90px; padding-bottom: 90px; background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
 .mh-route-partners-note p { color: var(--mh-muted); font-size: 18px; line-height: 29px; }
@@ -649,7 +673,8 @@
   .mh-home-trust > div:first-child,
   .mh-route-content-heading,
   .mh-route-independence,
-  .mh-route-contact { grid-template-columns: 1fr; }
+  .mh-route-contact,
+  .mh-employer-pricing-layout { grid-template-columns: 1fr; }
   .mh-pricing-teaser-cards,
   .mh-verified-grid,
   .mh-community { grid-template-columns: 1fr; }
@@ -711,6 +736,8 @@
   .mh-identity-new::before { display: block; margin-bottom: 4px; font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
   .mh-identity-old::before { content: "Old office"; color: var(--mh-muted); }
   .mh-identity-new::before { content: "Modern one"; color: var(--mh-forest); }
+  .mh-employer-pricing,
+  .mh-employer-steps { min-height: 0; padding-top: 72px; padding-bottom: 72px; }
   .mh-five-steps-rows li { grid-template-columns: 40px 1fr; row-gap: 12px; padding: 24px 0; }
   .mh-five-steps-rows li > span { width: 40px; flex: 0 0 40px; font-size: 26px; line-height: 32px; }
   .mh-five-steps-rows em { grid-column: 2; justify-self: start; }
@@ -758,7 +785,10 @@
   .mh-route-contact,
   .mh-route-hiring,
   .mh-route-community,
-  .mh-route-partners-note { padding-inline: 20px; padding-top: 72px; padding-bottom: 72px; }
+  .mh-route-partners-note,
+  .mh-employer-pricing,
+  .mh-employer-steps,
+  .mh-employer-sb617 { padding-inline: 20px; padding-top: 72px; padding-bottom: 72px; }
   .mh-home-trust h2,
   .mh-pricing-teaser h2,
   .mh-route-content-heading h2,
