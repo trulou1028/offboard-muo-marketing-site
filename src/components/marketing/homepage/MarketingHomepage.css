@@ -545,9 +545,9 @@
 .mh-article-body { max-width: 68ch; margin-top: 44px; font-family: var(--font-aspekta), Inter, system-ui, sans-serif; }
 .mh-article-body h2,
 .mh-article-body h3 { font-family: var(--font-aspekta), Inter, system-ui, sans-serif; letter-spacing: -0.01em; }
-.mh-article-h2 { margin-top: 44px; font-size: 26px; font-weight: 650; line-height: 1.25; }
-.mh-article-h2:first-child { margin-top: 0; }
-.mh-article-h3 { margin-top: 30px; font-size: 19px; font-weight: 650; line-height: 1.3; }
+.mh-article-body h2.mh-article-h2 { margin-top: 44px; font-size: 26px; font-weight: 650; line-height: 1.25; }
+.mh-article-body h2.mh-article-h2:first-child { margin-top: 0; }
+.mh-article-body h3.mh-article-h3 { margin-top: 30px; font-size: 19px; font-weight: 650; line-height: 1.3; }
 .mh-article-p { margin-top: 16px; color: var(--mh-muted); font-size: 17px; line-height: 29px; }
 .mh-article-list { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
 .mh-article-list li { position: relative; padding-left: 22px; color: var(--mh-muted); font-size: 17px; line-height: 27px; }
