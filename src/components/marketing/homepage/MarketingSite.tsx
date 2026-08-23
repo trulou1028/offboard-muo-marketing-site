@@ -833,7 +833,7 @@ const COMMUNITY_ROWS = [
     title: "The Offboard Newsletter",
     body: "Weekly job-market analysis and honest takes on tech hiring. 5,000+ subscribers.",
     cta: "Subscribe free",
-    href: "https://offboard.co/newsletter",
+    href: "https://newsletter.offboard.co",
   },
   {
     title: "Slack community",

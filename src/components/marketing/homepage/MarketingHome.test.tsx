@@ -55,6 +55,7 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { name: /letting people go/i })).toBeInTheDocument();
     expect(screen.getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Your transition is yours." })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /subscribe free/i })).toHaveAttribute("href", "https://newsletter.offboard.co");
     expect(screen.getByRole("heading", { name: /find out first/i })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Where are you right now?" })).not.toBeInTheDocument();
     expect(screen.queryByRole("tablist", { name: "Job search stages" })).not.toBeInTheDocument();
