@@ -321,6 +321,122 @@ export function MarketingEmployers() {
   );
 }
 
+const ACT_PILOT_STEPS = [
+  ["Learn about ACT", "Residents land here, on /act, and see who is eligible and what sponsored access includes."],
+  ["Apply through Offboard", "Residents complete a short application on Offboard's app, not a phone tree or a paper form."],
+  ["Program review", "The program or admin team reviews the application on their own schedule."],
+  ["Approval and a private link", "Approved residents receive a private claim link, sent directly to them."],
+  ["Claim sponsored access", "Residents claim sponsored Offboard access, and their workspace is ready the same day."],
+  ["Aggregate program review", "The program reviews aggregate activation and engagement, not individual accounts."],
+] as const;
+
+export function MarketingAct() {
+  return (
+    <MarketingShell current="act">
+      <main id="main-content">
+        <PageHero
+          current="act"
+          kicker="ACT pilot"
+          title="Career support that starts tonight, not in six weeks."
+          body="Eligible residents in Alameda County get sponsored access to Offboard and can start a job-search workspace the same day, right after a layoff, instead of waiting on forms, phone trees, and appointment windows while rent is due. Residents work the search on their own schedule: tonight, at 6am, or between school pickups."
+          cta="Apply for pilot access"
+          ctaHref="https://app.offboard.co/act/apply"
+          aside={<><span>In agency terms</span><strong>Resident-first, aggregate-only for the program.</strong><p>Residents apply, claim sponsored access, and use Offboard privately. The agency or partner reviews aggregate program engagement.</p></>}
+        />
+        <section className="mh-route-content mh-section" aria-labelledby="act-pilot-steps-title">
+          <div className="mh-route-content-heading">
+            <span className="mh-kicker">How the pilot works</span>
+            <h2 id="act-pilot-steps-title">From application to activation, in six steps.</h2>
+            <p>A resident-first pilot path: apply, get approved, claim sponsored access, and start working the search the same day.</p>
+          </div>
+          <NumberedRows rows={ACT_PILOT_STEPS} />
+        </section>
+        <section className="mh-route-story mh-section mh-split" aria-labelledby="act-story-title">
+          <div className="mh-route-story-photo">
+            <Image
+              src="/marketing/homepage/raw/strip-school-dropoff.webp"
+              alt="A parent kneeling to zip up her daughter's jacket at a school drop-off, other children and backpacks in the background"
+              fill
+              sizes="(max-width: 900px) 100vw, 44vw"
+            />
+          </div>
+          <div className="mh-copy-block">
+            <span className="mh-kicker">Built around real schedules</span>
+            <h2 id="act-story-title">The search does not wait for office hours.</h2>
+            <p>Between drop-off, a shift, and bedtime, most residents do not have room for another appointment window. ACT gives them a plan they can work at 9pm or 6am, on a phone or a laptop, without waiting on a callback.</p>
+          </div>
+        </section>
+        <EditorialGrid
+          kicker="What residents get"
+          title="The same Offboard workspace, sponsored."
+          body="One connected place for the search: jobs, applications, documents, interviews, and guidance that already knows the resident's plan."
+          items={[
+            { title: "A private job-search workspace", body: "The full Offboard workspace in one place, instead of scattered tools and paperwork." },
+            { title: "Jobs and Job Packets", body: "Find roles and build a Job Packet for each one, with fit and next steps included." },
+            { title: "Applications, follow-ups, and documents", body: "Track every application and follow-up, and keep resumes and other documents in one place." },
+            { title: "Interview prep and Ask LUMO", body: "Practice for interviews and ask LUMO for guidance grounded in the resident's own plan." },
+          ]}
+        />
+        <section className="mh-route-privacy mh-section" aria-labelledby="act-privacy-title">
+          <div className="mh-copy-block">
+            <span className="mh-kicker is-lime">Worker-controlled privacy</span>
+            <h2 id="act-privacy-title">Aggregate for the program. Private for the resident.</h2>
+            <p>ACT reporting is aggregate-first. The program can understand applications, approvals, claims, onboarding, and engagement without seeing private resumes, documents, LUMO conversations, or individual job-search behavior.</p>
+          </div>
+          <div className="mh-route-privacy-columns">
+            <div>
+              <span>What the program sees</span>
+              <ul>
+                <li>Application funnel</li>
+                <li>Approval and claim visibility</li>
+                <li>Aggregate engagement</li>
+                <li>Weekly signup trends</li>
+                <li>Cohort or jurisdiction view</li>
+              </ul>
+            </div>
+            <div>
+              <span>What stays private</span>
+              <ul>
+                <li>Resumes</li>
+                <li>Documents</li>
+                <li>LUMO conversations</li>
+                <li>Individual job-search behavior</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section className="mh-route-agency mh-section" aria-labelledby="act-agency-title">
+          <div className="mh-copy-block">
+            <span className="mh-kicker">For public-sector partners</span>
+            <h2 id="act-agency-title">A pilot path that sits beside what you already run.</h2>
+            <p>ACT gives the program an application funnel, approval and claim visibility, and aggregate engagement, including weekly signup trends and a cohort or jurisdiction view.</p>
+          </div>
+          <div className="mh-route-agency-shape">
+            <span>Suggested pilot shape</span>
+            <ul>
+              <li>One jurisdiction or cohort</li>
+              <li>25 to 100 residents</li>
+              <li>3-month sponsored access</li>
+              <li>First review after 30 days</li>
+            </ul>
+          </div>
+          <div className="mh-route-agency-objection">
+            <strong>Is this replacing our workforce system?</strong>
+            <p>No. ACT is a resident-facing digital support layer and pilot path. It can sit beside existing workforce systems and focus on faster activation.</p>
+          </div>
+        </section>
+        <ContactBand
+          kicker="Pilot inquiries"
+          title="Bring ACT to your jurisdiction."
+          body="Tell us which residents you serve and where sponsored access could help most. We will follow up to scope a pilot."
+          cta="Start a pilot conversation"
+          href="mailto:hello@offboard.co?subject=ACT%20pilot"
+        />
+      </main>
+    </MarketingShell>
+  );
+}
+
 export function MarketingPublicPartners() {
   return (
     <MarketingShell current="public-partners">

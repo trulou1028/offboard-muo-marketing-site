@@ -24,8 +24,14 @@ This keeps the homepage useful as an orientation page, not a compressed version 
 | `/about` | Members, press, community, and prospective partners | Understand why Offboard exists, its principles, and its independence | Talk to the team |
 | `/employers` | People and HR leaders supporting separated employees | Understand sponsored access, the member experience, and visibility boundaries | Talk about sponsored access |
 | `/public-partners` | Workforce, benefits, and public-service organizations | Understand how Offboard complements official systems without making eligibility decisions | Discuss a partnership |
+| `/act` | Residents eligible for the ACT pilot, and public-sector pilot partners | Understand resident-first sponsored access to Offboard and the program's aggregate-only reporting boundary | Apply for pilot access |
 
 All routes remain `noindex` until the public launch decision is made.
+
+`/act` is intentionally excluded from the header and footer nav. It is a
+live, out-of-nav B2G landing URL for the ACT pilot and must never receive a
+redirect. The resident application flow lives in the app
+(`https://app.offboard.co/act/apply`); this repo owns the landing page only.
 
 ## Section ownership
 
@@ -95,6 +101,21 @@ The homepage does not contain the full onboarding demo, benefits demo, job-searc
 3. Clear boundary between planning support and official decisions.
 4. Member choice and sponsor visibility.
 5. Public partnership inquiry.
+
+### ACT pilot (`/act`)
+
+1. Resident-first hero: sponsored access, geography, and the pilot apply CTA.
+2. How the pilot works: the six-step application-to-activation path.
+3. A documentary photo section grounding the pitch in real schedules.
+4. What residents get from sponsored Offboard access.
+5. Worker-controlled privacy: the aggregate-only reporting boundary.
+6. For public-sector partners: pilot shape and the workforce-system objection.
+7. Pilot inquiries contact band.
+
+This page uses ACT's own approved vocabulary ("sponsored access", "career
+transition workspace") scoped to `/act` only, and never uses the sitewide
+category claim ("the modern unemployment office"), per the B2G language
+firewall for government-facing surfaces.
 
 ## Migration status
 
