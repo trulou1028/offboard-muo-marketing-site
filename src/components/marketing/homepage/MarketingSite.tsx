@@ -633,7 +633,7 @@ export function PricingSection() {
     <section className="mh-pricing mh-section" id="pricing" aria-labelledby="pricing-title">
       <div className="mh-pricing-heading"><div><span className="mh-kicker">A simple place to start</span><h2 id="pricing-title">Start free. Add more support when you need it.</h2></div><p>Begin with a transition plan and the core tools. Add credits or human support only when you choose to go further. You will see the price and what is included before you pay.</p></div>
       <div className="mh-price-deck">
-        <article>
+        <article className="is-primary">
           <header>
             <h3>Free</h3>
           </header>
@@ -649,7 +649,7 @@ export function PricingSection() {
           </ul>
           <PrimaryCta>Build my free transition plan</PrimaryCta>
         </article>
-        <article className="is-primary">
+        <article>
           <header>
             <h3>Offboard Pro</h3>
             <b className="is-badge">For active transitions</b>
