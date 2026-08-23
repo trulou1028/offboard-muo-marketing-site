@@ -17,7 +17,9 @@ import {
   PricingSection,
   PRICING_FAQS,
   PRODUCT_FAQS,
+  StartingPlanSection,
   ToolkitSection,
+  VerifiedFactsStrip,
 } from "./MarketingSite";
 
 export function MarketingHowItWorks() {
@@ -33,8 +35,15 @@ export function MarketingHowItWorks() {
           aside={<><span>The spine and the muscle</span><strong>The plan is the spine. The tools are the muscle.</strong><p>Every step links straight into the tool that does the heavy lifting. No blank pages, no starting over.</p></>}
         />
         <FiveSteps />
+        <StartingPlanSection />
         <ToolkitSection />
         <LumoSection />
+        <section className="mh-verified-visual mh-section" aria-hidden="true">
+          <div className="mh-verified-visual-frame">
+            <Image src="/marketing/homepage/renders/benefits-stack.webp" alt="" fill sizes="(max-width: 900px) 100vw, 1200px" />
+          </div>
+        </section>
+        <VerifiedFactsStrip />
         <HumanSupportSection />
         <ContextSection />
         <FaqSection title="What to know about the product." items={PRODUCT_FAQS} />
