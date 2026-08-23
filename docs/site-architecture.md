@@ -30,12 +30,17 @@ All routes remain `noindex` until the public launch decision is made.
 ### Homepage
 
 1. Hero: The Modern Unemployment Office, audience, and primary action.
-2. Three jobs: runway, available support, and the next role.
-3. Connected-plan proof: a compact example of the unified workspace.
-4. Privacy and independence: the minimum trust needed to continue.
-5. Human support: a concise explanation of self-serve, Lumo, and people.
-6. Pricing teaser: start free and review optional support separately.
-7. Final action: build a plan or talk to a person.
+2. The real problem: the questions behind every layoff.
+3. `IdentityContrast` (identity contrast): why "unemployment office" is honest, old office vs. modern one.
+4. Three jobs: claim what's owed, make your money last, land what's next.
+5. Hook: one example deadline worth watching.
+6. Connected-plan proof: a compact example of the unified workspace.
+7. Verified facts: deadlines and dollar figures checked by people.
+8. Pricing teaser: start free and review optional support separately.
+9. Employer strip: one sentence and a link to `/employers`, the only B2B content on the page.
+10. Community: newsletter, Slack, and a real person.
+11. Privacy and independence: the minimum trust needed to continue.
+12. Final action: build a plan or talk to a person.
 
 The homepage does not contain the full onboarding demo, benefits demo, job-search tabs, full pricing comparison, company origin story, or partner program details.
 
