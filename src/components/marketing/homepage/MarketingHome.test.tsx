@@ -2,6 +2,7 @@ import { render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from "vitest";
 
 import { metadata as aboutMetadata } from "@/app/about/page";
+import { metadata as actMetadata } from "@/app/act/page";
 import { metadata as employerMetadata } from "@/app/employers/page";
 import { metadata as howMetadata } from "@/app/how-it-works/page";
 import { metadata as homeMetadata } from "@/app/page";
@@ -12,6 +13,7 @@ import { metadata as resourcesMetadata } from "@/app/resources/page";
 import MarketingHome from "./MarketingHome";
 import {
   MarketingAbout,
+  MarketingAct,
   MarketingEmployers,
   MarketingHowItWorks,
   MarketingPricing,
@@ -121,9 +123,23 @@ describe("Offboard marketing routes", () => {
   });
 
   it("keeps every route out of search indexes while the site is pre-launch", () => {
-    [homeMetadata, howMetadata, pricingMetadata, aboutMetadata, employerMetadata, publicPartnerMetadata, resourcesMetadata].forEach((metadata) => {
+    [homeMetadata, howMetadata, pricingMetadata, aboutMetadata, employerMetadata, publicPartnerMetadata, resourcesMetadata, actMetadata].forEach((metadata) => {
       expect(metadata.robots).toBe("noindex, nofollow, noarchive");
     });
+  });
+
+  it("gives the ACT pilot its own resident-first landing page", () => {
+    render(<MarketingAct />);
+
+    expect(screen.getByRole("heading", { level: 1, name: /career support that starts tonight, not in six weeks/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /apply for pilot access/i })).toHaveAttribute("href", "https://app.offboard.co/act/apply");
+    expect(
+      screen.getByText(
+        "ACT reporting is aggregate-first. The program can understand applications, approvals, claims, onboarding, and engagement without seeing private resumes, documents, LUMO conversations, or individual job-search behavior."
+      )
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/modern unemployment office/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/guaranteed|government-endorsed|official alameda county program/i)).not.toBeInTheDocument();
   });
 
   it("gives resources a library shell that links out to the live guides", () => {

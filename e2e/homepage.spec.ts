@@ -84,7 +84,7 @@ test.describe("Offboard marketing site", () => {
   test("reflows every route without horizontal overflow on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
 
-    for (const route of ["/", "/how-it-works", "/pricing", "/resources", "/about", "/employers", "/public-partners"]) {
+    for (const route of ["/", "/how-it-works", "/pricing", "/resources", "/about", "/employers", "/public-partners", "/act"]) {
       await page.goto(route);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
@@ -126,5 +126,12 @@ test.describe("Offboard marketing site", () => {
     const response = await page.goto("/intake");
     expect(response?.status()).toBe(200);
     await expect(page).toHaveURL(/\/intake$/);
+  });
+
+  test("keeps /act a live route, never a redirect", async ({ page }) => {
+    const response = await page.goto("/act");
+    expect(response?.status()).toBe(200);
+    await expect(page).toHaveURL(/\/act$/);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   });
 });
