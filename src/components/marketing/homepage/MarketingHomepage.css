@@ -498,6 +498,11 @@
 .mh-route-story { min-height: 760px; padding-top: 86px; padding-bottom: 86px; background: white; }
 .mh-route-story-photo { position: relative; min-height: 610px; overflow: hidden; border-radius: 24px; }
 .mh-route-story-photo img { object-fit: cover; object-position: 45% 35%; }
+.mh-route-ethos { min-height: 620px; padding-top: 90px; padding-bottom: 90px; background: white; border-bottom: 1px solid var(--mh-line); }
+.mh-route-ethos small { display: block; color: var(--mh-muted); font-size: 13px; line-height: 20px; }
+.mh-route-privacy { padding-top: 90px; padding-bottom: 90px; background: white; border-bottom: 1px solid var(--mh-line); }
+.mh-route-privacy .mh-copy-block { max-width: 660px; margin-bottom: 32px; }
+.mh-route-privacy .mh-plain-list { max-width: 900px; }
 .mh-route-independence { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; padding-top: 100px; padding-bottom: 100px; background: var(--mh-forest); color: var(--mh-paper); }
 .mh-route-independence h2 { margin-top: 18px; font-size: clamp(46px, 4vw, 62px); line-height: 1.08; }
 .mh-route-independence > p { align-self: end; color: #d1ded9; font-size: 19px; line-height: 31px; }
@@ -687,7 +692,9 @@
   .mh-five-steps,
   .mh-toolkit,
   .mh-lumo,
-  .mh-context { min-height: 0; padding-top: 72px; padding-bottom: 72px; }
+  .mh-context,
+  .mh-route-ethos,
+  .mh-route-privacy { min-height: 0; padding-top: 72px; padding-bottom: 72px; }
   .mh-five-steps-rows li { grid-template-columns: 40px 1fr; row-gap: 12px; padding: 24px 0; }
   .mh-five-steps-rows li > span { width: 40px; flex: 0 0 40px; font-size: 26px; line-height: 32px; }
   .mh-five-steps-rows em { grid-column: 2; justify-self: start; }
@@ -735,7 +742,9 @@
   .mh-route-contact,
   .mh-route-hiring,
   .mh-route-community,
-  .mh-route-partners-note { padding-inline: 20px; padding-top: 72px; padding-bottom: 72px; }
+  .mh-route-partners-note,
+  .mh-route-ethos,
+  .mh-route-privacy { padding-inline: 20px; padding-top: 72px; padding-bottom: 72px; }
   .mh-home-trust h2,
   .mh-pricing-teaser h2,
   .mh-route-content-heading h2,

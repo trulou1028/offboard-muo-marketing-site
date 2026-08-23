@@ -99,10 +99,14 @@ describe("Offboard marketing routes", () => {
     render(<MarketingAbout />);
 
     expect(screen.getByRole("heading", { level: 1, name: /built for the moment work stops making sense/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "It started with the same questions, over and over." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "It started with our own layoffs." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A newsletter and a community came first." })).toBeInTheDocument();
     expect(screen.getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Calm is part of the product." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Our job is to get you out of here." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Fair questions." })).toBeInTheDocument();
+    expect(screen.getByText(/founder and CEO/i)).toBeInTheDocument();
+    expect(screen.queryByText(/I run Offboard/)).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Offboard is not a government agency." })).toBeInTheDocument();
   });
 
