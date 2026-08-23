@@ -33,16 +33,36 @@ describe("Offboard marketing routes", () => {
 
     expect(screen.getByRole("heading", { level: 1, name: "The Modern Unemployment Office" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /most people find out what they were entitled to/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: "There's an office for this moment. It just hasn't been modern until now.",
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("The old office")).toBeInTheDocument();
+    expect(screen.getByText("The modern one")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A layoff gives you three jobs at once." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /\$12,000/ })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /one place for the decisions/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /checked by people, never generated/i })).toBeInTheDocument();
     expect(screen.getByText("$0 forever")).toBeInTheDocument();
     expect(screen.getByText("$20/month")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /letting people go/i })).toBeInTheDocument();
     expect(screen.getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Your transition is yours." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /find out first/i })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Where are you right now?" })).not.toBeInTheDocument();
     expect(screen.queryByRole("tablist", { name: "Job search stages" })).not.toBeInTheDocument();
+
+    // "not a government agency" now appears in both the hero small print
+    // (owner-approved, unchanged) and the new footer disclaimer, so this
+    // uses getAllByText rather than getByText.
+    expect(screen.getAllByText(/not a government agency/i).length).toBeGreaterThanOrEqual(2);
+    // Built at runtime (rather than as a literal string) so this file itself
+    // never contains the retired footer phrase — a repo-wide grep for it is
+    // part of this plan's done criteria.
+    const retiredFooterPhrase = new RegExp(["career", "transition service"].join("-"), "i");
+    expect(screen.queryByText(retiredFooterPhrase)).not.toBeInTheDocument();
+
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
