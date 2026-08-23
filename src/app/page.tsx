@@ -7,7 +7,7 @@ import MarketingHome from "@/components/marketing/homepage/MarketingHome";
 export const metadata: Metadata = {
   title: "Offboard | The modern unemployment office",
   description:
-    "A private, practical plan for benefits, funded training, and the job search after a layoff.",
+    "Offboard is the modern unemployment office: one calm place for your benefits, deadlines, runway, funded training, and next job. Verified facts, AI guidance, and a plan that starts where you are. Independent, not a government agency.",
   robots: "noindex, nofollow, noarchive",
 };
 
