@@ -36,7 +36,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   }
 
   return (
-    <GuideArticle category={post.category} title={post.title} readingTime={post.readingTime} date={post.date} author={post.author}>
+    <GuideArticle
+      category={post.category}
+      title={post.title}
+      readingTime={post.readingTime}
+      date={post.date}
+      author={post.author}
+      guestAuthor={post.guestAuthor}
+    >
       <Body />
     </GuideArticle>
   );

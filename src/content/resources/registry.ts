@@ -2,10 +2,12 @@
 //
 // Ported from the legacy TanStack marketing site
 // (~/Documents/Codex/offboard-marketing-site/src/content/resources.ts) as
-// part of plan 013. `image` and `guestAuthor` were dropped: this repo has no
+// part of plan 013. The `image` field was dropped: this repo has no
 // asset-pipeline equivalent for the legacy `@/assets/blog/*.webp` imports,
-// and porting binary images was out of the plan's declared scope. If those
-// fields are needed later, add them back here and to `GuideArticle`.
+// and porting binary images was out of the plan's declared scope. If it is
+// needed later, add it back here and to `GuideArticle`. `guestAuthor` is
+// kept as plain strings (name/bio/company/url), dropping only the binary
+// `avatar` field for the same reason.
 //
 // This registry is also the future CMS import surface (see plan 013
 // Maintenance notes): when the Supabase CMS phase lands, this becomes a
@@ -21,6 +23,7 @@ export type ResourcePost = {
   readingTime: string;
   date?: string;
   author?: { name: string; role: string };
+  guestAuthor?: { name: string; bio: string; company: string; url: string };
   related?: string[];
   /** True once the article body has been ported into src/content/resources/posts/. */
   ported: boolean;
@@ -82,6 +85,12 @@ export const resources: ResourcePost[] = [
     readingTime: "8 min read",
     date: "2026-03-18",
     author: { name: "Offboard", role: "Team" },
+    guestAuthor: {
+      name: "Gerta & Alex",
+      bio: "Cofounders of YourNegotiations.com. They help professionals negotiate job offers with confidence. Their clients have negotiated millions in additional compensation across tech, finance, and consulting.",
+      company: "YourNegotiations",
+      url: "https://yournegotiations.com",
+    },
     related: ["negotiating-your-severance", "rebuild-your-resume-after-a-layoff"],
     ported: true,
   },

@@ -18,6 +18,7 @@ export function GuideArticle({
   readingTime,
   date,
   author,
+  guestAuthor,
   children,
 }: {
   category: ResourceCategory;
@@ -25,6 +26,7 @@ export function GuideArticle({
   readingTime: string;
   date?: string;
   author?: { name: string; role: string };
+  guestAuthor?: { name: string; bio: string; company: string; url: string };
   children: ReactNode;
 }) {
   const formattedDate = formatDate(date);
@@ -43,9 +45,24 @@ export function GuideArticle({
               <span className="mh-article-meta-reading">
                 <Clock aria-hidden="true" /> {readingTime}
               </span>
-              {author && <span>{author.name} · {author.role}</span>}
+              {guestAuthor ? (
+                <span>Guest post by {guestAuthor.name}</span>
+              ) : (
+                author && <span>{author.name} · {author.role}</span>
+              )}
               {formattedDate && <span>{formattedDate}</span>}
             </div>
+            {guestAuthor && (
+              <div className="mh-article-guest-author">
+                <span className="mh-article-guest-author-label">About the author</span>
+                <p>
+                  <strong>{guestAuthor.name}</strong>, {guestAuthor.bio}{" "}
+                  <a href={guestAuthor.url} target="_blank" rel="noreferrer" className="mh-article-link">
+                    {guestAuthor.company}
+                  </a>
+                </p>
+              </div>
+            )}
           </div>
           <div className="mh-article-body" data-guide-article>
             {children}

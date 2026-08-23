@@ -1,29 +1,23 @@
 # Resources content roadmap
 
-Reference for future article work on `/resources`. Source: app repo
-`documentation/sales/jobseeker-growth-playbook/03-acquisition-channels-and-campaigns.md`
-(Channel 3) and `04-messaging-library-and-content-pillars.md`, as cited in
-plan 013. This executor did not have direct read access to the app repo in
-this worktree; the content below is transcribed from the plan's own
-specification of those sections, which the plan author sourced from that
-playbook. Treat the cluster volumes/difficulty figures as placeholders to
-verify against the source doc (or current SEO tooling) before acting on them.
+Reference for future article work on `/resources`. The cluster table below
+is transcribed from `documentation/sales/jobseeker-growth-playbook/03-acquisition-channels-and-campaigns.md`
+(Channel 3) in the app repo, verified 2026-08-23.
 
 ## Priority keyword clusters
 
-Seven clusters map onto search intent that fires the week someone is laid
-off, not generic "career services" language. Each should map to a specific
-product landing path, not a generic demo CTA.
+Do not start with broad keywords like "career advice." Start with problems
+that map directly to product workflows.
 
-| Cluster | Search-intent examples | Product landing path |
+| Cluster | Search intent | Product landing path |
 | --- | --- | --- |
-| Ghost jobs | "is this job posting fake", "ghost job listings 2026" | The job tracker's status/verification workflow |
-| Resume tailoring | "tailor resume to job description", "ATS resume keywords" | Resume Tailor |
-| Jobs directory | "layoff list [industry/company]", "who is hiring after layoffs" | The jobs directory / matching surface |
-| Job tracker | "best job application tracker", "spreadsheet vs app for job search" | The application tracker |
-| Layoff checklist | "what to do after being laid off", "first week after layoff" | The runway/benefits checklist flow (ported: `first-week-after-a-layoff`) |
-| Interview prep | "interview prep after layoff", "how to explain layoff in interview" | Interview Practice |
-| Career repositioning | "changing careers after layoff", "career pivot resume" | Job Packet / career-change guidance (ported: `career-changers-guide-to-job-offer-negotiations`) |
+| Ghost jobs | "is this job posting real", "ghost job checker", "fake job posting signs" | Jobs, Ghost Checker, or Job Packet |
+| Resume tailoring | "tailor resume to job description", "resume keyword match", "resume for ATS" | Resume tailor |
+| Jobs directory | "curated jobs", "recommended jobs", "find jobs that match my resume" | Jobs |
+| Job tracker | "job application tracker", "track job applications", "job search spreadsheet alternative" | Applications |
+| Layoff checklist | "what to do after being laid off", "layoff checklist", "severance checklist" | Emergency Room and checklist |
+| Interview prep | "interview prep for [role]", "company interview briefing", "interview follow-up email" | Interviews |
+| Career repositioning | "career change resume", "positioning statement", "explain layoff in interview" | Resumes and target role |
 
 Two of the ported guides already sit inside the layoff-checklist and
 career-repositioning clusters; the other 9 ported articles support these

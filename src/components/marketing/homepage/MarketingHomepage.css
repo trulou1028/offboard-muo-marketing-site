@@ -542,6 +542,10 @@
 .mh-article-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; margin-top: 20px; color: var(--mh-muted); font-size: 14px; }
 .mh-article-meta-reading { display: inline-flex; align-items: center; gap: 6px; }
 .mh-article-meta-reading svg { width: 14px; height: 14px; }
+.mh-article-guest-author { max-width: 68ch; margin-top: 24px; padding: 16px 20px; background: var(--mh-paper-soft); border: 1px solid var(--mh-line); border-radius: 12px; }
+.mh-article-guest-author-label { display: block; color: var(--mh-muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.mh-article-guest-author p { margin-top: 6px; color: var(--mh-muted); font-size: 14px; line-height: 22px; }
+.mh-article-guest-author p strong { color: var(--mh-ink); }
 .mh-article-body { max-width: 68ch; margin-top: 44px; font-family: var(--font-aspekta), Inter, system-ui, sans-serif; }
 .mh-article-body h2,
 .mh-article-body h3 { font-family: var(--font-aspekta), Inter, system-ui, sans-serif; letter-spacing: -0.01em; }

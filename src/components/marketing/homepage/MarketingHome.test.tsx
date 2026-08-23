@@ -11,6 +11,7 @@ import { metadata as resourcesMetadata } from "@/app/resources/page";
 import { GuideArticle } from "@/components/marketing/resources/GuideArticle";
 import { getResource } from "@/content/resources/registry";
 import FirstWeekAfterALayoff from "@/content/resources/posts/first-week-after-a-layoff";
+import CareerChangersGuideNegotiations from "@/content/resources/posts/career-changers-guide-to-job-offer-negotiations";
 
 import MarketingHome from "./MarketingHome";
 import {
@@ -157,5 +158,26 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { level: 2, name: "1. Take 48 hours before you sign anything" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /all guides/i })).toHaveAttribute("href", "/resources");
     expect(screen.getByRole("link", { name: /more guides/i })).toHaveAttribute("href", "/resources");
+  });
+
+  it("credits the guest author on the career-changers negotiations article", () => {
+    const post = getResource("career-changers-guide-to-job-offer-negotiations");
+    if (!post) throw new Error("Expected career-changers-guide-to-job-offer-negotiations to be in the registry");
+
+    render(
+      <GuideArticle
+        category={post.category}
+        title={post.title}
+        readingTime={post.readingTime}
+        date={post.date}
+        author={post.author}
+        guestAuthor={post.guestAuthor}
+      >
+        <CareerChangersGuideNegotiations />
+      </GuideArticle>,
+    );
+
+    expect(screen.getByText(/guest post by gerta & alex/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "YourNegotiations" })).toHaveAttribute("href", "https://yournegotiations.com");
   });
 });
