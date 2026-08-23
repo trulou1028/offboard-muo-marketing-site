@@ -15,12 +15,20 @@ export type MarketingRoute =
   | "about"
   | "employers"
   | "public-partners"
-  | "intake";
+  | "intake"
+  | "act";
 
 const HUMAN_STEPS = [
   ["Work independently", "Follow your plan, manage applications, and use the tools at your own pace."],
   ["Ask Lumo", "Get guidance that uses the context already in your Offboard plan."],
   ["Talk with a person", "Book available one-on-one support online or visit the Offboard office in Concord, California."],
+] as const;
+
+export const ABOUT_FAQS = [
+  ["Isn't calling it 'unemployment' depressing?", "Because pretending is worse. You were just laid off, and a euphemism like 'career transition' reads as marketing at the exact moment you need candor. The word does the targeting. The warmth does the differentiating."],
+  ["How is this different from an AI resume tool?", "Those tools help with one document. Offboard is accountable for the whole passage: the money, the programs, the paperwork, the search, and the landing. AI is how it scales. It isn't the product."],
+  ["Are you a government website?", "No. Offboard is independent, not a government agency. It helps you organize your transition and reach official sources, and government agencies and providers make the eligibility and benefit decisions."],
+  ["What about people who aren't unemployed right now?", "Offboard starts from the laid-off moment on purpose, since that is when the deadlines are most urgent. But transitions are not limited to unemployment, and most people move between jobs while still employed at some point. The office is built for the whole transition, not only the week after a layoff."],
 ] as const;
 
 export const PRODUCT_FAQS = [
@@ -37,6 +45,14 @@ export const PRICING_FAQS = [
   ["Can I cancel Pro any time?", "Yes. Your plan, materials, and history remain yours on the Free tier after you cancel."],
   ["Is human support included?", "Availability, format, eligibility, and pricing vary by support option. The booking page shows the current details before you schedule."],
   ["Does any tier charge for government benefits?", "Never. Claiming your benefits is always free. Offboard charges for its own tools and support, not for access to public programs."],
+] as const;
+
+export const EMPLOYER_FAQS = [
+  ["Is there a minimum number of seats?", "No minimum. Buy for two people or two hundred, with no contract. Pricing is $199 per employee, one-time, and drops to $169 per seat at 50 or more."],
+  ["How fast can this be live?", "Invitations go out the same day you upload a roster. Setup takes minutes, not weeks."],
+  ["What exactly can we see?", "Aggregate engagement only. For example, a sponsor can see that 19 of 24 people claimed access and 14 are active, but never anyone's resume, applications, or conversations. Not the CEO, not HR, nobody. That privacy line is contractual, not a preference."],
+  ["How do people pay?", "$199 per employee, one-time. Card or NET-30 invoice. No renewal, no SOW, no procurement cycle."],
+  ["What does each person get?", "90 days of full Offboard Pro: a personal plan, verified benefit deadlines, resume and application help, interview prep, and a real job feed."],
 ] as const;
 
 export function Brand() {
@@ -118,7 +134,7 @@ export function MarketingFooter() {
         <div>
           <strong>Offboard</strong>
           <p>
-            Offboard is an independent career-transition service and is not affiliated with any state or federal agency. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
+            Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
           </p>
         </div>
         <nav aria-label="Footer navigation">
@@ -284,6 +300,41 @@ export function ProblemSection() {
   );
 }
 
+const IDENTITY_BODY =
+  "The system that catches you after a layoff is real: unemployment insurance, health-coverage windows, and billions of dollars a year in federal retraining money, delivered through 2,000+ job centers. It's also fifty different portals, hostile paperwork, and deadlines that expire silently. Offboard is the modern layer on top: one calm place that knows how the whole system works, watches your clocks, and walks with you to the next job. One situation. One plan. One clear next move.";
+
+const IDENTITY_LEDGER = [
+  ["You find out what you were owed after the deadline passes.", "Your entitlements, dollar amounts, and deadlines surface on day one."],
+  ["Paperwork written for the agency. Hold music for you.", "Plain-language steps with verified official links."],
+  ["A weekly check, then you're on your own.", "Money, paperwork, and the job search connected in one plan."],
+  ["Closes at 4 p.m.", "Open whenever you are, with a guide that knows your situation."],
+] as const;
+
+export function IdentityContrast() {
+  return (
+    <section className="mh-identity mh-section" aria-labelledby="identity-title">
+      <div className="mh-copy-block">
+        <span className="mh-kicker">Why &quot;unemployment office&quot;</span>
+        <h2 id="identity-title">There&apos;s an office for this moment. It just hasn&apos;t been modern until now.</h2>
+        <p>{IDENTITY_BODY}</p>
+      </div>
+      <div className="mh-identity-ledger">
+        <div className="mh-identity-ledger-head">
+          <span>The old office</span>
+          <span>The modern one</span>
+        </div>
+        {IDENTITY_LEDGER.map(([oldRow, newRow]) => (
+          <div className="mh-identity-ledger-row" key={oldRow}>
+            <p className="mh-identity-old">{oldRow}</p>
+            <p className="mh-identity-new">{newRow}</p>
+          </div>
+        ))}
+      </div>
+      <small>Offboard is independent and not affiliated with any government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free.</small>
+    </section>
+  );
+}
+
 export function HowItWorksOverview() {
   const jobs = [
     ["01", "Claim what you're owed", "Unemployment benefits, health-coverage windows, severance review, and state-approved funded training, with the deadlines watched."],
@@ -397,6 +448,19 @@ export function ConnectedPlanSummary() {
   );
 }
 
+export function StartingPlanSection() {
+  return (
+    <section className="mh-starting-plan mh-section mh-split" aria-labelledby="starting-plan-title">
+      <div className="mh-copy-block">
+        <span className="mh-kicker">The first ten minutes</span>
+        <h2 id="starting-plan-title">A few questions. A plan that&apos;s actually yours.</h2>
+        <p>Your situation, your state, your dates. That&apos;s enough to build a starting plan around what changed, with the option to skip straight to the tools if you already know what you need. Private by default, and you can change your answers any time.</p>
+      </div>
+      <StartingPlan />
+    </section>
+  );
+}
+
 const VERIFIED_FACTS_COLUMNS = [
   ["A verification date on every rule", "Every state rule in Offboard shows when a person last checked it: \"California rules verified June 2026.\""],
   ["Deepest coverage in California", "Including 4,000+ state-approved training programs, with verified official links for every state."],
@@ -481,16 +545,16 @@ export function FiveSteps() {
 
 const TOOLKIT_FLAGSHIP_CHIPS = ["Ghost check", "Fit read", "Tailored materials", "Warm intro"] as const;
 
-const TOOLKIT_CARDS = [
-  ["Resume Studio", "Build and tailor resumes from your real history, ready for the role in front of you."],
-  ["Interview prep & practice", "Drills grounded in the role, the company, and your strongest stories."],
-  ["Application tracker", "Every application, stage, and follow-up stays current without extra busywork."],
-  ["Ghost-job checker", "Flags fake or stale listings before you waste an application on them."],
-  ["Paperwork review", "A read on your severance or offer paperwork before you sign anything."],
-  ["Runway calculator", "See how long your money lasts and which deadlines change the math."],
-  ["Funded training explorer", "Search state-approved programs that may be paid for while you train."],
-  ["Ask LUMO", "An AI guide that works from your plan, your benefit facts, and your search."],
-] as const;
+const TOOLKIT_CARDS: Array<{ title: string; body: string; image?: string; alt?: string }> = [
+  { title: "Resume Studio", body: "Build and tailor resumes from your real history, ready for the role in front of you.", image: "/marketing/homepage/renders/toolkit-resumes.webp", alt: "Product render of the Resume Studio view, a resume tailored into role-specific cards" },
+  { title: "Interview prep & practice", body: "Drills grounded in the role, the company, and your strongest stories.", image: "/marketing/homepage/renders/toolkit-interviews.webp", alt: "Product render of interview prep, two message cards exchanging practice questions" },
+  { title: "Application tracker", body: "Every application, stage, and follow-up stays current without extra busywork.", image: "/marketing/homepage/renders/toolkit-applications.webp", alt: "Product render of the application tracker, cards filed by stage" },
+  { title: "Ghost-job checker", body: "Flags fake or stale listings before you waste an application on them." },
+  { title: "Paperwork review", body: "A read on your severance or offer paperwork before you sign anything." },
+  { title: "Runway calculator", body: "See how long your money lasts and which deadlines change the math." },
+  { title: "Funded training explorer", body: "Search state-approved programs that may be paid for while you train." },
+  { title: "Ask LUMO", body: "An AI guide that works from your plan, your benefit facts, and your search." },
+];
 
 export function ToolkitSection() {
   return (
@@ -501,6 +565,9 @@ export function ToolkitSection() {
       </div>
       <div className="mh-toolkit-layout">
         <article className="mh-toolkit-flagship">
+          <div className="mh-toolkit-flagship-visual">
+            <Image src="/marketing/homepage/renders/toolkit-job-packets.webp" alt="Product render of the Job Packet view, a document linked to its tailored materials" fill sizes="(max-width: 900px) 100vw, 38vw" />
+          </div>
           <span className="mh-kicker is-lime">Flagship</span>
           <h3>Job Packet</h3>
           <p>Paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person, all kept with the role.</p>
@@ -510,8 +577,13 @@ export function ToolkitSection() {
           <a className="mh-section-link" href={SIGN_UP_URL}>Explore the Job Packet <ArrowRight aria-hidden="true" /></a>
         </article>
         <div className="mh-toolkit-grid">
-          {TOOLKIT_CARDS.map(([title, body]) => (
+          {TOOLKIT_CARDS.map(({ title, body, image, alt }) => (
             <article key={title}>
+              {image && (
+                <div className="mh-toolkit-card-visual">
+                  <Image src={image} alt={alt ?? ""} fill sizes="(max-width: 900px) 100vw, 22vw" />
+                </div>
+              )}
               <h3>{title}</h3>
               <p>{body}</p>
             </article>
@@ -535,7 +607,7 @@ export function LumoSection() {
       <div className="mh-copy-block">
         <span className="mh-kicker is-lime">Meet LUMO</span>
         <h2 id="lumo-title">An AI guide that knows your actual situation.</h2>
-        <p>LUMO works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three.</p>
+        <p>LUMO works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three. Like a caseworker who answers in seconds, remembers everything, and never has a line.</p>
         <div className="mh-lumo-trust">
           <p>When LUMO talks about your benefits, it reads from human-verified state facts. It never invents a dollar figure or a deadline.</p>
         </div>
@@ -728,6 +800,19 @@ export function PricingTeaser() {
   );
 }
 
+export function EmployerStrip() {
+  return (
+    <section className="mh-employer-strip mh-section" aria-labelledby="employer-strip-title">
+      <div className="mh-copy-block">
+        <span className="mh-kicker">For employers</span>
+        <h2 id="employer-strip-title">Letting people go? Hand them the modern unemployment office on the way out.</h2>
+        <p>Real, private help for each departing person. Self-serve and one-time per seat, live in under 15 minutes. No enterprise contract, no sales call.</p>
+        <Link className="mh-section-link" href="/employers">Offboard for employers <ArrowRight aria-hidden="true" /></Link>
+      </div>
+    </section>
+  );
+}
+
 export function FaqSection({
   title,
   items,
@@ -748,7 +833,7 @@ const COMMUNITY_ROWS = [
     title: "The Offboard Newsletter",
     body: "Weekly job-market analysis and honest takes on tech hiring. 5,000+ subscribers.",
     cta: "Subscribe free",
-    href: "https://offboard.co/newsletter",
+    href: "https://newsletter.offboard.co",
   },
   {
     title: "Slack community",

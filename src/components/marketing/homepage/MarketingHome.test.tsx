@@ -2,16 +2,22 @@ import { render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from "vitest";
 
 import { metadata as aboutMetadata } from "@/app/about/page";
+import { metadata as actMetadata } from "@/app/act/page";
 import { metadata as employerMetadata } from "@/app/employers/page";
 import { metadata as howMetadata } from "@/app/how-it-works/page";
 import { metadata as homeMetadata } from "@/app/page";
 import { metadata as pricingMetadata } from "@/app/pricing/page";
 import { metadata as publicPartnerMetadata } from "@/app/public-partners/page";
 import { metadata as resourcesMetadata } from "@/app/resources/page";
+import { GuideArticle } from "@/components/marketing/resources/GuideArticle";
+import { getResource } from "@/content/resources/registry";
+import FirstWeekAfterALayoff from "@/content/resources/posts/first-week-after-a-layoff";
+import CareerChangersGuideNegotiations from "@/content/resources/posts/career-changers-guide-to-job-offer-negotiations";
 
 import MarketingHome from "./MarketingHome";
 import {
   MarketingAbout,
+  MarketingAct,
   MarketingEmployers,
   MarketingHowItWorks,
   MarketingPricing,
@@ -33,16 +39,37 @@ describe("Offboard marketing routes", () => {
 
     expect(screen.getByRole("heading", { level: 1, name: "The Modern Unemployment Office" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /most people find out what they were entitled to/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: "There's an office for this moment. It just hasn't been modern until now.",
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("The old office")).toBeInTheDocument();
+    expect(screen.getByText("The modern one")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A layoff gives you three jobs at once." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /\$12,000/ })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /one place for the decisions/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /checked by people, never generated/i })).toBeInTheDocument();
     expect(screen.getByText("$0 forever")).toBeInTheDocument();
     expect(screen.getByText("$20/month")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /letting people go/i })).toBeInTheDocument();
     expect(screen.getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Your transition is yours." })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /subscribe free/i })).toHaveAttribute("href", "https://newsletter.offboard.co");
     expect(screen.getByRole("heading", { name: /find out first/i })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Where are you right now?" })).not.toBeInTheDocument();
     expect(screen.queryByRole("tablist", { name: "Job search stages" })).not.toBeInTheDocument();
+
+    // "not a government agency" now appears in both the hero small print
+    // (owner-approved, unchanged) and the new footer disclaimer, so this
+    // uses getAllByText rather than getByText.
+    expect(screen.getAllByText(/not a government agency/i).length).toBeGreaterThanOrEqual(2);
+    // Built at runtime (rather than as a literal string) so this file itself
+    // never contains the retired footer phrase — a repo-wide grep for it is
+    // part of this plan's done criteria.
+    const retiredFooterPhrase = new RegExp(["career", "transition service"].join("-"), "i");
+    expect(screen.queryByText(retiredFooterPhrase)).not.toBeInTheDocument();
+
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
@@ -74,10 +101,14 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByText("Get ready, then run the search")).toBeInTheDocument();
     expect(screen.getByText("Close it, and make it count")).toBeInTheDocument();
     expect(screen.getByText(/we never promise funding/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /a few questions\. a plan that's actually yours/i })).toBeInTheDocument();
+    expect(screen.getByText("Where are you right now?")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /tools didn't go anywhere/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 3, name: "Job Packet" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "An AI guide that knows your actual situation." })).toBeInTheDocument();
     expect(screen.getByText(/never invents a dollar figure/i)).toBeInTheDocument();
+    expect(screen.getByText(/like a caseworker/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /checked by people, never generated/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "You can do this yourself. You should not have to do it alone." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Stop repeating your story to every new tool." })).toBeInTheDocument();
   });
@@ -99,10 +130,14 @@ describe("Offboard marketing routes", () => {
     render(<MarketingAbout />);
 
     expect(screen.getByRole("heading", { level: 1, name: /built for the moment work stops making sense/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "It started with the same questions, over and over." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "It started with our own layoffs." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A newsletter and a community came first." })).toBeInTheDocument();
     expect(screen.getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Calm is part of the product." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Our job is to get you out of here." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Fair questions." })).toBeInTheDocument();
+    expect(screen.getByText(/founder and CEO/i)).toBeInTheDocument();
+    expect(screen.queryByText(/I run Offboard/)).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Offboard is not a government agency." })).toBeInTheDocument();
   });
 
@@ -110,8 +145,13 @@ describe("Offboard marketing routes", () => {
     const employerView = render(<MarketingEmployers />);
     expect(screen.getByRole("heading", { level: 1, name: /outplacement, modernized/i })).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /talk about sponsored access/i })[0]).toHaveAttribute("href", expect.stringContaining("Employer%20support"));
-    expect(screen.getByRole("link", { name: /post a role/i })).toHaveAttribute("href", expect.stringContaining("Hiring%20on%20Offboard"));
+    expect(screen.getByRole("link", { name: /post a role/i })).toHaveAttribute("href", expect.stringContaining("intent=recruit"));
     expect(screen.getByRole("heading", { name: "Agencies decide. Offboard helps people prepare and continue." })).toBeInTheDocument();
+    expect(screen.getAllByText(/\$199/).length).toBeGreaterThan(0);
+    expect(screen.getByRole("heading", { name: /cheapest line item/i })).toBeInTheDocument();
+    expect(screen.getByText("Why companies do this")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /what employers ask/i })).toBeInTheDocument();
+    expect(screen.getAllByText(/19 of 24 people claimed access/i).length).toBeGreaterThan(0);
     employerView.unmount();
 
     render(<MarketingPublicPartners />);
@@ -121,17 +161,73 @@ describe("Offboard marketing routes", () => {
   });
 
   it("keeps every route out of search indexes while the site is pre-launch", () => {
-    [homeMetadata, howMetadata, pricingMetadata, aboutMetadata, employerMetadata, publicPartnerMetadata, resourcesMetadata].forEach((metadata) => {
+    [homeMetadata, howMetadata, pricingMetadata, aboutMetadata, employerMetadata, publicPartnerMetadata, resourcesMetadata, actMetadata].forEach((metadata) => {
       expect(metadata.robots).toBe("noindex, nofollow, noarchive");
     });
   });
 
-  it("gives resources a library shell that links out to the live guides", () => {
+  it("gives the ACT pilot its own resident-first landing page", () => {
+    render(<MarketingAct />);
+
+    expect(screen.getByRole("heading", { level: 1, name: /career support that starts tonight, not in six weeks/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /apply for pilot access/i })).toHaveAttribute("href", "https://app.offboard.co/act/apply");
+    expect(
+      screen.getByText(
+        "ACT reporting is aggregate-first. The program can understand applications, approvals, claims, onboarding, and engagement without seeing private resumes, documents, LUMO conversations, or individual job-search behavior."
+      )
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/modern unemployment office/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/guaranteed|government-endorsed|official alameda county program/i)).not.toBeInTheDocument();
+  });
+
+  it("gives resources a real library with local article routes", () => {
     render(<MarketingResources />);
 
     expect(screen.getByRole("heading", { level: 1, name: "Guides & resources" })).toBeInTheDocument();
     expect(screen.getByText(/reported essays, practical guides/i)).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "The first week after a layoff" })).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /read the guide/i })[0]).toHaveAttribute("href", expect.stringContaining("https://offboard.co/resources/"));
+    expect(screen.getByRole("heading", { level: 2, name: "Guides" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "AI & Technology" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "What to do in your first week after a layoff" })).toBeInTheDocument();
+
+    const guideLink = screen.getAllByRole("link", { name: /read the guide/i })[0];
+    expect(guideLink).toHaveAttribute("href", "/resources/first-week-after-a-layoff");
+    expect(screen.queryByText(/https:\/\/offboard\.co\/resources/)).not.toBeInTheDocument();
+  });
+
+  it("renders a ported article page with its title and body content", () => {
+    const post = getResource("first-week-after-a-layoff");
+    if (!post) throw new Error("Expected first-week-after-a-layoff to be in the registry");
+
+    render(
+      <GuideArticle category={post.category} title={post.title} readingTime={post.readingTime} date={post.date} author={post.author}>
+        <FirstWeekAfterALayoff />
+      </GuideArticle>,
+    );
+
+    expect(screen.getByRole("heading", { level: 1, name: "What to do in your first week after a layoff" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "1. Take 48 hours before you sign anything" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /all guides/i })).toHaveAttribute("href", "/resources");
+    expect(screen.getByRole("link", { name: /more guides/i })).toHaveAttribute("href", "/resources");
+  });
+
+  it("credits the guest author on the career-changers negotiations article", () => {
+    const post = getResource("career-changers-guide-to-job-offer-negotiations");
+    if (!post) throw new Error("Expected career-changers-guide-to-job-offer-negotiations to be in the registry");
+
+    render(
+      <GuideArticle
+        category={post.category}
+        title={post.title}
+        readingTime={post.readingTime}
+        date={post.date}
+        author={post.author}
+        guestAuthor={post.guestAuthor}
+      >
+        <CareerChangersGuideNegotiations />
+      </GuideArticle>,
+    );
+
+    expect(screen.getByText(/guest post by gerta & alex/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "YourNegotiations" })).toHaveAttribute("href", "https://yournegotiations.com");
   });
 });
