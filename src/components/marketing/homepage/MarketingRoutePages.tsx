@@ -244,8 +244,8 @@ export function MarketingEmployers() {
         </section>
         <EditorialGrid
           kicker="Why companies do this"
-          title="Why companies do this."
-          body="It is the cheapest line item in the entire layoff, and the one people remember."
+          title="The cheapest line item in the layoff, and the one people remember."
+          body="Glassdoor reviews, boomerang hires, and references are written in the last week of employment. Sponsorship is the part of a layoff people actually tell other people about."
           items={WHY_COMPANIES_ITEMS}
         />
         <aside className="mh-employer-sb617 mh-section" aria-label="California SB 617">
