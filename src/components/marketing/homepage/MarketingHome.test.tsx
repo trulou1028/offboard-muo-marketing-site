@@ -8,6 +8,9 @@ import { metadata as homeMetadata } from "@/app/page";
 import { metadata as pricingMetadata } from "@/app/pricing/page";
 import { metadata as publicPartnerMetadata } from "@/app/public-partners/page";
 import { metadata as resourcesMetadata } from "@/app/resources/page";
+import { GuideArticle } from "@/components/marketing/resources/GuideArticle";
+import { getResource } from "@/content/resources/registry";
+import FirstWeekAfterALayoff from "@/content/resources/posts/first-week-after-a-layoff";
 
 import MarketingHome from "./MarketingHome";
 import {
@@ -126,12 +129,33 @@ describe("Offboard marketing routes", () => {
     });
   });
 
-  it("gives resources a library shell that links out to the live guides", () => {
+  it("gives resources a real library with local article routes", () => {
     render(<MarketingResources />);
 
     expect(screen.getByRole("heading", { level: 1, name: "Guides & resources" })).toBeInTheDocument();
     expect(screen.getByText(/reported essays, practical guides/i)).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "The first week after a layoff" })).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /read the guide/i })[0]).toHaveAttribute("href", expect.stringContaining("https://offboard.co/resources/"));
+    expect(screen.getByRole("heading", { level: 2, name: "Guides" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "AI & Technology" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "What to do in your first week after a layoff" })).toBeInTheDocument();
+
+    const guideLink = screen.getAllByRole("link", { name: /read the guide/i })[0];
+    expect(guideLink).toHaveAttribute("href", "/resources/first-week-after-a-layoff");
+    expect(screen.queryByText(/https:\/\/offboard\.co\/resources/)).not.toBeInTheDocument();
+  });
+
+  it("renders a ported article page with its title and body content", () => {
+    const post = getResource("first-week-after-a-layoff");
+    if (!post) throw new Error("Expected first-week-after-a-layoff to be in the registry");
+
+    render(
+      <GuideArticle category={post.category} title={post.title} readingTime={post.readingTime} date={post.date} author={post.author}>
+        <FirstWeekAfterALayoff />
+      </GuideArticle>,
+    );
+
+    expect(screen.getByRole("heading", { level: 1, name: "What to do in your first week after a layoff" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "1. Take 48 hours before you sign anything" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /all guides/i })).toHaveAttribute("href", "/resources");
+    expect(screen.getByRole("link", { name: /more guides/i })).toHaveAttribute("href", "/resources");
   });
 });

@@ -24,6 +24,18 @@ const nextConfig: NextConfig = {
       { source: "/gift", destination: "/pricing", permanent: true },
       { source: "/tools", destination: "/resources", permanent: true },
       { source: "/tools/:slug*", destination: "/resources", permanent: true },
+      // Essays + Policy & Accountability articles (plan 013): not yet
+      // ported into this repo pending an owner editorial pass. Redirect
+      // each slug individually rather than a /resources/:slug* catch-all,
+      // which would shadow the 11 real article routes (redirects() runs
+      // before the filesystem).
+      { source: "/resources/this-is-not-charity-it-is-reconstruction", destination: "/resources", permanent: true },
+      { source: "/resources/a-series-of-fortunate-events", destination: "/resources", permanent: true },
+      { source: "/resources/they-think-an-idea-is-bulletproof-they-are-wrong", destination: "/resources", permanent: true },
+      { source: "/resources/we-forgot-to-reinforce-the-foundations", destination: "/resources", permanent: true },
+      { source: "/resources/the-mentor-trap-a-silicon-valley-horror-story", destination: "/resources", permanent: true },
+      { source: "/resources/the-valleys-hypocrisy-hustle-exposed-by-the-overemployed", destination: "/resources", permanent: true },
+      { source: "/resources/alameda-d2-safety-net-transparency", destination: "/resources", permanent: true },
     ];
   },
 };
