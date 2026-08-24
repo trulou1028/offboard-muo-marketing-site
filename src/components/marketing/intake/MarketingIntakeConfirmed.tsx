@@ -1,18 +1,18 @@
 import Link from "next/link";
 
+import { PageHero } from "@/components/marketing/homepage/MarketingSite";
+
 export function MarketingIntakeConfirmed() {
   return (
     <main id="main-content">
-      <section className="mh-route-hero mh-section">
-        <div>
-          <span className="mh-kicker is-lime">Soft Landing Zone</span>
-          <h1>Thanks for filling that out.</h1>
-          <p>
-            We&apos;ll review your intake and reach out directly, usually within a few days. Keep an eye on your
-            inbox.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        current="intake"
+        kicker="Soft Landing Zone"
+        title="Thanks for filling that out."
+        body="We'll review your intake and reach out directly, usually within a few days. Keep an eye on your inbox."
+        aside={false}
+        cta={false}
+      />
       <section className="mh-section mh-intake-confirmed">
         <p>
           A confirmation is on its way to your inbox. If it doesn&apos;t land within a few minutes, check spam or

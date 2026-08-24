@@ -367,6 +367,7 @@
 .mh-section-link svg { width: 17px; height: 17px; }
 
 .mh-route-hero { min-height: 720px; padding-top: 172px; padding-bottom: 92px; background: var(--mh-deep); color: var(--mh-paper); display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(340px, .55fr); gap: clamp(60px, 8vw, 126px); align-items: center; }
+.mh-route-hero.is-single { grid-template-columns: 1fr; min-height: 0; padding-bottom: 72px; }
 .mh-route-hero > div { max-width: 810px; }
 .mh-route-hero h1 { margin-top: 24px; font-size: clamp(56px, 5.3vw, 82px); line-height: 1.02; text-wrap: balance; }
 .mh-route-hero > div > p { max-width: 720px; margin-top: 28px; color: #d6e0dc; font-size: 21px; line-height: 32px; text-wrap: pretty; }
