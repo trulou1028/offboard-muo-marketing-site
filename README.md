@@ -11,6 +11,9 @@ standalone Next.js project.
   ([MarketingHomepage.css](src/components/marketing/homepage/MarketingHomepage.css),
   `.marketing-homepage` scope, `--mh-*` tokens)
 - Self-hosted variable fonts (Aspekta, Fraunces) in `public/fonts`
+- [COPY.md](COPY.md) — **the master copy doc**: every user-facing string on the
+  site, verbatim, plus language rules, the verified-facts ledger, and the copy
+  decision log. Copy changes land there first (or in the same PR).
 - [DESIGN.md](DESIGN.md) — the Clause design system this page follows
 - [docs/site-architecture.md](docs/site-architecture.md) - the sitemap, page responsibilities, and migration gates
 
