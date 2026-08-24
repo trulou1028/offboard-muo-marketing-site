@@ -95,8 +95,8 @@ your row when done.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 011  | Fix shipped CSS defects + delete dead CSS | P1 | M | — | DONE — executed + reviewed 2026-08-24; branch `claude/011-css-defects`, 5 commits, awaiting owner merge. See "Plan 011 review record" below. |
-| 012  | Styling verification baseline (stylelint, screenshots, CI) | P1 | M | 011 | TODO |
+| 011  | Fix shipped CSS defects + delete dead CSS | P1 | M | — | DONE — executed, reviewed, **merged to `main`** 2026-08-24 ([PR #21](https://github.com/trulou1028/offboard-muo-marketing-site/pull/21)). See "Plan 011 review record" below. |
+| 012  | Styling verification baseline (stylelint, screenshots, CI) | P1 | M | 011 | DONE — executed + reviewed (1 revision round) 2026-08-24; branch `claude/012-style-baseline`. See "Plan 012 review record" below. |
 | 013  | Container unification + 1200px cap | P1 | M | 012 | TODO |
 | 014  | Design-token consolidation + DESIGN.md rewrite | P2 | L | 012, 013 | TODO |
 | 015  | Portable content format + characterization tests | P1 | L | — | TODO |
@@ -214,3 +214,66 @@ session's ORIGINAL launch directory as cwd, not the current worktree
 therefore cannot browser-verify its own changes through that tool. Use
 Playwright instead — its `webServer` builds and serves from the worktree it
 runs in. Plan 012's screenshot suite should be written with this in mind.
+
+## Plan 012 review record (2026-08-24)
+
+Executed by a fresh-context executor in an isolated worktree; APPROVED after
+one revision round. All gates re-verified by the reviewer, not taken on
+report: `npm test` (61 passed, 4 files), `npm run lint`, `npm run lint:css`,
+`npm run typecheck`, `npm run build` (24/24 routes), `npm run e2e` (47 passed)
+— all exit 0. Scope clean.
+
+**What landed**: stylelint + `.stylelintrc.json` wired into CI; a `typecheck`
+script; lint, lint:css and typecheck now run in the `test-and-build` job
+(closing the gap where `docs/site-architecture.md` listed lint as release
+check #2 but CI never ran it); a dead-selector guard test; and 33 screenshot
+baselines (11 routes x 3 viewports).
+
+**Blocker found and fixed in review.** The executor committed baselines as
+`*-chromium-darwin.png`. On ubuntu CI Playwright looks for
+`*-chromium-linux.png`, finds nothing, and FAILS — so the `browser` job would
+have gone red on every future PR. Proven locally by moving one baseline aside
+and observing a hard failure, not a skip. Fixed with the fallback this plan
+pre-authorized: `test.skip(!!process.env.CI, …)` in `e2e/visual.spec.ts`.
+Verified both paths: `npm run e2e` runs all 33 visual assertions; `CI=1 npm
+run e2e` reports "33 skipped, 14 passed" and exits 0.
+
+**Consequence to understand**: visual regressions are NOT enforced by CI. The
+baselines' real job — a committed before/after PNG diff in a PR for plans
+013/014 — still works, because that diff is produced locally by whoever runs
+the suite. To gain CI enforcement later, generate linux baselines in the
+official Playwright container and commit them alongside the darwin ones; both
+platforms coexist in the snapshot dir. The upgrade path is recorded in a
+comment in `e2e/visual.spec.ts`. Docker is installed on the owner's machine
+but its daemon was not running, so this was not done now.
+
+**Verified independently, beyond the executor's report:**
+
+- **The CSS edits are visually neutral — proven, not assumed.** stylelint
+  `--fix` rewrote `:not(a):not(b)` to `:not(a, b)`, which lowers selector
+  specificity, and it merged two duplicate rules. The screenshots were
+  generated AFTER those edits, so they could not catch a regression the edits
+  introduced. To break that circularity the reviewer swapped `main`'s
+  stylesheet back in and ran the full visual suite: all 33 passed
+  pixel-identical. The edits changed no rendering.
+- **The dead-selector guard actually bites.** Planted
+  `.mh-reviewer-planted-dead` in the stylesheet; the test failed and named it
+  in the assertion message. Reverted; green again. Its `> 50 classes found`
+  sanity check is what stops the classic vacuous pass where the regex matches
+  nothing.
+- `.mh-search` (the dead rule deliberately left behind by plan 011 as a live
+  test of the new guard) was correctly caught and deleted.
+
+**Accepted deviation**: `custom-property-pattern` widened from `^mh-` to
+`^(mh-|font-)`. Verified legitimate — `--font-aspekta` / `--font-fraunces` are
+declared by `next/font` in `src/app/layout.tsx` and are not ours to rename;
+one honest config scope beats 12 inline disable comments.
+
+**Deferred, documented in-file**: two `selector-class-pattern` disables on
+`.mh-plain-list.ruled` (renaming `.ruled` means touching TSX, out of this
+plan's CSS-only scope) — fold into plan 013/014.
+
+**Note for plans 013/014**: regenerate affected baselines with
+`npm run test:visual -- --update-snapshots` and treat the committed PNG diff
+as the review artifact. Snapshots add ~23MB to the repo; if that becomes a
+problem, consider git-lfs before adding more viewports.
