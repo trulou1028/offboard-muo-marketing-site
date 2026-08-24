@@ -377,7 +377,7 @@ export function MarketingAct() {
             { title: "Interview prep and Ask LUMO", body: "Practice for interviews and ask LUMO for guidance grounded in the resident's own plan." },
           ]}
         />
-        <section className="mh-route-privacy mh-section" aria-labelledby="act-privacy-title">
+        <section className="mh-act-privacy mh-section" aria-labelledby="act-privacy-title">
           <div className="mh-copy-block">
             <span className="mh-kicker is-lime">Worker-controlled privacy</span>
             <h2 id="act-privacy-title">Aggregate for the program. Private for the resident.</h2>

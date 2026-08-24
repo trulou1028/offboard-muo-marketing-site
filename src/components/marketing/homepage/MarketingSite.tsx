@@ -178,7 +178,7 @@ export function MarketingShell({
   children: ReactNode;
 }) {
   return (
-    <div className={`marketing-homepage mh-route-${current}`}>
+    <div className={`marketing-homepage mh-page-${current}`}>
       <a className="mh-skip-link" href="#main-content">Skip to content</a>
       <MarketingHeader current={current} />
       {children}
@@ -212,34 +212,36 @@ export function PageHero({
   kicker: string;
   title: string;
   body: string;
-  current: Exclude<MarketingRoute, "home">;
-  aside?: ReactNode;
-  cta?: string;
+  current: MarketingRoute;
+  aside?: ReactNode | false;
+  cta?: string | false;
   ctaHref?: string;
 }) {
-  const ctaNode = ctaHref.startsWith("/") ? (
+  const ctaNode = cta === false ? null : ctaHref.startsWith("/") ? (
     <Link className="mh-primary-cta" href={ctaHref}><span>{cta}</span><ArrowRight aria-hidden="true" /></Link>
   ) : (
     <a className="mh-primary-cta" href={ctaHref}><span>{cta}</span><ArrowRight aria-hidden="true" /></a>
   );
 
   return (
-    <section className="mh-route-hero mh-section">
+    <section className={`mh-route-hero mh-section${aside === false ? " is-single" : ""}`}>
       <div>
         <span className="mh-kicker is-lime">{kicker}</span>
         <h1>{title}</h1>
         <p>{body}</p>
         {ctaNode}
       </div>
-      <aside aria-label={`${current} summary`}>
-        {aside ?? (
-          <>
-            <span>One connected plan</span>
-            <strong>Start with what changed.</strong>
-            <p>Offboard organizes what deserves attention now and builds from there.</p>
-          </>
-        )}
-      </aside>
+      {aside !== false && (
+        <aside aria-label={`${current} summary`}>
+          {aside ?? (
+            <>
+              <span>One connected plan</span>
+              <strong>Start with what changed.</strong>
+              <p>Offboard organizes what deserves attention now and builds from there.</p>
+            </>
+          )}
+        </aside>
+      )}
     </section>
   );
 }
