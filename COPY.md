@@ -39,6 +39,13 @@ resolves. The A/B variants that already exist on record are listed in
 | Redirect map | `next.config.ts` |
 | Copy regression tests (update in the same PR as any copy change) | `src/components/marketing/homepage/MarketingHome.test.tsx`, `e2e/homepage.spec.ts` |
 
+`src/components/marketing/homepage/CopyDrift.test.tsx` enforces this document
+against shipped copy in code. It checks that the ledger's load-bearing
+figures actually appear on the pages listed in the Appears on column, and it
+sweeps the never-say list and its scoped exceptions over the rendered text of
+every page named in the sweep. A failing drift test means this doc and the
+site disagree: fix whichever one is wrong, in the same PR.
+
 **This doc supersedes** the three prior sources of truth, which remain
 upstream references but are no longer canonical for shipped copy:
 the app repo's `documentation/strategy/landing-page/landing-page-v7-modern-unemployment-office.md`
@@ -61,10 +68,19 @@ From the v2 spec §3, enforced by plan 009's sweep and the test harness.
 | tools · your guide (LUMO) | modules · workspace · agents · career memory |
 | benefits, deadlines, runway | transition intelligence |
 
-**Scoped exceptions** (each valid on exactly one page):
+**Scoped exceptions:**
 
-1. `/employers` may say **"outplacement"** — it is the term buyers search and
-   budget against. It never appears on jobseeker-facing pages.
+1. **"Outplacement"** is allowed in exactly two contexts, and nowhere else:
+   - **`/employers`**, throughout. It is the term buyers search and budget
+     against.
+   - **Sponsored-tier copy, wherever the Sponsored tier is described.** Today
+     that is the homepage pricing teaser and the `/pricing` deck, which both
+     render "Outplacement, modernized. Your former employer, school, or
+     workforce organization may cover your access." (Owner decision
+     2026-08-21, see the decision log.)
+
+   It must not appear in jobseeker narrative copy: `/how-it-works`, `/about`,
+   `/act`, `/resources`, `/public-partners`.
 2. `/act` may say **"career transition"** and **"workspace"** — ACT's approved
    agency-facing vocabulary. It never leaks to any other page.
 
@@ -109,7 +125,7 @@ and everywhere it appears in the same PR.
 | Consumer tiers | **Free $0 forever · Pro $20/month** · 30 / 300 monthly credits · 3 LUMO messages/day on Free · first Job Packet free | Owner-confirmed 2026-08-21 | Home, Pricing |
 | Gift Pro prices | 1 mo $20 · 3 mo $54 · 6 mo $99 | **Not yet on site** (plan 015 unexecuted); see § Approved but unshipped | — |
 | SB 617 (California WARN-notice statement) | Shipped verbatim from the founder's public LinkedIn post | **Owner to re-verify the statute stays current**; drop the aside if stale | Employers |
-| ACT suggested pilot shape | One jurisdiction or cohort · 25–100 residents · 3-month access · first review after 30 days | "Suggested", never a claim about actual participation | ACT |
+| ACT suggested pilot shape | One jurisdiction or cohort · 25 to 100 residents · 3-month sponsored access · first review after 30 days | "Suggested", never a claim about actual participation | ACT |
 | Office location | Concord, California | | About, How it works |
 
 ## Canonical positioning
@@ -733,6 +749,7 @@ When one ships, move it into its page section above.
 | 2026-08-23 | `/act` rebuilt from scratch; Alameda County naming approved as geography only | plan 017 |
 | 2026-08-23 | Newsletter CTA → `newsletter.offboard.co` (old path 404s) | plan 018 |
 | 2026-08-24 | COPY.md created as the copy source of truth; copy changes land here first | this file |
+| 2026-08-24 | Clarified the "outplacement" scope: allowed on /employers AND in Sponsored-tier copy wherever it renders (home teaser, /pricing deck), per the 2026-08-21 owner call. The earlier "one page only" wording in Language rules was inaccurate and is corrected. | COPY.md, plan 019 |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·
