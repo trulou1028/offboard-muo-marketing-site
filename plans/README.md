@@ -95,7 +95,7 @@ your row when done.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 011  | Fix shipped CSS defects + delete dead CSS | P1 | M | — | TODO |
+| 011  | Fix shipped CSS defects + delete dead CSS | P1 | M | — | DONE — executed + reviewed 2026-08-24; branch `claude/011-css-defects`, 5 commits, awaiting owner merge. See "Plan 011 review record" below. |
 | 012  | Styling verification baseline (stylelint, screenshots, CI) | P1 | M | 011 | TODO |
 | 013  | Container unification + 1200px cap | P1 | M | 012 | TODO |
 | 014  | Design-token consolidation + DESIGN.md rewrite | P2 | L | 012, 013 | TODO |
@@ -145,3 +145,72 @@ REJECTED (with one-line rationale)
 - **BEM rename of existing classes**: rejected — churn without user value;
   the `mh-page-` wrapper prefix (011) plus stylelint's class-pattern rule
   (012) give the needed namespace discipline.
+
+## Plan 011 review record (2026-08-24)
+
+Executed by a fresh-context executor in an isolated worktree, reviewed
+independently by the advisor. All done criteria re-verified by the reviewer,
+not taken on report: `npm test` (59 passed), `npm run lint`, `npx tsc
+--noEmit`, `npm run build` (24/24 routes), `npm run e2e` (14/14) — all exit 0.
+Scope clean: exactly the 5 in-scope files, one commit per step.
+
+**Independently verified in a browser** (via a temporary Playwright spec,
+since the preview tool binds to the session's launch worktree and cannot see
+an executor worktree — see "Known environment quirk" below):
+
+- Defect 1 FIXED: `/resources/<slug>` wrapper is now `mh-page-resources` with
+  `padding-top: 0px`, no stray background or border. The intended
+  `.mh-route-resources` section rule still applies inside `/resources` (90px).
+- Defect 2 FIXED: `/about` privacy renders `rgb(255,255,255)` (its authored
+  white, restored); `/act` privacy renders `rgb(0,72,56)` under the new
+  `.mh-act-privacy` class.
+- Defect 4 FIXED: `/intake/confirmed` hero is single-column, no `<aside>`,
+  no CTA, copy byte-identical. The 404 keeps its two-column hero and aside.
+- CSS deletion caused ZERO collateral damage: a bidirectional class-coverage
+  check found no live TSX class lost its rule (the one pre-existing gap,
+  `mh-intake-vibe`, has an identical 10 rules before and after).
+
+**CORRECTION to this plan's Defect 3 premise.** The plan claimed three
+sections "reserve 720-760px of height for ~300px of content, leaving screens
+of empty space" on phones. Measured at 390px after the fix, that is **not
+true** and was not true before:
+
+- `.mh-route-story` (/about): 1420px tall, content-driven, slack 0px.
+- `.mh-route-sponsor` (/employers): 1427px — content already far exceeded the
+  removed 720px floor.
+- `.mh-human.is-compact`: never rendered at all — `HumanSupportSection` has a
+  single caller (`MarketingRoutePages.tsx:67`) which never passes `compact`.
+
+The three `min-height` removals were therefore correct **dead-declaration
+cleanup** (and are still needed by plans 013/014), but they reclaimed no
+user-visible dead space. The original claim came from an audit subagent and
+was not measured live before being written into the plan — unlike the gutter
+and section-padding findings, which were. Lesson for future plans: measure
+every visual claim in a browser before it becomes a plan's justification.
+
+**Accepted deviations** (both documented by the executor, both judged sound):
+
+- `PageHero` gained `cta?: string | false`. Without it, adopting the shared
+  hero on `/intake/confirmed` would have ADDED a "Build my plan" CTA that page
+  never had — a content change this plan forbids.
+- `PageHero`'s `current` widened from `Exclude<MarketingRoute, "home">` to
+  `MarketingRoute`, because the 404 shell uses `current="home"`. `current`
+  only feeds the aside's `aria-label`; no CSS depends on it.
+
+**Minor undocumented visual delta**: the 404's CTA now renders PageHero's
+arrow icon, which the hand-rolled version lacked. Text is unchanged ("Return
+home") and it now matches the other 9 heroes. Accepted as inherent to the
+consolidation the plan asked for.
+
+**Left alone deliberately**: `.mh-search { background: var(--mh-forest); color: white; }`
+is dead (zero TSX references) but was not on this plan's deletion list. The
+executor correctly did not improvise it in. Plan 012's dead-selector guard
+will catch it; delete it there.
+
+**Known environment quirk (affects all future executor dispatches in this
+repo)**: `mcp__Claude_Browser__preview_start` launches `next dev` with the
+session's ORIGINAL launch directory as cwd, not the current worktree
+(confirmed via `lsof -a -p <pid> -d cwd`). An executor in a fresh worktree
+therefore cannot browser-verify its own changes through that tool. Use
+Playwright instead — its `webServer` builds and serves from the worktree it
+runs in. Plan 012's screenshot suite should be written with this in mind.
