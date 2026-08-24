@@ -147,12 +147,13 @@ const SWEPT_PAGES: ReadonlyArray<[string, () => ReactElement]> = [
 describe("language rules hold on shipped pages", () => {
   // Built at runtime (rather than as a literal string) so this file itself
   // never contains the retired phrase — the existing MarketingHome.test.tsx
-  // harness uses the same technique for the same reason.
-  const retiredCareerTransitionService = new RegExp(["career", "transition service"].join("."), "i");
+  // harness uses the same technique for the same reason. The alternation
+  // covers both banned forms, "services" and "support".
+  const retiredCareerTransitionPhrase = new RegExp(["career", "transition (service|support)"].join("."), "i");
 
   it.each(SWEPT_PAGES)("never-say list stays retired on %s", (_name, factory) => {
     const text = renderedText(factory());
-    expect(text).not.toMatch(retiredCareerTransitionService);
+    expect(text).not.toMatch(retiredCareerTransitionPhrase);
     expect(text).not.toMatch(/transition intelligence/i);
     expect(text).not.toMatch(/career memory/i);
   });
@@ -190,8 +191,8 @@ describe("language rules hold on shipped pages", () => {
   it("B2G language firewall holds on /act", () => {
     const text = renderedText(<MarketingAct />);
     expect(text).not.toMatch(/modern unemployment office/i);
-    expect(text).not.toContain("guaranteed");
-    expect(text).not.toContain("government-endorsed");
+    expect(text).not.toMatch(/guaranteed/i);
+    expect(text).not.toMatch(/government-endorsed/i);
     expect(text).not.toContain("Official Alameda County program");
   });
 
