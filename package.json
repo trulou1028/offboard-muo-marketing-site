@@ -7,8 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:visual": "playwright test e2e/visual.spec.ts",
     "e2e": "playwright test",
     "imagery": "node scripts/generate-imagery.mjs",
     "imagery:dry": "node scripts/generate-imagery.mjs --dry-run"
@@ -33,6 +36,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.0",
     "jsdom": "^30.0.1",
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard": "^40.0.0",
     "typescript": "^5",
     "vitest": "^3.2.7"
   }
