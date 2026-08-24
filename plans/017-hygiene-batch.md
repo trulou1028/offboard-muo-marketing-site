@@ -111,7 +111,12 @@ Repo conventions (AGENTS.md): copy law (no string changes without COPY.md),
 ## Git workflow
 
 - Branch: `claude/017-hygiene`
-- One commit per part (A–F). Do NOT push or merge without owner review.
+- One commit per part (A–F).
+- **Hand over with a preview link** (AGENTS.md "Handing over work for review"):
+  when the work is complete, push the branch, open a PR, run
+  `node scripts/preview-url.mjs`, and put the URL in your final report — Part D
+  (related posts) is the one visible change, so point at an article page. Do
+  NOT merge — that is the owner's call.
 
 ## Steps
 

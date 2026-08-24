@@ -67,6 +67,40 @@ supersedes the app repo's strategy docs.
    `marketing-site`, port 3000): renders, no console errors, mobile width.
 4. **Copy change?** → COPY.md + drift/regression tests updated, same PR (above).
 
+## Handing over work for review — always ship a preview link
+
+**Never hand Louie work to review without telling him exactly where to look.**
+He should never have to guess which environment, branch, or worktree holds the
+change. Local dev servers and agent worktrees are invisible to him.
+
+So whenever work reaches a reviewable state — a plan executed, a feature
+finished, a fix ready — the last step is always:
+
+1. **Push the branch.** No push, no preview: Vercel only builds what it can see.
+   This applies to work done in an isolated worktree too.
+2. **Open a PR** (or reuse the existing one) so the preview is tied to the change.
+3. **Get the real URL:** `node scripts/preview-url.mjs` (defaults to the current
+   branch; takes a branch name or `--json`). It waits for the build and fails
+   with a diagnosis rather than printing a guess.
+4. **Put the URL in your closing message**, with 2–5 specific things to look at
+   ("`/about` — the privacy band should be white again"), and call out anything
+   that deliberately changed appearance so a fix doesn't read as a regression.
+
+```bash
+node scripts/preview-url.mjs
+```
+
+Do not hand-construct preview URLs. Vercel's `…-git-<branch>-…` alias does NOT
+resolve for branches containing a slash, which every `claude/*` branch has —
+the script resolves the real URL through GitHub's deployments API instead.
+
+Preview URLs are Vercel-SSO-gated: Louie can open them, the public cannot. If a
+preview build FAILED, say so plainly and do not present the work as ready.
+
+The one exception: work with no observable surface (docs, plans, CI config,
+refactors with no visual change) still gets a PR link, but say plainly that
+there is nothing to look at on the preview, so he doesn't go hunting.
+
 ## Source control and deployment
 
 - GitHub `main` is the source of truth for production.
@@ -75,7 +109,8 @@ supersedes the app repo's strategy docs.
 - Production releases happen by merging a verified pull request to `main`.
   Vercel deploys `main` automatically — **merging is shipping.**
 - **Shipping gate:** for any user-facing change, give Louie the Vercel preview
-  URL plus what to look at, and merge only after he says go. Docs, plans,
+  URL plus what to look at (see "Handing over work for review" above — this is
+  mandatory, not best-effort), and merge only after he says go. Docs, plans,
   tests, CI, and refactors with no visual change may merge without asking.
 - Do not run `vercel --prod`, deploy through the Vercel API, or promote a dirty
   local worktree.

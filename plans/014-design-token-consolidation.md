@@ -107,7 +107,12 @@ cleanly creates new pages that keep the site consistent."
 
 - Branch: `claude/014-token-consolidation`
 - ONE COMMIT PER STAGE below, so the owner can review each visual delta
-  independently. Do NOT push or merge without owner preview sign-off.
+  independently.
+- **Hand over with a preview link** (AGENTS.md "Handing over work for review"):
+  when the work is complete, push the branch, open a PR, run
+  `node scripts/preview-url.mjs`, and put the URL in your final report, calling
+  out per stage what shifted (tone, rounding, rhythm). Do NOT merge — the owner
+  signs off on each visual delta.
 
 ## Steps
 

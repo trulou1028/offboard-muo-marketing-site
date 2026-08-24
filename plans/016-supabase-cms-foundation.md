@@ -117,10 +117,16 @@ are contracts and rails.
 ## Git workflow
 
 - Branch: `claude/016-cms-foundation`
-- Commit per step. Do NOT push, merge, or run anything against the
+- Commit per step. Do NOT merge, and do NOT run anything against the
   PRODUCTION Supabase project — everything here runs against the LOCAL
   stack. Applying the migration to production is an owner-supervised step
   recorded in the doc, not something this plan executes.
+- **Hand over with a preview link** (AGENTS.md "Handing over work for review"):
+  when the work is complete, push the branch, open a PR, run
+  `node scripts/preview-url.mjs`, and put the URL in your final report. Note
+  explicitly whether the preview is serving articles from the database or from
+  the committed fallback fixtures — the owner cannot tell by looking, and that
+  distinction is the whole point of this plan.
 
 ## Steps
 

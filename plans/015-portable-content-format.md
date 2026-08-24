@@ -148,9 +148,13 @@ return (
 ## Git workflow
 
 - Branch: `claude/015-portable-content`
-- Commit per step. Do NOT push or merge without owner review. The final
-  rendered pages must be byte-identical, so this is reviewable as "tests
-  prove no change".
+- Commit per step.
+- **Hand over with a preview link** (AGENTS.md "Handing over work for review"):
+  when the work is complete, push the branch, open a PR, run
+  `node scripts/preview-url.mjs`, and put the URL in your final report. The
+  rendered pages must be byte-identical, so tell the owner the articles should
+  look *unchanged* on the preview — that is the pass condition here. Do NOT
+  merge — that is the owner's call.
 
 ## Steps
 

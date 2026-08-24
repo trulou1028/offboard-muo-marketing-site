@@ -90,7 +90,11 @@ This plan also closes a documented gap: `docs/site-architecture.md` lists
 ## Git workflow
 
 - Branch: `claude/012-style-baseline`
-- Commit per step. Do NOT push or merge; owner reviews per AGENTS.md.
+- Commit per step.
+- **Hand over with a preview link** (AGENTS.md "Handing over work for review"):
+  when the work is complete, push the branch, open a PR, run
+  `node scripts/preview-url.mjs`, and put the URL in your final report with
+  specific things to look at. Do NOT merge — that is the owner's call.
 
 ## Steps
 

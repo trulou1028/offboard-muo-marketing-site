@@ -119,9 +119,13 @@ must be equal, and equal to `max(clamp-gutter, (1440-1200)/2) = 120`.
 ## Git workflow
 
 - Branch: `claude/013-container-1200`
-- Commit per step. Do NOT push or merge; owner reviews on the Vercel preview
-  (this is exactly the kind of user-facing change AGENTS.md's shipping gate
-  exists for).
+- Commit per step.
+- **Hand over with a preview link** (AGENTS.md "Handing over work for review"):
+  when the work is complete, push the branch, open a PR, run
+  `node scripts/preview-url.mjs`, and put the URL in your final report with
+  specific things to look at — this change alters every page's silhouette, so
+  name the pages worth checking at desktop and phone width. Do NOT merge; this
+  is exactly the kind of user-facing change the shipping gate exists for.
 
 ## Steps
 
