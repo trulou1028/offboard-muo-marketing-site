@@ -5,18 +5,31 @@
  * everything to webp in public/marketing/homepage/{raw,renders,collage}/.
  *
  * Usage:
- *   node scripts/generate-imagery.mjs --dry-run     # plan + model discovery only
+ *   node scripts/generate-imagery.mjs --dry-run     # plan + cost estimate, no spend
  *   node scripts/generate-imagery.mjs --crops       # cut mockup reference crops (sips)
  *   node scripts/generate-imagery.mjs               # generate everything missing
  *   node scripts/generate-imagery.mjs --only=raw/system-desk,collage/torn-paper-1
+ *   node scripts/generate-imagery.mjs --quality low # cheap style iteration
+ *   node scripts/generate-imagery.mjs --reconvert   # re-encode from cache, free
  *   node scripts/generate-imagery.mjs --force       # regenerate even if output exists
  *   node scripts/generate-imagery.mjs --model gpt-image-2  # explicit model override
  *
  * Key resolution: $OPENAI_API_KEY, else parsed from the app repo's .env.local
  * (--env-file overrides that path). The key is never printed.
  *
- * Cost: a full ~15-generation run at high quality is roughly $3-5. Photo style
- * iteration typically takes 2-3 rounds on a few ids via --only; budget $10-15.
+ * Cost: the manifest is 19 paid generations plus one local conversion. At the
+ * default "high" quality a full run is roughly $3-5. Every run prints an
+ * estimate first, and --dry-run prints it without spending anything.
+ *
+ * Spending less:
+ *   --quality low|medium   style iteration costs a fraction of "high" (see
+ *                          PRICE_PER_IMAGE); switch back to high for keepers.
+ *   --only=<id>            regenerate one image instead of the whole manifest.
+ *   --reconvert            re-encode webps from the cached full-res PNGs in
+ *                          .imagery-cache/ with no API calls at all. Use this
+ *                          after changing an entry's width or webpQuality.
+ * A normal run also reuses a cached PNG instead of re-generating it, so only
+ * --force ever pays twice for the same image.
  */
 
 import { execFile } from "node:child_process";
@@ -49,9 +62,15 @@ const opt = (name) => {
 const DRY_RUN = flag("dry-run");
 const CROPS_ONLY = flag("crops");
 const FORCE = flag("force");
+const RECONVERT = flag("reconvert");
 const ONLY = opt("only")?.split(",").map((s) => s.trim());
 const MODEL_OVERRIDE = opt("model");
 const ENV_FILE = opt("env-file") ?? DEFAULT_ENV_FILE;
+const QUALITY = opt("quality") ?? "high";
+
+if (!["low", "medium", "high"].includes(QUALITY)) {
+  fail(`--quality must be low, medium or high (got "${QUALITY}").`);
+}
 
 // ---------------------------------------------------------------------------
 // Style prefixes
@@ -87,6 +106,28 @@ const CROPS = [
 // Manifest
 
 const cropRef = (id) => path.join(CACHE, `${id}.png`);
+
+// Full-res PNG kept for every generated entry, so a webp can be re-encoded
+// without paying to generate the image again.
+const cachedPng = (entry) => path.join(CACHE, `${entry.id.replace(/\//g, "__")}.png`);
+
+// ---------------------------------------------------------------------------
+// Pricing — estimate only, for the --dry-run budget gate.
+//
+// OpenAI's pricing page defers per-image output costs to its calculator rather
+// than publishing a table, so these are the published third-party figures as of
+// 2026-08 and are the one place to correct if billing disagrees. They exclude
+// input tokens (the edits endpoint uploads a reference image on every photo and
+// render call) and any retries, so treat the printed number as a floor.
+const PRICE_PER_IMAGE = {
+  high: { "1024x1024": 0.211, "1024x1536": 0.165, "1536x1024": 0.165 },
+  medium: { "1024x1024": 0.053, "1024x1536": 0.041, "1536x1024": 0.041 },
+  low: { "1024x1024": 0.006, "1024x1536": 0.005, "1536x1024": 0.005 },
+};
+
+const priceOf = (entry, quality = QUALITY) => PRICE_PER_IMAGE[quality]?.[entry.size] ?? 0;
+const sumPrice = (entries, quality) =>
+  entries.reduce((total, entry) => total + priceOf(entry, quality), 0);
 
 const MANIFEST = [
   // Hero: straight conversion of the approved photo, no API call.
@@ -310,11 +351,19 @@ async function withRetry(label, fn, attempts = 3) {
 async function generateEntry(entry, model) {
   // Entries may pin a model (e.g. transparency support gpt-image-2 lacks).
   model = entry.model ?? model;
-  const pngPath = path.join(CACHE, `${entry.id.replace(/\//g, "__")}.png`);
+  const pngPath = cachedPng(entry);
 
   if (entry.kind === "convert") {
     if (!existsSync(entry.source)) fail(`Missing source image: ${entry.source}`);
     await convertToWebp(entry, entry.source);
+    return;
+  }
+
+  // The full-res PNG survives in .imagery-cache/ even when its webp is deleted.
+  // Re-encoding it is free; only --force pays for the same image twice.
+  if (existsSync(pngPath) && !FORCE) {
+    console.log("  reusing cached PNG, no API call");
+    await convertToWebp(entry, pngPath);
     return;
   }
 
@@ -324,7 +373,7 @@ async function generateEntry(entry, model) {
       model,
       prompt: entry.prompt,
       size: entry.size,
-      quality: "high",
+      quality: QUALITY,
       background: "transparent",
       output_format: "png",
       n: 1,
@@ -348,7 +397,7 @@ async function generateEntry(entry, model) {
     form.append("model", model);
     form.append("prompt", entry.prompt);
     form.append("size", entry.size);
-    form.append("quality", "high");
+    form.append("quality", QUALITY);
     form.append("n", "1");
     if (entry.kind === "collage") {
       form.append("background", "transparent");
@@ -421,29 +470,84 @@ async function main() {
     return;
   }
 
-  API_KEY = loadKey();
-  const model = await discoverModel();
-  console.log(`Using image model: ${model}`);
-
   let entries = MANIFEST;
   if (ONLY) {
     entries = MANIFEST.filter((e) => ONLY.includes(e.id));
     const missing = ONLY.filter((id) => !MANIFEST.some((e) => e.id === id));
     if (missing.length) fail(`Unknown --only ids: ${missing.join(", ")}`);
   }
+
+  // Re-encode from cached sources. No key, no model discovery, no spend.
+  if (RECONVERT) {
+    const sourceFor = (e) => (e.kind === "convert" ? e.source : cachedPng(e));
+    const reusable = entries.filter((e) => existsSync(sourceFor(e)));
+    console.log(
+      `${reusable.length} of ${entries.length} entries have a cached source to re-encode (free):`,
+    );
+    for (const e of reusable) console.log(`  [${e.kind}] ${e.id}`);
+    if (DRY_RUN || reusable.length === 0) return;
+    for (const entry of reusable) {
+      console.log(`\n${entry.id}`);
+      await convertToWebp(entry, sourceFor(entry));
+    }
+    console.log("\nDone. No API calls made.");
+    return;
+  }
+
   if (!FORCE) {
     entries = entries.filter((e) => !existsSync(path.join(PUBLIC, `${e.id}.webp`)));
   }
 
+  // An entry is free when it converts a local file, or when its full-res PNG is
+  // still cached and we are not forcing a regeneration.
+  const isFree = (e) => e.kind === "convert" || (!FORCE && existsSync(cachedPng(e)));
+  const paid = entries.filter((e) => !isFree(e));
+
   console.log(`${entries.length} of ${MANIFEST.length} entries to produce${DRY_RUN ? " (dry run)" : ""}:`);
-  for (const e of entries) console.log(`  [${e.kind}] ${e.id}`);
-  if (DRY_RUN || entries.length === 0) return;
+  for (const e of entries) {
+    const cost = isFree(e) ? "free, cached" : `~$${priceOf(e).toFixed(3)}`;
+    console.log(`  [${e.kind}] ${e.id} (${cost})`);
+  }
+  reportEstimate(paid);
+  if (entries.length === 0) return;
+
+  if (DRY_RUN) {
+    // Model discovery is a free GET, so confirm the key resolves before a paid
+    // run. A missing key must not break the estimate, which is the point here.
+    if (process.env.OPENAI_API_KEY || existsSync(ENV_FILE)) {
+      API_KEY = loadKey();
+      console.log(`Using image model: ${await discoverModel()}`);
+    } else {
+      console.log("No API key resolved, so the model was not checked.");
+    }
+    return;
+  }
+
+  API_KEY = loadKey();
+  const model = await discoverModel();
+  console.log(`Using image model: ${model}`);
 
   for (const entry of entries) {
     console.log(`\n${entry.id}`);
     await generateEntry(entry, model);
   }
   console.log("\nDone. Review the results as a contact sheet before wiring into the page.");
+}
+
+function reportEstimate(paid) {
+  if (paid.length === 0) {
+    console.log("\nEstimated API spend: $0.00 — nothing needs generating.");
+    return;
+  }
+  console.log(
+    `\nEstimated API spend: ~$${sumPrice(paid, QUALITY).toFixed(2)} ` +
+      `for ${paid.length} generation(s) at "${QUALITY}" quality.`,
+  );
+  for (const tier of ["high", "medium", "low"]) {
+    if (tier === QUALITY) continue;
+    console.log(`  the same run at "${tier}": ~$${sumPrice(paid, tier).toFixed(2)}`);
+  }
+  console.log("  Estimate excludes reference-image input tokens and retries; treat it as a floor.");
 }
 
 main().catch((error) => fail(String(error?.stack ?? error)));
