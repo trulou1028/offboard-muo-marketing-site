@@ -89,7 +89,4 @@ describe("MarketingHomepage.css has no dead .mh- selectors", () => {
   // The reverse direction is deliberately not asserted: a .tsx file may use
   // a class (e.g. a state hook like "is-open" applied conditionally, or a
   // test-only marker) that has no corresponding CSS rule, and that is fine.
-  it("does not enforce that every TSX class has a matching CSS rule", () => {
-    expect(true).toBe(true);
-  });
 });
