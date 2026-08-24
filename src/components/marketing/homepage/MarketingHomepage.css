@@ -387,7 +387,6 @@
 .mh-home-trust > a { display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; padding-bottom: 5px; border-bottom: 1px solid var(--mh-lime); color: var(--mh-lime); font-weight: 650; }
 .mh-home-trust > a svg { width: 17px; }
 
-.mh-human.is-compact { min-height: 760px; }
 .mh-pricing-teaser { padding-top: 98px; padding-bottom: 104px; background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
 .mh-pricing-teaser-heading { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
 .mh-pricing-teaser-heading h2 { max-width: 760px; margin-top: 16px; font-size: clamp(46px, 4vw, 62px); line-height: 1.08; }
@@ -411,7 +410,7 @@
 .mh-route-card-grid h3 { max-width: 500px; margin-top: 70px; font-size: 31px; line-height: 1.12; }
 .mh-route-card-grid p { max-width: 580px; margin-top: 12px; color: var(--mh-muted); font-size: 16px; line-height: 25px; }
 
-.mh-route-story { min-height: 760px; padding-top: 86px; padding-bottom: 86px; background: white; }
+.mh-route-story { padding-top: 86px; padding-bottom: 86px; background: white; }
 .mh-route-story-photo { position: relative; min-height: 610px; overflow: hidden; border-radius: 24px; }
 .mh-route-story-photo img { object-fit: cover; object-position: 45% 35%; }
 .mh-route-ethos { min-height: 620px; padding-top: 90px; padding-bottom: 90px; background: white; border-bottom: 1px solid var(--mh-line); }
@@ -427,7 +426,7 @@
 .mh-route-contact p { max-width: 760px; margin-top: 20px; color: #c9d8d3; font-size: 18px; line-height: 29px; }
 .mh-route-contact .mh-primary-cta { border-radius: 999px; }
 
-.mh-route-sponsor { min-height: 720px; padding-top: 90px; padding-bottom: 90px; background: white; border-bottom: 1px solid var(--mh-line); }
+.mh-route-sponsor { padding-top: 90px; padding-bottom: 90px; background: white; border-bottom: 1px solid var(--mh-line); }
 .mh-route-sponsor-card { display: grid; grid-template-columns: 170px 1fr; gap: 12px 28px; padding: 34px; background: var(--mh-paper-soft); border: 1px solid var(--mh-line); border-radius: 22px; }
 .mh-route-sponsor-card span { color: var(--mh-muted); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .mh-route-sponsor-card strong { font-family: var(--font-fraunces), Georgia, serif; font-size: 26px; font-weight: 500; }
