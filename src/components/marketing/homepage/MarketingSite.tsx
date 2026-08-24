@@ -178,7 +178,7 @@ export function MarketingShell({
   children: ReactNode;
 }) {
   return (
-    <div className={`marketing-homepage mh-route-${current}`}>
+    <div className={`marketing-homepage mh-page-${current}`}>
       <a className="mh-skip-link" href="#main-content">Skip to content</a>
       <MarketingHeader current={current} />
       {children}
