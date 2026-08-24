@@ -86,9 +86,13 @@ supersedes the app repo's strategy docs.
 
 - **`/act` never receives a redirect** and stays out of header/footer nav. It is
   a live, out-of-nav B2G landing URL (`docs/site-architecture.md`).
-- **`npm run imagery` costs real money** (~$3–5/run, OpenAI image gen) and needs
-  the owner's API key. Run it only with Louie's go-ahead; `npm run imagery:dry`
-  is free.
+- **`npm run imagery` costs real money** (~$3–5/run at high quality, OpenAI
+  image gen) and needs the owner's API key. Run it only with Louie's go-ahead.
+  Every run prints a cost estimate first. Free and safe to run unasked:
+  `npm run imagery:dry` (plan + estimate), `--crops`, and `--reconvert`
+  (re-encodes webps from `.imagery-cache/`, no API calls). Iterate style with
+  `--quality low` (~30x cheaper) and pay for `high` only on the keeper; use
+  `--only=<id>` rather than regenerating the whole manifest.
 - Secrets never go through chat. Have Louie paste them into the session
   scratchpad, or run the step himself.
 
