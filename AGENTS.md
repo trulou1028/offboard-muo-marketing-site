@@ -74,7 +74,17 @@ He should never have to guess which environment, branch, or worktree holds the
 change. Local dev servers and agent worktrees are invisible to him.
 
 So whenever work reaches a reviewable state — a plan executed, a feature
-finished, a fix ready — the last step is always:
+finished, a fix ready — first answer one question:
+
+**Does this change anything a person can SEE on the site?**
+
+**No** (docs, plans, CI config, tests, tooling, refactors with no visual
+change): push the branch, open a PR, and hand over **the PR link only**. Say in
+one line that there is no visual change. **Do not produce a preview link** — a
+link to a page that looks identical wastes his time and trains him to ignore
+the links that matter.
+
+**Yes** — then the preview link is mandatory:
 
 1. **Push the branch.** No push, no preview: Vercel only builds what it can see.
    This applies to work done in an isolated worktree too.
@@ -90,16 +100,16 @@ finished, a fix ready — the last step is always:
 node scripts/preview-url.mjs
 ```
 
+"Visible" includes a change whose point is that nothing moved (a refactor that
+must render identically). Say so explicitly — "these pages should look
+unchanged; that is the pass condition" — so he knows what he is confirming.
+
 Do not hand-construct preview URLs. Vercel's `…-git-<branch>-…` alias does NOT
 resolve for branches containing a slash, which every `claude/*` branch has —
 the script resolves the real URL through GitHub's deployments API instead.
 
 Preview URLs are Vercel-SSO-gated: Louie can open them, the public cannot. If a
 preview build FAILED, say so plainly and do not present the work as ready.
-
-The one exception: work with no observable surface (docs, plans, CI config,
-refactors with no visual change) still gets a PR link, but say plainly that
-there is nothing to look at on the preview, so he doesn't go hunting.
 
 ## Source control and deployment
 

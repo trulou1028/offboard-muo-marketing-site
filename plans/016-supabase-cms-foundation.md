@@ -121,12 +121,12 @@ are contracts and rails.
   PRODUCTION Supabase project — everything here runs against the LOCAL
   stack. Applying the migration to production is an owner-supervised step
   recorded in the doc, not something this plan executes.
-- **Hand over with a preview link** (AGENTS.md "Handing over work for review"):
-  when the work is complete, push the branch, open a PR, run
-  `node scripts/preview-url.mjs`, and put the URL in your final report. Note
-  explicitly whether the preview is serving articles from the database or from
-  the committed fallback fixtures — the owner cannot tell by looking, and that
-  distinction is the whole point of this plan.
+- **Handover** (AGENTS.md "Handing over work for review"): the site should
+  render identically after this plan — that is the pass condition. Push the
+  branch, open a PR, run `node scripts/preview-url.mjs`, and give the URL with
+  "the articles should look unchanged". Note explicitly whether the preview is
+  serving from the database or the committed fallback fixtures — the owner
+  cannot tell by looking, and that distinction is the whole point of this plan.
 
 ## Steps
 
