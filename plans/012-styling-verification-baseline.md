@@ -90,7 +90,13 @@ This plan also closes a documented gap: `docs/site-architecture.md` lists
 ## Git workflow
 
 - Branch: `claude/012-style-baseline`
-- Commit per step. Do NOT push or merge; owner reviews per AGENTS.md.
+- Commit per step.
+- **Handover** (AGENTS.md "Handing over work for review"): this plan adds
+  tooling and tests only — it changes NOTHING visible on the site. So push the
+  branch, open a PR, and hand over **the PR link only**, saying in one line
+  that there is no visual change. Do NOT produce a preview link. Do NOT merge —
+  that is the owner's call. The review artifact here is the committed
+  screenshot baselines, not the running site.
 
 ## Steps
 
