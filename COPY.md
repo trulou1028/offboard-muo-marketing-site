@@ -594,6 +594,16 @@ cover letter is AI?
 the six founder essays + the Alameda D2 policy piece. Their registry entries
 (and original punctuation) are preserved for when they return.
 
+### Article page chrome *(plan 017)*
+
+Every article page (`/resources/[slug]`) renders each entry's 2 curated
+`related` slugs (from `src/content/resources/registry.ts`) above the "More
+guides" footer link, as a pair of cards linking to those articles.
+
+- Section label: `Keep reading`
+- Each card shows the related article's category and title, linking to
+  `/resources/[slug]`.
+
 ### Final CTA (page-specific override)
 
 - H2: `Bring your situation. We will help you sort the rest.`

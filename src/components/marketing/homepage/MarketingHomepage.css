@@ -549,6 +549,12 @@
 .mh-article-link { color: var(--mh-forest); text-decoration: underline; text-underline-offset: 3px; }
 .mh-article-footer { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--mh-line); }
 .mh-article-footer .mh-section-link { margin-top: 0; border-bottom-color: var(--mh-ink); color: var(--mh-ink); }
+.mh-article-related { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--mh-line); }
+.mh-article-related-label { display: block; color: var(--mh-muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.mh-article-related-links { margin-top: 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.mh-article-related-link { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; background: var(--mh-paper-soft); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); text-decoration: none; }
+.mh-article-related-link-category { color: var(--mh-forest); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.mh-article-related-link-title { color: var(--mh-ink); font-size: 16px; font-weight: 650; line-height: 22px; }
 
 /* ACT pilot landing page */
 .mh-act-privacy { padding-top: var(--mh-section-y-loose); padding-bottom: var(--mh-section-y-loose); background: var(--mh-forest); color: var(--mh-paper); border-bottom: 1px solid var(--mh-hairline-on-dark); }
@@ -671,6 +677,7 @@
   .mh-route-hero aside { min-height: 240px; transform: none; }
   .mh-article { padding-top: 128px; padding-bottom: 64px; }
   .mh-article-body { max-width: none; }
+  .mh-article-related-links { grid-template-columns: 1fr; }
   .mh-intake-page { padding-top: 108px; }
   .mh-intake-grid { grid-template-columns: 1fr; gap: 36px; }
   .mh-intake-rail { position: static; }
