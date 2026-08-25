@@ -100,7 +100,7 @@ your row when done.
 | 013  | Container unification + 1200px cap | P1 | M | 012 | DONE — executed + reviewed (1 revision round) 2026-08-24; branch `claude/013-container-1200`. See "Plan 013 review record" below. |
 | 014  | Design-token consolidation + DESIGN.md rewrite | P2 | L | 012, 013 | DONE — executed + reviewed, approved first pass 2026-08-24; branch `claude/014-token-consolidation`, 7 commits (one per stage). See "Plan 014 review record" below. |
 | 015  | Portable content format + characterization tests | P1 | L | — | DONE — executed + reviewed, approved first pass 2026-08-24; branch `claude/015-portable-content`, 6 commits. See "Plan 015 review record" below. |
-| 016  | Supabase CMS foundation (schema, ISR, read client, CI DB) | P1 | L | 015 | TODO |
+| 016  | Supabase CMS foundation (schema, ISR, read client, CI DB) | P1 | L | 015 | DONE — executed in 2 phases across an owner gate, reviewed, approved 2026-08-25; branch `claude/016-cms-foundation-phase2`. See "Plan 016 review record" below. |
 | 017  | Hygiene batch (PII logs, intake tests, noindex/sitemap, related posts, font/scroll polish) | P2 | M | — | TODO |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
@@ -482,3 +482,131 @@ side effect.
 silently break, and `ArticleFidelity` becomes the migration's acceptance test.
 The `image` and `cta` block types ship unused, so the content-roadmap's funnel
 articles will not need a schema change.
+
+## Plan 016 review record (2026-08-25)
+
+Executed in TWO phases across the plan's owner gate: phase 1 wrote
+`docs/cms-architecture.md` and stopped; the owner signed off on three
+decisions; phase 2 built Steps 2-7. APPROVED. Gates re-verified by the
+reviewer: `npm test` (92, 7 files), `lint`, `lint:css`, `typecheck`, `build`
+(11 article routes prerender, ISR at 5m), `npm run e2e` (52), `CI=1 npm run
+e2e` (19 + 33 skipped). Scope: 12 files. **No `ArticleFidelity` snapshot and
+no visual baseline changed.**
+
+**Owner decisions (2026-08-25)**: authoring via the Supabase dashboard (so
+this plan ships a READ path only — no admin UI, no auth, no write path);
+5-minute publish visibility via `revalidate = 300`, webhook deferred;
+retired URLs issue a PERMANENT redirect.
+
+**Reviewer decisions on the remaining open questions**: categories stay a
+migration-reviewed set (COPY.md holds the category descriptions verbatim and
+`registry.test.ts` asserts they match, so an ad-hoc `INSERT` would silently
+diverge or break that test — new categories need a migration AND a COPY.md
+update together); the categories build-fallback is `registry.ts`'s existing
+`categoryMeta`/`categoryOrder`, no new snapshot file.
+
+### Three corrections the executor made to the dispatch — all correct
+
+1. **Seeded the 7 unported slugs as `retired`, not `draft`.** The dispatch
+   said `draft`, which contradicts owner decision 3: `draft → notFound()`
+   while only `retired → permanentRedirect()`. Seeding them `draft` would
+   have turned 7 currently-working 301s into 404s the moment the per-slug
+   `next.config.ts` redirects were deleted. `retired` is the only value that
+   preserves today's behavior. (Naming wart worth knowing: `retired` is doing
+   double duty for "not ported yet"; when one of those essays is finally
+   written it flips to `published`.)
+2. **Widened the anon RLS policy** from `status = 'published'` to
+   `status in ('published','retired')`. Without retired rows being visible,
+   a retired slug and a nonexistent slug both return zero rows and are
+   indistinguishable — silently turning the intended 308 into a 404. Drafts
+   remain fully denied. Verified safe: retired rows are seeded with
+   `body = '[]'::jsonb`, so **no unpublished writing is exposed** — only
+   title/excerpt metadata that is already public via the legacy site and the
+   old redirect list.
+3. **`supabase db diff` has no `--check` flag** (the plan's text was wrong);
+   equivalent drift logic implemented manually, and the CLI override paths
+   were confirmed by reading the installed CLI rather than guessed.
+
+### Verified independently
+
+- **The service-role guard actually bites**: planting the env-var name in
+  `src/lib/content/posts.ts` made the test fail and name that exact file;
+  reverted → green. This is the guard that keeps public content reads off the
+  RLS-bypassing key that can also read `intake_submissions` (real people's
+  names, emails, layoff circumstances).
+- **The build uses the fallback path** (`posts: fallback` in build output with
+  no credentials) and still prerenders all 11 article routes at ISR 5m — so a
+  database outage cannot break a deploy, and CI stays green without Supabase
+  credentials.
+- **No Postgres residue**: the executor verified the migration against a
+  disposable database on a pre-existing local Postgres 16 (Docker being
+  unavailable) and dropped it; `psql -l` shows no leftovers.
+
+### Still unverified — the reviewer must watch this
+
+- **`npx supabase start` / `db reset` / `db diff` never ran** (Docker
+  unavailable). The migration was applied against a bare Postgres instead,
+  which exercises the SQL and RLS semantics but NOT Supabase's PostgREST
+  layer or the CLI's own diff.
+- **The new `cms-contract` CI job has never executed.** YAML and bash syntax
+  were checked statically only. That job IS the migration's real verification
+  — watch it on the PR. If it fails, the likely causes are `supabase start`
+  on the runner or the CLI version `setup-cli@v1` resolves.
+
+### Note for whoever runs plan 017
+
+`src/lib/content/supabase-read.ts` deliberately logs status + parsed
+`code`/`message` only, never raw response bodies — the PII-safe pattern plan
+017 is retrofitting onto `src/lib/intake/supabase-admin.ts`. Align the two
+when 017 lands.
+
+Branch note: phase 2 ran on `claude/016-cms-foundation-phase2` because the
+phase-1 branch was still checked out in another worktree. Its history contains
+the phase-1 commit (`7376999`), so it is the complete PR branch.
+
+### Plan 016 — addendum: what the CI job caught (2026-08-25)
+
+The first `cms-contract` run passed **while proving nothing**, and two more
+rounds were needed. Recording the sequence because it is the clearest example
+in this batch of why the job exists:
+
+1. **Run 1 — green, worthless.** The job started a real Supabase stack and
+   applied both migrations (so the SQL WAS verified), but the build inside it
+   logged `posts: fallback`. The `supabase status -o env` output is
+   shell-style `KEY="value"`, and `$GITHUB_ENV` does not strip quotes — so
+   `NEXT_PUBLIC_SUPABASE_URL` was literally `"http://127.0.0.1:54321"`
+   including the quote characters, `new URL()` threw, and the silent fallback
+   swallowed it. Green build, database never touched.
+2. **Fixes: unquote the export, make the fetch ISR-safe, and ASSERT the DB
+   path.** The fetch had `cache: "no-store"` (correct for the write path it
+   was copied from), which forced `/resources/[slug]` dynamic and broke
+   contract 1's ISR promise. The job now fails if `posts: fallback` appears
+   or `posts: db` is missing. `test-and-build` deliberately still proves the
+   opposite — that the no-credentials fallback works.
+3. **Run 2 — red, and useful.** With the URL fixed the request finally
+   reached PostgREST and returned
+   `401 { code: '42501', message: 'permission denied for table categories' }`.
+   **The RLS policies were right; the `anon` role simply had no table GRANT.**
+   RLS gates which ROWS a role sees; the role must independently hold `SELECT`
+   on the table, and migration-created tables do not inherit it. The migration
+   contained zero `grant` statements.
+4. **This would have failed in PRODUCTION too.** The earlier local
+   bare-Postgres verification passed only because it used self-created roles
+   that over-granted relative to Supabase's real `anon` baseline. Before
+   fixing, the executor reproduced the exact `42501` locally against a minimal
+   `anon` role (schema `USAGE`, no table grant), then verified the fix:
+   4 categories, 18 posts (11 published + 7 retired, 0 draft), no `INSERT`,
+   and `authenticated` still unable to read.
+5. **Run 3 — green and meaningful.** Build logs `posts: db`, and
+   `/resources` plus all 11 article routes still prerender at `5m` revalidate
+   **with a live database** — proving the ISR contract holds on the DB path,
+   not just the fallback.
+
+Fix shipped: `grant select on public.categories to anon;` and
+`grant select on public.posts to anon;` — select-only, anon-only, policies
+untouched (grants and RLS are complementary layers, not alternatives).
+
+**Standing lesson for future Supabase work in this repo**: a migration that
+creates a table read by the site needs BOTH an RLS policy and a `grant select
+… to anon`. Neither alone is sufficient, and the failure mode is a silent
+fallback that looks healthy.

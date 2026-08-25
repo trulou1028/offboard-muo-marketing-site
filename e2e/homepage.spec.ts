@@ -113,12 +113,24 @@ test.describe("Offboard marketing site", () => {
     expect(consoleErrors).toEqual([]);
   });
 
-  test("redirects unported essay and policy slugs to the resources index", async ({ page }) => {
-    await page.goto("/resources/this-is-not-charity-it-is-reconstruction");
-    await expect(page).toHaveURL(/\/resources$/);
+  test("redirects retired essay and policy slugs to the resources index with a permanent redirect", async ({
+    page,
+  }) => {
+    // Plan 016 moved this from a next.config.ts-level 301 (the config no
+    // longer lists these slugs at all) to a route-level permanentRedirect()
+    // call in src/app/resources/[slug]/page.tsx, driven by the post's
+    // `status = 'retired'` (docs/cms-architecture.md "Decisions" #3). This
+    // asserts the real mechanism — a 308 issued by the route after a status
+    // lookup — rather than the config file, which no longer does this.
+    for (const slug of ["this-is-not-charity-it-is-reconstruction", "alameda-d2-safety-net-transparency"]) {
+      const response = await page.goto(`/resources/${slug}`);
+      await expect(page).toHaveURL(/\/resources$/);
 
-    await page.goto("/resources/alameda-d2-safety-net-transparency");
-    await expect(page).toHaveURL(/\/resources$/);
+      const redirectedFrom = response?.request().redirectedFrom();
+      expect(redirectedFrom, `expected a redirect chain for /resources/${slug}`).toBeTruthy();
+      const redirectResponse = await redirectedFrom?.response();
+      expect(redirectResponse?.status(), `expected a permanent (308) redirect for /resources/${slug}`).toBe(308);
+    }
   });
 
   test("redirects legacy production URLs to their new destinations", async ({ page }) => {
