@@ -33,7 +33,21 @@ export type IntakeInsertRow = {
 
 export type InsertIntakeResult =
   | { ok: true; id: string }
-  | { ok: false; reason: "not-configured" | "insert-failed"; detail?: string };
+  | { ok: false; reason: "not-configured" | "insert-failed" };
+
+async function logInsertFailure(res: Response): Promise<void> {
+  let parsed: { code?: unknown; message?: unknown; hint?: unknown } | undefined;
+  try {
+    parsed = (await res.json()) as { code?: unknown; message?: unknown; hint?: unknown };
+  } catch {
+    parsed = undefined;
+  }
+  console.error(
+    "intake insert failed",
+    res.status,
+    parsed ? { code: parsed.code, message: parsed.message, hint: parsed.hint } : undefined,
+  );
+}
 
 export async function insertIntakeRow(row: IntakeInsertRow): Promise<InsertIntakeResult> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -58,9 +72,8 @@ export async function insertIntakeRow(row: IntakeInsertRow): Promise<InsertIntak
     });
 
     if (!res.ok) {
-      const detail = await res.text().catch(() => undefined);
-      console.error("intake insert failed", res.status, detail);
-      return { ok: false, reason: "insert-failed", detail };
+      await logInsertFailure(res);
+      return { ok: false, reason: "insert-failed" };
     }
 
     const inserted = (await res.json()) as Array<{ id: string }>;
@@ -71,7 +84,7 @@ export async function insertIntakeRow(row: IntakeInsertRow): Promise<InsertIntak
     }
     return { ok: true, id };
   } catch (e) {
-    console.error("intake insert threw", e);
-    return { ok: false, reason: "insert-failed", detail: e instanceof Error ? e.message : String(e) };
+    console.error("intake insert threw", e instanceof Error ? e.message : String(e));
+    return { ok: false, reason: "insert-failed" };
   }
 }
