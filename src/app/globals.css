@@ -5,3 +5,10 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* Reserves the scrollbar's width whether or not the page is tall enough to
+   need one, so short pages (404, /intake/confirmed) don't shift content
+   horizontally relative to taller pages that do scroll. */
+html {
+  scrollbar-gutter: stable;
+}
