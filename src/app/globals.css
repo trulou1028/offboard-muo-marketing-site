@@ -1,7 +1,14 @@
-/* The source app's Tailwind preflight zeroed body margin; the scoped homepage
-   CSS depends on it for edge-to-edge sections. */
+/* Base reset: the scoped homepage stylesheet assumes zero body margin for
+   edge-to-edge sections. */
 html,
 body {
   margin: 0;
   padding: 0;
+}
+
+/* Reserves the scrollbar's width whether or not the page is tall enough to
+   need one, so short pages (404, /intake/confirmed) don't shift content
+   horizontally relative to taller pages that do scroll. */
+html {
+  scrollbar-gutter: stable;
 }

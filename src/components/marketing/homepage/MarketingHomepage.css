@@ -549,6 +549,12 @@
 .mh-article-link { color: var(--mh-forest); text-decoration: underline; text-underline-offset: 3px; }
 .mh-article-footer { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--mh-line); }
 .mh-article-footer .mh-section-link { margin-top: 0; border-bottom-color: var(--mh-ink); color: var(--mh-ink); }
+.mh-article-related { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--mh-line); }
+.mh-article-related-label { display: block; color: var(--mh-muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.mh-article-related-links { margin-top: 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.mh-article-related-link { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; background: var(--mh-paper-soft); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); text-decoration: none; }
+.mh-article-related-link-category { color: var(--mh-forest); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.mh-article-related-link-title { color: var(--mh-ink); font-size: 16px; font-weight: 650; line-height: 22px; }
 
 /* ACT pilot landing page */
 .mh-act-privacy { padding-top: var(--mh-section-y-loose); padding-bottom: var(--mh-section-y-loose); background: var(--mh-forest); color: var(--mh-paper); border-bottom: 1px solid var(--mh-hairline-on-dark); }
@@ -577,7 +583,7 @@
 .mh-intake-page { padding-top: 148px; padding-bottom: var(--mh-section-y-loose); }
 .mh-intake-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 64px; align-items: start; }
 
-.mh-intake-rail { position: sticky; top: 96px; }
+.mh-intake-rail { position: sticky; top: 24px; }
 .mh-intake-eyebrow { color: var(--mh-forest); font-size: 14px; font-weight: 650; }
 .mh-intake-rail h1 { margin-top: 16px; font-size: clamp(38px, 3.6vw, 54px); line-height: 1.05; }
 .mh-intake-lede { margin-top: 22px; color: var(--mh-muted); font-size: 17px; line-height: 27px; }
@@ -589,7 +595,7 @@
 .mh-intake-section-nav span { display: inline-flex; height: 24px; width: 24px; flex: 0 0 24px; align-items: center; justify-content: center; border-radius: var(--mh-radius-pill); background: var(--mh-paper-soft); font-size: 11px; font-weight: 650; }
 
 .mh-intake-form { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
-.mh-intake-card { padding: 28px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); scroll-margin-top: 110px; }
+.mh-intake-card { padding: 28px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); scroll-margin-top: 24px; }
 .mh-intake-card > header { padding-bottom: 18px; margin-bottom: 22px; border-bottom: 1px solid var(--mh-line); }
 .mh-intake-card-eyebrow { color: var(--mh-forest); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .mh-intake-card h2 { margin-top: 4px; font-size: clamp(24px, 2.2vw, 30px); }
@@ -671,6 +677,7 @@
   .mh-route-hero aside { min-height: 240px; transform: none; }
   .mh-article { padding-top: 128px; padding-bottom: 64px; }
   .mh-article-body { max-width: none; }
+  .mh-article-related-links { grid-template-columns: 1fr; }
   .mh-intake-page { padding-top: 108px; }
   .mh-intake-grid { grid-template-columns: 1fr; gap: 36px; }
   .mh-intake-rail { position: static; }

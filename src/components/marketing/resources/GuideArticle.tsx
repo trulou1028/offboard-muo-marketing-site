@@ -19,6 +19,7 @@ export function GuideArticle({
   date,
   author,
   guestAuthor,
+  related,
   children,
 }: {
   category: ResourceCategory;
@@ -27,6 +28,7 @@ export function GuideArticle({
   date?: string;
   author?: { name: string; role: string };
   guestAuthor?: { name: string; bio: string; company: string; url: string };
+  related?: { slug: string; title: string; category: ResourceCategory }[];
   children: ReactNode;
 }) {
   const formattedDate = formatDate(date);
@@ -67,6 +69,19 @@ export function GuideArticle({
           <div className="mh-article-body" data-guide-article>
             {children}
           </div>
+          {related && related.length > 0 && (
+            <div className="mh-article-related">
+              <span className="mh-article-related-label">Keep reading</span>
+              <div className="mh-article-related-links">
+                {related.map((item) => (
+                  <Link key={item.slug} href={`/resources/${item.slug}`} className="mh-article-related-link">
+                    <span className="mh-article-related-link-category">{item.category}</span>
+                    <span className="mh-article-related-link-title">{item.title}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
           <div className="mh-article-footer">
             <Link href="/resources" className="mh-section-link">
               More guides <ArrowRight aria-hidden="true" />

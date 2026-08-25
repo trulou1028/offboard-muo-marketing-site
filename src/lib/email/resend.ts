@@ -16,6 +16,20 @@ import "server-only";
 const FROM = "Offboard <hello@offboard.co>";
 const REPLY_TO = "hello@offboard.co";
 
+async function logSendFailure(res: Response): Promise<void> {
+  let parsed: { name?: unknown; message?: unknown } | undefined;
+  try {
+    parsed = (await res.json()) as { name?: unknown; message?: unknown };
+  } catch {
+    parsed = undefined;
+  }
+  console.error(
+    "resend send failed",
+    res.status,
+    parsed ? { name: parsed.name, message: parsed.message } : undefined,
+  );
+}
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -50,13 +64,12 @@ async function sendViaResend(input: { to: string | string[]; subject: string; ht
     });
 
     if (!res.ok) {
-      const detail = await res.text().catch(() => undefined);
-      console.error("resend send failed", res.status, detail);
+      await logSendFailure(res);
       return { ok: false as const, reason: "send-failed" as const };
     }
     return { ok: true as const };
   } catch (e) {
-    console.error("resend send threw", e);
+    console.error("resend send threw", e instanceof Error ? e.message : String(e));
     return { ok: false as const, reason: "send-failed" as const };
   }
 }

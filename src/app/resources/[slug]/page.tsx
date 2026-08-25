@@ -22,12 +22,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const lookup = await getPostBySlug(slug);
   if (lookup.kind !== "published") {
-    return { title: "Guides & resources | Offboard", robots: "noindex, nofollow, noarchive" };
+    return { title: "Guides & resources | Offboard" };
   }
   return {
     title: `${lookup.post.title} | Offboard`,
     description: lookup.post.excerpt,
-    robots: "noindex, nofollow, noarchive",
   };
 }
 
@@ -51,6 +50,17 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   const { post, body } = lookup;
 
+  // Resolve related slugs through the data layer (not the registry directly)
+  // so these links keep working once content is DB-backed. getPublishedPosts()
+  // is already filtered to published posts, so mapping over it also drops any
+  // related slug that isn't published — registry.test.ts separately asserts
+  // every related slug resolves to a real registry entry.
+  const publishedPosts = await getPublishedPosts();
+  const related = (post.related ?? [])
+    .map((slug) => publishedPosts.find((candidate) => candidate.slug === slug))
+    .filter((candidate): candidate is NonNullable<typeof candidate> => Boolean(candidate))
+    .map((candidate) => ({ slug: candidate.slug, title: candidate.title, category: candidate.category }));
+
   return (
     <GuideArticle
       category={post.category}
@@ -59,6 +69,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       date={post.date}
       author={post.author}
       guestAuthor={post.guestAuthor}
+      related={related}
     >
       <RenderBlocks blocks={body} />
     </GuideArticle>

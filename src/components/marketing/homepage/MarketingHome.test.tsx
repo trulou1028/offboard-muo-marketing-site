@@ -1,14 +1,15 @@
 import { render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from "vitest";
 
-import { metadata as aboutMetadata } from "@/app/about/page";
-import { metadata as actMetadata } from "@/app/act/page";
-import { metadata as employerMetadata } from "@/app/employers/page";
-import { metadata as howMetadata } from "@/app/how-it-works/page";
-import { metadata as homeMetadata } from "@/app/page";
-import { metadata as pricingMetadata } from "@/app/pricing/page";
-import { metadata as publicPartnerMetadata } from "@/app/public-partners/page";
-import { metadata as resourcesMetadata } from "@/app/resources/page";
+// next/font/local's real module body is only ever run through Next's SWC
+// font transform; imported directly (as importing @/app/layout below does)
+// it's an empty stub that throws. Mock it so pulling in layout.tsx for its
+// `metadata` export doesn't require the whole Next build pipeline.
+vi.mock("next/font/local", () => ({
+  default: () => ({ variable: "", className: "" }),
+}));
+
+import { metadata as layoutMetadata } from "@/app/layout";
 import { GuideArticle } from "@/components/marketing/resources/GuideArticle";
 import { RenderBlocks } from "@/components/marketing/resources/RenderBlocks";
 import { getPostBlocks } from "@/content/resources/blocks";
@@ -161,9 +162,10 @@ describe("Offboard marketing routes", () => {
   });
 
   it("keeps every route out of search indexes while the site is pre-launch", () => {
-    [homeMetadata, howMetadata, pricingMetadata, aboutMetadata, employerMetadata, publicPartnerMetadata, resourcesMetadata, actMetadata].forEach((metadata) => {
-      expect(metadata.robots).toBe("noindex, nofollow, noarchive");
-    });
+    // Every page.tsx used to repeat this string in its own metadata export;
+    // it now lives once on the root layout and every route inherits it, so
+    // this asserts the single source of truth rather than 8 hand-copied ones.
+    expect(layoutMetadata.robots).toBe("noindex, nofollow, noarchive");
   });
 
   it("gives the ACT pilot its own resident-first landing page", () => {
