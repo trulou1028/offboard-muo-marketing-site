@@ -98,7 +98,7 @@ your row when done.
 | 011  | Fix shipped CSS defects + delete dead CSS | P1 | M | — | DONE — executed, reviewed, **merged to `main`** 2026-08-24 ([PR #21](https://github.com/trulou1028/offboard-muo-marketing-site/pull/21)). See "Plan 011 review record" below. |
 | 012  | Styling verification baseline (stylelint, screenshots, CI) | P1 | M | 011 | DONE — executed + reviewed (1 revision round) 2026-08-24; branch `claude/012-style-baseline`. See "Plan 012 review record" below. |
 | 013  | Container unification + 1200px cap | P1 | M | 012 | DONE — executed + reviewed (1 revision round) 2026-08-24; branch `claude/013-container-1200`. See "Plan 013 review record" below. |
-| 014  | Design-token consolidation + DESIGN.md rewrite | P2 | L | 012, 013 | TODO |
+| 014  | Design-token consolidation + DESIGN.md rewrite | P2 | L | 012, 013 | DONE — executed + reviewed, approved first pass 2026-08-24; branch `claude/014-token-consolidation`, 7 commits (one per stage). See "Plan 014 review record" below. |
 | 015  | Portable content format + characterization tests | P1 | L | — | TODO |
 | 016  | Supabase CMS foundation (schema, ISR, read client, CI DB) | P1 | L | 015 | TODO |
 | 017  | Hygiene batch (PII logs, intake tests, noindex/sitemap, related posts, font/scroll polish) | P2 | M | — | TODO |
@@ -347,3 +347,69 @@ correctness.
 together with `.mh-section` double-counts the page inset. If any future page
 needs a narrow centered measure, give it `--mh-gutter` padding like
 `.mh-article` now does, or do not compose `.mh-section` at all.
+
+## Plan 014 review record (2026-08-24)
+
+Executed by a fresh-context executor in an isolated worktree; APPROVED on the
+first pass — no revision round needed. Seven commits, one per stage, so each
+visual delta is reviewable on its own. Gates re-verified by the reviewer:
+`npm test` (61), `npm run lint`, `npm run lint:css`, `npm run typecheck`,
+`npm run build` (24/24), `npm run e2e` (52), `CI=1 npm run e2e` (19 + 33
+skipped) — all exit 0. Scope clean: CSS, DESIGN.md, `.stylelintrc.json`, and
+30 regenerated baselines.
+
+**What the design system looks like now**: rhythm tokens replace 15
+near-identical section paddings; three heading tokens replace the 7x-duplicated
+`clamp(46px, 4vw, 62px)` and its near-twins; nine color-role tokens collapse
+five near-identical on-dark greys and the ad-hoc status colors; five radius
+tokens replace 13 literals; two shadow tokens replace five. `--mh-violet`
+stays defined-but-unconsumed and is documented as reserved for LUMO/AI.
+
+**DESIGN.md is now true — verified mechanically, not by reading.** A script
+cross-checked every `--mh-*` value the doc claims against the stylesheet's
+base definitions: **36 of 36 match exactly, and no token is undocumented.**
+(A naive first pass appeared to show 5 mismatches; that was the script picking
+up media-query overrides instead of base values. Corrected — zero mismatches.)
+The doc carries the provenance note recording that shipped CSS won over the
+stale app-repo values, the `.mh-article` gutter-doubling rule, and a "how to
+add a section" recipe.
+
+**Token discipline is now enforced**: `color-no-hex` in stylelint, with the
+token block wrapped in a disable/enable pair and 19 individually-justified
+disables for genuine one-offs (hover tints, image placeholders, focus ring).
+Proven: planting `color: #ff0000` makes `npm run lint:css` exit 2; reverting
+returns exit 0.
+
+### Judgment calls reviewed and accepted
+
+- **Tablet rhythm tightened beyond the plan's literal text.** Setting
+  `--mh-section-y` on the wrapper in the ≤900px block reaches all 34
+  token-consuming sections, including ones that were never in the old
+  per-selector 72px reset lists (`.mh-route-agency`, `.mh-employer-sb617`,
+  `.mh-route-content`, `.mh-employer-strip`). Real layout change: employers at
+  tablet is 287px shorter. Reviewed the rendered tablet page directly — clear
+  section separation, nothing cramped or overlapping, uniform rhythm. This is
+  the natural and desirable consequence of tokenizing; accepted.
+- **`--mh-success` applied to `#4c7a34`** is a genuine hue shift (olive →
+  teal-green `#006b52`), not the "subtle" the executor called it. Accepted
+  anyway: the plan itself specified that token value and listed `#4c7a34`
+  among the literals to sweep, the new color is closer to the brand green, and
+  contrast on white improves from 5.07:1 to 6.58:1.
+- `.mh-faq` kept a literal 80px (equidistant between rhythm buckets); the 36px
+  onboarding-frame radius was folded into `--mh-radius-card` only after the
+  executor measured and cropped it to confirm the change is invisible.
+- The executor documented, rather than hid, that `.mh-employer-privacy-quote`
+  and `.mh-article-callout` violate DESIGN.md's own "no side-accent bars on
+  rounded containers" rule. Fixing them needs TSX changes, out of scope —
+  candidate cleanup for a later plan.
+
+### Limitation worth knowing
+
+The screenshot suite runs at `maxDiffPixelRatio: 0.01`, so a color change on a
+small element does not move a baseline — roughly 127,000 pixels of a
+full-page desktop shot must differ before it trips. Stage 4's color work
+reported "no snapshot moved", which is therefore weak evidence of "no visual
+change", not proof. Small-element color changes need direct inspection; the
+reviewer checked this one by contrast math instead. If tighter color
+regression coverage is ever wanted, add element-scoped screenshots rather than
+lowering the full-page ratio.
