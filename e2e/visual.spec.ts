@@ -62,3 +62,35 @@ test.describe("Marketing site visual baseline", () => {
     }
   }
 });
+
+// Plan 013: the header, hero, and sections previously computed their
+// horizontal gutters from two different container-width formulas
+// (1384px vs 1368px), so the header sat 7-8px left of section content at
+// every desktop width. This pins the fix as a functional assertion —
+// unlike the screenshot suite above, it needs no platform-specific
+// baseline, so it runs in CI too.
+test.describe("Marketing site container alignment", () => {
+  test("header brand and first section share the same left edge @ 1440px", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await page.evaluate(() => document.fonts.ready);
+
+    const headerBrandLink = page.locator(".mh-site-header > a");
+    const firstSection = page.locator("main .mh-section").first();
+
+    const headerBox = await headerBrandLink.boundingBox();
+    expect(headerBox).not.toBeNull();
+
+    // .mh-section is a full-bleed block (its horizontal inset comes from
+    // padding, not margin), so its own getBoundingClientRect().left is
+    // always 0 — not a proxy for where its content visually starts. The
+    // content's left edge is rect.left + the computed padding-left.
+    const sectionContentLeft = await firstSection.evaluate((el) => {
+      const rect = el.getBoundingClientRect();
+      const paddingLeft = parseFloat(getComputedStyle(el).paddingLeft);
+      return rect.left + paddingLeft;
+    });
+
+    expect(headerBox!.x).toBe(sectionContentLeft);
+  });
+});
