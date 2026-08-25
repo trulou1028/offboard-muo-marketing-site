@@ -39,3 +39,60 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run e2e
+
+  # Plan 016 step 5. Unlike the two jobs above (which deliberately run with
+  # NO Supabase env vars, proving the committed-content fallback path in
+  # src/lib/content/posts.ts stays green without a database — see
+  # docs/cms-architecture.md contract 1), this job runs the local Supabase
+  # stack and exercises the real database path: applying
+  # supabase/migrations/*.sql + supabase/seed.sql, then running the suite
+  # again with NEXT_PUBLIC_SUPABASE_URL/NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+  # pointed at it. This is also the first real application of the plan 016
+  # step 2 migration + seed: Docker was unavailable in the environment that
+  # authored them, so this job is what actually proves they apply cleanly
+  # via `supabase db reset` (not just the manual bare-Postgres probe noted
+  # in that commit's message).
+  cms-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - run: supabase start
+      - run: supabase db reset --yes
+      - name: Fail on schema drift between supabase/migrations and the reset database
+        # supabase db diff has no --check flag in the installed CLI
+        # (verified against `supabase db diff --help`, CLI 2.115.0) despite
+        # earlier plan drafts assuming one — this reproduces the same intent
+        # (non-empty diff output means an untracked schema change) without
+        # relying on a flag that doesn't exist.
+        run: |
+          diff_output="$(supabase db diff --local)"
+          if [ -n "$diff_output" ]; then
+            echo "$diff_output"
+            echo "::error::Schema drift detected between supabase/migrations and the local database after 'supabase db reset'."
+            exit 1
+          fi
+      - name: Export the local stack's URL + anon key
+        # Dot-paths verified against the installed CLI's own --help example
+        # (api.url) and its Go source's struct tags for the anon key field
+        # (auth.anon_key) — not guessed from documentation alone, since this
+        # environment has no Docker and so cannot run `supabase status` to
+        # confirm the output directly. If either path is wrong for the CLI
+        # version this job resolves in CI, this step's output env vars will
+        # be empty and the next two steps will silently exercise the
+        # fallback path instead of the database — watch for "posts: db" (not
+        # "posts: fallback") in the `npm run build` log below to confirm.
+        run: |
+          supabase status -o env \
+            --override-name api.url=NEXT_PUBLIC_SUPABASE_URL \
+            --override-name auth.anon_key=NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY \
+            >> "$GITHUB_ENV"
+      - run: npm test
+      - run: npm run build
