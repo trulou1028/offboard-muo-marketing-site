@@ -62,6 +62,28 @@ create table public.posts (
 alter table public.categories enable row level security;
 alter table public.posts enable row level security;
 
+-- RLS policies (below) gate WHICH ROWS a role may see; they are not enough
+-- on their own. A role also needs an independent table-level GRANT before
+-- Postgres will let it touch the table at all, and a freshly created table
+-- does not hand that out automatically. Skipping this line does not fail
+-- loudly at migration time — `create policy` succeeds either way — it fails
+-- later, at read time, with Postgres error 42501 (insufficient_privilege):
+-- this exact migration shipped once without these two grants and the first
+-- real Supabase-backed read failed with
+-- `{ code: '42501', message: 'permission denied for table categories' }`,
+-- caught by the cms-contract CI job (docs/cms-architecture.md "Decisions"
+-- #6) against a real Supabase stack — a detail a bare local Postgres probe
+-- cannot reproduce, because it doesn't have Supabase's `anon` role's actual
+-- (lack of) default privileges. Read-only, `anon` only, on purpose: this
+-- plan ships a read path only (docs/cms-architecture.md "Decisions" #1) —
+-- authoring happens through the Supabase dashboard's own connection, which
+-- does not go through `anon` and is unaffected by these grants. Do not add
+-- insert/update/delete here, and do not grant to `authenticated` or
+-- `public` — that would open a write or a broader-than-intended read
+-- surface that no RLS policy below is designed to constrain.
+grant select on public.categories to anon;
+grant select on public.posts to anon;
+
 -- categories has no draft concept (see docs/cms-architecture.md "Schema"):
 -- fully readable by anon.
 create policy "categories are publicly readable"
