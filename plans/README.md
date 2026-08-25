@@ -563,3 +563,50 @@ when 017 lands.
 Branch note: phase 2 ran on `claude/016-cms-foundation-phase2` because the
 phase-1 branch was still checked out in another worktree. Its history contains
 the phase-1 commit (`7376999`), so it is the complete PR branch.
+
+### Plan 016 — addendum: what the CI job caught (2026-08-25)
+
+The first `cms-contract` run passed **while proving nothing**, and two more
+rounds were needed. Recording the sequence because it is the clearest example
+in this batch of why the job exists:
+
+1. **Run 1 — green, worthless.** The job started a real Supabase stack and
+   applied both migrations (so the SQL WAS verified), but the build inside it
+   logged `posts: fallback`. The `supabase status -o env` output is
+   shell-style `KEY="value"`, and `$GITHUB_ENV` does not strip quotes — so
+   `NEXT_PUBLIC_SUPABASE_URL` was literally `"http://127.0.0.1:54321"`
+   including the quote characters, `new URL()` threw, and the silent fallback
+   swallowed it. Green build, database never touched.
+2. **Fixes: unquote the export, make the fetch ISR-safe, and ASSERT the DB
+   path.** The fetch had `cache: "no-store"` (correct for the write path it
+   was copied from), which forced `/resources/[slug]` dynamic and broke
+   contract 1's ISR promise. The job now fails if `posts: fallback` appears
+   or `posts: db` is missing. `test-and-build` deliberately still proves the
+   opposite — that the no-credentials fallback works.
+3. **Run 2 — red, and useful.** With the URL fixed the request finally
+   reached PostgREST and returned
+   `401 { code: '42501', message: 'permission denied for table categories' }`.
+   **The RLS policies were right; the `anon` role simply had no table GRANT.**
+   RLS gates which ROWS a role sees; the role must independently hold `SELECT`
+   on the table, and migration-created tables do not inherit it. The migration
+   contained zero `grant` statements.
+4. **This would have failed in PRODUCTION too.** The earlier local
+   bare-Postgres verification passed only because it used self-created roles
+   that over-granted relative to Supabase's real `anon` baseline. Before
+   fixing, the executor reproduced the exact `42501` locally against a minimal
+   `anon` role (schema `USAGE`, no table grant), then verified the fix:
+   4 categories, 18 posts (11 published + 7 retired, 0 draft), no `INSERT`,
+   and `authenticated` still unable to read.
+5. **Run 3 — green and meaningful.** Build logs `posts: db`, and
+   `/resources` plus all 11 article routes still prerender at `5m` revalidate
+   **with a live database** — proving the ISR contract holds on the DB path,
+   not just the fallback.
+
+Fix shipped: `grant select on public.categories to anon;` and
+`grant select on public.posts to anon;` — select-only, anon-only, policies
+untouched (grants and RLS are complementary layers, not alternatives).
+
+**Standing lesson for future Supabase work in this repo**: a migration that
+creates a table read by the site needs BOTH an RLS policy and a `grant select
+… to anon`. Neither alone is sufficient, and the failure mode is a silent
+fallback that looks healthy.
