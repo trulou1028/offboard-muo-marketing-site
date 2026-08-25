@@ -479,7 +479,7 @@
 .mh-route-resources-reading { display: block; margin-top: 14px; color: var(--mh-muted); font-size: 12.5px; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; }
 
 /* Guide article (ported /resources/:slug content) */
-.mh-article { max-width: 856px; margin-inline: auto; padding-top: 172px; padding-bottom: 96px; }
+.mh-article { max-width: 856px; margin-inline: auto; padding-inline: var(--mh-gutter); padding-top: 172px; padding-bottom: 96px; }
 .mh-article-back { display: inline-flex; align-items: center; gap: 8px; color: var(--mh-muted); font-size: 14px; font-weight: 650; }
 .mh-article-back:hover { color: var(--mh-ink); }
 .mh-article-back svg { width: 14px; height: 14px; }

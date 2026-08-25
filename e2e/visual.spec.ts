@@ -69,28 +69,44 @@ test.describe("Marketing site visual baseline", () => {
 // every desktop width. This pins the fix as a functional assertion —
 // unlike the screenshot suite above, it needs no platform-specific
 // baseline, so it runs in CI too.
+//
+// Covers the widths the plan's done criteria name (1280 / 1440 / 1920 /
+// 700 / 480). Comparisons use a sub-pixel tolerance rather than exact
+// equality: at non-integer gutters getBoundingClientRect() snaps to
+// 1/64px while getComputedStyle().paddingLeft does not, so two values
+// that are visually identical can differ by a few thousandths of a
+// pixel — a real mismatch is off by whole pixels, not a rounding crumb.
+const ALIGNMENT_WIDTHS = [1920, 1440, 1280, 700, 480] as const;
+
 test.describe("Marketing site container alignment", () => {
-  test("header brand and first section share the same left edge @ 1440px", async ({ page }) => {
-    await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/");
-    await page.evaluate(() => document.fonts.ready);
+  for (const width of ALIGNMENT_WIDTHS) {
+    test(`header brand and first section share the same left edge @ ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/");
+      await page.evaluate(() => document.fonts.ready);
 
-    const headerBrandLink = page.locator(".mh-site-header > a");
-    const firstSection = page.locator("main .mh-section").first();
+      const headerBrandLink = page.locator(".mh-site-header > a");
+      const firstSection = page.locator("main .mh-section").first();
 
-    const headerBox = await headerBrandLink.boundingBox();
-    expect(headerBox).not.toBeNull();
+      const headerBox = await headerBrandLink.boundingBox();
+      expect(headerBox).not.toBeNull();
 
-    // .mh-section is a full-bleed block (its horizontal inset comes from
-    // padding, not margin), so its own getBoundingClientRect().left is
-    // always 0 — not a proxy for where its content visually starts. The
-    // content's left edge is rect.left + the computed padding-left.
-    const sectionContentLeft = await firstSection.evaluate((el) => {
-      const rect = el.getBoundingClientRect();
-      const paddingLeft = parseFloat(getComputedStyle(el).paddingLeft);
-      return rect.left + paddingLeft;
+      // .mh-section is a full-bleed block (its horizontal inset comes from
+      // padding, not margin), so its own getBoundingClientRect().left is
+      // always 0 — not a proxy for where its content visually starts. The
+      // content's left edge is rect.left + the computed padding-left.
+      const sectionContentLeft = await firstSection.evaluate((el) => {
+        const rect = el.getBoundingClientRect();
+        const paddingLeft = parseFloat(getComputedStyle(el).paddingLeft);
+        return rect.left + paddingLeft;
+      });
+
+      expect(Math.abs(headerBox!.x - sectionContentLeft)).toBeLessThan(0.5);
+
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - window.innerWidth
+      );
+      expect(overflow).toBeLessThanOrEqual(1);
     });
-
-    expect(headerBox!.x).toBe(sectionContentLeft);
-  });
+  }
 });
