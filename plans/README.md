@@ -97,7 +97,7 @@ your row when done.
 |------|-------|----------|--------|------------|--------|
 | 011  | Fix shipped CSS defects + delete dead CSS | P1 | M | — | DONE — executed, reviewed, **merged to `main`** 2026-08-24 ([PR #21](https://github.com/trulou1028/offboard-muo-marketing-site/pull/21)). See "Plan 011 review record" below. |
 | 012  | Styling verification baseline (stylelint, screenshots, CI) | P1 | M | 011 | DONE — executed + reviewed (1 revision round) 2026-08-24; branch `claude/012-style-baseline`. See "Plan 012 review record" below. |
-| 013  | Container unification + 1200px cap | P1 | M | 012 | TODO |
+| 013  | Container unification + 1200px cap | P1 | M | 012 | DONE — executed + reviewed (1 revision round) 2026-08-24; branch `claude/013-container-1200`. See "Plan 013 review record" below. |
 | 014  | Design-token consolidation + DESIGN.md rewrite | P2 | L | 012, 013 | TODO |
 | 015  | Portable content format + characterization tests | P1 | L | — | TODO |
 | 016  | Supabase CMS foundation (schema, ISR, read client, CI DB) | P1 | L | 015 | TODO |
@@ -277,3 +277,73 @@ plan's CSS-only scope) — fold into plan 013/014.
 `npm run test:visual -- --update-snapshots` and treat the committed PNG diff
 as the review artifact. Snapshots add ~23MB to the repo; if that becomes a
 problem, consider git-lfs before adding more viewports.
+
+## Plan 013 review record (2026-08-24)
+
+Executed by a fresh-context executor in an isolated worktree; APPROVED after
+one revision round. Gates re-verified by the reviewer: `npm test` (61),
+`npm run lint`, `npm run lint:css`, `npm run typecheck`, `npm run build`
+(24/24 routes), `npm run e2e` (52 passed), `CI=1 npm run e2e` (19 passed,
+33 visual skipped) — all exit 0. Scope clean: CSS, `e2e/visual.spec.ts`, and
+22 regenerated baselines.
+
+**The container system now has exactly two inputs**: `--mh-page-max: 1200px`
+and `--mh-gutter`, with `--mh-page-x` derived from them. Header, hero,
+sections and footer all consume it, at every breakpoint.
+
+**Alignment verified independently at 12 widths** (1920/1600/1440/1366/1280/
+1200/1024/900/700/561/480/390): header, hero, section and footer left edges
+are IDENTICAL at every one. The original 7-8px header misalignment is gone.
+
+**Hero rebalance**: `minmax(0, 1.15fr) minmax(380px, 1fr)`, gap
+`clamp(40px, 4vw, 62px)`. Copy column 611px vs visual 531px at 1440
+(592/515 at 1280), h1 wraps 3 lines, collage unclipped.
+
+### Regression found and fixed in review — article pages
+
+`GuideArticle.tsx:37` renders `<article className="mh-article mh-section">`,
+so the article gets BOTH its own centered `max-width: 856px` AND
+`.mh-section`'s `padding-inline: var(--mh-page-x)`. Because `--mh-page-x`
+grows with viewport width, the gutter ate the article's own box from the
+inside. Measured on the first-round branch:
+
+| viewport | article text width | h1 height |
+|---|---|---|
+| 1920 | **136px** | 529px (a tower) |
+| 1600 | 456px | 176px |
+| 1440 | 616px | 118px |
+
+This was **pre-existing** (304px at 1920 on `main` before this plan) and made
+materially worse by the cap. Fixed CSS-only, no TSX change:
+`.mh-article { … padding-inline: var(--mh-gutter); … }` — the article uses the
+plain gutter instead of the centering page-x. After: 712px at 1920, 719px at
+1440 (identical to pre-plan `main`, so no regression), body settling at its
+`68ch` cap of 655px at every desktop width, h1 back to 2 lines. **This plan
+therefore also fixes a wide-screen article bug that predates it.**
+
+### Test quality, audited not assumed
+
+- The alignment tests are real: restoring the old 1384px header formula makes
+  **all 5 fail**. Verified, then reverted.
+- Coverage was broadened from 1440-only to the plan's five named widths
+  (1920/1440/1280/700/480), each also asserting no horizontal overflow.
+- Exact equality was replaced with a 0.5px tolerance. Reason:
+  `getBoundingClientRect()` snaps to 1/64px while `getComputedStyle()
+  .paddingLeft` does not — at 1280 the two read 60.921875 vs 60.928, a 0.006px
+  artifact that is NOT misalignment but WILL fail `toBe`. The reviewer's own
+  first check produced exactly this false alarm; the tolerance prevents future
+  readers from chasing it.
+- These alignment tests run in CI (they need no screenshot baseline, so they
+  are platform-safe) — recovering part of the CI coverage lost when plan 012
+  gated the visual suite off CI.
+
+**Deferred to plan 014**: two hardcoded `padding-inline: 20px` declarations
+left untouched at `.mh-route-agency` and `.mh-site-footer` in the 560px block.
+Both evaluate to exactly the `--mh-gutter` value at that breakpoint, so there
+is no visual or alignment difference — sweep them for consistency, not
+correctness.
+
+**Note on the `.mh-article` pattern**: composing a centered `max-width` box
+together with `.mh-section` double-counts the page inset. If any future page
+needs a narrow centered measure, give it `--mh-gutter` padding like
+`.mh-article` now does, or do not compose `.mh-section` at all.

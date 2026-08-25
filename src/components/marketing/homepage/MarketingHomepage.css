@@ -10,7 +10,9 @@
   --mh-footer: #002e26;
   --mh-lime: #dfff5a;
   --mh-violet: #c5b7ff;
-  --mh-page-x: max(clamp(24px, 4.76vw, 72px), calc((100vw - 1368px) / 2));
+  --mh-page-max: 1200px;
+  --mh-gutter: clamp(24px, 4.76vw, 72px);
+  --mh-page-x: max(var(--mh-gutter), calc((100vw - var(--mh-page-max)) / 2));
 
   background: var(--mh-paper);
   color: var(--mh-ink);
@@ -56,7 +58,7 @@
 .marketing-homepage a:focus-visible,
 .marketing-homepage button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 
-.mh-site-header { position: absolute; z-index: 20; inset: 0 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 76px; padding-inline: max(clamp(24px, 4.23vw, 64px), calc((100vw - 1384px) / 2)); background: rgb(0, 53, 42, .9); border-bottom: 1px solid rgb(255,255,255,.12); backdrop-filter: blur(18px); }
+.mh-site-header { position: absolute; z-index: 20; inset: 0 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 76px; padding-inline: var(--mh-page-x); background: rgb(0, 53, 42, .9); border-bottom: 1px solid rgb(255,255,255,.12); backdrop-filter: blur(18px); }
 .mh-site-header > a { justify-self: start; }
 .mh-brand { width: 157px; height: auto; }
 .mh-site-header nav { display: flex; align-items: center; gap: 36px; color: white; font-size: 16px; line-height: 24px; }
@@ -69,7 +71,7 @@
 .mh-header-actions .mh-primary-cta svg { display: none; }
 
 .mh-hero { min-height: 983px; padding: 152px var(--mh-page-x) 56px; background: var(--mh-deep); color: white; }
-.mh-hero-inner { max-width: 1384px; min-height: 775px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 680px) minmax(480px, 630px); gap: 62px; align-items: center; }
+.mh-hero-inner { max-width: var(--mh-page-max); min-height: 775px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(380px, 1fr); gap: clamp(40px, 4vw, 62px); align-items: center; }
 .mh-hero-copy { padding: 20px 0 30px; }
 .mh-hero-copy h1 { margin-top: 26px; color: var(--mh-paper); font-size: clamp(58px, 5.03vw, 76px); line-height: 1.03; letter-spacing: -.035em; }
 .mh-hero-copy h1 span { display: block; }
@@ -477,7 +479,7 @@
 .mh-route-resources-reading { display: block; margin-top: 14px; color: var(--mh-muted); font-size: 12.5px; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; }
 
 /* Guide article (ported /resources/:slug content) */
-.mh-article { max-width: 856px; margin-inline: auto; padding-top: 172px; padding-bottom: 96px; }
+.mh-article { max-width: 856px; margin-inline: auto; padding-inline: var(--mh-gutter); padding-top: 172px; padding-bottom: 96px; }
 .mh-article-back { display: inline-flex; align-items: center; gap: 8px; color: var(--mh-muted); font-size: 14px; font-weight: 650; }
 .mh-article-back:hover { color: var(--mh-ink); }
 .mh-article-back svg { width: 14px; height: 14px; }
@@ -621,7 +623,8 @@
 }
 
 @media (max-width: 900px) {
-  .mh-site-header { height: 68px; padding-inline: 24px; }
+  .marketing-homepage { --mh-gutter: 24px; }
+  .mh-site-header { height: 68px; }
   .mh-sign-in { display: none; }
   .mh-header-actions .mh-primary-cta { min-height: 42px; padding-inline: 16px; }
   .mh-route-hero { min-height: auto; grid-template-columns: 1fr; gap: 50px; padding-top: 138px; padding-bottom: 72px; }
@@ -661,7 +664,7 @@
   .mh-route-sponsor-card p { grid-column: 1; }
   .mh-route-privacy-columns { grid-template-columns: 1fr; }
   .mh-brand { width: 132px; }
-  .mh-hero { min-height: 0; padding: 116px 24px 56px; }
+  .mh-hero { min-height: 0; padding: 116px var(--mh-page-x) 56px; }
   .mh-hero-inner { min-height: 0; grid-template-columns: 1fr; }
   .mh-hero-copy { padding: 0; }
   .mh-hero-copy h1 { font-size: clamp(48px, 13vw, 72px); }
@@ -719,12 +722,12 @@
 }
 
 @media (max-width: 560px) {
-  .mh-section { padding-inline: 20px; }
+  .marketing-homepage { --mh-gutter: 20px; }
   .mh-kicker { font-size: 12px; line-height: 18px; }
   .mh-header-actions .mh-primary-cta span { font-size: 13px; }
   .mh-header-actions { gap: 14px; }
   .mh-mobile-menu > div { right: -152px; }
-  .mh-route-hero { padding-inline: 20px; padding-top: 118px; }
+  .mh-route-hero { padding-top: 118px; }
   .mh-route-hero h1 { font-size: 48px; line-height: 1.02; }
   .mh-route-hero > div > p { font-size: 18px; line-height: 28px; }
   .mh-route-hero aside { padding: 24px; }
@@ -738,10 +741,10 @@
   .mh-route-partners-note,
   .mh-employer-pricing,
   .mh-employer-steps,
-  .mh-employer-sb617 { padding-inline: 20px; padding-top: 72px; padding-bottom: 72px; }
+  .mh-employer-sb617 { padding-top: 72px; padding-bottom: 72px; }
   .mh-route-ethos,
   .mh-route-privacy,
-  .mh-act-privacy { padding-inline: 20px; padding-top: 72px; padding-bottom: 72px; }
+  .mh-act-privacy { padding-top: 72px; padding-bottom: 72px; }
   .mh-home-trust h2,
   .mh-pricing-teaser h2,
   .mh-route-content-heading h2,
@@ -755,7 +758,6 @@
   .mh-act-privacy .mh-copy-block h2,
   .mh-route-agency .mh-copy-block h2 { font-size: 40px; line-height: 46px; }
   .mh-route-agency-objection { padding: 20px; }
-  .mh-hero { padding-inline: 20px; }
   .mh-hero-actions { align-items: flex-start; flex-direction: column; gap: 10px; }
   .mh-hero-actions > a:last-child { min-height: 48px; }
   .mh-hero-visual { min-height: 490px; }
