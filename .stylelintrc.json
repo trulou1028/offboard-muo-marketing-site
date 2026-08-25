@@ -13,6 +13,7 @@
     "rule-empty-line-before": null,
     "comment-empty-line-before": null,
     "media-feature-range-notation": null,
-    "number-max-precision": 4
+    "number-max-precision": 4,
+    "color-no-hex": true
   }
 }

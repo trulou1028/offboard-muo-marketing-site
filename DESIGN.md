@@ -1,256 +1,245 @@
----
-name: Offboard
-description: Light-first, warm-paper career-transition platform — a calm, human place to run a job search. Forest-green + lime brand; deep-charcoal + sage dark mode; violet reserved for AI (LUMO).
-colors:
-  # Brand (light is the canonical/default theme)
-  green-900: "#004838"       # --primary — forest green; CTAs, active nav, progress
-  lime: "#E2FB6C"            # --primary-foreground — lime text on green CTAs; small "stamp" accents
-  # Light surfaces (3-tier warm system)
-  canvas: "#FBFBF8"          # --background — warm bone paper
-  rail: "#F4F2EC"            # --surface-rail — sidebars, grouped chrome (one shade cooler than canvas)
-  card: "#FFFFFF"            # --card — the default content surface
-  ink: "#1A1F1D"            # --foreground — primary text
-  muted-ink: "#6A736F"       # --muted-foreground — secondary text, captions, axes
-  border: "#DEDAD0"          # --border — warm stone hairline
-  # Dark surfaces (warm charcoal, sage accent — NOT a green wallpaper)
-  canvas-dark: "#161717"     # .dark --background
-  card-dark: "#232424"       # .dark --card
-  sage: "#74BD47"           # .dark --primary — the dark-mode brand accent
-  # Reserved + status
-  ai-violet: "#5C2AFF"       # --secondary-accent — AI/LUMO ONLY, never decorative
-  ai-violet-glow: "#8C69FF"  # --accent-purple — AI/LUMO ONLY
-  destructive: "#F4476B"     # --destructive — errors, destructive actions (NOT unread counts)
-  warning: "#C77A17"         # --warning
-typography:
-  display:
-    fontFamily: "Fraunces, serif"   # self-hosted variable font (public/fonts/FrauncesVF.woff2), weight axis 100–900
-    fontWeight: 500                 # opt in with `font-serif`; the real 500 renders (no faux weighting)
-    letterSpacing: "-0.02em"
-  ui:
-    fontFamily: "Aspekta, Inter, sans-serif"  # self-hosted variable font (public/fonts/AspektaVF.woff2)
-    fontWeight: 500                 # headings h1–h6 default to Aspekta 500, -0.025em
-  body:
-    fontFamily: "Aspekta, Inter, sans-serif"
-    fontWeight: 400
-    lineHeight: 1.5
-  overline:
-    fontFamily: "Aspekta, Inter, sans-serif"
-    fontSize: "0.6875rem"           # 11px, uppercase, +0.14em tracking — use `.type-overline`
-    fontWeight: 500
-rounded:
-  xs: "0.25rem"      # fixed 4px, NOT derived from --radius — for small fixed-size
-                      # controls (checkbox, chart swatches, heatmap cells) so they
-                      # never round into a circle
-  md: "0.875rem"     # calc(var(--radius) - 2px)
-  lg: "1rem"         # var(--radius)
-  card: "1.5rem"     # var(--radius-card) — the generous card corner
-  pill: "9999px"
-spacing:
-  xs: "4px"
-  sm: "8px"
-  md: "16px"
-  lg: "24px"
-  xl: "32px"
-components:
-  button-primary:
-    backgroundColor: "{colors.green-900}"
-    textColor: "{colors.lime}"
-    rounded: "{rounded.md}"
-  button-accent:
-    backgroundColor: "{colors.lime}"     # bg-accent-lime; foreground flips per theme (green in light, charcoal in dark)
-    rounded: "{rounded.md}"
-  card:
-    backgroundColor: "{colors.card}"
-    rounded: "{rounded.card}"
-    elevation: "var(--shadow-surface)"   # flat at rest; hairline border + barely-there lift
-  dialog:
-    backgroundColor: "{colors.card}"
-    rounded: "{rounded.card}"
-    elevation: "var(--shadow-overlay)"
----
+# Design System: Offboard Marketing Site
 
-# Design System: Offboard — "Clause"
+## Provenance
 
-## 1. Overview
+This describes the marketing site's shipped system (`--mh-*` tokens in
+`src/components/marketing/homepage/MarketingHomepage.css`). It deliberately
+diverges from the app repo's Clause design system; do not copy values from
+the app repo, and do not "fix" this doc to match it.
 
-**Creative North Star: "The Quiet Companion."** Offboard is used by people in a
-hard, stressful moment — recently laid off, mid-search, checking their phone
-between calls. The interface is the steady, warm presence beside them: it leads
-with the next thing to do, shows that effort is adding up, and never shouts.
-**Calm is the product.**
+**Decision date: 2026-08-24.** Before that date this file described the app
+repo's Clause tokens (lime `#E2FB6C`, canvas `#FBFBF8`, an `hsl(var(--token))`
+mechanism, "h1–h6 default to Aspekta 500") even though the shipped CSS here
+had never matched it — 10 of 13 colors disagreed and the heading-font rule
+was inverted. Plan 014 resolved that by treating the **shipped CSS as the
+source of truth** and rewriting the doc to match it, not the reverse. The one
+change made *to* the CSS at the same time: the header CTA's stray
+`#e2fb6c` border was normalized to `var(--mh-lime)` (`#dfff5a`), since that
+was an internal inconsistency, not a real doc-vs-code disagreement.
 
-Clause is **light-first** (a warm bone-paper canvas, white cards, forest-green
-brand) with a considered **deep-charcoal + sage dark mode**. It is **quiet**
-(flat surfaces, hairline borders, one accent), and **human** (generous rounding,
-a display serif for moments that matter, plain and encouraging copy). Forest
-green (light) / sage (dark) is the single voice of action and progress. **Violet
-is reserved exclusively for AI (LUMO)** so intelligence reads as a distinct,
-special thing.
+If you're an agent building a new marketing page or section: everything
+below is a description of what already ships. Match it. If a value you need
+isn't in this doc, look at the nearest existing section in
+`MarketingHomepage.css` before inventing a new one.
 
-This system explicitly rejects the **generic SaaS dashboard** (blue/navy
-gradients, the big-number hero-metric template, endless identical icon-card
-grids), the **cold corporate HR tool** (Workday/ADP bureaucracy), and the
-**cluttered job board** (Indeed/ZipRecruiter density). Warmth is carried by
-type, rounding, and copy — never by loud color or gamified confetti.
+## Palette
 
-**Token contract:** values live in `src/index.css` as `H S% L%` triplets
-consumed via `hsl(var(--token))`. Token *names* are stable (`bg-background`,
-`text-primary`, `--sidebar-background`, …) so ~5,700 existing consumers re-theme
-automatically. **Change a color by remapping a token, never by hardcoding.**
+All colors live as custom properties on `.marketing-homepage` (the single
+scope root for this stylesheet — every rule is nested under it, so these
+tokens are only available within it).
 
-## 2. Colors
+### Brand / surface
+| Token | Value | Use |
+|---|---|---|
+| `--mh-paper` | `#f7f4ec` | Default page background (warm off-white) |
+| `--mh-paper-soft` | `#f2efe6` | Alternating section background, one shade down from paper |
+| `--mh-white` | `#fff` | Card surfaces on paper |
+| `--mh-line` | `#d7d3c8` | Hairline borders/dividers on light surfaces |
+| `--mh-muted` | `#40534c` | Secondary text on light surfaces |
+| `--mh-ink` | `#15211d` | Primary text on light surfaces |
+| `--mh-forest` | `#004838` | Mid-tone brand green — filled dark sections, solid buttons |
+| `--mh-deep` | `#00352a` | Darkest brand green — hero, some route heroes |
+| `--mh-footer` | `#002e26` | Footer background (darkest of the three greens) |
+| `--mh-lime` | `#dfff5a` | The single accent. Primary CTA fill, on-dark accents, badges |
+| `--mh-violet` | `#c5b7ff` | **Reserved for LUMO/AI.** Defined but not yet consumed by any rule in this file — do not use it for anything else, including "just to add a second accent color." |
 
-Clause is **light-first**; the light values below are canonical, dark mode is the
-considered counterpart.
+### Color roles (on-dark and status)
+| Token | Value | Use |
+|---|---|---|
+| `--mh-on-dark-muted` | `#cfe0d9` | Secondary/muted text on `--mh-forest`/`--mh-deep` sections |
+| `--mh-hairline-on-dark` | `rgb(255 255 255 / 18%)` | `border-top`/`border-bottom` dividers on dark sections |
+| `--mh-surface-on-dark` | `rgb(255 255 255 / 6%)` | Subtle fill for panels/cards sitting on dark sections |
+| `--mh-border-on-dark` | `rgb(255 255 255 / 16%)` | Borders (and the money-clock progress-bar track) on dark sections |
+| `--mh-success` | `#006b52` | Positive/matched status text |
+| `--mh-warning` | `#9a5b0b` | Pending/attention status text |
+| `--mh-danger` | `#b3261e` | Error text (form validation) |
+| `--mh-danger-surface` | `#fbeceb` | Error banner background |
+| `--mh-danger-border` | `#f0c6c2` | Error banner border |
 
-### Brand
-- **Forest green** (`--primary`, light `#004838` / dark sage `#74BD47`): the
-  single voice of action and progress — primary buttons, active nav, positive
-  trends, the hero chart series, selected/done states. Its restraint is the point.
-- **Lime** (`--primary-foreground`, `#E2FB6C`): text on green CTAs, and small
-  "stamp" accents. Light-on-dark; never a fill for large areas.
+Three greys (`#d1ded9`, `#d6e0dc`, `#c9d8d3`, `#cbd9d4`) that used to sit
+within a couple of RGB units of `--mh-on-dark-muted` were consolidated into
+that one token — if you're picking a muted-text color for a dark section,
+this is the only one that exists now.
 
-### Surfaces (3-tier warm system, light)
-- **Canvas** (`--background`, `#FBFBF8`): warm bone paper — the app background.
-- **Rail** (`--surface-rail`, `#F4F2EC`): sidebars, pipeline panels, grouped
-  chrome — one shade cooler than canvas so cards still pop.
-- **Card** (`--card`, `#FFFFFF`): the default content surface. **Never nest a
-  card in a card.**
-- **Dark**: canvas `#161717`, card `#232424` — warm charcoal, sage as accent,
-  **not** a green wallpaper.
+**A new hex color anywhere outside this token block fails `npm run lint:css`**
+(enforced by stylelint — see the end of this doc). If the palette above
+doesn't have what you need, that's a signal to talk to the owner before
+adding a 31st color, not to add one inline.
 
-### Neutral / text
-- **Ink** (`--foreground`, `#1A1F1D`) primary text; **Muted ink**
-  (`--muted-foreground`) secondary text/captions/axes. Hold body ≥ 4.5:1.
+## Typography
 
-### AI (reserved)
-- **Signal Violet** (`--secondary-accent`, `#5C2AFF`) + **Violet Glow**
-  (`--accent-purple`, `#8C69FF`): **LUMO / AI surfaces only.** Never generic
-  emphasis or decoration.
+Two self-hosted variable fonts, loaded via `next/font` and exposed as
+`var(--font-fraunces)` and `var(--font-aspekta)`.
 
-### Status
-- **Destructive** (`--destructive`): errors and destructive actions **only** —
-  not notification counts (those use the brand color).
-- **Warning** (`--warning`). Disciplined chart tokens: one hero green,
-  everything else grey (`--chart-hero`, `--chart-muted`, `--chart-seq-1..5`).
+- **Fraunces, weight 500, `-0.03em` letter-spacing, is the default for `h1`,
+  `h2`, and `h3`** everywhere inside `.marketing-homepage` (see the
+  reset block at the top of the CSS file). This site has no `h4`–`h6`
+  usage — if you need a smaller heading, drop to a `strong`/`span` styled
+  with the body font, or check whether an existing pattern
+  (`.mh-ui-card-heading h3`, `.mh-price-deck h3`, …) already fits.
+- **Aspekta carries everything else**: body copy, labels, kickers, buttons,
+  nav, form fields. It is also used for **article body headings**
+  specifically — `.mh-article-body h2`/`h3` explicitly override back to
+  Aspekta, because long-form reading content reads better in the UI face
+  than in the display serif. This is the one deliberate exception to the
+  h1–h3-is-Fraunces default; don't generalize it elsewhere.
+- Base body copy is `font-size: 16px; line-height: 1.5;` at the
+  `.marketing-homepage` root, un-bolded (this stylesheet never explicitly
+  sets a body font-weight — it inherits the browser default of 400).
+  Labels/kickers/buttons are typically `font-weight: 650` or `700`;
+  Fraunces headings are `500`.
 
-**The One Voice Rule.** Green is the only action/progress accent. Two competing
-accents on a screen = one is wrong. Violet is not a second accent — it is the AI
-signifier.
+### Type scale tokens
+| Token | Value | Use |
+|---|---|---|
+| `--mh-h1` | `clamp(56px, 5.3vw, 82px)` | Route/page hero `h1` (e.g. `.mh-route-hero h1`) |
+| `--mh-h2` | `clamp(46px, 4vw, 62px)` | Default section heading `h2` |
+| `--mh-h2-sm` | `clamp(38px, 3.2vw, 48px)` | A section `h2` that needs to read a size down (currently only `.mh-verified-heading h2`) |
 
-**The Color-Is-Not-Status Rule.** Never encode meaning in hue alone. Pair every
-status/trend/severity with a label, icon, or number.
+`--mh-h2` is overridden to a flat `40px` at the `≤560px` breakpoint (see
+Rhythm & breakpoints below); every `h2` on the token still tracks it, so a
+mobile-size change only ever needs to happen in one place.
 
-## 3. Typography
+Not every heading in the file is on these tokens. The homepage hero
+(`.mh-hero-copy h1`, `clamp(58px, 5.03vw, 76px)`), the article title
+(`.mh-article-header h1`, `clamp(38px, 4.4vw, 56px)`), the intake rail
+title, and several smaller sub-headings (`.mh-employer-strip .mh-copy-block
+h2` at `clamp(26px, 2.4vw, 34px)`, card-level `h3`s, etc.) keep their own
+literal clamps because their values don't line up with `--mh-h1`/`--mh-h2`
+closely enough to fold in without a visible size change. That's fine — the
+rule is "reach for the token first," not "every heading must be on one of
+three sizes."
 
-Both faces are **self-hosted variable fonts** (`public/fonts/`), so the full
-weight range is available in both themes (no CDN dependency, no faux weighting).
+## Rhythm & breakpoints
 
-- **Aspekta** (`font-sans`, variable 100–900) carries the entire working UI —
-  headings, labels, data, body. `h1–h6` default to Aspekta 500, `-0.025em`.
-- **Fraunces** (`font-serif`, variable weight axis, self-hosted) is the **display
-  serif** — page/section titles opt in with `font-serif` and render at true 500.
-  Roman only (no `font-serif italic`). It never appears in buttons, labels,
-  inputs, table cells, or body copy (**the Serif-Is-Special Rule**).
-- **Named type scale** (`.type-display` 30 · `.type-title` 20 · `.type-body-lg`
-  18 · `.type-body` 16 · `.type-caption` 13 · `.type-overline` 11) — a fixed
-  rem scale (ratio ~1.2) that sets size/weight/tracking/leading only, so it
-  composes with `font-serif` and any `text-*` color. Prefer these over ad-hoc
-  `text-[Npx]`; `.type-overline` is the one canonical eyebrow/label (don't
-  hand-roll `text-xs uppercase tracking-*`).
-- **Tabular numbers**: every changing number (metrics, currency, counts, axes)
-  uses `tabular-nums` — helpers in `src/lib/format.ts`.
-- Cap prose at 65–75ch; dense tables may run wider.
+| Token | Value | Use |
+|---|---|---|
+| `--mh-section-y` | `88px` | Default section `padding-top`/`padding-bottom` |
+| `--mh-section-y-loose` | `104px` | Heavier bands (route content grids, the independence/pricing-teaser sections) |
+| `--mh-section-y-tight` | `64px` | Shorter strips (pricing, the final CTA, the employer strip) |
 
-## 4. Elevation
+At `≤900px` these three collapse to `72px / 72px / 56px` with one override
+on `.marketing-homepage`, so every section using the tokens tightens
+uniformly at tablet width instead of each one having its own bespoke
+mobile reset. `.mh-faq` is the one exception: its `80px` sits equidistant
+between the tight and default buckets, so it keeps a literal value at every
+breakpoint rather than being forced into either.
 
-**Flat by default.** Surfaces rest with a hairline border (`--border`) and no
-shadow; depth is tonal (canvas → rail/card → overlay). Shadow is earned by
-floating, not decoration.
+**Breakpoints**: `1180px` (nav collapses to the mobile menu), `900px`
+(rhythm/gutter tighten, most grids go single-column), `560px` (small-phone
+overrides — the smallest heading/gutter/padding step). There's also a
+`prefers-reduced-motion: reduce` query that kills transitions site-wide.
 
-- **`shadow-elevation-surface`** (`--shadow-surface`): resting cards that need
-  separation — a barely-there warm lift + hairline ring.
-- **`shadow-elevation-overlay`** (`--shadow-overlay`): floating surfaces —
-  dialogs, popovers, dropdowns, toasts.
+Hero top offsets (`148px`/`152px`/`172px`, used for `.mh-hero`,
+`.mh-route-hero`, `.mh-article`, `.mh-intake-page`) are **not** section
+rhythm — they exist to clear the fixed/absolute header — and are not on the
+`--mh-section-y*` scale.
 
-**Use the tokens, not ad-hoc `shadow-sm/md/lg`.** A heavy drop shadow on a
-resting card is wrong — separate it with the surface tone or a 1px border.
+## Container & measure
 
-## 5. Components
+Owned by plan 013, not this one — listed here because a new section needs
+both this and the rhythm tokens above to compose correctly.
 
-- **Buttons**: `md` radius, uniform across sizes. **Primary** = green fill /
-  lime text, one per view. **Accent** = lime fill (`bg-accent-lime`,
-  foreground flips per theme). Most buttons are **ghost/outline**, not primary.
-- **Cards**: `card` radius (24px), Card `module` variant = the Clause recipe
-  (token border + `shadow-elevation-surface`). Never nest cards.
-- **Inputs**: `--field` fill, hairline border, sage/green focus ring. Error =
-  destructive border **plus** a text message (never color alone). `input.tsx`
-  is the reference token-driven component.
-- **Badges/counts**: `pill` radius. Notification/unread **counts use the brand
-  color** (`Badge` `default`), not destructive red — red is for genuinely
-  destructive/critical only.
-- **Dialogs**: `bg-card`, `card` radius, `shadow-elevation-overlay` (not a
-  black slab). Modal is a last resort — exhaust inline/progressive first.
-- **Charts**: `src/components/ui/charts/` (NYT discipline) — one hero-green
-  series, everything else grey; direct labels over legends; `role="img"` + a
-  visually-hidden data table.
+| Token | Value |
+|---|---|
+| `--mh-page-max` | `1200px` |
+| `--mh-gutter` | `clamp(24px, 4.76vw, 72px)` |
+| `--mh-page-x` | `max(var(--mh-gutter), calc((100vw - var(--mh-page-max)) / 2))` |
 
-## 5b. Page frame (the one-frame contract)
+**The `.mh-article` rule**: a centered `max-width` box must never also take
+the page-x gutter. `.mh-article` renders as `<article class="mh-article
+mh-section">` — composing `.mh-section` gives it `padding-inline:
+var(--mh-page-x)`, which *grows* with viewport width, while `.mh-article`
+also centers itself with its own `max-width: 856px`. Stacking both once
+starved the article to ~136px of usable text width at 1920px. The fix,
+already shipped: `.mh-article` carries its own `padding-inline:
+var(--mh-gutter)` (the flat, capped gutter, not the page-x formula) instead
+of relying on `.mh-section`. If you're building another centered
+reading-width block, do the same — give it `var(--mh-gutter)` padding
+directly, or don't compose `.mh-section` on it at all.
 
-Every member page in the standard app shell shares one frame. Owner-requested
-2026-08-04, shipped in Sprint 327 (plan 191).
+**Reading measures stay `ch`-based, not tokenized.** `.mh-article` itself is
+a `max-width: 856px` box (a pixel measure, matched to the visual column
+width of the page), while `.mh-article-body` and `.mh-article-guest-author`
+inside it cap prose at `max-width: 68ch` — a character-count measure, which
+is the right unit for a reading column because it holds line length
+constant across font-size and viewport changes in a way a pixel value
+can't. These weren't folded into a `--mh-measure-*` token scale because no
+such scale exists yet in this stylesheet (this plan only tokenized rhythm,
+type, color, radius, and shadow) — introducing one for two consumers would
+be premature. If a third `ch`-based reading column shows up, that's the
+signal to add the token.
 
-- **The shell owns the container.** `DashboardLayout` renders page content in
-  `max-w-6xl mx-auto px-3 py-4 md:p-6 lg:py-8 lg:px-12` (the `narrow` route
-  variant swaps `max-w-6xl` for `max-w-4xl`; `immersive`/`noPadding` is the
-  full-bleed escape for Messages, LumoChat, Job Packet, Resume Studio,
-  Interview Practice). A page **never** sets its own `mx-auto`, outer
-  `max-w-*`, or outer padding. Need a different width? Change the route's
-  `contentWidth`, never the page.
-- **Every standard page opens with `PageHeader`** (`components/layouts/`):
-  optional icon chip, `font-serif text-3xl md:text-4xl` title, description at
-  `max-w-3xl`, plus `action`/`titleAction`/`children` slots. Titles read from
-  `src/config/navLabels.ts`, and the icon matches the page's sidebar icon in
-  `src/config/domains.ts`. Pages whose header carries bespoke content (the
-  spine, Dashboard, SpineHome) still match that title scale.
-- **Breadcrumbs follow one policy.** None on sidebar-reachable pages, because
-  the sidebar is the wayfinding. Required on nested detail pages (the spine's
-  stage and step views), and always rendered by `PageHeader` or its exported
-  `PageBreadcrumbs`. There is exactly one breadcrumb implementation.
-- **Reading measure is not the frame.** Long prose inside a page may keep an
-  inner `max-w-3xl`; that constrains text, not the page. The guard test
-  `src/components/layouts/pageFrame.test.ts` only polices outermost
-  containers.
+## Radii
 
-## 6. Motion
+| Token | Value |
+|---|---|
+| `--mh-radius-sm` | `8px` |
+| `--mh-radius-md` | `12px` |
+| `--mh-radius-lg` | `18px` |
+| `--mh-radius-card` | `24px` |
+| `--mh-radius-pill` | `999px` |
 
-Motion conveys **state**, not decoration: hover/focus/active, feedback,
-loading, reveal. 150–250ms, ease-out (no bounce/elastic). **No orchestrated
-page-load sequences** — product surfaces load into a task, they don't perform.
-Every animation has a `prefers-reduced-motion: reduce` alternative (handled
-globally in `index.css`).
+Circular elements (`border-radius: 50%`) are their own thing and stay `50%`
+— they're not on this scale and shouldn't be. One literal survives outside
+the scale on purpose: `.mh-employer-privacy-quote` keeps `border-radius:
+4px`, a deliberately square-ish corner for a bordered quote card, smaller
+than anything the scale offers.
 
-## 7. Do / Don't
+## Shadows
 
-**Do**
-- Keep green the only action/progress accent; ≤ one primary button per view.
-- Reserve violet for AI/LUMO surfaces.
-- Keep surfaces flat at rest; separate with tone or a 1px border; float with the
-  elevation tokens.
-- Use `tabular-nums` + `src/lib/format.ts` for changing numbers.
-- Fraunces for display titles only; Aspekta for everything else.
-- Pair status with a label/icon, not color alone.
-- Hold body contrast ≥ 4.5:1.
+| Token | Value | Use |
+|---|---|---|
+| `--mh-shadow-surface` | `0 18px 40px rgb(24 42 36 / 15%)` | Resting elements that need separation without floating (e.g. `.mh-job-pill`) |
+| `--mh-shadow-overlay` | `0 28px 60px rgb(29 59 51 / 22%)` | Floating/absolute-positioned elements — the onboarding illustration pieces, the mobile nav dropdown |
 
-**Don't**
-- Use gradients — anywhere. Solid colors only.
-- Build the generic SaaS dashboard, cold HR tool, or cluttered job-board look.
-- Add gamified/confetti energy — warmth comes from type, rounding, and copy.
-- Nest a card in a card.
-- Use `border-left`/`border-right` > 1px as a colored accent stripe.
-- Use `background-clip: text` gradient text.
-- Use glassmorphism decoratively.
-- Introduce a second accent, or use violet for non-AI emphasis.
-- Encode meaning in hue alone.
-- Alarm-red for counts/indicators — red is for destructive/critical only.
-- Ship em-dashes in user-facing copy.
+Only two shadows exist in this stylesheet. If a new component needs
+elevation, it's one of these two — there's no third tier.
+
+## Hard rules (carried over, unchanged)
+
+- **Violet is LUMO/AI-only.** `--mh-violet` is reserved for AI/LUMO
+  surfaces if and when this site grows one. Never use it as a second
+  general-purpose accent — lime is the only accent color this site has.
+- **No side-accent color bars on rounded containers.** A colored
+  `border-left`/`border-right` wider than 1px reads as a "stripe," which
+  this system doesn't use decoratively. (Two existing components —
+  `.mh-employer-privacy-quote` and `.mh-article-callout` — do combine a
+  colored `border-left` with `border-radius`; they predate this rule being
+  written down explicitly. Don't use them as precedent for a new one.)
+- **One primary CTA per view.** `.mh-primary-cta` (lime fill, deep-green
+  text) is the loud, filled button — at most one per screen. Everything
+  else is a text link (`.mh-section-link`) or an outline button (the header
+  CTA: transparent fill, `var(--mh-lime)` border, white text).
+- **No em dashes in site copy.** Copy content and its rules live in
+  `COPY.md` at the repo root — this doc doesn't duplicate them.
+
+## How to add a section
+
+1. Compose `.mh-section` (from plan 013) for the horizontal gutter, or give
+   your root element `padding-inline: var(--mh-gutter)` directly if it's
+   also a centered `max-width` box (see the `.mh-article` rule above —
+   never do both).
+2. Set `padding-top`/`padding-bottom` to `var(--mh-section-y)`,
+   `-loose`, or `-tight` — don't write a literal vertical padding.
+3. Size your heading with `var(--mh-h1)`/`var(--mh-h2)`/`var(--mh-h2-sm)`
+   where the value is close enough to fit (see Typography above for when
+   it's fine to keep a bespoke clamp instead).
+4. Pick colors from the Palette/Color-roles tables. On a dark section
+   (`--mh-forest`/`--mh-deep`/`--mh-footer` background), reach for the
+   `-on-dark` roles for muted text, hairlines, and subtle surfaces rather
+   than writing a new `rgb(255 255 255 / N%)`.
+5. Pick a radius/shadow from the scales above, not a new literal.
+6. **Never introduce a literal hex color, px font-size, border-radius, or
+   box-shadow without adding a token for it first.** `npm run lint:css`
+   enforces this for colors outside the token block; the rest is
+   discipline, not tooling — but it's the same rule.
+
+## Enforcement
+
+`.stylelintrc.json` disallows a new hex color anywhere in this stylesheet
+outside the `.marketing-homepage` token block (`color-no-hex`, scoped with a
+`stylelint-disable`/`-enable` pair around the token definitions). It does
+not (and can't, practically) stop a new *token value* someone picks
+carelessly — only a raw hex literal leaking into a rule. Preventing sloppy
+token choices is still a code-review problem, not a lint problem.
