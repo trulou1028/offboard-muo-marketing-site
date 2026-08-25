@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { MarketingResources } from "@/components/marketing/homepage/MarketingRoutePages";
+import { buildResourceSections } from "@/content/resources/registry";
 
 export const metadata: Metadata = {
   title: "Guides & resources | Offboard",
@@ -9,5 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <MarketingResources />;
+  return <MarketingResources sections={buildResourceSections()} />;
 }

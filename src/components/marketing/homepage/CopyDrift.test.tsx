@@ -5,6 +5,8 @@ import type { ReactElement } from "react";
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
+import { buildResourceSections } from "@/content/resources/registry";
+
 import MarketingHome from "./MarketingHome";
 import {
   MarketingAbout,
@@ -140,9 +142,20 @@ const SWEPT_PAGES: ReadonlyArray<[string, () => ReactElement]> = [
   ["MarketingHowItWorks", () => <MarketingHowItWorks />],
   ["MarketingPricing", () => <MarketingPricing />],
   ["MarketingAbout", () => <MarketingAbout />],
-  ["MarketingResources", () => <MarketingResources />],
+  ["MarketingResources", () => <MarketingResources sections={buildResourceSections()} />],
   ["MarketingPublicPartners", () => <MarketingPublicPartners />],
 ];
+
+describe("MarketingResources sweep still covers real article content", () => {
+  // Plan 015 step 6 moved /resources' data fetch (buildResourceSections) out
+  // of MarketingResources and into the route. This guards against the sweep
+  // silently starting to cover an empty shell (e.g. sections={[]} passed by
+  // mistake), which would make the never-say/em-dash assertions below vacuous.
+  it("renders a known ported article title", () => {
+    const text = renderedText(<MarketingResources sections={buildResourceSections()} />);
+    expect(text).toContain("What to do in your first week after a layoff");
+  });
+});
 
 describe("language rules hold on shipped pages", () => {
   // Built at runtime (rather than as a literal string) so this file itself
@@ -182,7 +195,7 @@ describe("language rules hold on shipped pages", () => {
     ["MarketingHowItWorks", () => <MarketingHowItWorks />],
     ["MarketingAbout", () => <MarketingAbout />],
     ["MarketingAct", () => <MarketingAct />],
-    ["MarketingResources", () => <MarketingResources />],
+    ["MarketingResources", () => <MarketingResources sections={buildResourceSections()} />],
     ["MarketingPublicPartners", () => <MarketingPublicPartners />],
   ] as const)("%s does not say outplacement (jobseeker narrative copy)", (_name, factory) => {
     expect(renderedText(factory())).not.toMatch(/outplacement/i);

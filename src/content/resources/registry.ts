@@ -283,3 +283,18 @@ export function getByCategory(category: ResourceCategory): ResourcePost[] {
 export const portedResources: ResourcePost[] = resources.filter((post) => post.ported);
 
 export const unportedResources: ResourcePost[] = resources.filter((post) => !post.ported);
+
+export type ResourceSection = { category: ResourceCategory; posts: ResourcePost[] };
+
+/**
+ * Builds the /resources hub's category sections (in display order, dropping
+ * empty categories). Shared by the route (src/app/resources/page.tsx) and
+ * its tests, so both stay in sync with the registry as the single builder
+ * (plan 015 step 6: /resources' data-fetch moves here so MarketingResources
+ * itself can be a plain view that takes sections as a prop).
+ */
+export function buildResourceSections(): ResourceSection[] {
+  return categoryOrder
+    .map((category) => ({ category, posts: getByCategory(category) }))
+    .filter(({ posts }) => posts.length > 0);
+}
