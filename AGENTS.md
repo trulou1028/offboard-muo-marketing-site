@@ -13,6 +13,11 @@ Tailwind** — the site ships one scoped stylesheet. Sibling repos: the app is
 (TanStack) repo that this one replaces at cutover. All routes stay `noindex`
 until the public launch decision.
 
+**This file is the shared contract for every agent** — Claude Code, Codex, or
+anything else. Everything in it applies regardless of harness. `CLAUDE.md` only
+imports this file, and `.claude/` (settings, launch config) is Claude-specific
+convenience that other tools can ignore without losing any rule.
+
 ## Sources of truth — read the relevant one before you write
 
 | Question | Document |
@@ -63,9 +68,54 @@ supersedes the app repo's strategy docs.
 1. **Always:** `npm test` and `npm run build` green. Never report work as done
    on a red suite; if something fails, say so with the output.
 2. **Touched routes, nav, redirects, or the intake form?** → `npm run e2e` too.
-3. **Visual change?** → verify in the browser preview (launch config
-   `marketing-site`, port 3000): renders, no console errors, mobile width.
+3. **Visual change?** → verify it actually renders, with no console errors, at
+   desktop AND mobile width. Use whatever browser tooling your harness gives
+   you; the tool-agnostic fallback that always works is a temporary Playwright
+   spec (see "Verification rules" below). Claude Code additionally has a launch
+   config `marketing-site` on port 3000.
 4. **Copy change?** → COPY.md + drift/regression tests updated, same PR (above).
+
+## Verification rules — every agent, every tool
+
+Tool-agnostic. Each of these already cost this repo a real defect or a false
+green, so they are rules, not preferences.
+
+- **Verify through the repo's own harness, not a server you did not start.**
+  Playwright (`npm run e2e`, `npm run test:visual`) builds and serves the
+  worktree it runs in. An editor's built-in preview or a stray `next dev` may
+  be serving a DIFFERENT checkout — that happened here for three consecutive
+  plans, silently showing pre-edit output while reporting success. For an
+  ad-hoc measurement, write a temporary Playwright spec, run it, delete it.
+- **Never regenerate a snapshot or baseline to make a suite pass.** If a
+  screenshot, an `ArticleFidelity` snapshot, or a drift snapshot moves, prove
+  the diff is only what you intended, then re-capture deliberately and say so
+  in your report. Silent re-capture is how published prose or a layout
+  regression ships unnoticed.
+- **Never report a verification you did not run.** If a check was impossible
+  (no Docker, no credentials, CI-only), name the command you could not run and
+  why. An honest gap is useful; an implied pass is not.
+- **A green check that could be a silent fallback is not proof.** Assert the
+  path you meant to exercise. The `cms-contract` CI job passed green while
+  building from committed files instead of the database; it only became useful
+  once it was made to FAIL when the database path was not taken.
+- **Match the verification to the risk.** The visual suite runs at 1% pixel
+  tolerance, so a color change on a small element does NOT move a baseline.
+  "No snapshot moved" is weak evidence for small changes — inspect directly.
+- **Correct the plan, not the evidence.** If a plan's stated facts disagree
+  with the repo, trust the repo, say so, and carry on with the verified
+  numbers.
+
+### Supabase specifics
+
+- A table the site reads needs **both** an RLS policy **and**
+  `grant select … to anon`. Neither alone is sufficient. Missing the grant
+  gives `42501 permission denied`, and with a fallback in place the site looks
+  perfectly healthy while never touching the database.
+- The local stack (`npx supabase start`) needs Docker. Without it, write the
+  migration but mark it **explicitly unverified** — the `cms-contract` CI job
+  is then the authoritative check.
+- Migrations reach production only by an owner-run `supabase db push`, never
+  by hand-run SQL and never by an agent. See `docs/cms-architecture.md`.
 
 ## Handing over work for review — always ship a preview link
 
