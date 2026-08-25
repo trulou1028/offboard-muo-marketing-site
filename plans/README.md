@@ -99,7 +99,7 @@ your row when done.
 | 012  | Styling verification baseline (stylelint, screenshots, CI) | P1 | M | 011 | DONE — executed + reviewed (1 revision round) 2026-08-24; branch `claude/012-style-baseline`. See "Plan 012 review record" below. |
 | 013  | Container unification + 1200px cap | P1 | M | 012 | DONE — executed + reviewed (1 revision round) 2026-08-24; branch `claude/013-container-1200`. See "Plan 013 review record" below. |
 | 014  | Design-token consolidation + DESIGN.md rewrite | P2 | L | 012, 013 | DONE — executed + reviewed, approved first pass 2026-08-24; branch `claude/014-token-consolidation`, 7 commits (one per stage). See "Plan 014 review record" below. |
-| 015  | Portable content format + characterization tests | P1 | L | — | TODO |
+| 015  | Portable content format + characterization tests | P1 | L | — | DONE — executed + reviewed, approved first pass 2026-08-24; branch `claude/015-portable-content`, 6 commits. See "Plan 015 review record" below. |
 | 016  | Supabase CMS foundation (schema, ISR, read client, CI DB) | P1 | L | 015 | TODO |
 | 017  | Hygiene batch (PII logs, intake tests, noindex/sitemap, related posts, font/scroll polish) | P2 | M | — | TODO |
 
@@ -413,3 +413,72 @@ change", not proof. Small-element color changes need direct inspection; the
 reviewer checked this one by contrast math instead. If tighter color
 regression coverage is ever wanted, add element-scoped screenshots rather than
 lowering the full-page ratio.
+
+## Plan 015 review record (2026-08-24)
+
+Executed by a fresh-context executor; APPROVED first pass. The 11 articles are
+now JSON blocks + a renderer, the TSX posts are deleted, and `/resources`
+takes its data as props. Gates re-verified: `npm test` (90), `npm run lint`,
+`npm run lint:css`, `npm run typecheck`, `npm run build` (all 11 article
+routes prerender), `npm run e2e` (52), `CI=1 npm run e2e` (19 + 33 skipped).
+Scope clean, tree clean.
+
+### The fidelity chain, verified end to end
+
+This plan's only real risk was silently altering published prose. The proof
+holds at every link, checked by the reviewer rather than taken on report:
+
+1. **The baseline came from the originals.** `git diff 96e7789 6853cda --
+   src/content/resources/posts/` is EMPTY — the TSX posts were byte-identical
+   to `main` at the commit that captured the snapshot. The step-1 commit
+   touched only the test and its snapshot: no schema, no blocks, no posts.
+2. **The baseline was never rewritten.** `git log --follow` on
+   `__snapshots__/ArticleFidelity.test.tsx.snap` shows exactly ONE commit
+   (6853cda, step 1). 136KB across all 11 slugs.
+3. **The new renderer reproduces it.** All 11 comparisons pass against that
+   untouched baseline, with no normalization crutch — the executor diffed
+   `innerHTML` directly and it matched on the first attempt.
+4. **The test is not vacuous.** The reviewer planted a single word change in
+   one block file; the fidelity test FAILED, naming the article and showing
+   the altered sentence. Reverted → green.
+5. **No screenshot moved.** `git diff --stat` over the snapshot dir is EMPTY,
+   so the articles render pixel-identically. This was the plan's core
+   acceptance signal and it held without a single baseline regeneration.
+
+### Two schema extensions — required, not stylistic
+
+- `b`/`i` inline runs carry nested `InlineRun[]` rather than a plain string,
+  because `career-changers-guide-to-job-offer-negotiations` nests a link
+  inside `<strong>` in several list items.
+- `h2` blocks carry an optional `id`, because `GuideH2` takes an anchor id
+  used repeatedly in that same post.
+
+Both were needed for byte-for-byte fidelity. The plan anticipated exactly this
+("extend `InlineRun` minimally and note it") and the executor did.
+
+### Copy-law coverage survived the refactor
+
+`MarketingResources` now takes `sections`; `CopyDrift.test.tsx` renders it with
+`buildResourceSections()` — the same builder the route uses — so the never-say
+and em-dash sweeps still run over real article content, plus a new explicit
+assertion that a known article title appears in the swept text. This was the
+whole point of doing the data/view split BEFORE Supabase: after the switch,
+the failure mode would have been "delete the test to get green".
+
+### Noted for later, not a defect
+
+Every `<strong>` in the corpus carries `className="font-semibold text-foreground"`
+and every `<em>` carries `className="italic"` — **Tailwind class names**, and
+this repo has no Tailwind, so they style nothing. They are vestigial from the
+legacy-site port and are preserved deliberately (byte-faithful fidelity
+requires it). Stripping them is a content-level cleanup that would need the
+fidelity baseline re-captured on purpose; do it as its own change, never as a
+side effect.
+
+### Ready for plan 016
+
+`blocks/*.json` is now the exact shape of the future `posts.body` jsonb column,
+`registry.test.ts` pins the registry↔blocks bijection that a migration could
+silently break, and `ArticleFidelity` becomes the migration's acceptance test.
+The `image` and `cta` block types ship unused, so the content-roadmap's funnel
+articles will not need a schema change.

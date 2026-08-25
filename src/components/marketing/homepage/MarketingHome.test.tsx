@@ -10,9 +10,9 @@ import { metadata as pricingMetadata } from "@/app/pricing/page";
 import { metadata as publicPartnerMetadata } from "@/app/public-partners/page";
 import { metadata as resourcesMetadata } from "@/app/resources/page";
 import { GuideArticle } from "@/components/marketing/resources/GuideArticle";
-import { getResource } from "@/content/resources/registry";
-import FirstWeekAfterALayoff from "@/content/resources/posts/first-week-after-a-layoff";
-import CareerChangersGuideNegotiations from "@/content/resources/posts/career-changers-guide-to-job-offer-negotiations";
+import { RenderBlocks } from "@/components/marketing/resources/RenderBlocks";
+import { getPostBlocks } from "@/content/resources/blocks";
+import { buildResourceSections, getResource } from "@/content/resources/registry";
 
 import MarketingHome from "./MarketingHome";
 import {
@@ -181,7 +181,7 @@ describe("Offboard marketing routes", () => {
   });
 
   it("gives resources a real library with local article routes", () => {
-    render(<MarketingResources />);
+    render(<MarketingResources sections={buildResourceSections()} />);
 
     expect(screen.getByRole("heading", { level: 1, name: "Guides & resources" })).toBeInTheDocument();
     expect(screen.getByText(/reported essays, practical guides/i)).toBeInTheDocument();
@@ -197,10 +197,12 @@ describe("Offboard marketing routes", () => {
   it("renders a ported article page with its title and body content", () => {
     const post = getResource("first-week-after-a-layoff");
     if (!post) throw new Error("Expected first-week-after-a-layoff to be in the registry");
+    const blocks = getPostBlocks("first-week-after-a-layoff");
+    if (!blocks) throw new Error("Expected first-week-after-a-layoff to have converted blocks");
 
     render(
       <GuideArticle category={post.category} title={post.title} readingTime={post.readingTime} date={post.date} author={post.author}>
-        <FirstWeekAfterALayoff />
+        <RenderBlocks blocks={blocks} />
       </GuideArticle>,
     );
 
@@ -213,6 +215,8 @@ describe("Offboard marketing routes", () => {
   it("credits the guest author on the career-changers negotiations article", () => {
     const post = getResource("career-changers-guide-to-job-offer-negotiations");
     if (!post) throw new Error("Expected career-changers-guide-to-job-offer-negotiations to be in the registry");
+    const blocks = getPostBlocks("career-changers-guide-to-job-offer-negotiations");
+    if (!blocks) throw new Error("Expected career-changers-guide-to-job-offer-negotiations to have converted blocks");
 
     render(
       <GuideArticle
@@ -223,7 +227,7 @@ describe("Offboard marketing routes", () => {
         author={post.author}
         guestAuthor={post.guestAuthor}
       >
-        <CareerChangersGuideNegotiations />
+        <RenderBlocks blocks={blocks} />
       </GuideArticle>,
     );
 

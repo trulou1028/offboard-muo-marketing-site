@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 
-import { categoryMeta, categoryOrder, getByCategory } from "@/content/resources/registry";
+import { categoryMeta, type ResourceSection } from "@/content/resources/registry";
 
 import {
   ABOUT_FAQS,
@@ -107,11 +107,7 @@ function categoryHeadingId(category: string): string {
   return `resources-${category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}-title`;
 }
 
-export function MarketingResources() {
-  const sections = categoryOrder
-    .map((category) => ({ category, posts: getByCategory(category) }))
-    .filter(({ posts }) => posts.length > 0);
-
+export function MarketingResources({ sections }: { sections: ResourceSection[] }) {
   return (
     <MarketingShell current="resources">
       <main id="main-content">

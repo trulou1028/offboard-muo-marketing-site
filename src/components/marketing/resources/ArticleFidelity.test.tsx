@@ -1,0 +1,55 @@
+import { render } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+
+import { getPostBlocks } from "@/content/resources/blocks";
+import { getResource, portedResources } from "@/content/resources/registry";
+
+import { GuideArticle } from "./GuideArticle";
+import { RenderBlocks } from "./RenderBlocks";
+
+// Characterization baseline for plan 015 (make article content portable).
+//
+// This snapshot file is the permanent acceptance oracle for the plan: it was
+// captured from the CURRENT, hand-written src/content/resources/posts/*.tsx
+// components (step 1), before any block-schema conversion existed. Step 4
+// proved the JSON blocks + RenderBlocks reproduced that exact same DOM by
+// rendering both sides in one test and diffing them directly. Now that the
+// *.tsx files are deleted (step 5), this test renders only the RenderBlocks
+// side and keeps asserting it against the same frozen snapshot via
+// toMatchSnapshot() — the describe/it titles below must never change, or
+// vitest would treat it as a new snapshot instead of comparing against the
+// frozen baseline, silently defeating the whole point of this file.
+//
+// Whitespace-only differences BETWEEN tags would be tolerated (JSX
+// formatting is allowed to differ) via normalizeBetweenTags below, but in
+// practice React's rendered DOM never has whitespace-only text nodes
+// between adjacent tags, so this is a no-op safety net, not a loosened
+// comparison — whitespace inside text nodes is never touched either way.
+function normalizeBetweenTags(html: string): string {
+  return html.replace(/>\s+</g, "><").trim();
+}
+
+describe.each(portedResources.map((post) => post.slug))("article fidelity: %s", (slug) => {
+  it("matches the pre-conversion baseline and has substantial body text", () => {
+    const post = getResource(slug);
+    if (!post) throw new Error(`registry has no entry for ${slug}`);
+    const blocks = getPostBlocks(slug);
+    if (!blocks) throw new Error(`getPostBlocks has no entry for ${slug}`);
+
+    const { container } = render(
+      <GuideArticle
+        category={post.category}
+        title={post.title}
+        readingTime={post.readingTime}
+        date={post.date}
+        author={post.author}
+        guestAuthor={post.guestAuthor}
+      >
+        <RenderBlocks blocks={blocks} />
+      </GuideArticle>,
+    );
+
+    expect(container.textContent?.length ?? 0).toBeGreaterThan(1000);
+    expect(normalizeBetweenTags(container.innerHTML)).toMatchSnapshot();
+  });
+});

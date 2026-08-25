@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { GuideArticle } from "@/components/marketing/resources/GuideArticle";
+import { RenderBlocks } from "@/components/marketing/resources/RenderBlocks";
+import { getPostBlocks } from "@/content/resources/blocks";
 import { getResource, portedResources } from "@/content/resources/registry";
-import { postComponents } from "@/content/resources/posts";
 
 export function generateStaticParams() {
   return portedResources.map((post) => ({ slug: post.slug }));
@@ -29,9 +30,9 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = getResource(slug);
-  const Body = postComponents[slug];
+  const blocks = getPostBlocks(slug);
 
-  if (!post || !post.ported || !Body) {
+  if (!post || !post.ported || !blocks) {
     notFound();
   }
 
@@ -44,7 +45,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       author={post.author}
       guestAuthor={post.guestAuthor}
     >
-      <Body />
+      <RenderBlocks blocks={blocks} />
     </GuideArticle>
   );
 }
