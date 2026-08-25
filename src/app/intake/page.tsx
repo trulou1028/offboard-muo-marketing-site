@@ -7,7 +7,6 @@ export const metadata: Metadata = {
   title: "Intake | Offboard",
   description:
     "Tell us a bit about your offboarding story. Our team reviews every intake and reaches out directly.",
-  robots: "noindex, nofollow, noarchive",
 };
 
 export default function Page() {

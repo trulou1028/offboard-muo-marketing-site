@@ -22,12 +22,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const lookup = await getPostBySlug(slug);
   if (lookup.kind !== "published") {
-    return { title: "Guides & resources | Offboard", robots: "noindex, nofollow, noarchive" };
+    return { title: "Guides & resources | Offboard" };
   }
   return {
     title: `${lookup.post.title} | Offboard`,
     description: lookup.post.excerpt,
-    robots: "noindex, nofollow, noarchive",
   };
 }
 

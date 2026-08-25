@@ -5,7 +5,6 @@ import { MarketingPricing } from "@/components/marketing/homepage/MarketingRoute
 export const metadata: Metadata = {
   title: "Pricing and support | Offboard",
   description: "Start an Offboard transition plan for free, then add credits or eligible human support only when you choose.",
-  robots: "noindex, nofollow, noarchive",
 };
 
 export default function Page() {
