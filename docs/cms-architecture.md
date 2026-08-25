@@ -1,11 +1,11 @@
 # CMS architecture decision record (plan 016, step 1)
 
-**Status: awaiting owner sign-off.** This document proposes five decisions
-for the resources CMS (Supabase-backed `categories`/`posts` tables replacing
-the current `registry.ts` + `posts/*.tsx` + `next.config.ts` redirect list).
-Nothing here is built yet. Once the owner approves this document, plan 016's
-later steps write the migration, the seed file, and the fetch code. No
-migration, SQL, or application code is part of this step.
+**Status: signed off.** This document proposes five decisions for the
+resources CMS (Supabase-backed `categories`/`posts` tables replacing the
+current `registry.ts` + `posts/*.tsx` + `next.config.ts` redirect list). The
+owner has approved all five (see "Decisions" below); plan 016's later steps
+build the migration, the seed file, and the fetch code against this
+contract.
 
 Each section starts with a plain-language summary of the decision and why it
 matters, then the technical detail underneath.
@@ -131,10 +131,11 @@ about their layoffs. That must not happen.
 - Reads (posts, categories) go through the publishable/anon key
   (`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, already declared in
   `.env.example:5`), constrained by a Row Level Security policy on `posts`
-  scoped to `status = 'published'` (and an equivalent open-read policy on
-  `categories`, which has no draft concept).
-  candidate policy shape:
-  `USING (status = 'published')` for `SELECT` under the `anon` role.
+  (and an equivalent open-read policy on `categories`, which has no draft
+  concept). **This section's original candidate policy shape,
+  `USING (status = 'published')`, was refined during sign-off — see
+  "Decisions" #3 below for why the shipped policy is
+  `USING (status in ('published', 'retired'))` instead.**
 - Writes to `intake_submissions` keep using `SUPABASE_SERVICE_ROLE_KEY`
   exactly as today, confined to `src/lib/intake/supabase-admin.ts`.
 - **Guard to add** (in a later plan-016 step, not this one): a test that
@@ -277,46 +278,72 @@ migration file could silently drift from reality.
 
 ---
 
-## Open questions for the owner
+## Decisions
 
-1. **301 vs. temporary redirect for retired posts.** Today's redirects for
-   unpublished essays are permanent (301s) declared in `next.config.ts`.
-   Contract 2 moves that behavior to a route-level `redirect()` call, whose
-   Next.js default is a temporary redirect, not a 301. Search engines treat
-   these differently (a 301 consolidates SEO signal to the destination; a
-   temporary redirect does not). Does retiring a post need to preserve the
-   permanent-redirect SEO behavior, or is a temporary redirect acceptable
-   since retired posts are expected to be rare and short-lived compared to
-   the original "not ported yet" essays?
-2. **Exact RLS policy text and who can write `posts`/`categories`.** This
-   document specifies the read policy (`status = 'published'` for `anon`)
-   but not the authoring/write side: who (which key, which role, which
-   tool) is allowed to insert/update `posts` and `categories`, and whether
-   that's a Supabase Studio dashboard user, a future admin UI, or something
-   else. Plan 016's later steps need this answered before writing the write
-   path.
-3. **Categories are fixed today; does the schema need to support adding
-   one without a migration?** The current 4 categories
-   (`registry.ts:16,32-45`) are a closed TypeScript union. Moving them into
-   a `categories` table technically allows adding a category via an
-   `INSERT` alone, but nothing in this document says whether that's an
-   intended workflow the owner wants to use, or whether new categories
-   should still go through a reviewed migration.
-4. **On-demand revalidation timeline.** Contract 1 names the
-   `revalidatePath`-via-webhook enhancement as future work but doesn't
-   estimate when. Is the 5-minute ISR delay acceptable for the CMS's
-   initial launch, or does the owner want the webhook in the same plan
-   rather than a follow-up?
-5. **What "committed fallback" content looks like for `categories`.**
-   Contract 1 requires a build-fallback for posts (the existing
-   `blocks/*.json` files already serve this purpose) but categories don't
-   currently have an equivalent committed snapshot outside `registry.ts`'s
-   `categoryMeta`/`categoryOrder`. Later steps need to decide whether that
-   TypeScript data doubles as the fallback or whether a separate committed
-   file is needed.
+Step 1's five open questions are answered below (owner sign-off received;
+reviewer answered the two questions that were implementation-detail rather
+than product/policy calls). Plan 016 steps 2–7 implement all five.
+
+1. **Authoring: the Supabase dashboard, not an admin UI.** (Owner.) The
+   owner writes and edits posts directly in Supabase Studio's table editor.
+   This plan builds no admin UI, no authentication, and no write path in the
+   application for `posts` or `categories` — only the read path. This also
+   answers Step 1's question 2 (who can write): nobody writes through the
+   app; writes happen as the dashboard's own authenticated Postgres session,
+   outside anything this codebase controls. The migration in Step 2
+   accordingly creates no `INSERT`/`UPDATE` policy for `anon` or
+   `authenticated` on either table.
+2. **Publish speed: within 5 minutes, via the ISR contract already
+   designed.** (Owner.) `export const revalidate = 300` (Contract 1) stays
+   as designed. The `revalidatePath`-via-webhook enhancement (Step 1's
+   question 4) remains future work, not built in this plan — a 5-minute
+   worst-case publish delay is acceptable for launch.
+3. **Retired URLs get a real permanent redirect, not Next's default
+   temporary one.** (Owner, resolving Step 1's question 1.) Next's plain
+   `redirect()` from `next/navigation` issues a temporary (307) redirect by
+   default, which would silently drop the 301 behavior
+   `next.config.ts`'s per-slug entries provide today. Route-level retired
+   handling instead uses `permanentRedirect()` from `next/navigation` (a
+   308, verified against `node_modules/next/dist/docs/01-app/03-api-reference/04-functions/permanentRedirect.md`
+   for this installed Next 16 build), so a retired slug keeps issuing a
+   permanent redirect. Draft or unknown slugs still call `notFound()`.
+   **Consequence for the schema/RLS pairing** (not asked as a Step 1
+   question, but forced by this decision): the route needs to tell a
+   retired slug (redirect) apart from an unknown or still-drafting one
+   (404), which means the anon-key read path must be able to see retired
+   rows, not just published ones. Step 2's migration therefore scopes the
+   anon `SELECT` policy on `posts` to `status in ('published', 'retired')`
+   rather than Contract 3's original `status = 'published'`-only sketch —
+   `draft` stays fully denied to `anon`. Retired rows carry no
+   confidentiality risk (they were public before retirement), so this
+   read-only exposure is safe. See the migration file's policy comment for
+   the same reasoning inline with the code.
+4. **Categories stay a migration-reviewed set — no ad-hoc `INSERT`.**
+   (Reviewer, resolving Step 1's question 3.) The `categories` table is not
+   designed for open-ended inserts. `COPY.md` contains each category's
+   description verbatim, and `registry.test.ts`'s "category metadata matches
+   COPY.md" suite asserts that verbatim match against `registry.ts`'s
+   `categoryMeta`. A bare `INSERT` into `categories` would have no such
+   check and could silently diverge from `COPY.md`, or exist with no
+   corresponding registry/test coverage at all. Adding a category is
+   therefore a two-part change: a reviewed migration (like Step 2's) **and**
+   a `COPY.md` update, landed together, the same way any other copy change
+   ships.
+5. **The categories fallback is `registry.ts`'s existing `categoryMeta` /
+   `categoryOrder` — no separate snapshot file.** (Reviewer, resolving Step
+   1's question 5.) Posts already have a committed fallback in
+   `blocks/*.json` (Contract 1). Categories don't need an equivalent new
+   file: `registry.ts` already exports `categoryMeta` (descriptions) and
+   `categoryOrder` (display order) as committed TypeScript, and
+   `MarketingResources` (`src/components/marketing/homepage/MarketingRoutePages.tsx`)
+   already reads category descriptions from `categoryMeta` directly rather
+   than from whatever `sections` data it's passed — so this data was already
+   serving as the categories fallback in practice before this plan started.
+   Step 3's data layer reuses it as-is rather than duplicating it into a new
+   committed file, which would only create a second place for category
+   copy to drift from `COPY.md`.
 
 ---
 
-*This document is Step 1 of plan 016 ("CMS foundation"). Per the plan, an
-owner gate follows this step — no migration, seed file, or fetch code is
-written until this document is signed off.*
+*This document is Step 1 of plan 016 ("CMS foundation"). The owner signed
+off on the five decisions above; plan 016 steps 2–7 implement them.*
