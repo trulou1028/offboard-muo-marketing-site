@@ -67,7 +67,7 @@
 .mh-site-header nav a:hover,
 .mh-sign-in:hover { opacity: 1; }
 .mh-header-actions { justify-self: end; display: flex; align-items: center; gap: 24px; color: white; }
-.mh-header-actions a.mh-primary-cta { min-height: 48px; background: transparent; border: 1px solid #e2fb6c; border-radius: 8px; color: white; }
+.mh-header-actions a.mh-primary-cta { min-height: 48px; background: transparent; border: 1px solid var(--mh-lime); border-radius: 8px; color: white; }
 .mh-header-actions .mh-primary-cta svg { display: none; }
 
 .mh-hero { min-height: 983px; padding: 152px var(--mh-page-x) 56px; background: var(--mh-deep); color: white; }
