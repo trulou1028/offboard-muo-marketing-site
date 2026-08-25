@@ -71,7 +71,7 @@
 .mh-header-actions .mh-primary-cta svg { display: none; }
 
 .mh-hero { min-height: 983px; padding: 152px var(--mh-page-x) 56px; background: var(--mh-deep); color: white; }
-.mh-hero-inner { max-width: 1384px; min-height: 775px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 680px) minmax(480px, 630px); gap: 62px; align-items: center; }
+.mh-hero-inner { max-width: var(--mh-page-max); min-height: 775px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(380px, 1fr); gap: clamp(40px, 4vw, 62px); align-items: center; }
 .mh-hero-copy { padding: 20px 0 30px; }
 .mh-hero-copy h1 { margin-top: 26px; color: var(--mh-paper); font-size: clamp(58px, 5.03vw, 76px); line-height: 1.03; letter-spacing: -.035em; }
 .mh-hero-copy h1 span { display: block; }
