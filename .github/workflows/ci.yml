@@ -52,6 +52,16 @@ jobs:
   # authored them, so this job is what actually proves they apply cleanly
   # via `supabase db reset` (not just the manual bare-Postgres probe noted
   # in that commit's message).
+  #
+  # The "build against the database" step below FAILS the job if the build
+  # actually ran through the fallback instead of the database (grepping the
+  # "posts: db" / "posts: fallback" marker src/lib/content/posts.ts logs) —
+  # not just a comment asking someone to watch for it. That check earns its
+  # place here: the fallback is deliberately silent, so on the first real
+  # run of this job it stayed green while quoting bug in the env-export step
+  # below made the DB fetch fail and fall through unnoticed. Fixed in both
+  # places; this job now fails loudly instead of passing quietly if it
+  # regresses.
   cms-contract:
     runs-on: ubuntu-latest
     steps:
@@ -84,15 +94,40 @@ jobs:
         # (api.url) and its Go source's struct tags for the anon key field
         # (auth.anon_key) — not guessed from documentation alone, since this
         # environment has no Docker and so cannot run `supabase status` to
-        # confirm the output directly. If either path is wrong for the CLI
-        # version this job resolves in CI, this step's output env vars will
-        # be empty and the next two steps will silently exercise the
-        # fallback path instead of the database — watch for "posts: db" (not
-        # "posts: fallback") in the `npm run build` log below to confirm.
+        # confirm the output directly.
+        #
+        # `supabase status -o env` emits shell-style KEY="value" lines, but
+        # $GITHUB_ENV does not strip quotes — it takes everything after `=`
+        # literally — so appending its output directly makes
+        # NEXT_PUBLIC_SUPABASE_URL literally `"http://127.0.0.1:54321"`,
+        # quote characters included, which `new URL()` then rejects. Caught
+        # on this job's first real CI run: the build log showed
+        # `Failed to parse URL from "http://127.0.0.1:54321"/rest/v1/...`
+        # with the stray quote visible right there, and the run fell through
+        # to the fallback path silently (the "build against the database"
+        # step below did not exist yet on that run, or it would have failed
+        # loudly instead). The sed strips the surrounding quotes as each
+        # line is appended.
         run: |
           supabase status -o env \
             --override-name api.url=NEXT_PUBLIC_SUPABASE_URL \
             --override-name auth.anon_key=NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY \
-            >> "$GITHUB_ENV"
+            | sed -E 's/^([A-Z_]+)="(.*)"$/\1=\2/' >> "$GITHUB_ENV"
+          echo "NEXT_PUBLIC_SUPABASE_URL (unquoted, for verification only): $NEXT_PUBLIC_SUPABASE_URL"
       - run: npm test
-      - run: npm run build
+      - name: Build against the database and require the DB path
+        # The fallback in src/lib/content/posts.ts is deliberately silent
+        # (correct for production resilience against a real outage), which
+        # means "no credentials" and "the DB read path is broken" produce an
+        # identical green `npm run build` here unless something makes the
+        # difference fatal. This job's entire point is to prove the database
+        # path works, not just that the fallback still does (test-and-build
+        # already proves that, unchanged, with zero credentials) — so a
+        # build that quietly fell back must fail this job.
+        run: |
+          npm run build 2>&1 | tee build.log
+          if grep -q "posts: fallback" build.log; then
+            echo "::error::cms-contract built from the committed fallback, not the database. The DB read path is broken."
+            exit 1
+          fi
+          grep -q "posts: db" build.log || { echo "::error::No 'posts: db' marker in build output."; exit 1; }

@@ -282,7 +282,9 @@ migration file could silently drift from reality.
 
 Step 1's five open questions are answered below (owner sign-off received;
 reviewer answered the two questions that were implementation-detail rather
-than product/policy calls). Plan 016 steps 2–7 implement all five.
+than product/policy calls), plus a sixth decision the reviewer added during
+Step 5/7 review after it caused a real CI failure mode. Plan 016 steps 2–7
+implement all six.
 
 1. **Authoring: the Supabase dashboard, not an admin UI.** (Owner.) The
    owner writes and edits posts directly in Supabase Studio's table editor.
@@ -342,8 +344,40 @@ than product/policy calls). Plan 016 steps 2–7 implement all five.
    Step 3's data layer reuses it as-is rather than duplicating it into a new
    committed file, which would only create a second place for category
    copy to drift from `COPY.md`.
+6. **The `cms-contract` CI job must assert it actually used the database,
+   not just build successfully.** (Reviewer, added during Step 5/7 review —
+   not one of Step 1's original five questions, but promoted into this
+   contract once it caused a real, silent failure.) `getPublishedPosts()`
+   and friends (`src/lib/content/posts.ts`) fall back to the committed
+   registry/blocks content whenever the database is unreachable, and that
+   fallback is deliberately silent — the whole point of Contract 1 is that a
+   database outage must never fail a build. That silence has a cost: on the
+   `cms-contract` job's first real CI run, a quoting bug in the env-export
+   step (`supabase status -o env` emits `KEY="value"`; `$GITHUB_ENV` does
+   not strip the quotes, so `NEXT_PUBLIC_SUPABASE_URL` arrived as the
+   literal string `"http://127.0.0.1:54321"`, which `new URL()` rejects)
+   made the database fetch fail on every call — and the job stayed green,
+   because "no working credentials" and "the read path is broken" are
+   indistinguishable from a build that just falls back correctly. Fixed
+   two ways: the quoting bug itself (stripped with `sed` before appending
+   to `$GITHUB_ENV`), and — the part that makes this a standing contract
+   rather than a one-off fix — the job's build step now greps its own
+   output for `posts/logSource()`'s `posts: db` / `posts: fallback`
+   marker and fails if it sees `fallback`. `test-and-build` and `browser`
+   (unchanged) still prove the fallback path stays green with zero
+   credentials; `cms-contract` now proves the opposite is also true. A
+   related correction found the same day: the read fetch in
+   `src/lib/content/supabase-read.ts` used `cache: "no-store"` (copied from
+   `supabase-admin.ts`, correct there for a one-shot write), which forces
+   Next to render the whole route dynamically the moment the fetch actually
+   runs — the same CI run's build log showed `/resources/[slug]` fail to
+   prerender with `Dynamic server usage: ... used revalidate: 0 fetch`.
+   Changed to `next: { revalidate: 300 }` so the read participates in the
+   route's own ISR window (Contract 1) instead of opting it out of static
+   rendering.
 
 ---
 
 *This document is Step 1 of plan 016 ("CMS foundation"). The owner signed
-off on the five decisions above; plan 016 steps 2–7 implement them.*
+off on the five decisions above; plan 016 steps 2–7 implement them, with
+decision 6 added during review.*

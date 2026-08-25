@@ -60,10 +60,21 @@ export async function supabaseSelect<T>(table: string, query: string): Promise<S
         apikey: credentials.key,
         Authorization: `Bearer ${credentials.key}`,
       },
-      // Build-time/ISR reads want fresh rows each time this is called
-      // (Next's own `revalidate = 300` on the calling route is what
-      // controls staleness, not an inner fetch cache layered on top of it).
-      cache: "no-store",
+      // `next: { revalidate: 300 }`, NOT `cache: "no-store"`. This must
+      // match the calling route's `export const revalidate = 300`
+      // (src/app/resources/page.tsx, src/app/resources/[slug]/page.tsx) —
+      // Next.js's ISR contract (docs/cms-architecture.md contract 1) is that
+      // article pages PRERENDER at build and refresh on a 300s window, not
+      // that every request re-fetches. `cache: "no-store"` (correct for
+      // supabase-admin.ts's one-shot write) forces the whole route dynamic
+      // the moment a fetch call inside it uses it — confirmed the hard way:
+      // the cms-contract CI job's build log showed "Dynamic server usage:
+      // Route /resources/[slug] couldn't be rendered statically because it
+      // used revalidate: 0 fetch" once real credentials made this fetch
+      // actually run. `revalidate: 300` here lets Next fold this fetch into
+      // the route's own ISR window instead of opting the route out of static
+      // rendering entirely.
+      next: { revalidate: 300 },
     });
 
     if (!res.ok) {
