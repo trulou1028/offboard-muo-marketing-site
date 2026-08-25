@@ -101,7 +101,7 @@ your row when done.
 | 014  | Design-token consolidation + DESIGN.md rewrite | P2 | L | 012, 013 | DONE — executed + reviewed, approved first pass 2026-08-24; branch `claude/014-token-consolidation`, 7 commits (one per stage). See "Plan 014 review record" below. |
 | 015  | Portable content format + characterization tests | P1 | L | — | DONE — executed + reviewed, approved first pass 2026-08-24; branch `claude/015-portable-content`, 6 commits. See "Plan 015 review record" below. |
 | 016  | Supabase CMS foundation (schema, ISR, read client, CI DB) | P1 | L | 015 | DONE — executed in 2 phases across an owner gate, reviewed, approved 2026-08-25; branch `claude/016-cms-foundation-phase2`. See "Plan 016 review record" below. |
-| 017  | Hygiene batch (PII logs, intake tests, noindex/sitemap, related posts, font/scroll polish) | P2 | M | — | TODO |
+| 017  | Hygiene batch (PII logs, intake tests, noindex/sitemap, related posts, font/scroll polish) | P2 | M | — | DONE — executed + reviewed, approved first pass 2026-08-25; branch `claude/017-hygiene`, 6 commits (one per part). See "Plan 017 review record" below. |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale)
@@ -610,3 +610,62 @@ untouched (grants and RLS are complementary layers, not alternatives).
 creates a table read by the site needs BOTH an RLS policy and a `grant select
 … to anon`. Neither alone is sufficient, and the failure mode is a silent
 fallback that looks healthy.
+
+## Plan 017 review record (2026-08-25)
+
+All six parts done; APPROVED first pass. Gates re-verified: `npm test`
+(96, 8 files), `lint`, `lint:css`, `typecheck`, `build`, `npm run e2e` (52),
+`CI=1 npm run e2e` (19 + 33 skipped). Tree clean, no temp specs left.
+
+**Part A — PII out of the logs (the one that mattered).** Verified directly:
+`res.text()` is gone from both `supabase-admin.ts` and `resend.ts`, `detail`
+is gone from `InsertIntakeResult`, and the new `logInsertFailure` helper logs
+only `{ code, message, hint }`. Critically it excludes PostgREST's `details`
+field — that is the one that echoes offending column values, i.e. a laid-off
+person's name, email and free-text answers. Matches the pattern plan 016
+established in `supabase-read.ts`, so all three call sites now log alike.
+
+**Part C — the highest-risk change, verified in built HTML.** Moving `noindex`
+from 11 hand-copied page files to one inherited `metadata` export could have
+silently shipped an indexable site. The reviewer built and scanned every
+generated page: **23 checked, 22 carry `noindex`.** The single exception is
+`.next/server/app/_global-error.html` — Next's internal global-error boundary,
+which replaces the root layout entirely and therefore never inherited root
+metadata. It is not a crawlable route and did not carry `noindex` before
+either. Not a regression. Launch is now a one-line flip in `layout.tsx`.
+
+**Part D — related posts, copy law honored.** "Keep reading" was added to
+COPY.md in the same commit (§6, "Article page chrome"). Related slugs resolve
+through the **data layer** (`getPublishedPosts()`), not the registry directly,
+so the links keep working once content is DB-backed — this was called out at
+dispatch because the plan predated plan 016. Reviewed the rendered page: the
+pair sits above the "More guides" link and matches the article's card styling.
+
+**Snapshot discipline held.** The 11 `ArticleFidelity` snapshots did NOT move
+(that suite renders `GuideArticle` without the new `related` prop). Exactly 3
+PNGs changed — the article route's desktop/tablet/mobile full-page shots —
+because the page genuinely grew (desktop 3007px → 3229px). Legitimate,
+scoped, and disclosed rather than silently regenerated.
+
+**Parts B, E, F.** The intake action finally has direct tests (4 cases with
+real assertions, proven non-vacuous by inverting one). Font `fallback` +
+`adjustFontFallback` were confirmed against the installed Next 16 docs rather
+than assumed. `scrollbar-gutter: stable` fixes the horizontal jump on short
+pages. The stale "Tailwind preflight" comment is gone, and the sticky intake
+rail keeps a `top` value (24px) rather than losing it.
+
+**Honest gap the executor disclosed**: it attempted to measure the font-reflow
+improvement via the Layout Instability API and got 0 in both configurations,
+because self-hosted fonts load too fast locally for the swap window to show.
+So Part E's CLS benefit is reasoned, not measured. The change is a documented
+Next.js API used correctly; the risk of it being wrong is low, but it is not
+empirically demonstrated.
+
+**Two scoping judgment calls, both accepted**: the sitemap excludes `/intake`
+and `/intake/confirmed` (a form and a transactional confirmation, not
+content); and COPY.md gained a new "Article page chrome" subsection because no
+section was literally named for guide-article chrome.
+
+**Follow-up not done here**: `docs/cutover-checklist.md` still describes the
+old per-page `noindex` mechanism. Update its launch step to reference the
+single `layout.tsx` export.
