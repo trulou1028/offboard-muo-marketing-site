@@ -93,15 +93,40 @@ cleanly creates new pages that keep the site consistent."
 **In scope**:
 - `src/components/marketing/homepage/MarketingHomepage.css`
 - `DESIGN.md` (rewrite to describe THIS repo truthfully)
-- `e2e/__screenshots__/` (regenerated at the end)
+- `e2e/visual.spec.ts-snapshots/` (regenerated per stage)
 - `.stylelintrc.json` (tighten color rules at the end)
 
 **Out of scope**:
 - TSX changes of any kind (if a consolidation seems to require one, STOP).
 - Copy strings / COPY.md.
-- Container widths and gutters (plan 013 owns them; already tokens).
+- Container widths and gutters (plan 013 owns them; already tokens:
+  `--mh-page-max`, `--mh-gutter`, `--mh-page-x`). Do NOT change their values.
 - The app repo's design system — DESIGN.md here diverges deliberately;
   do not "sync" values from lumo-plan-builder.
+
+### Carried over from plan 013's review (do these as part of Stage 2/6)
+
+1. **Sweep the two leftover hardcoded gutters** in the `@media (max-width: 560px)`
+   block, which plan 013 deliberately left: `.mh-route-agency { padding-inline: 20px; … }`
+   and `.mh-site-footer { padding: 54px 20px 30px; }`. Both evaluate to exactly
+   the `--mh-gutter` value at that breakpoint, so this is a consistency fix with
+   ZERO visual delta — replace the literal with `var(--mh-gutter)` and confirm
+   the screenshots do not move.
+2. **Document the `.mh-article` trap in DESIGN.md.** `GuideArticle.tsx` renders
+   `<article className="mh-article mh-section">`, so the article gets BOTH its own
+   centered `max-width: 856px` AND `.mh-section`'s `padding-inline: var(--mh-page-x)`.
+   Because `--mh-page-x` grows with viewport width, that combination once starved
+   the article to 136px of text at 1920px (fixed in plan 013 by giving
+   `.mh-article` its own `padding-inline: var(--mh-gutter)`). The RULE that must
+   go in DESIGN.md's "how to add a section" recipe: **a centered `max-width` box
+   must never also take the page-x gutter** — either give it `--mh-gutter`
+   padding like `.mh-article` does, or do not compose `.mh-section` at all.
+   Do not change `.mh-article`'s current, working declaration.
+3. **Fold the article's inner measures into the measure scale.** `.mh-article`
+   (856px) and `.mh-article-body` / `.mh-article-guest-author` (`68ch`) are
+   reading measures. When you build `--mh-measure-*` (Step 3/heading work),
+   either express these through it or record in DESIGN.md why the article keeps
+   its own `ch`-based measure. Their rendered widths must not change.
 
 ## Git workflow
 
