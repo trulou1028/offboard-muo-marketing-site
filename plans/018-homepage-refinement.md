@@ -17,7 +17,8 @@
 - **Category**: design / conversion / accessibility
 - **Planned at**: commit `c551bf6`, 2026-08-25
 - **Branch**: `codex/018-homepage-refinement`
-- **Current phase**: All four phases executed; awaiting owner preview approval
+- **Current phase**: COMPLETE - all four phases owner-approved and merged to `main` 2026-08-26
+- **Merges**: phase 1 PR #31 (`d0227c5`), phase 2 PR #33, phase 3 PR #34, phase 4 PR #36 (`859ec5e`)
 - **Phase 1 merge**: PR #31, merge commit `d0227c5`, 2026-08-25
 - **Phase 2 branch**: `claude/018-phase2-typography`
 - **Phase 3 branch**: `claude/018-phase3-teasers-proof` (stacked on phase 2)

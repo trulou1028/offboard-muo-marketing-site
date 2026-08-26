@@ -16,14 +16,14 @@ your row when done.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 001  | Remove dead migration components (dead-code half) | P1 | S | — | DONE — reviewed; [PR #2](https://github.com/trulou1028/offboard-muo-marketing-site/pull/2) open, **awaiting owner merge**. Imagery half split out to 007. |
+| 001  | Remove dead migration components (dead-code half) | P1 | S | - | DONE - reviewed and **merged** via [PR #2](https://github.com/trulou1028/offboard-muo-marketing-site/pull/2). Imagery half split out to 007. *(Row corrected 2026-08-26: it said "open, awaiting owner merge" long after the PR merged.)* |
 | 002  | Rebuild the homepage with the approved v7 substance | P1 | L | — | DONE — reviewed (3 rounds); branch `claude/002-homepage-substance-port` (`2eea650`). Pricing figures owner-confirmed 2026-08-21. |
 | 003  | Rebuild /how-it-works (5 steps, toolkit, LUMO) | P1 | L | 002 | DONE — reviewed, approved first pass; branch `claude/003-how-it-works-rebuild` (`e691f86`), stacked on 002. |
 | 004  | Put real prices on /pricing | P1 | M | 002 | DONE — reviewed (1 revision); branch `claude/004-pricing-real-numbers` (`0eb0896`), stacked on 003. Highlight on Free per owner. |
 | 005  | Consolidate /employers, rewrite /about | P2 | M | 002 | DONE — reviewed, approved first pass; branch `claude/005-employers-about`, stacked on 008. Founder story shipped neutral (no approved copy). |
 | 006  | /resources shell, 301 map, cutover readiness | P2 | L | 005 | DONE — reviewed, approved first pass; branch `claude/006-resources-and-redirects`, stacked on 010. Open cutover item: `/act` decision (checklist). |
 | 008  | Fix white-on-lime primary CTA sitewide (a11y) | P1 | S | — | DONE — reviewed, approved first pass; branch `claude/008-cta-contrast` (`820bca5`), stacked on 004. |
-| 007  | Give human-support and About their own photos | P2 | S | 001 | DONE — reviewed; branch `claude/007-imagery-dedupe` (`fcd1d3e`), **not pushed**. Merges cleanly with 001. |
+| 007  | Give human-support and About their own photos | P2 | S | 001 | DONE - goal met on `main`: every `/marketing/**` image is referenced exactly once across `MarketingSite.tsx` and `MarketingRoutePages.tsx`, so no page reuses another's photo. *(Row corrected 2026-08-26: it named a branch `claude/007-imagery-dedupe` that exists neither locally nor on the remote. The dedupe is in place; how it landed was not traced.)* |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale)
@@ -676,7 +676,7 @@ single `layout.tsx` export.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 018 | Refine homepage hierarchy, pacing, proof, and interaction polish | P1 | L | 012-014 | IN PROGRESS - Phase 1 approved and merged in PR #31 (`d0227c5`). Phase 2 (typography) on `claude/018-phase2-typography` and Phase 3 parts 1-2 (teaser patterns) on `claude/018-phase3-teasers-proof`, both awaiting owner preview approval. All four phases executed, awaiting owner preview approval. Branches stack: `claude/018-phase2-typography` -> `claude/018-phase3-teasers-proof` -> `claude/018-phase4-cta-polish`. Phase 4 fixed a shipped a11y defect: the focus ring was flat white on every surface (~1.06:1 on paper) |
+| 018 | Refine homepage hierarchy, pacing, proof, and interaction polish | P1 | L | 012-014 | DONE - all four phases executed, owner-approved and **merged to `main`** 2026-08-26. Phase 1 [PR #31](https://github.com/trulou1028/offboard-muo-marketing-site/pull/31) (`d0227c5`); phase 2 [PR #33](https://github.com/trulou1028/offboard-muo-marketing-site/pull/33); phase 3 [PR #34](https://github.com/trulou1028/offboard-muo-marketing-site/pull/34); phase 4 [PR #36](https://github.com/trulou1028/offboard-muo-marketing-site/pull/36) (`859ec5e`). Phase 3 part 3's STOP was resolved by the owner (ship the claim-free subset of real product state). Phase 4 fixed a **shipped a11y defect**: the focus ring was flat white on every surface, ~1.06:1 on paper. See the plan's per-phase records, including two evidence traps worth reading before touching the visual suite. |
 
 Plan 018 preserves the approved homepage copy and section order. It uses a
 preview gate after Phase 1 so the owner can approve the new page silhouette
