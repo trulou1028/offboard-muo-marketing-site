@@ -248,6 +248,7 @@ Connected plan → Verified facts → Pricing teaser → Employer strip → Comm
 
 - Kicker: `Pricing` · H2: `Start free. Upgrade when you need more support.`
 - Link: `Compare all pricing details` → `/pricing`
+- Composition *(plan 018 phase 3)*: Free leads as a tall card in the forest treatment; Pro and Sponsored sit beside it as compact support. Same three tiers, same strings.
 - Cards: **Free / $0 forever** — `See your plan, your runway, and your benefit deadlines. Then build your first Job Packet.` (features line: `Transition plan & benefit sheets · Runway calculator · First Job Packet free · Application tracking · 3 LUMO messages a day`) · **Offboard Pro / $20/month** — `For an active transition that needs more room: research, tailoring, preparation, and paperwork review.` (`Unlimited LUMO · More Job Packets and tailoring · Deeper application and interview support`) · **Sponsored / badge "May be covered"** — `Outplacement, modernized. Your former employer, school, or workforce organization may cover your access.` (`Full benefit delivered to you · Your activity stays private · Sponsors see aggregate reporting only`)
 
 ### Employer strip *(added by plan 011 — the only B2B content on the page, deliberately price-free)*
@@ -269,7 +270,7 @@ Connected plan → Verified facts → Pricing teaser → Employer strip → Comm
 ### Privacy summary *(rendered since plan 011)*
 
 - Kicker: `Private by default` · H2: `Your transition is yours.`
-- Cards: `01 Independent` — `Offboard is not affiliated with any state or federal agency.` · `02 Your choice` — `You choose what enters your plan and which support you request.` · `03 Clear sponsor terms` — `Sponsored programs explain what a sponsor can and cannot see before enrollment.`
+- Rendered as a ruled numbered ledger *(plan 018 phase 3; three equal cards before)*: `01 Independent` — `Offboard is not affiliated with any state or federal agency.` · `02 Your choice` — `You choose what enters your plan and which support you request.` · `03 Clear sponsor terms` — `Sponsored programs explain what a sponsor can and cannot see before enrollment.`
 - Link: `Read the privacy policy` → app privacy page
 
 ### Final CTA (shared component; default copy)

@@ -692,11 +692,11 @@ export function PrivacySummary() {
   return (
     <section className="mh-home-trust mh-section" aria-labelledby="trust-summary-title">
       <div><span className="mh-kicker is-lime">Private by default</span><h2 id="trust-summary-title">Your transition is yours.</h2></div>
-      <div className="mh-home-trust-grid">
-        <article><span>01</span><strong>Independent</strong><p>Offboard is not affiliated with any state or federal agency.</p></article>
-        <article><span>02</span><strong>Your choice</strong><p>You choose what enters your plan and which support you request.</p></article>
-        <article><span>03</span><strong>Clear sponsor terms</strong><p>Sponsored programs explain what a sponsor can and cannot see before enrollment.</p></article>
-      </div>
+      <ol className="mh-home-trust-ledger">
+        <li><span>01</span><strong>Independent</strong><p>Offboard is not affiliated with any state or federal agency.</p></li>
+        <li><span>02</span><strong>Your choice</strong><p>You choose what enters your plan and which support you request.</p></li>
+        <li><span>03</span><strong>Clear sponsor terms</strong><p>Sponsored programs explain what a sponsor can and cannot see before enrollment.</p></li>
+      </ol>
       <a href="https://app.offboard.co/privacy">Read the privacy policy <ArrowRight aria-hidden="true" /></a>
     </section>
   );
@@ -787,8 +787,8 @@ export function PricingTeaser() {
         <Link className="mh-section-link" href="/pricing">Compare all pricing details <ArrowRight aria-hidden="true" /></Link>
       </div>
       <div className="mh-pricing-teaser-cards">
-        {PRICING_TEASER_CARDS.map((card) => (
-          <article key={card.name}>
+        {PRICING_TEASER_CARDS.map((card, index) => (
+          <article key={card.name} className={index === 0 ? "is-primary" : undefined}>
             <header>
               <span>{card.name}</span>
               {"price" in card ? <b>{card.price}</b> : <b className="is-badge">{card.badge}</b>}
