@@ -29,7 +29,7 @@ export default function MarketingHome() {
         <EmployerStrip />
         <CommunityStrip />
         <PrivacySummary />
-        <FinalCta />
+        <FinalCta photo />
       </main>
     </MarketingShell>
   );

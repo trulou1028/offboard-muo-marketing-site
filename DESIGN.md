@@ -198,6 +198,50 @@ type, color, radius, and shadow) — introducing one for two consumers would
 be premature. If a third `ch`-based reading column shows up, that's the
 signal to add the token.
 
+## Interaction & focus
+
+### CTA roles (plan 018 phase 4)
+| Class | Role | Looks like |
+|---|---|---|
+| `.mh-primary-cta` | **Signup only.** The filled lime button is reserved for "start free" / "build my plan". | Filled lime, deep-green label |
+| `.mh-secondary-cta` | An internal route link that still needs button weight (`/how-it-works` from the homepage, `/employers` from the Sponsored card). | Same geometry, 1px ink outline, no fill |
+| `.mh-section-link` | A quiet inline "read more" link at the end of a section. | Underlined label + arrow, no box |
+
+Before this split, three different destinations all rendered the same filled
+lime button, so the homepage showed four equally loud CTAs. Mailto links and
+`/intake` ("Talk to someone") were left on `.mh-primary-cta` deliberately —
+they are neither signup nor internal route links, and re-roling them is a
+separate decision.
+
+Hover lifts a CTA by 1px and nudges its arrow 3px; `:active` returns both to
+rest so a click reads as a press. All of it is `transition`-based, so the
+existing `prefers-reduced-motion` block already switches it off.
+
+### `--mh-focus-ring`
+| Token | Value | Use |
+|---|---|---|
+| `--mh-focus-ring` | `var(--mh-ink)` | Default (light surfaces) |
+| | `var(--mh-paper)` | Re-declared on dark bands |
+
+The ring used to be a flat white everywhere, which against paper (`#f7f4ec`)
+measures about **1.06:1** — a keyboard user had no visible focus indicator
+across the light two-thirds of every page. WCAG 2.1 SC 1.4.11 wants 3:1.
+
+One rule consumes the token
+(`.marketing-homepage a/button/summary:focus-visible`). Custom properties
+inherit, so **a control inside a dark band needs no rule of its own** — the
+band re-declares the token and everything below it follows. When you add a
+dark section, add it to that selector list. When you put a *light* surface
+inside a dark one (the mobile-menu panel is the live example), set the token
+back to ink on that surface, or it paints paper on paper.
+
+`e2e/homepage.spec.ts` asserts every focusable resolves the token to one of
+the two values, that both values are actually in use, and that the resolved
+ring clears 3:1 against the surface behind it. Note that reading
+`outlineColor` back off a focused element is NOT a reliable check here — it
+reports white even when the ring paints ink, which is how the original defect
+went unnoticed.
+
 ## Radii
 
 | Token | Value |

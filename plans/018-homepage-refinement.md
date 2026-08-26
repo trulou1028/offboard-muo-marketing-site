@@ -17,10 +17,11 @@
 - **Category**: design / conversion / accessibility
 - **Planned at**: commit `c551bf6`, 2026-08-25
 - **Branch**: `codex/018-homepage-refinement`
-- **Current phase**: Phase 3 complete (all three parts); Phase 4 is next
+- **Current phase**: All four phases executed; awaiting owner preview approval
 - **Phase 1 merge**: PR #31, merge commit `d0227c5`, 2026-08-25
 - **Phase 2 branch**: `claude/018-phase2-typography`
 - **Phase 3 branch**: `claude/018-phase3-teasers-proof` (stacked on phase 2)
+- **Phase 4 branch**: `claude/018-phase4-cta-polish` (stacked on phase 3)
 
 ## Objective
 
@@ -309,6 +310,97 @@ anything -- each width was inspected directly with section screenshots instead.
 
 If no existing image fits, keep the current image count. Do not generate new
 imagery without owner approval.
+
+### Phase 4 implementation record
+
+**No new imagery was generated.** `npm run imagery` was not run.
+
+#### 1. Imagery
+
+Three existing raw photos were unused: `final-cta-portrait.webp`,
+`strip-interview-prep.webp`, `system-desk.webp`. The first is purpose-named
+for this exact slot and is the one added. The homepage ran six text-only bands
+between the hero photo and the footer; the closing band now pairs copy with a
+portrait, echoing the hero's composition.
+
+`FinalCta` gained an opt-in `photo` prop. Only the homepage passes it, so the
+three other routes that share the component render the markup they rendered
+before and never download the image. Verified by direct screenshot that
+`/how-it-works`'s closing band is unchanged.
+
+#### 2. CTA roles
+
+`.mh-secondary-cta` is new: the primary CTA's geometry with a 1px ink outline
+instead of the lime fill. Two internal route links moved onto it — the
+homepage's `See how Offboard works` (to `/how-it-works`) and the Sponsored
+card's `Learn about sponsored access` (to `/employers`) on `/pricing`. The
+homepage previously showed the same filled lime button for signup and for a
+route link on the same screen.
+
+Mailto CTAs and `/intake` ("Talk to someone") were deliberately left on
+`.mh-primary-cta`: neither is signup nor an internal route link, and re-roling
+them is a separate decision, not this plan's.
+
+#### 3. Focus, pressed, and menu states
+
+The real find. Every focus ring on the site was a flat white, set once in a
+single rule. Against paper (`#f7f4ec`) that is about **1.06:1** — a keyboard
+user had no visible focus indicator across the light two-thirds of every page.
+WCAG 2.1 SC 1.4.11 wants 3:1. This was shipped, not introduced by this plan.
+
+The ring is now the inherited `--mh-focus-ring` token: ink by default, paper
+re-declared on dark bands. Because custom properties inherit, a control inside
+a dark band needs no rule of its own.
+
+Writing the regression test caught a case direct inspection had missed: the
+mobile-menu panel is a *light* dropdown inside the *dark* header, so it
+inherited the light ring and painted paper on paper. It now sets the token
+back to ink.
+
+Also added: `:active` returns the CTA lift and the arrow nudge to rest so a
+click reads as a press; `.mh-section-link` and `.mh-secondary-cta` nudge their
+arrow 3px on hover; and the mobile-menu trigger finally has an open state
+(surface, border, lime label) — it previously looked identical open or closed.
+
+#### 4. Reduced motion
+
+Everything added is `transition`-based, so the existing
+`prefers-reduced-motion` block switches it all off. No new animation, no
+transform that persists without a transition.
+
+#### Verification
+
+`npm test` 111 passed, `npm run lint`, `npm run lint:css`, `npm run typecheck`,
+`npm run build` (25 static pages), `npm run e2e` **53 passed** (52 before, plus
+the new focus-contrast guard).
+
+The new guard asserts every focusable resolves the token to one of the two
+documented values, that both values are in use, and that the resolved ring
+clears 3:1 against the surface behind it. Proven non-vacuous: pointing the
+token at paper everywhere reproduces the original defect and the test fails
+with `Expected >= 3, Received 1`.
+
+**Two evidence traps worth recording.**
+
+1. Reading `outlineColor` back off a focused element reports **white even when
+   the ring paints ink**. An early measurement pass "confirmed" the fix had not
+   worked when it had. Ground truth came from screenshots of focused controls,
+   and the committed test asserts the token, not the computed outline.
+2. `/pricing`'s visual baseline **passed** after its Sponsored button changed
+   from filled to outlined, because the button is under the suite's 1% pixel
+   tolerance. Worse, `--update-snapshots` does not rewrite a snapshot whose
+   comparison passed, so the committed baseline silently kept the old button.
+   It needed `--update-snapshots=all`. Any future small-element change has the
+   same trap: a green visual suite is not evidence, and a routine re-capture
+   will not fix the stale reference.
+
+   This bit a second time when the stack was rebased onto `main` after
+   [PR #35](https://github.com/trulou1028/offboard-muo-marketing-site/pull/35)
+   landed: the three `pricing` baselines conflicted, and resolving them to
+   either side produced a **green** suite while the committed image still
+   showed the old filled button. Only a forced re-capture surfaced it. When a
+   screenshot baseline conflicts, re-capture it -- never resolve it by picking
+   a side and trusting the suite.
 
 ## Verification for every visible phase
 
