@@ -196,6 +196,18 @@
 .mh-copy-block > p { color: var(--mh-muted); font-size: 18px; line-height: 29px; }
 .mh-copy-block > strong { font-size: 15px; line-height: 24px; }
 .mh-copy-block > small { color: var(--mh-muted); font-size: 12px; line-height: 19px; }
+
+/* Plan 018 phase 2: the homepage has two heading tiers. Narrative anchors
+   (problem, identity, three jobs, the $12,000 hook, the connected plan, the
+   final CTA) keep the full --mh-h2. Supporting sections step down to
+   --mh-h2-sm so the big Fraunces size marks story beats, not every band.
+   Verified facts is already on --mh-h2-sm at .mh-verified-heading h2 and is
+   the shared member of this tier; the other three are homepage-only, so the
+   rule is scoped to .mh-page-home the same way the phase 1 pacing overrides
+   are. Employer strip sits a step below this tier and keeps its own clamp. */
+.mh-page-home .mh-pricing-teaser-heading h2,
+.mh-page-home .mh-community .mh-copy-block h2,
+.mh-page-home .mh-home-trust h2 { font-size: var(--mh-h2-sm); line-height: 1.15; }
 .mh-five-steps { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: white; border-bottom: 1px solid var(--mh-line); }
 .mh-five-steps .mh-section-heading h2 { max-width: 900px; }
 /* `ol.` prefix is load-bearing - see the reset note at the top of this file. */
@@ -430,6 +442,15 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-home-trust { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-forest); color: var(--mh-paper); }
 .mh-page-home .mh-home-trust { padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); border-bottom: 1px solid color-mix(in srgb, var(--mh-paper) 18%, transparent); }
 .mh-home-trust > div:first-child { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: end; }
+/* The privacy head is a kicker-left / heading-right pair whose 1.4fr heading
+   column was sized around the full --mh-h2. At the supporting size the
+   heading no longer fills that column and strands a gap after "yours." on
+   wide screens, so on the homepage the heading column hugs its own text and
+   lands on the section's right edge instead. Below 900px the head is already
+   a single column, so this only applies to the two-column widths -- but
+   that reset needs a matching .mh-page-home selector to outrank this one,
+   see the <=900 block. */
+.mh-page-home .mh-home-trust > div:first-child { grid-template-columns: 1fr auto; }
 .mh-home-trust h2 { font-size: var(--mh-h2); line-height: 1.08; }
 .mh-home-trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
 .mh-home-trust-grid article { min-height: 230px; padding: 26px; background: var(--mh-surface-on-dark); border: 1px solid var(--mh-border-on-dark); border-radius: var(--mh-radius-lg); }
@@ -710,6 +731,10 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-route-independence,
   .mh-route-contact,
   .mh-employer-pricing-layout { grid-template-columns: 1fr; }
+  /* Same reset, restated at the homepage's specificity: the `1fr auto`
+     rule above is `.mh-page-home ...`, which would otherwise outrank the
+     line above and keep the privacy head two-column on phones. */
+  .mh-page-home .mh-home-trust > div:first-child { grid-template-columns: 1fr; }
   .mh-pricing-teaser-cards,
   .mh-verified-grid,
   .mh-community { grid-template-columns: 1fr; }
@@ -789,7 +814,7 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
 }
 
 @media (max-width: 560px) {
-  .marketing-homepage { --mh-gutter: 20px; --mh-h2: 40px; }
+  .marketing-homepage { --mh-gutter: 20px; --mh-h2: 40px; --mh-h2-sm: 32px; }
   .mh-kicker { font-size: 12px; line-height: 18px; }
   .mh-header-actions .mh-primary-cta span { font-size: 13px; }
   .mh-header-actions { gap: 14px; }
@@ -812,8 +837,6 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-route-ethos,
   .mh-route-privacy,
   .mh-act-privacy { padding-top: 72px; padding-bottom: 72px; }
-  .mh-home-trust h2,
-  .mh-pricing-teaser h2,
   .mh-route-content-heading h2,
   .mh-route-independence h2,
   .mh-route-contact h2 { line-height: 46px; }
@@ -833,10 +856,8 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-note-two { left: -18px; bottom: 84px; transform: rotate(-1.67deg) scale(.78); transform-origin: bottom left; }
   .mh-official-pill { width: 204px; bottom: 18px; font-size: 12px; }
   .mh-section-heading h2,
-  .mh-copy-block h2,
-  .mh-pricing-teaser-heading h2 { line-height: 46px; }
+  .mh-copy-block h2 { line-height: 46px; }
   .mh-pricing-heading h2,
-  .mh-verified-heading h2,
   .mh-faq h2,
   .mh-final-cta h2 { font-size: 40px; line-height: 46px; }
   .mh-jobs-editorial { height: 410px; margin-top: 34px; border-radius: var(--mh-radius-lg); }

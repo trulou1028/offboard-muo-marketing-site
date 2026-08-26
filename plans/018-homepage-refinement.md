@@ -17,8 +17,9 @@
 - **Category**: design / conversion / accessibility
 - **Planned at**: commit `c551bf6`, 2026-08-25
 - **Branch**: `codex/018-homepage-refinement`
-- **Current phase**: Phase 1 approved and merged; Phase 2 is next
+- **Current phase**: Phase 2 executed, awaiting owner preview approval
 - **Phase 1 merge**: PR #31, merge commit `d0227c5`, 2026-08-25
+- **Phase 2 branch**: `claude/018-phase2-typography`
 
 ## Objective
 
@@ -116,6 +117,62 @@ Push the branch, open a PR, resolve the real Vercel preview URL with
 3. Apply a documented smaller section-heading treatment to verified facts,
    pricing, community, and privacy.
 4. Check heading wraps at 390, 560, 900, 1200, and 1440px.
+
+### Phase 2 implementation record
+
+**Classification.** Narrative anchors keep the full `--mh-h2`: problem,
+identity contrast, three jobs, the $12,000 hook, the connected plan, and the
+final CTA. Supporting sections move to `--mh-h2-sm`: verified facts, pricing
+teaser, community, and privacy. The employer strip already sat a step below
+the supporting tier on its own `clamp(26px, 2.4vw, 34px)` and was left alone.
+
+**What changed.** One grouped rule scoped to `.mh-page-home` sizes the
+pricing teaser, community, and privacy headings; verified facts was already
+on `--mh-h2-sm`. The scoping follows the phase 1 convention, and three of the
+four sections are homepage-only components in any case.
+
+**The mobile tier was the real defect.** At `≤560px` the stylesheet flattened
+`--mh-h2` to `40px` while `--mh-h2-sm`'s clamp floor stayed at `38px`, and a
+separate override forced `.mh-verified-heading h2` back to `40px`. That is
+why the baseline measured ten of eleven homepage h2 elements at an identical
+40px / 46px. Phase 2 gives `--mh-h2-sm` its own `32px` small-phone step and
+drops the verified-facts override, so the two tiers stay legible on a phone.
+
+**Measured heading sizes after the change** (anchor / supporting):
+
+| Width | Anchor | Supporting | Employer strip |
+| --- | --- | --- | --- |
+| 390px | 40px | 32px | 26px |
+| 560px | 40px | 32px | 26px |
+| 900px | 46px | 38px | 26px |
+| 1200px | 48px | 38.4px | 28.8px |
+| 1440px | 57.6px | 46.08px | 34px |
+
+**One layout follow-on, caused by the size change.** The privacy band's head
+is a kicker-left / heading-right pair whose `1.4fr` heading column was sized
+around the full `--mh-h2`. At the supporting size the heading stopped filling
+that column and stranded a visible gap after "yours." at 1440px, so the
+homepage now sizes that column to its own content. The first attempt at this
+regressed phones — `.mh-page-home ...` outranks the plain `≤900px`
+single-column reset — so the reset is restated at the homepage's specificity
+inside the `≤900px` block.
+
+**Verification.** `npm test` 96 passed, `npm run lint`, `npm run lint:css`,
+`npm run typecheck`, `npm run build` (25 static pages), `npm run e2e` 52
+passed. Heading metrics and wraps were measured at 390, 560, 900, 1200, and
+1440px with a temporary Playwright spec, which was then deleted. No console
+errors and no horizontal overflow at 390px or 1440px. Desktop page height
+8,910px to 8,833px; mobile 13,704px to 13,474px.
+
+**Baselines deliberately updated: four.** The three homepage screenshots, and
+`how-it-works-mobile`. The `/how-it-works` move is intentional and is the
+only cross-route effect: that page shares the verified-facts strip, which
+sits on `--mh-h2-sm` at every other width, so dropping the `≤560px` override
+makes its phone rendering agree with its own desktop rendering. Verified by
+direct measurement that exactly one heading on that page changed (40px to
+32px) and the other nine were untouched. No other route's baseline moved.
+
+**No copy changed**, so `COPY.md` and the drift tests are untouched.
 
 ## Phase 3: Teaser patterns and product proof
 

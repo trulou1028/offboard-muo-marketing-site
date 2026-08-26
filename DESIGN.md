@@ -94,11 +94,36 @@ Two self-hosted variable fonts, loaded via `next/font` and exposed as
 |---|---|---|
 | `--mh-h1` | `clamp(56px, 5.3vw, 82px)` | Route/page hero `h1` (e.g. `.mh-route-hero h1`) |
 | `--mh-h2` | `clamp(46px, 4vw, 62px)` | Default section heading `h2` |
-| `--mh-h2-sm` | `clamp(38px, 3.2vw, 48px)` | A section `h2` that needs to read a size down (currently only `.mh-verified-heading h2`) |
+| `--mh-h2-sm` | `clamp(38px, 3.2vw, 48px)` | A section `h2` that reads one step down from a narrative anchor (see Homepage heading tiers below) |
 
-`--mh-h2` is overridden to a flat `40px` at the `≤560px` breakpoint (see
-Rhythm & breakpoints below); every `h2` on the token still tracks it, so a
-mobile-size change only ever needs to happen in one place.
+`--mh-h2` is overridden to a flat `40px` at the `≤560px` breakpoint, and
+`--mh-h2-sm` to a flat `32px` (see Rhythm & breakpoints below); every `h2`
+on either token still tracks it, so a mobile-size change only ever needs to
+happen in one place. Both need a value there: `--mh-h2-sm`'s clamp floor is
+`38px`, so without its own small-phone step it would land 2px under the
+anchor size and the two tiers would read as one.
+
+### Homepage heading tiers
+
+The homepage has two `h2` sizes, and which one a section gets is a content
+decision, not a layout one.
+
+- **Narrative anchors** carry the story — the problem, the identity
+  contrast, the three jobs, the $12,000 hook, the connected plan, and the
+  final CTA. They keep the full `--mh-h2`.
+- **Supporting sections** answer a question the story raises rather than
+  advancing it — verified facts, the pricing teaser, community, and the
+  privacy summary. They use `--mh-h2-sm`.
+
+Verified facts is the shared member of the supporting tier (it also appears
+on `/how-it-works`) and sizes itself at `.mh-verified-heading h2`. The other
+three are homepage-only, so one grouped rule scoped to `.mh-page-home`
+covers them — the same scoping convention the plan 018 phase 1 pacing
+overrides use. The employer strip sits a step below the supporting tier on
+its own `clamp(26px, 2.4vw, 34px)` and is not part of either.
+
+Adding a homepage section? Decide which tier it is first, then add its
+selector to the existing grouped rule rather than writing a new font-size.
 
 Not every heading in the file is on these tokens. The homepage hero
 (`.mh-hero-copy h1`, `clamp(58px, 5.03vw, 76px)`), the article title
@@ -117,6 +142,9 @@ three sizes."
 | `--mh-section-y` | `88px` | Default section `padding-top`/`padding-bottom` |
 | `--mh-section-y-loose` | `104px` | Heavier bands (route content grids, the independence/pricing-teaser sections) |
 | `--mh-section-y-tight` | `64px` | Shorter strips (pricing, the final CTA, the employer strip) |
+
+At `≤560px` the type scale steps down with them: `--mh-h2` to `40px` and
+`--mh-h2-sm` to `32px`.
 
 At `≤900px` these three collapse to `72px / 72px / 56px` with one override
 on `.marketing-homepage`, so every section using the tokens tightens
