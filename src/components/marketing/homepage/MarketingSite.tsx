@@ -460,7 +460,7 @@ export function ConnectedPlanSummary() {
           <li>02 One place connecting each role, application, and next step</li>
           <li>03 Possible support with official sources and clear follow-through</li>
         </ul>
-        <Link className="mh-primary-cta" href="/how-it-works"><span>See how Offboard works</span><ArrowRight aria-hidden="true" /></Link>
+        <Link className="mh-secondary-cta" href="/how-it-works"><span>See how Offboard works</span><ArrowRight aria-hidden="true" /></Link>
       </div>
       <div><StartingPlanPreview /><small className="mh-card-note">Example information shown. Your plan will reflect the details you choose to provide.</small></div>
     </section>
@@ -766,7 +766,7 @@ export function PricingSection() {
             <li><Check aria-hidden="true" />Your private career activity remains yours</li>
             <li><Check aria-hidden="true" />Sponsors receive aggregate reporting only</li>
           </ul>
-          <Link className="mh-primary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
+          <Link className="mh-secondary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
         </article>
       </div>
       <p className="mh-price-note">Quarterly billing details and the full feature comparison are shown at checkout. Claiming your government benefits is always free, on any tier.</p>
@@ -892,18 +892,31 @@ export function CommunityStrip() {
 export function FinalCta({
   title = "Find out first.",
   body = "Bring your situation. In a few minutes you will see how long your money lasts, which deadlines are coming, and what may be waiting for you. Then a clear plan for what to do about it.",
+  photo = false,
 }: {
   title?: string;
   body?: string;
+  /* Plan 018 phase 4: the homepage runs six text-only bands between the hero
+     photo and the footer. Only the homepage opts in -- the other three routes
+     that share this component render exactly the markup they did before, so
+     they neither re-lay-out nor download the image. */
+  photo?: boolean;
 }) {
   return (
-    <section className="mh-final-cta mh-section" aria-labelledby="final-title">
+    <section className={`mh-final-cta mh-section${photo ? " is-photo" : ""}`} aria-labelledby="final-title">
+      {photo ? (
+        <div className="mh-final-cta-photo">
+          <Image src="/marketing/homepage/raw/final-cta-portrait.webp" alt="A woman standing in an open doorway with a bag over her shoulder, looking out toward the street" fill sizes="(max-width: 900px) 100vw, 36vw" />
+        </div>
+      ) : null}
+      <div className="mh-final-cta-copy">
       <span className="mh-kicker is-lime">You do not need the whole plan today</span>
       <h2 id="final-title">{title}</h2>
       <p>{body}</p>
       <div><PrimaryCta>Build my free transition plan</PrimaryCta><a href={HUMAN_SUPPORT_URL}>Talk to a person</a></div>
       <small>Independent support. Start free.</small>
       <div className="mh-progress-mark" aria-hidden="true"><i /><span /><i /><span /><i /></div>
+      </div>
     </section>
   );
 }

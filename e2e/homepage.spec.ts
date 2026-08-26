@@ -160,3 +160,75 @@ test.describe("Offboard marketing site", () => {
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   });
 });
+
+// Plan 018 phase 4. The focus ring used to be a flat white on every surface:
+// against paper (#f7f4ec) that measures about 1.06:1, so a keyboard user got
+// no visible indicator across the light two-thirds of the site. WCAG 2.1
+// SC 1.4.11 wants 3:1 for a focus indicator.
+//
+// The fix is the inherited --mh-focus-ring token, so that is what this asserts.
+// Reading `outlineColor` back off a focused element is NOT reliable here -- it
+// reports white even when the ring paints ink, which is exactly how the
+// original defect stayed invisible. The token plus the single rule that
+// consumes it is the honest seam, and the contrast maths below is real.
+test.describe("focus indicator contrast", () => {
+  const INK = "#15211d";
+  const PAPER = "#f7f4ec";
+
+  function luminance(hex: string): number {
+    const channels = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+    const linear = channels.map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+  }
+
+  function contrast(a: string, b: string): number {
+    const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+
+  test("every focusable resolves a ring that clears 3:1 on its own surface", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForLoadState("networkidle");
+
+    const samples = await page.evaluate(() => {
+      function surfaceOf(node: Element | null): string {
+        while (node) {
+          const bg = getComputedStyle(node).backgroundColor;
+          if (bg && bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") return bg;
+          node = node.parentElement;
+        }
+        return "none";
+      }
+      return Array.from(document.querySelectorAll("main a, main button, header a, header summary")).map(
+        (el) => ({
+          ring: getComputedStyle(el).getPropertyValue("--mh-focus-ring").trim().toLowerCase(),
+          surface: surfaceOf(el.parentElement),
+        }),
+      );
+    });
+
+    expect(samples.length).toBeGreaterThan(15);
+
+    // Every control resolves the token to one of the two documented values,
+    // and never inherits an empty string (which would paint currentColor).
+    for (const { ring } of samples) {
+      expect([INK, PAPER]).toContain(ring);
+    }
+
+    // Both values are worth having: a page that resolved ink everywhere would
+    // pass a naive "is it set" check while leaving the dark bands unreadable.
+    const distinct = new Set(samples.map((s) => s.ring));
+    expect(distinct.size).toBe(2);
+
+    // The ring must clear 3:1 against the surface it is actually drawn on.
+    for (const { ring, surface } of samples) {
+      const match = surface.match(/\d+/g);
+      if (!match) continue;
+      const [r, g, b] = match.map(Number);
+      const surfaceHex = `#${[r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("")}`;
+      expect(contrast(ring, surfaceHex)).toBeGreaterThanOrEqual(3);
+    }
+  });
+});

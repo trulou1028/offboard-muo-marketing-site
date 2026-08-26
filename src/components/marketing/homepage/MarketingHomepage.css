@@ -30,6 +30,7 @@
   --mh-danger-surface: #fbeceb;
   --mh-danger-border: #f0c6c2;
   /* stylelint-enable color-no-hex */
+  --mh-focus-ring: var(--mh-ink);
   --mh-radius-xs: 4px;
   --mh-radius-sm: 8px;
   --mh-radius-md: 12px;
@@ -84,12 +85,44 @@
 .mh-primary-cta { display: inline-flex; width: fit-content; min-height: 50px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 22px; background: var(--mh-lime); color: var(--mh-deep); font-size: 15px; font-weight: 650; line-height: 20px; transition: background-color 180ms ease-out, transform 180ms ease-out; }
 .marketing-homepage a.mh-primary-cta { color: var(--mh-deep); }
 .mh-primary-cta svg { width: 17px; height: 17px; }
+
+/* Plan 018 phase 4: the filled lime button is the signup role. An internal
+   route link that looked identical competed with it on the same screen, so
+   it keeps the button shape and loses the fill. */
+.mh-secondary-cta { display: inline-flex; width: fit-content; min-height: 50px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 22px; background: transparent; border: 1px solid var(--mh-ink); color: var(--mh-ink); font-size: 15px; font-weight: 650; line-height: 20px; transition: background-color 180ms ease-out, transform 180ms ease-out; }
+.mh-secondary-cta svg { width: 17px; height: 17px; transition: transform 180ms ease-out; }
+.mh-secondary-cta:hover { background: var(--mh-paper-soft); transform: translateY(-1px); }
+.mh-secondary-cta:hover svg { transform: translateX(3px); }
+.mh-secondary-cta:active { transform: translateY(0); }
 /* stylelint-disable-next-line color-no-hex -- one-off hover-lightened lime, not a token-worthy role */
 .mh-primary-cta:hover { background: #e7ff7a; transform: translateY(-1px); }
-.mh-primary-cta:focus-visible,
+/* Pressed: the hover lift returns to rest so a click reads as a press. */
+.mh-primary-cta:active { transform: translateY(0); }
+
+/* Plan 018 phase 4. The ring used to be a flat white on every surface, which
+   on paper (#f7f4ec) measures about 1.06:1 -- a keyboard user got no visible
+   indicator across the light two-thirds of the site (WCAG 2.1 SC 1.4.11 wants
+   3:1). It is a token now: ink by default, and dark sections below re-declare
+   it to paper. Custom properties inherit, so a control anywhere inside a dark
+   band picks up the light ring without being enumerated here. */
 .marketing-homepage a:focus-visible,
-/* stylelint-disable-next-line color-no-hex -- plain white focus ring, not the --mh-white surface token */
-.marketing-homepage button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.marketing-homepage button:focus-visible,
+.marketing-homepage summary:focus-visible { outline: 3px solid var(--mh-focus-ring); outline-offset: 3px; }
+
+.mh-site-header,
+.mh-hero,
+.mh-hook,
+.mh-lumo,
+.mh-toolkit-flagship,
+.mh-final-cta,
+.mh-site-footer,
+.mh-home-trust,
+.mh-route-hero,
+.mh-route-independence,
+.mh-route-contact,
+.mh-act-privacy,
+.mh-employer-price-card,
+.mh-price-deck .is-primary { --mh-focus-ring: var(--mh-paper); }
 
 .mh-site-header { position: absolute; z-index: 20; inset: 0 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 76px; padding-inline: var(--mh-page-x); background: rgb(0, 53, 42, .9); border-bottom: 1px solid rgb(255,255,255,.12); backdrop-filter: blur(18px); }
 .mh-site-header > a { justify-self: start; }
@@ -363,7 +396,8 @@ ol.mh-five-steps-rows { width: 100%; margin-top: 54px; border-top: 1px solid var
 .mh-price-deck .mh-price-value { display: flex; align-items: baseline; gap: 6px; }
 .mh-price-deck .mh-price-value b { font-size: 40px; line-height: 1; font-weight: 650; }
 .mh-price-deck .mh-price-value small { font-size: 15px; color: var(--mh-muted); }
-.mh-price-deck .mh-primary-cta { width: 100%; min-height: 48px; }
+.mh-price-deck .mh-primary-cta,
+.mh-price-deck .mh-secondary-cta { width: 100%; min-height: 48px; }
 .mh-price-deck .is-primary { background: var(--mh-forest); border-color: var(--mh-forest); color: white; }
 .mh-price-deck .is-primary .mh-price-value small { color: rgb(255, 255, 255, .7); }
 .mh-price-deck .is-primary li svg { border-color: rgb(255, 255, 255, .55); }
@@ -395,12 +429,21 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-faq-list svg { width: 16px; flex: 0 0 16px; }
 .mh-faq-list p { max-width: 620px; color: var(--mh-muted); font-size: 16px; line-height: 24px; }
 
-.mh-final-cta { min-height: 520px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); background: var(--mh-forest); color: white; text-align: center; }
+.mh-final-cta { min-height: 520px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); background: var(--mh-forest); color: white; text-align: center; }
+.mh-final-cta-copy { display: flex; max-width: var(--mh-page-max); flex-direction: column; align-items: center; gap: 20px; }
+
+/* Plan 018 phase 4, homepage only: the portrait turns the closing band from a
+   centred text block into the same copy-and-photo pairing the hero opens with.
+   Routes that render <FinalCta /> without the prop never enter this branch. */
+.mh-final-cta.is-photo { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(40px, 5vw, 78px); align-items: center; text-align: left; }
+.mh-final-cta.is-photo .mh-final-cta-copy { align-items: flex-start; }
+.mh-final-cta-photo { position: relative; min-height: 520px; overflow: hidden; border-radius: var(--mh-radius-lg); }
+.mh-final-cta-photo img { object-fit: cover; object-position: 50% 32%; }
 .mh-final-cta h2 { font-size: 60px; line-height: 68px; }
-.mh-final-cta > p { max-width: 720px; color: rgb(255,255,255,.78); font-size: 18px; line-height: 29px; }
-.mh-final-cta > div:not(.mh-progress-mark) { display: flex; align-items: center; gap: 24px; }
-.mh-final-cta > div > a:last-child { font-size: 15px; }
-.mh-final-cta > small { color: rgb(255,255,255,.62); font-size: 12px; }
+.mh-final-cta p { max-width: 720px; color: rgb(255,255,255,.78); font-size: 18px; line-height: 29px; }
+.mh-final-cta-copy > div:not(.mh-progress-mark) { display: flex; align-items: center; gap: 24px; }
+.mh-final-cta-copy > div > a:last-child { font-size: 15px; }
+.mh-final-cta small { color: rgb(255,255,255,.62); font-size: 12px; }
 .mh-progress-mark { display: flex; width: 600px; align-items: center; padding-top: 12px; }
 .mh-progress-mark i { width: 10px; height: 10px; flex: 0 0 10px; border: 1px solid var(--mh-lime); border-radius: 50%; }
 .mh-progress-mark i:first-child { background: var(--mh-lime); }
@@ -419,15 +462,22 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 
 .mh-site-header nav a[aria-current="page"] { opacity: 1; text-decoration: underline; text-decoration-color: var(--mh-lime); text-decoration-thickness: 2px; text-underline-offset: 8px; }
 .mh-mobile-menu { display: none; position: relative; }
-.mh-mobile-menu summary { cursor: pointer; list-style: none; font-weight: 600; }
+.mh-mobile-menu summary { padding: 6px 10px; border: 1px solid transparent; border-radius: var(--mh-radius-sm); cursor: pointer; list-style: none; font-weight: 600; transition: background-color 180ms ease-out, border-color 180ms ease-out; }
+/* Open state: without it the trigger looked identical whether the panel was
+   showing or not. */
+.mh-mobile-menu[open] summary { background: var(--mh-surface-on-dark); border-color: var(--mh-border-on-dark); color: var(--mh-lime); }
 .mh-mobile-menu summary::-webkit-details-marker { display: none; }
-.mh-mobile-menu > div { position: absolute; z-index: 30; top: 42px; right: 0; display: grid; width: 230px; padding: 12px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); }
+/* A light panel inside the dark header, so it takes the ring back to ink --
+   otherwise it inherits the header's light ring and paints paper on paper. */
+.mh-mobile-menu > div { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: 42px; right: 0; display: grid; width: 230px; padding: 12px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); }
 .mh-mobile-menu > div a { padding: 11px 12px; border-radius: var(--mh-radius-sm); }
 .mh-mobile-menu > div a:hover,
 .mh-mobile-menu > div a[aria-current="page"] { background: var(--mh-paper-soft); color: var(--mh-forest); }
 
 .mh-section-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 36px; padding-bottom: 5px; border-bottom: 1px solid var(--mh-ink); font-size: 15px; font-weight: 650; }
-.mh-section-link svg { width: 17px; height: 17px; }
+.mh-section-link svg { width: 17px; height: 17px; transition: transform 180ms ease-out; }
+.mh-section-link:hover svg { transform: translateX(3px); }
+.mh-section-link:active svg { transform: translateX(1px); }
 
 .mh-route-hero { min-height: 720px; padding-top: 172px; padding-bottom: var(--mh-section-y); background: var(--mh-deep); color: var(--mh-paper); display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(340px, .55fr); gap: clamp(60px, 8vw, 126px); align-items: center; }
 .mh-route-hero.is-single { grid-template-columns: 1fr; min-height: 0; padding-bottom: var(--mh-section-y-tight); }
@@ -762,6 +812,8 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-pricing-teaser-cards,
   .mh-verified-grid,
   .mh-community { grid-template-columns: 1fr; }
+  .mh-final-cta.is-photo { grid-template-columns: 1fr; }
+  .mh-final-cta-photo { min-height: 340px; }
   /* Free keeps its emphasis when the deck stacks, but not a two-row span
      -- there is only one column left to span. */
   .mh-pricing-teaser-cards > article.is-primary { grid-row: auto; }
@@ -907,7 +959,7 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-plan-preview { padding: 22px; }
   .mh-human-photo { min-height: 430px; }
   .mh-price-deck header { align-items: flex-start; flex-direction: column; gap: 8px; }
-  .mh-final-cta > div:not(.mh-progress-mark) { flex-direction: column; }
+  .mh-final-cta-copy > div:not(.mh-progress-mark) { flex-direction: column; }
   .mh-progress-mark { width: min(100%, 420px); }
   .mh-site-footer { padding: 54px var(--mh-gutter) 30px; }
   .mh-site-footer > p { flex-direction: column; gap: 8px; }
