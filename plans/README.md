@@ -712,7 +712,7 @@ kind the backlog table was hiding rather than surfacing.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 019 | Make the CMS real in production, and loud when it is not | P1 | M | 016 | TODO - Part 2 is an owner-run `supabase db push`; Parts 1 and 4 do not depend on it |
+| 019 | Make the CMS real in production, and loud when it is not | P1 | M | 016 | IN PROGRESS - Parts 1 (loud fallback) and 4 (cutover checklist) done on `claude/019-cms-production-gap`. **BLOCKED at Part 2**: the owner must run `supabase db push` and apply `supabase/seed.sql`. **Do not merge Part 1 before that** - it turns today's silent state into a failed production deploy, by design. Part 3 (prove production reads the DB) follows the push. |
 
 Plan 016's CMS is merged but was never deployed: production Supabase has no
 `posts` or `categories` table. Every article is served from the committed

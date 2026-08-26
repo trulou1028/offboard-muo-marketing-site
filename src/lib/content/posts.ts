@@ -71,6 +71,61 @@ function logSource(source: "db" | "fallback"): void {
   console.log(`posts: ${source}`);
 }
 
+// Plan 019. Falling back is two different events wearing one coat, and until
+// now both were silent:
+//
+//   not-configured  no credentials at all. CI builds this way on purpose and
+//                   so does a fresh clone, so it must stay quiet.
+//   fetch-failed    credentials ARE set and the database refused us or could
+//                   not be reached. That is a defect, not a mode.
+//
+// The second one shipped undetected: plan 016's migration was never pushed,
+// so production had no `posts` table, every read 404'd, and the site served
+// committed content looking perfectly healthy. `supabaseSelect` already draws
+// this distinction; this module used to throw it away.
+//
+// `supabaseSelect` only ever returns "fetch-failed" when credentials exist,
+// so that reason alone is the whole signal -- no separate env check needed.
+let reportedUnreachable = false;
+
+/**
+ * Exported for tests only. Vitest gives each test file a fresh module
+ * registry, but a single file exercising several states needs the latches
+ * cleared between cases.
+ */
+export function __resetContentSourceLatches(): void {
+  loggedSource = false;
+  reportedUnreachable = false;
+}
+
+function reportFallback(reason: "not-configured" | "fetch-failed"): void {
+  if (reason === "not-configured") return;
+
+  if (!reportedUnreachable) {
+    reportedUnreachable = true;
+    console.error(
+      "posts: database is CONFIGURED BUT UNREACHABLE - serving committed fallback. " +
+        "This is not a supported production state. Check that public.posts and " +
+        "public.categories exist (the migration may never have been pushed) and that " +
+        "the anon role holds both a select grant and an RLS policy.",
+    );
+  }
+
+  // Fail the build rather than bake fallback content into a deployment whose
+  // configuration claims a database. At request time we do NOT throw: serving
+  // slightly stale committed content beats returning a 500 to a reader.
+  // `next build` sets NEXT_PHASE itself -- verified in the installed copy at
+  // node_modules/next/dist/build/index.js, which assigns PHASE_PRODUCTION_BUILD
+  // and compares against this same literal internally.
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    throw new Error(
+      "Refusing to prerender /resources from the committed fallback while Supabase " +
+        "credentials are configured. Either the CMS migration was never pushed, or " +
+        "the anon grant/RLS is wrong. See plans/019-cms-production-gap.md.",
+    );
+  }
+}
+
 // ------------------------------------------------------------ DB fetchers
 
 async function fetchCategoryRows(): Promise<CategoryRow[] | undefined> {
@@ -78,12 +133,16 @@ async function fetchCategoryRows(): Promise<CategoryRow[] | undefined> {
     "categories",
     "select=slug,name,description,sort_order&order=sort_order.asc",
   );
-  return result.ok ? result.data : undefined;
+  if (result.ok) return result.data;
+  reportFallback(result.reason);
+  return undefined;
 }
 
 async function fetchPostListRows(): Promise<PostListRow[] | undefined> {
   const result = await supabaseSelect<PostListRow>("posts", `select=${POST_LIST_COLUMNS}&order=title.asc`);
-  return result.ok ? result.data : undefined;
+  if (result.ok) return result.data;
+  reportFallback(result.reason);
+  return undefined;
 }
 
 // Distinguishes "the fetch succeeded but no row matched" (a real answer —
@@ -97,7 +156,9 @@ async function fetchPostRowBySlug(slug: string): Promise<{ ok: true; row: PostRo
     "posts",
     `select=${POST_LIST_COLUMNS},body&slug=eq.${encodeURIComponent(slug)}&limit=1`,
   );
-  return result.ok ? { ok: true, row: result.data[0] } : { ok: false };
+  if (result.ok) return { ok: true, row: result.data[0] };
+  reportFallback(result.reason);
+  return { ok: false };
 }
 
 // --------------------------------------------------------------- Mapping
