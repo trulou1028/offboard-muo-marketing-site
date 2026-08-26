@@ -202,6 +202,7 @@ signal to add the token.
 
 | Token | Value |
 |---|---|
+| `--mh-radius-xs` | `4px` | Controls small enough that `-sm` reads as a circle (the plan preview's 16px checkbox) |
 | `--mh-radius-sm` | `8px` |
 | `--mh-radius-md` | `12px` |
 | `--mh-radius-lg` | `18px` |

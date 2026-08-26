@@ -30,6 +30,7 @@
   --mh-danger-surface: #fbeceb;
   --mh-danger-border: #f0c6c2;
   /* stylelint-enable color-no-hex */
+  --mh-radius-xs: 4px;
   --mh-radius-sm: 8px;
   --mh-radius-md: 12px;
   --mh-radius-lg: 18px;
@@ -307,9 +308,6 @@ ol.mh-five-steps-rows { width: 100%; margin-top: 54px; border-top: 1px solid var
 .mh-ui-card-heading h3 { font-size: 28px; line-height: 34px; }
 .mh-ui-card-heading > span { color: var(--mh-muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
 
-.mh-segmented { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.mh-segmented > * { display: grid; min-height: 42px; place-items: center; background: white; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); font-size: 13px; font-weight: 400; }
-.mh-segmented > b { background: var(--mh-forest); border-color: var(--mh-forest); color: white; }
 .mh-card-note { display: block; color: var(--mh-muted); font-size: 12px; line-height: 18px; }
 .mh-plain-list { display: flex; flex-direction: column; gap: 9px; font-size: 15px; line-height: 22px; }
 /* stylelint-disable-next-line selector-class-pattern -- .ruled predates the mh-/is- naming contract; renaming means touching MarketingRoutePages.tsx and MarketingSite.tsx too, deferred to plan 013/014 */
@@ -335,16 +333,19 @@ ol.mh-five-steps-rows { width: 100%; margin-top: 54px; border-top: 1px solid var
 .mh-human-photo img { object-fit: cover; object-position: 62% 30%; }
 .mh-proof { min-height: 820px; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
 .mh-page-home .mh-proof { background: var(--mh-paper-soft); }
-.mh-plan-preview { display: flex; min-height: 610px; flex-direction: column; gap: 22px; padding: 34px; }
-.mh-plan-rows { border-top: 1px solid var(--mh-line); }
-.mh-plan-rows > div { display: grid; grid-template-columns: 78px 1fr 92px; gap: 14px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--mh-line); }
-.mh-plan-rows span { color: var(--mh-warning); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
-.mh-plan-rows div:nth-child(2) span { color: var(--mh-success); }
-.mh-plan-rows div:nth-child(3) span { color: var(--mh-muted); }
-.mh-plan-rows strong { font-size: 15px; }
-.mh-plan-rows small { color: var(--mh-muted); font-size: 13px; text-align: right; }
-.mh-lumo-row { display: flex; min-height: 74px; align-items: center; justify-content: space-between; padding: 18px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); font-size: 14px; }
-.mh-lumo-row small { color: var(--mh-muted); font-size: 13px; }
+.mh-plan-preview { display: flex; flex-direction: column; gap: 22px; padding: 34px; }
+/* The real /path row: a toggle, a title, one quiet line. No status column,
+   no category column -- neither exists in the product. */
+.mh-plan-lede { color: var(--mh-muted); font-size: 15px; line-height: 23px; }
+.mh-plan-stage { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--mh-line); }
+.mh-plan-stage strong { font-family: var(--font-aspekta), Inter, system-ui, sans-serif; font-size: 14px; font-weight: 650; }
+.mh-plan-stage > span { color: var(--mh-muted); font-size: 13px; }
+.mh-plan-steps { display: flex; flex-direction: column; }
+.mh-plan-steps li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 4px 12px; padding: 16px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-plan-steps i { width: 16px; height: 16px; margin-top: 2px; border: 2px solid var(--mh-line); border-radius: var(--mh-radius-xs); }
+.mh-plan-steps strong { font-size: 15px; font-weight: 650; }
+.mh-plan-steps p { grid-column: 2; color: var(--mh-muted); font-size: 14px; line-height: 21px; }
+.mh-plan-done-note { color: var(--mh-muted); font-size: 13px; font-weight: 650; text-decoration: underline; text-underline-offset: 2px; }
 .mh-proof > div:last-child > .mh-card-note { margin-top: 14px; }
 
 
@@ -452,11 +453,18 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
    see the <=900 block. */
 .mh-page-home .mh-home-trust > div:first-child { grid-template-columns: 1fr auto; }
 .mh-home-trust h2 { font-size: var(--mh-h2); line-height: 1.08; }
-.mh-home-trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
-.mh-home-trust-grid article { min-height: 230px; padding: 26px; background: var(--mh-surface-on-dark); border: 1px solid var(--mh-border-on-dark); border-radius: var(--mh-radius-lg); }
-.mh-home-trust-grid span { color: var(--mh-lime); font-family: var(--font-fraunces), Georgia, serif; font-size: 22px; }
-.mh-home-trust-grid strong { display: block; margin-top: 54px; font-family: var(--font-fraunces), Georgia, serif; font-size: 28px; font-weight: 500; }
-.mh-home-trust-grid p { margin-top: 10px; color: var(--mh-on-dark-muted); font-size: 15px; line-height: 23px; }
+/* Plan 018 phase 3: three 230px boxes for three one-line guarantees was the
+   same equal-card pattern the pricing teaser used, and it made a short list
+   read as a heavy band. Same three items, same strings, now a ruled ledger --
+   the identity-contrast section's editorial rule, reused rather than a new
+   pattern. Rules replace the card borders, so no surface tokens are needed. */
+/* `ol.` is load-bearing: the reset at the top of this file zeroes margin on
+   `.marketing-homepage ol`, which outranks a bare class selector. */
+ol.mh-home-trust-ledger { margin-top: 56px; border-top: 1px solid var(--mh-border-on-dark); }
+.mh-home-trust-ledger li { display: grid; grid-template-columns: 56px minmax(0, 260px) minmax(0, 1fr); gap: 8px 32px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--mh-border-on-dark); }
+.mh-home-trust-ledger span { color: var(--mh-lime); font-family: var(--font-fraunces), Georgia, serif; font-size: 22px; }
+.mh-home-trust-ledger strong { font-family: var(--font-fraunces), Georgia, serif; font-size: 26px; font-weight: 500; letter-spacing: -.02em; }
+.mh-home-trust-ledger p { color: var(--mh-on-dark-muted); font-size: 16px; line-height: 25px; }
 .mh-home-trust > a { display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; padding-bottom: 5px; border-bottom: 1px solid var(--mh-lime); color: var(--mh-lime); font-weight: 650; }
 .mh-home-trust > a svg { width: 17px; }
 
@@ -464,8 +472,24 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-page-home .mh-pricing-teaser { padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); }
 .mh-pricing-teaser-heading { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
 .mh-pricing-teaser-heading h2 { max-width: 760px; margin-top: 16px; font-size: var(--mh-h2); line-height: 1.08; }
-.mh-pricing-teaser-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 54px; }
+/* Plan 018 phase 3: Free leads. Three equal cards asked the reader to
+   compare tiers on a page whose only job is "start free" -- so Free takes a
+   tall column of its own in the forest treatment /pricing already uses for
+   it, and Pro and Sponsored sit beside it as compact support. Same three
+   articles, same strings; the composition is grid placement only. */
+.mh-pricing-teaser-cards { display: grid; grid-template-columns: minmax(0, 1.24fr) minmax(0, 1fr); grid-template-rows: auto auto; gap: 20px; margin-top: 54px; align-items: stretch; }
 .mh-pricing-teaser-cards > article { display: flex; flex-direction: column; gap: 16px; padding: 30px; background: white; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); }
+/* Centred, not top-and-bottom: Free's two lines of body cannot fill a card
+   as tall as the two beside it, and pinning the feature line to the floor
+   left a visible hole in the middle. */
+.mh-pricing-teaser-cards > article.is-primary { grid-row: 1 / span 2; justify-content: center; gap: 20px; padding: 34px; background: var(--mh-forest); border-color: var(--mh-forest); color: var(--mh-paper); }
+.mh-pricing-teaser-cards > article.is-primary header > span { font-size: 30px; }
+.mh-pricing-teaser-cards > article.is-primary header > b { font-size: 18px; }
+.mh-pricing-teaser-cards > article.is-primary p { color: var(--mh-on-dark-muted); font-size: 17px; line-height: 26px; }
+.mh-pricing-teaser-cards > article.is-primary small { border-top-color: var(--mh-hairline-on-dark); color: var(--mh-on-dark-muted); }
+/* Pro and Sponsored are support, not peers of Free: tighter box, quieter type. */
+.mh-pricing-teaser-cards > article:not(.is-primary) { gap: 12px; padding: 24px; }
+.mh-pricing-teaser-cards > article:not(.is-primary) small { margin-top: auto; }
 .mh-pricing-teaser-cards header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .mh-pricing-teaser-cards header > span { font-family: var(--font-fraunces), Georgia, serif; font-size: 22px; font-weight: 500; }
 .mh-pricing-teaser-cards header > b { font-size: 16px; font-weight: 650; }
@@ -738,6 +762,9 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-pricing-teaser-cards,
   .mh-verified-grid,
   .mh-community { grid-template-columns: 1fr; }
+  /* Free keeps its emphasis when the deck stacks, but not a two-row span
+     -- there is only one column left to span. */
+  .mh-pricing-teaser-cards > article.is-primary { grid-row: auto; }
   .mh-toolkit-layout { grid-template-columns: 1fr; margin-top: 40px; }
   .mh-toolkit-grid { grid-template-columns: 1fr; }
   .mh-route-resources-grid { grid-template-columns: 1fr; }
@@ -745,9 +772,8 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-verified-heading { flex-direction: column; align-items: flex-start; gap: 20px; }
   .mh-community-rows article { grid-template-columns: 1fr; }
   .mh-community-rows a { grid-column: auto; grid-row: auto; }
-  .mh-home-trust-grid { grid-template-columns: 1fr; }
-  .mh-home-trust-grid article { min-height: 190px; }
-  .mh-home-trust-grid strong { margin-top: 36px; }
+  .mh-home-trust-ledger li { grid-template-columns: 40px minmax(0, 1fr); gap: 6px 16px; padding: 18px 0; }
+  .mh-home-trust-ledger p { grid-column: 2; }
   .mh-route-content-heading p { margin-top: 26px; }
   .mh-route-card-grid { grid-template-columns: 1fr; }
   .mh-route-story-photo { min-height: 520px; }
@@ -880,9 +906,6 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-onboarding-card.is-know { top: 144px; right: -24px; }
   .mh-plan-preview { padding: 22px; }
   .mh-human-photo { min-height: 430px; }
-  .mh-plan-rows > div { grid-template-columns: 68px 1fr; }
-  .mh-plan-rows small { grid-column: 2; text-align: left; }
-  .mh-lumo-row { align-items: flex-start; flex-direction: column; gap: 6px; }
   .mh-price-deck header { align-items: flex-start; flex-direction: column; gap: 8px; }
   .mh-final-cta > div:not(.mh-progress-mark) { flex-direction: column; }
   .mh-progress-mark { width: min(100%, 420px); }

@@ -676,7 +676,7 @@ single `layout.tsx` export.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 018 | Refine homepage hierarchy, pacing, proof, and interaction polish | P1 | L | 012-014 | IN PROGRESS - Phase 1 approved and merged in PR #31 (`d0227c5`). Phase 2 (typography and hierarchy) executed on `claude/018-phase2-typography`, awaiting owner preview approval; Phase 3 is next |
+| 018 | Refine homepage hierarchy, pacing, proof, and interaction polish | P1 | L | 012-014 | IN PROGRESS - Phase 1 approved and merged in PR #31 (`d0227c5`). Phase 2 (typography) on `claude/018-phase2-typography` and Phase 3 parts 1-2 (teaser patterns) on `claude/018-phase3-teasers-proof`, both awaiting owner preview approval. Phase 3 complete: part 3's STOP was resolved by the owner on 2026-08-26 (ship the claim-free subset of real product state). Phase 4 is next |
 
 Plan 018 preserves the approved homepage copy and section order. It uses a
 preview gate after Phase 1 so the owner can approve the new page silhouette
