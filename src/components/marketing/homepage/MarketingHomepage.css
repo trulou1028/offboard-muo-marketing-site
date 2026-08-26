@@ -51,6 +51,12 @@
 .marketing-homepage *,
 .marketing-homepage *::before,
 .marketing-homepage *::after { box-sizing: border-box; }
+/* This reset has specificity (0,1,1), so it beats a bare single-class
+   selector at (0,1,0) no matter the source order. Any later rule that sets
+   margin on one of these elements needs an element prefix on the class
+   (`ol.` or `p.` in front of it), or the declaration is dead and the spacing
+   silently never renders. Guarded by e2e/reset-shadowing.spec.ts. The same
+   applies to the padding reset on ol/ul below. */
 .marketing-homepage h1,
 .marketing-homepage h2,
 .marketing-homepage h3,
@@ -192,7 +198,8 @@
 .mh-copy-block > small { color: var(--mh-muted); font-size: 12px; line-height: 19px; }
 .mh-five-steps { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: white; border-bottom: 1px solid var(--mh-line); }
 .mh-five-steps .mh-section-heading h2 { max-width: 900px; }
-.mh-five-steps-rows { width: 100%; margin-top: 54px; border-top: 1px solid var(--mh-line); }
+/* `ol.` prefix is load-bearing - see the reset note at the top of this file. */
+ol.mh-five-steps-rows { width: 100%; margin-top: 54px; border-top: 1px solid var(--mh-line); }
 .mh-five-steps-rows li { display: grid; grid-template-columns: 56px minmax(0, 1fr) 240px; gap: 28px; align-items: start; padding: 30px 0; border-bottom: 1px solid var(--mh-line); }
 .mh-five-steps-rows li:last-child { border-bottom: 0; }
 .mh-five-steps-rows li > span { width: 56px; flex: 0 0 56px; font-family: var(--font-fraunces), Georgia, serif; font-size: 34px; line-height: 40px; color: var(--mh-muted); }
@@ -352,7 +359,8 @@
 .mh-price-deck li { display: flex; align-items: center; gap: 10px; font-size: 14px; }
 /* stylelint-disable-next-line color-no-hex -- one-off muted-sage icon-ring color, not a token-worthy role */
 .mh-price-deck li svg { width: 18px; height: 18px; flex: 0 0 18px; padding: 3px; border: 1px solid #7f9b92; border-radius: 50%; }
-.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; line-height: 22px; text-align: center; }
+/* `p.` prefix is load-bearing - see the reset note at the top of this file. */
+p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; line-height: 22px; text-align: center; }
 
 .mh-community { min-height: 480px; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(48px, 5.42vw, 82px); padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
 .mh-page-home .mh-community { min-height: 0; padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); }
@@ -541,8 +549,11 @@
 .mh-article-body h2.mh-article-h2 { margin-top: 44px; font-size: 26px; font-weight: 650; line-height: 1.25; }
 .mh-article-body h2.mh-article-h2:first-child { margin-top: 0; }
 .mh-article-body h3.mh-article-h3 { margin-top: 30px; font-size: 19px; font-weight: 650; line-height: 1.3; }
-.mh-article-p { margin-top: 16px; color: var(--mh-muted); font-size: 17px; line-height: 29px; }
-.mh-article-list { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+/* `p.` prefix is load-bearing - see the reset note at the top of this file. */
+p.mh-article-p { margin-top: 16px; color: var(--mh-muted); font-size: 17px; line-height: 29px; }
+/* `ol.` / `ul.` prefix is load-bearing - see the reset note at the top of this file. */
+ol.mh-article-list,
+ul.mh-article-list { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
 .mh-article-list li { position: relative; padding-left: 22px; color: var(--mh-muted); font-size: 17px; line-height: 27px; }
 .mh-article-list li::before { position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: var(--mh-radius-pill); background: var(--mh-forest); content: ""; }
 .mh-article-list.is-ordered { counter-reset: mh-article-list; }
@@ -593,7 +604,8 @@
 .mh-intake-rail { position: sticky; top: 24px; }
 .mh-intake-eyebrow { color: var(--mh-forest); font-size: 14px; font-weight: 650; }
 .mh-intake-rail h1 { margin-top: 16px; font-size: clamp(38px, 3.6vw, 54px); line-height: 1.05; }
-.mh-intake-lede { margin-top: 22px; color: var(--mh-muted); font-size: 17px; line-height: 27px; }
+/* `p.` prefix is load-bearing - see the reset note at the top of this file. */
+p.mh-intake-lede { margin-top: 22px; color: var(--mh-muted); font-size: 17px; line-height: 27px; }
 
 .mh-intake-section-nav { margin-top: 36px; }
 .mh-intake-section-nav ol { display: flex; flex-direction: column; gap: 4px; }
@@ -606,7 +618,8 @@
 .mh-intake-card > header { padding-bottom: 18px; margin-bottom: 22px; border-bottom: 1px solid var(--mh-line); }
 .mh-intake-card-eyebrow { color: var(--mh-forest); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .mh-intake-card h2 { margin-top: 4px; font-size: clamp(24px, 2.2vw, 30px); }
-.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 14px; }
+/* `p.` prefix is load-bearing - see the reset note at the top of this file. */
+p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 14px; }
 .mh-intake-card-body { display: flex; flex-direction: column; gap: 24px; }
 
 .mh-intake-field-label label { display: block; font-size: 14px; font-weight: 650; color: var(--mh-ink); }
