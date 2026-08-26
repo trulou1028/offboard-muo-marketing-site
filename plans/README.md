@@ -669,3 +669,15 @@ section was literally named for guide-article chrome.
 **Follow-up not done here**: `docs/cutover-checklist.md` still describes the
 old per-page `noindex` mechanism. Update its launch step to reference the
 single `layout.tsx` export.
+
+---
+
+# Batch 3 - homepage refinement (2026-08-25)
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+|------|-------|----------|--------|------------|--------|
+| 018 | Refine homepage hierarchy, pacing, proof, and interaction polish | P1 | L | 012-014 | AWAITING REVIEW - Phase 1 implemented and verified on `codex/018-homepage-refinement`; stop before Phase 2 pending owner approval |
+
+Plan 018 preserves the approved homepage copy and section order. It uses a
+preview gate after Phase 1 so the owner can approve the new page silhouette
+and mobile hero before product-proof and interaction work continues.
