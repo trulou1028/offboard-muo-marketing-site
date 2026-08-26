@@ -413,20 +413,37 @@ export function StartingPlan() {
   );
 }
 
+// Plan 018 phase 3. Every string below is real product state, read from
+// lumo-plan-builder origin/main: the stage name from src/journey/stages.ts,
+// the step titles and their caption lines from
+// src/components/layoff-plan/layoffPlanItems.ts (the caption is the first
+// sentence of whyItMatters, which is what rowLineFor() falls back to), and the
+// row / stage-group shape from src/components/journey/PathListRow.tsx and
+// src/pages/path/YourPath.tsx.
+//
+// Steps whose caption or stake carries a benefit or severance NUMBER are
+// deliberately left out -- "Takes 2-3 weeks to start" and "21 or 45 days to
+// decide" are real product copy but are not in COPY.md's verified-facts
+// ledger, and this page does not mint a new claim to decorate a screenshot.
+// Owner decision 2026-08-26: ship the claim-free subset.
+const PLAN_PREVIEW_STEPS = [
+  ["Write down your key dates", "Most post-layoff mistakes are missed deadlines."],
+  ["Understand your COBRA / health insurance options", "A gap in health coverage can be financially devastating."],
+  ["Secure your accounts and access", "Paystubs, tax docs, benefits, and equity portals often live behind work logins that disappear without warning."],
+] as const;
+
 export function StartingPlanPreview() {
-  const rows = [
-    ["Priority", "Review severance and save questions", "Money"],
-    ["Possible", "Review funded training requirements", "Support"],
-    ["Next", "Finish application packet for Northstar", "Job search"],
-  ] as const;
   return (
-    <div className="mh-ui-card mh-plan-preview" aria-label="Example Offboard starting plan">
-      <div className="mh-ui-card-heading"><h3>Your starting plan</h3><span>Week one</span></div>
-      <div className="mh-segmented"><b>Now</b><span>This week</span><span>Coming up</span></div>
-      <div className="mh-plan-rows">
-        {rows.map(([status, title, category]) => <div key={title}><span>{status}</span><strong>{title}</strong><small>{category}</small></div>)}
-      </div>
-      <div className="mh-lumo-row"><span>Ask Lumo what to do first</span><small>Context already attached</small></div>
+    <div className="mh-ui-card mh-plan-preview" aria-label="Example Offboard path">
+      <div className="mh-ui-card-heading"><h3>Your Path</h3></div>
+      <p className="mh-plan-lede">The steps that fit your situation. Do them in any order.</p>
+      <div className="mh-plan-stage"><strong>Protect the first week</strong><span>3 left</span></div>
+      <ul className="mh-plan-steps">
+        {PLAN_PREVIEW_STEPS.map(([title, line]) => (
+          <li key={title}><i aria-hidden="true" /><strong>{title}</strong><p>{line}</p></li>
+        ))}
+      </ul>
+      <span className="mh-plan-done-note">Show 2 done</span>
     </div>
   );
 }

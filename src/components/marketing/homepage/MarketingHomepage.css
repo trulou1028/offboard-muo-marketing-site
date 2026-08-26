@@ -30,6 +30,7 @@
   --mh-danger-surface: #fbeceb;
   --mh-danger-border: #f0c6c2;
   /* stylelint-enable color-no-hex */
+  --mh-radius-xs: 4px;
   --mh-radius-sm: 8px;
   --mh-radius-md: 12px;
   --mh-radius-lg: 18px;
@@ -307,9 +308,6 @@ ol.mh-five-steps-rows { width: 100%; margin-top: 54px; border-top: 1px solid var
 .mh-ui-card-heading h3 { font-size: 28px; line-height: 34px; }
 .mh-ui-card-heading > span { color: var(--mh-muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
 
-.mh-segmented { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.mh-segmented > * { display: grid; min-height: 42px; place-items: center; background: white; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); font-size: 13px; font-weight: 400; }
-.mh-segmented > b { background: var(--mh-forest); border-color: var(--mh-forest); color: white; }
 .mh-card-note { display: block; color: var(--mh-muted); font-size: 12px; line-height: 18px; }
 .mh-plain-list { display: flex; flex-direction: column; gap: 9px; font-size: 15px; line-height: 22px; }
 /* stylelint-disable-next-line selector-class-pattern -- .ruled predates the mh-/is- naming contract; renaming means touching MarketingRoutePages.tsx and MarketingSite.tsx too, deferred to plan 013/014 */
@@ -335,16 +333,19 @@ ol.mh-five-steps-rows { width: 100%; margin-top: 54px; border-top: 1px solid var
 .mh-human-photo img { object-fit: cover; object-position: 62% 30%; }
 .mh-proof { min-height: 820px; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
 .mh-page-home .mh-proof { background: var(--mh-paper-soft); }
-.mh-plan-preview { display: flex; min-height: 610px; flex-direction: column; gap: 22px; padding: 34px; }
-.mh-plan-rows { border-top: 1px solid var(--mh-line); }
-.mh-plan-rows > div { display: grid; grid-template-columns: 78px 1fr 92px; gap: 14px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--mh-line); }
-.mh-plan-rows span { color: var(--mh-warning); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
-.mh-plan-rows div:nth-child(2) span { color: var(--mh-success); }
-.mh-plan-rows div:nth-child(3) span { color: var(--mh-muted); }
-.mh-plan-rows strong { font-size: 15px; }
-.mh-plan-rows small { color: var(--mh-muted); font-size: 13px; text-align: right; }
-.mh-lumo-row { display: flex; min-height: 74px; align-items: center; justify-content: space-between; padding: 18px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); font-size: 14px; }
-.mh-lumo-row small { color: var(--mh-muted); font-size: 13px; }
+.mh-plan-preview { display: flex; flex-direction: column; gap: 22px; padding: 34px; }
+/* The real /path row: a toggle, a title, one quiet line. No status column,
+   no category column -- neither exists in the product. */
+.mh-plan-lede { color: var(--mh-muted); font-size: 15px; line-height: 23px; }
+.mh-plan-stage { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--mh-line); }
+.mh-plan-stage strong { font-family: var(--font-aspekta), Inter, system-ui, sans-serif; font-size: 14px; font-weight: 650; }
+.mh-plan-stage > span { color: var(--mh-muted); font-size: 13px; }
+.mh-plan-steps { display: flex; flex-direction: column; }
+.mh-plan-steps li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 4px 12px; padding: 16px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-plan-steps i { width: 16px; height: 16px; margin-top: 2px; border: 2px solid var(--mh-line); border-radius: var(--mh-radius-xs); }
+.mh-plan-steps strong { font-size: 15px; font-weight: 650; }
+.mh-plan-steps p { grid-column: 2; color: var(--mh-muted); font-size: 14px; line-height: 21px; }
+.mh-plan-done-note { color: var(--mh-muted); font-size: 13px; font-weight: 650; text-decoration: underline; text-underline-offset: 2px; }
 .mh-proof > div:last-child > .mh-card-note { margin-top: 14px; }
 
 
@@ -905,9 +906,6 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-onboarding-card.is-know { top: 144px; right: -24px; }
   .mh-plan-preview { padding: 22px; }
   .mh-human-photo { min-height: 430px; }
-  .mh-plan-rows > div { grid-template-columns: 68px 1fr; }
-  .mh-plan-rows small { grid-column: 2; text-align: left; }
-  .mh-lumo-row { align-items: flex-start; flex-direction: column; gap: 6px; }
   .mh-price-deck header { align-items: flex-start; flex-direction: column; gap: 8px; }
   .mh-final-cta > div:not(.mh-progress-mark) { flex-direction: column; }
   .mh-progress-mark { width: min(100%, 420px); }

@@ -17,7 +17,7 @@
 - **Category**: design / conversion / accessibility
 - **Planned at**: commit `c551bf6`, 2026-08-25
 - **Branch**: `codex/018-homepage-refinement`
-- **Current phase**: Phase 3 parts 1-2 executed; part 3 held at its STOP condition
+- **Current phase**: Phase 3 complete (all three parts); Phase 4 is next
 - **Phase 1 merge**: PR #31, merge commit `d0227c5`, 2026-08-25
 - **Phase 2 branch**: `claude/018-phase2-typography`
 - **Phase 3 branch**: `claude/018-phase3-teasers-proof` (stacked on phase 2)
@@ -216,7 +216,7 @@ reads `ol.mh-home-trust-ledger`. This was caught by measuring, not by
 looking -- the first screenshot only showed the top rule sitting oddly close
 to the heading.
 
-#### Part 3: connected-plan preview -- STOPPED
+#### Part 3: connected-plan preview -- STOPPED, then resolved
 
 The real product state was read from `lumo-plan-builder` `origin/main`
 (`src/journey/stages.ts`, `src/journey/journeyItems.ts`,
@@ -246,20 +246,54 @@ three `Priority / Possible / Next` rows with their category labels, and the
 `Ask Lumo what to do first / Context already attached` row are all recorded in
 COPY.md and would be removed.
 
-Nothing was implemented for part 3. The owner decides: approve the new claims
-into the ledger, approve a claim-free subset (the step titles alone carry no
-numbers), or keep the current illustrative card.
+**Owner decision 2026-08-26: ship the claim-free subset.** The card now
+renders real product state with every number-bearing step left out:
 
-**Verification for parts 1 and 2.** `npm test` 96 passed, `npm run lint`,
-`npm run lint:css`, `npm run typecheck`, `npm run build` (25 static pages),
-`npm run e2e` 52 passed. Three homepage baselines updated deliberately.
-`/pricing` did not move, which confirms the pricing deck was untouched.
+- Heading `Your Path` and the lede `The steps that fit your situation. Do them
+  in any order.` (a verbatim prefix of the page description).
+- Stage row `Protect the first week` / `3 left`, then three steps with their
+  real caption lines: key dates, COBRA, secure your accounts.
+- `Show 2 done`, the real affordance for handled steps. `3 left` plus
+  `Show 2 done` is internally consistent -- five steps in the stage, three
+  open.
 
-**Follow-up found, not fixed here.** `.mh-five-steps-rows` declares
-`margin-top: 54px` that never applies, for the same `.marketing-homepage ol`
-specificity reason. Confirmed by measurement: it computes to `0px` on
-`/how-it-works`. Left alone because fixing it changes that page's spacing,
-which is outside a homepage phase.
+`File for unemployment benefits` and `Review your severance agreement` are
+excluded: their copy carries the two unbacked figures. COPY.md records the
+new strings, the retired invented UI, and the exclusion rule.
+
+`--mh-radius-xs: 4px` was added to the token scale and to DESIGN.md -- a 16px
+checkbox at `--mh-radius-sm` (8px) renders as a circle, and the scale had no
+smaller step.
+
+**Drift guards added** (`CopyDrift.test.tsx`, 15 new cases): the card's strings
+must appear in both the render and COPY.md; the six retired invented strings
+must not come back; and the two unbacked claims must stay off the homepage AND
+out of the ledger. Proven non-vacuous by inverting two of them -- restoring
+`Your starting plan` failed 2 cases, and putting `Takes 2-3 weeks to start` on
+a row failed its guard.
+
+**Verification for phase 3.** `npm test` 111 passed (96 before the new drift
+guards), `npm run lint`, `npm run lint:css`, `npm run typecheck`,
+`npm run build` (25 static pages), `npm run e2e` 52 passed. Three homepage
+baselines updated deliberately across the phase; `/pricing` never moved, which
+confirms the pricing deck was untouched.
+
+Worth recording: after the part 3 rebuild the desktop homepage baseline passed
+while tablet and mobile failed, because the card change sits under the suite's
+1% pixel tolerance at 1440px. The desktop result is therefore not evidence of
+anything -- each width was inspected directly with section screenshots instead.
+
+**Follow-ups found, not fixed here.**
+
+1. `.mh-five-steps-rows` declares `margin-top: 54px` that never applies, for
+   the same `.marketing-homepage ol` specificity reason. Confirmed by
+   measurement: it computes to `0px` on `/how-it-works`. Left alone because
+   fixing it changes that page's spacing, which is outside a homepage phase.
+2. The rebuilt card drops the LUMO row, which was invented UI -- the real
+   `/path` list has no LUMO affordance. That removes the homepage's only
+   product-surface mention of LUMO; the pricing teaser's feature line is now
+   the only one. Worth a deliberate decision about where LUMO appears on the
+   homepage, rather than restoring UI the product does not have.
 
 ## Phase 4: Imagery, CTA roles, and interaction polish
 

@@ -137,6 +137,53 @@ describe("verified-facts ledger matches shipped copy", () => {
   });
 });
 
+// Plan 018 phase 3 rebuilt the homepage plan-preview card from real product
+// state in lumo-plan-builder origin/main. Two things can rot silently here and
+// neither is covered anywhere else: the card drifting back toward invented
+// product UI, and a benefit or severance NUMBER arriving on the card without a
+// verified-facts ledger row to back it. Both directions are asserted.
+describe("homepage plan-preview card stays real product state", () => {
+  const PLAN_PREVIEW_STRINGS = [
+    "Your Path",
+    "The steps that fit your situation. Do them in any order.",
+    "Protect the first week",
+    "Write down your key dates",
+    "Most post-layoff mistakes are missed deadlines.",
+    "Understand your COBRA / health insurance options",
+    "Secure your accounts and access",
+  ] as const;
+
+  it.each(PLAN_PREVIEW_STRINGS)("ships %s and documents it in COPY.md", (value) => {
+    expect(renderedText(<MarketingHome />)).toContain(value);
+    expect(COPY_DOC).toContain(value);
+  });
+
+  // The retired invented UI. None of it exists in the product; if any of it
+  // comes back, this card has stopped being a picture of the real thing.
+  it.each([
+    "Your starting plan",
+    "Week one",
+    "Coming up",
+    "Review severance and save questions",
+    "Finish application packet for Northstar",
+    "Ask Lumo what to do first",
+  ])("does not resurrect the invented plan UI: %s", (value) => {
+    expect(renderedText(<MarketingHome />)).not.toContain(value);
+  });
+
+  // The claim-free rule (owner decision 2026-08-26). These two strings are
+  // genuine product copy, deliberately left off the marketing card because
+  // neither figure is in the ledger. Shipping one means adding a ledger row
+  // in the same PR -- at which point this assertion is the thing to update.
+  it.each(["Takes 2-3 weeks to start", "21 or 45 days to decide"])(
+    "keeps the unbacked claim %s off the homepage",
+    (value) => {
+      expect(renderedText(<MarketingHome />)).not.toContain(value);
+      expect(ledgerSection()).not.toContain(value);
+    },
+  );
+});
+
 const SWEPT_PAGES: ReadonlyArray<[string, () => ReactElement]> = [
   ["MarketingHome", () => <MarketingHome />],
   ["MarketingHowItWorks", () => <MarketingHowItWorks />],
