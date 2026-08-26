@@ -17,7 +17,8 @@
 - **Category**: design / conversion / accessibility
 - **Planned at**: commit `c551bf6`, 2026-08-25
 - **Branch**: `codex/018-homepage-refinement`
-- **Current phase**: Phase 1 implemented and verified; awaiting owner review
+- **Current phase**: Phase 1 approved and merged; Phase 2 is next
+- **Phase 1 merge**: PR #31, merge commit `d0227c5`, 2026-08-25
 
 ## Objective
 
