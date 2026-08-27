@@ -14,7 +14,7 @@
 - **Category**: correctness / observability / release
 - **Planned at**: commit `8f4ecbc`, 2026-08-26
 - **Branch**: `claude/019-cms-production-gap`
-- **Current state**: COMPLETE. All four parts done and verified against the live database. One honest gap remains, recorded below.
+- **Current state**: COMPLETE. All four parts verified against the live database, and the last open gap (draft visibility) closed 2026-08-26.
 
 ## The finding
 
@@ -261,13 +261,33 @@ plus link order, which is what a reader actually gets.
 Identical output from both sources is the goal, not a weak result: it means the
 database is a faithful replacement, not a plausible-looking substitute.
 
-### The one gap, stated plainly
+### The last gap - CLOSED 2026-08-26
 
-**"Anon cannot see drafts" is still untested.** The corpus has no `draft` rows,
-so the query returns zero either way and proves nothing. The migration's RLS
-policy is the only evidence. Creating one throwaway draft row in Studio and
-re-running the anonymous read would close it in two minutes. Until then, this
-is asserted by code review, not by test.
+"Anon cannot see drafts" was asserted by code review only, because the corpus
+had no `draft` rows and the query returned zero either way. The owner inserted
+one throwaway draft (`zz-draft-visibility-test`) in Studio, and it is now
+tested:
+
+| Check, with the publishable key only | Result |
+| --- | --- |
+| List every post | 18 visible: 11 published, 7 retired. Draft absent |
+| Request the draft by its exact slug | 0 rows |
+| Request `status=eq.draft` | 0 rows |
+| Build the site against the live database | 11 article routes, 11 hub links, **no route for the draft slug** |
+
+**Why this was not a false pass.** Every one of those results is also what an
+insert that silently never landed would produce, and the publishable key
+cannot tell the two apart - the same shape of trap that let the CMS sit unused
+for a day. So the row's existence was confirmed independently: the owner ran
+`select slug, status from public.posts where slug = 'zz-draft-visibility-test'`
+and it returned one row, `draft`. The row existed, and the public key still
+could not reach it. That is the whole test.
+
+The row was then deleted. A follow-up anonymous read confirms the corpus is
+back to 18 rows with no `zz-` slug remaining.
+
+Two things this deliberately does **not** cover: Studio's own UI, and the
+owner's authenticated access. Both are supposed to show drafts.
 
 ## Part 4: close the two stale docs items
 
