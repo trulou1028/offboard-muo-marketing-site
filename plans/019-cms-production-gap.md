@@ -14,7 +14,7 @@
 - **Category**: correctness / observability / release
 - **Planned at**: commit `8f4ecbc`, 2026-08-26
 - **Branch**: `claude/019-cms-production-gap`
-- **Current state**: Parts 1, 2 and 4 done. Part 3 found a regression and fixed it; **one more owner-run `supabase db push` is needed** before the fix can be proven.
+- **Current state**: COMPLETE. All four parts done and verified against the live database. One honest gap remains, recorded below.
 
 ## The finding
 
@@ -238,11 +238,36 @@ Usefully, that is the guard working: the build fails with "CONFIGURED BUT
 UNREACHABLE" rather than quietly serving fallback content. Third independent
 demonstration that Part 1 does its job.
 
-**Acceptance test once pushed**: build against the database and against the
-committed files, and diff the generated `/resources` HTML. They should now be
-**identical** - same articles, same order. That is the strongest available
-proof that the CMS is a faithful replacement rather than a plausible-looking
-substitute.
+#### Acceptance test - PASSED
+
+The owner pushed the second migration on 2026-08-26. `sort_order` is live and
+`first-week-after-a-layoff` sits at index 0 again.
+
+Built the site twice - once against the live database (`posts: db`), once with
+no credentials (`posts: fallback`) - and compared the output:
+
+| Page | Result |
+| --- | --- |
+| `/resources` article order | **identical**, 11 links in the same sequence |
+| `/resources` visible text | **identical** |
+| `/resources/first-week-after-a-layoff` | **identical** |
+| `/resources/health-insurance-after-a-layoff` | **identical** |
+
+Comparison note: a raw file diff is useless here. Two builds of the same source
+produce different asset hashes and chunk filenames, so a whole-file diff is
+100% noise. The comparison strips scripts and tags and compares visible text
+plus link order, which is what a reader actually gets.
+
+Identical output from both sources is the goal, not a weak result: it means the
+database is a faithful replacement, not a plausible-looking substitute.
+
+### The one gap, stated plainly
+
+**"Anon cannot see drafts" is still untested.** The corpus has no `draft` rows,
+so the query returns zero either way and proves nothing. The migration's RLS
+policy is the only evidence. Creating one throwaway draft row in Studio and
+re-running the anonymous read would close it in two minutes. Until then, this
+is asserted by code review, not by test.
 
 ## Part 4: close the two stale docs items
 
