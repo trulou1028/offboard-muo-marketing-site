@@ -14,6 +14,7 @@
 - **Category**: correctness / observability / release
 - **Planned at**: commit `8f4ecbc`, 2026-08-26
 - **Branch**: `claude/019-cms-production-gap`
+- **Current state**: COMPLETE. All four parts done and verified against the live database. One honest gap remains, recorded below.
 
 ## The finding
 
@@ -81,6 +82,52 @@ fallback impossible to miss.
 Add unit coverage for all three states, and prove it non-vacuous by inverting
 one case.
 
+### Part 1 implementation record
+
+`supabaseSelect`'s `reason` now reaches `posts.ts` instead of being discarded
+at each fetcher. `reportFallback()` acts on it:
+
+- `not-configured` returns immediately. CI and fresh clones stay silent.
+- `fetch-failed` logs one error naming the two likely causes (missing tables,
+  or a missing anon grant/RLS), once per process rather than once per
+  prerendered route.
+- During `next build` it additionally throws. At request time it does not -
+  serving slightly stale committed content beats returning a 500 to a reader.
+
+The build-phase signal is `process.env.NEXT_PHASE === "phase-production-build"`.
+That was checked against the installed Next 16, not assumed:
+`node_modules/next/dist/build/index.js` assigns `PHASE_PRODUCTION_BUILD` to
+`NEXT_PHASE`, and Next compares against the same literal internally.
+
+**Proven against the real defect.** A build pointed at the production Supabase
+project (publishable key only) now fails:
+
+```
+posts: database is CONFIGURED BUT UNREACHABLE - serving committed fallback. ...
+Error: Refusing to prerender /resources from the committed fallback while
+Supabase credentials are configured. ...
+Failed to collect page data for /resources/[slug]
+```
+
+A build with no credentials still succeeds quietly (`posts: fallback`, 25
+static pages), which is the CI condition.
+
+`src/lib/content/posts.test.ts` covers all three states in 6 cases. Proven
+non-vacuous twice: collapsing `fetch-failed` back into silence fails 3 cases,
+and making the loud path fire on `not-configured` fails the other 2.
+
+`server-only` is stubbed in that test file because Vitest runs in jsdom. This
+does not weaken the key-separation guard - `service-role-guard.test.ts`
+enforces it by scanning source text, independently of imports.
+
+### Sequencing warning - read before merging
+
+Part 1 turns today's silent production state into a **failed build**. If the
+production environment has `NEXT_PUBLIC_SUPABASE_URL` set (it appears to,
+since `intake_submissions` works), then merging Part 1 before Part 2 will
+fail the next production deploy. That is the intended behaviour, not a bug -
+but it means **Part 1 must not merge until the migration is pushed.**
+
 ## Part 2: push the migration (OWNER-RUN - STOP)
 
 Hand the owner the exact command and stop:
@@ -89,9 +136,26 @@ Hand the owner the exact command and stop:
 supabase db push
 ```
 
-Then seed the 11 articles and their categories from the plan 015 block files.
-The executor prepares and verifies the seed **against a local database**, then
-hands it over. It does not run against production.
+That creates `public.categories` and `public.posts` with their RLS policies
+and `anon` grants. It does **not** load content: `supabase/config.toml` wires
+`seed.sql` to local `db reset` only.
+
+So a second step loads the content. `supabase/seed.sql` is already in the repo
+from plan 016, already in sync with the registry (re-running
+`node scripts/generate-seed.mjs` produces no diff), and contains 4 categories
+and 18 posts - 11 published, 7 retired, 0 draft. Apply it once against
+production, through Supabase Studio's SQL editor or `psql`.
+
+**It is not idempotent.** The inserts carry no `on conflict` clause, so a
+second run errors on the primary key rather than duplicating rows. Run it once
+against the fresh tables. Erroring is the safe failure here, but it is worth
+knowing before pasting it twice.
+
+**Seed verification is blocked and explicitly unverified.** Docker is not
+available on this machine, so `npx supabase start` / `db reset` could not run
+and the seed was never executed against any database. What was verified: it
+is generated from the registry rather than hand-written, and it is in sync
+with that registry today. Whether it applies cleanly is unproven.
 
 ### STOP condition
 
@@ -113,6 +177,98 @@ Once Part 2 lands, the same anonymous check that found this must pass:
 Record the row counts. "It returned 200" is not the same as "it returned the
 content".
 
+### Part 3 record
+
+**The owner ran `supabase db push` and applied the seed on 2026-08-26.** The
+anonymous read that originally found the gap now returns:
+
+| Table | Result |
+| --- | --- |
+| `categories` | 4 rows: Guides, AI & Technology, Essays, Policy & Accountability |
+| `posts` | 18 rows: 11 `published`, 7 `retired`, 0 `draft` |
+| `posts?status=eq.draft` | 0 rows visible to `anon` |
+
+A production build against the live database logs `posts: db` and generates 25
+static pages. The identical command failed an hour earlier. The read path is
+proven end to end.
+
+**The draft check is currently vacuous** and the record should say so: there
+are no `draft` rows in the corpus, so "anon cannot see drafts" is untested in
+production. The migration's policy is the only evidence today. Creating one
+temporary draft row in Studio would close it.
+
+#### The regression this part existed to catch
+
+The plan insisted on watching a page change rather than trusting a green
+check, and that is what surfaced this. Rendering `/resources` from the
+database and from the committed files produces **the same 11 articles in a
+different order**:
+
+```
+database build      best-job-application-trackers-2026, health-insurance-…, …
+committed build     first-week-after-a-layoff, negotiating-your-severance, …
+```
+
+The read path ordered `title.asc`; `registry.ts` carries a curated order. The
+Guides section's lead article - "What to do in your first week after a
+layoff", the one written for someone laid off yesterday - fell from **first to
+seventh**. Both pages look completely valid, which is exactly why no test
+caught it and why "it returned 200" was never going to be enough.
+
+#### Fix
+
+`posts` gains the explicit `sort_order` column `categories` already had
+(`supabase/migrations/20260826220000_add_posts_sort_order.sql`), the read path
+orders `sort_order.asc,title.asc`, and `scripts/generate-seed.mjs` writes the
+registry index into every row. Curation now survives the move into the
+database, and a post authored in Studio has a place to say where it belongs.
+
+The migration **backfills the 18 existing rows itself**, so it needs a push
+but no re-seed. Its `case` mapping was checked against the regenerated seed
+programmatically: same 18 slugs, identical values, contiguous 0..17.
+
+#### Still to prove - needs one more push
+
+```bash
+supabase db push
+```
+
+Until that runs, production has no `sort_order` column, so the read 400s.
+Usefully, that is the guard working: the build fails with "CONFIGURED BUT
+UNREACHABLE" rather than quietly serving fallback content. Third independent
+demonstration that Part 1 does its job.
+
+#### Acceptance test - PASSED
+
+The owner pushed the second migration on 2026-08-26. `sort_order` is live and
+`first-week-after-a-layoff` sits at index 0 again.
+
+Built the site twice - once against the live database (`posts: db`), once with
+no credentials (`posts: fallback`) - and compared the output:
+
+| Page | Result |
+| --- | --- |
+| `/resources` article order | **identical**, 11 links in the same sequence |
+| `/resources` visible text | **identical** |
+| `/resources/first-week-after-a-layoff` | **identical** |
+| `/resources/health-insurance-after-a-layoff` | **identical** |
+
+Comparison note: a raw file diff is useless here. Two builds of the same source
+produce different asset hashes and chunk filenames, so a whole-file diff is
+100% noise. The comparison strips scripts and tags and compares visible text
+plus link order, which is what a reader actually gets.
+
+Identical output from both sources is the goal, not a weak result: it means the
+database is a faithful replacement, not a plausible-looking substitute.
+
+### The one gap, stated plainly
+
+**"Anon cannot see drafts" is still untested.** The corpus has no `draft` rows,
+so the query returns zero either way and proves nothing. The migration's RLS
+policy is the only evidence. Creating one throwaway draft row in Studio and
+re-running the anonymous read would close it in two minutes. Until then, this
+is asserted by code review, not by test.
+
 ## Part 4: close the two stale docs items
 
 1. `docs/cutover-checklist.md` still says to flip `robots` metadata "on every
@@ -121,6 +277,18 @@ content".
    did not do it.)
 2. That checklist is the launch gate. While reading it, confirm every other
    step still describes the current mechanism rather than the one it replaced.
+
+### Part 4 implementation record
+
+The `noindex` step now names the single `src/app/layout.tsx` export, and adds
+two things the operator would otherwise hit blind: `e2e/homepage.spec.ts`
+asserts the robots string verbatim in two places and will fail until it is
+updated in the same change, and `src/app/sitemap.ts` is inert while `noindex`
+is set, so submitting a sitemap only becomes meaningful after this step.
+
+Every other factual claim in the checklist was re-checked and holds:
+`next.config.ts` does define `redirects()`; the registry really does carry 11
+`ported: true` and 7 `ported: false` slugs.
 
 ## Verification
 
@@ -131,6 +299,15 @@ content".
 5. The `cms-contract` CI job, green, on the PR.
 6. For Part 3 only: the anonymous production read above, with row counts
    pasted into the report.
+
+### Verification run for Parts 1 and 4
+
+`npm test` 117 passed (111 before, plus 6 new), `npm run lint`,
+`npm run lint:css`, `npm run typecheck`, `npm run e2e` 65 passed. Builds
+checked in both configurations, as recorded in the Part 1 record above.
+
+Not run: `npx supabase start` / `db reset` (no Docker). The `cms-contract` CI
+job is the authoritative check for the database path and runs on the PR.
 
 ## Definition of done
 

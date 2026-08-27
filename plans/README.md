@@ -712,7 +712,7 @@ kind the backlog table was hiding rather than surfacing.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 019 | Make the CMS real in production, and loud when it is not | P1 | M | 016 | TODO - Part 2 is an owner-run `supabase db push`; Parts 1 and 4 do not depend on it |
+| 019 | Make the CMS real in production, and loud when it is not | P1 | M | 016 | DONE - all four parts verified against the live database 2026-08-26. The CMS now genuinely serves `/resources`; a build that is configured for Supabase but cannot reach it fails instead of quietly serving committed content. Part 3 caught a regression no green check would have: the database reordered the library alphabetically, dropping the Guides lead article from first to seventh. Fixed with a `sort_order` column. Acceptance test passed - database and committed builds render identical text and link order. **Open gap**: "anon cannot see drafts" is untested because no draft rows exist. |
 
 Plan 016's CMS is merged but was never deployed: production Supabase has no
 `posts` or `categories` table. Every article is served from the committed
