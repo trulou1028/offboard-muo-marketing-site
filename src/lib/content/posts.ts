@@ -50,12 +50,13 @@ type PostListRow = {
   guest_author: { name: string; bio: string; company: string; url: string } | null;
   related: string[] | null;
   status: "draft" | "published" | "retired";
+  sort_order: number;
 };
 
 type PostRowWithBody = PostListRow & { body: unknown };
 
 const POST_LIST_COLUMNS =
-  "slug,title,category_slug,excerpt,reading_time,date,author_name,author_role,guest_author,related,status";
+  "slug,title,category_slug,excerpt,reading_time,date,author_name,author_role,guest_author,related,status,sort_order";
 
 // -------------------------------------------------------- Source logging
 
@@ -139,7 +140,13 @@ async function fetchCategoryRows(): Promise<CategoryRow[] | undefined> {
 }
 
 async function fetchPostListRows(): Promise<PostListRow[] | undefined> {
-  const result = await supabaseSelect<PostListRow>("posts", `select=${POST_LIST_COLUMNS}&order=title.asc`);
+  // Plan 019: `sort_order` carries registry.ts's curated sequence into the
+  // database. Ordering by title instead put the Guides section's lead
+  // article seventh -- see the migration comment.
+  const result = await supabaseSelect<PostListRow>(
+    "posts",
+    `select=${POST_LIST_COLUMNS}&order=sort_order.asc,title.asc`,
+  );
   if (result.ok) return result.data;
   reportFallback(result.reason);
   return undefined;

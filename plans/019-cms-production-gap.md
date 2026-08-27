@@ -14,7 +14,7 @@
 - **Category**: correctness / observability / release
 - **Planned at**: commit `8f4ecbc`, 2026-08-26
 - **Branch**: `claude/019-cms-production-gap`
-- **Current state**: Parts 1 and 4 done. **Part 2 is the owner gate and blocks Part 3.**
+- **Current state**: Parts 1, 2 and 4 done. Part 3 found a regression and fixed it; **one more owner-run `supabase db push` is needed** before the fix can be proven.
 
 ## The finding
 
@@ -176,6 +176,73 @@ Once Part 2 lands, the same anonymous check that found this must pass:
 
 Record the row counts. "It returned 200" is not the same as "it returned the
 content".
+
+### Part 3 record
+
+**The owner ran `supabase db push` and applied the seed on 2026-08-26.** The
+anonymous read that originally found the gap now returns:
+
+| Table | Result |
+| --- | --- |
+| `categories` | 4 rows: Guides, AI & Technology, Essays, Policy & Accountability |
+| `posts` | 18 rows: 11 `published`, 7 `retired`, 0 `draft` |
+| `posts?status=eq.draft` | 0 rows visible to `anon` |
+
+A production build against the live database logs `posts: db` and generates 25
+static pages. The identical command failed an hour earlier. The read path is
+proven end to end.
+
+**The draft check is currently vacuous** and the record should say so: there
+are no `draft` rows in the corpus, so "anon cannot see drafts" is untested in
+production. The migration's policy is the only evidence today. Creating one
+temporary draft row in Studio would close it.
+
+#### The regression this part existed to catch
+
+The plan insisted on watching a page change rather than trusting a green
+check, and that is what surfaced this. Rendering `/resources` from the
+database and from the committed files produces **the same 11 articles in a
+different order**:
+
+```
+database build      best-job-application-trackers-2026, health-insurance-…, …
+committed build     first-week-after-a-layoff, negotiating-your-severance, …
+```
+
+The read path ordered `title.asc`; `registry.ts` carries a curated order. The
+Guides section's lead article - "What to do in your first week after a
+layoff", the one written for someone laid off yesterday - fell from **first to
+seventh**. Both pages look completely valid, which is exactly why no test
+caught it and why "it returned 200" was never going to be enough.
+
+#### Fix
+
+`posts` gains the explicit `sort_order` column `categories` already had
+(`supabase/migrations/20260826220000_add_posts_sort_order.sql`), the read path
+orders `sort_order.asc,title.asc`, and `scripts/generate-seed.mjs` writes the
+registry index into every row. Curation now survives the move into the
+database, and a post authored in Studio has a place to say where it belongs.
+
+The migration **backfills the 18 existing rows itself**, so it needs a push
+but no re-seed. Its `case` mapping was checked against the regenerated seed
+programmatically: same 18 slugs, identical values, contiguous 0..17.
+
+#### Still to prove - needs one more push
+
+```bash
+supabase db push
+```
+
+Until that runs, production has no `sort_order` column, so the read 400s.
+Usefully, that is the guard working: the build fails with "CONFIGURED BUT
+UNREACHABLE" rather than quietly serving fallback content. Third independent
+demonstration that Part 1 does its job.
+
+**Acceptance test once pushed**: build against the database and against the
+committed files, and diff the generated `/resources` HTML. They should now be
+**identical** - same articles, same order. That is the strongest available
+proof that the CMS is a faithful replacement rather than a plausible-looking
+substitute.
 
 ## Part 4: close the two stale docs items
 
