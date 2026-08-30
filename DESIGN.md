@@ -22,6 +22,49 @@ below is a description of what already ships. Match it. If a value you need
 isn't in this doc, look at the nearest existing section in
 `MarketingHomepage.css` before inventing a new one.
 
+## Transition state (2026-08-30, plan 019)
+
+The site is mid-adoption of the owner's **Civic Modern** design system
+(reference export: `docs/design-system-civic-modern/` — `readme.md` is the
+spec, `tokens/*.css` carry the values). Adoption is per-route:
+
+- **The homepage runs Civic Modern.** A
+  `.marketing-homepage.mh-page-home { … }` block near the top of
+  `MarketingHomepage.css` re-values the `--mh-*` tokens (palette, type
+  scale, rhythm, radii, shadow, fonts) for the homepage only, and a
+  "Civic Modern homepage overrides" section before the media queries
+  carries the per-element changes the token swap could not reach.
+- **Every other route keeps the legacy values** documented in the tables
+  below until its own rollout pass.
+- The shipped CSS remains the source of truth (plan 014 doctrine); this
+  section describes the shipped mechanism.
+
+Civic Modern values on the homepage: paper `#f6f4ee` / paper-deep
+`#ece9e0`, ink `#0a1110`, muted `#3c4640`, line `#d9d6cc`, forest
+`#16351f`, forest-deep `#0f2617` (also the footer — Civic Modern has no
+third green), Lumo lime `#b8f24a`, on-dark-muted `#b9c4bb`. New tokens
+(homepage scope only): `--mh-mist` `#e9f0e5` (consumed), `--mh-sage`
+`#74bd47` (status fills only — it fails text contrast on white),
+`--mh-secondary` `#6f736b` (meta text), plus `--mh-mist-border`,
+`--mh-sand`, `--mh-sand-eyebrow`, `--mh-chip-fill` reserved for rollout.
+Type is Newsreader (serif display, weight 500) + Inter, self-hosted via
+`--font-newsreader`/`--font-inter` and reached through the
+`--mh-font-display`/`--mh-font-body` indirection. Radii 6/12/16/20, one
+shadow `0 16px 40px rgb(10 17 16 / 12%)`, section rhythm 120/80.
+
+**The lime role narrowed on the homepage: Lumo lime is AI-only.** Primary
+CTAs are forest-on-paper (dark bands: paper-on-ink); decorative lime
+became paper/mist/forest per element. The only lime on the homepage is
+the "Ask Lumo" dot. Legacy routes still use lime as the general accent
+until their rollout pass.
+
+Deliberate holds this pass: the container tokens
+(`--mh-page-max/gutter/page-x`) keep the legacy formula (CI-enforced
+alignment contract; Civic Modern's flat 32px gutter was rejected for now),
+and component micro-sizes keep their current values so layout does not
+move — Civic Modern's fixed sizes became desktop clamp endpoints for the
+tokenized headings only.
+
 ## Palette
 
 All colors live as custom properties on `.marketing-homepage` (the single

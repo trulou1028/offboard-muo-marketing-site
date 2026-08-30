@@ -676,8 +676,20 @@ single `layout.tsx` export.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 018 | Refine homepage hierarchy, pacing, proof, and interaction polish | P1 | L | 012-014 | IN PROGRESS - Phase 1 approved and merged in PR #31 (`d0227c5`); Phase 2 is next |
+| 018 | Refine homepage hierarchy, pacing, proof, and interaction polish | P1 | L | 012-014 | IN PROGRESS - Phase 1 approved and merged in PR #31 (`d0227c5`); Phase 2 ON HOLD, to be re-scoped against 019's Civic Modern homepage (owner decision 2026-08-30) |
 
 Plan 018 preserves the approved homepage copy and section order. It uses a
 preview gate after Phase 1 so the owner can approve the new page silhouette
 and mobile hero before product-proof and interaction work continues.
+
+---
+
+# Batch 4 - Civic Modern design system (2026-08-30)
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+|------|-------|----------|--------|------------|--------|
+| 019 | Civic Modern homepage retheme (owner's Claude Design system; homepage-scoped tokens, forest CTAs, lime->AI-only, site-wide new wordmark) | P1 | M | 014 | IN PROGRESS - branch `claude/civic-modern-homepage`, awaiting owner preview sign-off |
+
+Plan 019 is owner-directed: adopt the design system Louie built in Claude
+Design (reference in `docs/design-system-civic-modern/`). Homepage first;
+other routes follow in a rollout batch after the homepage look is approved.

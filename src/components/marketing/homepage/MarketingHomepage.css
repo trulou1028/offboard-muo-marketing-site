@@ -50,6 +50,50 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Civic Modern token values — homepage only during the transition (DESIGN.md
+   "Transition state"). Other routes keep the legacy values above. The
+   container tokens (--mh-page-max/gutter/page-x) are deliberately NOT
+   overridden: the container-alignment e2e contract stays unchanged. */
+.marketing-homepage.mh-page-home {
+  /* stylelint-disable color-no-hex -- token block, same license as above */
+  --mh-paper: #f6f4ee;
+  --mh-paper-soft: #ece9e0;
+  --mh-line: #d9d6cc;
+  --mh-muted: #3c4640;
+  --mh-ink: #0a1110;
+  --mh-forest: #16351f;
+  --mh-deep: #0f2617;
+  --mh-footer: #0f2617; /* Civic Modern has no third green; footer = forest-deep */
+  --mh-lime: #b8f24a; /* Lumo. Role narrows to AI-only; see per-element overrides below */
+  --mh-on-dark-muted: #b9c4bb;
+  --mh-mist: #e9f0e5;
+  --mh-mist-border: #d3dcce; /* reserved for rollout */
+  --mh-sand: #f1e9dc; /* reserved for rollout */
+  --mh-sand-eyebrow: #8a6a3b; /* reserved for rollout */
+  --mh-sage: #74bd47; /* status fills only; fails text contrast on white */
+  --mh-secondary: #6f736b;
+  /* stylelint-enable color-no-hex */
+  --mh-chip-fill: rgb(10 17 16 / 62%); /* reserved for rollout */
+  --mh-hairline-on-dark: rgb(246 244 238 / 16%);
+  --mh-surface-on-dark: rgb(246 244 238 / 6%);
+  --mh-border-on-dark: rgb(246 244 238 / 16%);
+  --mh-h1: clamp(44px, 4.45vw, 64px);
+  --mh-h2: clamp(32px, 2.8vw, 40px);
+  --mh-h2-sm: clamp(28px, 2.2vw, 34px);
+  --mh-section-y: 120px;
+  --mh-section-y-loose: 120px;
+  --mh-section-y-tight: 80px;
+  --mh-radius-sm: 6px;
+  --mh-radius-lg: 16px;
+  --mh-radius-card: 20px;
+  --mh-shadow-surface: 0 16px 40px rgb(10 17 16 / 12%);
+  --mh-shadow-overlay: 0 16px 40px rgb(10 17 16 / 12%);
+  --mh-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --mh-dur-base: 180ms;
+  --mh-font-body: var(--font-inter), "Inter", system-ui, sans-serif;
+  --mh-font-display: var(--font-newsreader), "Georgia", serif;
+}
+
 .marketing-homepage *,
 .marketing-homepage *::before,
 .marketing-homepage *::after { box-sizing: border-box; }
@@ -678,6 +722,92 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
 .mh-intake-confirmed-back { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); font-size: 14px; font-weight: 650; }
 .mh-intake-confirmed-back:hover { background: var(--mh-paper-soft); }
 
+/* ------------------------------------------------------------------ */
+/* Civic Modern homepage overrides (transition state, see DESIGN.md).  */
+/* Token re-values live in the .marketing-homepage.mh-page-home block  */
+/* at the top; everything here is either a Newsreader/Inter type       */
+/* adjustment, the lime->AI-only role migration (decorative lime       */
+/* becomes paper/mist/forest per element), or a literal that the token */
+/* swap could not reach.                                               */
+/* ------------------------------------------------------------------ */
+
+.marketing-homepage.mh-page-home h1 { letter-spacing: -0.02em; }
+.marketing-homepage.mh-page-home h2 { letter-spacing: -0.015em; }
+.marketing-homepage.mh-page-home h3 { letter-spacing: normal; }
+
+.mh-page-home .mh-kicker { color: var(--mh-forest); font-size: 12px; font-weight: 600; letter-spacing: .1em; line-height: 18px; }
+/* Every is-lime kicker on the homepage sits on a dark band; on dark the eyebrow reads in paper, not Lumo. */
+.mh-page-home .mh-kicker.is-lime { color: var(--mh-paper); }
+
+/* Buttons: Civic Modern primary is forest on paper, hover forest-deep,
+   radius 6px, color-only motion. Dark bands use the onDark variant
+   (paper on ink) - the owner's lime-is-AI-only rule supersedes the DS
+   lumo-final-CTA suggestion. */
+.marketing-homepage.mh-page-home a.mh-primary-cta { background: var(--mh-forest); border-radius: var(--mh-radius-sm); color: var(--mh-paper); font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), color var(--mh-dur-base) var(--mh-ease-standard), border-color var(--mh-dur-base) var(--mh-ease-standard); }
+.marketing-homepage.mh-page-home a.mh-primary-cta:hover { background: var(--mh-deep); transform: none; }
+.marketing-homepage.mh-page-home .mh-hero-actions .mh-primary-cta,
+.marketing-homepage.mh-page-home .mh-final-cta .mh-primary-cta,
+.marketing-homepage.mh-page-home .mh-header-actions a.mh-primary-cta { background: var(--mh-paper); border: 0; border-radius: var(--mh-radius-sm); color: var(--mh-ink); }
+.marketing-homepage.mh-page-home .mh-hero-actions .mh-primary-cta:hover,
+.marketing-homepage.mh-page-home .mh-final-cta .mh-primary-cta:hover,
+.marketing-homepage.mh-page-home .mh-header-actions a.mh-primary-cta:hover { background: var(--mh-white); }
+
+/* Header/footer forks: these components are shared across routes, so the
+   Civic Modern colors are homepage-scoped. */
+.mh-page-home .mh-site-header { background: rgb(15 38 23 / 90%); border-bottom-color: rgb(246 244 238 / 12%); }
+.mh-page-home .mh-site-header nav,
+.mh-page-home .mh-header-actions { color: var(--mh-paper); }
+.mh-page-home .mh-site-header nav a[aria-current="page"] { text-decoration-color: var(--mh-paper); }
+.mh-page-home .mh-site-footer { color: var(--mh-paper); }
+.mh-page-home .mh-site-footer nav strong { color: var(--mh-paper); }
+.mh-page-home .mh-site-footer > div > div p { color: rgb(246 244 238 / 66%); }
+.mh-page-home .mh-site-footer > p { color: rgb(246 244 238 / 50%); }
+
+.mh-page-home .mh-skip-link { background: var(--mh-forest); color: var(--mh-paper); }
+
+/* Hero */
+.mh-page-home .mh-hero { color: var(--mh-paper); }
+.mh-page-home .mh-hero-copy h1 { font-size: clamp(48px, 4.45vw, 64px); line-height: 1.02; letter-spacing: -0.02em; }
+.mh-page-home .mh-hero-copy > p { font-size: 20px; line-height: 1.45; }
+.mh-page-home .mh-hero-actions > a:last-child { border-bottom-color: rgb(246 244 238 / 44%); }
+.mh-page-home .mh-hero-trust { color: var(--mh-on-dark-muted); }
+.mh-page-home .mh-hero-photo { background: rgb(34 53 40); }
+.mh-page-home .mh-hero-note > svg { background: var(--mh-mist); }
+.mh-page-home .mh-official-pill svg { color: var(--mh-paper); }
+
+/* Three jobs */
+.mh-page-home .mh-jobs-editorial { background: var(--mh-mist); }
+.mh-page-home .mh-job-pill { border-color: rgb(22 53 31 / 10%); }
+.mh-page-home .mh-job-pill b { background: var(--mh-forest); color: var(--mh-paper); }
+
+/* Hook band + money clock (sage is the one sanctioned status fill) */
+.mh-page-home .mh-hook { color: var(--mh-paper); }
+.mh-page-home .mh-hook .mh-copy-block > small { color: rgb(246 244 238 / 62%); }
+.mh-page-home .mh-money-clock > header > span { color: rgb(246 244 238 / 70%); }
+.mh-page-home .mh-money-clock > header > b { background: rgb(246 244 238 / 12%); color: var(--mh-paper); }
+.mh-page-home .mh-money-clock-bar > i { background: var(--mh-sage); }
+.mh-page-home .mh-money-clock-ends { color: rgb(246 244 238 / 62%); }
+
+/* Plan preview: the "Ask Lumo" row takes the page's single sanctioned Lumo
+   accent - the AI dot. */
+.mh-page-home .mh-lumo-row > span::before { display: inline-block; width: 8px; height: 8px; margin-right: 10px; background: var(--mh-lime); border-radius: 50%; content: ""; }
+.mh-page-home .mh-card-note { color: var(--mh-secondary); }
+
+/* Trust band + pricing teaser */
+.mh-page-home .mh-home-trust-grid span { color: var(--mh-paper); }
+.mh-page-home .mh-home-trust > a { border-bottom-color: var(--mh-paper); color: var(--mh-paper); }
+.mh-page-home .mh-pricing-teaser-cards header > b.is-badge { background: var(--mh-mist); }
+
+/* Final CTA: headline joins the section scale (Civic Modern has one display
+   size, and it belongs to the hero). */
+.mh-page-home .mh-final-cta { color: var(--mh-paper); }
+.mh-page-home .mh-final-cta h2 { font-size: var(--mh-h2); line-height: 1.1; }
+.mh-page-home .mh-final-cta > p { color: rgb(246 244 238 / 78%); }
+.mh-page-home .mh-final-cta > small { color: rgb(246 244 238 / 62%); }
+.mh-page-home .mh-progress-mark i { border-color: var(--mh-paper); }
+.mh-page-home .mh-progress-mark i:first-child { background: var(--mh-paper); }
+.mh-page-home .mh-progress-mark span { background: rgb(246 244 238 / 34%); }
+
 @media (max-width: 1180px) {
   .mh-site-header { grid-template-columns: auto 1fr; }
   .mh-site-header nav { display: none; }
@@ -688,6 +818,7 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-jobs-intro { gap: 48px; }
   .mh-jobs-editorial { height: 540px; }
   .mh-onboarding-screen { padding-inline: 38px; }
+  .mh-page-home .mh-hero-copy h1 { font-size: 52px; }
 }
 
 @media (max-width: 900px) {
@@ -788,6 +919,9 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-price-deck > article { min-height: 330px; }
   .mh-faq { min-height: 0; padding-top: 72px; padding-bottom: 72px; gap: 48px; }
   .mh-site-footer nav { grid-template-columns: repeat(2, 1fr); }
+  .marketing-homepage.mh-page-home { --mh-section-y: 96px; --mh-section-y-loose: 96px; --mh-section-y-tight: 64px; }
+  .mh-page-home .mh-hero-copy h1 { font-size: clamp(40px, 11vw, 56px); }
+  .mh-page-home .mh-hero-copy > p { font-size: 18px; line-height: 26px; }
 }
 
 @media (max-width: 560px) {
@@ -869,6 +1003,13 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
   .mh-progress-mark { width: min(100%, 420px); }
   .mh-site-footer { padding: 54px var(--mh-gutter) 30px; }
   .mh-site-footer > p { flex-direction: column; gap: 8px; }
+  .marketing-homepage.mh-page-home { --mh-h2: 32px; }
+  .mh-page-home .mh-section-heading h2,
+  .mh-page-home .mh-copy-block h2,
+  .mh-page-home .mh-pricing-teaser-heading h2,
+  .mh-page-home .mh-home-trust h2 { line-height: 38px; }
+  .mh-page-home .mh-verified-heading h2 { font-size: 28px; line-height: 34px; }
+  .mh-page-home .mh-final-cta h2 { font-size: var(--mh-h2); line-height: 38px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
