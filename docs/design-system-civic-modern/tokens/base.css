@@ -1,0 +1,12 @@
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--surface-page);color:var(--text-heading);font-family:var(--font-sans);font-size:var(--type-body-size);line-height:var(--type-body-lh);font-weight:400}
+h1,h2,h3,h4{font-family:var(--font-serif-display);font-weight:var(--serif-weight);color:var(--text-heading);margin:0;text-wrap:pretty}
+h1{font-size:var(--type-display-size);line-height:var(--type-display-lh);letter-spacing:var(--type-display-ls)}
+h2{font-size:var(--type-section-size);line-height:var(--type-section-lh);letter-spacing:var(--type-section-ls)}
+h3{font-size:var(--type-question-size);line-height:var(--type-question-lh)}
+p{margin:0;color:var(--text-body)}
+a{color:var(--text-link);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--ink)}
+img{display:block;max-width:100%}
+::selection{background:var(--lumo);color:var(--ink)}

@@ -1,0 +1,16 @@
+<!-- @dsCard group="Brand" viewport="700x130" name="Iconography" subtitle="Lucide at 1.5px stroke, 20px grid, Ink or Forest, never filled" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css"><style>body{margin:0;padding:20px;background:var(--paper);font-family:var(--font-sans)}#row{display:flex;gap:20px;flex-wrap:wrap}#row svg{display:block}</style></head><body>
+<div id="row"></div>
+<p style="margin:14px 0 0;font:400 12px/1.5 var(--font-sans);color:var(--body-muted)">Substituted set. Offboard ships no proprietary icon font; Lucide's 1.5px-capable line style is the closest match.</p>
+<script>
+const names=['briefcase','calendar','file-text','message-square','wallet','heart-pulse','landmark','graduation-cap','list-checks','shield','clock','search'];
+const row=document.getElementById('row');
+names.forEach(async n=>{
+  const t=await (await fetch('../assets/icons/'+n+'.svg')).text();
+  const d=document.createElement('div');d.innerHTML=t;
+  const s=d.querySelector('svg');
+  s.setAttribute('width','22');s.setAttribute('height','22');
+  s.setAttribute('stroke','#16351F');s.setAttribute('stroke-width','1.5');
+  row.appendChild(s);
+});
+</script></body></html>

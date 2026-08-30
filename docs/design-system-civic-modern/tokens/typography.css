@@ -1,0 +1,42 @@
+:root{
+--font-serif-display:"Newsreader",Georgia,"Times New Roman",serif;
+--font-sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+
+--serif-weight:500;
+
+/* Display · Newsreader 500 · 64/1.02 · -0.02em */
+--type-display-size:64px;
+--type-display-lh:1.02;
+--type-display-ls:-0.02em;
+
+/* Section · 40/1.1 */
+--type-section-size:40px;
+--type-section-lh:1.1;
+--type-section-ls:-0.015em;
+
+/* Question · 26/1.2 — the intake-form voice */
+--type-question-size:26px;
+--type-question-lh:1.2;
+
+/* Lead · Inter 400 · 20/1.45 */
+--type-lead-size:20px;
+--type-lead-lh:1.45;
+
+/* Body · Inter 400 · 16/1.55 · max 68ch */
+--type-body-size:16px;
+--type-body-lh:1.55;
+--type-body-measure:68ch;
+
+/* Small / meta */
+--type-small-size:14px;
+--type-small-lh:1.5;
+
+/* Eyebrow · Inter 600 · 12 · 0.1em */
+--type-eyebrow-size:12px;
+--type-eyebrow-ls:0.1em;
+--type-eyebrow-weight:600;
+
+--font-weight-regular:400;
+--font-weight-medium:500;
+--font-weight-semibold:600;
+}

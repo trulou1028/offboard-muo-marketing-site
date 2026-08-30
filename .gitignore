@@ -53,3 +53,7 @@ supabase/.temp/
 
 # imagery pipeline
 /.imagery-cache/
+
+# design-system export extras kept local pending owner OK to delete (plan 019)
+/docs/design-system-civic-modern/uploads/
+/docs/design-system-civic-modern/assets/Offboard Civic Modern Style Guide.pdf
