@@ -37,9 +37,33 @@ const fraunces = localFont({
   adjustFontFallback: "Times New Roman",
 });
 
+// Civic Modern faces (homepage, per DESIGN.md transition state). Aspekta and
+// Fraunces stay loaded while other routes remain on the legacy palette; the
+// double preload goes away at full rollout.
+const inter = localFont({
+  src: "../../public/fonts/InterVF.woff2",
+  display: "swap",
+  variable: "--font-inter",
+  weight: "100 900",
+  fallback: ["system-ui", "sans-serif"],
+  adjustFontFallback: "Arial",
+});
+
+const newsreader = localFont({
+  src: "../../public/fonts/NewsreaderVF.woff2",
+  display: "swap",
+  variable: "--font-newsreader",
+  weight: "200 800",
+  fallback: ["Georgia", "serif"],
+  adjustFontFallback: "Times New Roman",
+});
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${aspekta.variable} ${fraunces.variable}`}>
+    <html
+      lang="en"
+      className={`${aspekta.variable} ${fraunces.variable} ${inter.variable} ${newsreader.variable}`}
+    >
       <body>{children}</body>
     </html>
   );
