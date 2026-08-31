@@ -52,6 +52,7 @@
   --mh-ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --mh-dur-fast: 120ms;
   --mh-dur-base: 180ms;
+  --mh-dur-reveal: 400ms;
   --mh-font-body: var(--font-inter), "Inter", system-ui, sans-serif;
   --mh-font-display: var(--font-newsreader), "Georgia", serif;
 
@@ -109,9 +110,10 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-kicker.is-sand { color: var(--mh-sand-eyebrow); }
 .mh-kicker.is-ondark { color: var(--mh-on-dark-muted); }
 
-.mh-primary-cta { display: inline-flex; width: fit-content; min-height: 50px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 22px; background: var(--mh-forest); border-radius: var(--mh-radius-sm); color: var(--mh-paper); font-size: 15px; font-weight: 600; line-height: 20px; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), color var(--mh-dur-base) var(--mh-ease-standard), border-color var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-primary-cta { display: inline-flex; width: fit-content; min-height: 50px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 22px; background: var(--mh-forest); border-radius: var(--mh-radius-sm); color: var(--mh-paper); font-size: 15px; font-weight: 600; line-height: 20px; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), color var(--mh-dur-base) var(--mh-ease-standard), border-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-base) var(--mh-ease-standard); }
 .marketing-homepage a.mh-primary-cta { color: var(--mh-paper); }
-.mh-primary-cta svg { width: 17px; height: 17px; }
+.mh-primary-cta svg { width: 17px; height: 17px; transition: transform var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-primary-cta:hover svg { transform: translateX(3px); }
 
 /* Plan 018 phase 4: the filled lime button is the signup role. An internal
    route link that looked identical competed with it on the same screen, so
@@ -121,9 +123,9 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-secondary-cta:hover { background: var(--mh-paper-soft); transform: translateY(-1px); }
 .mh-secondary-cta:hover svg { transform: translateX(3px); }
 .mh-secondary-cta:active { transform: translateY(0); }
-.mh-primary-cta:hover { background: var(--mh-deep); }
+.mh-primary-cta:hover { background: var(--mh-deep); transform: translateY(-1px); }
 /* Pressed: the hover lift returns to rest so a click reads as a press. */
-.mh-primary-cta:active { transform: translateY(0); }
+.mh-primary-cta:active { transform: translateY(1px); }
 
 /* Plan 018 phase 4. The ring used to be a flat white on every surface, which
    on paper (#f7f4ec) measures about 1.06:1 -- a keyboard user got no visible
@@ -167,10 +169,13 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-site-header > a { justify-self: start; }
 .mh-brand { width: 157px; height: auto; }
 .mh-site-header nav { display: flex; align-items: center; gap: 36px; color: var(--mh-paper); font-size: 16px; line-height: 24px; }
-.mh-site-header nav a,
 .mh-sign-in { opacity: .92; transition: opacity 180ms ease-out; }
-.mh-site-header nav a:hover,
 .mh-sign-in:hover { opacity: 1; }
+/* Animated underline replaces the opacity hover; the aria-current state uses
+   the same bar so current + hover never double-underline. */
+.mh-site-header nav a { position: relative; }
+.mh-site-header nav a::after { position: absolute; right: 0; bottom: -6px; left: 0; height: 2px; background: var(--mh-paper); content: ""; transform: scaleX(0); transform-origin: left; transition: transform var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-site-header nav a:hover::after { transform: scaleX(1); }
 .mh-header-actions { justify-self: end; display: flex; align-items: center; gap: 24px; color: var(--mh-paper); }
 .mh-header-actions a.mh-primary-cta { min-height: 42px; background: var(--mh-lime); border: 0; border-radius: var(--mh-radius-sm); color: var(--mh-deep); }
 .mh-header-actions a.mh-primary-cta:hover { background: var(--mh-lime-hover); }
@@ -411,7 +416,7 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-site-footer nav a { font-size: 14px; }
 .mh-site-footer > p { display: flex; justify-content: space-between; margin-top: 42px; padding-top: 20px; border-top: 1px solid var(--mh-hairline-on-dark); color: rgb(246 244 238 / 50%); font-size: 12px; }
 
-.mh-site-header nav a[aria-current="page"] { opacity: 1; text-decoration: underline; text-decoration-color: var(--mh-paper); text-decoration-thickness: 2px; text-underline-offset: 8px; }
+.mh-site-header nav a[aria-current="page"]::after { transform: scaleX(1); }
 .mh-mobile-menu { display: none; position: relative; }
 .mh-mobile-menu summary { padding: 6px 10px; border: 1px solid transparent; border-radius: var(--mh-radius-sm); cursor: pointer; list-style: none; font-weight: 600; transition: background-color 180ms ease-out, border-color 180ms ease-out; }
 /* Open state: without it the trigger looked identical whether the panel was
@@ -734,13 +739,16 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
 
 a.mh-secondary-cta { display: inline-flex; min-height: 50px; align-items: center; padding: 0 20px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); color: var(--mh-ink); font-size: 15px; font-weight: 600; transition: border-color var(--mh-dur-base) var(--mh-ease-standard), color var(--mh-dur-base) var(--mh-ease-standard); }
 a.mh-secondary-cta:hover { border-color: var(--mh-ink); }
-a.mh-ondark-cta { display: inline-flex; width: fit-content; min-height: 48px; align-items: center; gap: 12px; padding: 0 20px; background: var(--mh-paper); border-radius: var(--mh-radius-sm); color: var(--mh-ink); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard); }
-a.mh-ondark-cta:hover { background: var(--mh-white); }
+a.mh-ondark-cta { display: inline-flex; width: fit-content; min-height: 48px; align-items: center; gap: 12px; padding: 0 20px; background: var(--mh-paper); border-radius: var(--mh-radius-sm); color: var(--mh-ink); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-base) var(--mh-ease-standard); }
+a.mh-ondark-cta:hover { background: var(--mh-white); transform: translateY(-1px); }
 .mh-ondark-cta svg { width: 16px; height: 16px; }
-a.mh-ai-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 10px; padding: 0 20px; background: var(--mh-ink); border-radius: var(--mh-radius-sm); color: var(--mh-paper); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard); }
-a.mh-ai-cta:hover { background: rgb(27 36 34); }
-a.mh-lumo-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 12px; padding: 0 22px; background: var(--mh-lime); border-radius: var(--mh-radius-sm); color: var(--mh-deep); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard); }
-a.mh-lumo-cta:hover { background: var(--mh-lime-hover); }
+a.mh-ai-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 10px; padding: 0 20px; background: var(--mh-ink); border-radius: var(--mh-radius-sm); color: var(--mh-paper); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-base) var(--mh-ease-standard); }
+a.mh-ai-cta:hover { background: rgb(27 36 34); transform: translateY(-1px); }
+a.mh-lumo-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 12px; padding: 0 22px; background: var(--mh-lime); border-radius: var(--mh-radius-sm); color: var(--mh-deep); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-base) var(--mh-ease-standard); }
+a.mh-ondark-cta:active,
+a.mh-ai-cta:active,
+a.mh-lumo-cta:active { transform: translateY(1px); }
+a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1px); }
 .mh-lumo-cta svg { width: 16px; height: 16px; }
 
 /* Hero */
@@ -858,6 +866,44 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); }
 .mh-page-home .mh-final2 h2 { letter-spacing: -0.02em; }
 .mh-final2 > p { max-width: 58ch; color: rgb(246 244 238 / 78%); font-size: 18px; line-height: 1.55; }
 .mh-final2 > small { color: rgb(246 244 238 / 62%); font-size: 13px; }
+
+
+/* ------------------------------------------------------------------ */
+/* Motion (plan 024, owner decision - retires the "page is a document" */
+/* doctrine). Calm and premium: one reveal gesture, <=400ms, and       */
+/* nothing moves for reduced-motion, no-JS, or test visitors - the     */
+/* hidden state only exists under the .mh-motion class the             */
+/* MotionController adds after checking prefers-reduced-motion.        */
+/* ------------------------------------------------------------------ */
+
+.mh-motion .marketing-homepage [data-reveal] { opacity: 0; transform: translateY(12px); transition: opacity var(--mh-dur-reveal) var(--mh-ease-standard), transform var(--mh-dur-reveal) var(--mh-ease-standard); }
+.mh-motion .marketing-homepage [data-reveal].is-inview { opacity: 1; transform: none; }
+
+/* Hero load-in is pure CSS so it starts at first paint (no hydration
+   flash). Playwright's animations:"disabled" fast-forwards `both`-fill
+   animations to their visible end state. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes mh-rise { from { opacity: 0; transform: translateY(12px); } }
+  .mh-hero2-copy > *,
+  .mh-hero2-visual,
+  .mh-route-hero > div > *,
+  .mh-route-hero aside { animation: mh-rise var(--mh-dur-reveal) var(--mh-ease-standard) both; }
+  .mh-hero2-copy > :nth-child(2), .mh-route-hero > div > :nth-child(2) { animation-delay: 60ms; }
+  .mh-hero2-copy > :nth-child(3), .mh-route-hero > div > :nth-child(3) { animation-delay: 120ms; }
+  .mh-hero2-copy > :nth-child(4), .mh-route-hero > div > :nth-child(4) { animation-delay: 180ms; }
+  .mh-hero2-visual, .mh-route-hero aside { animation-delay: 180ms; }
+}
+
+/* Card lifts: flat bordered cards only. Ruled rows and shared-border grid
+   cells are excluded - lifting them breaks their borders. */
+.mh-ctx-card,
+.mh-plan-card,
+.mh-toolkit-grid article,
+.mh-route-resources-grid article { transition: transform var(--mh-dur-base) var(--mh-ease-standard), box-shadow var(--mh-dur-base) var(--mh-ease-standard), border-color var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-ctx-card:hover,
+.mh-plan-card:hover,
+.mh-toolkit-grid article:hover,
+.mh-route-resources-grid article:hover { border-color: var(--mh-mist-border); box-shadow: var(--mh-shadow-surface); transform: translateY(-2px); }
 
 @media (max-width: 1180px) {
   .mh-chat-card.is-floating { right: 0; width: 360px; }
@@ -1028,5 +1074,5 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); }
 @media (prefers-reduced-motion: reduce) {
   .marketing-homepage *,
   .marketing-homepage *::before,
-  .marketing-homepage *::after { scroll-behavior: auto !important; transition: none !important; }
+  .marketing-homepage *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }
