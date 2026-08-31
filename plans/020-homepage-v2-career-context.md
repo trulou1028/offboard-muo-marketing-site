@@ -7,7 +7,7 @@ system export. Stacked on plan 019 (`claude/civic-modern-homepage`).
 
 ## What shipped
 
-- `MarketingHome.tsx` fully rebuilt: Hero (light paper band, kitchen-table
+- `MarketingHome.tsx` fully rebuilt: Hero (forest-deep band, kitchen-table
   photo, floating AI-chat card with tracker card) → Wherever you work (mist,
   4-message demo conversation + 4 capabilities) → Career Context (8 category
   cards + forest inset card) → More than a job search (sand, photo triptych +
@@ -16,9 +16,13 @@ system export. Stacked on plan 019 (`claude/civic-modern-homepage`).
   Sponsored access (forest inset) → Built around you (mist) → Community
   (carried over from v1) → Final CTA (forest-deep, Lumo-filled button).
 - Band order and component treatments follow
-  `docs/design-system-civic-modern/` (readme + marketing ui_kit). The
-  homepage header flips light with the dark wordmark (`Brand` gained a
-  `variant` prop; other routes unchanged, ArticleFidelity snapshot intact).
+  `docs/design-system-civic-modern/` (readme + marketing ui_kit), with one
+  owner-directed change (2026-08-31): the hero is a **forest-deep band**, not
+  the design system's paper hero. To hold the system's rhythm rule of at most
+  two forest-deep anchors, the Meet Lumo band moved to mid forest, so the page
+  reads hero (deep) → … → Lumo (mid) → … → final CTA (deep), with no two
+  adjacent bands sharing a background. Header stays dark with the light
+  wordmark; both hero buttons take the on-dark treatment.
 - v1 homepage-only sections and their CSS deleted (hero, problem, identity,
   three-jobs, hook/$12k, connected-plan, pricing-teaser, employer-strip,
   privacy-summary). `VerifiedFactsStrip`, `FinalCta`, `CommunityStrip` kept

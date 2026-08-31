@@ -622,16 +622,16 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
    radius 6px, color-only motion. */
 .marketing-homepage.mh-page-home a.mh-primary-cta { background: var(--mh-forest); border-radius: var(--mh-radius-sm); color: var(--mh-paper); font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), color var(--mh-dur-base) var(--mh-ease-standard), border-color var(--mh-dur-base) var(--mh-ease-standard); }
 .marketing-homepage.mh-page-home a.mh-primary-cta:hover { background: var(--mh-deep); transform: none; }
-.marketing-homepage.mh-page-home .mh-header-actions a.mh-primary-cta { min-height: 42px; background: var(--mh-forest); border: 0; color: var(--mh-paper); }
-.marketing-homepage.mh-page-home .mh-header-actions a.mh-primary-cta:hover { background: var(--mh-deep); }
+.marketing-homepage.mh-page-home .mh-header-actions a.mh-primary-cta { min-height: 42px; background: var(--mh-paper); border: 0; color: var(--mh-ink); }
+.marketing-homepage.mh-page-home .mh-header-actions a.mh-primary-cta:hover { background: var(--mh-white); }
 
 /* Header/footer forks: these components are shared across routes, so the
-   Civic Modern colors are homepage-scoped. The v2 hero is a light paper band,
-   so the homepage header flips light (the dark wordmark comes from Brand). */
-.mh-page-home .mh-site-header { background: rgb(246 244 238 / 92%); border-bottom-color: var(--mh-line); }
+   Civic Modern colors are homepage-scoped. The v2 hero is a forest-deep band,
+   so the header sits dark on it and carries the light wordmark. */
+.mh-page-home .mh-site-header { background: rgb(15 38 23 / 90%); border-bottom-color: rgb(246 244 238 / 12%); }
 .mh-page-home .mh-site-header nav,
-.mh-page-home .mh-header-actions { color: var(--mh-ink); }
-.mh-page-home .mh-site-header nav a[aria-current="page"] { text-decoration-color: var(--mh-forest); }
+.mh-page-home .mh-header-actions { color: var(--mh-paper); }
+.mh-page-home .mh-site-header nav a[aria-current="page"] { text-decoration-color: var(--mh-paper); }
 .mh-page-home .mh-site-footer { color: var(--mh-paper); }
 .mh-page-home .mh-site-footer nav strong { color: var(--mh-paper); }
 .mh-page-home .mh-site-footer > div > div p { color: rgb(246 244 238 / 66%); }
@@ -661,7 +661,9 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
 .mh-lumo-mark.is-dot { width: 8px; height: 8px; flex-basis: 8px; }
 .mh-lumo-mark.is-dot::after { display: none; }
 
-.mh-chat-card { display: flex; flex-direction: column; gap: 16px; padding: 20px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); }
+/* Light island: the card can sit on a dark band (the hero), so it sets its own
+   text color rather than inheriting the band's. */
+.mh-chat-card { display: flex; flex-direction: column; gap: 16px; padding: 20px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); color: var(--mh-ink); }
 .mh-chat-card.is-floating { position: absolute; right: -18px; bottom: -40px; z-index: 3; width: 400px; border: 0; box-shadow: var(--mh-shadow-overlay); }
 .mh-chat-speaker { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .mh-chat-you { position: relative; align-self: flex-end; max-width: 78%; padding: 12px 16px; background: var(--mh-paper-soft); border-radius: 16px 16px 4px 16px; font-size: 15px; line-height: 1.45; }
@@ -669,7 +671,7 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
 .mh-chat-ai p { font-size: 15px; line-height: 1.5; color: var(--mh-ink); }
 .mh-ai-highlight { padding: 1px 4px; background: var(--mh-lime); border-radius: 3px; color: var(--mh-ink); }
 
-.mh-tracker-card { display: flex; align-items: center; gap: 12px; margin-top: 12px; padding: 12px 14px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); }
+.mh-tracker-card { display: flex; align-items: center; gap: 12px; margin-top: 12px; padding: 12px 14px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); color: var(--mh-ink); }
 .mh-tracker-monogram { display: grid; width: 32px; height: 32px; flex: 0 0 32px; place-items: center; background: var(--mh-paper-soft); border-radius: var(--mh-radius-sm); color: var(--mh-forest); font-size: 14px; font-weight: 600; }
 .mh-tracker-card span { display: flex; flex-direction: column; gap: 2px; }
 .mh-tracker-card strong { font-size: 14px; font-weight: 600; line-height: 1.3; }
@@ -688,13 +690,19 @@ a.mh-lumo-cta:hover { background: rgb(168 228 55); }
 .mh-lumo-cta svg { width: 16px; height: 16px; }
 
 /* Hero */
-.mh-hero2 { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); gap: clamp(40px, 4vw, 64px); align-items: center; padding-top: 168px; padding-bottom: 128px; background: var(--mh-paper); }
-.mh-hero2-copy h1 { font-size: var(--mh-h1); line-height: 1.02; }
-.mh-hero2-copy > p { max-width: 33em; margin-top: 24px; color: var(--mh-muted); font-size: 20px; line-height: 1.45; }
+.mh-hero2 { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); gap: clamp(40px, 4vw, 64px); align-items: center; padding-top: 168px; padding-bottom: 128px; background: var(--mh-deep); color: var(--mh-paper); }
+.mh-hero2-copy h1 { color: var(--mh-paper); font-size: var(--mh-h1); line-height: 1.02; }
+.mh-hero2-copy > p { max-width: 33em; margin-top: 24px; color: var(--mh-on-dark-muted); font-size: 20px; line-height: 1.45; }
 .mh-hero2-actions { display: flex; align-items: center; gap: 12px; margin-top: 32px; }
-.mh-hero2-trust { display: block; margin-top: 26px; color: var(--mh-secondary); font-size: 14px; line-height: 1.5; }
+.mh-hero2-trust { display: block; margin-top: 26px; color: rgb(246 244 238 / 62%); font-size: 14px; line-height: 1.5; }
 .mh-hero2-visual { position: relative; padding-bottom: 44px; }
 .mh-hero2-visual > .mh-photo-frame { aspect-ratio: 4 / 3; }
+/* On the dark hero both buttons take the on-dark treatment: forest would sit
+   too close to the forest-deep band to read as a button. */
+.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-primary-cta { background: var(--mh-paper); color: var(--mh-ink); }
+.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-primary-cta:hover { background: var(--mh-white); }
+.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-secondary-cta { border-color: rgb(246 244 238 / 44%); color: var(--mh-paper); }
+.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-secondary-cta:hover { border-color: var(--mh-paper); }
 
 /* Wherever you work */
 .mh-wherever { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-mist); border-bottom: 1px solid var(--mh-mist-border); }
@@ -733,7 +741,10 @@ a.mh-lumo-cta:hover { background: rgb(168 228 55); }
 .mh-morethan-note { display: block; margin-top: 44px; color: var(--mh-muted); font-size: 13px; line-height: 1.5; }
 
 /* Meet Lumo */
-.mh-lumo-band { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-deep); color: var(--mh-paper); }
+/* Mid forest, not forest-deep: the hero and the final CTA are the page's two
+   forest-deep anchors (design system rhythm rule), so the AI band takes the
+   lighter of the two greens to stay distinct from them. */
+.mh-lumo-band { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-forest); color: var(--mh-paper); }
 .mh-lumo-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 4vw, 64px); align-items: center; }
 .mh-lumo-band .mh-copy-block > p { color: var(--mh-on-dark-muted); }
 .mh-lumo-band .mh-copy-block > small { color: var(--mh-on-dark-muted); font-size: 13px; }

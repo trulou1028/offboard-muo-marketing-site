@@ -55,11 +55,11 @@ export const EMPLOYER_FAQS = [
   ["What does each person get?", "90 days of full Offboard Pro: a personal plan, verified benefit deadlines, resume and application help, interview prep, and a real job feed."],
 ] as const;
 
-export function Brand({ variant = "light" }: { variant?: "light" | "dark" }) {
+export function Brand() {
   return (
     <Image
       className="mh-brand"
-      src={`/marketing/homepage/offboard-logo-${variant}.png`}
+      src="/marketing/homepage/offboard-logo-light.png"
       alt="Offboard"
       width={520}
       height={106}
@@ -95,8 +95,7 @@ export function MarketingHeader({ current }: { current: MarketingRoute }) {
   return (
     <header className="mh-site-header">
       <Link href="/" aria-label="Offboard home">
-        {/* v2 homepage hero is a light band, so the header flips to the dark wordmark there. */}
-        <Brand variant={current === "home" ? "dark" : "light"} />
+        <Brand />
       </Link>
       <nav aria-label="Marketing navigation">
         {NAV_LINKS.map((item) => (
