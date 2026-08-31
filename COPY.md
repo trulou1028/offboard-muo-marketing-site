@@ -5,7 +5,7 @@ Offboard marketing site (offboard.co).** Every headline, body paragraph, FAQ,
 CTA label, disclaimer, and metadata string on the site appears here, verbatim,
 in page order.
 
-- **Version:** 2.0 · 2026-08-30 · homepage v2 (plan 020, Career Context copy); other pages unchanged since 1.0 (`2d56c7b`)
+- **Version:** 2.1 · 2026-08-31 · homepage v2 (plan 020, Career Context copy) + owner copy confirmations; other pages unchanged since 1.0 (`2d56c7b`)
 - **Owner:** Louie / Steph
 - **Siblings:** [DESIGN.md](DESIGN.md) is the design source of truth; this file
   is the copy source of truth. [docs/site-architecture.md](docs/site-architecture.md)
@@ -117,11 +117,12 @@ and everywhere it appears in the same PR.
 
 | Fact | Value | Status | Appears on |
 | --- | --- | --- | --- |
+| Homepage trust line | **“Join thousands of people”** | Owner-confirmed accurate 2026-08-31 | Home |
 | Newsletter subscribers | **5,000+** | Owner-corrected 2026-08-01 (verified 5,200; "8,000+" is stale and banned) | Home, About |
-| CalJOBS training extension example | **~$12,000**, contact EDD before **week 16** of benefit payments, California | Always shipped with conditions + "amounts vary" small print | Not currently shipped (left the homepage in v2, plan 020; owner may re-add) |
+| CalJOBS training extension example | **~$12,000**, contact EDD before **week 16** of benefit payments, California | Always shipped with conditions + "amounts vary" small print | Not currently shipped — owner decided 2026-08-31 to keep it off the homepage for now |
 | Job centers | **"2,000+ job centers"** and **"billions of dollars a year"** | The only approved public phrasings; precise figures (~$3.2B WIOA, ~2,300 AJCs) require re-verification before any cited use | Not currently shipped (left the homepage in v2, plan 020) |
 | State-approved training programs (CA) | **4,000+** | From v7, owner-shipped | How it works (left the homepage in v2, plan 020) |
-| Live verified states | **CA** (deepest), NY, NJ, WA | | Home, How it works |
+| Live verified states | **CA** (deepest), NY, NJ, WA | | How it works (left the homepage in v2, plan 020) |
 | Employer seat price | **$199 per employee, one-time**; **$169 per seat at 50 or more**; card or NET-30 | Owner-approved for public display 2026-08-23. Must stay in sync with the app-repo sales one-pager | Employers (+ metadata) |
 | Legacy outplacement comparison | **$3,000 to $7,000 per head**; most firms will not take a layoff under 50 people | From the prospect-facing one-pager | Employers |
 | Sponsored access duration | **90 days of full Offboard Pro** | | Employers, ACT |
@@ -185,7 +186,7 @@ Community → Final CTA.
 - H1: `The modern unemployment office.`
 - Body: `Your job search, benefits, applications, career context, and next steps in one system, connected to the AI you already use.`
 - CTAs: `Get started free` (primary) · `See how it works` → `/how-it-works`
-- Trust line: `Join thousands of people building their next chapter with Offboard.` **(owner to verify the "thousands" claim; see Open owner items)**
+- Trust line: `Join thousands of people building their next chapter with Offboard.` *(owner-confirmed accurate 2026-08-31)*
 - Hero visual: kitchen-table photo with chip `Benefits check · Done`, plus an example AI conversation: You: `I think I'm going to apply to this. Add it to Offboard.` / AI: `Done. I've added the role to your Offboard tracker and saved the company context.` with tracker card `Product Designer / Tesserac / Saved`.
 
 ### Offboard, wherever you work
@@ -773,9 +774,10 @@ When one ships, move it into its page section above.
 | 2026-08-23 | `/act` rebuilt from scratch; Alameda County naming approved as geography only | plan 017 |
 | 2026-08-23 | Newsletter CTA → `newsletter.offboard.co` (old path 404s) | plan 018 |
 | 2026-08-24 | COPY.md created as the copy source of truth; copy changes land here first | this file |
+| 2026-08-31 | Homepage hero becomes a forest-deep band (Lumo band drops to mid forest to hold the two-anchor rhythm rule); “Join thousands of people” confirmed accurate; $12k hook stays off the homepage for now | plan 020, owner call |
 | 2026-08-30 | Homepage v2 shipped from owner's Career Context copy doc; primary CTA on home becomes "Get started free"; hook/$12k, identity, three-jobs, verified-facts, pricing-teaser, employer-strip, privacy-summary sections retired from home; community strip kept for the `/#community` redirect; "recruiting platform"→"recruiting site" and "infrastructure"→"tools" never-say substitutions | plan 020, this file § 1 |
 | 2026-08-24 | Clarified the "outplacement" scope: allowed on /employers AND in Sponsored-tier copy wherever it renders (home teaser, /pricing deck), per the 2026-08-21 owner call. The earlier "one page only" wording in Language rules was inaccurate and is corrected. | COPY.md, plan 019 |
 
-**Open owner items:** verify the homepage v2 trust line "Join thousands of people" against real user counts (shipped pending verification) · decide whether the $12k hook band returns to the homepage · re-verify SB 617 currency (`/employers`) · optionally
+**Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·
 Steph's essay editorial pass · execute the gift lane (plan 015).

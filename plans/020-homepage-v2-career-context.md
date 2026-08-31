@@ -48,8 +48,10 @@ reply highlight, the Meet Lumo eyebrow (dark AI band), the AI-button dot, and
 the single Lumo-filled final CTA — all four sanctioned uses from the design
 system, verified by a computed-style sweep.
 
-## STOP conditions
+## Owner sign-off (2026-08-31)
 
-- Vercel preview + owner sign-off before merge (stacked PR on top of plan
-  019's PR #41 — merge order: 41 first).
-- Owner decides: does the $12k hook band return in some form?
+Approved for merge. Owner confirmed: the "Join thousands of people" trust
+line is accurate; the $12k hook band stays off the homepage for now; the
+design-system export's `uploads/` duplicates and the duplicate style-guide
+PDF were deleted (15.7 MB reclaimed, folder now 3.1 MB — the spec itself
+lives in the committed `readme.md`).
