@@ -12,11 +12,13 @@ test.describe("Offboard marketing site", () => {
     });
 
     await page.goto("/");
+    // Homepage v2 (plan 022): Career Context narrative, COPY.md § 1.
     await expect(page.getByRole("heading", { level: 1, name: /modern unemployment office/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /three jobs at once/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /\$12,000/ })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /one place for the decisions/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /checked by people, never generated/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /your job search goes wherever you do/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /one place that remembers your entire job search/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /losing your job creates more than one problem/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /an ai guide that already knows/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /you don't need another place to start over/i })).toBeVisible();
     await expect(page.getByRole("tablist", { name: "Job search stages" })).toHaveCount(0);
 
     await page.getByRole("link", { name: "How it works" }).first().click();
@@ -172,8 +174,6 @@ test.describe("Offboard marketing site", () => {
 // original defect stayed invisible. The token plus the single rule that
 // consumes it is the honest seam, and the contrast maths below is real.
 test.describe("focus indicator contrast", () => {
-  const INK = "#15211d";
-  const PAPER = "#f7f4ec";
 
   function luminance(hex: string): number {
     const channels = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
@@ -211,10 +211,24 @@ test.describe("focus indicator contrast", () => {
 
     expect(samples.length).toBeGreaterThan(15);
 
+    // The two documented ring values are read from the page rather than
+    // hardcoded: the homepage runs the Civic Modern palette while the route
+    // pages are still on the legacy one (DESIGN.md "Transition state"), so a
+    // literal hex here would only ever be right for one of them.
+    const palette = await page.evaluate(() => {
+      const style = getComputedStyle(document.querySelector(".marketing-homepage")!);
+      return {
+        ink: style.getPropertyValue("--mh-ink").trim().toLowerCase(),
+        paper: style.getPropertyValue("--mh-paper").trim().toLowerCase(),
+      };
+    });
+    expect(palette.ink).toMatch(/^#[0-9a-f]{6}$/);
+    expect(palette.paper).toMatch(/^#[0-9a-f]{6}$/);
+
     // Every control resolves the token to one of the two documented values,
     // and never inherits an empty string (which would paint currentColor).
     for (const { ring } of samples) {
-      expect([INK, PAPER]).toContain(ring);
+      expect([palette.ink, palette.paper]).toContain(ring);
     }
 
     // Both values are worth having: a page that resolved ink everywhere would

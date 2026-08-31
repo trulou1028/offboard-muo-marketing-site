@@ -94,25 +94,27 @@ describe("verified-facts ledger matches shipped copy", () => {
     expect(renderedText(<MarketingAbout />)).toContain("5,000+");
   });
 
-  it("CalJOBS training extension example: $12,000 and week 16 appear in the ledger and on the homepage", () => {
+  // Homepage v2 (plan 022) retired the hook band and identity contrast, so the
+  // CalJOBS and job-centers facts no longer ship anywhere. Their ledger rows
+  // stay (marked "Not currently shipped") so the numbers stay governed; if a
+  // component renders them again, restore the render assertions here.
+  it("CalJOBS training extension example: ledger row keeps $12,000 and week 16 governed", () => {
     const row = ledgerRow("CalJOBS training extension example");
     expect(row).toContain("$12,000");
     expect(row).toContain("week 16");
-    const text = renderedText(<MarketingHome />);
-    expect(text).toContain("$12,000");
-    expect(text).toContain("week 16");
+    expect(row).toContain("Not currently shipped");
   });
 
-  it("Job centers: '2,000+ job centers' appears in the ledger and on the homepage", () => {
+  it("Job centers: ledger row keeps the approved phrasing governed", () => {
     const row = ledgerRow("Job centers");
     expect(row).toContain("2,000+ job centers");
-    expect(renderedText(<MarketingHome />)).toContain("2,000+ job centers");
+    expect(row).toContain("Not currently shipped");
   });
 
-  it("State-approved training programs (CA): 4,000+ appears in the ledger and on the homepage", () => {
+  it("State-approved training programs (CA): 4,000+ appears in the ledger and on /how-it-works", () => {
     const row = ledgerRow("State-approved training programs (CA)");
     expect(row).toContain("4,000+");
-    expect(renderedText(<MarketingHome />)).toContain("4,000+");
+    expect(renderedText(<MarketingHowItWorks />)).toContain("4,000+");
   });
 
   it("Sponsored access duration: '90 days of full Offboard Pro' appears in the ledger and on /employers", () => {

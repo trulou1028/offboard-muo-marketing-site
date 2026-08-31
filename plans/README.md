@@ -725,3 +725,37 @@ from the database by editing a row and watching the page change.
 Plan 018 preserves the approved homepage copy and section order. It uses a
 preview gate after Phase 1 so the owner can approve the new page silhouette
 and mobile hero before product-proof and interaction work continues.
+
+---
+
+# Batch 4 - Civic Modern design system (2026-08-30)
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+|------|-------|----------|--------|------------|--------|
+| 019 | Civic Modern homepage retheme (owner's Claude Design system; homepage-scoped tokens, forest CTAs, lime->AI-only, site-wide new wordmark) | P1 | M | 014 | IN PROGRESS - branch `claude/civic-modern-homepage`, PR #41, awaiting owner preview sign-off |
+| 020 | Homepage v2 - Career Context narrative (owner copy doc; full section rebuild on the Civic Modern system, COPY.md 2.0) | P1 | L | 019 | IN PROGRESS - branch `claude/homepage-v2-career-context` stacked on 019, awaiting owner preview sign-off |
+
+Plan 019 is owner-directed: adopt the design system Louie built in Claude
+Design (reference in `docs/design-system-civic-modern/`). Homepage first;
+other routes follow in a rollout batch after the homepage look is approved.
+
+---
+
+# Batch 5 - Civic Modern design system (2026-08-30)
+
+Owner-directed: Louie built the "Offboard Modern Civic" design system in
+Claude Design and asked the site to adopt it, then supplied a full homepage
+copy doc built on it. Reference export lives in
+`docs/design-system-civic-modern/`.
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+|------|-------|----------|--------|------------|--------|
+| 021 | Civic Modern homepage retheme (homepage-scoped tokens, forest CTAs, lime->AI-only, refreshed wordmark) | P1 | M | 014 | IN PROGRESS - branch `claude/civic-modern-homepage`, [PR #41](https://github.com/trulou1028/offboard-muo-marketing-site/pull/41), awaiting owner preview sign-off |
+| 022 | Homepage v2 - Career Context narrative (owner copy doc; full section rebuild, COPY.md 2.0) | P1 | L | 021 | IN PROGRESS - branch `claude/homepage-v2-career-context`, [PR #42](https://github.com/trulou1028/offboard-muo-marketing-site/pull/42), stacked on 021, awaiting owner preview sign-off |
+
+Plan 022 supersedes plan 018's homepage-specific work, with one deliberate
+carry-over the owner approved on 2026-08-31: 018 phase 3's "Your Path"
+plan-preview card (real product state) is folded into v2's "More than a job
+search" section, beside the question it answers. 018's shared work - the
+final-CTA photo treatment, the secondary-CTA role, the focus-ring a11y fix -
+is untouched and still ships on every route.

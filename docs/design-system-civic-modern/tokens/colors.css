@@ -1,0 +1,60 @@
+:root{
+/* Neutrals — paper grounds */
+--paper:#F6F4EE;
+--paper-deep:#ECE9E0;
+--white:#FFFFFF;
+
+/* Ink */
+--ink:#0A1110;
+--body-muted:#3C4640;
+--secondary:#6F736B;
+--line:#D9D6CC;
+
+/* Brand green */
+--forest:#16351F;
+--forest-deep:#0F2617;
+
+/* Section band tints (3–5% saturation) */
+--mist:#E9F0E5;
+--mist-border:#D3DCCE;
+--sand:#F1E9DC;
+--sand-eyebrow:#8A6A3B;
+
+/* Accents, one job each */
+--lumo:#B8F24A;   /* AI only. Never a background, never type. */
+--sage:#74BD47;   /* Product status only. */
+
+/* On dark bands */
+--on-dark-heading:#F6F4EE;
+--on-dark-muted:#B9C4BB;
+--on-dark-hairline:rgba(246,244,238,0.16);
+
+/* Translucent chip on photography */
+--chip-fill:rgba(10,17,16,0.62);
+
+/* ---- Semantic aliases ---- */
+--surface-page:var(--paper);
+--surface-band:var(--paper-deep);
+--surface-band-mist:var(--mist);
+--surface-band-sand:var(--sand);
+--surface-anchor:var(--forest-deep);
+--surface-card:#FFFFFF;
+--surface-inset:var(--forest);
+
+--text-heading:var(--ink);
+--text-body:var(--body-muted);
+--text-meta:var(--secondary);
+--text-eyebrow:var(--forest);
+--text-link:var(--forest);
+
+--border-default:var(--line);
+--border-on-mist:var(--mist-border);
+--border-emphasis:var(--forest);
+
+--action-primary-bg:var(--forest);
+--action-primary-fg:var(--paper);
+--action-secondary-fg:var(--ink);
+--action-ai-bg:var(--ink);
+--action-ai-dot:var(--lumo);
+--status-dot:var(--sage);
+}

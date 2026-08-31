@@ -1,0 +1,38 @@
+<!-- @dsCard group="Components" viewport="700x560" name="Product" subtitle="Chat exchange, tracker card, question block, plans and the Forest inset" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{margin:0;padding:20px;background:var(--paper)}.lbl{font:600 10px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--secondary);margin-bottom:10px}</style></head>
+<body><div id="root"></div><script type="text/babel">
+const ICONS='../../assets/icons';const ASSETS='../../assets';
+const { ChatExchange, YouBubble, AiReply, TrackerCard, QuestionBlock, InsetBlock, PlanCard, Button, Eyebrow } = window.OffboardDesignSystem_d4ec49;
+function Card(){return(<div style={{display:'flex',flexDirection:'column',gap:24}}>
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,alignItems:'start'}}>
+<div><div className="lbl">Chat exchange</div>
+<ChatExchange>
+<YouBubble>I think I'm going to apply to this. Add it to Offboard.</YouBubble>
+<AiReply highlight="Done." cards={<TrackerCard compact role="Product Designer" company="Tesserac" status="Saved"/>}>
+I've added the role to your Offboard tracker and saved the company context.</AiReply>
+</ChatExchange></div>
+<div><div className="lbl">Tracker card</div>
+<TrackerCard role="Product Designer" company="Tesserac" location="Remote, US" status="Interviewing"
+meta={[{label:'Fit',value:'82%'},{label:'Recruiter',value:'Ruben'},{label:'Next',value:'Panel, Thu'}]}/>
+<div className="lbl" style={{marginTop:20}}>Question block</div>
+<QuestionBlock question="What support might I qualify for?" feature="Benefits and workforce programs">
+Navigate unemployment insurance, training programs, workforce resources, and other forms of support that may be available where you live.
+</QuestionBlock></div></div>
+<div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,alignItems:'stretch'}}>
+<PlanCard name="Free" price="$0" tagline="Build your Career Context." features={['Application tracker','Benefits checklist']} iconBase={ICONS} action={<Button variant="secondary">Get started free</Button>}/>
+<PlanCard name="Pro" price="$19" cadence="/ month" emphasized tagline="Put it to work." features={['Unlimited applications','Interview prep with Lumo']} iconBase={ICONS} action={<Button>See Pro pricing</Button>}/>
+</div>
+<div><div className="lbl">Forest inset block</div>
+<InsetBlock style={{padding:'28px 28px'}}>
+<Eyebrow tone="onDark">Sponsored access</Eyebrow>
+<div style={{font:'500 28px/1.15 var(--font-serif-display)',color:'var(--on-dark-heading)',marginTop:12,maxWidth:'22ch'}}>Job-search support people will actually use.</div>
+<div style={{marginTop:20}}><Button variant="onDark">Sponsor Offboard</Button></div>
+</InsetBlock></div>
+</div>);}
+ReactDOM.createRoot(document.getElementById('root')).render(<Card/>);
+</script></body></html>
