@@ -9,7 +9,8 @@
   --mh-forest: #16351f;
   --mh-deep: #0f2617;
   --mh-footer: #0f2617; /* Civic Modern has two greens; the footer takes forest-deep */
-  --mh-lime: #b8f24a; /* Lumo. AI moments only - never decorative */
+  --mh-lime: #b8f24a; /* Lumo. Primary action on dark green + AI accents - never decorative on light */
+  --mh-lime-hover: #a8e437;
   --mh-violet: #c5b7ff; /* legacy AI token, superseded by Lumo; unused */
   --mh-mist: #e9f0e5;
   --mh-mist-border: #d3dcce;
@@ -153,7 +154,16 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-ctx-inset,
 .mh-sponsor-inset { --mh-focus-ring: var(--mh-paper); }
 
-.mh-site-header { position: absolute; z-index: 20; inset: 0 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 76px; padding-inline: var(--mh-page-x); background: rgb(15 38 23 / 90%); border-bottom: 1px solid rgb(246 244 238 / 12%); backdrop-filter: blur(18px); }
+/* Fixed, not absolute (owner decision, plan 024): the nav stays interactive
+   while scrolling. inset keeps left/right on the viewport ICB (never 100vw -
+   the e2e overflow assertion). The scrolled shadow is toggled by
+   MotionController and runs even under reduced motion: it is state, not
+   motion. */
+.mh-site-header { position: fixed; z-index: 20; inset: 0 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 76px; padding-inline: var(--mh-page-x); background: rgb(15 38 23 / 90%); border-bottom: 1px solid rgb(246 244 238 / 12%); backdrop-filter: blur(18px); transition: box-shadow var(--mh-dur-base) var(--mh-ease-standard), background-color var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-site-header.is-scrolled { background: rgb(15 38 23 / 96%); box-shadow: var(--mh-shadow-surface); }
+/* A fixed header covers in-page anchor targets without this. #community,
+   #faq, #toolkit and #pricing are targets of SEO-load-bearing redirects. */
+.marketing-homepage section[id] { scroll-margin-top: 96px; }
 .mh-site-header > a { justify-self: start; }
 .mh-brand { width: 157px; height: auto; }
 .mh-site-header nav { display: flex; align-items: center; gap: 36px; color: var(--mh-paper); font-size: 16px; line-height: 24px; }
@@ -162,8 +172,8 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-site-header nav a:hover,
 .mh-sign-in:hover { opacity: 1; }
 .mh-header-actions { justify-self: end; display: flex; align-items: center; gap: 24px; color: var(--mh-paper); }
-.mh-header-actions a.mh-primary-cta { min-height: 42px; background: var(--mh-paper); border: 0; border-radius: var(--mh-radius-sm); color: var(--mh-ink); }
-.mh-header-actions a.mh-primary-cta:hover { background: var(--mh-white); }
+.mh-header-actions a.mh-primary-cta { min-height: 42px; background: var(--mh-lime); border: 0; border-radius: var(--mh-radius-sm); color: var(--mh-deep); }
+.mh-header-actions a.mh-primary-cta:hover { background: var(--mh-lime-hover); }
 .mh-header-actions .mh-primary-cta svg { display: none; }
 
 
@@ -595,7 +605,7 @@ p.mh-intake-lede { margin-top: 22px; color: var(--mh-muted); font-size: 17px; li
 .mh-intake-section-nav span { display: inline-flex; height: 24px; width: 24px; flex: 0 0 24px; align-items: center; justify-content: center; border-radius: var(--mh-radius-pill); background: var(--mh-paper-soft); font-size: 11px; font-weight: 650; }
 
 .mh-intake-form { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
-.mh-intake-card { padding: 28px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); scroll-margin-top: 24px; }
+.mh-intake-card { padding: 28px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); scroll-margin-top: 96px; }
 .mh-intake-card > header { padding-bottom: 18px; margin-bottom: 22px; border-bottom: 1px solid var(--mh-line); }
 .mh-intake-card-eyebrow { color: var(--mh-forest); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .mh-intake-card h2 { margin-top: 4px; font-size: clamp(24px, 2.2vw, 30px); }
@@ -667,16 +677,16 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
 .marketing-homepage h2 { letter-spacing: -0.015em; }
 .marketing-homepage h3 { letter-spacing: normal; }
 
-/* On a dark band the forest fill would disappear, so CTAs there take the
-   on-dark treatment (paper on ink). The `a.` qualifier is load-bearing:
+/* On a dark band the primary CTA goes neon (owner decision, plan 024): lime
+   fill, forest-deep text, ~12:1. The `a.` qualifier is load-bearing:
    `.marketing-homepage a.mh-primary-cta` is (0,2,1) and would otherwise keep
-   the paper text, painting paper on paper. */
+   the paper text. */
 .marketing-homepage .mh-route-hero a.mh-primary-cta,
 .marketing-homepage .mh-route-contact a.mh-primary-cta,
-.marketing-homepage .mh-final-cta a.mh-primary-cta { background: var(--mh-paper); color: var(--mh-ink); }
+.marketing-homepage .mh-final-cta a.mh-primary-cta { background: var(--mh-lime); color: var(--mh-deep); }
 .marketing-homepage .mh-route-hero a.mh-primary-cta:hover,
 .marketing-homepage .mh-route-contact a.mh-primary-cta:hover,
-.marketing-homepage .mh-final-cta a.mh-primary-cta:hover { background: var(--mh-white); }
+.marketing-homepage .mh-final-cta a.mh-primary-cta:hover { background: var(--mh-lime-hover); }
 
 /* Civic Modern weight set is 400/500/600; the legacy 650s round down. */
 .mh-plan-preview strong,
@@ -729,8 +739,8 @@ a.mh-ondark-cta:hover { background: var(--mh-white); }
 .mh-ondark-cta svg { width: 16px; height: 16px; }
 a.mh-ai-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 10px; padding: 0 20px; background: var(--mh-ink); border-radius: var(--mh-radius-sm); color: var(--mh-paper); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard); }
 a.mh-ai-cta:hover { background: rgb(27 36 34); }
-a.mh-lumo-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 12px; padding: 0 22px; background: var(--mh-lime); border-radius: var(--mh-radius-sm); color: var(--mh-ink); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard); }
-a.mh-lumo-cta:hover { background: rgb(168 228 55); }
+a.mh-lumo-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 12px; padding: 0 22px; background: var(--mh-lime); border-radius: var(--mh-radius-sm); color: var(--mh-deep); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard); }
+a.mh-lumo-cta:hover { background: var(--mh-lime-hover); }
 .mh-lumo-cta svg { width: 16px; height: 16px; }
 
 /* Hero */
@@ -743,8 +753,8 @@ a.mh-lumo-cta:hover { background: rgb(168 228 55); }
 .mh-hero2-visual > .mh-photo-frame { aspect-ratio: 4 / 3; }
 /* On the dark hero both buttons take the on-dark treatment: forest would sit
    too close to the forest-deep band to read as a button. */
-.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-primary-cta { background: var(--mh-paper); color: var(--mh-ink); }
-.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-primary-cta:hover { background: var(--mh-white); }
+.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-primary-cta { background: var(--mh-lime); color: var(--mh-deep); }
+.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-primary-cta:hover { background: var(--mh-lime-hover); }
 .marketing-homepage.mh-page-home .mh-hero2-actions a.mh-secondary-cta { border-color: rgb(246 244 238 / 44%); color: var(--mh-paper); }
 .marketing-homepage.mh-page-home .mh-hero2-actions a.mh-secondary-cta:hover { border-color: var(--mh-paper); }
 

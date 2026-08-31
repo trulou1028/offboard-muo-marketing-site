@@ -84,6 +84,7 @@ export function PrimaryCta({
 }
 
 const NAV_LINKS: ReadonlyArray<{ route: MarketingRoute; href: string; label: string }> = [
+  { route: "home", href: "/", label: "Home" },
   { route: "how-it-works", href: "/how-it-works", label: "How it works" },
   { route: "pricing", href: "/pricing", label: "Pricing" },
   { route: "resources", href: "/resources", label: "Guides" },

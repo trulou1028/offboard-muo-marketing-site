@@ -60,9 +60,10 @@ supersedes the app repo's strategy docs.
   token set; never hardcode colors that a token already names.
 - Palette and type come from `DESIGN.md`. The whole site runs the owner's
   Civic Modern system (`docs/design-system-civic-modern/`; the `--mh-*` token
-  block is its shipped form). **Lumo lime is reserved for AI moments**, never
-  decorative and never a CTA fill; primary CTAs are forest, or paper-on-ink on
-  a dark band.
+  block is its shipped form). **Lumo lime = the primary action on
+  dark green + AI accents** (owner revision 2026-08-31), never decorative and
+  never on light surfaces; primary CTAs are forest on light, neon lime on
+  dark green.
 - Fonts are self-hosted variable fonts (Aspekta, Fraunces, Inter, Newsreader)
   in `public/fonts` — no font CDNs. Never import the design-system export's
   `tokens/fonts.css` (it is a Google Fonts CDN `@import`).
