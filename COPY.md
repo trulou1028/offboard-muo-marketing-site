@@ -160,7 +160,8 @@ out of nav.
 > **Offboard**
 > Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
 
-Columns — **Product:** How it works, Pricing, Guides · **Partners:** For
+Columns — **Product:** How it works, Career Context, Pricing, Guides ·
+**Partners:** For
 employers, For public partners · **Company:** About, Visit us (`/intake`),
 Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy, Terms
 (app.offboard.co).
@@ -208,9 +209,10 @@ questions) → Meet Lumo → Toolkit → Pro → Sponsored access → Built arou
 ### Career Context
 
 - Kicker: `Career Context`
-- H2: `One place that remembers your entire job search.`
+- H2: `One place that remembers your career.` *(widened from "your entire job search", owner strategy doc, plan 025)*
 - Body: `Your resume is only a fraction of your career. Offboard builds a living record of your experience, accomplishments, applications, companies, conversations, documents, interviews, goals, and progress so you don't have to explain yourself from scratch every time you need help.`
 - Categories: `Experience` — `Roles, skills, accomplishments, projects, and outcomes.` · `Applications` — `The opportunities you're pursuing and what has happened with each one.` · `Companies` — `Research, notes, people, hiring signals, and what you've learned.` · `Contacts` — `Recruiters, hiring managers, referrals, and people in your network.` · `Documents` — `Resumes, application materials, job descriptions, and other files.` · `Interviews` — `Upcoming conversations, preparation, notes, feedback, and next steps.` · `Preferences` — `The work you want, compensation expectations, location, industries, and constraints.` · `Goals` — `What you're trying to accomplish and what needs your attention next.`
+- Section link: `Learn more about Career Context` → `/career-context`
 - Central card: `Your Career Context` — `Always evolving. Available wherever you use Offboard.` — `Build it once. Keep making it better. Let the tools you use work from the same understanding of you.`
 - CTA: `Build my Career Context`
 
@@ -720,6 +722,98 @@ do`). Treat it as its own voice zone; the sitewide language rules apply but
 the register is deliberately looser.
 
 ---
+
+# 10 · Career Context `/career-context`
+
+**Added 2026-08-31 (plan 025, first pillar of the owner's site-architecture
+strategy). Copy drafted from the owner's outline; owner sign-off gates
+merge.** Not in header nav yet (the Product dropdown waits for more pillar
+pages); linked from the homepage Career Context section and the footer
+Product column.
+
+**Meta title:** `Career Context | Offboard`
+**Meta description:** `Build your career context once and use it everywhere: a living record of your experience, applications, companies, interviews, and goals that improves every tool you use, in Offboard and in the AI assistants you already work with.`
+
+### Hero
+
+- Kicker: `Career Context`
+- H1: `Build your career context once. Use it everywhere.`
+- Body: `Your resume is one page about your past. Your Career Context is a living record of your experience, applications, companies, conversations, interviews, preferences, and goals. Offboard builds it with you and puts it to work in every tool you use.`
+- CTA: `Create my Career Context` (primary)
+
+### Why a resume isn't enough
+
+- Kicker: `The problem`
+- H2: `A resume is a fraction of your career.`
+- Body: `A resume compresses years of work into one page for one audience. It leaves out the projects that went well, the numbers behind them, the people you worked with, what you learned in interviews, and what you actually want next. So every new tool, and every new conversation, starts from scratch.`
+- Contrast blocks:
+  1. `What a resume holds` — `Titles, dates, and a dozen bullet points, tuned for the last role you applied to.`
+  2. `What your career holds` — `Projects, outcomes, relationships, decisions, feedback, and direction. The material that makes your next application stronger.`
+  3. `What keeps getting lost` — `Every time you explain yourself to a new tool or a new chat window, the context evaporates when the tab closes.`
+
+### What goes in
+
+- Kicker: `Start fast`
+- H2: `Bring what you already have.`
+- Body: `Offboard builds the first version of your Career Context from the things you already have, in minutes. Then it keeps getting better as you use it.`
+- Cards:
+  1. `Resume import` — `Start from the document you have. Offboard turns it into structured experience you can build on.`
+  2. `LinkedIn` — `Bring your profile history in instead of retyping it.`
+  3. `AI conversations` — `Import the career context you have already built up in your ChatGPT history.`
+  4. `Portfolio & documents` — `Work samples, case studies, and files that show what you did.`
+  5. `Projects & outcomes` — `The work behind the bullet points, with the results that made it matter.`
+  6. `Interview stories` — `The examples you reach for in interviews, saved once and ready to reuse.`
+  7. `Goals & preferences` — `The work you want, where, and on what terms.`
+  8. `Applications & contacts` — `The opportunities you are pursuing and the people connected to them.`
+
+### It gets better as you go
+
+- Kicker: `Always evolving`
+- H2: `Every step of your search makes it smarter.`
+- Question blocks:
+  1. `You apply to a role` — **Applications** — `The role, the company research, and the materials you used stay connected to the outcome.`
+  2. `You finish an interview` — **Interviews** — `Questions asked, answers given, and what to prepare next become part of the record.`
+  3. `You talk it through` — **Conversations** — `Decisions and updates you make in conversation, with Lumo or a connected assistant, land in your Career Context instead of vanishing.`
+
+### What it powers
+
+- Kicker: `Put it to work`
+- H2: `One record. Every output.`
+- Capabilities:
+  1. `Tailored resumes` — `Resume versions built from your real history, tuned to the role in front of you.`
+  2. `Application packets` — `The role, the company, your positioning, and your materials in one place.`
+  3. `Interview preparation` — `Prep plans and practice grounded in your actual experience and the actual role.`
+  4. `Better decisions` — `Compare opportunities against your experience, preferences, and how your search is going.`
+
+### How Lumo uses it
+
+- Kicker: `Meet Lumo` (Lumo eyebrow treatment)
+- H2: `Lumo starts every conversation already caught up.`
+- Body: `Because Lumo works from your Career Context, you never re-upload a resume, re-explain your goals, or reconstruct what happened with an application. You ask, and the answer starts from everything you have already built.`
+- CTA: `Ask Lumo` (AI button)
+
+### Works with the AI you already use
+
+- Kicker: `Offboard, wherever you work`
+- H2: `Offboard holds the record. You choose the interface.`
+- Body: `Connect Offboard to supported AI assistants and your Career Context goes with you. Save an opportunity from a conversation, update an application, or add what you just learned, from whichever tool you are already in.`
+- Demo conversation: You: `Add the project outcomes we just discussed to my Career Context.` / AI: `Done. I have added the migration project and its results to your experience.`
+
+### Yours, and private
+
+- Kicker: `Private by default`
+- H2: `Your Career Context belongs to you.`
+- List:
+  1. `You choose what goes in, and you can edit or remove anything.`
+  2. `Connected assistants see what you authorize, not everything.`
+  3. `Sponsors only ever see aggregate participation, never your record.`
+  4. `You can export what you have built. It is yours.`
+
+### Final CTA (shared component, overridden copy)
+
+- H2: `Stop starting from scratch.`
+- Body: `Build your Career Context once and every application, interview, and conversation after it starts further ahead.`
+- CTAs: sitewide primary + `Talk to a person`
 
 # Redirect map (SEO-load-bearing; any route rename must update it in the same PR)
 

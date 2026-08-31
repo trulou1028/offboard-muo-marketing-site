@@ -13,60 +13,12 @@ import {
   Users,
 } from "lucide-react";
 import type { ReactNode } from "react";
-import { CommunityStrip, MarketingShell, SIGN_UP_URL, StartingPlanPreview } from "./MarketingSite";
+import { AiReply, CommunityStrip, LumoMark, MarketingShell, SIGN_UP_URL, StartingPlanPreview, TrackerCard, YouBubble } from "./MarketingSite";
 
 /* Homepage v2 (plan 022): the Civic Modern homepage. Copy source:
    offboard-career-context-hp-copy-v1a.md, mirrored in COPY.md § 1. Layout
    follows docs/design-system-civic-modern (readme.md band order and the
    marketing ui_kit). */
-
-function LumoMark({ className = "" }: { className?: string }) {
-  return <i className={`mh-lumo-mark ${className}`.trim()} aria-hidden="true" />;
-}
-
-function YouBubble({ children }: { children: ReactNode }) {
-  return (
-    <p className="mh-chat-you">
-      <span className="mh-chat-speaker">You</span>
-      {children}
-    </p>
-  );
-}
-
-function AiReply({
-  highlight,
-  children,
-  card,
-}: {
-  highlight?: string;
-  children: ReactNode;
-  card?: ReactNode;
-}) {
-  return (
-    <div className="mh-chat-ai">
-      <LumoMark />
-      <div>
-        <p>
-          {highlight ? <mark className="mh-ai-highlight">{highlight}</mark> : null} {children}
-        </p>
-        {card}
-      </div>
-    </div>
-  );
-}
-
-function TrackerCard() {
-  return (
-    <div className="mh-tracker-card" aria-label="Example tracked opportunity">
-      <b className="mh-tracker-monogram" aria-hidden="true">T</b>
-      <span>
-        <strong>Product Designer</strong>
-        <small>Tesserac</small>
-      </span>
-      <em className="mh-tracker-status">Saved</em>
-    </div>
-  );
-}
 
 function SecondaryCta({ children, href }: { children: ReactNode; href: string }) {
   return href.startsWith("/") ? (

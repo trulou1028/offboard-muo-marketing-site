@@ -191,6 +191,57 @@ export function MarketingShell({
   );
 }
 
+/* Chat primitives (moved from MarketingHome for reuse on product pages -
+   plan 025; no visual change). */
+export function LumoMark({ className = "" }: { className?: string }) {
+  return <i className={`mh-lumo-mark ${className}`.trim()} aria-hidden="true" />;
+}
+
+export function YouBubble({ children }: { children: ReactNode }) {
+  return (
+    <p className="mh-chat-you">
+      <span className="mh-chat-speaker">You</span>
+      {children}
+    </p>
+  );
+}
+
+export function AiReply({
+  highlight,
+  children,
+  card,
+}: {
+  highlight?: string;
+  children: ReactNode;
+  card?: ReactNode;
+}) {
+  return (
+    <div className="mh-chat-ai">
+      <LumoMark />
+      <div>
+        <p>
+          {highlight ? <mark className="mh-ai-highlight">{highlight}</mark> : null} {children}
+        </p>
+        {card}
+      </div>
+    </div>
+  );
+}
+
+export function TrackerCard() {
+  return (
+    <div className="mh-tracker-card" aria-label="Example tracked opportunity">
+      <b className="mh-tracker-monogram" aria-hidden="true">T</b>
+      <span>
+        <strong>Product Designer</strong>
+        <small>Tesserac</small>
+      </span>
+      <em className="mh-tracker-status">Saved</em>
+    </div>
+  );
+}
+
+
 export function NumberedRows({ rows }: { rows: readonly (readonly [string, string])[] }) {
   return (
     <ol className="mh-numbered-rows">
