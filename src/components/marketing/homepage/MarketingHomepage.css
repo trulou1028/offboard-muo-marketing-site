@@ -8,7 +8,8 @@
   --mh-ink: #0a1110;
   --mh-forest: #16351f;
   --mh-deep: #0f2617;
-  --mh-footer: #0f2617; /* Civic Modern has two greens; the footer takes forest-deep */
+  --mh-footer: #07160c; /* Deliberate third green (plan 027): every page ends on a
+                            dark band, so a footer at forest-deep merged into it. */
   --mh-lime: #b8f24a; /* Lumo. Primary action on dark green + AI accents - never decorative on light */
   --mh-lime-hover: #a8e437;
   --mh-violet: #c5b7ff; /* legacy AI token, superseded by Lumo; unused */
@@ -405,7 +406,9 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-progress-mark i:first-child { background: var(--mh-paper); }
 .mh-progress-mark span { flex: 1; height: 1px; background: rgb(246 244 238 / 34%); }
 
-.mh-site-footer { min-height: 360px; padding: 62px var(--mh-page-x) 34px; background: var(--mh-footer); color: var(--mh-paper); }
+/* The hairline guarantees a crisp edge even where the section above is also
+   dark; the deeper fill does the layering. */
+.mh-site-footer { min-height: 360px; padding: 62px var(--mh-page-x) 34px; background: var(--mh-footer); border-top: 1px solid var(--mh-hairline-on-dark); color: var(--mh-paper); }
 .mh-site-footer > div { display: grid; grid-template-columns: .83fr 1fr; gap: 90px; }
 .mh-site-footer > div > div { display: flex; flex-direction: column; gap: 18px; }
 .mh-site-footer > div > div strong { font-size: 20px; }

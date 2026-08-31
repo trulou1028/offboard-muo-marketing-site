@@ -35,6 +35,13 @@ Rollout history: plan 021 themed the homepage behind a
 homepage on it; plan 023 promoted those values to the base scope and
 deleted the override block. There is no longer a per-route palette split.
 
+**The footer is a deliberate third green** (`#07160c`, plan 027). Civic
+Modern ships two greens, but every page ends on a dark band (a forest
+`.mh-final-cta` or a forest-deep `.mh-route-contact` / `.mh-final2`), so a
+footer at forest-deep merged into the section above it and stopped reading
+as its own layer. The footer also carries a top hairline, which keeps the
+edge crisp where the step alone is subtle.
+
 **Lumo lime = the primary action on dark green, plus AI accents**
 (owner revision 2026-08-31, plan 024; it was AI-only for a week). On a
 dark-green surface (`--mh-forest` / `--mh-deep`, including the fixed
@@ -77,7 +84,7 @@ tokens are only available within it).
 | `--mh-ink` | `#0a1110` | Primary text on light surfaces |
 | `--mh-forest` | `#16351f` | Mid-tone brand green — filled dark sections, solid buttons |
 | `--mh-deep` | `#0f2617` | Darkest brand green — hero, some route heroes |
-| `--mh-footer` | `#0f2617` | Footer background (darkest of the three greens) |
+| `--mh-footer` | `#07160c` | Footer background (darkest of the three greens) |
 | `--mh-lime` | `#b8f24a` | **Lumo. AI moments only** — never decorative, never a primary CTA |
 | `--mh-violet` | `#c5b7ff` | **Reserved for LUMO/AI.** Defined but not yet consumed by any rule in this file — do not use it for anything else, including "just to add a second accent color." |
 
