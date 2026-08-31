@@ -750,8 +750,8 @@ copy doc built on it. Reference export lives in
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 021 | Civic Modern homepage retheme (homepage-scoped tokens, forest CTAs, lime->AI-only, refreshed wordmark) | P1 | M | 014 | IN PROGRESS - branch `claude/civic-modern-homepage`, [PR #41](https://github.com/trulou1028/offboard-muo-marketing-site/pull/41), awaiting owner preview sign-off |
-| 022 | Homepage v2 - Career Context narrative (owner copy doc; full section rebuild, COPY.md 2.0) | P1 | L | 021 | IN PROGRESS - branch `claude/homepage-v2-career-context`, [PR #42](https://github.com/trulou1028/offboard-muo-marketing-site/pull/42), stacked on 021, awaiting owner preview sign-off |
+| 021 | Civic Modern homepage retheme (homepage-scoped tokens, forest CTAs, lime->AI-only, refreshed wordmark) | P1 | M | 014 | DONE - owner-approved and **merged to `main`** 2026-08-31 via [PR #42](https://github.com/trulou1028/offboard-muo-marketing-site/pull/42), which contains every commit of [PR #41](https://github.com/trulou1028/offboard-muo-marketing-site/pull/41). Production deploy `f7af7aa` verified READY. |
+| 022 | Homepage v2 - Career Context narrative (owner copy doc; full section rebuild, COPY.md 2.1) | P1 | L | 021 | DONE - owner-approved and **merged to `main`** 2026-08-31 via [PR #42](https://github.com/trulou1028/offboard-muo-marketing-site/pull/42). Hero is forest-deep per owner direction; 018's Your Path card carried in. Caught and fixed an a11y regression this rebuild introduced: six controls on the new dark bands drew a 1.2-1.4:1 focus ring. |
 
 Plan 022 supersedes plan 018's homepage-specific work, with one deliberate
 carry-over the owner approved on 2026-08-31: 018 phase 3's "Your Path"
