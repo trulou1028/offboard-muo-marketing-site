@@ -12,11 +12,13 @@ test.describe("Offboard marketing site", () => {
     });
 
     await page.goto("/");
+    // Homepage v2 (plan 020): Career Context narrative, COPY.md § 1.
     await expect(page.getByRole("heading", { level: 1, name: /modern unemployment office/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /three jobs at once/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /\$12,000/ })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /one place for the decisions/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /checked by people, never generated/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /your job search goes wherever you do/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /one place that remembers your entire job search/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /losing your job creates more than one problem/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /an ai guide that already knows/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /you don't need another place to start over/i })).toBeVisible();
     await expect(page.getByRole("tablist", { name: "Job search stages" })).toHaveCount(0);
 
     await page.getByRole("link", { name: "How it works" }).first().click();

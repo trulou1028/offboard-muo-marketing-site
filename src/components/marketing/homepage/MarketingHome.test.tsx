@@ -38,32 +38,40 @@ describe("Offboard marketing routes", () => {
   it("keeps the homepage focused on what Offboard does and who it serves", () => {
     render(<MarketingHome />);
 
-    expect(screen.getByRole("heading", { level: 1, name: "The Modern Unemployment Office" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /most people find out what they were entitled to/i })).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", {
-        name: "There's an office for this moment. It just hasn't been modern until now.",
-      }),
-    ).toBeInTheDocument();
-    expect(screen.getByText("The old office")).toBeInTheDocument();
-    expect(screen.getByText("The modern one")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A layoff gives you three jobs at once." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /\$12,000/ })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /one place for the decisions/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /checked by people, never generated/i })).toBeInTheDocument();
-    expect(screen.getByText("$0 forever")).toBeInTheDocument();
-    expect(screen.getByText("$20/month")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /letting people go/i })).toBeInTheDocument();
+    // Homepage v2 (plan 020): Career Context narrative from the owner's copy
+    // doc, mirrored in COPY.md § 1.
+    expect(screen.getByRole("heading", { level: 1, name: "The modern unemployment office." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Your job search goes wherever you do." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "One place that remembers your entire job search." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Losing your job creates more than one problem." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /an ai guide that already knows/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /everything you need when the next opportunity appears/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Free remembers your search. Pro puts it to work." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /job-search support people will actually use/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Your career context should belong to you." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /you don't need another place to start over/i })).toBeInTheDocument();
+
+    // Verified facts that stay on the homepage (COPY.md ledger).
+    expect(screen.getByText("$0")).toBeInTheDocument();
+    expect(screen.getByText("$20")).toBeInTheDocument();
     expect(screen.getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Your transition is yours." })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /subscribe free/i })).toHaveAttribute("href", "https://newsletter.offboard.co");
-    expect(screen.getByRole("heading", { name: /find out first/i })).toBeInTheDocument();
+
+    // The primary CTA changed to "Get started free" on v2 (COPY.md language
+    // rules, homepage exception).
+    expect(screen.getAllByRole("link", { name: /get started free/i }).length).toBeGreaterThanOrEqual(2);
+
+    // Sponsored-tier copy keeps "outplacement" on the page (the scoped
+    // exception in COPY.md language rules).
+    expect(screen.getByText(/outplacement/i)).toBeInTheDocument();
+
+    // Retired v1 sections must not resurface.
+    expect(screen.queryByRole("heading", { name: /a layoff gives you three jobs at once/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /\$12,000/ })).not.toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Where are you right now?" })).not.toBeInTheDocument();
     expect(screen.queryByRole("tablist", { name: "Job search stages" })).not.toBeInTheDocument();
 
-    // "not a government agency" now appears in both the hero small print
-    // (owner-approved, unchanged) and the new footer disclaimer, so this
-    // uses getAllByText rather than getByText.
+    // Independence disclaimer: benefits section small print + footer.
     expect(screen.getAllByText(/not a government agency/i).length).toBeGreaterThanOrEqual(2);
     // Built at runtime (rather than as a literal string) so this file itself
     // never contains the retired footer phrase — a repo-wide grep for it is

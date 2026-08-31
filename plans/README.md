@@ -688,7 +688,8 @@ and mobile hero before product-proof and interaction work continues.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 019 | Civic Modern homepage retheme (owner's Claude Design system; homepage-scoped tokens, forest CTAs, lime->AI-only, site-wide new wordmark) | P1 | M | 014 | IN PROGRESS - branch `claude/civic-modern-homepage`, awaiting owner preview sign-off |
+| 019 | Civic Modern homepage retheme (owner's Claude Design system; homepage-scoped tokens, forest CTAs, lime->AI-only, site-wide new wordmark) | P1 | M | 014 | IN PROGRESS - branch `claude/civic-modern-homepage`, PR #41, awaiting owner preview sign-off |
+| 020 | Homepage v2 - Career Context narrative (owner copy doc; full section rebuild on the Civic Modern system, COPY.md 2.0) | P1 | L | 019 | IN PROGRESS - branch `claude/homepage-v2-career-context` stacked on 019, awaiting owner preview sign-off |
 
 Plan 019 is owner-directed: adopt the design system Louie built in Claude
 Design (reference in `docs/design-system-civic-modern/`). Homepage first;
