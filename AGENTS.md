@@ -58,11 +58,11 @@ supersedes the app repo's strategy docs.
   `src/components/marketing/homepage/MarketingHomepage.css` under the
   `.marketing-homepage` scope with `--mh-*` tokens. New surfaces extend the
   token set; never hardcode colors that a token already names.
-- Palette and type come from `DESIGN.md`. The homepage runs the owner's Civic
-  Modern system (`docs/design-system-civic-modern/`, see DESIGN.md "Transition
-  state"); other routes keep the legacy values until rollout. **Violet and
-  Lumo lime are reserved for LUMO/AI**, never decorative (the homepage already
-  enforces this; legacy routes migrate at rollout).
+- Palette and type come from `DESIGN.md`. The whole site runs the owner's
+  Civic Modern system (`docs/design-system-civic-modern/`; the `--mh-*` token
+  block is its shipped form). **Lumo lime is reserved for AI moments**, never
+  decorative and never a CTA fill; primary CTAs are forest, or paper-on-ink on
+  a dark band.
 - Fonts are self-hosted variable fonts (Aspekta, Fraunces, Inter, Newsreader)
   in `public/fonts` — no font CDNs. Never import the design-system export's
   `tokens/fonts.css` (it is a Google Fonts CDN `@import`).

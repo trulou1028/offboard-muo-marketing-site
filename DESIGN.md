@@ -22,48 +22,40 @@ below is a description of what already ships. Match it. If a value you need
 isn't in this doc, look at the nearest existing section in
 `MarketingHomepage.css` before inventing a new one.
 
-## Transition state (2026-08-30, plan 021)
+## Civic Modern (adopted site-wide, 2026-08-31, plan 023)
 
-The site is mid-adoption of the owner's **Civic Modern** design system
-(reference export: `docs/design-system-civic-modern/` — `readme.md` is the
-spec, `tokens/*.css` carry the values). Adoption is per-route:
+The site runs the owner's **Civic Modern** design system on every route.
+Reference export: `docs/design-system-civic-modern/` (`readme.md` is the
+spec, `tokens/*.css` carry the values). The `--mh-*` token block at the top
+of `MarketingHomepage.css` now holds the Civic Modern values, so this
+document's tables below describe what ships everywhere.
 
-- **The homepage runs Civic Modern.** A
-  `.marketing-homepage.mh-page-home { … }` block near the top of
-  `MarketingHomepage.css` re-values the `--mh-*` tokens (palette, type
-  scale, rhythm, radii, shadow, fonts) for the homepage only, and a
-  "Civic Modern homepage overrides" section before the media queries
-  carries the per-element changes the token swap could not reach.
-- **Every other route keeps the legacy values** documented in the tables
-  below until its own rollout pass.
-- The shipped CSS remains the source of truth (plan 014 doctrine); this
-  section describes the shipped mechanism.
+Rollout history: plan 021 themed the homepage behind a
+`.marketing-homepage.mh-page-home` override block; plan 022 rebuilt the
+homepage on it; plan 023 promoted those values to the base scope and
+deleted the override block. There is no longer a per-route palette split.
 
-Civic Modern values on the homepage: paper `#f6f4ee` / paper-deep
-`#ece9e0`, ink `#0a1110`, muted `#3c4640`, line `#d9d6cc`, forest
-`#16351f`, forest-deep `#0f2617` (also the footer — Civic Modern has no
-third green), Lumo lime `#b8f24a`, on-dark-muted `#b9c4bb`. New tokens
-(homepage scope only): `--mh-mist` `#e9f0e5` (consumed), `--mh-sage`
-`#74bd47` (status fills only — it fails text contrast on white),
-`--mh-secondary` `#6f736b` (meta text), plus `--mh-mist-border`,
-`--mh-sand`, `--mh-sand-eyebrow`, `--mh-chip-fill` reserved for rollout.
-Type is Newsreader (serif display, weight 500) + Inter, self-hosted via
-`--font-newsreader`/`--font-inter` and reached through the
-`--mh-font-display`/`--mh-font-body` indirection. Radii 6/12/16/20, one
-shadow `0 16px 40px rgb(10 17 16 / 12%)`, section rhythm 120/80.
+**Lumo lime is AI-only, site-wide.** `--mh-lime` (`#b8f24a`) appears in
+exactly four roles: the AI avatar disc (`.mh-lumo-mark`), the highlight
+behind an AI reply's first word (`.mh-ai-highlight`), an AI chip dot, and
+the single Lumo-filled final CTA on the homepage. The LUMO section's
+eyebrow keeps it as a sanctioned AI use. Everything that used lime
+decoratively now takes forest (on light) or paper (on dark). Primary CTAs
+are forest-on-paper, or paper-on-ink on a dark band.
+`e2e/homepage.spec.ts` guards the focus-ring half of this; the palette
+half is enforced by review, not tooling.
 
-**The lime role narrowed on the homepage: Lumo lime is AI-only.** Primary
-CTAs are forest-on-paper (dark bands: paper-on-ink); decorative lime
-became paper/mist/forest per element. The only lime on the homepage is
-the "Ask Lumo" dot. Legacy routes still use lime as the general accent
-until their rollout pass.
+Two class names outlive their meaning and are deliberately not renamed
+(the `ArticleFidelity` snapshot embeds them): `.is-lime` now means
+"eyebrow on a dark band", and `.mh-lumo-row` is a plain product row.
 
-Deliberate holds this pass: the container tokens
-(`--mh-page-max/gutter/page-x`) keep the legacy formula (CI-enforced
-alignment contract; Civic Modern's flat 32px gutter was rejected for now),
-and component micro-sizes keep their current values so layout does not
-move — Civic Modern's fixed sizes became desktop clamp endpoints for the
-tokenized headings only.
+**Deferred, not rejected:** the design system's flat 32px container gutter
+(the site keeps `clamp(24px, 4.76vw, 72px)`, which the CI container
+-alignment test is written against), and full adoption of its fixed type
+scale for component-level text (the tokenized headings use its sizes as
+desktop clamp endpoints; card and label sizes keep their own values).
+Route pages also keep their own band order rather than the system's
+homepage rhythm.
 
 ## Palette
 
@@ -74,25 +66,25 @@ tokens are only available within it).
 ### Brand / surface
 | Token | Value | Use |
 |---|---|---|
-| `--mh-paper` | `#f7f4ec` | Default page background (warm off-white) |
-| `--mh-paper-soft` | `#f2efe6` | Alternating section background, one shade down from paper |
+| `--mh-paper` | `#f6f4ee` | Default page background (warm off-white) |
+| `--mh-paper-soft` | `#ece9e0` | Alternating section background, one shade down from paper |
 | `--mh-white` | `#fff` | Card surfaces on paper |
-| `--mh-line` | `#d7d3c8` | Hairline borders/dividers on light surfaces |
-| `--mh-muted` | `#40534c` | Secondary text on light surfaces |
-| `--mh-ink` | `#15211d` | Primary text on light surfaces |
-| `--mh-forest` | `#004838` | Mid-tone brand green — filled dark sections, solid buttons |
-| `--mh-deep` | `#00352a` | Darkest brand green — hero, some route heroes |
-| `--mh-footer` | `#002e26` | Footer background (darkest of the three greens) |
-| `--mh-lime` | `#dfff5a` | The single accent. Primary CTA fill, on-dark accents, badges |
+| `--mh-line` | `#d9d6cc` | Hairline borders/dividers on light surfaces |
+| `--mh-muted` | `#3c4640` | Secondary text on light surfaces |
+| `--mh-ink` | `#0a1110` | Primary text on light surfaces |
+| `--mh-forest` | `#16351f` | Mid-tone brand green — filled dark sections, solid buttons |
+| `--mh-deep` | `#0f2617` | Darkest brand green — hero, some route heroes |
+| `--mh-footer` | `#0f2617` | Footer background (darkest of the three greens) |
+| `--mh-lime` | `#b8f24a` | **Lumo. AI moments only** — never decorative, never a primary CTA |
 | `--mh-violet` | `#c5b7ff` | **Reserved for LUMO/AI.** Defined but not yet consumed by any rule in this file — do not use it for anything else, including "just to add a second accent color." |
 
 ### Color roles (on-dark and status)
 | Token | Value | Use |
 |---|---|---|
-| `--mh-on-dark-muted` | `#cfe0d9` | Secondary/muted text on `--mh-forest`/`--mh-deep` sections |
-| `--mh-hairline-on-dark` | `rgb(255 255 255 / 18%)` | `border-top`/`border-bottom` dividers on dark sections |
-| `--mh-surface-on-dark` | `rgb(255 255 255 / 6%)` | Subtle fill for panels/cards sitting on dark sections |
-| `--mh-border-on-dark` | `rgb(255 255 255 / 16%)` | Borders (and the money-clock progress-bar track) on dark sections |
+| `--mh-on-dark-muted` | `#b9c4bb` | Secondary/muted text on `--mh-forest`/`--mh-deep` sections |
+| `--mh-hairline-on-dark` | `rgb(246 244 238 / 16%)` | `border-top`/`border-bottom` dividers on dark sections |
+| `--mh-surface-on-dark` | `rgb(246 244 238 / 6%)` | Subtle fill for panels/cards sitting on dark sections |
+| `--mh-border-on-dark` | `rgb(246 244 238 / 16%)` | Borders (and the money-clock progress-bar track) on dark sections |
 | `--mh-success` | `#006b52` | Positive/matched status text |
 | `--mh-warning` | `#9a5b0b` | Pending/attention status text |
 | `--mh-danger` | `#b3261e` | Error text (form validation) |
@@ -111,10 +103,13 @@ adding a 31st color, not to add one inline.
 
 ## Typography
 
-Two self-hosted variable fonts, loaded via `next/font` and exposed as
-`var(--font-fraunces)` and `var(--font-aspekta)`.
+Two self-hosted variable fonts, **Newsreader** (display serif) and **Inter**
+(everything else), loaded via `next/font/local` and reached through the
+`--mh-font-display` / `--mh-font-body` tokens rather than the raw
+`--font-*` variables. Aspekta and Fraunces are still loaded in
+`layout.tsx` but no rule consumes them; removing them is a follow-up.
 
-- **Fraunces, weight 500, `-0.03em` letter-spacing, is the default for `h1`,
+- **Newsreader, weight 500, is the default for `h1`,
   `h2`, and `h3`** everywhere inside `.marketing-homepage` (see the
   reset block at the top of the CSS file). This site has no `h4`–`h6`
   usage — if you need a smaller heading, drop to a `strong`/`span` styled
@@ -135,9 +130,9 @@ Two self-hosted variable fonts, loaded via `next/font` and exposed as
 ### Type scale tokens
 | Token | Value | Use |
 |---|---|---|
-| `--mh-h1` | `clamp(56px, 5.3vw, 82px)` | Route/page hero `h1` (e.g. `.mh-route-hero h1`) |
-| `--mh-h2` | `clamp(46px, 4vw, 62px)` | Default section heading `h2` |
-| `--mh-h2-sm` | `clamp(38px, 3.2vw, 48px)` | A section `h2` that reads one step down from a narrative anchor (see Homepage heading tiers below) |
+| `--mh-h1` | `clamp(44px, 4.45vw, 64px)` | Route/page hero `h1` (e.g. `.mh-route-hero h1`) |
+| `--mh-h2` | `clamp(32px, 2.8vw, 40px)` | Default section heading `h2` |
+| `--mh-h2-sm` | `clamp(28px, 2.2vw, 34px)` | A section `h2` that reads one step down from a narrative anchor (see Homepage heading tiers below) |
 
 `--mh-h2` is overridden to a flat `40px` at the `≤560px` breakpoint, and
 `--mh-h2-sm` to a flat `32px` (see Rhythm & breakpoints below); every `h2`
@@ -182,9 +177,9 @@ three sizes."
 
 | Token | Value | Use |
 |---|---|---|
-| `--mh-section-y` | `88px` | Default section `padding-top`/`padding-bottom` |
-| `--mh-section-y-loose` | `104px` | Heavier bands (route content grids, the independence/pricing-teaser sections) |
-| `--mh-section-y-tight` | `64px` | Shorter strips (pricing, the final CTA, the employer strip) |
+| `--mh-section-y` | `120px` | Default section `padding-top`/`padding-bottom` |
+| `--mh-section-y-loose` | `120px` | Heavier bands (route content grids, the independence/pricing-teaser sections) |
+| `--mh-section-y-tight` | `80px` | Shorter strips (pricing, the final CTA, the employer strip) |
 
 At `≤560px` the type scale steps down with them: `--mh-h2` to `40px` and
 `--mh-h2-sm` to `32px`.
@@ -290,10 +285,10 @@ went unnoticed.
 | Token | Value |
 |---|---|
 | `--mh-radius-xs` | `4px` | Controls small enough that `-sm` reads as a circle (the plan preview's 16px checkbox) |
-| `--mh-radius-sm` | `8px` |
+| `--mh-radius-sm` | `6px` |
 | `--mh-radius-md` | `12px` |
-| `--mh-radius-lg` | `18px` |
-| `--mh-radius-card` | `24px` |
+| `--mh-radius-lg` | `16px` |
+| `--mh-radius-card` | `20px` |
 | `--mh-radius-pill` | `999px` |
 
 Circular elements (`border-radius: 50%`) are their own thing and stay `50%`
@@ -306,27 +301,28 @@ than anything the scale offers.
 
 | Token | Value | Use |
 |---|---|---|
-| `--mh-shadow-surface` | `0 18px 40px rgb(24 42 36 / 15%)` | Resting elements that need separation without floating (e.g. `.mh-job-pill`) |
-| `--mh-shadow-overlay` | `0 28px 60px rgb(29 59 51 / 22%)` | Floating/absolute-positioned elements — the onboarding illustration pieces, the mobile nav dropdown |
+| `--mh-shadow-surface` | `0 16px 40px rgb(10 17 16 / 12%)` | Resting elements that need separation without floating (e.g. `.mh-job-pill`) |
+| `--mh-shadow-overlay` | `0 16px 40px rgb(10 17 16 / 12%)` | Floating/absolute-positioned elements — the onboarding illustration pieces, the mobile nav dropdown |
 
 Only two shadows exist in this stylesheet. If a new component needs
 elevation, it's one of these two — there's no third tier.
 
 ## Hard rules (carried over, unchanged)
 
-- **Violet is LUMO/AI-only.** `--mh-violet` is reserved for AI/LUMO
-  surfaces if and when this site grows one. Never use it as a second
-  general-purpose accent — lime is the only accent color this site has.
+- **Lumo lime is AI-only.** `--mh-lime` marks AI moments and nothing else
+  (see the Civic Modern section above for the four permitted roles). Never
+  use it as a general accent or a CTA fill. `--mh-violet` is the superseded
+  legacy AI token, still defined but consumed by no rule; prefer lime.
 - **No side-accent color bars on rounded containers.** A colored
   `border-left`/`border-right` wider than 1px reads as a "stripe," which
   this system doesn't use decoratively. (Two existing components —
   `.mh-employer-privacy-quote` and `.mh-article-callout` — do combine a
   colored `border-left` with `border-radius`; they predate this rule being
   written down explicitly. Don't use them as precedent for a new one.)
-- **One primary CTA per view.** `.mh-primary-cta` (lime fill, deep-green
-  text) is the loud, filled button — at most one per screen. Everything
-  else is a text link (`.mh-section-link`) or an outline button (the header
-  CTA: transparent fill, `var(--mh-lime)` border, white text).
+- **One primary CTA per view.** `.mh-primary-cta` (forest fill, paper text;
+  paper-on-ink when it sits on a dark band) is the filled button — at most
+  one per screen. Everything else is a text link (`.mh-section-link`) or the
+  outline `.mh-secondary-cta`.
 - **No em dashes in site copy.** Copy content and its rules live in
   `COPY.md` at the repo root — this doc doesn't duplicate them.
 
