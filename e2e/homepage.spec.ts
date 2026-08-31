@@ -65,10 +65,11 @@ test.describe("Offboard marketing site", () => {
     }
   });
 
-  test("keeps the header nav to five marketing links and demotes public partners", async ({ page }) => {
+  test("keeps the header nav to six marketing links and demotes public partners", async ({ page }) => {
     await page.goto("/");
     const headerNav = page.getByRole("navigation", { name: "Marketing navigation" });
-    await expect(headerNav.getByRole("link")).toHaveCount(5);
+    await expect(headerNav.getByRole("link")).toHaveCount(6);
+    await expect(headerNav.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
     await expect(headerNav.getByRole("link", { name: "Guides" })).toHaveAttribute("href", "/resources");
     await expect(headerNav.getByRole("link", { name: "For public partners" })).toHaveCount(0);
 

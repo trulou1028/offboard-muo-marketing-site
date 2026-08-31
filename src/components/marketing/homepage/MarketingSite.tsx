@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ArrowRight, CalendarDays, Check, GraduationCap, LockKeyhole } from "lucide-react";
 import type { ReactNode } from "react";
 
+import { MotionController } from "./MotionController";
+
 export const SIGN_UP_URL = "https://app.offboard.co/auth?tab=signup";
 export const SIGN_IN_URL = "https://app.offboard.co/auth?tab=signin";
 export const HUMAN_SUPPORT_URL = "/intake";
@@ -84,6 +86,7 @@ export function PrimaryCta({
 }
 
 const NAV_LINKS: ReadonlyArray<{ route: MarketingRoute; href: string; label: string }> = [
+  { route: "home", href: "/", label: "Home" },
   { route: "how-it-works", href: "/how-it-works", label: "How it works" },
   { route: "pricing", href: "/pricing", label: "Pricing" },
   { route: "resources", href: "/resources", label: "Guides" },
@@ -179,6 +182,7 @@ export function MarketingShell({
 }) {
   return (
     <div className={`marketing-homepage mh-page-${current}`}>
+      <MotionController />
       <a className="mh-skip-link" href="#main-content">Skip to content</a>
       <MarketingHeader current={current} />
       {children}
@@ -248,7 +252,7 @@ export function PageHero({
 
 export function StartingPlan() {
   return (
-    <div className="mh-onboarding-visual" aria-label="An abstracted preview of Offboard onboarding">
+    <div className="mh-onboarding-visual" data-reveal="" aria-label="An abstracted preview of Offboard onboarding">
       <Image src="/marketing/homepage/onboarding-atmosphere-v1.png" alt="" fill sizes="(max-width: 900px) 100vw, 44vw" aria-hidden="true" />
       <div className="mh-onboarding-screen">
         <div className="mh-onboarding-progress" aria-hidden="true"><i /><i /><i /><i /><i /></div>
@@ -334,7 +338,7 @@ export function VerifiedFactsStrip() {
           </div>
         </div>
       </div>
-      <div className="mh-verified-grid">
+      <div className="mh-verified-grid" data-reveal="">
         {VERIFIED_FACTS_COLUMNS.map(([title, body]) => (
           <article key={title}><h3>{title}</h3><p>{body}</p></article>
         ))}
@@ -414,7 +418,7 @@ export function ToolkitSection() {
         <span className="mh-kicker">The toolkit</span>
         <h2 id="toolkit-title">The tools didn&apos;t go anywhere. Now they show up at the right moment.</h2>
       </div>
-      <div className="mh-toolkit-layout">
+      <div className="mh-toolkit-layout" data-reveal="">
         <article className="mh-toolkit-flagship">
           <div className="mh-toolkit-flagship-visual">
             <Image src="/marketing/homepage/renders/toolkit-job-packets.webp" alt="Product render of the Job Packet view, a document linked to its tailored materials" fill sizes="(max-width: 900px) 100vw, 38vw" />
@@ -463,7 +467,7 @@ export function LumoSection() {
           <p>When LUMO talks about your benefits, it reads from human-verified state facts. It never invents a dollar figure or a deadline.</p>
         </div>
       </div>
-      <div className="mh-lumo-questions">
+      <div className="mh-lumo-questions" data-reveal="">
         <span>Ask questions like</span>
         <ol>
           {LUMO_QUESTIONS.map((question, index) => (
@@ -497,7 +501,7 @@ export function ContextSection() {
         <h2 id="context-title">Stop repeating your story to every new tool.</h2>
         <p>Your situation, state, runway, roles, resumes, applications, interviews, and outcomes stay connected. Every step of the plan, and every tool, starts from your real context instead of a blank page.</p>
       </div>
-      <div className="mh-context-chips">
+      <div className="mh-context-chips" data-reveal="">
         <div>
           <span>Adds context</span>
           <ul>{CONTEXT_ADDS.map((chip) => <li key={chip}>{chip}</li>)}</ul>
@@ -541,7 +545,7 @@ export function PricingSection() {
   return (
     <section className="mh-pricing mh-section" id="pricing" aria-labelledby="pricing-title">
       <div className="mh-pricing-heading"><div><span className="mh-kicker">A simple place to start</span><h2 id="pricing-title">Start free. Add more support when you need it.</h2></div><p>Begin with a transition plan and the core tools. Add credits or human support only when you choose to go further. You will see the price and what is included before you pay.</p></div>
-      <div className="mh-price-deck">
+      <div className="mh-price-deck" data-reveal="">
         <article className="is-primary">
           <header>
             <h3>Free</h3>
@@ -602,7 +606,7 @@ export function FaqSection({
   return (
     <section className="mh-faq mh-section" id="faq" aria-labelledby="faq-title">
       <div><span className="mh-kicker">Good questions</span><h2 id="faq-title">{title}</h2></div>
-      <div className="mh-faq-list">{items.map(([question, answer]) => <article key={question}><header><h3>{question}</h3></header><p>{answer}</p></article>)}</div>
+      <div className="mh-faq-list" data-reveal="">{items.map(([question, answer]) => <article key={question}><header><h3>{question}</h3></header><p>{answer}</p></article>)}</div>
     </section>
   );
 }
@@ -636,7 +640,7 @@ export function CommunityStrip() {
         <h2 id="community-title">Job searching is hard enough without doing it alone.</h2>
         <p>Practical job-market intelligence, people navigating the same uncertainty, and a real person when you feel stuck.</p>
       </div>
-      <div className="mh-community-rows">
+      <div className="mh-community-rows" data-reveal="">
         {COMMUNITY_ROWS.map((row) => (
           <article key={row.title}>
             <h3>{row.title}</h3>
@@ -697,7 +701,7 @@ export function EditorialGrid({
   return (
     <section className="mh-route-content mh-section" aria-labelledby={headingId}>
       <div className="mh-route-content-heading"><span className="mh-kicker">{kicker}</span><h2 id={headingId}>{title}</h2><p>{body}</p></div>
-      <div className="mh-route-card-grid">{items.map((item, index) => <article key={item.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+      <div className="mh-route-card-grid" data-reveal="">{items.map((item, index) => <article key={item.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
     </section>
   );
 }

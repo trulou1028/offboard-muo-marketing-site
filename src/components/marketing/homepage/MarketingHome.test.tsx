@@ -87,7 +87,8 @@ describe("Offboard marketing routes", () => {
 
     const headerNav = screen.getByRole("navigation", { name: "Marketing navigation" });
     const headerLinks = within(headerNav).getAllByRole("link");
-    expect(headerLinks).toHaveLength(5);
+    expect(headerLinks).toHaveLength(6);
+    expect(within(headerNav).getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
     expect(within(headerNav).getByRole("link", { name: "How it works" })).toHaveAttribute("href", "/how-it-works");
     expect(within(headerNav).getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
     expect(within(headerNav).getByRole("link", { name: "Guides" })).toHaveAttribute("href", "/resources");

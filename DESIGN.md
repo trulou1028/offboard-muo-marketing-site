@@ -35,15 +35,18 @@ Rollout history: plan 021 themed the homepage behind a
 homepage on it; plan 023 promoted those values to the base scope and
 deleted the override block. There is no longer a per-route palette split.
 
-**Lumo lime is AI-only, site-wide.** `--mh-lime` (`#b8f24a`) appears in
-exactly four roles: the AI avatar disc (`.mh-lumo-mark`), the highlight
-behind an AI reply's first word (`.mh-ai-highlight`), an AI chip dot, and
-the single Lumo-filled final CTA on the homepage. The LUMO section's
-eyebrow keeps it as a sanctioned AI use. Everything that used lime
-decoratively now takes forest (on light) or paper (on dark). Primary CTAs
-are forest-on-paper, or paper-on-ink on a dark band.
-`e2e/homepage.spec.ts` guards the focus-ring half of this; the palette
-half is enforced by review, not tooling.
+**Lumo lime = the primary action on dark green, plus AI accents**
+(owner revision 2026-08-31, plan 024; it was AI-only for a week). On a
+dark-green surface (`--mh-forest` / `--mh-deep`, including the fixed
+header) the primary CTA is neon: lime fill, `--mh-deep` text (~12:1),
+hover `--mh-lime-hover`. On light surfaces lime remains forbidden and
+primaries stay forest-on-paper. The AI accents keep lime too: the avatar
+disc (`.mh-lumo-mark`), the AI reply highlight (`.mh-ai-highlight`), AI
+chip dots, and the LUMO section eyebrow. Supporting CTAs on dark stay
+paper (`.mh-ondark-cta`) and the AI button stays ink with a lumo dot
+(`.mh-ai-cta`) — that contrast is what keeps the neon reading as THE
+primary. `e2e/homepage.spec.ts` guards the focus-ring half of this; the
+palette half is enforced by review, not tooling.
 
 Two class names outlive their meaning and are deliberately not renamed
 (the `ArticleFidelity` snapshot embeds them): `.is-lime` now means
@@ -194,7 +197,9 @@ breakpoint rather than being forced into either.
 **Breakpoints**: `1180px` (nav collapses to the mobile menu), `900px`
 (rhythm/gutter tighten, most grids go single-column), `560px` (small-phone
 overrides — the smallest heading/gutter/padding step). There's also a
-`prefers-reduced-motion: reduce` query that kills transitions site-wide.
+`prefers-reduced-motion: reduce` query that kills transitions and
+animations site-wide (and the motion controller adds no reveal classes
+under it, so reduced-motion users get a fully static page).
 
 Hero top offsets (`148px`/`152px`/`172px`, used for `.mh-hero`,
 `.mh-route-hero`, `.mh-article`, `.mh-intake-page`) are **not** section
@@ -241,7 +246,7 @@ signal to add the token.
 ### CTA roles (plan 018 phase 4)
 | Class | Role | Looks like |
 |---|---|---|
-| `.mh-primary-cta` | **Signup only.** The filled lime button is reserved for "start free" / "build my plan". | Filled lime, deep-green label |
+| `.mh-primary-cta` | **Signup only.** The filled button is reserved for "start free" / "build my plan". | Forest fill + paper label on light; neon lime fill + deep label on dark green |
 | `.mh-secondary-cta` | An internal route link that still needs button weight (`/how-it-works` from the homepage, `/employers` from the Sponsored card). | Same geometry, 1px ink outline, no fill |
 | `.mh-section-link` | A quiet inline "read more" link at the end of a section. | Underlined label + arrow, no box |
 
@@ -309,10 +314,11 @@ elevation, it's one of these two — there's no third tier.
 
 ## Hard rules (carried over, unchanged)
 
-- **Lumo lime is AI-only.** `--mh-lime` marks AI moments and nothing else
-  (see the Civic Modern section above for the four permitted roles). Never
-  use it as a general accent or a CTA fill. `--mh-violet` is the superseded
-  legacy AI token, still defined but consumed by no rule; prefer lime.
+- **Lumo lime = primary-on-dark + AI accents.** `--mh-lime` fills the
+  primary CTA on dark-green surfaces and marks AI moments (see the Civic
+  Modern section above). Never decorative, never on light surfaces.
+  `--mh-violet` is the superseded legacy AI token, still defined but
+  consumed by no rule; prefer lime.
 - **No side-accent color bars on rounded containers.** A colored
   `border-left`/`border-right` wider than 1px reads as a "stripe," which
   this system doesn't use decoratively. (Two existing components —

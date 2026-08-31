@@ -148,10 +148,12 @@ and everywhere it appears in the same PR.
 
 # Site chrome (all pages)
 
-**Header nav** (5 links + actions): How it works `/how-it-works` · Pricing
-`/pricing` · Guides `/resources` · About `/about` · For employers `/employers`
-· Sign in → `https://app.offboard.co/auth?tab=signin` · **Build my plan**
-(primary) → signup. `/act` and `/public-partners` are deliberately out of nav.
+**Header nav** (6 links + actions): Home `/` · How it works `/how-it-works` ·
+Pricing `/pricing` · Guides `/resources` · About `/about` · For employers
+`/employers` · Sign in → `https://app.offboard.co/auth?tab=signin` ·
+**Build my plan** (primary, neon on the dark header) → signup. The header is
+fixed (sticky) on every route. `/act` and `/public-partners` are deliberately
+out of nav.
 
 **Footer**
 

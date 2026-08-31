@@ -134,7 +134,7 @@ function WhereverYouWork() {
           <AiReply highlight="Done.">Tesserac is now in Interviewing, and I&apos;ve added Ruben to the opportunity.</AiReply>
         </div>
       </div>
-      <div className="mh-capabilities">
+      <div className="mh-capabilities" data-reveal="">
         {CAPABILITIES.map(([title, body]) => (
           <div className="mh-capability" key={title}>
             <h3>{title}</h3>
@@ -165,7 +165,7 @@ function CareerContextSection() {
         <h2 id="ctx-title">One place that remembers your entire job search.</h2>
         <p>Your resume is only a fraction of your career. Offboard builds a living record of your experience, accomplishments, applications, companies, conversations, documents, interviews, goals, and progress so you don&apos;t have to explain yourself from scratch every time you need help.</p>
       </div>
-      <div className="mh-ctx-grid">
+      <div className="mh-ctx-grid" data-reveal="">
         {CONTEXT_CATEGORIES.map(({ icon: IconComponent, title, body }) => (
           <article className="mh-ctx-card" key={title}>
             <IconComponent aria-hidden="true" />
@@ -174,7 +174,7 @@ function CareerContextSection() {
           </article>
         ))}
       </div>
-      <div className="mh-ctx-inset">
+      <div className="mh-ctx-inset" data-reveal="">
         <div>
           <strong>Your Career Context</strong>
           <p>Always evolving. Available wherever you use Offboard.</p>
@@ -213,7 +213,7 @@ function MoreThanAJobSearch() {
         <h2 id="morethan-title">Losing your job creates more than one problem.</h2>
         <p>Finding another role matters. But so do unemployment benefits, health coverage, finances, career decisions, applications, networking, interviews, and figuring out what to do first. Offboard brings those pieces together.</p>
       </div>
-      <div className="mh-triptych">
+      <div className="mh-triptych" data-reveal="">
         {TRIPTYCH.map(({ src, alt, chip, dot }) => (
           <figure className="mh-photo-frame" key={chip}>
             <Image src={src} alt={alt} fill sizes="(max-width: 900px) 100vw, 30vw" />
@@ -221,7 +221,7 @@ function MoreThanAJobSearch() {
           </figure>
         ))}
       </div>
-      <div className="mh-morethan-first">
+      <div className="mh-morethan-first" data-reveal="">
         <article className="mh-qblock">
           <h3>{FIRST_QUESTION[0]}</h3>
           <span className="mh-qblock-feature">{FIRST_QUESTION[1]}</span>
@@ -229,7 +229,7 @@ function MoreThanAJobSearch() {
         </article>
         <StartingPlanPreview />
       </div>
-      <div className="mh-qgrid">
+      <div className="mh-qgrid" data-reveal="">
         {LIFE_QUESTIONS.map(([question, feature, body]) => (
           <article className="mh-qblock" key={question}>
             <h3>{question}</h3>
@@ -262,7 +262,7 @@ function MeetLumo() {
           <a className="mh-ai-cta" href={SIGN_UP_URL}><LumoMark className="is-dot" /><span>Ask Lumo</span></a>
           <small>Prefer another AI assistant? Connect Offboard and take your context with you.</small>
         </div>
-        <div className="mh-lumo-prompts" aria-label="Example questions to ask Lumo">
+        <div className="mh-lumo-prompts" data-reveal="" aria-label="Example questions to ask Lumo">
           <span>Ask things like</span>
           {LUMO_PROMPTS.map((prompt) => <p key={prompt}>{prompt}</p>)}
         </div>
@@ -299,7 +299,7 @@ function ToolkitV2() {
         <span className="mh-kicker">Your job search toolkit</span>
         <h2 id="kit-title">Everything you need when the next opportunity appears.</h2>
       </div>
-      <div className="mh-kit-grid">
+      <div className="mh-kit-grid" data-reveal="">
         {TOOLKIT_GROUPS.map(({ icon: IconComponent, title, tools }) => (
           <div className="mh-kit-col" key={title}>
             <IconComponent aria-hidden="true" />
@@ -344,7 +344,7 @@ function ProSection() {
           <p>Start free and build the foundation of your Career Context. When you want deeper intelligence, preparation, and personalized help, Offboard Pro uses that context to help you make better decisions and move faster.</p>
           <small>Don&apos;t pay just to keep your job search organized. Upgrade when you want Offboard to do more with everything it knows.</small>
         </div>
-        <div className="mh-pro-cards">
+        <div className="mh-pro-cards" data-reveal="">
           <article className="mh-plan-card">
             <h3>Free</h3>
             <p className="mh-plan-price"><b>$0</b><small>forever</small></p>
@@ -372,7 +372,7 @@ const SPONSOR_AUDIENCES = [
 function SponsoredAccess() {
   return (
     <section className="mh-sponsor mh-section" aria-labelledby="sponsor-title">
-      <div className="mh-sponsor-inset">
+      <div className="mh-sponsor-inset" data-reveal="">
         <div className="mh-copy-block">
           <span className="mh-kicker is-ondark">Sponsored access</span>
           <h2 id="sponsor-title">Job-search support people will actually use.</h2>

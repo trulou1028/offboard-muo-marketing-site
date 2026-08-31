@@ -13,6 +13,11 @@ export default defineConfig({
   use: {
     baseURL,
     trace: "on-first-retry",
+    // Plan 024: the motion controller adds no reveal classes under reduced
+    // motion, so every suite sees the fully visible static page. The suites
+    // assert content, layout, and contrast - never motion; motion is
+    // verified manually.
+    contextOptions: { reducedMotion: "reduce" },
   },
   projects: [
     {
