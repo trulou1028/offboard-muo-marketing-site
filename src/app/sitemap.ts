@@ -10,7 +10,8 @@ import { getPublishedPosts } from "@/lib/content/posts";
 // src/app/layout.tsx) — it pre-builds the "submit the new sitemap in Search
 // Console" step in docs/cutover-checklist.md so flipping robots off is the
 // only remaining step, not also writing this file.
-const STATIC_ROUTES = ["/", "/how-it-works", "/pricing", "/about", "/employers", "/public-partners", "/act", "/resources"] as const;
+const STATIC_ROUTES = ["/", "/how-it-works", "/pricing",
+  "/career-context", "/about", "/employers", "/public-partners", "/act", "/resources"] as const;
 
 const BASE_URL = "https://offboard.co";
 

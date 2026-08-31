@@ -15,6 +15,7 @@ const ROUTES = [
   "/",
   "/how-it-works",
   "/pricing",
+  "/career-context",
   "/about",
   "/employers",
   "/resources",
