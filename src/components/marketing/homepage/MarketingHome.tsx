@@ -114,8 +114,9 @@ function CareerContextSection() {
     <section className="mh-ctx mh-section" aria-labelledby="ctx-title">
       <div className="mh-copy-block">
         <span className="mh-kicker">Career Context</span>
-        <h2 id="ctx-title">One place that remembers your entire job search.</h2>
+        <h2 id="ctx-title">One place that remembers your career.</h2>
         <p>Your resume is only a fraction of your career. Offboard builds a living record of your experience, accomplishments, applications, companies, conversations, documents, interviews, goals, and progress so you don&apos;t have to explain yourself from scratch every time you need help.</p>
+        <Link className="mh-section-link" href="/career-context">Learn more about Career Context <ArrowRight aria-hidden="true" /></Link>
       </div>
       <div className="mh-ctx-grid" data-reveal="">
         {CONTEXT_CATEGORIES.map(({ icon: IconComponent, title, body }) => (

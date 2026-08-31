@@ -42,7 +42,8 @@ describe("Offboard marketing routes", () => {
     // doc, mirrored in COPY.md § 1.
     expect(screen.getByRole("heading", { level: 1, name: "The modern unemployment office." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Your job search goes wherever you do." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "One place that remembers your entire job search." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "One place that remembers your career." })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /learn more about career context/i })).toHaveAttribute("href", "/career-context");
     expect(screen.getByRole("heading", { name: "Losing your job creates more than one problem." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /an ai guide that already knows/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /everything you need when the next opportunity appears/i })).toBeInTheDocument();

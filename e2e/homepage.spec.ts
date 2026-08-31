@@ -15,7 +15,7 @@ test.describe("Offboard marketing site", () => {
     // Homepage v2 (plan 022): Career Context narrative, COPY.md § 1.
     await expect(page.getByRole("heading", { level: 1, name: /modern unemployment office/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /your job search goes wherever you do/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /one place that remembers your entire job search/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /one place that remembers your career/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /losing your job creates more than one problem/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /an ai guide that already knows/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /you don't need another place to start over/i })).toBeVisible();
@@ -87,7 +87,7 @@ test.describe("Offboard marketing site", () => {
   test("reflows every route without horizontal overflow on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
 
-    for (const route of ["/", "/how-it-works", "/pricing", "/resources", "/resources/first-week-after-a-layoff", "/about", "/employers", "/public-partners", "/act"]) {
+    for (const route of ["/", "/how-it-works", "/pricing", "/career-context", "/resources", "/resources/first-week-after-a-layoff", "/about", "/employers", "/public-partners", "/act"]) {
       await page.goto(route);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
