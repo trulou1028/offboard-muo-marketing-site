@@ -5,7 +5,7 @@ Offboard marketing site (offboard.co).** Every headline, body paragraph, FAQ,
 CTA label, disclaimer, and metadata string on the site appears here, verbatim,
 in page order.
 
-- **Version:** 2.1 · 2026-08-31 · homepage v2 (plan 020, Career Context copy) + owner copy confirmations; other pages unchanged since 1.0 (`2d56c7b`)
+- **Version:** 2.1 · 2026-08-31 · homepage v2 (plan 022, Career Context copy) + owner copy confirmations; other pages unchanged since 1.0 (`2d56c7b`)
 - **Owner:** Louie / Steph
 - **Siblings:** [DESIGN.md](DESIGN.md) is the design source of truth; this file
   is the copy source of truth. [docs/site-architecture.md](docs/site-architecture.md)
@@ -106,7 +106,7 @@ or operator.
   and claiming your benefits is always free."*
 - One primary CTA per view. Sitewide primary CTA: **Build my free transition
   plan** → `https://app.offboard.co/auth?tab=signup`. Exception (homepage v2,
-  plan 020): the homepage's primary CTA is **Get started free**, same URL,
+  plan 022): the homepage's primary CTA is **Get started free**, same URL,
   per the owner-supplied v2 copy. Route pages keep the sitewide CTA until the
   owner rolls the new one out.
 
@@ -120,9 +120,9 @@ and everywhere it appears in the same PR.
 | Homepage trust line | **“Join thousands of people”** | Owner-confirmed accurate 2026-08-31 | Home |
 | Newsletter subscribers | **5,000+** | Owner-corrected 2026-08-01 (verified 5,200; "8,000+" is stale and banned) | Home, About |
 | CalJOBS training extension example | **~$12,000**, contact EDD before **week 16** of benefit payments, California | Always shipped with conditions + "amounts vary" small print | Not currently shipped — owner decided 2026-08-31 to keep it off the homepage for now |
-| Job centers | **"2,000+ job centers"** and **"billions of dollars a year"** | The only approved public phrasings; precise figures (~$3.2B WIOA, ~2,300 AJCs) require re-verification before any cited use | Not currently shipped (left the homepage in v2, plan 020) |
-| State-approved training programs (CA) | **4,000+** | From v7, owner-shipped | How it works (left the homepage in v2, plan 020) |
-| Live verified states | **CA** (deepest), NY, NJ, WA | | How it works (left the homepage in v2, plan 020) |
+| Job centers | **"2,000+ job centers"** and **"billions of dollars a year"** | The only approved public phrasings; precise figures (~$3.2B WIOA, ~2,300 AJCs) require re-verification before any cited use | Not currently shipped (left the homepage in v2, plan 022) |
+| State-approved training programs (CA) | **4,000+** | From v7, owner-shipped | How it works (left the homepage in v2, plan 022) |
+| Live verified states | **CA** (deepest), NY, NJ, WA | | How it works (left the homepage in v2, plan 022) |
 | Employer seat price | **$199 per employee, one-time**; **$169 per seat at 50 or more**; card or NET-30 | Owner-approved for public display 2026-08-23. Must stay in sync with the app-repo sales one-pager | Employers (+ metadata) |
 | Legacy outplacement comparison | **$3,000 to $7,000 per head**; most firms will not take a layoff under 50 people | From the prospect-facing one-pager | Employers |
 | Sponsored access duration | **90 days of full Offboard Pro** | | Employers, ACT |
@@ -169,7 +169,7 @@ Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy, Terms
 
 # 1 · Homepage `/`
 
-**Rewritten 2026-08-30 (homepage v2, plan 020).** Copy source:
+**Rewritten 2026-08-30 (homepage v2, plan 022).** Copy source:
 `offboard-career-context-hp-copy-v1a.md` (owner-supplied), with two
 never-say substitutions recorded in the decision log. Layout follows
 `docs/design-system-civic-modern/`.
@@ -178,8 +178,9 @@ never-say substitutions recorded in the decision log. Layout follows
 **Meta description:** `Offboard is the modern unemployment office: one calm place for your benefits, deadlines, runway, funded training, and next job. Verified facts, AI guidance, and a plan that starts where you are. Independent, not a government agency.`
 
 Section order: Hero → Wherever you work → Career Context → More than a job
-search → Meet Lumo → Toolkit → Pro → Sponsored access → Built around you →
-Community → Final CTA.
+search (first question + plan-preview card, then triptych and the remaining
+questions) → Meet Lumo → Toolkit → Pro → Sponsored access → Built around you
+→ Community → Final CTA.
 
 ### Hero
 
@@ -223,6 +224,10 @@ Community → Final CTA.
   4. `How do I submit a stronger application?` — **Application support** — `Turn your Career Context and the opportunity into stronger resumes, application packets, cover letters, and positioning.`
   5. `How do I prepare when I hear back?` — **Interview preparation** — `Research the company, anticipate questions, prepare stories from your experience, and practice interviews with AI.`
   6. `How do I keep everything straight?` — **Tracker + Career Context** — `Keep every opportunity, contact, document, conversation, and next step connected.`
+- The first question is rendered beside the plan-preview card that answers it.
+- Plan-preview card *(rebuilt in plan 018 phase 3 from real product state; every string below is verbatim from `lumo-plan-builder` `origin/main`)*: heading `Your Path` · lede `The steps that fit your situation. Do them in any order.` · stage row `Protect the first week` / `3 left` · steps `Write down your key dates` — `Most post-layoff mistakes are missed deadlines.` · `Understand your COBRA / health insurance options` — `A gap in health coverage can be financially devastating.` · `Secure your accounts and access` — `Paystubs, tax docs, benefits, and equity portals often live behind work logins that disappear without warning.` · `Show 2 done`
+  - **Retired with this rebuild** (do not reinstate; none of it exists in the product): heading `Your starting plan / Week one`, tabs `Now · This week · Coming up`, the `Priority / Possible / Next` status rows with their `Money / Support / Job search` categories, and the LUMO row `Ask Lumo what to do first / Context already attached`.
+  - **Deliberately excluded** (owner decision 2026-08-26, claim-free subset): the real steps whose copy carries a benefit or severance number — `File for unemployment benefits` with `Takes 2-3 weeks to start`, and `Review your severance agreement` with `21 or 45 days to decide`. Both are real product copy but neither is in the verified-facts ledger above. Adding either to this card means adding a ledger row first.
 - Photo chips: `Plan · Updated` · `Benefits check` · `Resume · 3 versions`
 - Small print: `Offboard is independent, not a government agency, and claiming your benefits is always free.`
 
@@ -291,11 +296,12 @@ newsletter fact ledger row lists Home. Copy unchanged from v1:
 - Small print: `No credit card required.`
 
 The v1 homepage sections this version retired: The real problem, Identity
-contrast, The three jobs, The hook band ($12k), One connected plan, Verified
+contrast, The three jobs, The hook band ($12k), One connected plan (its
+plan-preview card survives, folded into More than a job search), Verified
 facts (still on `/how-it-works`), Pricing teaser, Employer strip, Privacy
 summary, and the shared Final CTA default copy (still used on route pages).
-Their copy remains in git history and in `# Approved but unshipped` spirit;
-re-adding any of them is a copy decision for the owner.
+Their copy remains in git history; re-adding any of them is a copy decision
+for the owner.
 
 # 2 · How it works `/how-it-works`
 
@@ -774,8 +780,8 @@ When one ships, move it into its page section above.
 | 2026-08-23 | `/act` rebuilt from scratch; Alameda County naming approved as geography only | plan 017 |
 | 2026-08-23 | Newsletter CTA → `newsletter.offboard.co` (old path 404s) | plan 018 |
 | 2026-08-24 | COPY.md created as the copy source of truth; copy changes land here first | this file |
-| 2026-08-31 | Homepage hero becomes a forest-deep band (Lumo band drops to mid forest to hold the two-anchor rhythm rule); “Join thousands of people” confirmed accurate; $12k hook stays off the homepage for now | plan 020, owner call |
-| 2026-08-30 | Homepage v2 shipped from owner's Career Context copy doc; primary CTA on home becomes "Get started free"; hook/$12k, identity, three-jobs, verified-facts, pricing-teaser, employer-strip, privacy-summary sections retired from home; community strip kept for the `/#community` redirect; "recruiting platform"→"recruiting site" and "infrastructure"→"tools" never-say substitutions | plan 020, this file § 1 |
+| 2026-08-31 | Homepage hero becomes a forest-deep band (Lumo band drops to mid forest to hold the two-anchor rhythm rule); “Join thousands of people” confirmed accurate; $12k hook stays off the homepage for now | plan 022, owner call |
+| 2026-08-30 | Homepage v2 shipped from owner's Career Context copy doc; primary CTA on home becomes "Get started free"; hook/$12k, identity, three-jobs, verified-facts, pricing-teaser, employer-strip, privacy-summary sections retired from home; community strip kept for the `/#community` redirect; "recruiting platform"→"recruiting site" and "infrastructure"→"tools" never-say substitutions | plan 022, this file § 1 |
 | 2026-08-24 | Clarified the "outplacement" scope: allowed on /employers AND in Sponsored-tier copy wherever it renders (home teaser, /pricing deck), per the 2026-08-21 owner call. The earlier "one page only" wording in Language rules was inaccurate and is corrected. | COPY.md, plan 019 |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally

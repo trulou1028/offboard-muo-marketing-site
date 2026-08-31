@@ -16,20 +16,20 @@ your row when done.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 001  | Remove dead migration components (dead-code half) | P1 | S | — | DONE — reviewed; [PR #2](https://github.com/trulou1028/offboard-muo-marketing-site/pull/2) open, **awaiting owner merge**. Imagery half split out to 007. |
-| 002  | Rebuild the homepage with the approved v7 substance | P1 | L | — | DONE — reviewed (3 rounds); branch `claude/002-homepage-substance-port` (`2eea650`). Pricing figures owner-confirmed 2026-08-21. |
-| 003  | Rebuild /how-it-works (5 steps, toolkit, LUMO) | P1 | L | 002 | DONE — reviewed, approved first pass; branch `claude/003-how-it-works-rebuild` (`e691f86`), stacked on 002. |
-| 004  | Put real prices on /pricing | P1 | M | 002 | DONE — reviewed (1 revision); branch `claude/004-pricing-real-numbers` (`0eb0896`), stacked on 003. Highlight on Free per owner. |
-| 005  | Consolidate /employers, rewrite /about | P2 | M | 002 | DONE — reviewed, approved first pass; branch `claude/005-employers-about`, stacked on 008. Founder story shipped neutral (no approved copy). |
-| 006  | /resources shell, 301 map, cutover readiness | P2 | L | 005 | DONE — reviewed, approved first pass; branch `claude/006-resources-and-redirects`, stacked on 010. Open cutover item: `/act` decision (checklist). |
-| 008  | Fix white-on-lime primary CTA sitewide (a11y) | P1 | S | — | DONE — reviewed, approved first pass; branch `claude/008-cta-contrast` (`820bca5`), stacked on 004. |
-| 007  | Give human-support and About their own photos | P2 | S | 001 | DONE — reviewed; branch `claude/007-imagery-dedupe` (`fcd1d3e`), **not pushed**. Merges cleanly with 001. |
+| 001  | Remove dead migration components (dead-code half) | P1 | S | - | DONE - reviewed and **merged** via [PR #2](https://github.com/trulou1028/offboard-muo-marketing-site/pull/2). Imagery half split out to 007. *(Row corrected 2026-08-26: it said "open, awaiting owner merge" long after the PR merged.)* |
+| 002  | Rebuild the homepage with the approved v7 substance | P1 | L | — | DONE - **merged to `main`** via [PR #6](https://github.com/trulou1028/offboard-muo-marketing-site/pull/6). Reviewed (3 rounds). Pricing figures owner-confirmed 2026-08-21. |
+| 003  | Rebuild /how-it-works (5 steps, toolkit, LUMO) | P1 | L | 002 | DONE - reviewed, approved first pass; work verified present on `main` (`/how-it-works` ships the five steps, toolkit and LUMO sections). Per-plan merge commit not traced. |
+| 004  | Put real prices on /pricing | P1 | M | 002 | DONE - reviewed (1 revision); work verified present on `main` (`$0` / `$20` on `/pricing`). Highlight on Free per owner. Per-plan merge commit not traced. |
+| 005  | Consolidate /employers, rewrite /about | P2 | M | 002 | DONE - reviewed, approved first pass; work verified present on `main` (`/employers` and `/about` both routes). Founder story shipped neutral (no approved copy). Per-plan merge commit not traced. |
+| 006  | /resources shell, 301 map, cutover readiness | P2 | L | 005 | DONE - **merged to `main`** via [PR #13](https://github.com/trulou1028/offboard-muo-marketing-site/pull/13). *(Row corrected 2026-08-26: it listed an open `/act` cutover decision. `docs/cutover-checklist.md` records that decision as resolved by plan 017.)* |
+| 008  | Fix white-on-lime primary CTA sitewide (a11y) | P1 | S | — | DONE - reviewed, approved first pass; work verified present on `main` (`a.mh-primary-cta` sets `--mh-deep`). Per-plan merge commit not traced. |
+| 007  | Give human-support and About their own photos | P2 | S | 001 | DONE - **merged to `main`** via [PR #3](https://github.com/trulou1028/offboard-muo-marketing-site/pull/3). Goal holds today: every `/marketing/**` image is referenced exactly once across `MarketingSite.tsx` and `MarketingRoutePages.tsx`. *(Row corrected twice: it first claimed the branch was unpushed, then that the landing was untraceable. Both wrong - PR #3.)* |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale)
 
-| 010  | Port the /intake form (cutover prerequisite) | P1 | M | 002 | DONE — reviewed, approved first pass; branch `claude/010-intake-port`, stacked on 005. Live email proof awaits operator keys (handoff in plan). |
-| 009  | Sweep never-say vocabulary from copy | P3 | S | 002-005, 008 | DONE — reviewed, approved first pass; branch `claude/009-language-sweep`, stacked on 010. Leftover hits are 001's dead code only. |
+| 010  | Port the /intake form (cutover prerequisite) | P1 | M | 002 | DONE - **merged to `main`** via [PR #14](https://github.com/trulou1028/offboard-muo-marketing-site/pull/14). Live email proof awaits operator keys (handoff in plan). |
+| 009  | Sweep never-say vocabulary from copy | P3 | S | 002-005, 008 | DONE - **merged to `main`** via [PR #12](https://github.com/trulou1028/offboard-muo-marketing-site/pull/12). Leftover hits were 001's dead code, since deleted. |
 
 ## Dependency notes
 
@@ -96,12 +96,12 @@ your row when done.
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
 | 011  | Fix shipped CSS defects + delete dead CSS | P1 | M | — | DONE — executed, reviewed, **merged to `main`** 2026-08-24 ([PR #21](https://github.com/trulou1028/offboard-muo-marketing-site/pull/21)). See "Plan 011 review record" below. |
-| 012  | Styling verification baseline (stylelint, screenshots, CI) | P1 | M | 011 | DONE — executed + reviewed (1 revision round) 2026-08-24; branch `claude/012-style-baseline`. See "Plan 012 review record" below. |
-| 013  | Container unification + 1200px cap | P1 | M | 012 | DONE — executed + reviewed (1 revision round) 2026-08-24; branch `claude/013-container-1200`. See "Plan 013 review record" below. |
-| 014  | Design-token consolidation + DESIGN.md rewrite | P2 | L | 012, 013 | DONE — executed + reviewed, approved first pass 2026-08-24; branch `claude/014-token-consolidation`, 7 commits (one per stage). See "Plan 014 review record" below. |
-| 015  | Portable content format + characterization tests | P1 | L | — | DONE — executed + reviewed, approved first pass 2026-08-24; branch `claude/015-portable-content`, 6 commits. See "Plan 015 review record" below. |
-| 016  | Supabase CMS foundation (schema, ISR, read client, CI DB) | P1 | L | 015 | DONE — executed in 2 phases across an owner gate, reviewed, approved 2026-08-25; branch `claude/016-cms-foundation-phase2`. See "Plan 016 review record" below. |
-| 017  | Hygiene batch (PII logs, intake tests, noindex/sitemap, related posts, font/scroll polish) | P2 | M | — | DONE — executed + reviewed, approved first pass 2026-08-25; branch `claude/017-hygiene`, 6 commits (one per part). See "Plan 017 review record" below. |
+| 012  | Styling verification baseline (stylelint, screenshots, CI) | P1 | M | 011 | DONE - **merged to `main`** via [PR #23](https://github.com/trulou1028/offboard-muo-marketing-site/pull/23) 2026-08-24. See "Plan 012 review record" below. |
+| 013  | Container unification + 1200px cap | P1 | M | 012 | DONE - **merged to `main`** via [PR #24](https://github.com/trulou1028/offboard-muo-marketing-site/pull/24) 2026-08-24. See "Plan 013 review record" below. |
+| 014  | Design-token consolidation + DESIGN.md rewrite | P2 | L | 012, 013 | DONE - **merged to `main`** via [PR #26](https://github.com/trulou1028/offboard-muo-marketing-site/pull/26) 2026-08-24 (plus [PR #25](https://github.com/trulou1028/offboard-muo-marketing-site/pull/25), which folded 013's carried-over items into scope). See "Plan 014 review record" below. |
+| 015  | Portable content format + characterization tests | P1 | L | — | DONE - **merged to `main`** via [PR #27](https://github.com/trulou1028/offboard-muo-marketing-site/pull/27) 2026-08-24. See "Plan 015 review record" below. |
+| 016  | Supabase CMS foundation (schema, ISR, read client, CI DB) | P1 | L | 015 | DONE IN CODE, **NOT LIVE IN PRODUCTION** - merged via [PR #28](https://github.com/trulou1028/offboard-muo-marketing-site/pull/28) 2026-08-25, but the migration was never pushed: production Supabase has no `posts` or `categories` table (`PGRST205`, checked anonymously 2026-08-26). The site serves every article from the committed fallback and has never read the database. See plan 019. |
+| 017  | Hygiene batch (PII logs, intake tests, noindex/sitemap, related posts, font/scroll polish) | P2 | M | — | DONE - **merged to `main`** via [PR #29](https://github.com/trulou1028/offboard-muo-marketing-site/pull/29) 2026-08-25. See "Plan 017 review record" below. Its own noted follow-up (the `noindex` step in `docs/cutover-checklist.md`) is still open - see plan 019. |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale)
@@ -672,11 +672,55 @@ single `layout.tsx` export.
 
 ---
 
+## Backlog audit, 2026-08-26
+
+Every row above was re-checked against the repo rather than trusted. Findings:
+
+- **Every branch named in a status row has been deleted.** All 14 of them.
+  Rows now record the merge (with its PR) or, where the per-plan merge commit
+  could not be traced, the shipped artifact that proves the work is on `main`.
+  A branch name is not a status; it rots the moment the branch is cleaned up.
+- **Three rows were actively misleading** and would have sent someone chasing
+  finished work: 001 ("awaiting owner merge" - merged), 007 ("not pushed" -
+  PR #3), 006 ("open `/act` decision" - resolved by plan 017).
+- **One row was wrong in the dangerous direction.** Plan 016 was marked DONE.
+  Its code is merged, but the migration was never pushed to production: an
+  anonymous read of production Supabase returns `PGRST205 Could not find the
+  table 'public.posts'`. The CMS has never served a single request. Nothing
+  in the repo detects this, because the fallback is deliberately silent and
+  the `cms-contract` CI job proves the DB path against an *ephemeral* database,
+  never production. Plan 019 addresses it.
+- **Verified safe, not a finding**: `intake_submissions` does exist in
+  production and returns `[]` to an anonymous caller. That is RLS working -
+  the migration deliberately creates no policies, so every row is denied.
+
+Method note: the production checks used only `NEXT_PUBLIC_SUPABASE_URL` and
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` - the two values that ship to every
+visitor's browser - to make the same anonymous read the site makes. No service
+key, database password, or API key was read or used.
+
 # Batch 3 - homepage refinement (2026-08-25)
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 018 | Refine homepage hierarchy, pacing, proof, and interaction polish | P1 | L | 012-014 | IN PROGRESS - Phase 1 approved and merged in PR #31 (`d0227c5`); Phase 2 ON HOLD, to be re-scoped against 019's Civic Modern homepage (owner decision 2026-08-30) |
+| 018 | Refine homepage hierarchy, pacing, proof, and interaction polish | P1 | L | 012-014 | DONE - all four phases executed, owner-approved and **merged to `main`** 2026-08-26. Phase 1 [PR #31](https://github.com/trulou1028/offboard-muo-marketing-site/pull/31) (`d0227c5`); phase 2 [PR #33](https://github.com/trulou1028/offboard-muo-marketing-site/pull/33); phase 3 [PR #34](https://github.com/trulou1028/offboard-muo-marketing-site/pull/34); phase 4 [PR #36](https://github.com/trulou1028/offboard-muo-marketing-site/pull/36) (`859ec5e`). Phase 3 part 3's STOP was resolved by the owner (ship the claim-free subset of real product state). Phase 4 fixed a **shipped a11y defect**: the focus ring was flat white on every surface, ~1.06:1 on paper. See the plan's per-phase records, including two evidence traps worth reading before touching the visual suite. |
+
+# Batch 4 - production reality (2026-08-26)
+
+Generated by a backlog audit at commit `8f4ecbc`. One finding, and it is the
+kind the backlog table was hiding rather than surfacing.
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+|------|-------|----------|--------|------------|--------|
+| 019 | Make the CMS real in production, and loud when it is not | P1 | M | 016 | DONE - all four parts verified against the live database 2026-08-26. The CMS now genuinely serves `/resources`; a build that is configured for Supabase but cannot reach it fails instead of quietly serving committed content. Part 3 caught a regression no green check would have: the database reordered the library alphabetically, dropping the Guides lead article from first to seventh. Fixed with a `sort_order` column. Acceptance test passed - database and committed builds render identical text and link order. Draft visibility closed 2026-08-26 with a throwaway row: it existed and was `draft` (confirmed in Studio), the publishable key could not reach it on three probes, and a database build generated no route for it. |
+
+Plan 016's CMS is merged but was never deployed: production Supabase has no
+`posts` or `categories` table. Every article is served from the committed
+fallback. Nothing detects this, because the fallback is silent by design and
+`cms-contract` proves the DB path against an ephemeral database rather than
+production. Plan 019 makes a configured-but-broken database fail the build,
+hands the owner the migration push, and then proves the deployed site reads
+from the database by editing a row and watching the page change.
 
 Plan 018 preserves the approved homepage copy and section order. It uses a
 preview gate after Phase 1 so the owner can approve the new page silhouette
@@ -694,3 +738,24 @@ and mobile hero before product-proof and interaction work continues.
 Plan 019 is owner-directed: adopt the design system Louie built in Claude
 Design (reference in `docs/design-system-civic-modern/`). Homepage first;
 other routes follow in a rollout batch after the homepage look is approved.
+
+---
+
+# Batch 5 - Civic Modern design system (2026-08-30)
+
+Owner-directed: Louie built the "Offboard Modern Civic" design system in
+Claude Design and asked the site to adopt it, then supplied a full homepage
+copy doc built on it. Reference export lives in
+`docs/design-system-civic-modern/`.
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+|------|-------|----------|--------|------------|--------|
+| 021 | Civic Modern homepage retheme (homepage-scoped tokens, forest CTAs, lime->AI-only, refreshed wordmark) | P1 | M | 014 | IN PROGRESS - branch `claude/civic-modern-homepage`, [PR #41](https://github.com/trulou1028/offboard-muo-marketing-site/pull/41), awaiting owner preview sign-off |
+| 022 | Homepage v2 - Career Context narrative (owner copy doc; full section rebuild, COPY.md 2.0) | P1 | L | 021 | IN PROGRESS - branch `claude/homepage-v2-career-context`, [PR #42](https://github.com/trulou1028/offboard-muo-marketing-site/pull/42), stacked on 021, awaiting owner preview sign-off |
+
+Plan 022 supersedes plan 018's homepage-specific work, with one deliberate
+carry-over the owner approved on 2026-08-31: 018 phase 3's "Your Path"
+plan-preview card (real product state) is folded into v2's "More than a job
+search" section, beside the question it answers. 018's shared work - the
+final-CTA photo treatment, the secondary-CTA role, the focus-ring a11y fix -
+is untouched and still ships on every route.

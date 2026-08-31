@@ -1,4 +1,4 @@
-# Plan 019 — Civic Modern homepage retheme
+# Plan 021 — Civic Modern homepage retheme
 
 Owner-directed (2026-08-30). Louie built the "Offboard Modern Civic" design
 system in Claude Design; the site adopts it. Reference lives in

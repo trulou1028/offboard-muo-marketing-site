@@ -38,7 +38,7 @@ describe("Offboard marketing routes", () => {
   it("keeps the homepage focused on what Offboard does and who it serves", () => {
     render(<MarketingHome />);
 
-    // Homepage v2 (plan 020): Career Context narrative from the owner's copy
+    // Homepage v2 (plan 022): Career Context narrative from the owner's copy
     // doc, mirrored in COPY.md § 1.
     expect(screen.getByRole("heading", { level: 1, name: "The modern unemployment office." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Your job search goes wherever you do." })).toBeInTheDocument();

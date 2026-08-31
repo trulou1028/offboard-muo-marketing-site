@@ -1,9 +1,9 @@
-# Plan 020 — Homepage v2 (Career Context)
+# Plan 022 — Homepage v2 (Career Context)
 
 Owner-directed (2026-08-30). Louie supplied a full homepage copy doc
 (`offboard-career-context-hp-copy-v1a.md`, in his Drive) and asked for a
 homepage v2 built from it, using the hero photo from the Civic Modern design
-system export. Stacked on plan 019 (`claude/civic-modern-homepage`).
+system export. Stacked on plan 021 (`claude/civic-modern-homepage`).
 
 ## What shipped
 

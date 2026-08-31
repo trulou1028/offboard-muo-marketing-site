@@ -13,9 +13,9 @@ import {
   Users,
 } from "lucide-react";
 import type { ReactNode } from "react";
-import { CommunityStrip, MarketingShell, SIGN_UP_URL } from "./MarketingSite";
+import { CommunityStrip, MarketingShell, SIGN_UP_URL, StartingPlanPreview } from "./MarketingSite";
 
-/* Homepage v2 (plan 020): the Civic Modern homepage. Copy source:
+/* Homepage v2 (plan 022): the Civic Modern homepage. Copy source:
    offboard-career-context-hp-copy-v1a.md, mirrored in COPY.md § 1. Layout
    follows docs/design-system-civic-modern (readme.md band order and the
    marketing ui_kit). */
@@ -186,8 +186,12 @@ function CareerContextSection() {
   );
 }
 
+// The first question is promoted out of the grid so it can sit beside the
+// plan-preview card that answers it (that card is real product state, built in
+// plan 018 phase 3 and carried into v2).
+const FIRST_QUESTION = ["What do I do first?", "Your personalized plan", "Tell Offboard what's happening, and we'll help organize what needs your attention now, what can wait, and what comes next."] as const;
+
 const LIFE_QUESTIONS = [
-  ["What do I do first?", "Your personalized plan", "Tell Offboard what's happening, and we'll help organize what needs your attention now, what can wait, and what comes next."],
   ["What support might I qualify for?", "Benefits and workforce programs", "Navigate unemployment insurance, training programs, workforce resources, and other forms of support that may be available where you live."],
   ["Is this job worth my time?", "Opportunity intelligence", "Check role fit, investigate possible ghost jobs, research companies, and understand whether an opportunity deserves your energy."],
   ["How do I submit a stronger application?", "Application support", "Turn your Career Context and the opportunity into stronger resumes, application packets, cover letters, and positioning."],
@@ -216,6 +220,14 @@ function MoreThanAJobSearch() {
             <span className="mh-photo-chip"><i className={dot} aria-hidden="true" />{chip}</span>
           </figure>
         ))}
+      </div>
+      <div className="mh-morethan-first">
+        <article className="mh-qblock">
+          <h3>{FIRST_QUESTION[0]}</h3>
+          <span className="mh-qblock-feature">{FIRST_QUESTION[1]}</span>
+          <p>{FIRST_QUESTION[2]}</p>
+        </article>
+        <StartingPlanPreview />
       </div>
       <div className="mh-qgrid">
         {LIFE_QUESTIONS.map(([question, feature, body]) => (

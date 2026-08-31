@@ -13,10 +13,17 @@ here for the operator to execute deliberately, in order.
       no redirect and stays out of the nav by design. Verify one more time
       on the deployed preview before cutover that `/act` returns 200, not
       a 3xx.
-- [ ] Remove `noindex`: flip the `robots` metadata off `noindex, nofollow,
-      noarchive` on every route once the cutover is confirmed. This is a
-      separate, deliberate operator decision, not part of any plan-006
-      commit.
+- [ ] Remove `noindex`: the site is hidden from search engines by ONE
+      `robots: "noindex, nofollow, noarchive"` export in
+      `src/app/layout.tsx`, which every route inherits. Change that single
+      value once the cutover is confirmed; there is nothing per-route to
+      edit. This is a separate, deliberate operator decision, not part of
+      any plan commit. Two things to know before flipping it:
+      `e2e/homepage.spec.ts` asserts the string verbatim and will fail until
+      it is updated in the same change, and `src/app/sitemap.ts` is inert
+      while `noindex` is set, so the sitemap only becomes meaningful after
+      this step. *(Corrected 2026-08-26: this step used to say "on every
+      route", describing the per-page mechanism plan 017 replaced.)*
 - [ ] Point the domain at the Vercel project for this repo.
 - [ ] Archive the old production deployment (do not delete outright until
       the post-cutover monitoring window below has passed).

@@ -264,6 +264,41 @@ export function StartingPlan() {
   );
 }
 
+// Plan 018 phase 3. Every string below is real product state, read from
+// lumo-plan-builder origin/main: the stage name from src/journey/stages.ts,
+// the step titles and their caption lines from
+// src/components/layoff-plan/layoffPlanItems.ts (the caption is the first
+// sentence of whyItMatters, which is what rowLineFor() falls back to), and the
+// row / stage-group shape from src/components/journey/PathListRow.tsx and
+// src/pages/path/YourPath.tsx.
+//
+// Steps whose caption or stake carries a benefit or severance NUMBER are
+// deliberately left out -- "Takes 2-3 weeks to start" and "21 or 45 days to
+// decide" are real product copy but are not in COPY.md's verified-facts
+// ledger, and this page does not mint a new claim to decorate a screenshot.
+// Owner decision 2026-08-26: ship the claim-free subset.
+const PLAN_PREVIEW_STEPS = [
+  ["Write down your key dates", "Most post-layoff mistakes are missed deadlines."],
+  ["Understand your COBRA / health insurance options", "A gap in health coverage can be financially devastating."],
+  ["Secure your accounts and access", "Paystubs, tax docs, benefits, and equity portals often live behind work logins that disappear without warning."],
+] as const;
+
+export function StartingPlanPreview() {
+  return (
+    <div className="mh-ui-card mh-plan-preview" aria-label="Example Offboard path">
+      <div className="mh-ui-card-heading"><h3>Your Path</h3></div>
+      <p className="mh-plan-lede">The steps that fit your situation. Do them in any order.</p>
+      <div className="mh-plan-stage"><strong>Protect the first week</strong><span>3 left</span></div>
+      <ul className="mh-plan-steps">
+        {PLAN_PREVIEW_STEPS.map(([title, line]) => (
+          <li key={title}><i aria-hidden="true" /><strong>{title}</strong><p>{line}</p></li>
+        ))}
+      </ul>
+      <span className="mh-plan-done-note">Show 2 done</span>
+    </div>
+  );
+}
+
 export function StartingPlanSection() {
   return (
     <section className="mh-starting-plan mh-section mh-split" aria-labelledby="starting-plan-title">
@@ -549,7 +584,7 @@ export function PricingSection() {
             <li><Check aria-hidden="true" />Your private career activity remains yours</li>
             <li><Check aria-hidden="true" />Sponsors receive aggregate reporting only</li>
           </ul>
-          <Link className="mh-primary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
+          <Link className="mh-secondary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
         </article>
       </div>
       <p className="mh-price-note">Quarterly billing details and the full feature comparison are shown at checkout. Claiming your government benefits is always free, on any tier.</p>
@@ -617,18 +652,31 @@ export function CommunityStrip() {
 export function FinalCta({
   title = "Find out first.",
   body = "Bring your situation. In a few minutes you will see how long your money lasts, which deadlines are coming, and what may be waiting for you. Then a clear plan for what to do about it.",
+  photo = false,
 }: {
   title?: string;
   body?: string;
+  /* Plan 018 phase 4: the homepage runs six text-only bands between the hero
+     photo and the footer. Only the homepage opts in -- the other three routes
+     that share this component render exactly the markup they did before, so
+     they neither re-lay-out nor download the image. */
+  photo?: boolean;
 }) {
   return (
-    <section className="mh-final-cta mh-section" aria-labelledby="final-title">
+    <section className={`mh-final-cta mh-section${photo ? " is-photo" : ""}`} aria-labelledby="final-title">
+      {photo ? (
+        <div className="mh-final-cta-photo">
+          <Image src="/marketing/homepage/raw/final-cta-portrait.webp" alt="A woman standing in an open doorway with a bag over her shoulder, looking out toward the street" fill sizes="(max-width: 900px) 100vw, 36vw" />
+        </div>
+      ) : null}
+      <div className="mh-final-cta-copy">
       <span className="mh-kicker is-lime">You do not need the whole plan today</span>
       <h2 id="final-title">{title}</h2>
       <p>{body}</p>
       <div><PrimaryCta>Build my free transition plan</PrimaryCta><a href={HUMAN_SUPPORT_URL}>Talk to a person</a></div>
       <small>Independent support. Start free.</small>
       <div className="mh-progress-mark" aria-hidden="true"><i /><span /><i /><span /><i /></div>
+      </div>
     </section>
   );
 }

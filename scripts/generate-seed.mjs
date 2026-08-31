@@ -103,7 +103,7 @@ async function main() {
   }));
   const categorySlugByName = new Map(categoryRows.map((row) => [row.name, row.slug]));
 
-  const postRows = resources.map((post) => {
+  const postRows = resources.map((post, index) => {
     const status = post.ported ? "published" : "retired";
     const body = post.ported
       ? JSON.parse(readFileSync(path.join(BLOCKS_DIR, `${post.slug}.json`), "utf8"))
@@ -121,6 +121,10 @@ async function main() {
       related: post.related ?? null,
       status,
       body,
+      // Plan 019: registry order is the curated order. Carrying the array
+      // index into the row is what stops the database re-sorting the
+      // library alphabetically.
+      sort_order: index,
     };
   });
 
@@ -148,7 +152,7 @@ async function main() {
   );
   lines.push("");
   lines.push(
-    "insert into public.posts (slug, title, category_slug, excerpt, reading_time, date, author_name, author_role, guest_author, related, status, body) values",
+    "insert into public.posts (slug, title, category_slug, excerpt, reading_time, date, author_name, author_role, guest_author, related, status, body, sort_order) values",
   );
   lines.push(
     postRows
@@ -166,6 +170,7 @@ async function main() {
           sqlTextArrayOrNull(row.related),
           sqlString(row.status),
           `${sqlString(JSON.stringify(row.body))}::jsonb`,
+          `${row.sort_order}`,
         ];
         return `  (${values.join(", ")})${index === postRows.length - 1 ? ";" : ","}`;
       })
