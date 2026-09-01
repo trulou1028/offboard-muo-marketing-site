@@ -55,7 +55,9 @@ describe("Offboard marketing routes", () => {
     // Verified facts that stay on the homepage (COPY.md ledger).
     expect(screen.getByText("$0")).toBeInTheDocument();
     expect(screen.getByText("$20")).toBeInTheDocument();
-    expect(screen.getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
+    // The Resources mega menu also carries the subscriber count on every page
+    // since plan 037, so this is scoped to the page body.
+    expect(within(screen.getByRole("main")).getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /subscribe free/i })).toHaveAttribute("href", "https://newsletter.offboard.co");
 
     // The primary CTA changed to "Get started free" on v2 (COPY.md language
@@ -86,16 +88,46 @@ describe("Offboard marketing routes", () => {
   it("uses real routes for product, company, and partner navigation", () => {
     render(<MarketingHome />);
 
+    // Plan 037 (owner revision): the header nav is one top-level link and
+    // three mega-menu triggers. Home left the bar (the wordmark is the home
+    // link), How It Works lives inside Product as its featured card, About
+    // inside Resources. The panels render collapsed, so their links are
+    // queried with hidden: true -- the point is that every route the target
+    // navigation names is present and correct, not that it is on screen
+    // before the visitor opens anything.
     const headerNav = screen.getByRole("navigation", { name: "Marketing navigation" });
-    const headerLinks = within(headerNav).getAllByRole("link");
-    expect(headerLinks).toHaveLength(6);
-    expect(within(headerNav).getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
-    expect(within(headerNav).getByRole("link", { name: "How It Works" })).toHaveAttribute("href", "/how-it-works");
+    expect(within(headerNav).getAllByRole("link")).toHaveLength(1);
+    expect(within(headerNav).getAllByRole("button")).toHaveLength(3);
     expect(within(headerNav).getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
-    expect(within(headerNav).getByRole("link", { name: "Guides" })).toHaveAttribute("href", "/resources");
-    expect(within(headerNav).getByRole("link", { name: "About" })).toHaveAttribute("href", "/about");
-    expect(within(headerNav).getByRole("link", { name: "For Employers" })).toHaveAttribute("href", "/employers");
-    expect(within(headerNav).queryByRole("link", { name: "For Public Partners" })).not.toBeInTheDocument();
+    expect(within(headerNav).queryByRole("link", { name: "Home" })).not.toBeInTheDocument();
+
+    for (const name of ["Product", "For Organizations", "Resources"]) {
+      expect(within(headerNav).getByRole("button", { name })).toHaveAttribute("aria-expanded", "false");
+    }
+
+    for (const [name, href] of [
+      ["Career Context", "/career-context"],
+      ["Lumo", "/lumo"],
+      ["Offboard Everywhere", "/integrations"],
+      ["Job Search", "/job-search"],
+      ["Layoff & Benefits", "/layoff-support"],
+      ["How It Works", "/how-it-works"],
+      ["For Employers", "/employers"],
+      ["Workforce & Government", "/workforce"],
+      ["Universities & Communities", "/communities"],
+      ["Guides", "/resources"],
+      ["Privacy & Security", "/privacy-security"],
+      ["About", "/about"],
+      ["Visit Us", "/intake"],
+      ["The Offboard Newsletter", "https://newsletter.offboard.co"],
+    ] as const) {
+      const matches = within(headerNav).getAllByRole("link", { name: new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`), hidden: true });
+      expect(matches.length, `${name} in the header nav`).toBeGreaterThan(0);
+      expect(matches[0]).toHaveAttribute("href", href);
+    }
+
+    // /act stays out of the nav in both presentations (standing guardrail).
+    expect(headerNav.querySelector('a[href="/act"]')).toBeNull();
 
     const footerNav = screen.getByRole("navigation", { name: "Footer navigation" });
     expect(within(footerNav).getByRole("link", { name: "Workforce & Government" })).toHaveAttribute("href", "/workforce");
@@ -143,7 +175,9 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { level: 1, name: /built for the moment work stops making sense/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "It started with our own layoffs." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A newsletter and a community came first." })).toBeInTheDocument();
-    expect(screen.getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
+    // The Resources mega menu also carries the subscriber count on every page
+    // since plan 037, so this is scoped to the page body.
+    expect(within(screen.getByRole("main")).getByText(/5,000\+ subscribers/i)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Calm is part of the product." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Our job is to get you out of here." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Fair questions." })).toBeInTheDocument();

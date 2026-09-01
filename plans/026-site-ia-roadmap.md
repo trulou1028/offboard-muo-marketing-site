@@ -15,8 +15,9 @@ Workforce & Government · Universities & Communities) · Pricing ·
 Resources ▾ (Guides · Company Transition Centers · Privacy & Security) ·
 About · Sign in · Get started.
 
-The dropdown nav ships only when its pages exist — no dead links. Until
-then the flat 6-link nav stands.
+The dropdown nav ships only when its pages exist — no dead links. It
+shipped in plan 037 with everything above except Company Transition
+Centers, and with `Build my plan` rather than `Get started`.
 
 ## Phases
 
@@ -67,9 +68,14 @@ nav is close to worth doing.
 - `/companies` Company Transition Centers + per-company pages — the
   utility/SEO/distribution layer.
 
-**Phase 4 — dropdown navigation** (Product / For Organizations /
-Resources), replacing the flat nav once phases 2-3 give it real pages.
-Nav tests, COPY.md chrome, and baselines move with it.
+**Phase 4 — dropdown navigation.** ~~Product / For Organizations /
+Resources~~ **DONE, plan 037.** Four top-level links and three dropdowns,
+each item with a one-line blurb. Two departures from the target above:
+Company Transition Centers is held out of Resources until `/companies`
+exists (the no-dead-links rule), and the header CTA stays `Build my plan`
+per decision 2. Nav tests and COPY.md chrome moved with it; the visual
+baselines did **not**, because a 76px header sits under the suite's 1%
+tolerance - the nav was verified by measurement instead.
 
 ## Open owner decisions (recorded, not presumed)
 

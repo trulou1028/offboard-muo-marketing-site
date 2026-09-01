@@ -766,6 +766,7 @@ copy doc built on it. Reference export lives in
 | 034 | Privacy & Security page (`/privacy-security`); `/security` 301 retargeted from `/about`; claims ported from the app repo's `SECURITY_CLAIMS.md` | P1 | M | 026 | IN PROGRESS - branch `claude/privacy-security`, awaiting owner preview sign-off. **Phase 3 begins.** One open verification flag: the connected-assistant section |
 | 035 | Workforce & Government (`/workforce`); `/public-partners` retired and 301'd into it; public-sector section leaves `/employers` | P1 | M | 026, 034 | IN PROGRESS - branch `claude/workforce`, awaiting owner preview sign-off. Closes plan 026 decision 1. B2G firewall asserted in a browser |
 | 036 | Universities & Communities (`/communities`) - completes the For Organizations split | P2 | S | 026, 035 | IN PROGRESS - branch `claude/communities`, awaiting owner preview sign-off. No prices and no category claim, both deliberate and recorded |
+| 037 | Mega-menu navigation, four tabs (Product / For Organizations / Pricing / Resources), light panels with a featured card each | P1 | M | 026, 036 | IN PROGRESS - branch `claude/dropdown-nav`, owner revised the seven-item cut to four tabs; awaiting preview sign-off. **Phase 4 done.** Six defects found in verification, incl. `hidden` not hiding the panels |
 
 
 Plan 022 supersedes plan 018's homepage-specific work, with one deliberate
