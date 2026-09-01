@@ -148,12 +148,17 @@ and everywhere it appears in the same PR.
 
 # Site chrome (all pages)
 
-**Header nav** (6 links + actions): Home `/` · How it works `/how-it-works` ·
-Pricing `/pricing` · Guides `/resources` · About `/about` · For employers
-`/employers` · Sign in → `https://app.offboard.co/auth?tab=signin` ·
+**Header nav** (6 links + actions): Home `/` · How It Works `/how-it-works` ·
+Pricing `/pricing` · Guides `/resources` · About `/about` · For Employers
+`/employers` · Sign In → `https://app.offboard.co/auth?tab=signin` ·
 **Build my plan** (primary, neon on the dark header) → signup. The header is
 fixed (sticky) on every route. `/act` and `/public-partners` are deliberately
 out of nav.
+
+**Navigation labels are Title Case** (owner decision 2026-08-31); prose,
+headlines, and CTA button labels stay sentence case. The mixed casing this
+replaced was visible: product links like "Career Context" were already Title
+Case while "How it works" and "For employers" were not.
 
 **Footer**
 
@@ -163,7 +168,7 @@ out of nav.
 Columns — **Product:** How it works, Career Context, Lumo, Job Search,
 Offboard Everywhere, Layoff & Benefits, Pricing, Guides ·
 **Partners:** For
-employers, For public partners · **Company:** About, Visit us (`/intake`),
+Employers, For Public Partners · **Company:** About, Visit Us (`/intake`),
 Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy, Terms
 (app.offboard.co).
 

@@ -21,7 +21,7 @@ test.describe("Offboard marketing site", () => {
     await expect(page.getByRole("heading", { name: /you don't need another place to start over/i })).toBeVisible();
     await expect(page.getByRole("tablist", { name: "Job search stages" })).toHaveCount(0);
 
-    await page.getByRole("link", { name: "How it works" }).first().click();
+    await page.getByRole("link", { name: "How It Works" }).first().click();
     await expect(page).toHaveURL(/\/how-it-works$/);
     await expect(page.getByRole("heading", { level: 1, name: /one plan that starts where you are/i })).toBeVisible();
     expect(backendRequests).toEqual([]);
@@ -71,11 +71,11 @@ test.describe("Offboard marketing site", () => {
     await expect(headerNav.getByRole("link")).toHaveCount(6);
     await expect(headerNav.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
     await expect(headerNav.getByRole("link", { name: "Guides" })).toHaveAttribute("href", "/resources");
-    await expect(headerNav.getByRole("link", { name: "For public partners" })).toHaveCount(0);
+    await expect(headerNav.getByRole("link", { name: "For Public Partners" })).toHaveCount(0);
 
     const footerNav = page.getByRole("navigation", { name: "Footer navigation" });
-    await expect(footerNav.getByRole("link", { name: "For public partners" })).toBeVisible();
-    await expect(footerNav.getByRole("link", { name: "For employers" })).toBeVisible();
+    await expect(footerNav.getByRole("link", { name: "For Public Partners" })).toBeVisible();
+    await expect(footerNav.getByRole("link", { name: "For Employers" })).toBeVisible();
   });
 
   test("keeps the public-partners route live with a crosslink to employers", async ({ page }) => {

@@ -760,7 +760,8 @@ copy doc built on it. Reference export lives in
 | 028 | Offboard Everywhere (/integrations) + site-wide band-rhythm sweep | P1 | M | 026 | DONE - **merged to `main`** 2026-08-31 via [PR #48](https://github.com/trulou1028/offboard-muo-marketing-site/pull/48). Two owner-verification flags still open (see COPY.md § 11) |
 | 029 | Lumo page (/lumo) | P1 | M | 026 | DONE - **merged to `main`** 2026-08-31 via [PR #49](https://github.com/trulou1028/offboard-muo-marketing-site/pull/49) |
 | 030 | Layoff & Benefits page (/layoff-support) | P1 | M | 026 | DONE - **merged to `main`** 2026-08-31 via [PR #50](https://github.com/trulou1028/offboard-muo-marketing-site/pull/50). Open: yes/no on the two held-back ledger numbers |
-| 031 | Job Search page (/job-search) - completes phase 2's five pillars | P1 | M | 026 | IN PROGRESS - branch `claude/job-search-page`; page copy needs owner sign-off |
+| 031 | Job Search page (/job-search) - completes phase 2's five pillars | P1 | M | 026 | DONE - **merged to `main`** 2026-08-31 via [PR #51](https://github.com/trulou1028/offboard-muo-marketing-site/pull/51). **Phase 2 complete.** |
+| 032 | Title Case navigation labels | P2 | S | - | IN PROGRESS - branch `claude/nav-capitalization`, awaiting owner preview sign-off |
 
 
 Plan 022 supersedes plan 018's homepage-specific work, with one deliberate
