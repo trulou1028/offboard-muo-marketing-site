@@ -99,15 +99,37 @@ describe("verified-facts ledger matches shipped copy", () => {
     expect(renderedText(<MarketingAbout />)).toContain("5,000+");
   });
 
-  // Homepage v2 (plan 022) retired the hook band and identity contrast, so the
-  // CalJOBS and job-centers facts no longer ship anywhere. Their ledger rows
-  // stay (marked "Not currently shipped") so the numbers stay governed; if a
-  // component renders them again, restore the render assertions here.
-  it("CalJOBS training extension example: ledger row keeps $12,000 and week 16 governed", () => {
+  // Restored to /layoff-support on the owner's 2026-09-01 call (plan 033). The
+  // number never ships bare: the conditions and the "amounts vary" small print
+  // are asserted with it, and it stays off the homepage.
+  it("CalJOBS training extension example: $12,000 and week 16 appear in the ledger and on /layoff-support", () => {
     const row = ledgerRow("CalJOBS training extension example");
     expect(row).toContain("$12,000");
     expect(row).toContain("week 16");
-    expect(row).toContain("Not currently shipped");
+    const text = renderedText(<MarketingLayoffSupport />);
+    expect(text).toContain("$12,000");
+    expect(text).toContain("week 16");
+    expect(text).toContain("Amounts and timing vary by situation.");
+    expect(text).toContain("We never promise funding");
+  });
+
+  it("CalJOBS training extension example: stays off the homepage", () => {
+    expect(renderedText(<MarketingHome />)).not.toContain("$12,000");
+  });
+
+  // Which assistants and tools are connectable is a claim, not decoration: the
+  // grid and the ledger row have to agree, including the beta labelling the
+  // owner asked for (2026-09-01).
+  it("Live integrations: the ledger row and the /integrations grid agree", () => {
+    const row = ledgerRow("Live integrations");
+    const text = renderedText(<MarketingIntegrations />);
+    for (const name of ["Google Calendar", "Google Drive", "Calendly", "ChatGPT", "Claude", "Gmail", "Notion"]) {
+      expect(row).toContain(name);
+      expect(text).toContain(name);
+    }
+    expect(row).toContain("beta");
+    expect(text).toContain("Beta");
+    expect(text).toContain("In progress");
   });
 
   it("Job centers: ledger row keeps the approved phrasing governed", () => {

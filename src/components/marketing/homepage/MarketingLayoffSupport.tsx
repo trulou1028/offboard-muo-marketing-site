@@ -52,6 +52,40 @@ function Questions() {
   );
 }
 
+/* The CalJOBS hook (plan 033). Retired from the homepage in v2 and held back
+   from this page in plan 030 pending an owner call; the owner said yes on
+   2026-09-01, and this page is its documented home. The copy is the approved
+   v7 wording, shipped with its conditions and the "amounts vary" small print
+   attached, per the verified-facts ledger row. */
+function HookBand() {
+  return (
+    <section className="mh-hook mh-section mh-split" aria-labelledby="hook-title">
+      <div className="mh-copy-block">
+        <span className="mh-kicker is-lime">One example</span>
+        <h2 id="hook-title">There is a deadline worth roughly $12,000 that most people have never heard of.</h2>
+        <p>If you were laid off in California, you may be able to keep your unemployment benefits while you train full-time, including an extension worth roughly $12,000. But only if you contact EDD before week 16 of your benefit payments. Most people have never heard of it. Offboard watches that clock for you.</p>
+        <small>Amounts and timing vary by situation. We never promise funding, we show you the exact path to find out.</small>
+      </div>
+      <div className="mh-money-clock" data-reveal="" aria-label="Sample benefit payment deadline card">
+        <header>
+          <span>Benefit payments</span>
+          <b>Sample · CA</b>
+        </header>
+        <strong>Week 12 of 16</strong>
+        <div className="mh-money-clock-bar" aria-hidden="true"><i style={{ width: "75%" }} /></div>
+        <div className="mh-money-clock-ends">
+          <span>Now · week 12</span>
+          <span>Deadline · week 16</span>
+        </div>
+        <div className="mh-money-clock-footer">
+          <span>~$12,000 at stake</span>
+          <span>4 weeks left to contact EDD</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HowItHelps() {
   return (
     <section className="mh-ctx mh-section" aria-labelledby="helps-title">
@@ -112,6 +146,7 @@ export function MarketingLayoffSupport() {
           cta="Build my free transition plan"
         />
         <Questions />
+        <HookBand />
         <HowItHelps />
         <VerifiedFactsStrip />
         <StraightAnswers />

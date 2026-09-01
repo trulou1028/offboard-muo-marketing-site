@@ -119,7 +119,8 @@ and everywhere it appears in the same PR.
 | --- | --- | --- | --- |
 | Homepage trust line | **“Join thousands of people”** | Owner-confirmed accurate 2026-08-31 | Home |
 | Newsletter subscribers | **5,000+** | Owner-corrected 2026-08-01 (verified 5,200; "8,000+" is stale and banned) | Home, About |
-| CalJOBS training extension example | **~$12,000**, contact EDD before **week 16** of benefit payments, California | Always shipped with conditions + "amounts vary" small print | Not currently shipped — owner decided 2026-08-31 to keep it off the homepage for now |
+| CalJOBS training extension example | **~$12,000**, contact EDD before **week 16** of benefit payments, California | Always shipped with conditions + "amounts vary" small print | Layoff & Benefits (owner approved 2026-09-01; stays off the homepage) |
+| Live integrations | **Google Calendar, Google Drive, Calendly** live; **ChatGPT, Claude** in **beta**; **Gmail, Notion** in progress with no date | Owner-confirmed 2026-09-01: the ChatGPT and Claude connections exist and work, and are labelled beta because they are still being refined | Offboard Everywhere |
 | Job centers | **"2,000+ job centers"** and **"billions of dollars a year"** | The only approved public phrasings; precise figures (~$3.2B WIOA, ~2,300 AJCs) require re-verification before any cited use | Not currently shipped (left the homepage in v2, plan 022) |
 | State-approved training programs (CA) | **4,000+** | From v7, owner-shipped | How it works (left the homepage in v2, plan 022) |
 | Live verified states | **CA** (deepest), NY, NJ, WA | | How it works (left the homepage in v2, plan 022) |
@@ -829,16 +830,22 @@ strategy).** The consumer-facing version of the connected-assistant story.
 Deliberately never says "MCP" in user-facing copy. Not in header nav yet;
 linked from the homepage "wherever you work" section and the footer.
 
-**OWNER VERIFICATION NEEDED before public launch — two items:**
-1. **Which assistants are actually connectable today.** The demos name
-   ChatGPT, Claude, and Lumo per the strategy doc. If ChatGPT and Claude
-   are not both live, the demo labels must change before this page is
-   public. No launch date or roadmap is promised anywhere on the page.
-2. **The permissions section is written at the level of principle only**
-   ("a connection is scoped, you authorize it, you can disconnect"). It
-   deliberately does NOT publish a capability matrix of what a given
-   assistant can and cannot reach, because the real authorization model
-   is not settled. When it is, that matrix belongs here.
+**Rebuilt as a showcase 2026-09-01 (plan 033, owner direction).** The page
+leads with a card grid of the real integrations instead of a long prose
+section. "The idea" editorial block was cut and its H2 now titles the grid.
+
+**Owner verification, item 1: RESOLVED 2026-09-01.** ChatGPT and Claude
+connections both exist and work today. They ship labelled **Beta**, the
+owner's own framing, because they are still being refined. The three tool
+connections (Google Calendar, Google Drive, Calendly) ship as **Live**.
+Gmail and Notion ship as **In progress** with no date attached anywhere.
+
+**Owner verification, item 2 still OPEN.** The permissions section is
+written at the level of principle only ("a connection is scoped, you
+authorize it, you can disconnect"). It deliberately does NOT publish a
+capability matrix of what a given assistant can and cannot reach, because
+the real authorization model is not settled. When it is, that matrix
+belongs here.
 
 **Meta title:** `Offboard Everywhere | Use Offboard from the AI you already use`
 **Meta description:** `Connect Offboard to the AI assistants you already work in. Save opportunities, update applications, and add to your Career Context from wherever the conversation happens. Offboard holds the record, you choose the interface.`
@@ -850,15 +857,34 @@ linked from the homepage "wherever you work" section and the footer.
 - Body: `Your job search does not live in one tab. Connect Offboard to the assistants you already work in, and save opportunities, update applications, and add to your Career Context from wherever the conversation happens.`
 - CTA: `Get started free` (primary)
 
-### The idea
+### What connects (the showcase grid)
 
-- Kicker: `The idea`
+- Kicker: `What connects`
 - H2: `Offboard holds the record. You choose the interface.`
-- Body: `Offboard keeps the structured record of your search: your Career Context, the opportunities you are pursuing, the companies you are researching, and what happened with each one. A connected assistant reads and updates that record with your permission. The record stays in one place no matter which tool you happen to be working in.`
-- Contrast blocks:
-  1. `Without a shared record` — `Every assistant starts from nothing. You paste your resume again, re-explain your search, and whatever you work out disappears when the conversation ends.`
-  2. `With Offboard connected` — `The assistant starts from your Career Context, and the work you do in conversation lands back in your record instead of evaporating.`
-  3. `What that changes` — `You stop maintaining your job search in two places, and you stop losing the useful parts of conversations you already had.`
+- Body: `Connect the tools you already work in. Offboard keeps one record of your search, and a connection reads and updates it with your permission.`
+- Group heading: `Connected today`
+  1. **Google Calendar** · `Live` — `Interviews and deadlines land on the calendar you already keep.`
+  2. **Google Drive** · `Live` — `Save resumes and cover letters straight to your Drive.`
+  3. **Calendly** · `Live` — `Book networking calls and coffee chats without leaving your search.`
+  4. **ChatGPT** · `Beta` — `Save a role, move an application forward, or add to your Career Context from a ChatGPT conversation.`
+  5. **Claude** · `Beta` — `Work through a project or an interview in Claude and have what you decide land back in your record.`
+- Group heading: `In progress`
+  6. **Gmail** · `In progress` — `Follow application email and replies without hunting through your inbox.`
+  7. **Notion** · `In progress` — `Export your job search record to Notion.`
+- Note under the grid: `ChatGPT and Claude are in beta. They work today and we are still refining them. The ones marked in progress are being built, and we do not put dates on them.`
+
+The cards are a showcase, not links: nothing in the grid is clickable. The
+partner marks are hand-authored SVG in the partner's own colors
+(`IntegrationLogos.tsx`), the one place on the site allowed outside the
+Civic Modern palette. Statuses are governed by the verified-facts ledger
+row "Live integrations": changing what ships here changes that row in the
+same PR.
+
+**Retired 2026-09-01:** the "The idea" editorial block (kicker `The idea`,
+the three contrast cards `Without a shared record` / `With Offboard
+connected` / `What that changes`, and the long "Offboard keeps the
+structured record" body). Cut for length on owner direction; the H2 it
+carried moved to the grid above.
 
 ### Demos
 
@@ -999,11 +1025,12 @@ also the most claim-sensitive page on the site.
 - **"Outplacement" must not appear here** (jobseeker narrative copy), and
   the page is in the CopyDrift absence list.
 
-**Available but deliberately not shipped, owner's call:** the `~$12,000`
-CalJOBS extension example and the `2,000+ job centers` framing both have
-approved ledger rows and both left the homepage in v2. This page is their
-natural home, but the owner decided on 2026-08-31 to keep the $12,000 hook
-off for now, so neither was resurrected without asking.
+**The `~$12,000` CalJOBS hook ships here (owner approval 2026-09-01, plan
+033).** It left the homepage in v2 and this page is its documented home. It
+ships with its conditions and the "amounts vary" small print attached, per
+the ledger row, and it stays off the homepage. The `2,000+ job centers`
+framing is still held back: it has an approved ledger row but no owner
+decision, so it was not resurrected.
 
 **Meta title:** `Layoff & Benefits | Offboard`
 **Meta description:** `A layoff is not only a job search. Offboard helps you work out what to do first, what support you may qualify for, how to keep health coverage, whether training is funded, and how long your money lasts.`
@@ -1036,6 +1063,17 @@ off for now, so neither was resurrected without asking.
   2. `Deadlines surfaced early` — `The clocks that expire quietly are the expensive ones. Offboard puts them in front of you.`
   3. `Official sources, every time` — `Every program links to the official source that decides it. You are never asked to take our word for it.`
   4. `The search stays connected` — `The money side and the job side live in one place instead of two.`
+
+### The CalJOBS hook
+
+Placed between "The questions underneath" and "What Offboard does about
+it". Approved v7 copy, shipped verbatim with the small print.
+
+- Kicker: `One example`
+- H2: `There is a deadline worth roughly $12,000 that most people have never heard of.`
+- Body: `If you were laid off in California, you may be able to keep your unemployment benefits while you train full-time, including an extension worth roughly $12,000. But only if you contact EDD before week 16 of your benefit payments. Most people have never heard of it. Offboard watches that clock for you.`
+- Small print (required, never shipped without it): `Amounts and timing vary by situation. We never promise funding, we show you the exact path to find out.`
+- Sample card (labelled a sample, never live data): `Benefit payments` / `Sample · CA` / `Week 12 of 16` / `Now · week 12` / `Deadline · week 16` / `~$12,000 at stake` / `4 weeks left to contact EDD`
 
 ### Verified facts (shared component)
 
@@ -1138,6 +1176,10 @@ tools form, and the fact that the loop has a memory.
 · `/tools`, `/tools/:slug*` → `/resources` · 7 unported essay/policy slugs →
 `/resources`. Kept live, no redirect: `/intake`, `/act`.
 
+**Planned, not yet shipped:** `/public-partners` → `/workforce`, landing in
+the same PR as `/workforce` itself (owner decision 2026-09-01, plan 026
+decision 1). Until then `/public-partners` stays live and out of nav.
+
 ---
 
 # Approved but unshipped
@@ -1192,8 +1234,14 @@ When one ships, move it into its page section above.
 | 2026-08-24 | COPY.md created as the copy source of truth; copy changes land here first | this file |
 | 2026-08-31 | Homepage hero becomes a forest-deep band (Lumo band drops to mid forest to hold the two-anchor rhythm rule); “Join thousands of people” confirmed accurate; $12k hook stays off the homepage for now | plan 022, owner call |
 | 2026-08-30 | Homepage v2 shipped from owner's Career Context copy doc; primary CTA on home becomes "Get started free"; hook/$12k, identity, three-jobs, verified-facts, pricing-teaser, employer-strip, privacy-summary sections retired from home; community strip kept for the `/#community` redirect; "recruiting platform"→"recruiting site" and "infrastructure"→"tools" never-say substitutions | plan 022, this file § 1 |
+| 2026-09-01 | ChatGPT and Claude connections confirmed live, shipped labelled "Beta" (owner's framing: they work and are still being refined). Closes plan 028's first verification flag | plan 033, this file § 11 |
+| 2026-09-01 | `/integrations` leads with a card grid of real integrations; "The idea" editorial block cut for length | plan 033, this file § 11 |
+| 2026-09-01 | The `~$12,000` CalJOBS hook ships on `/layoff-support`, with conditions and small print, and stays off the homepage | plan 033, this file § 13 |
+| 2026-09-01 | `/public-partners` folds into `/workforce` and redirects when `/workforce` ships (no thin page kept) | plan 026 decision 1, docs/site-architecture.md |
 | 2026-08-24 | Clarified the "outplacement" scope: allowed on /employers AND in Sponsored-tier copy wherever it renders (home teaser, /pricing deck), per the 2026-08-21 owner call. The earlier "one page only" wording in Language rules was inaccurate and is corrected. | COPY.md, plan 019 |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·
-Steph's essay editorial pass · execute the gift lane (plan 015).
+Steph's essay editorial pass · execute the gift lane (plan 015) · the real
+permissions model for `/integrations` (plan 028 flag 2, still open) · yes/no
+on the `2,000+ job centers` framing for `/layoff-support`.
