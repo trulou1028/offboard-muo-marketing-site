@@ -162,21 +162,59 @@ a.mh-skip-link:focus { transform: translateY(0); }
    the e2e overflow assertion). The scrolled shadow is toggled by
    MotionController and runs even under reduced motion: it is state, not
    motion. */
-.mh-site-header { position: fixed; z-index: 20; inset: 0 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 76px; padding-inline: var(--mh-page-x); background: rgb(15 38 23 / 90%); border-bottom: 1px solid rgb(246 244 238 / 12%); backdrop-filter: blur(18px); transition: box-shadow var(--mh-dur-base) var(--mh-ease-standard), background-color var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-site-header { position: fixed; z-index: 20; inset: 0 0 auto; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; height: 76px; padding-inline: var(--mh-page-x); background: rgb(15 38 23 / 90%); border-bottom: 1px solid rgb(246 244 238 / 12%); backdrop-filter: blur(18px); transition: box-shadow var(--mh-dur-base) var(--mh-ease-standard), background-color var(--mh-dur-base) var(--mh-ease-standard); }
 .mh-site-header.is-scrolled { background: rgb(15 38 23 / 96%); box-shadow: var(--mh-shadow-surface); }
 /* A fixed header covers in-page anchor targets without this. #community,
    #faq, #toolkit and #pricing are targets of SEO-load-bearing redirects. */
 .marketing-homepage section[id] { scroll-margin-top: 96px; }
 .mh-site-header > a { justify-self: start; }
 .mh-brand { width: 157px; height: auto; }
-.mh-site-header nav { display: flex; align-items: center; gap: 36px; color: var(--mh-paper); font-size: 16px; line-height: 24px; }
+/* The middle column takes the space left between the brand and the actions,
+   and the nav centres itself inside that rather than in the viewport. With a
+   `1fr auto 1fr` header the nav was forced to true centre, and because the
+   actions are wider than the brand its right edge met them with 7px to spare
+   at 1440 and 0 at 1280. Centring between them instead frees ~50px and the
+   difference is imperceptible. */
+.mh-site-nav { display: flex; justify-content: center; align-items: center; gap: 26px; color: var(--mh-paper); font-size: 16px; line-height: 24px; }
 .mh-sign-in { opacity: .92; transition: opacity 180ms ease-out; }
 .mh-sign-in:hover { opacity: 1; }
 /* Animated underline replaces the opacity hover; the aria-current state uses
-   the same bar so current + hover never double-underline. */
-.mh-site-header nav a { position: relative; }
-.mh-site-header nav a::after { position: absolute; right: 0; bottom: -6px; left: 0; height: 2px; background: var(--mh-paper); content: ""; transform: scaleX(0); transform-origin: left; transition: transform var(--mh-dur-base) var(--mh-ease-standard); }
-.mh-site-header nav a:hover::after { transform: scaleX(1); }
+   the same bar so current + hover never double-underline. The `>` is
+   load-bearing since plan 037: without it the bar also paints on the links
+   inside a dropdown panel, which are dark-on-light and 60px lower. */
+.mh-site-nav > a,
+.mh-nav-trigger { position: relative; }
+.mh-site-nav > a::after,
+.mh-nav-trigger::after { position: absolute; right: 0; bottom: -6px; left: 0; height: 2px; background: var(--mh-paper); content: ""; transform: scaleX(0); transform-origin: left; transition: transform var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-site-nav > a:hover::after,
+.mh-nav-trigger:hover::after,
+.mh-nav-trigger[aria-expanded="true"]::after,
+.mh-nav-trigger[data-active]::after { transform: scaleX(1); }
+
+/* Dropdown navigation (plan 037). The trigger is a button, so it needs the
+   font and cursor a link gets for free. */
+.mh-nav-group { position: relative; }
+.mh-nav-trigger { display: inline-flex; align-items: center; gap: 6px; padding: 0; background: none; border: 0; cursor: pointer; font: inherit; line-height: 24px; }
+.mh-nav-trigger svg { width: 15px; height: 15px; transition: transform var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-nav-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+/* A light panel inside the dark header takes the focus ring back to ink, or
+   it inherits the header's light ring and paints paper on paper. */
+.mh-nav-panel { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: calc(100% + 20px); left: -16px; display: grid; width: 320px; gap: 2px; padding: 12px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); }
+/* Bridges the gap between trigger and panel so crossing it with the pointer
+   does not fire mouseleave and close the panel under the cursor. */
+.mh-nav-panel::before { position: absolute; top: -20px; right: 0; left: 0; height: 20px; content: ""; }
+/* The `hidden` attribute alone does NOT close these panels: `display: grid`
+   above is an author rule and beats the user-agent's `[hidden] {display:none}`,
+   so all three panels rendered at once and overlapped. Caught in a screenshot,
+   not by the attribute assertion that was passing next to it. */
+.mh-nav-panel[hidden] { display: none; }
+.mh-nav-panel a { display: grid; padding: 10px 12px; border-radius: var(--mh-radius-sm); }
+.mh-nav-panel strong { font-size: 15px; font-weight: 650; line-height: 21px; }
+.mh-nav-panel small { color: var(--mh-secondary); font-size: 13px; line-height: 18px; }
+.mh-nav-panel a:hover,
+.mh-nav-panel a[aria-current="page"] { background: var(--mh-paper-soft); }
+.mh-nav-panel a:hover strong,
+.mh-nav-panel a[aria-current="page"] strong { color: var(--mh-forest); }
 .mh-header-actions { justify-self: end; display: flex; align-items: center; gap: 24px; color: var(--mh-paper); }
 .mh-header-actions a.mh-primary-cta { min-height: 42px; background: var(--mh-lime); border: 0; border-radius: var(--mh-radius-sm); color: var(--mh-deep); }
 .mh-header-actions a.mh-primary-cta:hover { background: var(--mh-lime-hover); }
@@ -419,7 +457,7 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-site-footer nav a { font-size: 14px; }
 .mh-site-footer > p { display: flex; justify-content: space-between; margin-top: 42px; padding-top: 20px; border-top: 1px solid var(--mh-hairline-on-dark); color: rgb(246 244 238 / 50%); font-size: 12px; }
 
-.mh-site-header nav a[aria-current="page"]::after { transform: scaleX(1); }
+.mh-site-nav > a[aria-current="page"]::after { transform: scaleX(1); }
 .mh-mobile-menu { display: none; position: relative; }
 .mh-mobile-menu summary { padding: 6px 10px; border: 1px solid transparent; border-radius: var(--mh-radius-sm); cursor: pointer; list-style: none; font-weight: 600; transition: background-color 180ms ease-out, border-color 180ms ease-out; }
 /* Open state: without it the trigger looked identical whether the panel was
@@ -428,10 +466,21 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-mobile-menu summary::-webkit-details-marker { display: none; }
 /* A light panel inside the dark header, so it takes the ring back to ink --
    otherwise it inherits the header's light ring and paints paper on paper. */
-.mh-mobile-menu > div { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: 42px; right: 0; display: grid; width: 230px; padding: 12px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); }
+/* The grouped menu is roughly 18 rows; without a cap it runs past the bottom
+   of a short viewport and `.marketing-homepage { overflow: clip }` swallows
+   the overflow rather than scrolling it. */
+.mh-mobile-menu > div { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: 42px; right: 0; display: grid; width: 230px; max-height: calc(100dvh - 96px); overflow-y: auto; padding: 12px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); }
 .mh-mobile-menu > div a { padding: 11px 12px; border-radius: var(--mh-radius-sm); }
 .mh-mobile-menu > div a:hover,
 .mh-mobile-menu > div a[aria-current="page"] { background: var(--mh-paper-soft); color: var(--mh-forest); }
+/* The mobile menu keeps the same groups as the desktop dropdowns, flattened
+   under headings - a nested disclosure inside a disclosure is worse on a
+   phone than a slightly longer list. */
+.mh-mobile-group { display: grid; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--mh-line); }
+/* The link after a group needs the rule too, or "How It Works" reads as the
+   sixth Product item rather than a top-level page of its own. */
+.mh-mobile-group + a { margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--mh-line); }
+.mh-mobile-group > strong { padding: 4px 12px 6px; color: var(--mh-secondary); font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
 
 .mh-section-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 36px; padding-bottom: 5px; border-bottom: 1px solid var(--mh-ink); font-size: 15px; font-weight: 650; }
 .mh-section-link svg { width: 17px; height: 17px; transition: transform 180ms ease-out; }
@@ -1044,6 +1093,19 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 .mh-page-integrations .mh-lumo-band { background: var(--mh-deep); }
 .mh-route-resources + .mh-route-resources { background: var(--mh-paper); }
 
+/* Seven top-level items plus three chevrons stop fitting beside the brand and
+   the header actions well above the 900px nav breakpoint: at 1280px the nav's
+   right edge met the actions' left edge exactly, with zero clearance. The gap
+   and type tighten once, covering 1180 to 1360; below 1180 the header already
+   swaps to the mobile menu. Measured at 1440/1280/1200 - see plan 037. */
+@media (max-width: 1360px) {
+  .mh-site-nav { gap: 22px; font-size: 15px; }
+}
+
+@media (max-width: 1280px) {
+  .mh-site-nav { gap: 18px; }
+}
+
 @media (max-width: 1180px) {
   .mh-chat-card.is-floating { right: 0; width: 360px; }
   .mh-ctx-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1051,7 +1113,7 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
   .mh-capabilities { grid-template-columns: repeat(2, 1fr); }
   .mh-int-grid { grid-template-columns: repeat(2, 1fr); }
   .mh-site-header { grid-template-columns: auto 1fr; }
-  .mh-site-header nav { display: none; }
+  .mh-site-nav { display: none; }
   .mh-mobile-menu { display: block; }
   .mh-header-actions { grid-column: 2; justify-self: end; }
   .mh-onboarding-screen { padding-inline: 38px; }

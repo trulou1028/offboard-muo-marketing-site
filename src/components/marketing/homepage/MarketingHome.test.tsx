@@ -86,16 +86,45 @@ describe("Offboard marketing routes", () => {
   it("uses real routes for product, company, and partner navigation", () => {
     render(<MarketingHome />);
 
+    // Plan 037: the header nav is four top-level links and three dropdown
+    // triggers. The panels render collapsed, so their links are queried with
+    // hidden: true -- the point of these assertions is that every route the
+    // target navigation names is present and correct, not that it is on
+    // screen before the visitor opens anything.
     const headerNav = screen.getByRole("navigation", { name: "Marketing navigation" });
-    const headerLinks = within(headerNav).getAllByRole("link");
-    expect(headerLinks).toHaveLength(6);
+    expect(within(headerNav).getAllByRole("link")).toHaveLength(4);
+    expect(within(headerNav).getAllByRole("button")).toHaveLength(3);
     expect(within(headerNav).getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
     expect(within(headerNav).getByRole("link", { name: "How It Works" })).toHaveAttribute("href", "/how-it-works");
     expect(within(headerNav).getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
-    expect(within(headerNav).getByRole("link", { name: "Guides" })).toHaveAttribute("href", "/resources");
     expect(within(headerNav).getByRole("link", { name: "About" })).toHaveAttribute("href", "/about");
-    expect(within(headerNav).getByRole("link", { name: "For Employers" })).toHaveAttribute("href", "/employers");
-    expect(within(headerNav).queryByRole("link", { name: "For Public Partners" })).not.toBeInTheDocument();
+
+    for (const [name, href] of [
+      ["Product", null],
+      ["For Organizations", null],
+      ["Resources", null],
+    ] as const) {
+      void href;
+      expect(within(headerNav).getByRole("button", { name })).toHaveAttribute("aria-expanded", "false");
+    }
+
+    for (const [name, href] of [
+      ["Career Context", "/career-context"],
+      ["Lumo", "/lumo"],
+      ["Job Search", "/job-search"],
+      ["Layoff & Benefits", "/layoff-support"],
+      ["Offboard Everywhere", "/integrations"],
+      ["For Employers", "/employers"],
+      ["Workforce & Government", "/workforce"],
+      ["Universities & Communities", "/communities"],
+      ["Guides", "/resources"],
+      ["Privacy & Security", "/privacy-security"],
+    ] as const) {
+      expect(within(headerNav).getByRole("link", { name: new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`), hidden: true })).toHaveAttribute("href", href);
+    }
+
+    // /act stays out of the nav in both presentations (standing guardrail).
+    expect(headerNav.querySelector('a[href="/act"]')).toBeNull();
 
     const footerNav = screen.getByRole("navigation", { name: "Footer navigation" });
     expect(within(footerNav).getByRole("link", { name: "Workforce & Government" })).toHaveAttribute("href", "/workforce");

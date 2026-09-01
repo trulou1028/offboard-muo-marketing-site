@@ -29,6 +29,16 @@ function normalizeBetweenTags(html: string): string {
   return html.replace(/>\s+</g, "><").trim();
 }
 
+// The shell's dropdown navigation (plan 037) generates React useId() values
+// like `_r_7_`. They are stable for a given render tree and meaningless to
+// this baseline, but they renumber whenever anything upstream in the tree
+// changes, which would churn all 11 snapshots for a reason that has nothing
+// to do with article fidelity. Collapsed to a constant so the baseline keeps
+// asserting what it exists to assert.
+function normalizeReactIds(html: string): string {
+  return html.replace(/_[rR]_[a-z0-9]+_/g, "_reactId_");
+}
+
 describe.each(portedResources.map((post) => post.slug))("article fidelity: %s", (slug) => {
   it("matches the pre-conversion baseline and has substantial body text", () => {
     const post = getResource(slug);
@@ -50,6 +60,6 @@ describe.each(portedResources.map((post) => post.slug))("article fidelity: %s", 
     );
 
     expect(container.textContent?.length ?? 0).toBeGreaterThan(1000);
-    expect(normalizeBetweenTags(container.innerHTML)).toMatchSnapshot();
+    expect(normalizeReactIds(normalizeBetweenTags(container.innerHTML))).toMatchSnapshot();
   });
 });

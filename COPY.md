@@ -151,12 +151,29 @@ and everywhere it appears in the same PR.
 
 # Site chrome (all pages)
 
-**Header nav** (6 links + actions): Home `/` · How It Works `/how-it-works` ·
-Pricing `/pricing` · Guides `/resources` · About `/about` · For Employers
-`/employers` · Sign In → `https://app.offboard.co/auth?tab=signin` ·
-**Build my plan** (primary, neon on the dark header) → signup. The header is
-fixed (sticky) on every route. `/act` is deliberately
-out of nav.
+**Header nav** (6 links + actions): **Dropdown navigation since plan 037.** Home `/` · **Product ▾** (Career
+Context · Lumo · Job Search · Layoff & Benefits · Offboard Everywhere) ·
+How It Works `/how-it-works` · **For Organizations ▾** (For Employers ·
+Workforce & Government · Universities & Communities) · Pricing `/pricing` ·
+**Resources ▾** (Guides · Privacy & Security) · About `/about` · Sign In →
+`https://app.offboard.co/auth?tab=signin` · **Build my plan** (primary, neon
+on the dark header) → signup. The header is fixed (sticky) on every route.
+`/act` is deliberately out of nav, in both the desktop dropdowns and the
+mobile menu.
+
+Each dropdown item carries a one-line blurb: Career Context `The record
+everything else reads from.` · Lumo `The guide that knows your situation.` ·
+Job Search `The whole search as one system.` · Layoff & Benefits `Deadlines,
+coverage, and runway.` · Offboard Everywhere `Use Offboard from the AI you
+already use.` · For Employers `Sponsor a group through a layoff.` · Workforce
+& Government `Agencies, boards, and public programs.` · Universities &
+Communities `Alumni, members, and career offices.` · Guides `Practical
+answers, checked by people.` · Privacy & Security `Who can see your record,
+and who cannot.`
+
+**Company Transition Centers is NOT in Resources yet.** The target navigation
+lists it there; `/companies` does not exist, and plan 026's rule is that the
+dropdown ships only when its pages exist. It joins when the page does.
 
 **Navigation labels are Title Case** (owner decision 2026-08-31); prose,
 headlines, and CTA button labels stay sentence case. The mixed casing this
@@ -1554,6 +1571,7 @@ When one ships, move it into its page section above.
 | 2026-09-01 | ChatGPT and Claude connections confirmed live, shipped labelled "Beta" (owner's framing: they work and are still being refined). Closes plan 028's first verification flag | plan 033, this file § 11 |
 | 2026-09-01 | `/integrations` leads with a card grid of real integrations; "The idea" editorial block cut for length | plan 033, this file § 11 |
 | 2026-09-01 | The `~$12,000` CalJOBS hook ships on `/layoff-support`, with conditions and small print, and stays off the homepage | plan 033, this file § 13 |
+| 2026-09-01 | Dropdown navigation ships (Product / For Organizations / Resources); header CTA stays `Build my plan`; Company Transition Centers held out of Resources until `/companies` exists | plan 037, this file § Site chrome |
 | 2026-09-01 | `/communities` ships, completing the For Organizations split; no prices and no category claim on it, both by choice and both reversible | plan 036, this file § 16 |
 | 2026-09-01 | `/workforce` ships and `/public-partners` is retired and 301'd to it; the public-sector section leaves `/employers` for a crosslink; no county named and no B2G capability claimed beyond `/act` and `/employers` copy | plan 035, this file § 8 |
 | 2026-09-01 | Privacy & Security ships at `/privacy-security`, ported claim-for-claim from the app repo's `SECURITY_CLAIMS.md`; `/security` now redirects here instead of `/about` | plan 034, this file § 15 |

@@ -66,13 +66,36 @@ test.describe("Offboard marketing site", () => {
     }
   });
 
-  test("keeps the header nav to six marketing links and demotes workforce", async ({ page }) => {
+  // Plan 037 replaced the flat six-link nav with four top-level links and
+  // three dropdowns. What is asserted here is the shape and the guardrails:
+  // exactly one panel open at a time, Escape closing it, and /act absent from
+  // both the desktop nav and the mobile menu.
+  test("opens one dropdown at a time and keeps /act out of the nav", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
     const headerNav = page.getByRole("navigation", { name: "Marketing navigation" });
-    await expect(headerNav.getByRole("link")).toHaveCount(6);
+    await expect(headerNav.getByRole("link")).toHaveCount(4);
+    await expect(headerNav.getByRole("button")).toHaveCount(3);
     await expect(headerNav.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
-    await expect(headerNav.getByRole("link", { name: "Guides" })).toHaveAttribute("href", "/resources");
-    await expect(headerNav.getByRole("link", { name: "Workforce & Government" })).toHaveCount(0);
+    expect(await page.locator('.mh-site-header a[href="/act"]').count()).toBe(0);
+
+    const visiblePanels = () =>
+      page.locator(".mh-nav-panel").evaluateAll(
+        (els) => els.filter((el) => getComputedStyle(el).display !== "none").length,
+      );
+
+    expect(await visiblePanels()).toBe(0);
+    const product = headerNav.getByRole("button", { name: "Product" });
+    await product.click();
+    await expect(product).toHaveAttribute("aria-expanded", "true");
+    expect(await visiblePanels()).toBe(1);
+
+    await headerNav.getByRole("button", { name: "Resources" }).click();
+    await expect(product).toHaveAttribute("aria-expanded", "false");
+    expect(await visiblePanels()).toBe(1);
+
+    await page.keyboard.press("Escape");
+    expect(await visiblePanels()).toBe(0);
 
     const footerNav = page.getByRole("navigation", { name: "Footer navigation" });
     await expect(footerNav.getByRole("link", { name: "Workforce & Government" })).toBeVisible();
@@ -83,6 +106,60 @@ test.describe("Offboard marketing site", () => {
   // Plan 035 retired the thin /public-partners page into /workforce. The old
   // URL has to keep working - it is in the wild - so the 301 is asserted, not
   // just the new page.
+  // The dropdown nav is seven top-level items wide and sits between the brand
+  // and the header actions. It fit at 1440 with 7px to spare before plan 037
+  // changed the header grid, and met the actions exactly at 1280. Adding one
+  // label would break it silently, so the clearance is measured, and every
+  // width where the desktop nav is hidden must show the mobile menu instead.
+  test("header navigation fits, or hands over to the mobile menu", async ({ page }) => {
+    await page.goto("/");
+    for (const width of [1440, 1360, 1280, 1200, 1181, 1180, 1024, 768, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      const m = await page.evaluate(() => {
+        const header = document.querySelector(".mh-site-header") as HTMLElement;
+        const nav = header.querySelector(".mh-site-nav") as HTMLElement;
+        const menu = header.querySelector(".mh-mobile-menu") as HTMLElement;
+        const right = (el: Element) => el.getBoundingClientRect().right;
+        const left = (el: Element) => el.getBoundingClientRect().left;
+        return {
+          navVisible: getComputedStyle(nav).display !== "none",
+          menuVisible: getComputedStyle(menu).display !== "none",
+          brandClearance: Math.round(left(nav.firstElementChild!) - right(header.querySelector("a")!)),
+          actionsClearance: Math.round(
+            left(header.querySelector(".mh-header-actions")!) - right(nav.lastElementChild!),
+          ),
+          overflow: document.documentElement.scrollWidth - window.innerWidth,
+        };
+      });
+      expect(m.overflow, `horizontal overflow at ${width}`).toBeLessThanOrEqual(1);
+      expect(m.navVisible || m.menuVisible, `no navigation at all at ${width}`).toBe(true);
+      if (m.navVisible) {
+        expect(m.brandClearance, `nav clears the brand at ${width}`).toBeGreaterThanOrEqual(12);
+        expect(m.actionsClearance, `nav clears the header actions at ${width}`).toBeGreaterThanOrEqual(12);
+      }
+    }
+  });
+
+  // The mobile menu carries the same groups, flattened. It is ~18 rows now,
+  // and `.marketing-homepage { overflow: clip }` would swallow anything past
+  // the viewport rather than scrolling it, so the last row must be reachable.
+  test("mobile menu carries every group and stays reachable", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+    await page.getByText("Menu", { exact: true }).click();
+    const menu = page.locator(".mh-mobile-menu > div");
+    await expect(menu.getByRole("link", { name: "Universities & Communities" })).toBeVisible();
+    await expect(menu.getByRole("link", { name: "Privacy & Security" })).toBeVisible();
+    expect(await menu.locator('a[href="/act"]').count()).toBe(0);
+    expect(
+      await menu.evaluate((el) => {
+        el.scrollTop = el.scrollHeight;
+        return (el.lastElementChild as HTMLElement).getBoundingClientRect().bottom <= window.innerHeight + 1;
+      }),
+      "the last mobile menu item is clipped away",
+    ).toBe(true);
+  });
+
   test("301s the retired public-partners URL to workforce", async ({ page }) => {
     await page.goto("/public-partners");
     await expect(page).toHaveURL(/\/workforce$/);

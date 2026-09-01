@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, CalendarDays, Check, GraduationCap, LockKeyhole } from "lucide-react";
 import type { ReactNode } from "react";
 
+import { MarketingMobileMenu, MarketingNav } from "./MarketingNav";
 import { MotionController } from "./MotionController";
 
 export const SIGN_UP_URL = "https://app.offboard.co/auth?tab=signup";
@@ -92,44 +93,17 @@ export function PrimaryCta({
   );
 }
 
-const NAV_LINKS: ReadonlyArray<{ route: MarketingRoute; href: string; label: string }> = [
-  { route: "home", href: "/", label: "Home" },
-  { route: "how-it-works", href: "/how-it-works", label: "How It Works" },
-  { route: "pricing", href: "/pricing", label: "Pricing" },
-  { route: "resources", href: "/resources", label: "Guides" },
-  { route: "about", href: "/about", label: "About" },
-  { route: "employers", href: "/employers", label: "For Employers" },
-];
-
+/* The flat NAV_LINKS list became the dropdown structure in plan 037; it now
+   lives in MarketingNav.tsx, which owns both presentations. */
 export function MarketingHeader({ current }: { current: MarketingRoute }) {
   return (
     <header className="mh-site-header">
       <Link href="/" aria-label="Offboard home">
         <Brand />
       </Link>
-      <nav aria-label="Marketing navigation">
-        {NAV_LINKS.map((item) => (
-          <Link
-            key={item.route}
-            href={item.href}
-            aria-current={current === item.route ? "page" : undefined}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </nav>
+      <MarketingNav current={current} />
       <div className="mh-header-actions">
-        <details className="mh-mobile-menu">
-          <summary>Menu</summary>
-          <div>
-            {NAV_LINKS.map((item) => (
-              <Link key={item.route} href={item.href} aria-current={current === item.route ? "page" : undefined}>
-                {item.label}
-              </Link>
-            ))}
-            <a href={SIGN_IN_URL}>Sign In</a>
-          </div>
-        </details>
+        <MarketingMobileMenu current={current} signInUrl={SIGN_IN_URL} />
         <a className="mh-sign-in" href={SIGN_IN_URL}>Sign In</a>
         <PrimaryCta />
       </div>
