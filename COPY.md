@@ -126,7 +126,7 @@ and everywhere it appears in the same PR.
 | Employer seat price | **$199 per employee, one-time**; **$169 per seat at 50 or more**; card or NET-30 | Owner-approved for public display 2026-08-23. Must stay in sync with the app-repo sales one-pager | Employers (+ metadata) |
 | Legacy outplacement comparison | **$3,000 to $7,000 per head**; most firms will not take a layoff under 50 people | From the prospect-facing one-pager | Employers |
 | Sponsored access duration | **90 days of full Offboard Pro** | | Employers, ACT |
-| Consumer tiers | **Free $0 forever · Pro $20/month** · 30 / 300 monthly credits · 3 LUMO messages/day on Free · first Job Packet free | Owner-confirmed 2026-08-21 | Home, Pricing |
+| Consumer tiers | **Free $0 forever · Pro $20/month** · 30 / 300 monthly credits · 3 LUMO messages/day on Free · first Job Packet free | Owner-confirmed 2026-08-21 | Home, Pricing, Lumo (message limit only) |
 | Gift Pro prices | 1 mo $20 · 3 mo $54 · 6 mo $99 | **Not yet on site** (plan 015 unexecuted); see § Approved but unshipped | — |
 | SB 617 (California WARN-notice statement) | Shipped verbatim from the founder's public LinkedIn post | **Owner to re-verify the statute stays current**; drop the aside if stale | Employers |
 | ACT suggested pilot shape | One jurisdiction or cohort · 25 to 100 residents · 3-month sponsored access · first review after 30 days | "Suggested", never a claim about actual participation | ACT |
@@ -160,8 +160,8 @@ out of nav.
 > **Offboard**
 > Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
 
-Columns — **Product:** How it works, Career Context, Offboard Everywhere,
-Pricing, Guides ·
+Columns — **Product:** How it works, Career Context, Lumo, Offboard
+Everywhere, Pricing, Guides ·
 **Partners:** For
 employers, For public partners · **Company:** About, Visit us (`/intake`),
 Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy, Terms
@@ -893,6 +893,85 @@ linked from the homepage "wherever you work" section and the footer.
 
 - H2: `Keep your search in one place, wherever you work.`
 - Body: `Build your Career Context once, then reach it from Offboard or from the assistants you already use.`
+- CTAs: sitewide primary + `Talk to a person`
+
+# 12 · Lumo `/lumo`
+
+**Added 2026-08-31 (plan 029, third pillar).** Lumo already appears in four
+places (homepage § 1, `/how-it-works` § 2, `/career-context` § 10,
+`/integrations` § 11), so this page takes the angle none of them do: what
+Lumo actually knows, what you can ask it, and why that differs from pasting
+a resume into a general assistant. Not in header nav yet.
+
+**Meta title:** `Lumo | The AI that already understands your career`
+**Meta description:** `Lumo is Offboard's AI assistant. It works from your Career Context, your applications, your interviews, and your plan, so you can ask about your search without explaining yourself first.`
+
+### Hero
+
+- Kicker: `Meet Lumo`
+- H1: `The AI that already understands your career.`
+- Body: `Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window.`
+- CTA: `Ask Lumo` (primary)
+
+### What Lumo knows
+
+- Kicker: `What it knows`
+- H2: `It starts from your record, not a blank page.`
+- Cards:
+  1. `Your Career Context` — `Experience, projects, outcomes, and the stories you reach for in interviews.`
+  2. `Your applications` — `What you applied to, what stage it is at, and what happened.`
+  3. `Companies` — `What you researched and learned about the teams you are talking to.`
+  4. `Interviews` — `Questions asked, answers given, and what to prepare next.`
+  5. `Your goals` — `The work you want, and what you said you were optimizing for.`
+  6. `Your plan` — `What needs attention now, what can wait, and what comes next.`
+  7. `Benefits context` — `Where you are in the practical side of a transition.`
+  8. `Previous conversations` — `What you already worked out together, so you are not repeating it.`
+
+### What you can ask
+
+- Kicker: `What to ask`
+- H2: `Questions that would take a stranger an hour to answer.`
+- Prompts:
+  1. `What should I focus on today?`
+  2. `Is this opportunity worth my time?`
+  3. `Help me prepare for tomorrow's interview.`
+  4. `What support might I qualify for?`
+  5. `How do I make this application stronger?`
+  6. `What patterns do you see across my search?`
+  7. `Add what we just worked out to my Career Context.`
+  8. `Move Tesserac to the interview stage.`
+
+### Why this is different
+
+- Kicker: `The difference`
+- H2: `Not a smarter chatbot. A better starting point.`
+- Body: `Lumo is not claiming to out-think a general assistant. The difference is what it is working from: the structured, continuously updated state of your career, rather than whatever you can paste into a message box.`
+- Contrast blocks:
+  1. `Pasting a resume into a chat` — `One document, no history, and none of it is there tomorrow. Every conversation restarts from zero.`
+  2. `Asking Lumo` — `Your experience, applications, interviews, and goals are already there, and what you decide together is saved back.`
+  3. `What that changes` — `You spend the conversation on the decision instead of on context, and the answer is about your search rather than job searching in general.`
+
+### What Lumo will not do
+
+- Kicker: `Straight answers`
+- H2: `It works from verified facts, and it does not decide anything for you.`
+- List:
+  1. `When Lumo talks about benefits, it reads from state facts a person verified. It does not invent a dollar figure or a deadline.`
+  2. `Offboard is independent, not a government agency. Agencies and providers decide eligibility and benefit amounts.`
+  3. `Lumo helps you do the work. It does not replace your review and judgment on anything you send out.`
+  4. `Free includes 3 Lumo messages a day. Pro removes the limit.` → `/pricing`
+
+### Prefer a different assistant
+
+- Kicker: `Or bring your own`
+- H2: `Prefer ChatGPT or Claude? That works too.`
+- Body: `Lumo is the assistant that lives inside Offboard, but it is not the only way in. Connect the assistant you already use and it works from the same record.`
+- Section link: `See how Offboard Everywhere works` → `/integrations`
+
+### Final CTA (shared component, overridden copy)
+
+- H2: `Ask something only your own record could answer.`
+- Body: `Build your Career Context, then ask Lumo what to do about it.`
 - CTAs: sitewide primary + `Talk to a person`
 
 # Redirect map (SEO-load-bearing; any route rename must update it in the same PR)

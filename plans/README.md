@@ -757,7 +757,8 @@ copy doc built on it. Reference export lives in
 | 025 | Career Context pillar page (/career-context; homepage h2 widened; chat primitives shared) | P1 | M | 024 | DONE - owner-approved, **merged to `main`** 2026-08-31 via [PR #46](https://github.com/trulou1028/offboard-muo-marketing-site/pull/46) |
 | 026 | Site IA roadmap (five pillars, For Organizations, Privacy & Security, transition centers, dropdown nav) | P2 | - | 025 | WRITTEN PLAN ONLY - phases 2-4 not built; open owner decisions recorded in the plan |
 | 027 | Footer depth (deliberate third green + hairline so the footer stops merging into the last section) | P2 | S | 023 | DONE - owner-approved, **merged to `main`** 2026-08-31 via [PR #47](https://github.com/trulou1028/offboard-muo-marketing-site/pull/47) |
-| 028 | Offboard Everywhere (/integrations) + site-wide band-rhythm sweep | P1 | M | 026 | IN PROGRESS - branch `claude/integrations-page`; page copy and two verification flags need owner sign-off |
+| 028 | Offboard Everywhere (/integrations) + site-wide band-rhythm sweep | P1 | M | 026 | DONE - **merged to `main`** 2026-08-31 via [PR #48](https://github.com/trulou1028/offboard-muo-marketing-site/pull/48). Two owner-verification flags still open (see COPY.md § 11) |
+| 029 | Lumo page (/lumo) | P1 | M | 026 | IN PROGRESS - branch `claude/lumo-page`; page copy needs owner sign-off |
 
 
 Plan 022 supersedes plan 018's homepage-specific work, with one deliberate

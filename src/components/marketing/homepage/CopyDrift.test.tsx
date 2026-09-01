@@ -9,6 +9,7 @@ import { buildResourceSections } from "@/content/resources/registry";
 
 import { MarketingCareerContext } from "./MarketingCareerContext";
 import { MarketingIntegrations } from "./MarketingIntegrations";
+import { MarketingLumo } from "./MarketingLumo";
 import MarketingHome from "./MarketingHome";
 import {
   MarketingAbout,
@@ -192,6 +193,7 @@ const SWEPT_PAGES: ReadonlyArray<[string, () => ReactElement]> = [
   ["MarketingHome", () => <MarketingHome />],
   ["MarketingCareerContext", () => <MarketingCareerContext />],
   ["MarketingIntegrations", () => <MarketingIntegrations />],
+  ["MarketingLumo", () => <MarketingLumo />],
   ["MarketingHowItWorks", () => <MarketingHowItWorks />],
   ["MarketingPricing", () => <MarketingPricing />],
   ["MarketingAbout", () => <MarketingAbout />],
@@ -248,6 +250,7 @@ describe("language rules hold on shipped pages", () => {
     ["MarketingHowItWorks", () => <MarketingHowItWorks />],
     ["MarketingCareerContext", () => <MarketingCareerContext />],
     ["MarketingIntegrations", () => <MarketingIntegrations />],
+    ["MarketingLumo", () => <MarketingLumo />],
     ["MarketingAbout", () => <MarketingAbout />],
     ["MarketingAct", () => <MarketingAct />],
     ["MarketingResources", () => <MarketingResources sections={buildResourceSections()} />],
