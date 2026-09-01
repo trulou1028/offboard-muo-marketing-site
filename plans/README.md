@@ -758,7 +758,8 @@ copy doc built on it. Reference export lives in
 | 026 | Site IA roadmap (five pillars, For Organizations, Privacy & Security, transition centers, dropdown nav) | P2 | - | 025 | WRITTEN PLAN ONLY - phases 2-4 not built; open owner decisions recorded in the plan |
 | 027 | Footer depth (deliberate third green + hairline so the footer stops merging into the last section) | P2 | S | 023 | DONE - owner-approved, **merged to `main`** 2026-08-31 via [PR #47](https://github.com/trulou1028/offboard-muo-marketing-site/pull/47) |
 | 028 | Offboard Everywhere (/integrations) + site-wide band-rhythm sweep | P1 | M | 026 | DONE - **merged to `main`** 2026-08-31 via [PR #48](https://github.com/trulou1028/offboard-muo-marketing-site/pull/48). Two owner-verification flags still open (see COPY.md § 11) |
-| 029 | Lumo page (/lumo) | P1 | M | 026 | IN PROGRESS - branch `claude/lumo-page`; page copy needs owner sign-off |
+| 029 | Lumo page (/lumo) | P1 | M | 026 | DONE - **merged to `main`** 2026-08-31 via [PR #49](https://github.com/trulou1028/offboard-muo-marketing-site/pull/49) |
+| 030 | Layoff & Benefits page (/layoff-support) | P1 | M | 026 | IN PROGRESS - branch `claude/layoff-support-page`; copy sign-off + a yes/no on the two held-back ledger numbers |
 
 
 Plan 022 supersedes plan 018's homepage-specific work, with one deliberate

@@ -36,7 +36,7 @@ gated on owner copy approval:**
    not smarter than a general chatbot, but operating against the
    structured, continuously updated state of your career. Ends by saying
    other assistants are fine too, linking to /integrations.
-3. `/layoff-support` ("Layoff & Benefits") — strategically important: it
+3. ~~`/layoff-support`~~ **DONE, plan 030.** Strategically important: it
    is what keeps the site the Modern Unemployment Office rather than an
    AI job-search SaaS. Personalized plan, benefits, health coverage,
    funded training, financial planning, then the search.
