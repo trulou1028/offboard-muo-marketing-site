@@ -19,7 +19,8 @@ export type MarketingRoute =
   | "public-partners"
   | "intake"
   | "act"
-  | "career-context";
+  | "career-context"
+  | "integrations";
 
 const HUMAN_STEPS = [
   ["Work independently", "Follow your plan, manage applications, and use the tools at your own pace."],
@@ -146,6 +147,7 @@ export function MarketingFooter() {
             <strong>Product</strong>
             <Link href="/how-it-works">How it works</Link>
             <Link href="/career-context">Career Context</Link>
+            <Link href="/integrations">Offboard Everywhere</Link>
             <Link href="/pricing">Pricing</Link>
             <Link href="/resources">Guides</Link>
           </div>

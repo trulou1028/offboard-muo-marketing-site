@@ -78,6 +78,7 @@ function WhereverYouWork() {
           <h2 id="wherever-title">Your job search goes wherever you do.</h2>
           <p>Use Offboard from the AI tools you already use. Research a job, save it to your tracker, compare opportunities, update applications, and keep your search moving without constantly switching tabs.</p>
           <span className="mh-context-callout"><LumoMark />Powered by Offboard Career Context</span>
+          <Link className="mh-section-link" href="/integrations">See how Offboard Everywhere works <ArrowRight aria-hidden="true" /></Link>
         </div>
         <div className="mh-chat-card" aria-label="Example conversation updating a job search from an AI assistant">
           <YouBubble>How does this role compare with the other opportunities I&apos;m pursuing?</YouBubble>

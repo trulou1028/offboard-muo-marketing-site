@@ -908,6 +908,16 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-toolkit-grid article:hover,
 .mh-route-resources-grid article:hover { border-color: var(--mh-mist-border); box-shadow: var(--mh-shadow-surface); transform: translateY(-2px); }
 
+/* Band rhythm: no two adjacent sections may share a background, or they read
+   as one undifferentiated block (the same complaint the footer had). Found by
+   auditing every route's section backgrounds; each fix steps the second band
+   rather than adding a divider, so the page still reads as bands. */
+.mh-verified-visual { background: var(--mh-deep); }
+.mh-page-how-it-works .mh-human { background: var(--mh-paper-soft); }
+.mh-page-pricing .mh-route-content { background: var(--mh-white); }
+.mh-page-integrations .mh-lumo-band { background: var(--mh-deep); }
+.mh-route-resources + .mh-route-resources { background: var(--mh-paper); }
+
 @media (max-width: 1180px) {
   .mh-chat-card.is-floating { right: 0; width: 360px; }
   .mh-ctx-grid { grid-template-columns: repeat(2, 1fr); }
