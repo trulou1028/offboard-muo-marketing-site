@@ -206,8 +206,12 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-nav-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
 /* A light panel inside the dark header takes the focus ring back to ink, or
    it inherits the header's light ring and paints paper on paper. */
-.mh-nav-panel { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: calc(100% + 12px); right: var(--mh-page-x); left: var(--mh-page-x); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, 1.15fr); background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); }
-.mh-nav-panel[data-columns="1"] { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+/* Sized to its content and centred under the bar, not stretched across the
+   page container: a one-column panel spanning 1200px read as forced space
+   (owner review). Column tracks are fixed so the width is determinate; the
+   clamp keeps it inside the page gutters on narrow desktops. */
+.mh-nav-panel { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: calc(100% + 12px); left: 50%; display: grid; grid-template-columns: repeat(2, 300px) 400px; max-width: calc(100vw - 2 * var(--mh-page-x)); min-height: 400px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); translate: -50% 0; }
+.mh-nav-panel[data-columns="1"] { grid-template-columns: 340px 400px; }
 /* The `hidden` attribute alone does NOT close these panels: `display: grid`
    above is an author rule and beats the user-agent's `[hidden] {display:none}`,
    so all three panels rendered at once and overlapped. Caught in a screenshot,
@@ -216,7 +220,7 @@ a.mh-skip-link:focus { transform: translateY(0); }
 /* Bridges the gap between the bar and the panel so crossing it with the
    pointer does not fire mouseleave and close the panel under the cursor. */
 .mh-nav-panel::before { position: absolute; top: -12px; right: 0; left: 0; height: 12px; content: ""; }
-.mh-nav-column { display: grid; align-content: start; gap: 2px; padding: 22px 18px 22px 22px; border-right: 1px solid var(--mh-line); }
+.mh-nav-column { display: grid; align-content: start; gap: 2px; padding: 28px 20px 28px 26px; border-right: 1px solid var(--mh-line); }
 .mh-nav-heading { padding: 0 12px 10px; color: var(--mh-secondary); font-size: 11px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
 .mh-nav-column a { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; align-items: start; padding: 10px 12px; border-radius: var(--mh-radius-sm); }
 .mh-nav-column a svg { width: 20px; height: 20px; margin-top: 1px; color: var(--mh-forest); }
@@ -228,8 +232,10 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-nav-column a[aria-current="page"] strong { color: var(--mh-forest); }
 /* The featured card: light on light, per the owner. The render inside is
    the only dark thing in the panel, and it is an image, not a surface. */
-a.mh-nav-feature { display: grid; align-content: start; gap: 6px; padding: 22px; background: var(--mh-paper-soft); border-radius: 0 var(--mh-radius-lg) var(--mh-radius-lg) 0; }
-.mh-nav-feature-visual { order: -2; position: relative; display: block; height: 120px; margin-bottom: 8px; overflow: hidden; border-radius: var(--mh-radius-md); }
+a.mh-nav-feature { display: grid; align-content: start; gap: 6px; padding: 28px; background: var(--mh-paper-soft); border-radius: 0 var(--mh-radius-lg) var(--mh-radius-lg) 0; transition: background-color var(--mh-dur-base) var(--mh-ease-standard); }
+a.mh-nav-feature:hover { background: var(--mh-sand); }
+/* Taller than a thumbnail: the render is the card's hero, not its icon. */
+.mh-nav-feature-visual { order: -2; position: relative; display: block; height: 190px; margin-bottom: 10px; overflow: hidden; border-radius: var(--mh-radius-md); }
 .mh-nav-feature-visual img { object-fit: cover; }
 /* Visually first, but second in the DOM so the link's accessible name begins
    with the page title rather than with "Start here". */
@@ -1084,6 +1090,10 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
    flash). Playwright's animations:"disabled" fast-forwards `both`-fill
    animations to their visible end state. */
 @media (prefers-reduced-motion: no-preference) {
+  /* One short settle when a panel opens. Keyframes, not a transition,
+     because the closed state is display:none and cannot transition. */
+  .mh-nav-panel:not([hidden]) { animation: mh-nav-in var(--mh-dur-base) var(--mh-ease-standard); }
+
   @keyframes mh-rise { from { opacity: 0; transform: translateY(12px); } }
   .mh-hero2-copy > *,
   .mh-hero2-visual,
@@ -1307,4 +1317,8 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
   .marketing-homepage *,
   .marketing-homepage *::before,
   .marketing-homepage *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+}
+
+@keyframes mh-nav-in {
+  from { opacity: 0; translate: -50% -6px; }
 }

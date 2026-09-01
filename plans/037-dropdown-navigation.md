@@ -46,6 +46,25 @@ owner, so the render is the only dark thing inside one.
 2. **The header CTA stays "Build my plan", not "Get started".** That was plan
    026's open decision 2, answered on 2026-09-01.
 
+## Second owner review (2026-09-01): size to content, more room
+
+The full-container panel read as forced space when a group had one column.
+Panels now size to their content (fixed column tracks: 300px per link
+column, 340px for a lone column, 400px for the featured card) and centre
+under the bar, clamped to the page gutters. Measured at 1440/1280/1181:
+Product and Resources 1002px, For Organizations 742px, all centred to the
+pixel and inside the gutters at every width.
+
+The featured render grew from 120px to 190px and the padding from 22 to
+28px, so the card reads as a card rather than a list item with a thumbnail.
+Two small additions: the featured card tints to sand on hover, and a panel
+settles in with a 180ms fade-and-rise, gated behind
+`prefers-reduced-motion: no-preference` like every other motion on the site.
+
+Centring the panel moved it out from under some triggers, so the pointer
+path from every trigger into its panel was re-walked in 3px steps; all
+three stay open.
+
 ## Why it is a disclosure pattern, not a menubar
 
 Each trigger is a `<button>` with `aria-expanded` and `aria-controls`, and
