@@ -92,11 +92,11 @@ export function PrimaryCta({
 
 const NAV_LINKS: ReadonlyArray<{ route: MarketingRoute; href: string; label: string }> = [
   { route: "home", href: "/", label: "Home" },
-  { route: "how-it-works", href: "/how-it-works", label: "How it works" },
+  { route: "how-it-works", href: "/how-it-works", label: "How It Works" },
   { route: "pricing", href: "/pricing", label: "Pricing" },
   { route: "resources", href: "/resources", label: "Guides" },
   { route: "about", href: "/about", label: "About" },
-  { route: "employers", href: "/employers", label: "For employers" },
+  { route: "employers", href: "/employers", label: "For Employers" },
 ];
 
 export function MarketingHeader({ current }: { current: MarketingRoute }) {
@@ -125,10 +125,10 @@ export function MarketingHeader({ current }: { current: MarketingRoute }) {
                 {item.label}
               </Link>
             ))}
-            <a href={SIGN_IN_URL}>Sign in</a>
+            <a href={SIGN_IN_URL}>Sign In</a>
           </div>
         </details>
-        <a className="mh-sign-in" href={SIGN_IN_URL}>Sign in</a>
+        <a className="mh-sign-in" href={SIGN_IN_URL}>Sign In</a>
         <PrimaryCta />
       </div>
     </header>
@@ -148,7 +148,7 @@ export function MarketingFooter() {
         <nav aria-label="Footer navigation">
           <div>
             <strong>Product</strong>
-            <Link href="/how-it-works">How it works</Link>
+            <Link href="/how-it-works">How It Works</Link>
             <Link href="/career-context">Career Context</Link>
             <Link href="/lumo">Lumo</Link>
             <Link href="/job-search">Job Search</Link>
@@ -159,13 +159,13 @@ export function MarketingFooter() {
           </div>
           <div>
             <strong>Partners</strong>
-            <Link href="/employers">For employers</Link>
-            <Link href="/public-partners">For public partners</Link>
+            <Link href="/employers">For Employers</Link>
+            <Link href="/public-partners">For Public Partners</Link>
           </div>
           <div>
             <strong>Company</strong>
             <Link href="/about">About</Link>
-            <a href={HUMAN_SUPPORT_URL}>Visit us</a>
+            <a href={HUMAN_SUPPORT_URL}>Visit Us</a>
             <a href="mailto:hello@offboard.co">Contact</a>
           </div>
           <div>

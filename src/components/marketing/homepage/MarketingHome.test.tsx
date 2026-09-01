@@ -90,15 +90,15 @@ describe("Offboard marketing routes", () => {
     const headerLinks = within(headerNav).getAllByRole("link");
     expect(headerLinks).toHaveLength(6);
     expect(within(headerNav).getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
-    expect(within(headerNav).getByRole("link", { name: "How it works" })).toHaveAttribute("href", "/how-it-works");
+    expect(within(headerNav).getByRole("link", { name: "How It Works" })).toHaveAttribute("href", "/how-it-works");
     expect(within(headerNav).getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
     expect(within(headerNav).getByRole("link", { name: "Guides" })).toHaveAttribute("href", "/resources");
     expect(within(headerNav).getByRole("link", { name: "About" })).toHaveAttribute("href", "/about");
-    expect(within(headerNav).getByRole("link", { name: "For employers" })).toHaveAttribute("href", "/employers");
-    expect(within(headerNav).queryByRole("link", { name: "For public partners" })).not.toBeInTheDocument();
+    expect(within(headerNav).getByRole("link", { name: "For Employers" })).toHaveAttribute("href", "/employers");
+    expect(within(headerNav).queryByRole("link", { name: "For Public Partners" })).not.toBeInTheDocument();
 
     const footerNav = screen.getByRole("navigation", { name: "Footer navigation" });
-    expect(within(footerNav).getByRole("link", { name: "For public partners" })).toHaveAttribute("href", "/public-partners");
+    expect(within(footerNav).getByRole("link", { name: "For Public Partners" })).toHaveAttribute("href", "/public-partners");
   });
 
   it("gives how it works a five-step spine, a toolkit, and LUMO", () => {

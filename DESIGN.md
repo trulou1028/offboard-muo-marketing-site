@@ -321,6 +321,13 @@ elevation, it's one of these two — there's no third tier.
 
 ## Hard rules (carried over, unchanged)
 
+- **Navigation labels are Title Case; everything else is sentence case.**
+  Nav links, footer links, and Sign In use Title Case (owner decision
+  2026-08-31). Headlines, body copy, eyebrows, and CTA button labels keep
+  sentence case, so the design system's "sentence case everywhere" rule
+  still governs prose. This resolved genuinely mixed casing: product links
+  like "Career Context" were already Title Case while "How it works" and
+  "For employers" were not.
 - **Lumo lime = primary-on-dark + AI accents.** `--mh-lime` fills the
   primary CTA on dark-green surfaces and marks AI moments (see the Civic
   Modern section above). Never decorative, never on light surfaces.
