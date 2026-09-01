@@ -27,7 +27,8 @@ merge.
 
 **Phase 2 — remaining pillars, in the owner's recommended order, each
 gated on owner copy approval:**
-1. ~~`/integrations` ("Offboard Everywhere")~~ **DONE, plan 028.** — the consumer-facing MCP
+1. ~~`/integrations` ("Offboard Everywhere")~~ **DONE, plan 028; rebuilt
+   as an integrations showcase in plan 033.** — the consumer-facing MCP
    story: demos per assistant, the mental model "Offboard holds the
    record. You choose the interface.", and the permissions/authorization
    story (what a connected assistant can and cannot see). Potentially the
@@ -68,13 +69,15 @@ Nav tests, COPY.md chrome, and baselines move with it.
 
 ## Open owner decisions (recorded, not presumed)
 
-1. **Fate of `/public-partners`** once `/workforce` exists: fold in and
-   redirect, or keep as a thin crosslink page? It is deliberately
-   out-of-nav today (tested); the target IA puts Workforce & Government
-   in nav.
-2. Whether "Get started" replaces "Build my plan" as the header CTA label
-   when the dropdown nav ships (the strategy doc's nav uses "Get
-   started"; COPY.md currently pins "Build my plan").
+1. ~~**Fate of `/public-partners`** once `/workforce` exists.~~
+   **DECIDED 2026-09-01 (owner): consolidate.** `/public-partners` folds
+   into `/workforce` and the old URL redirects to it. No thin crosslink
+   page is kept. The redirect ships with `/workforce`, in phase 3, and
+   joins COPY.md's redirect map in that PR.
+2. ~~Whether "Get started" replaces "Build my plan" as the header CTA
+   label when the dropdown nav ships.~~ **DECIDED 2026-09-01: the header
+   keeps `Build my plan`.** The owner deferred the call; the reasoning is
+   in plan 033. Reversible in one line if the dropdown build disagrees.
 3. Ghost Check as a standalone acquisition page.
 4. Homepage "One place that remembers your career." shipped in phase 1 —
    confirm it stays after seeing it live.

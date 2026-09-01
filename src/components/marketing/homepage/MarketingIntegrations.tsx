@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import {
   AiReply,
-  EditorialGrid,
   FinalCta,
   LumoMark,
   MarketingShell,
@@ -10,19 +9,38 @@ import {
   TrackerCard,
   YouBubble,
 } from "./MarketingSite";
+import { IntegrationLogo, type IntegrationLogoId } from "./IntegrationLogos";
 
-/* Offboard Everywhere (plan 028) - the second pillar of the owner's
-   site-architecture strategy and the consumer-facing version of the
-   connected-assistant story. Deliberately never says "MCP". Copy: COPY.md
-   § 11, which also carries the two owner-verification flags (which
-   assistants are live, and the real permissions model). Every section
-   reuses an existing pattern; the page mints no new classes. */
+/* Offboard Everywhere (plan 028, rebuilt as a showcase in plan 033) - the
+   second pillar of the owner's site-architecture strategy and the
+   consumer-facing version of the connected-assistant story. Deliberately
+   never says "MCP". Copy: COPY.md § 11.
 
-const CONTRAST = [
-  { title: "Without a shared record", body: "Every assistant starts from nothing. You paste your resume again, re-explain your search, and whatever you work out disappears when the conversation ends." },
-  { title: "With Offboard connected", body: "The assistant starts from your Career Context, and the work you do in conversation lands back in your record instead of evaporating." },
-  { title: "What that changes", body: "You stop maintaining your job search in two places, and you stop losing the useful parts of conversations you already had." },
-] as const;
+   Plan 033 (owner direction 2026-09-01): the page leads with the card grid of
+   real integrations instead of a long prose section. The "The idea" editorial
+   block was cut and its thesis moved onto the grid's own H2. ChatGPT and
+   Claude are confirmed live in beta, which closes the first of plan 028's two
+   owner-verification flags; the permissions model is still principle-only. */
+
+type Integration = {
+  id: IntegrationLogoId;
+  name: string;
+  status: "Live" | "Beta" | "In progress";
+  body: string;
+};
+
+const CONNECTED: readonly Integration[] = [
+  { id: "google-calendar", name: "Google Calendar", status: "Live", body: "Interviews and deadlines land on the calendar you already keep." },
+  { id: "google-drive", name: "Google Drive", status: "Live", body: "Save resumes and cover letters straight to your Drive." },
+  { id: "calendly", name: "Calendly", status: "Live", body: "Book networking calls and coffee chats without leaving your search." },
+  { id: "chatgpt", name: "ChatGPT", status: "Beta", body: "Save a role, move an application forward, or add to your Career Context from a ChatGPT conversation." },
+  { id: "claude", name: "Claude", status: "Beta", body: "Work through a project or an interview in Claude and have what you decide land back in your record." },
+];
+
+const IN_PROGRESS: readonly Integration[] = [
+  { id: "gmail", name: "Gmail", status: "In progress", body: "Follow application email and replies without hunting through your inbox." },
+  { id: "notion", name: "Notion", status: "In progress", body: "Export your job search record to Notion." },
+];
 
 const CAPABILITIES = [
   ["Save an opportunity", "Turn a role you are already discussing into a tracked opportunity, without filling out a form."],
@@ -38,6 +56,41 @@ const PERMISSIONS = [
   "04 Sponsors never see your record. Sponsored access reports participation in aggregate only.",
 ] as const;
 
+function IntegrationCard({ integration }: { integration: Integration }) {
+  const { id, name, status, body } = integration;
+  return (
+    <article className="mh-int-card">
+      <div className="mh-int-card-hero">
+        <IntegrationLogo id={id} />
+        <em className={`mh-int-status is-${status.split(" ")[0].toLowerCase()}`}>{status}</em>
+      </div>
+      <h4 className="mh-int-name">{name}</h4>
+      <p>{body}</p>
+    </article>
+  );
+}
+
+function Showcase() {
+  return (
+    <section className="mh-int-showcase mh-section" aria-labelledby="showcase-title">
+      <div className="mh-copy-block">
+        <span className="mh-kicker">What connects</span>
+        <h2 id="showcase-title">Offboard holds the record. You choose the interface.</h2>
+        <p>Connect the tools you already work in. Offboard keeps one record of your search, and a connection reads and updates it with your permission.</p>
+      </div>
+      <h3 className="mh-int-grouphead">Connected today</h3>
+      <div className="mh-int-grid" data-reveal="">
+        {CONNECTED.map((integration) => <IntegrationCard key={integration.id} integration={integration} />)}
+      </div>
+      <h3 className="mh-int-grouphead">In progress</h3>
+      <div className="mh-int-grid is-quiet" data-reveal="">
+        {IN_PROGRESS.map((integration) => <IntegrationCard key={integration.id} integration={integration} />)}
+      </div>
+      <p className="mh-int-note">ChatGPT and Claude are in beta. They work today and we are still refining them. The ones marked in progress are being built, and we do not put dates on them.</p>
+    </section>
+  );
+}
+
 function Demo({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div>
@@ -46,17 +99,6 @@ function Demo({ label, children }: { label: string; children: ReactNode }) {
         {children}
       </div>
     </div>
-  );
-}
-
-function TheIdea() {
-  return (
-    <EditorialGrid
-      kicker="The idea"
-      title="Offboard holds the record. You choose the interface."
-      body="Offboard keeps the structured record of your search: your Career Context, the opportunities you are pursuing, the companies you are researching, and what happened with each one. A connected assistant reads and updates that record with your permission. The record stays in one place no matter which tool you happen to be working in."
-      items={CONTRAST}
-    />
   );
 }
 
@@ -146,7 +188,7 @@ export function MarketingIntegrations() {
           aside={false}
           cta="Get started free"
         />
-        <TheIdea />
+        <Showcase />
         <Demos />
         <Capabilities />
         <Permissions />

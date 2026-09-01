@@ -21,7 +21,7 @@ represents systems, not features.
 | `/resources` + `/resources/:slug` | Jobseekers, SEO | Practical guides | Read the guide |
 | `/about` | Everyone | Why Offboard exists; independence | Talk to the team |
 | `/employers` | B2B buyers | Outplacement, modernized ($199/seat) | Talk about sponsored access |
-| `/public-partners` | Public sector | Thin crosslink page (out of nav) | Discuss a partnership |
+| `/public-partners` | Public sector | Thin crosslink page (out of nav; folds into `/workforce` and redirects when that page ships) | Discuss a partnership |
 | `/act` | ACT pilot residents | Pilot landing (out of nav, B2G firewall) | Apply for pilot access |
 | `/intake` (+ `/confirmed`) | Members | Native intake form (never redirect) | Submit |
 
@@ -43,8 +43,11 @@ For public partners, and company/legal links.
 **Guardrails:** `/act` is intentionally excluded from header and footer nav
 and must never receive a redirect (live out-of-nav B2G landing URL; the
 resident application flow lives at `https://app.offboard.co/act/apply`).
-`/public-partners` is out of nav by owner decision. `/intake` is a native
-route, never redirected.
+`/public-partners` is out of nav by owner decision, and **consolidates into
+`/workforce` when that page ships** (owner decision 2026-09-01, plan 026
+decision 1): the thin page is retired, `/public-partners` redirects to
+`/workforce`, and the redirect joins COPY.md's redirect map in that PR.
+`/intake` is a native route, never redirected.
 
 ## Target IA
 
