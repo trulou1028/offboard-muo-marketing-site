@@ -161,7 +161,7 @@ out of nav.
 > Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
 
 Columns — **Product:** How it works, Career Context, Lumo, Offboard
-Everywhere, Pricing, Guides ·
+Everywhere, Layoff & Benefits, Pricing, Guides ·
 **Partners:** For
 employers, For public partners · **Company:** About, Visit us (`/intake`),
 Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy, Terms
@@ -972,6 +972,91 @@ a resume into a general assistant. Not in header nav yet.
 
 - H2: `Ask something only your own record could answer.`
 - Body: `Build your Career Context, then ask Lumo what to do about it.`
+- CTAs: sitewide primary + `Talk to a person`
+
+# 13 · Layoff & Benefits `/layoff-support`
+
+**Added 2026-08-31 (plan 030, fourth pillar).** The strategy doc calls this
+the strategically important one: without it the product pages drift toward
+an AI job-search tool and away from the modern unemployment office. It is
+also the most claim-sensitive page on the site.
+
+**Claim discipline on this page:**
+- Never promises funding, eligibility, approval, or amounts. The approved
+  formulation is used verbatim: `We never promise funding. We show you the
+  exact path to find out.`
+- The independence disclaimer appears in its own band, reusing the
+  `/about` wording.
+- The only numbers are existing verified-facts ledger rows, rendered by
+  the shared `VerifiedFactsStrip` (live states CA/NY/NJ/WA; 4,000+
+  state-approved California training programs; the checked-by-people
+  rule). The ledger's "Appears on" column was updated for both rows.
+- **"Outplacement" must not appear here** (jobseeker narrative copy), and
+  the page is in the CopyDrift absence list.
+
+**Available but deliberately not shipped, owner's call:** the `~$12,000`
+CalJOBS extension example and the `2,000+ job centers` framing both have
+approved ledger rows and both left the homepage in v2. This page is their
+natural home, but the owner decided on 2026-08-31 to keep the $12,000 hook
+off for now, so neither was resurrected without asking.
+
+**Meta title:** `Layoff & Benefits | Offboard`
+**Meta description:** `A layoff is not only a job search. Offboard helps you work out what to do first, what support you may qualify for, how to keep health coverage, whether training is funded, and how long your money lasts.`
+
+### Hero
+
+- Kicker: `Layoff and benefits`
+- H1: `Losing your job creates a lot of problems at once.`
+- Body: `The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in order.`
+- CTA: `Build my free transition plan` (primary)
+
+### The questions underneath
+
+- Kicker: `What people actually ask`
+- H2: `Six questions, in the order they usually arrive.`
+- Question blocks:
+  1. `What do I do first?` — **Your transition plan** — `Tell Offboard what happened and it organizes what needs attention now, what can wait, and what comes next.`
+  2. `What am I eligible for?` — **Unemployment benefits** — `Plain-language steps toward the official process in your state, with the deadlines that matter surfaced early.`
+  3. `How do I keep health insurance?` — **Health coverage** — `Understand the windows you are inside, and what your options are before one of them closes.`
+  4. `Is there funding for training?` — **Workforce and retraining programs** — `Find state-approved programs that may be paid for while you train, with the official source for each one.`
+  5. `How long can I afford to search?` — **Runway** — `See how long your money lasts, and which decisions change that number.`
+  6. `How do I find another job?` — **The search itself** — `The tracker, the packets, the interview prep, and the record behind them.`
+
+### What Offboard does about it
+
+- Kicker: `How it helps`
+- H2: `One plan, in the order that matters.`
+- Capabilities:
+  1. `Your situation, not a template` — `The plan starts from your state, your dates, and what actually happened.`
+  2. `Deadlines surfaced early` — `The clocks that expire quietly are the expensive ones. Offboard puts them in front of you.`
+  3. `Official sources, every time` — `Every program links to the official source that decides it. You are never asked to take our word for it.`
+  4. `The search stays connected` — `The money side and the job side live in one place instead of two.`
+
+### Verified facts (shared component)
+
+Renders the shipped `VerifiedFactsStrip`: `Deadlines and dollar figures are
+checked by people, never generated.` · live states `CA` (filled) NY NJ WA ·
+the three columns including `4,000+` state-approved California programs.
+
+### What Offboard will not do
+
+- Kicker: `Straight answers`
+- H2: `Offboard is not a government agency.`
+- Body: `Offboard helps people organize their transition and reach official sources. Government agencies and program providers make eligibility, benefit, and approval decisions. Offboard does not replace qualified legal, tax, financial, healthcare, or benefits guidance.`
+- Line: `We never promise funding. We show you the exact path to find out.`
+- Line: `Claiming your benefits is always free, and Offboard never charges for access to a public program.`
+
+### Then the search
+
+- Kicker: `And then the job`
+- H2: `When the paperwork is handled, the search is still there.`
+- Body: `Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other.`
+- Section link: `See how Offboard works` → `/how-it-works`
+
+### Final CTA (shared component, overridden copy)
+
+- H2: `Start with what changed.`
+- Body: `Tell Offboard what happened and get a plan that covers the money, the benefits, and the search, in the order they actually matter.`
 - CTAs: sitewide primary + `Talk to a person`
 
 # Redirect map (SEO-load-bearing; any route rename must update it in the same PR)
