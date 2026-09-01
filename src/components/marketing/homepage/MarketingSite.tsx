@@ -23,7 +23,8 @@ export type MarketingRoute =
   | "integrations"
   | "lumo"
   | "layoff-support"
-  | "job-search";
+  | "job-search"
+  | "privacy-security";
 
 const HUMAN_STEPS = [
   ["Work independently", "Follow your plan, manage applications, and use the tools at your own pace."],
@@ -170,7 +171,8 @@ export function MarketingFooter() {
           </div>
           <div>
             <strong>Legal</strong>
-            <a href="https://app.offboard.co/privacy">Privacy</a>
+            <Link href="/privacy-security">Privacy &amp; Security</Link>
+            <a href="https://app.offboard.co/privacy">Privacy Policy</a>
             <a href="https://app.offboard.co/terms">Terms</a>
           </div>
         </nav>
@@ -273,6 +275,7 @@ export function PageHero({
   aside,
   cta = "Build my plan",
   ctaHref = SIGN_UP_URL,
+  footnote,
 }: {
   kicker: string;
   title: string;
@@ -281,6 +284,9 @@ export function PageHero({
   aside?: ReactNode | false;
   cta?: string | false;
   ctaHref?: string;
+  /* A line under the body, above the CTA. Added for /privacy-security, where
+     the page has to say what its claims rest on before it makes any. */
+  footnote?: string;
 }) {
   const ctaNode = cta === false ? null : ctaHref.startsWith("/") ? (
     <Link className="mh-primary-cta" href={ctaHref}><span>{cta}</span><ArrowRight aria-hidden="true" /></Link>
@@ -294,6 +300,7 @@ export function PageHero({
         <span className="mh-kicker is-lime">{kicker}</span>
         <h1>{title}</h1>
         <p>{body}</p>
+        {footnote ? <small className="mh-route-hero-footnote">{footnote}</small> : null}
         {ctaNode}
       </div>
       {aside !== false && (

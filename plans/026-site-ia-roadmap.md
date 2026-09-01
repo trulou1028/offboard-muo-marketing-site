@@ -48,13 +48,13 @@ now carries six product links, which is the signal that phase 4's dropdown
 nav is close to worth doing.
 
 **Phase 3 — trust + organizations + distribution:**
-- `/privacy-security` — a plain-English trust page (mandatory per the
-  strategy doc: trust is intrinsic to Career Context working at all).
-  Private by default; who can see your Career Context (Offboard, AI
-  providers, sponsors, employers); the sponsored-account aggregate-only
-  rule made extremely visible; AI processing; data ownership
-  (export/edit/delete); only truthfully verifiable security practices —
-  no SOC 2 claim.
+- ~~`/privacy-security`~~ **DONE, plan 034.** A plain-English trust page
+  (mandatory per the strategy doc: trust is intrinsic to Career Context
+  working at all). Shipped with a who-sees-what table, the
+  sponsored-account aggregate-only rule as its own band, an honest-limits
+  section, and data ownership. Every claim is ported from the app repo's
+  `SECURITY_CLAIMS.md` §1; the no-certification line is stated outright
+  rather than omitted.
 - For Organizations split: `/employers` stays and improves; `/workforce`
   (Workforce & Government — where Alameda-style messaging eventually
   belongs, subject to the ACT B2G language firewall); `/communities`

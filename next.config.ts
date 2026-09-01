@@ -18,7 +18,8 @@ const nextConfig: NextConfig = {
       { source: "/faq", destination: "/how-it-works#faq", permanent: true },
       { source: "/community", destination: "/#community", permanent: true },
       { source: "/founder-story", destination: "/about", permanent: true },
-      { source: "/security", destination: "/about", permanent: true },
+      // Retargeted from /about in plan 034, now that a real trust page exists.
+      { source: "/security", destination: "/privacy-security", permanent: true },
       { source: "/for-organizations", destination: "/employers", permanent: true },
       { source: "/for-recruiters", destination: "/employers", permanent: true },
       { source: "/gift", destination: "/pricing", permanent: true },

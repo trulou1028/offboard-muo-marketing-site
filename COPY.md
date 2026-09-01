@@ -121,6 +121,8 @@ and everywhere it appears in the same PR.
 | Newsletter subscribers | **5,000+** | Owner-corrected 2026-08-01 (verified 5,200; "8,000+" is stale and banned) | Home, About |
 | CalJOBS training extension example | **~$12,000**, contact EDD before **week 16** of benefit payments, California | Always shipped with conditions + "amounts vary" small print | Layoff & Benefits (owner approved 2026-09-01; stays off the homepage) |
 | Live integrations | **Google Calendar, Google Drive, Calendly** live; **ChatGPT, Claude** in **beta**; **Gmail, Notion** in progress with no date | Owner-confirmed 2026-09-01: the ChatGPT and Claude connections exist and work, and are labelled beta because they are still being refined | Offboard Everywhere |
+| AI providers | **OpenAI and Anthropic only**; OpenAI called with retention disabled on every request, Anthropic's API does not train on customer data | From the app repo's `SECURITY_CLAIMS.md` §1 #11; verified live 2026-07-02. Adding a third provider changes this page in the same PR | Privacy & Security |
+| Security claims audit | Claims register **audited July 2026**; **no SOC 2 or ISO certification** | Sprint 119 rewrote the app's `/security` page from the register and deleted the certification roadmap rather than softening it | Privacy & Security |
 | Job centers | **"2,000+ job centers"** and **"billions of dollars a year"** | The only approved public phrasings; precise figures (~$3.2B WIOA, ~2,300 AJCs) require re-verification before any cited use | Not currently shipped (left the homepage in v2, plan 022) |
 | State-approved training programs (CA) | **4,000+** | From v7, owner-shipped | How it works (left the homepage in v2, plan 022) |
 | Live verified states | **CA** (deepest), NY, NJ, WA | | How it works (left the homepage in v2, plan 022) |
@@ -1167,11 +1169,145 @@ tools form, and the fact that the loop has a memory.
 - Body: `Start with the role in front of you, and let everything you learn stay where the next application can use it.`
 - CTAs: sitewide primary + `Talk to a person`
 
+# 15 · Privacy & Security `/privacy-security`
+
+**Added 2026-09-01 (plan 034, phase 3 of the site-architecture roadmap).**
+The strategy doc calls this page mandatory: Career Context only works if a
+person is willing to put their real history into it, and nobody does that
+without knowing who can read it.
+
+**Every claim on this page is ported from the app repo's own claims
+register, `SECURITY_CLAIMS.md` (`lumo-plan-builder` `origin/main`, last
+updated 2026-08-05), and from the published `/security` page that Sprint
+119 rewrote from that register.** The register's rule holds here: a claim
+appears on this page only if §1 of the register names the control that
+proves it. §2 (true after a fix) and §3 (not true without an architecture
+change) claims are not made, and §3's warnings are honored word for word:
+
+- Never "impossible". The approved phrasing is `prevented by
+  database-level Row-Level Security`.
+- Never "we cannot read it". The provable form is `no one on the Offboard
+  team can read it through the product`.
+- Never "never shared". The provable form names the providers and says
+  `we do not sell your data`.
+- No certification we do not hold. The page says so outright rather than
+  staying silent, which is the same register-driven choice Sprint 119 made
+  when it deleted the SOC 2 roadmap section instead of softening it.
+
+**Numbers deliberately left off this page:** the app page's per-endpoint
+rate-limit figures (50 LUMO messages an hour, and so on) and the "roughly
+one hundred server functions" count. Both are true and both go stale
+without a ledger row to govern them. The page states the control without
+the number.
+
+**Vocabulary:** the app page says "journal" and "LUMO". Neither ships on
+this site, so the journal row is not carried over and the assistant is
+`Lumo` throughout. The rows below are the app table's rows remapped onto
+nouns this site already uses.
+
+**OWNER / ENGINEERING VERIFICATION NEEDED before public launch — one item:**
+the **connected-assistant** section. Nothing in the claims register covers
+what happens to data after an outside assistant reads it, because that
+connection is newer than the register's last update. Every sentence in
+that section is written to be true by construction (it says the
+conversation lives with that provider under that provider's terms, and
+makes no claim about what those terms are). Confirm it before launch, and
+add the connection to the register.
+
+**Meta title:** `Privacy & Security | Who can see your Offboard record`
+**Meta description:** `Offboard holds your severance math, your runway, and your career history. This page says plainly who can see it, who cannot, where the honest limits are, and what you can delete.`
+
+### Hero
+
+- Kicker: `Privacy and security`
+- H1: `You are trusting us with more than a resume.`
+- Body: `Severance math. Runway numbers. The things you would only write down at 1am. This page answers the question that actually matters: who can see it, and who cannot.`
+- Small: `Every claim below maps to a specific control in our code. We keep a claims register, audited it in July 2026, and fixed what did not hold up.`
+- CTA: `Build my free transition plan` (primary)
+
+### Who can see what
+
+- Kicker: `The short answer`
+- H2: `Who can see what.`
+- Table columns: `What you put in` · `You` · `Offboard staff (through the product)` · `Lumo (our AI guide)` · `AI providers`
+- Rows:
+  1. `Your Career Context` (`work history, projects, and outcomes`) — You: `Always` · Staff: `No read path exists in the product` · Lumo: `Yes. This is what it works from` · Providers: `Processed to run a feature you asked for, with retention off. Never for training`
+  2. `Resumes and documents` (`uploads, drafts, cover letters`) — You: `Always` · Staff: `No` · Lumo: `Only what you share in a conversation or run through a resume feature` · Providers: `Processed to power tailoring and parsing, with retention off`
+  3. `Money numbers` (`severance, runway, budgets`) — You: `Always` · Staff: `Not shown in any admin screen. A database admin role exists for account support, and analytics store a risk band only` · Lumo: `A computed runway estimate, only if you saved numbers and keep it enabled. Never the raw amounts` · Providers: `Only inside a feature you run, with retention off`
+  4. `Lumo conversations` (`what you ask and what it answers`) — You: `Always` · Staff: `No read path exists in the product` · Lumo: `Yes. It is the conversation` · Providers: `Sent to generate the reply, with retention off. Never for training`
+  5. `Google Calendar` (`if you connect it`) — You: `Always` · Staff: `No` · Lumo: `Excluded from AI context entirely` · Providers: `Never sent to AI models`
+- Note under the table: `Sponsors are not a column here because they see none of it. That rule has its own section below.`
+
+### The receipts
+
+- Kicker: `The receipts`
+- H2: `Four things we can show you, not just say.`
+- Cards:
+  1. `Only your account reaches your rows` — `Row-Level Security is enforced on every sensitive table in our database. Your session can only ever query data that belongs to you. Cross-account leakage is prevented at the database layer.`
+  2. `No admin read paths` — `There is no screen, role, or query in the product that shows our team your Career Context, your resume, or your finances. Those are blocked at the database layer, and money numbers are excluded from every admin query and screen.`
+  3. `Exactly two AI providers` — `OpenAI, called with retention disabled on every request, and Anthropic, whose API does not train on customer data. Nothing you write goes to any other AI company.`
+  4. `Delete means delete` — `Deleting your account removes your database rows and your uploaded files, across every storage bucket. Not just the visible parts.`
+
+### If someone else is paying for your access
+
+- Kicker: `Sponsored access`
+- H2: `A sponsor sees a number. A sponsor never sees you.`
+- Body: `Your former employer, school, or workforce program may cover your Offboard access. That pays for the account. It does not buy a view into it.`
+- `What a sponsor sees`: `How many people claimed access` · `How many are active` · `Aggregate engagement and outcomes`
+- `What a sponsor never sees`: `Your resume` · `Your applications` · `Your Lumo conversations` · `Your money numbers` · `Anything you write`
+- Line: `That privacy line is contractual, not a preference. Not the CEO, not HR, nobody.`
+
+### When you connect an outside assistant
+
+- Kicker: `Connected assistants`
+- H2: `A connection you authorize sends your record somewhere we do not run.`
+- Body: `Offboard can connect to assistants you already use. When you authorize one, the parts of your record you allow are read into that conversation, and from that point the conversation lives in your account with that provider, under that provider's terms. Offboard's own retention terms cover the requests Offboard makes, not the ones you make inside someone else's product.`
+- Line: `A connection is scoped to what you authorize, and you can end it at any time. Your record stays with Offboard.`
+- Section link: `See how connections work` → `/integrations`
+
+### The honest part
+
+- Kicker: `The honest part`
+- H2: `Where the line actually sits.`
+- Body 1: `Offboard does not use end-to-end encryption. Our AI features need to read your text as text: a resume tailor cannot rewrite a bullet it cannot see. That means our servers process your data in readable form, and, like every cloud product, the company that hosts our database and the people who hold our service keys could technically reach it.`
+- Body 2: `We weighed the alternatives. On-device AI is not good enough yet to do this work. A key only you hold would mean one forgotten password erases your record forever, and it would break everything that helps you while you are away, like reminders and weekly summaries. So we chose readable processing plus strict access control, and we tell you exactly where the line sits. If that ever changes, it will change on this page first.`
+- Body 3: `What stands between that technical possibility and a person reading your record: no admin read paths exist in the product, identifiers are minimized in our server logs, admin actions are written to an audit log, and every sentence on this page is tied to a control in our claims register.`
+- Line: `We do not hold a SOC 2 or ISO certification, and we will not imply otherwise. When that changes, it will say so here.`
+
+### The specifics (shared FAQ component, overridden copy)
+
+- H2: `For the reader who wants receipts.`
+- Items:
+  1. `Sign-in and sessions` — `Google sign-in and email magic links, handled by Supabase Auth with the PKCE flow. Sessions use short-lived tokens that refresh automatically. AI provider keys live only on our servers as encrypted secrets, and never reach your browser.`
+  2. `Your files` — `Resumes, documents, and voice notes live in private storage buckets keyed to your account. There are no public links. Files are served through time-limited signed URLs that expire on their own, with random filenames, a size cap, and file-type validation on upload.`
+  3. `AI, precisely` — `Two providers, no more: OpenAI and Anthropic. Every OpenAI request is sent with retention disabled, so your data is not stored or used for training, and Anthropic's API does not train on customer data. Google Calendar data is excluded from AI context entirely, under Google's Limited Use policy. We verified all of this live on 2 July 2026.`
+  4. `Validation and abuse limits` — `Requests are checked against a schema before we act on them. AI and abuse-prone endpoints are rate-limited per account.`
+  5. `Infrastructure and accountability` — `Our database and file storage are managed by Supabase, which encrypts data at rest and in transit at the hosting layer, not end to end. We minimize identifiers in our server logs: user IDs are truncated and emails are masked. Admin actions are written to an audit log. We maintain a claims register that maps every public security claim to the code that enforces it, and we ran a full audit and hardening pass against it in July 2026.`
+
+### Your data, your call
+
+- Kicker: `Your data, your call`
+- H2: `These are product features, not legal concessions.`
+- Body: `You do not need to cite a regulation to use any of them.`
+- List:
+  1. `See and edit everything you have put in, at any time.`
+  2. `Delete a single document, a single entry, or your whole account. Account deletion removes your files too.`
+  3. `Export your resumes and documents whenever you want.`
+  4. `We do not sell your data. To power AI features it passes through OpenAI and Anthropic only, under the retention and no-training terms above.`
+- Small: `These map to the rights GDPR and CCPA give you, wherever you live.`
+- Line: `Found something, or have a question this page does not answer? Email hello@offboard.co. A human reads it.`
+
+### Final CTA (shared component, overridden copy)
+
+- H2: `Now you know exactly what you are trusting us with.`
+- Body: `Build your Career Context knowing who can see it, who cannot, and what you can delete.`
+- CTAs: sitewide primary + `Talk to a person`
+
 # Redirect map (SEO-load-bearing; any route rename must update it in the same PR)
 
 `/product`, `/why-offboard` → `/how-it-works` · `/job-packet` →
 `/how-it-works#toolkit` · `/faq` → `/how-it-works#faq` · `/community` →
-`/#community` · `/founder-story`, `/security` → `/about` ·
+`/#community` · `/founder-story` → `/about` · `/security` → `/privacy-security` ·
 `/for-organizations`, `/for-recruiters` → `/employers` · `/gift` → `/pricing`
 · `/tools`, `/tools/:slug*` → `/resources` · 7 unported essay/policy slugs →
 `/resources`. Kept live, no redirect: `/intake`, `/act`.
@@ -1237,6 +1373,7 @@ When one ships, move it into its page section above.
 | 2026-09-01 | ChatGPT and Claude connections confirmed live, shipped labelled "Beta" (owner's framing: they work and are still being refined). Closes plan 028's first verification flag | plan 033, this file § 11 |
 | 2026-09-01 | `/integrations` leads with a card grid of real integrations; "The idea" editorial block cut for length | plan 033, this file § 11 |
 | 2026-09-01 | The `~$12,000` CalJOBS hook ships on `/layoff-support`, with conditions and small print, and stays off the homepage | plan 033, this file § 13 |
+| 2026-09-01 | Privacy & Security ships at `/privacy-security`, ported claim-for-claim from the app repo's `SECURITY_CLAIMS.md`; `/security` now redirects here instead of `/about` | plan 034, this file § 15 |
 | 2026-09-01 | `/public-partners` folds into `/workforce` and redirects when `/workforce` ships (no thin page kept) | plan 026 decision 1, docs/site-architecture.md |
 | 2026-08-24 | Clarified the "outplacement" scope: allowed on /employers AND in Sponsored-tier copy wherever it renders (home teaser, /pricing deck), per the 2026-08-21 owner call. The earlier "one page only" wording in Language rules was inaccurate and is corrected. | COPY.md, plan 019 |
 
@@ -1244,4 +1381,6 @@ When one ships, move it into its page section above.
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·
 Steph's essay editorial pass · execute the gift lane (plan 015) · the real
 permissions model for `/integrations` (plan 028 flag 2, still open) · yes/no
-on the `2,000+ job centers` framing for `/layoff-support`.
+on the `2,000+ job centers` framing for `/layoff-support` · confirm the
+connected-assistant section on `/privacy-security` and add that connection
+to the app repo's claims register.
