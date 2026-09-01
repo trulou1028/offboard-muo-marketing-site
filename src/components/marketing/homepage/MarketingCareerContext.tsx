@@ -144,8 +144,8 @@ function AssistantsSection() {
           <p>Connect Offboard to supported AI assistants and your Career Context goes with you. Save an opportunity from a conversation, update an application, or add what you just learned, from whichever tool you are already in.</p>
         </div>
         <div className="mh-chat-card" aria-label="Example conversation updating a Career Context from an AI assistant" data-reveal="">
-          <YouBubble>Add the project outcomes we just discussed to my Career Context.</YouBubble>
-          <AiReply highlight="Done.">I have added the migration project and its results to your experience.</AiReply>
+          <YouBubble>Save the interview questions I just worked through, and what I answered.</YouBubble>
+          <AiReply highlight="Done.">I have added them to your interview stories.</AiReply>
         </div>
       </div>
     </section>

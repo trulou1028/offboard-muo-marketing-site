@@ -27,7 +27,7 @@ merge.
 
 **Phase 2 — remaining pillars, in the owner's recommended order, each
 gated on owner copy approval:**
-1. `/integrations` ("Offboard Everywhere") — the consumer-facing MCP
+1. ~~`/integrations` ("Offboard Everywhere")~~ **DONE, plan 028.** — the consumer-facing MCP
    story: demos per assistant, the mental model "Offboard holds the
    record. You choose the interface.", and the permissions/authorization
    story (what a connected assistant can and cannot see). Potentially the

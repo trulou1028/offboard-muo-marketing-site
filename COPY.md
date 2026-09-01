@@ -160,7 +160,8 @@ out of nav.
 > **Offboard**
 > Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
 
-Columns — **Product:** How it works, Career Context, Pricing, Guides ·
+Columns — **Product:** How it works, Career Context, Offboard Everywhere,
+Pricing, Guides ·
 **Partners:** For
 employers, For public partners · **Company:** About, Visit us (`/intake`),
 Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy, Terms
@@ -199,6 +200,7 @@ questions) → Meet Lumo → Toolkit → Pro → Sponsored access → Built arou
 - H2: `Your job search goes wherever you do.`
 - Body: `Use Offboard from the AI tools you already use. Research a job, save it to your tracker, compare opportunities, update applications, and keep your search moving without constantly switching tabs.`
 - Callout: `Powered by Offboard Career Context`
+- Section link: `See how Offboard Everywhere works` → `/integrations`
 - Demo conversation: You: `How does this role compare with the other opportunities I'm pursuing?` / AI: `Based on your Offboard context, Tesserac looks like one of your stronger opportunities. It aligns closely with your AI product experience and gives you more technical ownership than several of the other roles you're considering.` / You: `Move Tesserac to the interview stage and save that Ruben is my recruiter.` / AI: `Done. Tesserac is now in Interviewing, and I've added Ruben to the opportunity.`
 - Capabilities:
   1. `Save opportunities instantly` — `Turn something you're already discussing into a tracked opportunity without filling out another form.`
@@ -797,7 +799,7 @@ Product column.
 - Kicker: `Offboard, wherever you work`
 - H2: `Offboard holds the record. You choose the interface.`
 - Body: `Connect Offboard to supported AI assistants and your Career Context goes with you. Save an opportunity from a conversation, update an application, or add what you just learned, from whichever tool you are already in.`
-- Demo conversation: You: `Add the project outcomes we just discussed to my Career Context.` / AI: `Done. I have added the migration project and its results to your experience.`
+- Demo conversation: You: `Save the interview questions I just worked through, and what I answered.` / AI: `Done. I have added them to your interview stories.` *(varied 2026-08-31 so it does not duplicate the /integrations demo, which owns the project-outcomes line)*
 
 ### Yours, and private
 
@@ -813,6 +815,84 @@ Product column.
 
 - H2: `Stop starting from scratch.`
 - Body: `Build your Career Context once and every application, interview, and conversation after it starts further ahead.`
+- CTAs: sitewide primary + `Talk to a person`
+
+# 11 · Offboard Everywhere `/integrations`
+
+**Added 2026-08-31 (plan 028, second pillar of the site-architecture
+strategy).** The consumer-facing version of the connected-assistant story.
+Deliberately never says "MCP" in user-facing copy. Not in header nav yet;
+linked from the homepage "wherever you work" section and the footer.
+
+**OWNER VERIFICATION NEEDED before public launch — two items:**
+1. **Which assistants are actually connectable today.** The demos name
+   ChatGPT, Claude, and Lumo per the strategy doc. If ChatGPT and Claude
+   are not both live, the demo labels must change before this page is
+   public. No launch date or roadmap is promised anywhere on the page.
+2. **The permissions section is written at the level of principle only**
+   ("a connection is scoped, you authorize it, you can disconnect"). It
+   deliberately does NOT publish a capability matrix of what a given
+   assistant can and cannot reach, because the real authorization model
+   is not settled. When it is, that matrix belongs here.
+
+**Meta title:** `Offboard Everywhere | Use Offboard from the AI you already use`
+**Meta description:** `Connect Offboard to the AI assistants you already work in. Save opportunities, update applications, and add to your Career Context from wherever the conversation happens. Offboard holds the record, you choose the interface.`
+
+### Hero
+
+- Kicker: `Offboard everywhere`
+- H1: `Use Offboard from the AI you already use.`
+- Body: `Your job search does not live in one tab. Connect Offboard to the assistants you already work in, and save opportunities, update applications, and add to your Career Context from wherever the conversation happens.`
+- CTA: `Get started free` (primary)
+
+### The idea
+
+- Kicker: `The idea`
+- H2: `Offboard holds the record. You choose the interface.`
+- Body: `Offboard keeps the structured record of your search: your Career Context, the opportunities you are pursuing, the companies you are researching, and what happened with each one. A connected assistant reads and updates that record with your permission. The record stays in one place no matter which tool you happen to be working in.`
+- Contrast blocks:
+  1. `Without a shared record` — `Every assistant starts from nothing. You paste your resume again, re-explain your search, and whatever you work out disappears when the conversation ends.`
+  2. `With Offboard connected` — `The assistant starts from your Career Context, and the work you do in conversation lands back in your record instead of evaporating.`
+  3. `What that changes` — `You stop maintaining your job search in two places, and you stop losing the useful parts of conversations you already had.`
+
+### Demos
+
+- Kicker: `In practice`
+- H2: `The same record, from wherever you are working.`
+- **ChatGPT** — You: `I think I'm going to apply to this. Add it to Offboard.` / AI: `Done. I've added the role to your Offboard tracker and saved the company context.` with tracker card `Product Designer / Tesserac / Saved`
+- **Claude** — You: `Add the project outcomes we just discussed to my Career Context.` / AI: `Done. I've added the migration project and its results to your experience.`
+- **Lumo** — You: `Which applications need attention today?` / AI: `Three need follow-up. Tesserac has an interview on Thursday, and two applications have been open for more than two weeks without a reply.`
+
+### What you can do from a conversation
+
+- Capabilities:
+  1. `Save an opportunity` — `Turn a role you are already discussing into a tracked opportunity, without filling out a form.`
+  2. `Move it forward` — `Change a stage, add a recruiter, record what happened in an interview, or leave yourself a note.`
+  3. `Add to your Career Context` — `Capture a project, an outcome, or a story while it is fresh, straight from the conversation.`
+  4. `Ask across your whole search` — `Compare opportunities, or ask what needs attention, against everything Offboard already holds.`
+
+### Permissions
+
+- Kicker: `Permissions`
+- H2: `You decide what a connected assistant can reach.`
+- Body: `Connecting an assistant does not hand over your whole account. You authorize what it can read and what it can change, and the connection is yours to end.`
+- List:
+  1. `A connection is scoped. An assistant works with the parts of your Career Context you authorize, not everything in your account.`
+  2. `You can review and change what a connected assistant can reach.`
+  3. `You can disconnect an assistant at any time. Your record stays with Offboard.`
+  4. `Sponsors never see your record. Sponsored access reports participation in aggregate only.`
+
+### Prefer to stay in Offboard
+
+- Kicker: `Or use Lumo`
+- H2: `Lumo is the assistant that lives inside your record.`
+- Body: `If you would rather not connect anything, Lumo works from the same Career Context without leaving Offboard. Connecting an outside assistant is an option, not a requirement.`
+- CTA: `Ask Lumo` (AI button)
+
+### Final CTA (shared component, overridden copy)
+
+- H2: `Keep your search in one place, wherever you work.`
+- Body: `Build your Career Context once, then reach it from Offboard or from the assistants you already use.`
 - CTAs: sitewide primary + `Talk to a person`
 
 # Redirect map (SEO-load-bearing; any route rename must update it in the same PR)

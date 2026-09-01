@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 import { buildResourceSections } from "@/content/resources/registry";
 
 import { MarketingCareerContext } from "./MarketingCareerContext";
+import { MarketingIntegrations } from "./MarketingIntegrations";
 import MarketingHome from "./MarketingHome";
 import {
   MarketingAbout,
@@ -190,6 +191,7 @@ describe("homepage plan-preview card stays real product state", () => {
 const SWEPT_PAGES: ReadonlyArray<[string, () => ReactElement]> = [
   ["MarketingHome", () => <MarketingHome />],
   ["MarketingCareerContext", () => <MarketingCareerContext />],
+  ["MarketingIntegrations", () => <MarketingIntegrations />],
   ["MarketingHowItWorks", () => <MarketingHowItWorks />],
   ["MarketingPricing", () => <MarketingPricing />],
   ["MarketingAbout", () => <MarketingAbout />],
@@ -245,6 +247,7 @@ describe("language rules hold on shipped pages", () => {
   it.each([
     ["MarketingHowItWorks", () => <MarketingHowItWorks />],
     ["MarketingCareerContext", () => <MarketingCareerContext />],
+    ["MarketingIntegrations", () => <MarketingIntegrations />],
     ["MarketingAbout", () => <MarketingAbout />],
     ["MarketingAct", () => <MarketingAct />],
     ["MarketingResources", () => <MarketingResources sections={buildResourceSections()} />],
