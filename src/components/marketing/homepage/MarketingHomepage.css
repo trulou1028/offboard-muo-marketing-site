@@ -175,7 +175,7 @@ a.mh-skip-link:focus { transform: translateY(0); }
    actions are wider than the brand its right edge met them with 7px to spare
    at 1440 and 0 at 1280. Centring between them instead frees ~50px and the
    difference is imperceptible. */
-.mh-site-nav { display: flex; justify-content: center; align-items: center; gap: 26px; color: var(--mh-paper); font-size: 16px; line-height: 24px; }
+.mh-site-nav { display: flex; justify-content: center; align-items: center; align-self: stretch; gap: 26px; color: var(--mh-paper); font-size: 16px; line-height: 24px; }
 .mh-sign-in { opacity: .92; transition: opacity 180ms ease-out; }
 .mh-sign-in:hover { opacity: 1; }
 /* Animated underline replaces the opacity hover; the aria-current state uses
@@ -191,30 +191,54 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-nav-trigger[aria-expanded="true"]::after,
 .mh-nav-trigger[data-active]::after { transform: scaleX(1); }
 
-/* Dropdown navigation (plan 037). The trigger is a button, so it needs the
-   font and cursor a link gets for free. */
-.mh-nav-group { position: relative; }
+/* Mega-menu navigation (plan 037; owner revision: four tabs, light panels).
+   The trigger is a button, so it needs the font and cursor a link gets for
+   free. The group is NOT positioned: the panel is positioned against the
+   header itself, spanning the page container, so all three panels open in
+   the same place instead of hanging off their own trigger. */
+/* Stretched to the header's full height so the pointer travelling from the
+   trigger down to the panel never leaves the group's box: the 38px between
+   the trigger's bottom and the header's bottom fired mouseleave and shut the
+   panel under the cursor. The ::before bridge below covers the last 12px. */
+.mh-nav-group { position: static; display: flex; align-items: center; align-self: stretch; }
 .mh-nav-trigger { display: inline-flex; align-items: center; gap: 6px; padding: 0; background: none; border: 0; cursor: pointer; font: inherit; line-height: 24px; }
 .mh-nav-trigger svg { width: 15px; height: 15px; transition: transform var(--mh-dur-base) var(--mh-ease-standard); }
 .mh-nav-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
 /* A light panel inside the dark header takes the focus ring back to ink, or
    it inherits the header's light ring and paints paper on paper. */
-.mh-nav-panel { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: calc(100% + 20px); left: -16px; display: grid; width: 320px; gap: 2px; padding: 12px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); }
-/* Bridges the gap between trigger and panel so crossing it with the pointer
-   does not fire mouseleave and close the panel under the cursor. */
-.mh-nav-panel::before { position: absolute; top: -20px; right: 0; left: 0; height: 20px; content: ""; }
+.mh-nav-panel { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: calc(100% + 12px); right: var(--mh-page-x); left: var(--mh-page-x); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, 1.15fr); background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); }
+.mh-nav-panel[data-columns="1"] { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
 /* The `hidden` attribute alone does NOT close these panels: `display: grid`
    above is an author rule and beats the user-agent's `[hidden] {display:none}`,
    so all three panels rendered at once and overlapped. Caught in a screenshot,
    not by the attribute assertion that was passing next to it. */
 .mh-nav-panel[hidden] { display: none; }
-.mh-nav-panel a { display: grid; padding: 10px 12px; border-radius: var(--mh-radius-sm); }
-.mh-nav-panel strong { font-size: 15px; font-weight: 650; line-height: 21px; }
-.mh-nav-panel small { color: var(--mh-secondary); font-size: 13px; line-height: 18px; }
-.mh-nav-panel a:hover,
-.mh-nav-panel a[aria-current="page"] { background: var(--mh-paper-soft); }
-.mh-nav-panel a:hover strong,
-.mh-nav-panel a[aria-current="page"] strong { color: var(--mh-forest); }
+/* Bridges the gap between the bar and the panel so crossing it with the
+   pointer does not fire mouseleave and close the panel under the cursor. */
+.mh-nav-panel::before { position: absolute; top: -12px; right: 0; left: 0; height: 12px; content: ""; }
+.mh-nav-column { display: grid; align-content: start; gap: 2px; padding: 22px 18px 22px 22px; border-right: 1px solid var(--mh-line); }
+.mh-nav-heading { padding: 0 12px 10px; color: var(--mh-secondary); font-size: 11px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+.mh-nav-column a { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; align-items: start; padding: 10px 12px; border-radius: var(--mh-radius-sm); }
+.mh-nav-column a svg { width: 20px; height: 20px; margin-top: 1px; color: var(--mh-forest); }
+.mh-nav-column strong { display: block; font-size: 15px; font-weight: 650; line-height: 21px; }
+.mh-nav-column small { display: block; color: var(--mh-secondary); font-size: 13px; line-height: 18px; }
+.mh-nav-column a:hover,
+.mh-nav-column a[aria-current="page"] { background: var(--mh-paper-soft); }
+.mh-nav-column a:hover strong,
+.mh-nav-column a[aria-current="page"] strong { color: var(--mh-forest); }
+/* The featured card: light on light, per the owner. The render inside is
+   the only dark thing in the panel, and it is an image, not a surface. */
+a.mh-nav-feature { display: grid; align-content: start; gap: 6px; padding: 22px; background: var(--mh-paper-soft); border-radius: 0 var(--mh-radius-lg) var(--mh-radius-lg) 0; }
+.mh-nav-feature-visual { order: -2; position: relative; display: block; height: 120px; margin-bottom: 8px; overflow: hidden; border-radius: var(--mh-radius-md); }
+.mh-nav-feature-visual img { object-fit: cover; }
+/* Visually first, but second in the DOM so the link's accessible name begins
+   with the page title rather than with "Start here". */
+.mh-nav-feature-kicker { order: -1; color: var(--mh-secondary); font-size: 11px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+a.mh-nav-feature strong { font-size: 16px; font-weight: 650; line-height: 22px; }
+a.mh-nav-feature small { color: var(--mh-muted); font-size: 13px; line-height: 19px; }
+.mh-nav-feature-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; color: var(--mh-forest); font-size: 14px; font-weight: 650; }
+.mh-nav-feature-cta svg { width: 16px; height: 16px; transition: transform var(--mh-dur-base) var(--mh-ease-standard); }
+a.mh-nav-feature:hover .mh-nav-feature-cta svg { transform: translateX(3px); }
 .mh-header-actions { justify-self: end; display: flex; align-items: center; gap: 24px; color: var(--mh-paper); }
 .mh-header-actions a.mh-primary-cta { min-height: 42px; background: var(--mh-lime); border: 0; border-radius: var(--mh-radius-sm); color: var(--mh-deep); }
 .mh-header-actions a.mh-primary-cta:hover { background: var(--mh-lime-hover); }

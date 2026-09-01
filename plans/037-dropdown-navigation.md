@@ -5,16 +5,38 @@ roadmap (plan 026). The flat six-link header becomes four top-level links and
 three dropdowns, which is what finally puts the last three weeks of pages in
 the header instead of only the footer.
 
-## Shape
+## Shape (owner revision 2026-09-01: four tabs, light panels)
 
-Home · **Product ▾** (Career Context · Lumo · Job Search · Layoff & Benefits
-· Offboard Everywhere) · How It Works · **For Organizations ▾** (For
-Employers · Workforce & Government · Universities & Communities) · Pricing ·
-**Resources ▾** (Guides · Privacy & Security) · About · Sign In · Build my
-plan.
+**Product ▾** · **For Organizations ▾** · Pricing · **Resources ▾** · Sign In
+· Build my plan.
 
-Each dropdown item carries a one-line blurb, so the panel says what a page is
-rather than only naming it. Copy is in COPY.md § Site chrome.
+The first cut had seven items (Home, Product, How It Works, For
+Organizations, Pricing, Resources, About). The owner's review: too
+jam-packed, consolidate, and use mega menus. So:
+
+- **Home left the bar.** The wordmark is the home link, and the strategy
+  doc's target navigation never had Home. This reverses plan 024's Home
+  link; the owner said yes to that explicitly.
+- **How It Works moved inside Product** as its featured card ("Start
+  here"). It is the start of the product story, and it reads better as the
+  first thing Product shows than as a tab of its own.
+- **About moved inside Resources**, under a Company column with Visit Us,
+  Slack Community, and Contact, all of which previously lived only in the
+  footer.
+
+Each panel spans the page container and is columns of links (icon, label,
+one-line blurb) plus one featured card on the right with a render:
+
+| Panel | Columns | Featured |
+| --- | --- | --- |
+| Product | The system (Career Context, Lumo, Offboard Everywhere) · The work (Job Search, Layoff & Benefits) | How It Works, `path-stage.webp` |
+| For Organizations | Who you serve (Employers, Workforce & Government, Universities & Communities) | The sponsor promise, `privacy-three-panel.webp` → `/privacy-security` |
+| Resources | Resources (Guides, Privacy & Security) · Company (About, Visit Us, Slack Community, Contact) | The newsletter, 5,000+ subscribers, `hero-real-life.webp` |
+
+The three renders were the only images in `public/marketing/` nothing
+referenced, so plan 007's every-image-once goal holds and no imagery was
+generated. Panels are light (white; featured card on paper-soft) per the
+owner, so the render is the only dark thing inside one.
 
 **Two deliberate departures from the target navigation in plan 026:**
 
@@ -23,11 +45,6 @@ rather than only naming it. Copy is in COPY.md § Site chrome.
    dropdown ships only when its pages exist, so it joins when the page does.
 2. **The header CTA stays "Build my plan", not "Get started".** That was plan
    026's open decision 2, answered on 2026-09-01.
-
-`Home` stays, per the owner's plan 024 ask, even though the strategy doc's
-target navigation omits it. It costs about 75px, and the header fits with it
-(see below). Dropping it is the obvious release valve if the bar ever needs
-more room.
 
 ## Why it is a disclosure pattern, not a menubar
 
@@ -40,6 +57,21 @@ semantics and link shortcuts to work.
 Behavior: opens on hover and on click, closes on Escape (returning focus to
 the trigger), on an outside pointer press, on focus leaving the group, and on
 following a link. Only one panel is ever open.
+
+## Two more defects from the mega-menu revision
+
+5. **The featured render opened blank.** `next/image` lazy-loads by
+   default, and inside a `display: none` panel the image is never in the
+   viewport, so it only started loading on the click and the card opened
+   with an empty block where the render should be. The three feature images
+   load eagerly now, and the verification screenshot waits for a painted
+   image taller than 100px rather than merely a loaded one.
+6. **Moving the pointer from a trigger down to the panel closed it.** The
+   panel now hangs off the header rather than its trigger, so the 38px
+   between the trigger's bottom and the header's bottom was outside the
+   group's box and fired `mouseleave`. The group now stretches to the
+   header's full height and the 12px bridge covers the rest. Verified by
+   walking the pointer down in 4px steps.
 
 ## Four defects found in verification, all fixed
 

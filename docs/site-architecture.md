@@ -38,12 +38,15 @@ COPY.md § 1.
 
 ## Navigation
 
-Header (fixed since plan 024, dropdowns since plan 037): Home ·
-**Product ▾** (Career Context · Lumo · Job Search · Layoff & Benefits ·
-Offboard Everywhere) · How It Works · **For Organizations ▾** (For Employers ·
-Workforce & Government · Universities & Communities) · Pricing ·
-**Resources ▾** (Guides · Privacy & Security) · About · Sign in · Build my
-plan (neon). Company Transition Centers joins Resources when `/companies`
+Header (fixed since plan 024, mega menus since plan 037): **Product ▾**
+(The system: Career Context · Lumo · Offboard Everywhere; The work: Job
+Search · Layoff & Benefits; featured: How It Works) · **For Organizations ▾**
+(For Employers · Workforce & Government · Universities & Communities;
+featured: the sponsor promise → Privacy & Security) · Pricing ·
+**Resources ▾** (Resources: Guides · Privacy & Security; Company: About ·
+Visit Us · Slack Community · Contact; featured: the newsletter) · Sign in ·
+Build my plan (neon). No Home link: the wordmark is home (owner call
+2026-09-01). Company Transition Centers joins Resources when `/companies`
 ships. Below 1180px the header swaps to the mobile menu, which carries the
 same groups flattened under headings. Footer adds Career Context,
 Workforce & Government, Universities & Communities, Privacy & Security,

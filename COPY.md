@@ -118,7 +118,7 @@ and everywhere it appears in the same PR.
 | Fact | Value | Status | Appears on |
 | --- | --- | --- | --- |
 | Homepage trust line | **“Join thousands of people”** | Owner-confirmed accurate 2026-08-31 | Home |
-| Newsletter subscribers | **5,000+** | Owner-corrected 2026-08-01 (verified 5,200; "8,000+" is stale and banned) | Home, About |
+| Newsletter subscribers | **5,000+** | Owner-corrected 2026-08-01 (verified 5,200; "8,000+" is stale and banned) | Home, About, Resources menu (every page) |
 | CalJOBS training extension example | **~$12,000**, contact EDD before **week 16** of benefit payments, California | Always shipped with conditions + "amounts vary" small print | Layoff & Benefits (owner approved 2026-09-01; stays off the homepage) |
 | Live integrations | **Google Calendar, Google Drive, Calendly** live; **ChatGPT, Claude** in **beta**; **Gmail, Notion** in progress with no date | Owner-confirmed 2026-09-01: the ChatGPT and Claude connections exist and work, and are labelled beta because they are still being refined | Offboard Everywhere |
 | AI providers | **OpenAI and Anthropic only**; OpenAI called with retention disabled on every request, Anthropic's API does not train on customer data | From the app repo's `SECURITY_CLAIMS.md` §1 #11; verified live 2026-07-02. Adding a third provider changes this page in the same PR | Privacy & Security |
@@ -151,25 +151,42 @@ and everywhere it appears in the same PR.
 
 # Site chrome (all pages)
 
-**Header nav** (6 links + actions): **Dropdown navigation since plan 037.** Home `/` · **Product ▾** (Career
-Context · Lumo · Job Search · Layoff & Benefits · Offboard Everywhere) ·
-How It Works `/how-it-works` · **For Organizations ▾** (For Employers ·
-Workforce & Government · Universities & Communities) · Pricing `/pricing` ·
-**Resources ▾** (Guides · Privacy & Security) · About `/about` · Sign In →
+**Header nav** (6 links + actions): **Mega-menu navigation since plan 037 (owner revision 2026-09-01: four
+tabs, light panels).** **Product ▾** · **For Organizations ▾** · Pricing
+`/pricing` · **Resources ▾** · Sign In →
 `https://app.offboard.co/auth?tab=signin` · **Build my plan** (primary, neon
 on the dark header) → signup. The header is fixed (sticky) on every route.
-`/act` is deliberately out of nav, in both the desktop dropdowns and the
-mobile menu.
+Home left the bar (the wordmark is the home link; owner call 2026-09-01,
+reversing plan 024's Home link). `/act` is deliberately out of nav, in both
+the desktop panels and the mobile menu.
 
-Each dropdown item carries a one-line blurb: Career Context `The record
-everything else reads from.` · Lumo `The guide that knows your situation.` ·
-Job Search `The whole search as one system.` · Layoff & Benefits `Deadlines,
-coverage, and runway.` · Offboard Everywhere `Use Offboard from the AI you
-already use.` · For Employers `Sponsor a group through a layoff.` · Workforce
-& Government `Agencies, boards, and public programs.` · Universities &
-Communities `Alumni, members, and career offices.` · Guides `Practical
-answers, checked by people.` · Privacy & Security `Who can see your record,
-and who cannot.`
+Each panel is columns of links, each with a small icon and a one-line blurb,
+plus one featured card on the right with a render. Panels are light
+(white, featured card on paper-soft).
+
+- **Product ▾** — *The system:* Career Context `The record everything else
+  reads from.` · Lumo `The guide that knows your situation.` · Offboard
+  Everywhere `Use Offboard from the AI you already use.` · *The work:* Job
+  Search `The whole search as one system.` · Layoff & Benefits `Deadlines,
+  coverage, and runway.` · *Featured, "Start here":* **How It Works** `Five
+  steps from the layoff to the next job, and what Offboard does at each
+  one.` → `See how it works` → `/how-it-works`
+- **For Organizations ▾** — *Who you serve:* For Employers `Sponsor a group
+  through a layoff.` · Workforce & Government `Agencies, boards, and public
+  programs.` · Universities & Communities `Alumni, members, and career
+  offices.` · *Featured, "What a sponsor sees":* **Aggregate only. Never
+  the person.** `Sponsors receive aggregate participation and outcome
+  reporting, never individual applications, conversations, finances, or
+  reflections.` → `See exactly who can see what` → `/privacy-security`
+- **Resources ▾** — *Resources:* Guides `Practical answers, checked by
+  people.` · Privacy & Security `Who can see your record, and who cannot.`
+  · *Company:* About `Why Offboard exists, and who is behind it.` · Visit Us
+  `Talk to a person, online or in Concord.` → `/intake` · Slack Community
+  `People searching alongside you.` → `https://offboard.co/community` ·
+  Contact `hello@offboard.co. A human reads it.` → mailto · *Featured, "The
+  newsletter":* **The Offboard Newsletter** `Weekly job-market analysis and
+  honest takes on tech hiring. 5,000+ subscribers.` → `Subscribe free` →
+  `https://newsletter.offboard.co`
 
 **Company Transition Centers is NOT in Resources yet.** The target navigation
 lists it there; `/companies` does not exist, and plan 026's rule is that the
@@ -1571,7 +1588,7 @@ When one ships, move it into its page section above.
 | 2026-09-01 | ChatGPT and Claude connections confirmed live, shipped labelled "Beta" (owner's framing: they work and are still being refined). Closes plan 028's first verification flag | plan 033, this file § 11 |
 | 2026-09-01 | `/integrations` leads with a card grid of real integrations; "The idea" editorial block cut for length | plan 033, this file § 11 |
 | 2026-09-01 | The `~$12,000` CalJOBS hook ships on `/layoff-support`, with conditions and small print, and stays off the homepage | plan 033, this file § 13 |
-| 2026-09-01 | Dropdown navigation ships (Product / For Organizations / Resources); header CTA stays `Build my plan`; Company Transition Centers held out of Resources until `/companies` exists | plan 037, this file § Site chrome |
+| 2026-09-01 | Mega-menu navigation ships with four tabs (Product / For Organizations / Pricing / Resources) and light panels; Home leaves the bar, How It Works moves inside Product, About inside Resources; header CTA stays `Build my plan`; Company Transition Centers held out of Resources until `/companies` exists | plan 037, this file § Site chrome |
 | 2026-09-01 | `/communities` ships, completing the For Organizations split; no prices and no category claim on it, both by choice and both reversible | plan 036, this file § 16 |
 | 2026-09-01 | `/workforce` ships and `/public-partners` is retired and 301'd to it; the public-sector section leaves `/employers` for a crosslink; no county named and no B2G capability claimed beyond `/act` and `/employers` copy | plan 035, this file § 8 |
 | 2026-09-01 | Privacy & Security ships at `/privacy-security`, ported claim-for-claim from the app repo's `SECURITY_CLAIMS.md`; `/security` now redirects here instead of `/about` | plan 034, this file § 15 |

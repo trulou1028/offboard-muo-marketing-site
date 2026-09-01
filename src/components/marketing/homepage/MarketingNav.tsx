@@ -1,12 +1,38 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Briefcase,
+  Building2,
+  ChevronDown,
+  GraduationCap,
+  IdCard,
+  Info,
+  Landmark,
+  LifeBuoy,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Plug,
+  ShieldCheck,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 
 import type { MarketingRoute } from "./MarketingSite";
 
-/* The dropdown navigation (plan 037, phase 4 of the site IA roadmap).
+/* The mega-menu navigation (plan 037, phase 4 of the site IA roadmap; owner
+   revision 2026-09-01: four tabs, light panels).
+
+   Product ▾ · For Organizations ▾ · Pricing · Resources ▾. Home left the bar
+   (the wordmark is the home link), How It Works moved inside Product as its
+   featured panel, and About moved inside Resources under a Company column.
+   Each panel is columns of links plus one featured card on the right, so a
+   panel says what a page is rather than only naming it.
 
    Built as a disclosure-navigation pattern, not a menubar: each trigger is a
    plain button with aria-expanded, and each panel is a container of links.
@@ -14,64 +40,182 @@ import type { MarketingRoute } from "./MarketingSite";
    navigation, because these are links to pages, not commands, and screen
    reader users expect link semantics.
 
-   Deliberately NOT in the dropdown: Company Transition Centers, which the
-   target navigation lists under Resources but which does not exist yet.
-   Plan 026's rule is that the dropdown ships only when its pages exist - no
-   dead links. It joins Resources when /companies ships.
+   The featured images are the three renders nothing else on the site used,
+   which keeps plan 007's every-image-referenced-once goal intact without
+   spending on new imagery.
 
-   /act never appears here, in either the desktop nav or the mobile menu. */
+   Deliberately NOT in Resources: Company Transition Centers. The target
+   navigation lists it; /companies does not exist, and plan 026's rule is
+   that the nav ships only when its pages exist - no dead links.
+
+   /act never appears here, in either presentation. */
 
 export type NavLeaf = {
-  route: MarketingRoute;
+  route?: MarketingRoute;
   href: string;
   label: string;
   blurb: string;
+  icon: LucideIcon;
+  external?: boolean;
+};
+
+export type NavColumn = { heading: string; items: readonly NavLeaf[] };
+
+export type NavFeature = {
+  kicker: string;
+  title: string;
+  body: string;
+  cta: string;
+  href: string;
+  route?: MarketingRoute;
+  image: string;
+  external?: boolean;
 };
 
 export type NavEntry =
   | { kind: "link"; route: MarketingRoute; href: string; label: string }
-  | { kind: "group"; id: string; label: string; items: readonly NavLeaf[] };
+  | { kind: "group"; id: string; label: string; columns: readonly NavColumn[]; feature: NavFeature };
 
 export const NAV_ENTRIES: readonly NavEntry[] = [
-  { kind: "link", route: "home", href: "/", label: "Home" },
   {
     kind: "group",
     id: "product",
     label: "Product",
-    items: [
-      { route: "career-context", href: "/career-context", label: "Career Context", blurb: "The record everything else reads from." },
-      { route: "lumo", href: "/lumo", label: "Lumo", blurb: "The guide that knows your situation." },
-      { route: "job-search", href: "/job-search", label: "Job Search", blurb: "The whole search as one system." },
-      { route: "layoff-support", href: "/layoff-support", label: "Layoff & Benefits", blurb: "Deadlines, coverage, and runway." },
-      { route: "integrations", href: "/integrations", label: "Offboard Everywhere", blurb: "Use Offboard from the AI you already use." },
+    columns: [
+      {
+        heading: "The system",
+        items: [
+          { route: "career-context", href: "/career-context", label: "Career Context", blurb: "The record everything else reads from.", icon: IdCard },
+          { route: "lumo", href: "/lumo", label: "Lumo", blurb: "The guide that knows your situation.", icon: Sparkles },
+          { route: "integrations", href: "/integrations", label: "Offboard Everywhere", blurb: "Use Offboard from the AI you already use.", icon: Plug },
+        ],
+      },
+      {
+        heading: "The work",
+        items: [
+          { route: "job-search", href: "/job-search", label: "Job Search", blurb: "The whole search as one system.", icon: Briefcase },
+          { route: "layoff-support", href: "/layoff-support", label: "Layoff & Benefits", blurb: "Deadlines, coverage, and runway.", icon: LifeBuoy },
+        ],
+      },
     ],
+    feature: {
+      kicker: "Start here",
+      title: "How It Works",
+      body: "Five steps from the layoff to the next job, and what Offboard does at each one.",
+      cta: "See how it works",
+      href: "/how-it-works",
+      route: "how-it-works",
+      image: "/marketing/homepage/renders/path-stage.webp",
+    },
   },
-  { kind: "link", route: "how-it-works", href: "/how-it-works", label: "How It Works" },
   {
     kind: "group",
     id: "organizations",
     label: "For Organizations",
-    items: [
-      { route: "employers", href: "/employers", label: "For Employers", blurb: "Sponsor a group through a layoff." },
-      { route: "workforce", href: "/workforce", label: "Workforce & Government", blurb: "Agencies, boards, and public programs." },
-      { route: "communities", href: "/communities", label: "Universities & Communities", blurb: "Alumni, members, and career offices." },
+    columns: [
+      {
+        heading: "Who you serve",
+        items: [
+          { route: "employers", href: "/employers", label: "For Employers", blurb: "Sponsor a group through a layoff.", icon: Building2 },
+          { route: "workforce", href: "/workforce", label: "Workforce & Government", blurb: "Agencies, boards, and public programs.", icon: Landmark },
+          { route: "communities", href: "/communities", label: "Universities & Communities", blurb: "Alumni, members, and career offices.", icon: GraduationCap },
+        ],
+      },
     ],
+    feature: {
+      kicker: "What a sponsor sees",
+      title: "Aggregate only. Never the person.",
+      body: "Sponsors receive aggregate participation and outcome reporting, never individual applications, conversations, finances, or reflections.",
+      cta: "See exactly who can see what",
+      href: "/privacy-security",
+      route: "privacy-security",
+      image: "/marketing/homepage/renders/privacy-three-panel.webp",
+    },
   },
   { kind: "link", route: "pricing", href: "/pricing", label: "Pricing" },
   {
     kind: "group",
     id: "resources",
     label: "Resources",
-    items: [
-      { route: "resources", href: "/resources", label: "Guides", blurb: "Practical answers, checked by people." },
-      { route: "privacy-security", href: "/privacy-security", label: "Privacy & Security", blurb: "Who can see your record, and who cannot." },
+    columns: [
+      {
+        heading: "Resources",
+        items: [
+          { route: "resources", href: "/resources", label: "Guides", blurb: "Practical answers, checked by people.", icon: BookOpen },
+          { route: "privacy-security", href: "/privacy-security", label: "Privacy & Security", blurb: "Who can see your record, and who cannot.", icon: ShieldCheck },
+        ],
+      },
+      {
+        heading: "Company",
+        items: [
+          { route: "about", href: "/about", label: "About", blurb: "Why Offboard exists, and who is behind it.", icon: Info },
+          { route: "intake", href: "/intake", label: "Visit Us", blurb: "Talk to a person, online or in Concord.", icon: MapPin },
+          { href: "https://offboard.co/community", label: "Slack Community", blurb: "People searching alongside you.", icon: MessageCircle, external: true },
+          { href: "mailto:hello@offboard.co", label: "Contact", blurb: "hello@offboard.co. A human reads it.", icon: Mail, external: true },
+        ],
+      },
     ],
+    feature: {
+      kicker: "The newsletter",
+      title: "The Offboard Newsletter",
+      body: "Weekly job-market analysis and honest takes on tech hiring. 5,000+ subscribers.",
+      cta: "Subscribe free",
+      href: "https://newsletter.offboard.co",
+      image: "/marketing/homepage/raw/hero-real-life.webp",
+      external: true,
+    },
   },
-  { kind: "link", route: "about", href: "/about", label: "About" },
 ];
 
 function groupHoldsCurrent(entry: NavEntry, current: MarketingRoute): boolean {
-  return entry.kind === "group" && entry.items.some((item) => item.route === current);
+  if (entry.kind !== "group") return false;
+  return entry.columns.some((column) => column.items.some((item) => item.route === current)) || entry.feature.route === current;
+}
+
+type OpenSource = "hover" | "click";
+
+function LeafLink({ item, current, onFollow }: { item: NavLeaf; current: MarketingRoute; onFollow: () => void }) {
+  const Icon = item.icon;
+  const body = (
+    <>
+      <Icon aria-hidden="true" />
+      <span>
+        <strong>{item.label}</strong>
+        <small>{item.blurb}</small>
+      </span>
+    </>
+  );
+  const isCurrent = item.route !== undefined && item.route === current;
+  return item.external ? (
+    <a href={item.href} onClick={onFollow}>{body}</a>
+  ) : (
+    <Link href={item.href} aria-current={isCurrent ? "page" : undefined} onClick={onFollow}>{body}</Link>
+  );
+}
+
+function Feature({ feature, current, onFollow }: { feature: NavFeature; current: MarketingRoute; onFollow: () => void }) {
+  const inner = (
+    <>
+      {/* Title first in the DOM so the link is announced by its page name;
+          the image and kicker are placed above it visually with CSS order. */}
+      <strong>{feature.title}</strong>
+      <span className="mh-nav-feature-visual">
+        {/* Eager, not lazy: the panel is display:none until opened, so a lazy
+            image only starts loading on the click and the card opens with a
+            blank block where the render should be. Three small images. */}
+        <Image src={feature.image} alt="" fill sizes="300px" loading="eager" />
+      </span>
+      <span className="mh-nav-feature-kicker">{feature.kicker}</span>
+      <small>{feature.body}</small>
+      <span className="mh-nav-feature-cta">{feature.cta} <ArrowRight aria-hidden="true" /></span>
+    </>
+  );
+  const isCurrent = feature.route !== undefined && feature.route === current;
+  return feature.external ? (
+    <a className="mh-nav-feature" href={feature.href} onClick={onFollow}>{inner}</a>
+  ) : (
+    <Link className="mh-nav-feature" href={feature.href} aria-current={isCurrent ? "page" : undefined} onClick={onFollow}>{inner}</Link>
+  );
 }
 
 function NavGroup({
@@ -89,6 +233,7 @@ function NavGroup({
 }) {
   const panelId = `${useId()}-panel`;
   const active = groupHoldsCurrent(entry, current);
+  const follow = () => setOpen(null, "click");
 
   return (
     <div
@@ -130,24 +275,20 @@ function NavGroup({
         <span>{entry.label}</span>
         <ChevronDown aria-hidden="true" />
       </button>
-      <div className="mh-nav-panel" id={panelId} hidden={!open}>
-        {entry.items.map((item) => (
-          <Link
-            key={item.route}
-            href={item.href}
-            aria-current={current === item.route ? "page" : undefined}
-            onClick={() => setOpen(null, "click")}
-          >
-            <strong>{item.label}</strong>
-            <small>{item.blurb}</small>
-          </Link>
+      <div className="mh-nav-panel" id={panelId} hidden={!open} data-columns={entry.columns.length}>
+        {entry.columns.map((column) => (
+          <div className="mh-nav-column" key={column.heading}>
+            <span className="mh-nav-heading">{column.heading}</span>
+            {column.items.map((item) => (
+              <LeafLink key={item.label} item={item} current={current} onFollow={follow} />
+            ))}
+          </div>
         ))}
+        <Feature feature={entry.feature} current={current} onFollow={follow} />
       </div>
     </div>
   );
 }
-
-type OpenSource = "hover" | "click";
 
 export function MarketingNav({ current }: { current: MarketingRoute }) {
   const [openState, setOpenState] = useState<{ id: string | null; by: OpenSource }>({ id: null, by: "hover" });
@@ -206,6 +347,9 @@ export function MarketingNav({ current }: { current: MarketingRoute }) {
   );
 }
 
+/* The mobile menu keeps the same groups, flattened under headings. The
+   featured cards are desktop-only; their destinations are all reachable
+   as plain links here, so nothing is lost on a phone. */
 export function MarketingMobileMenu({ current, signInUrl }: { current: MarketingRoute; signInUrl: string }) {
   return (
     <details className="mh-mobile-menu">
@@ -219,11 +363,20 @@ export function MarketingMobileMenu({ current, signInUrl }: { current: Marketing
           ) : (
             <div className="mh-mobile-group" key={entry.id}>
               <strong>{entry.label}</strong>
-              {entry.items.map((item) => (
-                <Link key={item.route} href={item.href} aria-current={current === item.route ? "page" : undefined}>
-                  {item.label}
+              {entry.id === "product" && (
+                <Link href={entry.feature.href} aria-current={current === entry.feature.route ? "page" : undefined}>
+                  {entry.feature.title}
                 </Link>
-              ))}
+              )}
+              {entry.columns.flatMap((column) => column.items).map((item) =>
+                item.external ? (
+                  <a key={item.label} href={item.href}>{item.label}</a>
+                ) : (
+                  <Link key={item.label} href={item.href} aria-current={item.route !== undefined && current === item.route ? "page" : undefined}>
+                    {item.label}
+                  </Link>
+                ),
+              )}
             </div>
           ),
         )}

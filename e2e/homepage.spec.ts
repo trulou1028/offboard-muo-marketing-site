@@ -66,17 +66,17 @@ test.describe("Offboard marketing site", () => {
     }
   });
 
-  // Plan 037 replaced the flat six-link nav with four top-level links and
-  // three dropdowns. What is asserted here is the shape and the guardrails:
+  // Plan 037 replaced the flat six-link nav with one top-level link and
+  // three mega-menu triggers. What is asserted here is the shape and the guardrails:
   // exactly one panel open at a time, Escape closing it, and /act absent from
   // both the desktop nav and the mobile menu.
   test("opens one dropdown at a time and keeps /act out of the nav", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
     const headerNav = page.getByRole("navigation", { name: "Marketing navigation" });
-    await expect(headerNav.getByRole("link")).toHaveCount(4);
+    await expect(headerNav.getByRole("link")).toHaveCount(1);
     await expect(headerNav.getByRole("button")).toHaveCount(3);
-    await expect(headerNav.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
+    await expect(headerNav.getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
     expect(await page.locator('.mh-site-header a[href="/act"]').count()).toBe(0);
 
     const visiblePanels = () =>
@@ -106,11 +106,10 @@ test.describe("Offboard marketing site", () => {
   // Plan 035 retired the thin /public-partners page into /workforce. The old
   // URL has to keep working - it is in the wild - so the 301 is asserted, not
   // just the new page.
-  // The dropdown nav is seven top-level items wide and sits between the brand
-  // and the header actions. It fit at 1440 with 7px to spare before plan 037
-  // changed the header grid, and met the actions exactly at 1280. Adding one
-  // label would break it silently, so the clearance is measured, and every
-  // width where the desktop nav is hidden must show the mobile menu instead.
+  // The nav sits between the brand and the header actions. The seven-item
+  // draft of it met the actions with 0px to spare at 1280, which is why the
+  // clearance is measured rather than eyeballed; every width where the
+  // desktop nav is hidden must show the mobile menu instead.
   test("header navigation fits, or hands over to the mobile menu", async ({ page }) => {
     await page.goto("/");
     for (const width of [1440, 1360, 1280, 1200, 1181, 1180, 1024, 768, 390]) {
@@ -150,6 +149,10 @@ test.describe("Offboard marketing site", () => {
     const menu = page.locator(".mh-mobile-menu > div");
     await expect(menu.getByRole("link", { name: "Universities & Communities" })).toBeVisible();
     await expect(menu.getByRole("link", { name: "Privacy & Security" })).toBeVisible();
+    // The featured destinations are plain links on a phone, so nothing that
+    // only the desktop panels carry is lost here.
+    await expect(menu.getByRole("link", { name: "How It Works" })).toBeVisible();
+    await expect(menu.getByRole("link", { name: "About" })).toBeVisible();
     expect(await menu.locator('a[href="/act"]').count()).toBe(0);
     expect(
       await menu.evaluate((el) => {
