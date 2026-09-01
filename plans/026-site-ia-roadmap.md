@@ -15,6 +15,11 @@ Workforce & Government · Universities & Communities) · Pricing ·
 Resources ▾ (Guides · Company Transition Centers · Privacy & Security) ·
 About · Sign in · Get started.
 
+*As built (plan 037, after two owner reviews): four tabs. How it works
+became Product's featured card and About moved into Resources' Company
+column, so the bar is Product ▾ · For Organizations ▾ · Pricing ·
+Resources ▾. Home is not in the bar, and the CTA is `Build my plan`.*
+
 The dropdown nav ships only when its pages exist — no dead links. It
 shipped in plan 037 with everything above except Company Transition
 Centers, and with `Build my plan` rather than `Get started`.
@@ -69,13 +74,19 @@ nav is close to worth doing.
   utility/SEO/distribution layer.
 
 **Phase 4 — dropdown navigation.** ~~Product / For Organizations /
-Resources~~ **DONE, plan 037.** Four top-level links and three dropdowns,
-each item with a one-line blurb. Two departures from the target above:
-Company Transition Centers is held out of Resources until `/companies`
-exists (the no-dead-links rule), and the header CTA stays `Build my plan`
-per decision 2. Nav tests and COPY.md chrome moved with it; the visual
+Resources~~ **DONE, plan 037.** Shipped as **four tabs** after two owner
+reviews: Product ▾ · For Organizations ▾ · Pricing · Resources ▾, as light
+mega menus sized to their content with a featured card each. Three
+departures from the target above: **Home left the bar** (the wordmark is
+the home link; owner call, reversing plan 024), Company Transition Centers
+is held out of Resources until `/companies` exists (the no-dead-links
+rule), and the header CTA stays `Build my plan` per decision 2. How It
+Works moved inside Product and About inside Resources, which is how seven
+items became four. Nav tests and COPY.md chrome moved with it; the visual
 baselines did **not**, because a 76px header sits under the suite's 1%
 tolerance - the nav was verified by measurement instead.
+
+**Only `/companies` (Company Transition Centers) is left in the roadmap.**
 
 ## Open owner decisions (recorded, not presumed)
 
