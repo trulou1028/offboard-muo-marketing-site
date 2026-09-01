@@ -80,7 +80,7 @@ From the v2 spec §3, enforced by plan 009's sweep and the test harness.
      2026-08-21, see the decision log.)
 
    It must not appear in jobseeker narrative copy: `/how-it-works`, `/about`,
-   `/act`, `/resources`, `/public-partners`.
+   `/act`, `/resources`, `/workforce`.
 2. `/act` may say **"career transition"** and **"workspace"** — ACT's approved
    agency-facing vocabulary. It never leaks to any other page.
 
@@ -155,7 +155,7 @@ and everywhere it appears in the same PR.
 Pricing `/pricing` · Guides `/resources` · About `/about` · For Employers
 `/employers` · Sign In → `https://app.offboard.co/auth?tab=signin` ·
 **Build my plan** (primary, neon on the dark header) → signup. The header is
-fixed (sticky) on every route. `/act` and `/public-partners` are deliberately
+fixed (sticky) on every route. `/act` is deliberately
 out of nav.
 
 **Navigation labels are Title Case** (owner decision 2026-08-31); prose,
@@ -171,9 +171,9 @@ Case while "How it works" and "For employers" were not.
 Columns — **Product:** How it works, Career Context, Lumo, Job Search,
 Offboard Everywhere, Layoff & Benefits, Pricing, Guides ·
 **Partners:** For
-Employers, For Public Partners · **Company:** About, Visit Us (`/intake`),
-Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy, Terms
-(app.offboard.co).
+Employers, Workforce & Government · **Company:** About, Visit Us
+(`/intake`), Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy &
+Security (`/privacy-security`), Privacy Policy, Terms (app.offboard.co).
 
 > © 2026 Offboard · Independent support for life after a layoff
 
@@ -566,11 +566,11 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 - Body: `Offboard employers can post open roles at no cost. Postings reach members actively searching, with materials prepared and context attached.`
 - CTA: `Post a role` → `https://app.offboard.co/workspace/new?intent=recruit` *(hard URL contract with the app; never relative, never renamed unilaterally)* · secondary `or email us` → mailto
 
-### Public & workforce partners
+### Public & workforce partners *(moved to `/workforce` in plan 035; a crosslink stays)*
 
-- Kicker: `Public & workforce partners` · H2: `Agencies decide. Offboard helps people prepare and continue.`
-- Body: `For workforce boards, education partners, and public programs: Offboard organizes the practical work around the official system and routes residents to the responsible agency or provider for decisions and applications. Offboard does not determine eligibility, calculate benefits, or replace case workers.`
-- Items: `Orient` — `Start from the resident's situation and surface what may deserve attention now.` · `Route` — `Possible programs appear beside their responsible official source or local provider.` · `Follow through` — `Deadlines, questions, materials, and next steps stay in one private place.`
+- Kicker: `Public and workforce partners` · H2: `Agencies and workforce programs have their own page.`
+- Body: `Workforce boards, counties, education partners, and public programs work differently from a company running a layoff. The reporting boundary, the pilot shape, and the agency handoff live on their own page.`
+- Section link: `See Workforce & Government` → `/workforce`
 
 ### Employer FAQ — title `What employers ask.` *(plan 012)*
 
@@ -580,11 +580,11 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 4. `How do people pay?` — `$199 per employee, one-time. Card or NET-30 invoice. No renewal, no SOW, no procurement cycle.`
 5. `What does each person get?` — `90 days of full Offboard Pro: a personal plan, verified benefit deadlines, resume and application help, interview prep, and a real job feed.`
 
-### Contact band
+### Contact band *(retargeted to employers in plan 035; the public-partner version moved to `/workforce`)*
 
-- Kicker: `Public partnership` · H2: `Build a clearer route through the transition.`
-- Body: `Tell us which residents you serve and where the current handoff breaks down.`
-- CTA: `Discuss a public partnership` → `mailto:hello@offboard.co?subject=Public partner support`
+- Kicker: `Sponsored access` · H2: `Talk about sponsoring a group.`
+- Body: `Tell us how many people are affected and when. Setup is self-serve, and we can walk you through it.`
+- CTA: `Talk about sponsored access` → `mailto:hello@offboard.co?subject=Employer support`
 
 ---
 
@@ -706,16 +706,107 @@ rules).*
 
 ---
 
-# 8 · For public partners `/public-partners` *(out of nav; thinned crosslink page)*
+# 8 · Workforce & Government `/workforce`
 
-**Meta title:** `Transition support for public partners | Offboard`
-**Meta description:** `Public and workforce partner details now live on the employers page. See how Offboard organizes practical transition work for the residents you serve.`
+**Replaced `/public-partners` on 2026-09-01 (plan 035, phase 3 of the site
+IA roadmap).** The owner's 2026-09-01 decision was to consolidate: the thin
+`/public-partners` crosslink page is retired, `/public-partners` 301s here,
+and the public-sector material that plan 005 had parked on `/employers`
+moves here. `/employers` keeps a one-line crosslink.
 
-- Hero — Kicker: `For public partners` · H1: `Help people move from scattered information to a workable plan.` · Body: `Offboard helps residents organize transition work, identify possible support, and continue to the responsible agency or local provider for official decisions and applications.` · CTA: `Discuss a partnership` → mailto · Aside: `A clear boundary / Planning support, not an eligibility authority. / Offboard organizes information and routes people to official providers.`
-- Note: `The full public and workforce partner program, including sponsorship terms and the resident journey, now lives on the employers page alongside our employer sponsorship program.` — link `See partner details on the employers page` → `/employers`
-- Contact band — `Public partnership / Build a clearer route through the transition. / Tell us which residents you serve, which systems they navigate, and where the current handoff breaks down.` — CTA `Discuss a public partnership`
+**This page is inside the B2G language firewall** (COPY.md § Language
+rules), the same rules `/act` runs under:
 
----
+- The category claim "the modern unemployment office" never appears here.
+- Banned: "guaranteed jobs", "government-endorsed", "case management
+  replacement", "benefit eligibility system", any claim of official
+  endorsement.
+- **`/act`'s scoped vocabulary does not travel.** "Career transition" and
+  "workspace" are allowed on `/act` only, so the resident-benefit copy
+  below is rewritten off `/act`'s rather than reused from it.
+- "Outplacement" is a buyer word for `/employers` and Sponsored-tier copy.
+  It does not appear here, and this page is in the CopyDrift absence list.
+
+**No county is named.** `/act` names Alameda County because that pilot page
+is scoped to it and the owner approved it as geography. On a general
+agency-facing page a county name would read as a reference or a signed
+relationship, and no such claim is approved.
+
+**Deliberately not claimed.** The app repo's B2G document set describes
+WIOA/WARN compliance reporting, equity and demographic dashboards,
+cross-agency routing, case-management integration, procurement vehicles,
+and ROI figures. None of it appears here: the app repo's own plan 047
+records the B2G pilot as frozen at one seeded jurisdiction, so those are
+roadmap descriptions rather than shippable claims. Everything below traces
+to copy already approved for public display on `/act` or `/employers`.
+
+**No prices.** Employer pricing is public ($199 / $169 per seat). B2G
+pricing is volume-based and procurement-dependent, and has no owner
+approval for public display, so this page ends in a conversation.
+
+**Meta title:** `Workforce & Government | Offboard`
+**Meta description:** `For workforce boards, counties, and public programs: Offboard organizes the practical transition work around the official system and routes residents to the responsible agency for decisions. Agencies decide. Offboard helps people prepare and continue.`
+
+### Hero
+
+- Kicker: `Workforce and government`
+- H1: `Agencies decide. Offboard helps residents prepare and continue.`
+- Body: `Residents lose weeks to forms, phone trees, and appointment windows before anyone helps them plan. Offboard gives them a private place to organize the practical work and routes them back to the responsible agency for every official decision.`
+- CTA: `Start a partnership conversation` → `mailto:hello@offboard.co?subject=Workforce partnership`
+- Aside: `A clear boundary` / `Planning support, not an eligibility authority.` / `Offboard organizes the practical work and routes residents to the responsible agency or provider for official decisions and applications.`
+
+### What Offboard does beside your program *(moved verbatim from `/employers`, plan 005 copy)*
+
+- Kicker: `Beside what you already run`
+- H2: `Agencies decide. Offboard helps people prepare and continue.`
+- Body: `For workforce boards, education partners, and public programs: Offboard organizes the practical work around the official system and routes residents to the responsible agency or provider for decisions and applications. Offboard does not determine eligibility, calculate benefits, or replace case workers.`
+- Items:
+  1. `Orient` — `Start from the resident's situation and surface what may deserve attention now.`
+  2. `Route` — `Possible programs appear beside their responsible official source or local provider.`
+  3. `Follow through` — `Deadlines, questions, materials, and next steps stay in one private place.`
+
+### What a sponsored resident gets *(rewritten off `/act` § What residents get, whose "workspace" vocabulary is scoped to that page)*
+
+- Kicker: `What residents get`
+- H2: `A plan they can work at 9pm, not an appointment in six weeks.`
+- Body: `One private place for the whole transition: the benefits side, the money side, and the search, with guidance that already knows their situation.`
+- Capabilities:
+  1. `A plan from day one` — `Residents start from their own state, dates, and situation, and see what deserves attention first.`
+  2. `Verified benefit facts` — `Deadlines and dollar figures checked by people, with the official link for each one. Claiming benefits is always free.`
+  3. `The full toolkit` — `Job Packets, resume tailoring, interview prep, application tracking, and Lumo.`
+  4. `It starts the same day` — `A resident who claims access can begin that evening, on a phone, without waiting on a callback.`
+
+### Aggregate for the program. Private for the resident. *(the sees/stays-private lists are verbatim from the ACT playbook; the body sentence is the approved `/employers` formulation)*
+
+- Kicker: `Reporting boundary`
+- H2: `Aggregate for the program. Private for the resident.`
+- Body: `Sponsors receive aggregate participation and outcome reporting, never individual applications, conversations, finances, or reflections. Reporting and visibility are defined before participation begins.`
+- `What the program sees`: `Application funnel` · `Approval and claim visibility` · `Aggregate engagement` · `Weekly signup trends` · `Cohort or jurisdiction view`
+- `What stays private`: `Resumes` · `Documents` · `Lumo conversations` · `Individual job-search behavior`
+- Line: `That privacy line is contractual, not a preference.`
+- Section link: `See exactly who can see what` → `/privacy-security`
+
+### A pilot that sits beside what you already run
+
+- Kicker: `How a pilot starts`
+- H2: `Small, scoped, and reviewed after 30 days.`
+- Body: `Nothing here asks you to replace a system or run a procurement cycle first. A pilot is deliberately small enough to evaluate honestly.`
+- `Suggested pilot shape`: `One jurisdiction or cohort` · `25 to 100 residents` · `3-month sponsored access` · `First review after 30 days`
+- Objection: `Is this replacing our workforce system?` — `No. Offboard is a resident-facing support layer and a pilot path. It sits beside existing workforce systems and focuses on faster activation.`
+
+### What Offboard will not do *(compliance-reviewed; do not reword casually)*
+
+- Kicker: `Straight answers`
+- H2: `Offboard is not a government agency.`
+- Body: `Offboard helps people organize their transition and reach official sources. Government agencies and program providers make eligibility, benefit, and approval decisions. Offboard does not replace qualified legal, tax, financial, healthcare, or benefits guidance.`
+- Line: `Offboard does not determine eligibility, calculate benefits, or replace case workers. We never promise funding. We show residents the exact path to find out.`
+
+### Contact band
+
+- Kicker: `Partnership inquiries`
+- H2: `Build a clearer route through the transition.`
+- Body: `Tell us which residents you serve, which systems they navigate, and where the current handoff breaks down.`
+- CTA: `Start a partnership conversation` → `mailto:hello@offboard.co?subject=Workforce partnership`
 
 # 9 · Intake `/intake` *(live member-intake form; never redirect)*
 
@@ -1308,13 +1399,14 @@ add the connection to the register.
 `/product`, `/why-offboard` → `/how-it-works` · `/job-packet` →
 `/how-it-works#toolkit` · `/faq` → `/how-it-works#faq` · `/community` →
 `/#community` · `/founder-story` → `/about` · `/security` → `/privacy-security` ·
-`/for-organizations`, `/for-recruiters` → `/employers` · `/gift` → `/pricing`
+`/for-organizations`, `/for-recruiters` → `/employers` ·
+`/public-partners` → `/workforce` (plan 035) · `/gift` → `/pricing`
 · `/tools`, `/tools/:slug*` → `/resources` · 7 unported essay/policy slugs →
 `/resources`. Kept live, no redirect: `/intake`, `/act`.
 
-**Planned, not yet shipped:** `/public-partners` → `/workforce`, landing in
-the same PR as `/workforce` itself (owner decision 2026-09-01, plan 026
-decision 1). Until then `/public-partners` stays live and out of nav.
+`/public-partners` → `/workforce` shipped in plan 035, in the same PR as
+`/workforce` itself (owner decision 2026-09-01, plan 026 decision 1). The
+thin page is gone; the URL keeps working through the 301.
 
 ---
 
@@ -1373,6 +1465,7 @@ When one ships, move it into its page section above.
 | 2026-09-01 | ChatGPT and Claude connections confirmed live, shipped labelled "Beta" (owner's framing: they work and are still being refined). Closes plan 028's first verification flag | plan 033, this file § 11 |
 | 2026-09-01 | `/integrations` leads with a card grid of real integrations; "The idea" editorial block cut for length | plan 033, this file § 11 |
 | 2026-09-01 | The `~$12,000` CalJOBS hook ships on `/layoff-support`, with conditions and small print, and stays off the homepage | plan 033, this file § 13 |
+| 2026-09-01 | `/workforce` ships and `/public-partners` is retired and 301'd to it; the public-sector section leaves `/employers` for a crosslink; no county named and no B2G capability claimed beyond `/act` and `/employers` copy | plan 035, this file § 8 |
 | 2026-09-01 | Privacy & Security ships at `/privacy-security`, ported claim-for-claim from the app repo's `SECURITY_CLAIMS.md`; `/security` now redirects here instead of `/about` | plan 034, this file § 15 |
 | 2026-09-01 | `/public-partners` folds into `/workforce` and redirects when `/workforce` ships (no thin page kept) | plan 026 decision 1, docs/site-architecture.md |
 | 2026-08-24 | Clarified the "outplacement" scope: allowed on /employers AND in Sponsored-tier copy wherever it renders (home teaser, /pricing deck), per the 2026-08-21 owner call. The earlier "one page only" wording in Language rules was inaccurate and is corrected. | COPY.md, plan 019 |

@@ -11,7 +11,7 @@ import { getPublishedPosts } from "@/lib/content/posts";
 // Console" step in docs/cutover-checklist.md so flipping robots off is the
 // only remaining step, not also writing this file.
 const STATIC_ROUTES = ["/", "/how-it-works", "/pricing",
-  "/career-context", "/integrations", "/lumo", "/layoff-support", "/job-search", "/about", "/employers", "/public-partners", "/act", "/resources", "/privacy-security"] as const;
+  "/career-context", "/integrations", "/lumo", "/layoff-support", "/job-search", "/about", "/employers", "/workforce", "/act", "/resources", "/privacy-security"] as const;
 
 const BASE_URL = "https://offboard.co";
 

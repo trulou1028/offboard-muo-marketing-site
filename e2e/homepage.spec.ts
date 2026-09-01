@@ -55,7 +55,7 @@ test.describe("Offboard marketing site", () => {
       ["/pricing", /start free\. upgrade when you need more support/i],
       ["/about", /built for the moment work stops making sense/i],
       ["/employers", /outplacement, modernized/i],
-      ["/public-partners", /scattered information to a workable plan/i],
+      ["/workforce", /agencies decide/i],
     ] as const;
 
     for (const [route, heading] of routes) {
@@ -65,29 +65,32 @@ test.describe("Offboard marketing site", () => {
     }
   });
 
-  test("keeps the header nav to six marketing links and demotes public partners", async ({ page }) => {
+  test("keeps the header nav to six marketing links and demotes workforce", async ({ page }) => {
     await page.goto("/");
     const headerNav = page.getByRole("navigation", { name: "Marketing navigation" });
     await expect(headerNav.getByRole("link")).toHaveCount(6);
     await expect(headerNav.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
     await expect(headerNav.getByRole("link", { name: "Guides" })).toHaveAttribute("href", "/resources");
-    await expect(headerNav.getByRole("link", { name: "For Public Partners" })).toHaveCount(0);
+    await expect(headerNav.getByRole("link", { name: "Workforce & Government" })).toHaveCount(0);
 
     const footerNav = page.getByRole("navigation", { name: "Footer navigation" });
-    await expect(footerNav.getByRole("link", { name: "For Public Partners" })).toBeVisible();
+    await expect(footerNav.getByRole("link", { name: "Workforce & Government" })).toBeVisible();
     await expect(footerNav.getByRole("link", { name: "For Employers" })).toBeVisible();
   });
 
-  test("keeps the public-partners route live with a crosslink to employers", async ({ page }) => {
+  // Plan 035 retired the thin /public-partners page into /workforce. The old
+  // URL has to keep working - it is in the wild - so the 301 is asserted, not
+  // just the new page.
+  test("301s the retired public-partners URL to workforce", async ({ page }) => {
     await page.goto("/public-partners");
-    await expect(page.getByRole("heading", { level: 1, name: /scattered information to a workable plan/i })).toBeVisible();
-    await expect(page.getByRole("link", { name: /see partner details on the employers page/i })).toHaveAttribute("href", "/employers");
+    await expect(page).toHaveURL(/\/workforce$/);
+    await expect(page.getByRole("heading", { level: 1, name: /agencies decide/i })).toBeVisible();
   });
 
   test("reflows every route without horizontal overflow on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
 
-    for (const route of ["/", "/how-it-works", "/pricing", "/career-context", "/resources", "/resources/first-week-after-a-layoff", "/about", "/employers", "/public-partners", "/act", "/privacy-security"]) {
+    for (const route of ["/", "/how-it-works", "/pricing", "/career-context", "/resources", "/resources/first-week-after-a-layoff", "/about", "/employers", "/workforce", "/act", "/privacy-security"]) {
       await page.goto(route);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);

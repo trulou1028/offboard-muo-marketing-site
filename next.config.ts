@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
       { source: "/founder-story", destination: "/about", permanent: true },
       // Retargeted from /about in plan 034, now that a real trust page exists.
       { source: "/security", destination: "/privacy-security", permanent: true },
+      // The thin crosslink page was retired into /workforce in plan 035; the
+      // URL is in the wild, so it keeps working through this 301.
+      { source: "/public-partners", destination: "/workforce", permanent: true },
       { source: "/for-organizations", destination: "/employers", permanent: true },
       { source: "/for-recruiters", destination: "/employers", permanent: true },
       { source: "/gift", destination: "/pricing", permanent: true },

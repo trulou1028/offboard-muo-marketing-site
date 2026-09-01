@@ -300,18 +300,19 @@ export function MarketingEmployers() {
           </div>
           <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/strip-walking-in.webp" alt="A person walking into an office building for an interview, bag on shoulder" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
         </section>
-        <EditorialGrid
-          kicker="Public & workforce partners"
-          title="Agencies decide. Offboard helps people prepare and continue."
-          body="For workforce boards, education partners, and public programs: Offboard organizes the practical work around the official system and routes residents to the responsible agency or provider for decisions and applications. Offboard does not determine eligibility, calculate benefits, or replace case workers."
-          items={[
-            { title: "Orient", body: "Start from the resident's situation and surface what may deserve attention now." },
-            { title: "Route", body: "Possible programs appear beside their responsible official source or local provider." },
-            { title: "Follow through", body: "Deadlines, questions, materials, and next steps stay in one private place." },
-          ]}
-        />
+        {/* The full public-sector story moved to /workforce in plan 035;
+            a workforce board buys differently from a company running a
+            layoff, and the reporting boundary is not the same conversation. */}
+        <section className="mh-wherever mh-section" aria-labelledby="employer-partners-title">
+          <div className="mh-copy-block">
+            <span className="mh-kicker">Public and workforce partners</span>
+            <h2 id="employer-partners-title">Agencies and workforce programs have their own page.</h2>
+            <p>Workforce boards, counties, education partners, and public programs work differently from a company running a layoff. The reporting boundary, the pilot shape, and the agency handoff live on their own page.</p>
+            <Link className="mh-section-link" href="/workforce">See Workforce &amp; Government <ArrowRight aria-hidden="true" /></Link>
+          </div>
+        </section>
         <FaqSection title="What employers ask." items={EMPLOYER_FAQS} />
-        <ContactBand kicker="Public partnership" title="Build a clearer route through the transition." body="Tell us which residents you serve and where the current handoff breaks down." cta="Discuss a public partnership" href="mailto:hello@offboard.co?subject=Public%20partner%20support" />
+        <ContactBand kicker="Sponsored access" title="Talk about sponsoring a group." body="Tell us how many people are affected and when. Setup is self-serve, and we can walk you through it." cta="Talk about sponsored access" href="mailto:hello@offboard.co?subject=Employer%20support" />
       </main>
     </MarketingShell>
   );
@@ -433,25 +434,3 @@ export function MarketingAct() {
   );
 }
 
-export function MarketingPublicPartners() {
-  return (
-    <MarketingShell current="public-partners">
-      <main id="main-content">
-        <PageHero
-          current="public-partners"
-          kicker="For public partners"
-          title="Help people move from scattered information to a workable plan."
-          body="Offboard helps residents organize transition work, identify possible support, and continue to the responsible agency or local provider for official decisions and applications."
-          cta="Discuss a partnership"
-          ctaHref="mailto:hello@offboard.co?subject=Public%20partner%20support"
-          aside={<><span>A clear boundary</span><strong>Planning support, not an eligibility authority.</strong><p>Offboard organizes information and routes people to official providers.</p></>}
-        />
-        <section className="mh-route-partners-note mh-section" aria-label="Partner details">
-          <p>The full public and workforce partner program, including sponsorship terms and the resident journey, now lives on the employers page alongside our employer sponsorship program.</p>
-          <Link className="mh-section-link" href="/employers">See partner details on the employers page <ArrowRight aria-hidden="true" /></Link>
-        </section>
-        <ContactBand kicker="Public partnership" title="Build a clearer route through the transition." body="Tell us which residents you serve, which systems they navigate, and where the current handoff breaks down." cta="Discuss a public partnership" href="mailto:hello@offboard.co?subject=Public%20partner%20support" />
-      </main>
-    </MarketingShell>
-  );
-}
