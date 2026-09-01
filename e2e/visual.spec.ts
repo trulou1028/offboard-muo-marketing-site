@@ -21,6 +21,7 @@ const ROUTES = [
   "/lumo",
   "/layoff-support",
   "/job-search",
+  "/privacy-security",
   "/about",
   "/employers",
   "/public-partners",

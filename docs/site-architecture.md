@@ -22,6 +22,7 @@ represents systems, not features.
 | `/about` | Everyone | Why Offboard exists; independence | Talk to the team |
 | `/employers` | B2B buyers | Outplacement, modernized ($199/seat) | Talk about sponsored access |
 | `/public-partners` | Public sector | Thin crosslink page (out of nav; folds into `/workforce` and redirects when that page ships) | Discuss a partnership |
+| `/privacy-security` | Jobseekers, sponsors, buyers | Who can see your record, who cannot, and where the honest limits are; claims ported from the app repo's `SECURITY_CLAIMS.md` | Build my free transition plan |
 | `/act` | ACT pilot residents | Pilot landing (out of nav, B2G firewall) | Apply for pilot access |
 | `/intake` (+ `/confirmed`) | Members | Native intake form (never redirect) | Submit |
 
@@ -38,7 +39,10 @@ COPY.md § 1.
 
 Header (fixed, plan 024): Home · How it works · Pricing · Guides · About ·
 For employers · Sign in · Build my plan (neon). Footer adds Career Context,
-For public partners, and company/legal links.
+For public partners, Privacy & Security, and company/legal links.
+`/privacy-security` is out of header nav until the Resources dropdown
+ships (plan 026 phase 4); the footer's Legal column is its entry point,
+and `/security` 301s to it (retargeted from `/about` in plan 034).
 
 **Guardrails:** `/act` is intentionally excluded from header and footer nav
 and must never receive a redirect (live out-of-nav B2G landing URL; the

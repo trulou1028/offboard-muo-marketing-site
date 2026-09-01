@@ -12,6 +12,7 @@ import { MarketingIntegrations } from "./MarketingIntegrations";
 import { MarketingJobSearch } from "./MarketingJobSearch";
 import { MarketingLayoffSupport } from "./MarketingLayoffSupport";
 import { MarketingLumo } from "./MarketingLumo";
+import { MarketingPrivacySecurity } from "./MarketingPrivacySecurity";
 import MarketingHome from "./MarketingHome";
 import {
   MarketingAbout,
@@ -166,6 +167,53 @@ describe("verified-facts ledger matches shipped copy", () => {
   });
 });
 
+// Plan 034. /privacy-security is the only page whose sentences are security
+// claims, and the app repo's SECURITY_CLAIMS.md §3 names the exact wordings
+// that are NOT supportable. Both directions are asserted: the banned absolutes
+// must never appear, and the two ledger-governed facts must.
+describe("/privacy-security holds the claims-register discipline", () => {
+  const text = () => renderedText(<MarketingPrivacySecurity />);
+
+  it.each([
+    [/impossible/i, 'the approved phrasing is "prevented by ... Row-Level Security"'],
+    [/we cannot read/i, 'the provable form is "no read path exists in the product"'],
+    [/never shared/i, 'the provable form names the providers and says "we do not sell your data"'],
+    [/SOC ?2 (certified|compliant)/i, "we hold no certification"],
+    [/ISO ?270\d\d/i, "we hold no certification"],
+    [/bank[- ]level|military[- ]grade/i, "unfalsifiable security theatre"],
+  ])("never makes the unsupportable claim %s (%s)", (pattern) => {
+    expect(text()).not.toMatch(pattern);
+  });
+
+  it("AI providers: OpenAI and Anthropic appear in the ledger and on the page", () => {
+    const row = ledgerRow("AI providers");
+    expect(row).toContain("OpenAI");
+    expect(row).toContain("Anthropic");
+    expect(text()).toContain("OpenAI");
+    expect(text()).toContain("Anthropic");
+  });
+
+  it("Security claims audit: the July 2026 audit and the no-certification line both ship", () => {
+    const row = ledgerRow("Security claims audit");
+    expect(row).toContain("audited July 2026");
+    expect(row).toContain("no SOC 2 or ISO certification");
+    expect(text()).toContain("July 2026");
+    expect(text()).toContain("We do not hold a SOC 2 or ISO certification");
+  });
+
+  it("makes the sponsor rule explicit, not implied", () => {
+    expect(text()).toContain("A sponsor sees a number. A sponsor never sees you.");
+    expect(text()).toContain("contractual, not a preference");
+  });
+
+  // The register has no control for what happens after an outside assistant
+  // reads the record, so the page must not describe that provider's terms.
+  it("does not characterise an outside provider's retention terms", () => {
+    expect(text()).toContain("under that provider's terms");
+    expect(text()).not.toMatch(/(ChatGPT|Claude|OpenAI|Anthropic) (does not|never) (store|retain|keep)/i);
+  });
+});
+
 // Plan 018 phase 3 rebuilt the homepage plan-preview card from real product
 // state in lumo-plan-builder origin/main. Two things can rot silently here and
 // neither is covered anywhere else: the card drifting back toward invented
@@ -220,6 +268,7 @@ const SWEPT_PAGES: ReadonlyArray<[string, () => ReactElement]> = [
   ["MarketingLumo", () => <MarketingLumo />],
   ["MarketingLayoffSupport", () => <MarketingLayoffSupport />],
   ["MarketingJobSearch", () => <MarketingJobSearch />],
+  ["MarketingPrivacySecurity", () => <MarketingPrivacySecurity />],
   ["MarketingHowItWorks", () => <MarketingHowItWorks />],
   ["MarketingPricing", () => <MarketingPricing />],
   ["MarketingAbout", () => <MarketingAbout />],
@@ -279,6 +328,7 @@ describe("language rules hold on shipped pages", () => {
     ["MarketingLumo", () => <MarketingLumo />],
     ["MarketingLayoffSupport", () => <MarketingLayoffSupport />],
     ["MarketingJobSearch", () => <MarketingJobSearch />],
+    ["MarketingPrivacySecurity", () => <MarketingPrivacySecurity />],
     ["MarketingAbout", () => <MarketingAbout />],
     ["MarketingAct", () => <MarketingAct />],
     ["MarketingResources", () => <MarketingResources sections={buildResourceSections()} />],

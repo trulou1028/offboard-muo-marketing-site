@@ -810,6 +810,78 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-qblock p { max-width: 46ch; margin-top: 10px; color: var(--mh-muted); font-size: 15px; line-height: 1.55; }
 .mh-morethan-note { display: block; margin-top: 44px; color: var(--mh-muted); font-size: 13px; line-height: 1.5; }
 
+/* Privacy & Security (/privacy-security, plan 034).
+
+   The who-sees-what table is the page's centerpiece and the one real table on
+   the site. It ships in two presentations and exactly one is ever displayed:
+   a genuine <table> at >=760px, and a stacked list below that. A single
+   presentation was tried first and neither half worked - a 900px table inside
+   an `overflow-x: auto` container still scrolled the DOCUMENT sideways on a
+   390px viewport (measured: window.scrollX reached 354), and squeezing five
+   columns into 390px is unreadable for the page people trust least. Two
+   presentations keep real table semantics on desktop and real headings on
+   mobile, and `display: none` keeps the hidden one out of the accessibility
+   tree, so nothing is announced twice. */
+.mh-privacy-who { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-white); border-bottom: 1px solid var(--mh-line); }
+.mh-privacy-who .mh-copy-block { max-width: 820px; }
+.mh-privacy-scroll { margin-top: 48px; overflow-x: auto; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); }
+.mh-privacy-table { min-width: 900px; width: 100%; border-collapse: collapse; text-align: left; }
+.mh-privacy-table th,
+.mh-privacy-table td { padding: 18px 20px; border-bottom: 1px solid var(--mh-line); vertical-align: top; }
+.mh-privacy-table thead th { background: var(--mh-paper-soft); font-family: var(--mh-font-body); font-size: 13px; font-weight: 650; letter-spacing: .02em; }
+.mh-privacy-table thead th small { display: block; margin-top: 3px; color: var(--mh-secondary); font-size: 11px; font-weight: 500; }
+.mh-privacy-table tbody th { width: 210px; font-family: var(--mh-font-display); font-size: 17px; font-weight: 500; letter-spacing: -.01em; }
+.mh-privacy-table tbody th small { display: block; margin-top: 5px; color: var(--mh-secondary); font-family: var(--mh-font-body); font-size: 12px; font-weight: 400; line-height: 1.45; }
+.mh-privacy-table tbody tr:last-child th,
+.mh-privacy-table tbody tr:last-child td { border-bottom: 0; }
+/* The mark is taken out of flow so a long note wraps beside it instead of
+   under it: an inline-block note wide enough to need two lines pushed itself
+   onto the line below the dot, which read as two separate answers. */
+.mh-privacy-table td { position: relative; padding-left: 42px; color: var(--mh-muted); font-size: 13px; line-height: 1.5; }
+.mh-privacy-table td > span { display: block; max-width: 32ch; }
+.mh-privacy-mark { display: inline-block; width: 13px; height: 13px; border-radius: var(--mh-radius-pill); }
+.mh-privacy-table .mh-privacy-mark { position: absolute; top: 21px; left: 20px; }
+.mh-privacy-stack .mh-privacy-mark { margin-right: 8px; translate: 0 2px; }
+.mh-privacy-mark.is-yes { background: var(--mh-sage); }
+.mh-privacy-mark.is-limited { background: var(--mh-sand-eyebrow); }
+.mh-privacy-mark.is-no { border: 2px solid var(--mh-line); background: transparent; }
+.mh-privacy-stack { display: none; }
+.mh-privacy-stack > li { margin-top: 16px; padding: 22px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); }
+.mh-privacy-stack h3 { font-size: 20px; font-weight: 500; letter-spacing: -.01em; }
+.mh-privacy-stack h3 small { display: block; margin-top: 5px; color: var(--mh-secondary); font-family: var(--mh-font-body); font-size: 12px; font-weight: 400; line-height: 1.45; }
+.mh-privacy-stack dl { margin-top: 16px; border-top: 1px solid var(--mh-line); }
+.mh-privacy-stack dl > div { padding: 13px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-privacy-stack dl > div:last-child { border-bottom: 0; padding-bottom: 0; }
+.mh-privacy-stack dt { color: var(--mh-forest); font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+.mh-privacy-stack dd { margin: 6px 0 0; color: var(--mh-muted); font-size: 14px; line-height: 1.5; }
+p.mh-privacy-note { max-width: 74ch; margin-top: 26px; color: var(--mh-secondary); font-size: 13px; line-height: 1.6; }
+.mh-privacy-note a { border-bottom: 1px solid currentcolor; }
+.mh-sr-only { position: absolute; overflow: hidden; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; clip-path: inset(50%); white-space: nowrap; }
+
+/* The sponsor rule gets a dark band of its own. The strategy doc asks for it
+   to be the most visible thing on the page after the table, and a column in
+   the table would have done the opposite. */
+.mh-privacy-sponsor { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-forest); color: var(--mh-paper); }
+.mh-privacy-sponsor .mh-copy-block { max-width: 820px; }
+.mh-privacy-sponsor .mh-copy-block > p { color: var(--mh-on-dark-muted); }
+p.mh-privacy-contractual { margin-top: 14px; color: var(--mh-paper); font-size: 17px; font-weight: 600; }
+.mh-privacy-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 4vw, 64px); margin-top: 52px; }
+.mh-privacy-split h3 { font-family: var(--mh-font-body); font-size: 12px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+/* stylelint-disable-next-line selector-class-pattern -- .ruled predates the mh-/is- naming contract, see the note at .mh-plain-list */
+.mh-privacy-split .mh-plain-list.ruled { margin-top: 18px; border-top-color: var(--mh-hairline-on-dark); }
+/* stylelint-disable-next-line selector-class-pattern -- see above */
+.mh-privacy-split .mh-plain-list.ruled li { border-bottom-color: var(--mh-hairline-on-dark); }
+
+/* Paper, not paper-soft: the FAQ band that follows is paper-soft, and two
+   paper-soft bands in a row read as one section. */
+.mh-privacy-honest { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
+.mh-privacy-honest .mh-kicker.is-lime { color: var(--mh-forest); }
+.mh-privacy-honest .mh-copy-block { max-width: 820px; }
+.mh-privacy-honest-body { display: flex; max-width: 74ch; flex-direction: column; gap: 18px; margin-top: 34px; color: var(--mh-muted); font-size: 16px; line-height: 1.65; }
+p.mh-privacy-certs { padding-top: 18px; border-top: 1px solid var(--mh-line); color: var(--mh-ink); font-weight: 600; }
+
+small.mh-route-hero-footnote { display: block; max-width: 60ch; margin-top: 18px; color: var(--mh-on-dark-muted); font-size: 13px; line-height: 1.6; }
+
 /* The CalJOBS hook band (/layoff-support, plan 033). Retired from the homepage
    in v2, restored here on the owner's 2026-09-01 call. Rebuilt on the Civic
    Modern palette rather than restored verbatim: the progress fill is sage, not
@@ -974,6 +1046,10 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 }
 
 @media (max-width: 900px) {
+  /* Below the site's main breakpoint the table cannot fit five columns, so the
+     stacked presentation takes over and the table leaves the layout entirely. */
+  .mh-privacy-scroll { display: none; }
+  .mh-privacy-stack { display: block; }
   .mh-morethan-first { grid-template-columns: 1fr; }
   .marketing-homepage.mh-page-home { --mh-section-y: 96px; --mh-section-y-loose: 96px; --mh-section-y-tight: 64px; }
   .mh-hero2 { grid-template-columns: 1fr; padding-top: 116px; padding-bottom: 72px; }
@@ -981,6 +1057,7 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
   .mh-chat-card.is-floating { position: static; width: auto; margin-top: 16px; border: 1px solid var(--mh-line); box-shadow: none; }
   .mh-wherever-grid,
   .mh-lumo-grid,
+  .mh-privacy-split,
   .mh-pro-grid { grid-template-columns: 1fr; }
   .mh-triptych { grid-template-columns: 1fr; height: auto; }
   .mh-triptych .mh-photo-frame { height: 240px; }
