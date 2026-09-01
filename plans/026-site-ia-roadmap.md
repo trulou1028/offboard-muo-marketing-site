@@ -32,7 +32,7 @@ gated on owner copy approval:**
    record. You choose the interface.", and the permissions/authorization
    story (what a connected assistant can and cannot see). Potentially the
    most differentiated page on the site.
-2. `/lumo` — what Lumo knows, what it can do, and the differentiator:
+2. ~~`/lumo`~~ **DONE, plan 029.** What Lumo knows, what it can do, and the differentiator:
    not smarter than a general chatbot, but operating against the
    structured, continuously updated state of your career. Ends by saying
    other assistants are fine too, linking to /integrations.
