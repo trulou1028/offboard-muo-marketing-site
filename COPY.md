@@ -171,7 +171,8 @@ Case while "How it works" and "For employers" were not.
 Columns — **Product:** How it works, Career Context, Lumo, Job Search,
 Offboard Everywhere, Layoff & Benefits, Pricing, Guides ·
 **Partners:** For
-Employers, Workforce & Government · **Company:** About, Visit Us
+Employers, Workforce & Government, Universities & Communities ·
+**Company:** About, Visit Us
 (`/intake`), Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy &
 Security (`/privacy-security`), Privacy Policy, Terms (app.offboard.co).
 
@@ -1394,6 +1395,94 @@ add the connection to the register.
 - Body: `Build your Career Context knowing who can see it, who cannot, and what you can delete.`
 - CTAs: sitewide primary + `Talk to a person`
 
+# 16 · Universities & Communities `/communities`
+
+**Added 2026-09-01 (plan 036).** The third and last For Organizations page,
+completing the split plan 026 phase 3 asked for: `/employers` for companies
+running a layoff, `/workforce` for agencies, `/communities` for universities,
+alumni organizations, associations, and nonprofits. The roadmap called for
+this one to be "lighter at first", and it is: six sections, no FAQ.
+
+**Positioning comes from the one approved line about this audience**, the
+homepage's Sponsored access section: `Universities and communities — Help
+members navigate career transitions with tools that stay useful beyond a
+single workshop or program.` The page is that sentence expanded. The thing
+this audience has that employers do not is a relationship that outlasts the
+event: a member comes back in three years, and a workshop deck does not.
+
+**Two deliberate omissions, both easy for the owner to reverse:**
+
+1. **No prices.** Employer pricing ($199 / $169 per seat) is owner-approved
+   for public display for *employers*. Nothing is approved for universities
+   or associations, and quietly reusing the employer number would invent a
+   commercial term. The page ends in a conversation, like `/workforce`.
+2. **The category claim is not used here.** "The modern unemployment office"
+   is allowed everywhere except B2G surfaces, and a private university is
+   not a B2G surface. But community colleges and public universities are
+   public institutions, and the phrase adds nothing for a reader whose
+   members are mostly not unemployed yet. Left off by choice, not by rule.
+   Say the word and it goes in the hero.
+
+**Never-say check:** "outplacement" does not appear (this is not `/employers`
+and not Sponsored-tier copy) and the page is in the CopyDrift absence list.
+"Workspace" and "career transition services/support" do not appear.
+
+**Meta title:** `Universities & Communities | Offboard`
+**Meta description:** `For universities, alumni organizations, associations, and nonprofits: sponsor Offboard so your members keep a career record that outlasts a single workshop, appointment, or program year.`
+
+### Hero
+
+- Kicker: `Universities and communities`
+- H1: `The workshop ends. The career does not.`
+- Body: `Career offices and member programs do good work in a narrow window: a session, an appointment, a program year. What the member leaves with is a folder and a memory. Offboard gives them a record that keeps working after your program is over, and keeps working when they come back.`
+- CTA: `Start a sponsorship conversation` → `mailto:hello@offboard.co?subject=Community sponsorship`
+- Aside: `What sponsorship covers` / `The account, not a view into it.` / `You sponsor access for your members. What they build inside it stays theirs, and your reporting is aggregate only.`
+
+### Who this is for
+
+- Kicker: `Who this is for`
+- H2: `Programs whose people come back.`
+- Body: `The relationship outlasts the event. That is what makes this different from a company running a layoff, and it is what a record built once and kept is actually for.`
+- Items:
+  1. `Universities and colleges` — `Career services teams supporting students through a first search, and alumni through every one after it.`
+  2. `Alumni organizations` — `Members who graduated years ago, arrive with a real history, and need it organized rather than explained again.`
+  3. `Associations and nonprofits` — `Groups whose members change roles inside one field, where what someone did last still matters to what they do next.`
+
+### What changes for a member
+
+- Kicker: `What changes`
+- H2: `They stop starting over every time.`
+- Body: `A member builds their Career Context once. Every search after that starts from it instead of from a blank page.`
+- Capabilities:
+  1. `A record, not a folder` — `Work history, projects, and outcomes stay in one place that they keep, whether or not they are searching this month.`
+  2. `Your program stays in it` — `What a member works out in a session lands in the record instead of in notes nobody opens again.`
+  3. `The full toolkit` — `Job Packets, resume tailoring, interview prep, application tracking, and Lumo.`
+  4. `It works when your office is closed` — `Members do this work at 9pm and on weekends. Nothing waits for an appointment.`
+
+### What you see, and what you do not *(the boundary is the approved `/employers` formulation)*
+
+- Kicker: `Reporting boundary`
+- H2: `You see participation. You do not see people.`
+- Body: `Sponsors receive aggregate participation and outcome reporting, never individual applications, conversations, finances, or reflections. Reporting and visibility are defined before participation begins.`
+- `What you see`: `How many members claimed access` · `How many are active` · `Aggregate engagement and outcomes`
+- `What stays private`: `Resumes` · `Applications` · `Lumo conversations` · `Anything a member writes`
+- Line: `That privacy line is contractual, not a preference.`
+- Section link: `See exactly who can see what` → `/privacy-security`
+
+### Straight answers
+
+- Kicker: `Straight answers`
+- H2: `What Offboard will not promise.`
+- Body: `Offboard does not promise placements, interviews, or outcomes, and no sponsorship changes that. What it promises is that a member's own record is built once, stays theirs, and is there the next time they need it.`
+- Line: `Offboard does not replace your career office. It gives the work your team already does somewhere to live.`
+
+### Contact band
+
+- Kicker: `Sponsorship inquiries`
+- H2: `Talk about sponsoring your members.`
+- Body: `Tell us who your members are, how many you would start with, and what your team already runs. We will scope it with you.`
+- CTA: `Start a sponsorship conversation` → `mailto:hello@offboard.co?subject=Community sponsorship`
+
 # Redirect map (SEO-load-bearing; any route rename must update it in the same PR)
 
 `/product`, `/why-offboard` → `/how-it-works` · `/job-packet` →
@@ -1465,6 +1554,7 @@ When one ships, move it into its page section above.
 | 2026-09-01 | ChatGPT and Claude connections confirmed live, shipped labelled "Beta" (owner's framing: they work and are still being refined). Closes plan 028's first verification flag | plan 033, this file § 11 |
 | 2026-09-01 | `/integrations` leads with a card grid of real integrations; "The idea" editorial block cut for length | plan 033, this file § 11 |
 | 2026-09-01 | The `~$12,000` CalJOBS hook ships on `/layoff-support`, with conditions and small print, and stays off the homepage | plan 033, this file § 13 |
+| 2026-09-01 | `/communities` ships, completing the For Organizations split; no prices and no category claim on it, both by choice and both reversible | plan 036, this file § 16 |
 | 2026-09-01 | `/workforce` ships and `/public-partners` is retired and 301'd to it; the public-sector section leaves `/employers` for a crosslink; no county named and no B2G capability claimed beyond `/act` and `/employers` copy | plan 035, this file § 8 |
 | 2026-09-01 | Privacy & Security ships at `/privacy-security`, ported claim-for-claim from the app repo's `SECURITY_CLAIMS.md`; `/security` now redirects here instead of `/about` | plan 034, this file § 15 |
 | 2026-09-01 | `/public-partners` folds into `/workforce` and redirects when `/workforce` ships (no thin page kept) | plan 026 decision 1, docs/site-architecture.md |

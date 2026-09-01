@@ -21,6 +21,7 @@ represents systems, not features.
 | `/resources` + `/resources/:slug` | Jobseekers, SEO | Practical guides | Read the guide |
 | `/about` | Everyone | Why Offboard exists; independence | Talk to the team |
 | `/employers` | B2B buyers | Outplacement, modernized ($199/seat) | Talk about sponsored access |
+| `/communities` | Universities, alumni orgs, associations, nonprofits | Sponsor a record that outlasts a single workshop, appointment, or program year | Start a sponsorship conversation |
 | `/workforce` | Workforce boards, counties, public programs | Agencies decide, Offboard helps residents prepare and continue; reporting boundary and pilot shape | Start a partnership conversation |
 | `/privacy-security` | Jobseekers, sponsors, buyers | Who can see your record, who cannot, and where the honest limits are; claims ported from the app repo's `SECURITY_CLAIMS.md` | Build my free transition plan |
 | `/act` | ACT pilot residents | Pilot landing (out of nav, B2G firewall) | Apply for pilot access |
@@ -39,7 +40,8 @@ COPY.md § 1.
 
 Header (fixed, plan 024): Home · How it works · Pricing · Guides · About ·
 For employers · Sign in · Build my plan (neon). Footer adds Career Context,
-Workforce & Government, Privacy & Security, and company/legal links.
+Workforce & Government, Universities & Communities, Privacy & Security,
+and company/legal links.
 `/privacy-security` is out of header nav until the Resources dropdown
 ships (plan 026 phase 4); the footer's Legal column is its entry point,
 and `/security` 301s to it (retargeted from `/about` in plan 034).

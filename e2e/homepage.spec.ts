@@ -56,6 +56,7 @@ test.describe("Offboard marketing site", () => {
       ["/about", /built for the moment work stops making sense/i],
       ["/employers", /outplacement, modernized/i],
       ["/workforce", /agencies decide/i],
+      ["/communities", /the workshop ends/i],
     ] as const;
 
     for (const [route, heading] of routes) {
@@ -75,6 +76,7 @@ test.describe("Offboard marketing site", () => {
 
     const footerNav = page.getByRole("navigation", { name: "Footer navigation" });
     await expect(footerNav.getByRole("link", { name: "Workforce & Government" })).toBeVisible();
+    await expect(footerNav.getByRole("link", { name: "Universities & Communities" })).toBeVisible();
     await expect(footerNav.getByRole("link", { name: "For Employers" })).toBeVisible();
   });
 
@@ -90,7 +92,7 @@ test.describe("Offboard marketing site", () => {
   test("reflows every route without horizontal overflow on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
 
-    for (const route of ["/", "/how-it-works", "/pricing", "/career-context", "/resources", "/resources/first-week-after-a-layoff", "/about", "/employers", "/workforce", "/act", "/privacy-security"]) {
+    for (const route of ["/", "/how-it-works", "/pricing", "/career-context", "/resources", "/resources/first-week-after-a-layoff", "/about", "/employers", "/workforce", "/communities", "/act", "/privacy-security"]) {
       await page.goto(route);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
