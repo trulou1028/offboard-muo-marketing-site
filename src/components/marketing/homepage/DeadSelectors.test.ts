@@ -30,6 +30,7 @@ const MARKETING_ROUTES = [
   "about",
   "employers",
   "workforce",
+  "communities",
   "intake",
   "act",
   "career-context",

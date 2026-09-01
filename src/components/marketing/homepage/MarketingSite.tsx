@@ -17,6 +17,7 @@ export type MarketingRoute =
   | "about"
   | "employers"
   | "workforce"
+  | "communities"
   | "intake"
   | "act"
   | "career-context"
@@ -162,6 +163,7 @@ export function MarketingFooter() {
             <strong>Partners</strong>
             <Link href="/employers">For Employers</Link>
             <Link href="/workforce">Workforce &amp; Government</Link>
+            <Link href="/communities">Universities &amp; Communities</Link>
           </div>
           <div>
             <strong>Company</strong>

@@ -60,8 +60,10 @@ nav is close to worth doing.
   ACT B2G language firewall; it names no county, and the app repo's
   aspirational B2G capability set is deliberately not claimed).
   `/public-partners` was retired into it and 301s there, closing decision
-  1 below. Still to do: `/communities` (universities, alumni orgs,
-  associations, nonprofits, lighter at first).
+  1 below. ~~`/communities`~~ **DONE, plan 036** (universities, alumni
+  orgs, associations, nonprofits; shipped light, with no prices and no
+  category claim, both deliberate). **The organization split is
+  complete.**
 - `/companies` Company Transition Centers + per-company pages — the
   utility/SEO/distribution layer.
 
