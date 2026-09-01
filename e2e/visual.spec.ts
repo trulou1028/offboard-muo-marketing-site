@@ -24,7 +24,7 @@ const ROUTES = [
   "/privacy-security",
   "/about",
   "/employers",
-  "/public-partners",
+  "/workforce",
   "/act",
   "/resources",
   "/resources/first-week-after-a-layoff",

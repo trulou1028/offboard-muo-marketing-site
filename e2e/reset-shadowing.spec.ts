@@ -25,7 +25,7 @@ const ROUTES = [
   "/employers",
   "/resources",
   "/act",
-  "/public-partners",
+  "/workforce",
   "/intake",
   "/intake/confirmed",
   "/resources/first-week-after-a-layoff",

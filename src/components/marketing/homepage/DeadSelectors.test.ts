@@ -29,7 +29,7 @@ const MARKETING_ROUTES = [
   "resources",
   "about",
   "employers",
-  "public-partners",
+  "workforce",
   "intake",
   "act",
   "career-context",
@@ -37,6 +37,7 @@ const MARKETING_ROUTES = [
   "lumo",
   "layoff-support",
   "job-search",
+  "privacy-security",
 ] as const;
 
 const DYNAMIC_ROUTE_CLASSES = MARKETING_ROUTES.map((route) => `mh-page-${route}`);

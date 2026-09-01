@@ -13,6 +13,7 @@ import { MarketingJobSearch } from "./MarketingJobSearch";
 import { MarketingLayoffSupport } from "./MarketingLayoffSupport";
 import { MarketingLumo } from "./MarketingLumo";
 import { MarketingPrivacySecurity } from "./MarketingPrivacySecurity";
+import { MarketingWorkforce } from "./MarketingWorkforce";
 import MarketingHome from "./MarketingHome";
 import {
   MarketingAbout,
@@ -20,7 +21,6 @@ import {
   MarketingEmployers,
   MarketingHowItWorks,
   MarketingPricing,
-  MarketingPublicPartners,
   MarketingResources,
 } from "./MarketingRoutePages";
 
@@ -273,7 +273,7 @@ const SWEPT_PAGES: ReadonlyArray<[string, () => ReactElement]> = [
   ["MarketingPricing", () => <MarketingPricing />],
   ["MarketingAbout", () => <MarketingAbout />],
   ["MarketingResources", () => <MarketingResources sections={buildResourceSections()} />],
-  ["MarketingPublicPartners", () => <MarketingPublicPartners />],
+  ["MarketingWorkforce", () => <MarketingWorkforce />],
 ];
 
 describe("MarketingResources sweep still covers real article content", () => {
@@ -332,7 +332,7 @@ describe("language rules hold on shipped pages", () => {
     ["MarketingAbout", () => <MarketingAbout />],
     ["MarketingAct", () => <MarketingAct />],
     ["MarketingResources", () => <MarketingResources sections={buildResourceSections()} />],
-    ["MarketingPublicPartners", () => <MarketingPublicPartners />],
+    ["MarketingWorkforce", () => <MarketingWorkforce />],
   ] as const)("%s does not say outplacement (jobseeker narrative copy)", (_name, factory) => {
     expect(renderedText(factory())).not.toMatch(/outplacement/i);
   });

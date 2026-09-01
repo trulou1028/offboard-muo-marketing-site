@@ -764,6 +764,7 @@ copy doc built on it. Reference export lives in
 | 032 | Title Case navigation labels | P2 | S | - | DONE - **merged to `main`** 2026-09-01 via [PR #52](https://github.com/trulou1028/offboard-muo-marketing-site/pull/52). |
 | 033 | Integrations showcase grid, the CalJOBS hook on /layoff-support, and four owner decisions | P1 | M | 028, 030 | IN PROGRESS - branch `claude/integrations-showcase`, awaiting owner preview sign-off |
 | 034 | Privacy & Security page (`/privacy-security`); `/security` 301 retargeted from `/about`; claims ported from the app repo's `SECURITY_CLAIMS.md` | P1 | M | 026 | IN PROGRESS - branch `claude/privacy-security`, awaiting owner preview sign-off. **Phase 3 begins.** One open verification flag: the connected-assistant section |
+| 035 | Workforce & Government (`/workforce`); `/public-partners` retired and 301'd into it; public-sector section leaves `/employers` | P1 | M | 026, 034 | IN PROGRESS - branch `claude/workforce`, awaiting owner preview sign-off. Closes plan 026 decision 1. B2G firewall asserted in a browser |
 
 
 Plan 022 supersedes plan 018's homepage-specific work, with one deliberate

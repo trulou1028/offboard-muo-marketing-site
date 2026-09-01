@@ -55,11 +55,13 @@ nav is close to worth doing.
   section, and data ownership. Every claim is ported from the app repo's
   `SECURITY_CLAIMS.md` §1; the no-certification line is stated outright
   rather than omitted.
-- For Organizations split: `/employers` stays and improves; `/workforce`
-  (Workforce & Government — where Alameda-style messaging eventually
-  belongs, subject to the ACT B2G language firewall); `/communities`
-  (universities, alumni orgs, associations, nonprofits — lighter at
-  first).
+- For Organizations split: `/employers` stays and improves;
+  ~~`/workforce`~~ **DONE, plan 035** (Workforce & Government, under the
+  ACT B2G language firewall; it names no county, and the app repo's
+  aspirational B2G capability set is deliberately not claimed).
+  `/public-partners` was retired into it and 301s there, closing decision
+  1 below. Still to do: `/communities` (universities, alumni orgs,
+  associations, nonprofits, lighter at first).
 - `/companies` Company Transition Centers + per-company pages — the
   utility/SEO/distribution layer.
 
@@ -72,8 +74,7 @@ Nav tests, COPY.md chrome, and baselines move with it.
 1. ~~**Fate of `/public-partners`** once `/workforce` exists.~~
    **DECIDED 2026-09-01 (owner): consolidate.** `/public-partners` folds
    into `/workforce` and the old URL redirects to it. No thin crosslink
-   page is kept. The redirect ships with `/workforce`, in phase 3, and
-   joins COPY.md's redirect map in that PR.
+   page is kept. **Shipped in plan 035**, redirect and all.
 2. ~~Whether "Get started" replaces "Build my plan" as the header CTA
    label when the dropdown nav ships.~~ **DECIDED 2026-09-01: the header
    keeps `Build my plan`.** The owner deferred the call; the reasoning is

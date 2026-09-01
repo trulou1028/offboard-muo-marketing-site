@@ -22,9 +22,9 @@ import {
   MarketingEmployers,
   MarketingHowItWorks,
   MarketingPricing,
-  MarketingPublicPartners,
   MarketingResources,
 } from "./MarketingRoutePages";
+import { MarketingWorkforce } from "./MarketingWorkforce";
 
 describe("Offboard marketing routes", () => {
   let fetchSpy: MockInstance<typeof globalThis.fetch>;
@@ -98,7 +98,7 @@ describe("Offboard marketing routes", () => {
     expect(within(headerNav).queryByRole("link", { name: "For Public Partners" })).not.toBeInTheDocument();
 
     const footerNav = screen.getByRole("navigation", { name: "Footer navigation" });
-    expect(within(footerNav).getByRole("link", { name: "For Public Partners" })).toHaveAttribute("href", "/public-partners");
+    expect(within(footerNav).getByRole("link", { name: "Workforce & Government" })).toHaveAttribute("href", "/workforce");
   });
 
   it("gives how it works a five-step spine, a toolkit, and LUMO", () => {
@@ -157,7 +157,9 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { level: 1, name: /outplacement, modernized/i })).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /talk about sponsored access/i })[0]).toHaveAttribute("href", expect.stringContaining("Employer%20support"));
     expect(screen.getByRole("link", { name: /post a role/i })).toHaveAttribute("href", expect.stringContaining("intent=recruit"));
-    expect(screen.getByRole("heading", { name: "Agencies decide. Offboard helps people prepare and continue." })).toBeInTheDocument();
+    // The public-sector section left /employers for /workforce in plan 035;
+    // what stays behind is the crosslink.
+    expect(screen.getByRole("link", { name: /see workforce & government/i })).toHaveAttribute("href", "/workforce");
     expect(screen.getAllByText(/\$199/).length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: /cheapest line item/i })).toBeInTheDocument();
     expect(screen.getByText("Why companies do this")).toBeInTheDocument();
@@ -165,10 +167,11 @@ describe("Offboard marketing routes", () => {
     expect(screen.getAllByText(/19 of 24 people claimed access/i).length).toBeGreaterThan(0);
     employerView.unmount();
 
-    render(<MarketingPublicPartners />);
-    expect(screen.getByRole("heading", { level: 1, name: /scattered information to a workable plan/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /see partner details on the employers page/i })).toHaveAttribute("href", "/employers");
-    expect(screen.getAllByRole("link", { name: /discuss a public partnership|discuss a partnership/i })[0]).toHaveAttribute("href", expect.stringContaining("Public%20partner%20support"));
+    render(<MarketingWorkforce />);
+    expect(screen.getByRole("heading", { level: 1, name: /agencies decide/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Aggregate for the program. Private for the resident." })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /see exactly who can see what/i })).toHaveAttribute("href", "/privacy-security");
+    expect(screen.getAllByRole("link", { name: /start a partnership conversation/i })[0]).toHaveAttribute("href", expect.stringContaining("Workforce%20partnership"));
   });
 
   it("keeps every route out of search indexes while the site is pre-launch", () => {

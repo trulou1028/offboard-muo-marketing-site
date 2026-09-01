@@ -21,7 +21,7 @@ represents systems, not features.
 | `/resources` + `/resources/:slug` | Jobseekers, SEO | Practical guides | Read the guide |
 | `/about` | Everyone | Why Offboard exists; independence | Talk to the team |
 | `/employers` | B2B buyers | Outplacement, modernized ($199/seat) | Talk about sponsored access |
-| `/public-partners` | Public sector | Thin crosslink page (out of nav; folds into `/workforce` and redirects when that page ships) | Discuss a partnership |
+| `/workforce` | Workforce boards, counties, public programs | Agencies decide, Offboard helps residents prepare and continue; reporting boundary and pilot shape | Start a partnership conversation |
 | `/privacy-security` | Jobseekers, sponsors, buyers | Who can see your record, who cannot, and where the honest limits are; claims ported from the app repo's `SECURITY_CLAIMS.md` | Build my free transition plan |
 | `/act` | ACT pilot residents | Pilot landing (out of nav, B2G firewall) | Apply for pilot access |
 | `/intake` (+ `/confirmed`) | Members | Native intake form (never redirect) | Submit |
@@ -39,7 +39,7 @@ COPY.md § 1.
 
 Header (fixed, plan 024): Home · How it works · Pricing · Guides · About ·
 For employers · Sign in · Build my plan (neon). Footer adds Career Context,
-For public partners, Privacy & Security, and company/legal links.
+Workforce & Government, Privacy & Security, and company/legal links.
 `/privacy-security` is out of header nav until the Resources dropdown
 ships (plan 026 phase 4); the footer's Legal column is its entry point,
 and `/security` 301s to it (retargeted from `/about` in plan 034).
@@ -47,10 +47,12 @@ and `/security` 301s to it (retargeted from `/about` in plan 034).
 **Guardrails:** `/act` is intentionally excluded from header and footer nav
 and must never receive a redirect (live out-of-nav B2G landing URL; the
 resident application flow lives at `https://app.offboard.co/act/apply`).
-`/public-partners` is out of nav by owner decision, and **consolidates into
-`/workforce` when that page ships** (owner decision 2026-09-01, plan 026
-decision 1): the thin page is retired, `/public-partners` redirects to
-`/workforce`, and the redirect joins COPY.md's redirect map in that PR.
+`/public-partners` was **retired into `/workforce` in plan 035** (owner
+decision 2026-09-01, plan 026 decision 1): the thin page is gone, the URL
+301s to `/workforce`, and the public-sector section left `/employers` for a
+crosslink. `/workforce` is in the footer's Partners column and enters header
+nav with the For Organizations dropdown (plan 026 phase 4). It runs under
+the same B2G language firewall as `/act`, and names no county.
 `/intake` is a native route, never redirected.
 
 ## Target IA
