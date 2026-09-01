@@ -22,7 +22,8 @@ export type MarketingRoute =
   | "career-context"
   | "integrations"
   | "lumo"
-  | "layoff-support";
+  | "layoff-support"
+  | "job-search";
 
 const HUMAN_STEPS = [
   ["Work independently", "Follow your plan, manage applications, and use the tools at your own pace."],
@@ -150,6 +151,7 @@ export function MarketingFooter() {
             <Link href="/how-it-works">How it works</Link>
             <Link href="/career-context">Career Context</Link>
             <Link href="/lumo">Lumo</Link>
+            <Link href="/job-search">Job Search</Link>
             <Link href="/integrations">Offboard Everywhere</Link>
             <Link href="/layoff-support">Layoff &amp; Benefits</Link>
             <Link href="/pricing">Pricing</Link>

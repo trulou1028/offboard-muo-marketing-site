@@ -160,8 +160,8 @@ out of nav.
 > **Offboard**
 > Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
 
-Columns — **Product:** How it works, Career Context, Lumo, Offboard
-Everywhere, Layoff & Benefits, Pricing, Guides ·
+Columns — **Product:** How it works, Career Context, Lumo, Job Search,
+Offboard Everywhere, Layoff & Benefits, Pricing, Guides ·
 **Partners:** For
 employers, For public partners · **Company:** About, Visit us (`/intake`),
 Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy, Terms
@@ -1057,6 +1057,71 @@ the three columns including `4,000+` state-approved California programs.
 
 - H2: `Start with what changed.`
 - Body: `Tell Offboard what happened and get a plan that covers the money, the benefits, and the search, in the order they actually matter.`
+- CTAs: sitewide primary + `Talk to a person`
+
+# 14 · Job Search `/job-search`
+
+**Added 2026-08-31 (plan 031, fifth and final phase-2 pillar).** The
+strategy doc's job for this page is to show why Offboard beats a bag of AI
+tools. The homepage toolkit already names the ten tools, so this page does
+**not** repeat that list as feature copy. Its argument is the loop those
+tools form, and the fact that the loop has a memory.
+
+**Meta title:** `Job Search | Offboard`
+**Meta description:** `A job search that works as one system. Decide whether a role is worth pursuing, build the application, track it, prepare for the interview, and record what happened, with every pass making the next one better.`
+
+### Hero
+
+- Kicker: `Job search`
+- H1: `A job search that works as one system.`
+- Body: `Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, from the role you just found to the interview you just finished, so nothing has to be re-explained at the next step.`
+- CTA: `Build my free transition plan` (primary)
+
+### Why one system
+
+- Kicker: `The difference`
+- H2: `A bag of tools makes you the integration.`
+- Body: `Separately, a resume tool, a tracker, and a chat window each solve one step. Together they leave you carrying context between them: pasting the same history, re-explaining the same goals, and rebuilding the same picture of a company you already researched last week.`
+- Contrast blocks:
+  1. `Ten tools, ten starting points` — `Each one asks who you are before it can help, and none of them remembers what the last one learned.`
+  2. `One system, one record` — `Every step reads from and writes to the same Career Context, so the work compounds instead of resetting.`
+  3. `What that changes` — `The tenth application takes less effort than the first, because everything the first nine taught the system is still there.`
+
+### The loop
+
+- Kicker: `How it runs`
+- H2: `Eight steps, and the last one feeds the first.`
+- Steps:
+  1. `Find a role` — `Something lands in front of you, from a board, a referral, or a conversation you were already having.`
+  2. `Decide if it is worth it` — `Check the fit against your experience and goals, and look for signals that the posting may not be an actively hiring role.`
+  3. `Research the company` — `What you learn is saved to the company, not to a chat window you will close.`
+  4. `Build the application` — `Resume, cover letter, and positioning built from your record and the specific role.`
+  5. `Track it` — `Stage, dates, contacts, and next steps, without a separate spreadsheet.`
+  6. `Prepare for the interview` — `A prep plan from the company and role context you already gathered, and practice out loud.`
+  7. `Record what happened` — `Questions asked, what you answered, and what to do next.`
+  8. `Your Career Context improves` — `Which is why the next role starts further ahead than this one did.`
+
+### What each stage gives you
+
+- Kicker: `The toolkit`
+- H2: `Four stages, and what each one decides.`
+- Groups:
+  1. `Decide` — `Whether this one deserves your week.` — `Role Fit · Ghost Job Check · Company Intelligence`
+  2. `Apply` — `What you actually send.` — `Application Packets · Resume Tailoring · Cover Letters`
+  3. `Interview` — `Walking in prepared, not rehearsed.` — `Interview Prep · Voice Practice`
+  4. `Organize` — `Where all of it is kept.` — `Application Tracker · Career Context`
+
+### The memory underneath
+
+- Kicker: `What makes it compound`
+- H2: `The loop only works because something remembers.`
+- Body: `Every stage reads from your Career Context and writes back to it. That is the difference between a set of tools that happen to sit in one account and a search that gets better the longer you run it.`
+- Section link: `Learn more about Career Context` → `/career-context`
+
+### Final CTA (shared component, overridden copy)
+
+- H2: `Run the whole search in one place.`
+- Body: `Start with the role in front of you, and let everything you learn stay where the next application can use it.`
 - CTAs: sitewide primary + `Talk to a person`
 
 # Redirect map (SEO-load-bearing; any route rename must update it in the same PR)

@@ -40,8 +40,11 @@ gated on owner copy approval:**
    is what keeps the site the Modern Unemployment Office rather than an
    AI job-search SaaS. Personalized plan, benefits, health coverage,
    funded training, financial planning, then the search.
-4. `/job-search` — the Decide / Apply / Interview / Organize lifecycle as
-   one system.
+4. ~~`/job-search`~~ **DONE, plan 031.** The lifecycle as one system.
+
+**Phase 2 is complete.** All five pillars ship. The footer Product column
+now carries six product links, which is the signal that phase 4's dropdown
+nav is close to worth doing.
 
 **Phase 3 — trust + organizations + distribution:**
 - `/privacy-security` — a plain-English trust page (mandatory per the

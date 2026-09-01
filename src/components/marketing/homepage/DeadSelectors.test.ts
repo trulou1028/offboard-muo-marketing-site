@@ -36,6 +36,7 @@ const MARKETING_ROUTES = [
   "integrations",
   "lumo",
   "layoff-support",
+  "job-search",
 ] as const;
 
 const DYNAMIC_ROUTE_CLASSES = MARKETING_ROUTES.map((route) => `mh-page-${route}`);
