@@ -753,6 +753,11 @@ export function EditorialGrid({
   return (
     <section className="mh-route-content mh-section" aria-labelledby={headingId}>
       <div className="mh-route-content-heading"><span className="mh-kicker">{kicker}</span><h2 id={headingId}>{title}</h2><p>{body}</p></div>
+      {/* An odd number of cards in this two-column grid used to leave an empty
+          cell - the defect the owner flagged on /career-context. The fix is
+          Pattern B and it lives entirely in the stylesheet (see the
+          `:nth-last-child` block there), so it holds for every caller and
+          every count without this component knowing either. */}
       <div className="mh-route-card-grid" data-reveal="">{items.map((item, index) => <article key={item.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
     </section>
   );

@@ -346,6 +346,96 @@ elevation, it's one of these two — there's no third tier.
 - **No em dashes in site copy.** Copy content and its rules live in
   `COPY.md` at the repo root — this doc doesn't duplicate them.
 
+## Composition rules (plan 039, adopted 2026-09-02)
+
+The tokens above say what a section is made of. These say what shape it
+takes. They exist because the homepage audit found eleven sections and
+eight of them were the same unit — a copy block, then a grid — which read
+as unfinished even though every individual piece was correct.
+
+**R1 · No orphan cells.** A repeating grid must fill its last row. If the
+item count doesn't divide by the column count, change the layout, not the
+count: a ruled list (Pattern C), a lead-plus-pair (Pattern B), or a
+stepped strip (Pattern E). `repeat(3, 1fr)` with 5 items, or
+`repeat(2, 1fr)` with 3, is a defect. Enforced by
+`e2e/composition.spec.ts`, which walks every route, finds every grid whose
+tracks are equal, and fails on a remainder.
+
+**R2 · Product UI is a composition, never a screenshot.** Chat, tracker,
+plan, and packet UI shown on the site is a base card plus one to three
+satellites, each breaking an edge of the base. A single bordered
+rectangle holding a transcript is not allowed. Use `.mh-comp`,
+`.mh-comp-base`, and `.mh-comp-satellite`.
+
+**R3 · One idea, one section, one CTA.** A concept (Career Context, Lumo,
+Offboard Everywhere) gets one section on a page and one filled button.
+Later mentions are a `.mh-section-link`, never a second filled button.
+
+**R4 · Vary the section shape.** No more than two consecutive sections
+share a composition. The five compositions are Split, Stacked, Inset,
+Ruled, and Stepped. A page plan lists the composition of every section
+before the build starts.
+
+**R5 · Intros claim the width or share it.** A single-column
+`.mh-copy-block` either caps at `max-width: 820px` **and** puts something
+in the right half (a visual, a link cluster, a lead), or it becomes a
+two-column intro (`.mh-intro-split`: headline left, lead right). An empty
+right half beside an intro is a defect above 1180px.
+
+**R6 · Photos explain or leave.** At most one photo per section on
+jobseeker pages, and it sits beside product UI or the question it
+answers. Photo triptychs and strips are retired.
+
+**R7 · Insets share one padding.** `--mh-inset-pad` (`48px 56px`
+desktop, `36px 28px` below 900). Both forest insets use it.
+
+**R8 · Feature lists carry state.** A toolkit, capability, or category
+item shows one real product state (a chip, a count, a status pill) or it
+is a plain ruled row. No more icon-plus-label cards that link nowhere.
+Every state shown must be one the product can actually produce, verified
+against `lumo-plan-builder` `origin/main`.
+
+**R9 · The fixed header's button counts as a primary.** The header CTA is
+always lime and always on screen, so a section must not place its own
+filled button in the top 96px of the viewport at rest. On light bands a
+section primary is forest; on dark bands it is lime.
+
+**R10 · Mobile budget.** At 390 wide, no homepage section exceeds
+**2,600px** and the page total stays under **15,500px**. Enforced by
+`e2e/composition.spec.ts`. *(Both numbers are measured, not aspired to.
+Plan 039 proposed a 1,400px section budget; the rebuilt page's tallest
+section is "More than a job search" at 2,409px, which is six questions
+and a composition and does not shrink without cutting content. The page
+total is part of the rule because the per-section number alone would not
+have caught what prompted it: the v2 homepage ran 17,096px with a
+2,896px section. The rebuild measures 14,404px with a 2,409px maximum.)*
+
+### Pattern catalogue
+
+Every "three things" or "five things" moment picks one of these instead of
+minting a grid:
+
+| Pattern | Shape | Reference in the code |
+| --- | --- | --- |
+| A · Split | Copy one side, visual the other | `.mh-split`, `.mh-hero2` |
+| B · Lead + pair | First item spans the full width, the rest sit as a pair under it. Fixes any odd count in a 2-column grid | `.mh-route-card-grid.is-lead-pair` |
+| C · Ruled list | Rows with hairlines, title left, body and optional link right. Any count | `.mh-ruled`, `.mh-community-rows` |
+| D · Inset with ruled aside | Dark inset, copy left, ruled rows right | `.mh-sponsor-inset` |
+| E · Stepped strip | Numbered items in one row with hairline rules, 3 or 4 | `.mh-steps` |
+| F · Definition rows | `<dl>`, label column and value column | `.mh-company-facts` |
+| G · Two-column intro | Headline left, lead right, no grid | `.mh-intro-split` |
+
+### Composition primitives (R2)
+
+`.mh-comp` is the positioning context. `.mh-comp-base` is the white card
+that carries `--mh-shadow-overlay`. `.mh-comp-satellite` is absolutely
+positioned and breaks at least one edge of the base by 12 to 32px.
+Satellites are existing atoms only: a chat bubble, an `AiReply`, a
+`TrackerCard`, a plan step row, a chip, an integration mark. Two depths,
+no third tier. Below 900px every composition goes static and stacks in
+flow, keeping its shadow — a composition that flattens into a bordered
+box on a phone has lost the point.
+
 ## How to add a section
 
 1. Compose `.mh-section` (from plan 013) for the horizontal gutter, or give
@@ -362,7 +452,9 @@ elevation, it's one of these two — there's no third tier.
    `-on-dark` roles for muted text, hairlines, and subtle surfaces rather
    than writing a new `rgb(255 255 255 / N%)`.
 5. Pick a radius/shadow from the scales above, not a new literal.
-6. **Never introduce a literal hex color, px font-size, border-radius, or
+6. Pick a composition from the pattern catalogue above before you write
+   a `grid-template-columns`, and check it against R1 and R4.
+7. **Never introduce a literal hex color, px font-size, border-radius, or
    box-shadow without adding a token for it first.** `npm run lint:css`
    enforces this for colors outside the token block; the rest is
    discipline, not tooling — but it's the same rule.

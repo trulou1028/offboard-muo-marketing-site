@@ -12,14 +12,22 @@ test.describe("Offboard marketing site", () => {
     });
 
     await page.goto("/");
-    // Homepage v2 (plan 022): Career Context narrative, COPY.md § 1.
+    // Homepage v3 (plan 039): the Career Context narrative as three numbered
+    // steps, COPY.md § 1.
     await expect(page.getByRole("heading", { level: 1, name: /modern unemployment office/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /your job search goes wherever you do/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "How Offboard works." })).toBeVisible();
     await expect(page.getByRole("heading", { name: /one place that remembers your career/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /ask anywhere\. the answer is about you/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /everything you need when the next opportunity appears/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /losing your job creates more than one problem/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /an ai guide that already knows/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /you don't need another place to start over/i })).toBeVisible();
     await expect(page.getByRole("tablist", { name: "Job search stages" })).toHaveCount(0);
+
+    // Each step scrolls to the section that expands it.
+    await page.getByRole("link", { name: /see the connection/i }).click();
+    await expect(page).toHaveURL(/#connect$/);
+    await expect(page.getByRole("heading", { name: /ask anywhere/i })).toBeInViewport();
+    await page.goto("/");
 
     await page.getByRole("link", { name: "How It Works" }).first().click();
     await expect(page).toHaveURL(/\/how-it-works$/);

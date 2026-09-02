@@ -38,19 +38,44 @@ describe("Offboard marketing routes", () => {
   it("keeps the homepage focused on what Offboard does and who it serves", () => {
     render(<MarketingHome />);
 
-    // Homepage v2 (plan 022): Career Context narrative from the owner's copy
-    // doc, mirrored in COPY.md § 1.
+    // Homepage v3 (plan 039): the same Career Context narrative, re-sequenced
+    // as three numbered steps. COPY.md § 1.
     expect(screen.getByRole("heading", { level: 1, name: "The modern unemployment office." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Your job search goes wherever you do." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "How Offboard works." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "One place that remembers your career." })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /learn more about career context/i })).toHaveAttribute("href", "/career-context");
-    expect(screen.getByRole("heading", { name: "Losing your job creates more than one problem." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /an ai guide that already knows/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Ask anywhere. The answer is about you." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /everything you need when the next opportunity appears/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Losing your job creates more than one problem." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Free remembers your search. Pro puts it to work." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /job-search support people will actually use/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Your career context should belong to you." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /you don't need another place to start over/i })).toBeInTheDocument();
+
+    // The three steps are the page's spine, and each one links to the section
+    // that expands it. A broken anchor here silently strands the reader.
+    for (const [label, href] of [
+      ["Build your context", "#build"],
+      ["See the connection", "#connect"],
+      ["See the toolkit", "#run"],
+    ] as const) {
+      expect(screen.getByRole("link", { name: new RegExp(label, "i") })).toHaveAttribute("href", href);
+    }
+    for (const id of ["build", "connect", "run"]) {
+      expect(document.getElementById(id), `#${id} is a real section`).not.toBeNull();
+    }
+
+    // DESIGN.md R3, the defect this rebuild exists to fix: Career Context was
+    // pitched in three sections with three filled buttons. Exactly one now.
+    expect(screen.getAllByRole("link", { name: /(build|create) my career context/i })).toHaveLength(1);
+
+    // The ledger row "Live integrations" governs every mention of the ChatGPT
+    // and Claude connections on this page: they ship labelled beta.
+    expect(within(screen.getByRole("main")).getByText(/ChatGPT and Claude connections are in beta/i)).toBeInTheDocument();
+
+    // Retired with v3: two sections that told a story the page already told.
+    expect(screen.queryByRole("heading", { name: "Your job search goes wherever you do." })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /an ai guide that already knows/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Your career context should belong to you." })).not.toBeInTheDocument();
 
     // Verified facts that stay on the homepage (COPY.md ledger).
     expect(screen.getByText("$0")).toBeInTheDocument();
