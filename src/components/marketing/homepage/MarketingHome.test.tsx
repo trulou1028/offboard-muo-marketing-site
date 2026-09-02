@@ -48,7 +48,13 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { name: /everything you need when the next opportunity appears/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Losing your job creates more than one problem." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Free remembers your search. Pro puts it to work." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /job-search support people will actually use/i })).toBeInTheDocument();
+    // Sponsored access is the third plan card (owner 2026-09-02), not a band.
+    expect(screen.getByRole("heading", { name: "Sponsored access" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /learn about sponsored access/i })).toHaveAttribute("href", "/employers");
+    expect(screen.queryByRole("heading", { name: /job-search support people will actually use/i })).not.toBeInTheDocument();
+    // Community: three cards, and "Meet with a human" goes to the intake form.
+    expect(screen.getByRole("link", { name: /say hello/i })).toHaveAttribute("href", "/intake");
+    expect(screen.getByRole("link", { name: /join the slack/i })).toHaveAttribute("href", "https://offboard.co/community");
     expect(screen.getByRole("heading", { name: /you don't need another place to start over/i })).toBeInTheDocument();
 
     // The three steps are the page's spine, and each one links to the section

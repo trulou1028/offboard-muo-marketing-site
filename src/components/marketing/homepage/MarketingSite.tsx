@@ -183,8 +183,15 @@ export function MarketingShell({
 
 /* Chat primitives (moved from MarketingHome for reuse on product pages -
    plan 025; no visual change). */
+/* The AI avatar. Owner direction 2026-09-02: the avatar is Lumo's face, the
+   same asset the app uses (ported from lumo-plan-builder origin/main
+   src/assets/lumo-head.png), not the lime disc. The `is-dot` variant on the
+   AI button stays a lime dot - it is an accent, not a portrait. */
 export function LumoMark({ className = "" }: { className?: string }) {
-  return <i className={`mh-lumo-mark ${className}`.trim()} aria-hidden="true" />;
+  if (className.includes("is-dot")) {
+    return <i className={`mh-lumo-mark ${className}`.trim()} aria-hidden="true" />;
+  }
+  return <img className={`mh-lumo-mark ${className}`.trim()} src="/marketing/lumo-head.png" alt="" width={28} height={28} loading="lazy" decoding="async" />;
 }
 
 export function YouBubble({ children }: { children: ReactNode }) {
@@ -663,24 +670,35 @@ export function FaqSection({
   );
 }
 
+/* Owner direction 2026-09-02: the three-card layout from the live site, with
+   each partner's real mark (public/marketing/logos, sourced in COPY.md § 1),
+   restyled to Civic Modern. Three cards in three columns fills its row
+   (DESIGN.md R1). No filled button: three primaries in one view would break
+   the one-primary rule, so all three take the outline treatment. */
 const COMMUNITY_ROWS = [
   {
+    logo: "/marketing/logos/beehiiv.png",
     title: "The Offboard Newsletter",
     body: "Weekly job-market analysis and honest takes on tech hiring. 5,000+ subscribers.",
     cta: "Subscribe free",
     href: "https://newsletter.offboard.co",
+    note: "Free, weekly, unsubscribe anytime",
   },
   {
+    logo: "/marketing/logos/slack.svg",
     title: "Slack community",
     body: "Job seekers sharing leads, asking questions, and keeping each other accountable.",
     cta: "Join the Slack",
     href: "https://offboard.co/community",
+    note: "Free to join",
   },
   {
+    logo: "/marketing/logos/offboard-symbol.png",
     title: "Meet with a human",
     body: "Stuck on your search? Share where you are and our team reaches out directly. Free.",
     cta: "Say hello",
     href: HUMAN_SUPPORT_URL,
+    note: "Free, reviewed by our team",
   },
 ] as const;
 
@@ -692,12 +710,18 @@ export function CommunityStrip() {
         <h2 id="community-title">Job searching is hard enough without doing it alone.</h2>
         <p>Practical job-market intelligence, people navigating the same uncertainty, and a real person when you feel stuck.</p>
       </div>
-      <div className="mh-community-rows" data-reveal="">
+      <div className="mh-community-cards" data-reveal="">
         {COMMUNITY_ROWS.map((row) => (
           <article key={row.title}>
+            <span className="mh-community-logo"><img src={row.logo} alt="" width={40} height={40} loading="lazy" decoding="async" /></span>
             <h3>{row.title}</h3>
             <p>{row.body}</p>
-            <a href={row.href}>{row.cta} <ArrowRight aria-hidden="true" /></a>
+            {row.href.startsWith("/") ? (
+              <Link className="mh-secondary-cta" href={row.href}><span>{row.cta}</span><ArrowRight aria-hidden="true" /></Link>
+            ) : (
+              <a className="mh-secondary-cta" href={row.href}><span>{row.cta}</span><ArrowRight aria-hidden="true" /></a>
+            )}
+            <small>{row.note}</small>
           </article>
         ))}
       </div>

@@ -73,7 +73,6 @@ function HomeHero() {
             sizes="(max-width: 900px) 100vw, 46vw"
             preload
           />
-          <span className="mh-photo-chip"><i className="is-lumo" aria-hidden="true" />Benefits check · Done</span>
         </figure>
         <div className="mh-comp mh-hero-comp">
           <div className="mh-chat-card mh-comp-base" aria-label="Example conversation with an AI assistant">
@@ -414,9 +413,12 @@ function BesideTheSearch() {
 }
 
 /* ---------------------------------------------------------------- */
-/* 7 · Pro (paper deep). Unchanged but for the footnote, which moved */
-/* from under the left-hand copy into the Free card so the two cards */
-/* end level instead of leaving 200px of white under the Free CTA.   */
+/* 7 · Plans (paper deep). Owner direction 2026-09-02: sponsored access */
+/* is the third plan card, as it is on /pricing, rather than its own   */
+/* band. Three cards in three columns fill the row (R1). The sponsored */
+/* card takes the warm sand tint so it reads as "may be covered"       */
+/* rather than as a third thing to buy. Copy is /pricing's deck copy,  */
+/* already approved; the homepage's own sponsored band is retired.     */
 /* ---------------------------------------------------------------- */
 const FREE_FEATURES = [
   "Build your Career Context.",
@@ -435,58 +437,43 @@ const PRO_FEATURES = [
   "Get more personalized recommendations about what to do next.",
 ] as const;
 
-function ProSection() {
-  return (
-    <section className="mh-pro mh-section" aria-labelledby="pro-title">
-      <div className="mh-pro-grid">
-        <div className="mh-copy-block">
-          <span className="mh-kicker">Offboard Pro</span>
-          <h2 id="pro-title">Free remembers your search. Pro puts it to work.</h2>
-          <p>Start free and build the foundation of your Career Context. When you want deeper intelligence, preparation, and personalized help, Offboard Pro uses that context to help you make better decisions and move faster.</p>
-        </div>
-        <div className="mh-pro-cards" data-reveal="">
-          <article className="mh-plan-card">
-            <h3>Free</h3>
-            <p className="mh-plan-price"><b>$0</b><small>forever</small></p>
-            <ul>{FREE_FEATURES.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-            <small className="mh-plan-note">Don&apos;t pay just to keep your job search organized. Upgrade when you want Offboard to do more with everything it knows.</small>
-            <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Start free</span><ArrowRight aria-hidden="true" /></a>
-          </article>
-          <article className="mh-plan-card is-emphasized">
-            <h3>Pro</h3>
-            <p className="mh-plan-price"><b>$20</b><small>/month</small></p>
-            <ul>{PRO_FEATURES.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-            <SecondaryCta href="/pricing">See Pro pricing</SecondaryCta>
-          </article>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* 8 · Sponsored access (forest inset on paper). Unchanged: Pattern D, the
-   best "not a grid" layout the v2 page had. */
-const SPONSOR_AUDIENCES = [
-  ["Employers", "Support people through layoffs of any size without requiring them to learn another outplacement portal."],
-  ["Workforce and government", "Give residents personalized guidance and modern career tools alongside existing public programs."],
-  ["Universities and communities", "Help members navigate career transitions with tools that stay useful beyond a single workshop or program."],
+const SPONSORED_FEATURES = [
+  "The full sponsored benefit is delivered to you.",
+  "Your private career activity remains yours.",
+  "Sponsors receive aggregate reporting only.",
 ] as const;
 
-function SponsoredAccess() {
+function PlansSection() {
   return (
-    <section className="mh-sponsor mh-section" aria-labelledby="sponsor-title">
-      <div className="mh-sponsor-inset" data-reveal="">
-        <div className="mh-copy-block">
-          <span className="mh-kicker is-ondark">Sponsored access</span>
-          <h2 id="sponsor-title">Job-search support people will actually use.</h2>
-          <p>Offboard can be sponsored by employers, workforce organizations, universities, and community partners so people navigating job loss can use the same system in Offboard or from the AI tools already part of their workflow.</p>
-          <Link className="mh-ondark-cta" href="/employers"><span>Sponsor Offboard</span><ArrowRight aria-hidden="true" /></Link>
+    <section className="mh-pro mh-section" aria-labelledby="pro-title">
+      <div className="mh-intro-split">
+        <div>
+          <span className="mh-kicker">Offboard Pro</span>
+          <h2 id="pro-title">Free remembers your search. Pro puts it to work.</h2>
         </div>
-        <div className="mh-sponsor-audiences">
-          {SPONSOR_AUDIENCES.map(([title, body]) => (
-            <div key={title}><h3>{title}</h3><p>{body}</p></div>
-          ))}
-        </div>
+        <p>Start free and build the foundation of your Career Context. When you want deeper intelligence, preparation, and personalized help, Offboard Pro uses that context to help you make better decisions and move faster.</p>
+      </div>
+      <div className="mh-pro-cards" data-reveal="">
+        <article className="mh-plan-card">
+          <h3>Free</h3>
+          <p className="mh-plan-price"><b>$0</b><small>forever</small></p>
+          <ul>{FREE_FEATURES.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+          <small className="mh-plan-note">Don&apos;t pay just to keep your job search organized. Upgrade when you want Offboard to do more with everything it knows.</small>
+          <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Start free</span><ArrowRight aria-hidden="true" /></a>
+        </article>
+        <article className="mh-plan-card is-emphasized">
+          <h3>Pro</h3>
+          <p className="mh-plan-price"><b>$20</b><small>/month</small></p>
+          <ul>{PRO_FEATURES.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+          <SecondaryCta href="/pricing">See Pro pricing</SecondaryCta>
+        </article>
+        <article className="mh-plan-card is-sponsored">
+          <h3>Sponsored access</h3>
+          <p className="mh-plan-price"><b>May be covered</b></p>
+          <p className="mh-plan-lede">Outplacement, modernized. Your former employer, school, or workforce organization may cover your access.</p>
+          <ul>{SPONSORED_FEATURES.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+          <SecondaryCta href="/employers">Learn about sponsored access</SecondaryCta>
+        </article>
       </div>
     </section>
   );
@@ -513,8 +500,7 @@ export default function MarketingHome() {
         <StepConnect />
         <StepSearch />
         <BesideTheSearch />
-        <ProSection />
-        <SponsoredAccess />
+        <PlansSection />
         <CommunityStrip />
         <FinalCtaV2 />
       </main>

@@ -47,9 +47,10 @@ edge crisp where the step alone is subtle.
 dark-green surface (`--mh-forest` / `--mh-deep`, including the fixed
 header) the primary CTA is neon: lime fill, `--mh-deep` text (~12:1),
 hover `--mh-lime-hover`. On light surfaces lime remains forbidden and
-primaries stay forest-on-paper. The AI accents keep lime too: the avatar
-disc (`.mh-lumo-mark`), the AI reply highlight (`.mh-ai-highlight`), AI
-chip dots, and the LUMO section eyebrow. Supporting CTAs on dark stay
+primaries stay forest-on-paper. The AI accents keep lime too: the AI reply highlight (`.mh-ai-highlight`),
+the dot on the AI button, and the LUMO section eyebrow. **The avatar is
+Lumo's face, not a lime disc** (owner 2026-09-02): `.mh-lumo-mark` renders
+`public/marketing/lumo-head.png`, the same asset the app uses. Supporting CTAs on dark stay
 paper (`.mh-ondark-cta`) and the AI button stays ink with a lumo dot
 (`.mh-ai-cta`) — that contrast is what keeps the neon reading as THE
 primary. `e2e/homepage.spec.ts` guards the focus-ring half of this; the
@@ -314,10 +315,12 @@ than anything the scale offers.
 | Token | Value | Use |
 |---|---|---|
 | `--mh-shadow-surface` | `0 16px 40px rgb(10 17 16 / 12%)` | Resting elements that need separation without floating (e.g. `.mh-job-pill`) |
-| `--mh-shadow-overlay` | `0 16px 40px rgb(10 17 16 / 12%)` | Floating/absolute-positioned elements — the onboarding illustration pieces, the mobile nav dropdown |
+| `--mh-shadow-overlay` | `0 28px 64px rgb(10 17 16 / 24%)` | Compositions and floating pieces (the base card, satellites over the band, the mobile nav dropdown). Deepened 2026-09-02 on owner direction so overlap reads as depth |
 
 Only two shadows exist in this stylesheet. If a new component needs
-elevation, it's one of these two — there's no third tier.
+elevation, it's one of these two — there's no third tier. Surface is the
+resting tier; overlay is the one that says "this piece sits on top of
+that one".
 
 ## Hard rules (carried over, unchanged)
 
@@ -388,6 +391,18 @@ answers. Photo triptychs and strips are retired.
 
 **R7 · Insets share one padding.** `--mh-inset-pad` (`48px 56px`
 desktop, `36px 28px` below 900). Both forest insets use it.
+
+**R7a · Real logos are real files.** Any third-party mark (Slack, ChatGPT,
+Claude, beehiiv, a partner) is the brand's own asset, fetched from the
+brand or from a stable public archive of it and recorded in `COPY.md`.
+Never a hand-drawn approximation. The five Google, Calendly and Notion
+marks still in `IntegrationLogos.tsx` predate this rule and are tracked
+for replacement.
+
+**R7b · No chips on photographs.** The `Benefits check · Done` style
+badge over a photo is retired (owner 2026-09-02): it read as forced and
+added nothing the composition beside it did not already say. Product
+state belongs on product UI.
 
 **R8 · Feature lists carry state.** A toolkit, capability, or category
 item shows one real product state (a chip, a count, a status pill) or it

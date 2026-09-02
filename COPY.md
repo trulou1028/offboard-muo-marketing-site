@@ -229,7 +229,7 @@ are `DESIGN.md` § "Composition rules" (R1 to R10).
 **Meta description:** `Offboard is the modern unemployment office: one calm place for your benefits, deadlines, runway, funded training, and next job. Verified facts, AI guidance, and a plan that starts where you are. Independent, not a government agency.`
 
 Section order: Hero → The three steps → Step 1 Career Context → Step 2 Connect
-→ Step 3 Toolkit → More than a job search → Pro → Sponsored access →
+→ Step 3 Toolkit → More than a job search → Plans (Free, Pro, Sponsored) →
 Community → Final CTA.
 
 **What v3 retired or folded** (copy kept where it moved, in git history where
@@ -246,7 +246,16 @@ it did not):
   filled buttons on one page), and its body copy is retired from the homepage.
   The portable-context promise still ships on `/career-context`.
 - **The photo triptych** in More than a job search is retired (R6). Its three
-  chips (`Plan · Updated`, `Benefits check`, `Resume · 3 versions`) go with it.
+  chips (`Plan · Updated`, `Benefits check`, `Resume · 3 versions`) go with it,
+  and so does the hero's `Benefits check · Done` chip (owner 2026-09-02).
+- **The Sponsored access band** is retired (owner 2026-09-02): sponsored
+  access is the third plan card instead, as on `/pricing`. Its kicker, H2
+  `Job-search support people will actually use.`, body, three audiences and
+  the `Sponsor Offboard` CTA leave the homepage; the audiences still ship on
+  `/employers`, `/workforce` and `/communities`.
+- **The AI avatar** in every chat composition is Lumo's face, the asset the
+  app uses (`public/marketing/lumo-head.png`, ported from `lumo-plan-builder`
+  `origin/main` `src/assets/lumo-head.png`), not the lime disc.
 
 ### Hero
 
@@ -254,7 +263,7 @@ it did not):
 - Body: `Your job search, benefits, applications, career context, and next steps in one system, connected to the AI you already use.`
 - CTAs: `Get started free` (primary) · `See how it works` → `/how-it-works`
 - Trust line: `Join thousands of people building their next chapter with Offboard.` *(owner-confirmed accurate 2026-08-31)*
-- Hero visual (composition A): kitchen-table photo with chip `Benefits check · Done`, and a chat card overlapping its bottom-right corner: You: `I think I'm going to apply to this. Add it to Offboard.` / AI: `Done. I've added the role to your Offboard tracker and saved the company context.` The tracker card `Product Designer / Tesserac / Saved` is lifted out of the chat card and breaks its bottom-left edge.
+- Hero visual (composition A): kitchen-table photo (the `Benefits check · Done` chip is retired, owner 2026-09-02), and a chat card overlapping its bottom-right corner and overhanging the photo's right edge: You: `I think I'm going to apply to this. Add it to Offboard.` / AI: `Done. I've added the role to your Offboard tracker and saved the company context.` The tracker card `Product Designer / Tesserac / Saved` is lifted out of the chat card and breaks its bottom-left edge.
 
 ### The three steps *(new in v3)*
 
@@ -328,7 +337,7 @@ connections.
   - **Deliberately excluded** (owner decision 2026-08-26, claim-free subset): the real steps whose copy carries a benefit or severance number — `File for unemployment benefits` with `Takes 2-3 weeks to start`, and `Review your severance agreement` with `21 or 45 days to decide`. Both are real product copy but neither is in the verified-facts ledger above. Adding either to this card means adding a ledger row first.
 - Small print: `Offboard is independent, not a government agency, and claiming your benefits is always free.`
 
-### Offboard Pro
+### Plans (Free, Pro, Sponsored access)
 
 - Kicker: `Offboard Pro`
 - H2: `Free remembers your search. Pro puts it to work.`
@@ -336,8 +345,9 @@ connections.
 - Free ($0 forever): `Build your Career Context.` · `Track opportunities.` · `Save companies, contacts, notes, and activity.` · `Connect supported AI assistants.` · `Use core job-search tools.` — footnote `Don't pay just to keep your job search organized. Upgrade when you want Offboard to do more with everything it knows.` — CTA `Start free`
   - The footnote sat under the left-hand copy in v2. It moved into the Free card in v3 so the two cards end level; the sentence is unchanged and it is a statement about the free tier, which is where it reads best.
 - Pro ($20/month): `Compare opportunities using your complete context.` · `Get deeper role and company intelligence.` · `Create advanced application materials.` · `Prepare for interviews using everything Offboard knows about you and the opportunity.` · `Analyze patterns across your job search.` · `Get more personalized recommendations about what to do next.` — CTA `See Pro pricing` → `/pricing`
+- **Sponsored access** (third card, sand tint; copy is `/pricing`'s deck copy verbatim): price line `May be covered` — `Outplacement, modernized. Your former employer, school, or workforce organization may cover your access.` — `The full sponsored benefit is delivered to you.` · `Your private career activity remains yours.` · `Sponsors receive aggregate reporting only.` — CTA `Learn about sponsored access` → `/employers`. "Outplacement" is inside the Sponsored-tier exception.
 
-### Sponsored access
+### Sponsored access *(retired from the homepage 2026-09-02; kept for the record)*
 
 - Kicker: `Sponsored access`
 - H2: `Job-search support people will actually use.`
@@ -345,17 +355,27 @@ connections.
 - Audiences: `Employers` — `Support people through layoffs of any size without requiring them to learn another outplacement portal.` · `Workforce and government` — `Give residents personalized guidance and modern career tools alongside existing public programs.` · `Universities and communities` — `Help members navigate career transitions with tools that stay useful beyond a single workshop or program.` *(source doc said "with infrastructure that"; "infrastructure" is never-say, substituted)*
 - CTA: `Sponsor Offboard` → `/employers`
 
-### Community *(carried over from v1; not in the v2 source doc)*
+### Community *(three cards since 2026-09-02, owner direction)*
 
 Kept because the `/community` legacy redirect targets `/#community` and the
-newsletter fact ledger row lists Home. Copy unchanged from v1:
+newsletter fact ledger row lists Home. Row copy unchanged from v1; each row is
+now a card with the partner's real mark, an outline button, and a one-line
+note under it (notes are new, carried over from the live offboard.co site):
 
 - Kicker: `Community` · H2: `Job searching is hard enough without doing it alone.`
 - Body: `Practical job-market intelligence, people navigating the same uncertainty, and a real person when you feel stuck.`
 - Rows:
-  1. `The Offboard Newsletter` — `Weekly job-market analysis and honest takes on tech hiring. 5,000+ subscribers.` — `Subscribe free` → `https://newsletter.offboard.co`
-  2. `Slack community` — `Job seekers sharing leads, asking questions, and keeping each other accountable.` — `Join the Slack` → `https://offboard.co/community`
-  3. `Meet with a human` — `Stuck on your search? Share where you are and our team reaches out directly. Free.` — `Say hello` → `/intake`
+  1. beehiiv mark · `The Offboard Newsletter` — `Weekly job-market analysis and honest takes on tech hiring. 5,000+ subscribers.` — `Subscribe free` → `https://newsletter.offboard.co` — note `Free, weekly, unsubscribe anytime`
+  2. Slack mark · `Slack community` — `Job seekers sharing leads, asking questions, and keeping each other accountable.` — `Join the Slack` → `https://offboard.co/community` — note `Free to join`
+  3. Offboard symbol · `Meet with a human` — `Stuck on your search? Share where you are and our team reaches out directly. Free.` — `Say hello` → `/intake` — note `Free, reviewed by our team`
+
+**Brand marks on this page** (`public/marketing/logos/`, owner rule 2026-09-02:
+real files, never drawn): Slack `slack.svg` from Wikimedia Commons
+`Slack_icon_2019.svg` (the official mark) · ChatGPT `chatgpt.svg` from
+Commons `ChatGPT_logo.svg` (the app icon) · Claude `claude.svg` from Commons
+`Claude_AI_symbol.svg` · beehiiv `beehiiv.png` from beehiiv.com's own site
+icon · Offboard `offboard-symbol.png` from the Civic Modern export. All fetched
+2026-09-02.
 
 ### Final CTA
 
@@ -1022,9 +1042,11 @@ belongs here.
 - Note under the grid: `ChatGPT and Claude are in beta. They work today and we are still refining them. The ones marked in progress are being built, and we do not put dates on them.`
 
 The cards are a showcase, not links: nothing in the grid is clickable. The
-partner marks are hand-authored SVG in the partner's own colors
-(`IntegrationLogos.tsx`), the one place on the site allowed outside the
-Civic Modern palette. Statuses are governed by the verified-facts ledger
+ChatGPT and Claude marks are the partners' real files (sources in § 1); the
+Google, Calendly and Notion marks are still hand-authored SVG
+(`IntegrationLogos.tsx`) and are tracked for replacement under the owner's
+2026-09-02 rule. Partner marks are the one place on the site allowed
+outside the Civic Modern palette. Statuses are governed by the verified-facts ledger
 row "Live integrations": changing what ships here changes that row in the
 same PR.
 
@@ -1758,6 +1780,7 @@ When one ships, move it into its page section above.
 | 2026-08-24 | COPY.md created as the copy source of truth; copy changes land here first | this file |
 | 2026-08-31 | Homepage hero becomes a forest-deep band (Lumo band drops to mid forest to hold the two-anchor rhythm rule); “Join thousands of people” confirmed accurate; $12k hook stays off the homepage for now | plan 022, owner call |
 | 2026-08-30 | Homepage v2 shipped from owner's Career Context copy doc; primary CTA on home becomes "Get started free"; hook/$12k, identity, three-jobs, verified-facts, pricing-teaser, employer-strip, privacy-summary sections retired from home; community strip kept for the `/#community` redirect; "recruiting platform"→"recruiting site" and "infrastructure"→"tools" never-say substitutions | plan 022, this file § 1 |
+| 2026-09-02 | Owner review round on plan 039: community becomes three cards with real partner marks; sponsored access becomes the third plan card and its band is retired; photo chips retired; the AI avatar is Lumo's face; real logo files replace the drawn ChatGPT and Claude marks | plan 039, this file § 1 and § 11 |
 | 2026-09-02 | Homepage re-sequenced into three numbered steps (build your Career Context, connect it to the AI you use, run your search). Career Context and the AI story were each told twice; each is told once now. "Built around you" folds into step 1, "Offboard, wherever you work" and "Meet Lumo" merge into step 2, the photo triptych and the four capability blocks are retired | plan 039, this file § 1 |
 | 2026-09-02 | Toolkit groups carry product-state chips. `Strong fit`, `Ready for review`, `Prep ready` and `Saved to tracker` are verbatim product states in `lumo-plan-builder` `origin/main`; plan 039's proposed `Thursday · Prep done` and `12 tracked` do not exist in the app and were dropped rather than invented | plan 039, this file § 1 |
 | 2026-09-02 | Composition rules R1 to R10 adopted for every page. The homepage's three orphan-cell grids (8 in 4, 5 in 3, and a 3/3/2/2 toolkit) became ruled lists and a filled 2x2, and `EditorialGrid` now spans its first card when a caller passes an odd number, which fixed the same defect on `/career-context`, `/lumo`, `/job-search` and `/employers` | plan 039, DESIGN.md § Composition rules |
