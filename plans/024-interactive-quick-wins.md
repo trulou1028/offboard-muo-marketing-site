@@ -1,5 +1,7 @@
 # Plan 024 — Sticky nav, Home link, neon CTAs, motion pass
 
+> **Execute with:** Opus 5 · medium effort — sticky nav, motion, and neon CTAs; reduced-motion and contrast had to be verified, not assumed. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Owner-directed (2026-08-31), four asks in one PR, stacked on plan 023's
 PR #44. Each retires a previously documented rule, deliberately:
 

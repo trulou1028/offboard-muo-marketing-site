@@ -1,5 +1,7 @@
 # Plan 011: Fix the four shipped CSS defects (guide-page collision, About re-skin, mobile dead space, hand-rolled heroes) and delete dead CSS
 
+> **Execute with:** Opus 5 · medium effort — four CSS defects that needed browser verification, not a stylesheet read. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
 > next step. If anything in the "STOP conditions" section occurs, stop and

@@ -201,3 +201,9 @@ preview build FAILED, say so plainly and do not present the work as ready.
 Read the plan fully before starting, honor its STOP conditions (owner gates can
 block a plan at the finish line), and update your row in `plans/README.md` when
 done, with branch name and review status.
+
+**Every plan names its executing model on the first line under its title**
+(owner rule, 2026-09-01): `> **Execute with:** <model> · <effort> — <why>.`
+The picking guide is `plans/README.md` § "The model line". Writing a plan
+without it is incomplete work; executing one without it means adding it
+first, with a one-line reason, before touching code.

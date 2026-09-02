@@ -1,5 +1,7 @@
 # Plan 037 — Dropdown navigation
 
+> **Execute with:** Opus 5 · high effort — accessible dropdown navigation with hover, keyboard, and focus semantics, verified by measurement because the visual suite cannot see a header. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 **Status: executed on branch `claude/dropdown-nav`.** Phase 4 of the site IA
 roadmap (plan 026). The flat six-link header becomes four top-level links and
 three dropdowns, which is what finally puts the last three weeks of pages in

@@ -1,5 +1,7 @@
 # Plan 031 — Job Search (/job-search)
 
+> **Execute with:** Opus 5 · medium effort — a pillar page from approved copy. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Phase 2's fifth and final pillar. Built 2026-08-31. **Phase 2 of the site
 IA roadmap (plan 026) is now complete.**
 

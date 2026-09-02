@@ -1,5 +1,7 @@
 # Plan 030 — Layoff & Benefits (/layoff-support)
 
+> **Execute with:** Fable 5.1 · high effort — the most claim-sensitive page on the site; every number had to trace to the ledger and nothing could promise funding. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Phase 2, third item, of the site IA roadmap (plan 026). Built 2026-08-31.
 
 The strategy doc calls this the strategically important pillar: without it
