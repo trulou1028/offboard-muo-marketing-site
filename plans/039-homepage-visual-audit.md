@@ -440,7 +440,11 @@ through the repo's Playwright against the branch's own server.
 
 ---
 
-## Round 3 · Polish pass, recommendations only (2026-09-02, not built)
+## Round 3 · Polish pass (2026-09-02)
+
+**Owner picked all of P1 plus R3-4 and R3-5, and supplied the Offboard app
+icon for the community card. Those five are BUILT. The rest stand as
+recommendations for a later round.**
 
 Fresh capture of every section at 1440, 768 and 390 after the owner's
 second review landed. Ordered by what a visitor would notice first.
@@ -449,19 +453,35 @@ second review landed. Ordered by what a visitor would notice first.
 
 | # | Where | What | Fix |
 | --- | --- | --- | --- |
-| R3-1 | Toolkit at 390 | Two columns of 160px text. The homepage-scoped 2-column rule outranks the 560px collapse, so phones get the tablet layout. | Add the homepage selector to the 560px one-column group. |
-| R3-2 | Step 2 ghost card at 768 and below | The clip line falls through the AI reply, so two lines of text are cut mid-word. At desktop the bubble is two lines and the clip lands cleanly; at narrower widths it is one line and the reply starts earlier. | Fade the ghost's bottom edge with a mask instead of a hard clip, and clip to the bubble's height rather than a fixed 100px. |
-| R3-3 | Community, third card | The Offboard tile is a black square inside a paper tile. beehiiv and Slack are marks on paper; ours is a mark on black on paper. | Use a transparent-background symbol (the app repo's `public/offboard-logo-symbol.png` if it is transparent, or export one from the Civic Modern symbol). |
+| R3-1 ✅ | Toolkit at 390 | Two columns of 160px text. The homepage-scoped 2-column rule outranks the 560px collapse, so phones get the tablet layout. | Add the homepage selector to the 560px one-column group. |
+| R3-2 ✅ | Step 2 ghost card at 768 and below | The clip line falls through the AI reply, so two lines of text are cut mid-word. At desktop the bubble is two lines and the clip lands cleanly; at narrower widths it is one line and the reply starts earlier. | Fade the ghost's bottom edge with a mask instead of a hard clip, and clip to the bubble's height rather than a fixed 100px. |
+| R3-3 ✅ | Community, third card | The Offboard tile is a black square inside a paper tile. beehiiv and Slack are marks on paper; ours is a mark on black on paper. | Use a transparent-background symbol (the app repo's `public/offboard-logo-symbol.png` if it is transparent, or export one from the Civic Modern symbol). |
 
 ### P2 · Composition
 
 | # | Where | What | Fix |
 | --- | --- | --- | --- |
-| R3-4 | Step 1 record composition, desktop | The portrait and the chips sit low-left and leave a hole top-right (about 390 by 115px of empty mist above the card's right half). | Raise the card so its top aligns with the portrait's top third, or add one satellite top-right (a `Goals` row lifted out). |
-| R3-5 | Plans, sponsored card | No border, so the sand card's edges dissolve into the paper-soft band. It reads flatter than its neighbours. | A 1px border in sand-eyebrow at low alpha, or a hairline top rule inside the card. |
+| R3-4 ✅ | Step 1 record composition, desktop | The portrait and the chips sit low-left and leave a hole top-right (about 390 by 115px of empty mist above the card's right half). | Raise the card so its top aligns with the portrait's top third, or add one satellite top-right (a `Goals` row lifted out). |
+| R3-5 ✅ | Plans, sponsored card | No border, so the sand card's edges dissolve into the paper-soft band. It reads flatter than its neighbours. | A 1px border in sand-eyebrow at low alpha, or a hairline top rule inside the card. |
 | R3-6 | Plans at 768 | Three cards stack to 1,850px. Free and Pro fit side by side at this width. | At 601 to 900: Free and Pro as a pair, Sponsored spanning the full width beneath (pair-plus-lead; occupancy 4 in 2 columns, R1 clean). |
 | R3-7 | "Learn more" links inside copy blocks | `.mh-section-link` carries 36px top margin from its route-page origin, so the link floats 56px below the button while every other gap in the block is 20px. Visible in Step 1. | Inside `.mh-copy-block`, set the link's top margin to 12px. Step 2 already overrides it to 12px; make that the rule. |
 | R3-8 | Hero trust line | Still the least legible text on the page (62% paper, 14px). It is the one social-proof line. | Raise to 78% paper and 15px, matching the final CTA's supporting text. |
+
+### Built in this round
+
+- **R3-1** the homepage's 2x2 selector joined the 560px one-column group.
+- **R3-2** the ghost card's reply fades from its own top edge, which is
+  content-relative and so holds at every width, instead of a fixed clip
+  that fell through the text wherever the question wrapped differently.
+  The fade is decorative: the text keeps full contrast in the
+  accessibility tree and the conversation still reads in order.
+- **R3-3** an app icon fills its tile (new rule R7c). The owner supplied
+  the Offboard mark on its dark square, which now renders edge to edge
+  like beehiiv's circle.
+- **R3-4** the source chips moved to the composition's top-right corner,
+  which fills the hole and still breaks the card's top edge.
+- **R3-5** new `--mh-sand-border` token, paired with sand the way
+  `--mh-mist-border` is paired with mist.
 
 ### P3 · System hygiene
 

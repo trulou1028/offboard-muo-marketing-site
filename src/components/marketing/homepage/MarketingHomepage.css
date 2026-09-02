@@ -17,6 +17,7 @@
   --mh-mist-border: #d3dcce;
   --mh-sand: #f1e9dc;
   --mh-sand-eyebrow: #8a6a3b;
+  --mh-sand-border: #e2d5c0;
   --mh-sage: #74bd47; /* status fills only; fails text contrast on white */
   --mh-secondary: #6f736b;
   --mh-page-max: 1200px;
@@ -440,6 +441,8 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-community-cards article { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 28px; background: var(--mh-white); border: 1px solid var(--mh-mist-border); border-radius: var(--mh-radius-card); }
 .mh-community-logo { display: grid; width: 56px; height: 56px; margin-bottom: 8px; place-items: center; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); }
 .mh-community-logo img { width: 32px; height: 32px; object-fit: contain; }
+.mh-community-logo.is-icon { overflow: hidden; background: none; border-color: transparent; }
+.mh-community-logo.is-icon img { width: 100%; height: 100%; object-fit: cover; }
 .mh-community-cards h3 { font-size: 22px; line-height: 1.2; }
 .mh-community-cards p { color: var(--mh-muted); font-size: 15px; line-height: 1.5; }
 .mh-community-cards .mh-secondary-cta { width: 100%; margin-top: auto; justify-content: center; gap: 10px; }
@@ -1106,7 +1109,7 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 .mh-plan-card { display: flex; flex-direction: column; gap: 14px; padding: 28px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); }
 .mh-plan-card.is-emphasized { border-color: var(--mh-forest); }
 /* Sponsored: the warm neutral, so it reads as "may be covered", not a third price. */
-.mh-plan-card.is-sponsored { background: var(--mh-sand); border-color: var(--mh-sand); }
+.mh-plan-card.is-sponsored { background: var(--mh-sand); border-color: var(--mh-sand-border); }
 .mh-plan-card.is-sponsored h3 { color: var(--mh-sand-eyebrow); }
 .mh-plan-card.is-sponsored .mh-plan-price b { font-size: 26px; }
 .mh-plan-card .mh-plan-lede { color: var(--mh-ink); font-size: 14px; line-height: 1.5; }
@@ -1190,8 +1193,8 @@ ul.mh-ruled { display: grid; margin-top: clamp(40px, 4vw, 56px); }
 /* Composition C - the record. The portrait is the section's one photograph
    (R6): the card covers its bottom-right corner, so what stays visible is
    the top band across its full width rather than a sliver. */
-.mh-record-comp { padding-top: 132px; padding-left: 68px; }
-.mh-record-photo { position: absolute; z-index: 1; top: 0; left: 0; width: 172px; height: 216px; box-shadow: var(--mh-shadow-overlay); }
+.mh-record-comp { padding-top: 96px; padding-left: 68px; }
+.mh-record-photo { position: absolute; z-index: 1; top: 0; left: 0; width: 172px; height: 208px; box-shadow: var(--mh-shadow-overlay); }
 .mh-record-photo img { object-position: 50% 26%; }
 .mh-record-card { display: flex; flex-direction: column; gap: 8px; padding: 28px; background: var(--mh-white); border: 1px solid transparent; border-radius: var(--mh-radius-card); color: var(--mh-ink); }
 .mh-record-card > strong { font-family: var(--mh-font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; }
@@ -1201,7 +1204,7 @@ ul.mh-ruled { display: grid; margin-top: clamp(40px, 4vw, 56px); }
 .mh-record-card li:last-child { border-bottom: 0; }
 .mh-record-card li span { font-size: 14px; font-weight: 600; }
 .mh-record-card li em { color: var(--mh-secondary); font-size: 13px; font-style: normal; text-align: right; }
-ul.mh-record-sources { top: 106px; left: 196px; display: flex; }
+ul.mh-record-sources { top: 74px; right: 0; display: flex; }
 .mh-record-sources li { padding: 7px 13px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-pill); box-shadow: var(--mh-shadow-surface); font-size: 12px; font-weight: 600; white-space: nowrap; }
 .mh-record-sources li + li { margin-left: -8px; }
 
@@ -1221,6 +1224,7 @@ ul.mh-record-sources { top: 106px; left: 196px; display: flex; }
 .mh-connect-comp { padding-top: 100px; }
 .mh-comp-ghost { position: absolute; z-index: 1; top: 0; left: 0; width: calc(100% - 40px); max-height: 100px; overflow: hidden; border-color: transparent; box-shadow: var(--mh-shadow-surface); }
 .mh-connect-comp > .mh-comp-base { margin-left: 40px; }
+.mh-comp-ghost .mh-chat-ai { mask-image: linear-gradient(to bottom, rgb(0 0 0 / 26%), transparent 42%); }
 .mh-comp-marks { top: 78px; left: 68px; display: flex; align-items: center; gap: 10px; padding: 8px 13px; background: var(--mh-white); border-radius: var(--mh-radius-pill); box-shadow: var(--mh-shadow-overlay); }
 .mh-comp-marks .mh-int-logo { width: 26px; height: 26px; border: 0; }
 .mh-comp-marks .mh-int-logo img { width: 22px; height: 22px; }
@@ -1277,11 +1281,11 @@ ul.mh-record-sources { top: 106px; left: 196px; display: flex; }
 
   .mh-record-comp { display: flex; flex-direction: column; align-items: flex-start; padding: 0; }
   figure.mh-record-photo { position: relative; order: 1; width: 132px; height: 166px; margin-left: 6px; }
-  ul.mh-record-sources { position: relative; top: auto; left: auto; order: 2; margin: -18px 0 0 18px; }
+  ul.mh-record-sources { position: relative; top: auto; right: auto; order: 2; margin: -18px 0 0 18px; }
   .mh-record-card { order: 3; width: 100%; margin-top: -14px; }
 
   .mh-connect-comp { display: flex; flex-direction: column; padding-top: 0; }
-  .mh-comp-ghost { position: relative; order: 1; width: 100%; max-height: 112px; }
+  .mh-comp-ghost { position: relative; order: 1; width: 100%; max-height: 118px; }
   .mh-comp-marks { position: relative; top: auto; left: auto; order: 2; align-self: flex-start; margin: -20px 0 0 18px; }
   .mh-connect-comp > .mh-comp-base { order: 3; margin-top: -14px; margin-left: 0; }
   .mh-comp-chip { position: relative; right: auto; bottom: auto; order: 4; align-self: flex-end; margin: -16px 14px 0 0; }
@@ -1469,6 +1473,7 @@ ul.mh-record-sources { top: 106px; left: 196px; display: flex; }
   .mh-ctx-grid,
   .mh-int-grid,
   .mh-kit-grid,
+  .mh-page-home .mh-kit-grid,
   .mh-pro-cards { grid-template-columns: 1fr; }
   .mh-final2 h2 { font-size: 36px; }
   .mh-qblock h3 { font-size: 20px; }

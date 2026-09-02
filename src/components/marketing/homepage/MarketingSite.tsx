@@ -678,6 +678,7 @@ export function FaqSection({
 const COMMUNITY_ROWS = [
   {
     logo: "/marketing/logos/beehiiv.png",
+    icon: true,
     title: "The Offboard Newsletter",
     body: "Weekly job-market analysis and honest takes on tech hiring. 5,000+ subscribers.",
     cta: "Subscribe free",
@@ -686,6 +687,7 @@ const COMMUNITY_ROWS = [
   },
   {
     logo: "/marketing/logos/slack.svg",
+    icon: false,
     title: "Slack community",
     body: "Job seekers sharing leads, asking questions, and keeping each other accountable.",
     cta: "Join the Slack",
@@ -694,6 +696,7 @@ const COMMUNITY_ROWS = [
   },
   {
     logo: "/marketing/logos/offboard-symbol.png",
+    icon: true,
     title: "Meet with a human",
     body: "Stuck on your search? Share where you are and our team reaches out directly. Free.",
     cta: "Say hello",
@@ -713,7 +716,7 @@ export function CommunityStrip() {
       <div className="mh-community-cards" data-reveal="">
         {COMMUNITY_ROWS.map((row) => (
           <article key={row.title}>
-            <span className="mh-community-logo"><img src={row.logo} alt="" width={40} height={40} loading="lazy" decoding="async" /></span>
+            <span className={`mh-community-logo${row.icon ? " is-icon" : ""}`}><img src={row.logo} alt="" width={56} height={56} loading="lazy" decoding="async" /></span>
             <h3>{row.title}</h3>
             <p>{row.body}</p>
             {row.href.startsWith("/") ? (

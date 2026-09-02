@@ -399,6 +399,12 @@ Never a hand-drawn approximation. The five Google, Calendly and Notion
 marks still in `IntegrationLogos.tsx` predate this rule and are tracked
 for replacement.
 
+**R7c · An app icon fills its tile.** A brand mark that carries its own
+background (beehiiv's circle, the Offboard app icon) renders edge to edge
+at the tile's radius. Only a transparent mark sits on a paper tile with a
+hairline. Shrinking an icon inside a tile makes it read as a coloured
+square rather than as the brand.
+
 **R7b · No chips on photographs.** The `Benefits check · Done` style
 badge over a photo is retired (owner 2026-09-02): it read as forced and
 added nothing the composition beside it did not already say. Product
