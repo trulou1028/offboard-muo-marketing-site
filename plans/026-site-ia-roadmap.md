@@ -89,6 +89,7 @@ baselines did **not**, because a 76px header sits under the suite's 1%
 tolerance - the nav was verified by measurement instead.
 
 **Only `/companies` (Company Transition Centers) is left in the roadmap.**
+Scoped in plan 038 (written, not built; five owner decisions open).
 
 ## Open owner decisions (recorded, not presumed)
 
