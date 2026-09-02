@@ -1,5 +1,7 @@
 # Plan 013: Unify the container system and cap content width at 1200px sitewide (header, footer, hero, sections)
 
+> **Execute with:** Opus 5 · medium effort — a container refactor that had to render identically at 1200px. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
 > next step. If anything in the "STOP conditions" section occurs, stop and

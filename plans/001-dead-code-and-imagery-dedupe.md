@@ -1,5 +1,7 @@
 # Plan 001: Remove dead migration components and give each page its own photo
 
+> **Execute with:** Sonnet 5 · low effort — pure deletion plus two image swaps, with the build as the only check that matters. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
 > next step. If anything in the "STOP conditions" section occurs, stop and

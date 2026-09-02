@@ -1,5 +1,7 @@
 # Plan 028 — Offboard Everywhere (/integrations)
 
+> **Execute with:** Opus 5 · medium effort — a pillar page from the strategy doc with two owner-verification flags to carry, not resolve. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Phase 2, first item, of the site IA roadmap (plan 026). The consumer-facing
 version of the connected-assistant story. Built 2026-08-31.
 

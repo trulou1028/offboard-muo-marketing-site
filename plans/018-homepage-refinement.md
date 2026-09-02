@@ -1,5 +1,7 @@
 # Plan 018: Refine the homepage hierarchy, pacing, proof, and interaction polish
 
+> **Execute with:** Opus 5 · medium effort — homepage hierarchy and pacing on settled copy, verified in a browser. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan in phases. Run the required
 > verification after every phase and honor the review and STOP conditions.
 > Update the Plan 018 row in `plans/README.md` when the review state changes.

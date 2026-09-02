@@ -1,5 +1,7 @@
 # Plan 014: Consolidate the design tokens (spacing rhythm, type scale, colors, radii, shadows) and rewrite DESIGN.md to match what ships
 
+> **Execute with:** Opus 5 · medium effort — token consolidation across the whole stylesheet with the baseline as the check. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
 > next step. If anything in the "STOP conditions" section occurs, stop and

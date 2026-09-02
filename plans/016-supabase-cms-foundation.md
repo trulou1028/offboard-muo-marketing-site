@@ -1,5 +1,7 @@
 # Plan 016: Supabase CMS foundation — schema from the registry, one publish status, ISR rendering contract, safe read client, CI database story
 
+> **Execute with:** Fable 5.1 · high effort — the Supabase schema, RLS and grants, and a fallback that must fail loudly when the database path is not taken. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
 > next step. If anything in the "STOP conditions" section occurs, stop and

@@ -1,5 +1,7 @@
 # Plan 032 — Title Case navigation labels
 
+> **Execute with:** Sonnet 5 · low effort — a label casing change with the nav tests as the check. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Owner report (2026-08-31): "many links in the footer and nav have
 lowercase words like 'For employers' when it should be all uppercase like
 'For Employers'."

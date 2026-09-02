@@ -1,5 +1,7 @@
 # Plan 012: Establish a styling verification baseline (stylelint, typecheck, screenshot tests, dead-selector guard, lint in CI)
 
+> **Execute with:** Opus 5 · medium effort — establishing the visual baseline and lint harness the later plans depend on. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
 > next step. If anything in the "STOP conditions" section occurs, stop and

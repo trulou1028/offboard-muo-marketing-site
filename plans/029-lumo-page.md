@@ -1,5 +1,7 @@
 # Plan 029 — Lumo page (/lumo)
 
+> **Execute with:** Opus 5 · medium effort — a pillar page from approved copy. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Phase 2, second item, of the site IA roadmap (plan 026). Built 2026-08-31.
 
 ## The angle

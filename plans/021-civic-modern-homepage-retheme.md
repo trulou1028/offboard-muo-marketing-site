@@ -1,5 +1,7 @@
 # Plan 021 — Civic Modern homepage retheme
 
+> **Execute with:** Opus 5 · medium effort — a retheme onto the owner's design system, judged by the visual baseline. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Owner-directed (2026-08-30). Louie built the "Offboard Modern Civic" design
 system in Claude Design; the site adopts it. Reference lives in
 `docs/design-system-civic-modern/` (`readme.md` is the spec; `tokens/*.css`

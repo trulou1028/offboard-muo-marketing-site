@@ -1,5 +1,7 @@
 # Plan 017: Hygiene batch — PII-safe logging, intake action tests, inherited noindex + sitemap, related posts, font/scroll polish
 
+> **Execute with:** Sonnet 5 · low effort — a hygiene batch of small, independently testable fixes. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan step by step. The six parts are
 > independent — if one hits a STOP condition, report it and continue with the
 > others. Run every verification command before moving on. When done, update

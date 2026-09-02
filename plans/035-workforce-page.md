@@ -1,5 +1,7 @@
 # Plan 035 — Workforce & Government (`/workforce`), and the `/public-partners` consolidation
 
+> **Execute with:** Fable 5.1 · high effort — a government-facing page inside the B2G language firewall, with an aspirational doc set that had to be refused as a source. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 **Status: executed on branch `claude/workforce`.** Phase 3 of the site IA
 roadmap (plan 026), second item. Also closes plan 026's open decision 1.
 

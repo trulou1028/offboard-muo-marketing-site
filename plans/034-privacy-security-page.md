@@ -1,5 +1,7 @@
 # Plan 034 — Privacy & Security (`/privacy-security`)
 
+> **Execute with:** Fable 5.1 · high effort — security claims ported from the app's claims register; a single overstated sentence is a false public claim. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 **Status: executed on branch `claude/privacy-security`.** Phase 3 of the site
 IA roadmap (plan 026), the item the owner's strategy doc marks mandatory:
 Career Context only works if a person will put their real history into it,

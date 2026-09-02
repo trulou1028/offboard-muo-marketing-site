@@ -1,5 +1,7 @@
 # Plan 033 — Integrations showcase, the CalJOBS hook, and four owner decisions
 
+> **Execute with:** Opus 5 · medium effort — a card-grid rebuild, a ledger-governed hook, and four owner decisions to record exactly. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Executed directly on 2026-09-01 from the owner's answers to the five open
 questions carried out of plan 026 and plan 028. This file is the record of
 what shipped and what is still open, not a handoff.

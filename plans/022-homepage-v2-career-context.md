@@ -1,5 +1,7 @@
 # Plan 022 — Homepage v2 (Career Context)
 
+> **Execute with:** Opus 5 · high effort — a full homepage rebuild from the owner's copy doc, with an accessibility regression to catch. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Owner-directed (2026-08-30). Louie supplied a full homepage copy doc
 (`offboard-career-context-hp-copy-v1a.md`, in his Drive) and asked for a
 homepage v2 built from it, using the hero photo from the Civic Modern design
