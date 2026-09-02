@@ -12,6 +12,29 @@ Execute in the order below unless dependencies say otherwise. Each executor:
 read the plan fully before starting, honor its STOP conditions, and update
 your row when done.
 
+## The model line (every plan, first line under the title)
+
+**Owner rule, 2026-09-01: every plan names the model that should execute it,
+on the first line under its H1**, in this exact shape:
+
+> **Execute with:** `<model>` · `<effort>` — `<one clause on why>`.
+
+Pick from the current Claude family, by what the plan actually risks, not by
+its size:
+
+| Pick | When | Effort |
+| --- | --- | --- |
+| **Fable 5.1** | Claims and compliance copy (privacy, B2G firewall, named companies, prices), redirects and anything SEO-load-bearing, database and CMS work, cross-repo ports, accessibility-critical UI (nav, forms), anything where a wrong judgment ships a false claim | high |
+| **Opus 5** | Page builds from approved copy, retheme and CSS work with browser verification, refactors that must render identically, plans with 3+ moving parts but settled facts | medium (high if verification-heavy) |
+| **Sonnet 5** | Mechanical sweeps, single-copy changes, test-list and doc bookkeeping, one-file fixes with an existing test | low |
+| Haiku 4.5 | Not for executing plans here. Every plan in this repo ends in `npm test`, `npm run build`, and a browser check; the cheaper model saves nothing once verification is counted | — |
+
+When a plan straddles two rows, name the higher one. A plan whose model line
+is missing is not ready to execute. Plans 001–037 carry the line
+retroactively (added 2026-09-01); their picks are what the work turned out to
+need, recorded so the table above is grounded in real plans rather than
+guesses.
+
 ## Execution order & status
 
 | Plan | Title | Priority | Effort | Depends on | Status |

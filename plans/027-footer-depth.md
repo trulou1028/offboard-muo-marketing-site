@@ -1,5 +1,7 @@
 # Plan 027 — Give the footer its own depth
 
+> **Execute with:** Sonnet 5 · low effort — one footer token and a hairline. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Owner report (2026-08-31): "many of the pages have the last section before
 the footer be green and it flows right into the footer green instead of
 standing on its own."

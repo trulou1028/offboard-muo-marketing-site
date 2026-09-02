@@ -1,5 +1,7 @@
 # Plan 006: Add the /resources shell, the 301 map, and cutover readiness
 
+> **Execute with:** Fable 5.1 · high effort — the SEO-load-bearing 301 map and cutover readiness; a wrong redirect is a public defect. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
 > next step. If anything in the "STOP conditions" section occurs, stop and

@@ -1,5 +1,7 @@
 # Plan 019: Make the CMS real in production, and loud when it is not
 
+> **Execute with:** Fable 5.1 · high effort — the CMS production gap: a green check that could be a silent fallback had to be made to fail. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Read this fully before starting. Part 2 is
 > owner-run and blocks Part 3's proof, but Parts 1 and 4 do not depend on it -
 > do them first so the plan delivers value even if the owner gate is slow.

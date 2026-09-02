@@ -1,5 +1,7 @@
 # Plan 007: Give the human-support and About sections photos that are not the hero woman
 
+> **Execute with:** Sonnet 5 · low effort — two photo swaps against a stated once-only rule. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
 > next step. If anything in the "STOP conditions" section occurs, stop and

@@ -1,5 +1,7 @@
 # Plan 036 — Universities & Communities (`/communities`)
 
+> **Execute with:** Opus 5 · medium effort — a light page on already-fixed patterns; the judgment was in what to leave out. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 **Status: executed on branch `claude/communities`.** The third and last For
 Organizations page. **Phase 3's organization split is complete**:
 `/employers` for a company running a layoff, `/workforce` for agencies,

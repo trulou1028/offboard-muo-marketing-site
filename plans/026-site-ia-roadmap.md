@@ -1,5 +1,7 @@
 # Plan 026 — Site IA roadmap (written plan; phases 2-4 are NOT yet built)
 
+> **Execute with:** Fable 5.1 · high effort — a written roadmap that set the IA, the firewall boundaries, and the open owner decisions for phases 2–4. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Source: the owner's site-architecture strategy doc (2026-08-31, analyzed in
 plan 025's session). The homepage now tells the whole Offboard story; a
 small set of pillar pages lets visitors zoom into the concepts they care

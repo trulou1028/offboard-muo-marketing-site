@@ -1,5 +1,7 @@
 # Plan 015: Make article content portable (block schema + lossless conversion of the 11 posts + data/view split that keeps the copy-law tests alive)
 
+> **Execute with:** Fable 5.1 · high effort — a lossless content migration; the fidelity snapshot is the whole point and silent drift is the failure mode. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
 > next step. If anything in the "STOP conditions" section occurs, stop and

@@ -1,5 +1,7 @@
 # Plan 023 — Civic Modern rollout to every route
 
+> **Execute with:** Opus 5 · medium effort — rolling the design system to every route and asserting no route rendered off-system. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Owner-directed (2026-08-31): "can we apply our new style guide to the rest of
 the pages?" Completes the adoption that plan 021 started on the homepage.
 

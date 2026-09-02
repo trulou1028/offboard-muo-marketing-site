@@ -1,5 +1,7 @@
 # Plan 025 — Career Context pillar page
 
+> **Execute with:** Opus 5 · medium effort — the first pillar page and the plumbing template every later page copied. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 Phase 1 of the owner's site-architecture strategy (see plan 026 for the
 full roadmap). Built 2026-08-31 on `claude/career-context-page`, stacked
 on plan 024's PR #45.

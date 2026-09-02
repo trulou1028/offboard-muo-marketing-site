@@ -1,5 +1,7 @@
 # Plan 010: Port the /intake form so human support survives the cutover
 
+> **Execute with:** Fable 5.1 · high effort — a live form handling personal data, email delivery, and a never-redirect route. *(Executed. Model line added retroactively 2026-09-01 under plans/README.md § "The model line".)*
+
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
 > next step. If anything in the "STOP conditions" section occurs, stop and
