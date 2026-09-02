@@ -2,8 +2,10 @@
 
 > **Execute with:** Fable 5.1 · high effort — every page names a real company and states public facts about its layoff with sources; a wrong headcount, an implied relationship, or a stale date is a false public claim about a third party, and the per-page facts register plus CopyDrift assertions have to be built right the first time.
 
-**Status: WRITTEN SCOPE. Nothing is built. Five owner decisions gate the
-start (see STOP conditions).** The last item in plan 026's roadmap.
+**Status: BUILT on branch `claude/company-pages` (owner said go on
+2026-09-01 and added Airtable to the list). Decisions 3 to 5 were taken
+under stated assumptions, recorded at the end.** The last item in plan
+026's roadmap.
 
 ## What this is, in one paragraph
 
@@ -189,3 +191,45 @@ aggregates endpoint are a separate plan, written then, not now.
 
 Decision 6 is explicitly *not* asked now: member counts and "others from
 X" wait for the aggregates endpoint and real numbers.
+
+## As built (2026-09-01)
+
+Six pages, not five: the owner added **Airtable** for the founders' own
+history with it. No Airtable layoff newer than September 2023 is on public
+record, so that page states the 2022 and 2023 rounds and says plainly that
+nothing newer is on record, rather than implying a current event.
+
+Decisions 3 to 5 were not answered and were taken under these assumptions,
+each reversible in a line: the HR band stays (one quiet line, after the
+independence band, linking to `/employers`); "Company Transition Centers"
+is the public name (index H1, menu item, footer link); a page unchecked for
+90 days is re-verified or unpublished.
+
+Every figure was sourced by reading the source on 2026-09-01. Two sources
+that press summaries cited could not be read (GeekWire and HousingWire
+returned 403), so Zillow's reported 5 October separation date and up-to-21-
+weeks severance are **not** on the page. The SEC filings for Sprout Social
+and Coursera were located through the SEC's data API and cited by accession
+number. The facts register in COPY.md § 17 is generated from the JSON, and
+`CopyDrift` fails the build on any figure that is not in it.
+
+## Baselines: all 54 moved, and here is why that is right
+
+`--update-snapshots` rewrote every existing visual baseline. Pillow was
+used (in a scratch venv, not a project dependency) to diff each old and new
+image. Three causes, all verified:
+
+1. **The footer grew by one line** ("Company Transition Centers" in the
+   Product column): every image is exactly 54px taller at desktop and mobile
+   and 33px taller at tablet, and pixel-identical above the footer allowance
+   on 33 of the 54.
+2. **The stored baselines were stale by several merged plans.** Their header
+   still showed the sentence-case, seven-link nav from before plans 032 and
+   037, because a 76px header sits under the suite's 1% tolerance and was
+   never rewritten. The forced rewrite finally captured the shipped nav. This
+   is the "no baseline moved is weak evidence" trap from AGENTS.md, closed.
+3. **Two photo regions** (the homepage product-scene strip, the /how-it-works
+   onboarding render on mobile and tablet) differ by rendering noise only;
+   the old and new crops are visually identical.
+
+Nothing in the diff is a layout change on an existing page.

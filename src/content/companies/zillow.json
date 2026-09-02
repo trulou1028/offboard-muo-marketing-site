@@ -1,0 +1,14 @@
+{
+  "slug": "zillow",
+  "name": "Zillow",
+  "summary": "Zillow laid off just over 500 people, roughly 7% of the company, on 4 and 5 August 2026, including 91 in Washington state.",
+  "state": "WA",
+  "site": "Seattle",
+  "event_date": "2026-08-04",
+  "facts": [
+    { "label": "People affected", "figure": "just over 500 people, roughly 7% of the company", "detail": "CEO Jeremy Wacksman called it a difficult decision the company needed in order to grow at scale.", "source_name": "FOX 13 Seattle, 5 August 2026", "source_url": "https://www.fox13seattle.com/news/zillow-layoffs-affect-just-over-500-employees-91-wa", "checked_on": "2026-09-01" },
+    { "label": "Washington WARN filing", "figure": "91 people at the Seattle site, notice dated 4 August 2026", "detail": "WARN is the public notice an employer files with the state ahead of a large layoff. It counts one state, so it is smaller than the company-wide figure.", "source_name": "Washington WARN filings via WARN Firehose", "source_url": "https://warnfirehose.com/data/layoffs/washington", "checked_on": "2026-09-01" }
+  ],
+  "severance": null,
+  "last_checked": "2026-09-01"
+}

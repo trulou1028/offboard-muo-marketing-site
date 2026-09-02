@@ -143,6 +143,7 @@ export const NAV_ENTRIES: readonly NavEntry[] = [
         items: [
           { route: "resources", href: "/resources", label: "Guides", blurb: "Practical answers, checked by people.", icon: BookOpen },
           { route: "privacy-security", href: "/privacy-security", label: "Privacy & Security", blurb: "Who can see your record, and who cannot.", icon: ShieldCheck },
+          { route: "companies", href: "/companies", label: "Company Transition Centers", blurb: "Laid off from a company in the news? Start there.", icon: Building2 },
         ],
       },
       {

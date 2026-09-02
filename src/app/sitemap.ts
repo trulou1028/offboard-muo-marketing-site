@@ -2,7 +2,8 @@ import type { MetadataRoute } from "next";
 
 import { getPublishedPosts } from "@/lib/content/posts";
 
-// Static, sourced-from-code content routes. Deliberately excludes /intake
+// Static, sourced-from-code content routes. /companies/<slug> pages are
+// deliberately absent until they leave noindex (plan 038). Deliberately excludes /intake
 // and /intake/confirmed: those are a form and its transactional confirmation,
 // not content anyone should land on from search.
 //
@@ -11,7 +12,7 @@ import { getPublishedPosts } from "@/lib/content/posts";
 // Console" step in docs/cutover-checklist.md so flipping robots off is the
 // only remaining step, not also writing this file.
 const STATIC_ROUTES = ["/", "/how-it-works", "/pricing",
-  "/career-context", "/integrations", "/lumo", "/layoff-support", "/job-search", "/about", "/employers", "/workforce", "/communities", "/act", "/resources", "/privacy-security"] as const;
+  "/career-context", "/integrations", "/lumo", "/layoff-support", "/job-search", "/about", "/employers", "/workforce", "/communities", "/act", "/resources", "/privacy-security", "/companies"] as const;
 
 const BASE_URL = "https://offboard.co";
 

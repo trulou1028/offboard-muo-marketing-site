@@ -180,6 +180,8 @@ plus one featured card on the right with a render. Panels are light
   reflections.` → `See exactly who can see what` → `/privacy-security`
 - **Resources ▾** — *Resources:* Guides `Practical answers, checked by
   people.` · Privacy & Security `Who can see your record, and who cannot.`
+  · Company Transition Centers `Laid off from a company in the news? Start
+  there.` (joined in plan 038)
   · *Company:* About `Why Offboard exists, and who is behind it.` · Visit Us
   `Talk to a person, online or in Concord.` → `/intake` · Slack Community
   `People searching alongside you.` → `https://offboard.co/community` ·
@@ -188,9 +190,9 @@ plus one featured card on the right with a render. Panels are light
   honest takes on tech hiring. 5,000+ subscribers.` → `Subscribe free` →
   `https://newsletter.offboard.co`
 
-**Company Transition Centers is NOT in Resources yet.** The target navigation
-lists it there; `/companies` does not exist, and plan 026's rule is that the
-dropdown ships only when its pages exist. It joins when the page does.
+**Company Transition Centers joined Resources in plan 038**, the moment
+`/companies` existed; it was held out of the first cut under plan 026's
+no-dead-links rule.
 
 **Navigation labels are Title Case** (owner decision 2026-08-31); prose,
 headlines, and CTA button labels stay sentence case. The mixed casing this
@@ -203,7 +205,8 @@ Case while "How it works" and "For employers" were not.
 > Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
 
 Columns — **Product:** How it works, Career Context, Lumo, Job Search,
-Offboard Everywhere, Layoff & Benefits, Pricing, Guides ·
+Offboard Everywhere, Layoff & Benefits, Pricing, Guides, Company Transition
+Centers ·
 **Partners:** For
 Employers, Workforce & Government, Universities & Communities ·
 **Company:** About, Visit Us
@@ -1517,6 +1520,128 @@ and not Sponsored-tier copy) and the page is in the CopyDrift absence list.
 - Body: `Tell us who your members are, how many you would start with, and what your team already runs. We will scope it with you.`
 - CTA: `Start a sponsorship conversation` → `mailto:hello@offboard.co?subject=Community sponsorship`
 
+# 17 · Company Transition Centers `/companies` and `/companies/<slug>`
+
+**Added 2026-09-01 (plan 038, the last roadmap item).** One page per company
+that has had a layoff, built from the public record. Six in the pilot,
+hand-written, no data plumbing. The owner's own 2026-08-14 analysis in the
+app repo set the shape; Airtable is on the list at the owner's request.
+
+**The facts register below is the law for these pages.** Every figure in
+`src/content/companies/<slug>.json` must appear here verbatim, with its
+source and check date, and `CopyDrift.test.tsx` fails the build if one does
+not. A number with no register row cannot ship. The register is generated
+from the JSON, so editing a figure means editing the JSON and regenerating
+this section together.
+
+**What the pages never do:** imply a relationship ("no relationship with",
+"independent of", and "not affiliated with" are on every page), show who is
+on Offboard, editorialise about the company, promise anything, or go stale
+silently (every page carries `Last checked`; 90 days without a re-check
+means re-verify or unpublish). "Outplacement" stays on `/employers`; the HR
+band links there without the word. No logos.
+
+**Zillow note:** press reported a 5 October 2026 separation date and
+severance of up to 21 weeks, but the one source that stated them could not
+be read at check time, so neither is on the page.
+
+**Airtable note:** no layoff newer than September 2023 is on public record,
+and the page says so in its summary line rather than implying one.
+
+**Meta title (index):** `Company Transition Centers | Offboard`
+**Meta description (index):** `One page per company that has just had a layoff, built from the public record: what happened, with a source next to every figure, what to do this week, and what your state owes you.`
+**Meta title (page):** `Laid off from <Company>? Start here | Offboard` · **description:** the page's summary line.
+
+### Index hero
+
+- Kicker: `Company Transition Centers`
+- H1: `Laid off from a company in the news? Start with its page.`
+- Body: `One page per company, built from the public record: what happened, with a source next to every figure, what to do this week, and what your state owes you. Nothing here is an estimate and nothing here is a promise.`
+- Footnote: `Offboard has no relationship with any company listed. Each page says when it was last checked.`
+- CTA: `Build my free transition plan`
+- List section: kicker `Pages` · H2 `Six companies, newest first.` · each card: month and year, name, summary line, `Open the <Company> page`
+
+### Company page template
+
+- Kicker: `Company Transition Center` · H1: `Laid off from <Company>? Start here.` · Body: the summary line · Footnote: `Facts on this page come from the public record, with a source next to each one. Last checked <date>. Offboard has no relationship with <Company>.` · CTA: `Build my free transition plan`
+- **What happened** — Kicker `What happened` · H2 `The public record.` · Body `Each figure below is stated as its source states it, with the source next to it. Nothing here is Offboard's estimate.` · then the register rows for that company, each as label, figure, optional detail, `Source: <name> · checked <date>`.
+- **This week** — Kicker `This week` · H2 `Four things to do before anything else.` · Body `The job search can wait a few days. These cannot.`
+  1. `Write down your key dates` — `Your last day, your final pay date, and the date your health coverage ends. Most expensive mistakes after a layoff are missed deadlines.`
+  2. `File for unemployment now, not later` — `Benefits usually start from the week you file, not the week you were let go. Waiting costs money.`
+  3. `Get the severance paperwork in writing` — `Read it before you sign it. What you are being offered, and what you are giving up.`
+  4. `Sort out health coverage before the window closes` — `You have a limited time to choose. The options and the deadlines are on the guide below.`
+  - Link: `The full first-week guide` → `/resources/first-week-after-a-layoff`
+- **What <State> owes you** — Kicker `What <State> owes you` · H2 `Claiming your benefits is free. Start with the official source.` · Body `The <Company> site on record is in <City>, <State>. Unemployment benefits there are run by the <agency>. File with them directly; Offboard never sits between you and the agency.` · Cards: `File for unemployment in <State>` → the official agency page (CA: EDD `https://edd.ca.gov/en/unemployment/` · WA: ESD `https://esd.wa.gov/unemployment` · IL: IDES `https://ides.illinois.gov/unemployment.html`, each verified live 2026-09-01) · `Your options before the window closes` → `/resources/health-insurance-after-a-layoff` · `What Offboard watches for you` → `/layoff-support` (California pages add `Including the California training extension most people have never heard of.`)
+- **Severance** — Kicker `Severance` · H2 `Read it before you sign it.` · With a source: `<Company> offered <figure>. Source: <name>, checked <date>. Your own agreement is the only one that applies to you.` · Without: `No public source states <Company>'s severance terms for this round, so this page does not guess at them. Your own agreement is the only one that applies to you.` · Link `What to check in a severance agreement` → `/resources/negotiating-your-severance`
+- **Straight answers** — the compliance-reviewed independence band, plus `We never promise funding. We show you the exact path to find out. Offboard is independent of <Company> and is not affiliated with it.`
+- **If you work in People at <Company>** — H2 `Sponsoring your team's transition is self-serve and priced per person.` · Link `See sponsored access for employers` → `/employers`
+- Final CTA: `Start with what changed.` (shared, Layoff & Benefits copy)
+
+### Facts register (generated from `src/content/companies/*.json`)
+
+#### Zillow (`/companies/zillow`) · site: Seattle, WA · last checked 2026-09-01
+
+- Summary line: `Zillow laid off just over 500 people, roughly 7% of the company, on 4 and 5 August 2026, including 91 in Washington state.`
+
+| Fact | Figure (verbatim on the page) | Source | Checked |
+| --- | --- | --- | --- |
+| People affected | `just over 500 people, roughly 7% of the company` | [FOX 13 Seattle, 5 August 2026](https://www.fox13seattle.com/news/zillow-layoffs-affect-just-over-500-employees-91-wa) | 2026-09-01 |
+| Washington WARN filing | `91 people at the Seattle site, notice dated 4 August 2026` | [Washington WARN filings via WARN Firehose](https://warnfirehose.com/data/layoffs/washington) | 2026-09-01 |
+| Severance | *No public source states the terms; the page says so rather than guessing.* | | |
+
+#### Chime (`/companies/chime`) · site: San Francisco, CA · last checked 2026-09-01
+
+- Summary line: `Chime told staff on 31 July 2026 that it was cutting about 10% of the company, roughly 150 people, in a memo from CEO Chris Britt.`
+
+| Fact | Figure (verbatim on the page) | Source | Checked |
+| --- | --- | --- | --- |
+| People affected | `about 150 people, 10% of a company of about 1,500` | [Banking Dive, 31 July 2026](https://www.bankingdive.com/news/chime-cut-workforce-10-percent-150-employees-ai-smaller-teams-chris-britt/826730/) | 2026-09-01 |
+| California WARN filing | `135 people at the San Francisco site, notice dated 31 July 2026` | [California WARN filings via WARN Firehose](https://warnfirehose.com/data/layoffs/california) | 2026-09-01 |
+| Severance | *No public source states the terms; the page says so rather than guessing.* | | |
+
+#### Patreon (`/companies/patreon`) · site: San Francisco, CA · last checked 2026-09-01
+
+- Summary line: `Patreon laid off 93 people, about 20% of the company, on 23 July 2026, in a memo from CEO Jack Conte.`
+
+| Fact | Figure (verbatim on the page) | Source | Checked |
+| --- | --- | --- | --- |
+| People affected | `93 people, about 20% of the company` | [TechCrunch, 23 July 2026](https://techcrunch.com/2026/07/23/patreon-lays-off-off-20-of-its-workforce/) | 2026-09-01 |
+| Date | `23 July 2026` | [TechCrunch, 23 July 2026](https://techcrunch.com/2026/07/23/patreon-lays-off-off-20-of-its-workforce/) | 2026-09-01 |
+| Severance, as reported | `at least 16 weeks of severance, plus one week per year of service, with health coverage through the end of the year and a $1,500 laptop stipend, as reported` | [TechCrunch, 23 July 2026](https://techcrunch.com/2026/07/23/patreon-lays-off-off-20-of-its-workforce/) | 2026-09-01 |
+
+#### Sprout Social (`/companies/sprout-social`) · site: Chicago, IL · last checked 2026-09-01
+
+- Summary line: `Sprout Social began notifying about 260 people, 20% of its staff, on 15 July 2026, under a plan its board approved on 8 July.`
+
+| Fact | Figure (verbatim on the page) | Source | Checked |
+| --- | --- | --- | --- |
+| People affected | `about 260 positions, 20% of staff` | [Sprout Social Form 8-K, filed 15 July 2026](https://www.sec.gov/Archives/edgar/data/1517375/000151737526000052/spt-20260715.htm) | 2026-09-01 |
+| Board approval | `8 July 2026` | [Investing.com, 15 July 2026](https://www.investing.com/news/stock-market-news/sprout-social-cuts-20-of-workforce-in-restructuring-plan-93CH-4793486) | 2026-09-01 |
+| Set aside for severance and benefits | `$18.0 million to $20.0 million` | [Investing.com, 15 July 2026](https://www.investing.com/news/stock-market-news/sprout-social-cuts-20-of-workforce-in-restructuring-plan-93CH-4793486) | 2026-09-01 |
+| Expected to complete | `by the end of the third quarter of 2026` | [Investing.com, 15 July 2026](https://www.investing.com/news/stock-market-news/sprout-social-cuts-20-of-workforce-in-restructuring-plan-93CH-4793486) | 2026-09-01 |
+| Severance | *No public source states the terms; the page says so rather than guessing.* | | |
+
+#### Coursera (`/companies/coursera`) · site: San Jose, CA · last checked 2026-09-01
+
+- Summary line: `Coursera committed to a workforce reduction on 6 July 2026, two months after completing its merger with Udemy, and filed a California WARN notice for 31 people in San Jose on 14 July.`
+
+| Fact | Figure (verbatim on the page) | Source | Checked |
+| --- | --- | --- | --- |
+| What the company filed | `a workforce reduction plan, committed to on 6 July 2026` | [Coursera Form 8-K, filed 6 July 2026](https://www.sec.gov/Archives/edgar/data/1651562/000165156226000055/cour-20260706.htm) | 2026-09-01 |
+| Set aside for severance and benefits | `$8 million to $11 million` | [Coursera Form 8-K, filed 6 July 2026](https://www.sec.gov/Archives/edgar/data/1651562/000165156226000055/cour-20260706.htm) | 2026-09-01 |
+| California WARN filing | `31 people at the San Jose site, notice dated 14 July 2026` | [California WARN filings via WARN Firehose](https://warnfirehose.com/data/layoffs/company/coursera) | 2026-09-01 |
+| Severance | *No public source states the terms; the page says so rather than guessing.* | | |
+
+#### Airtable (`/companies/airtable`) · site: San Francisco, CA · last checked 2026-09-01
+
+- Summary line: `Airtable has had two rounds of layoffs on public record: 254 people in December 2022 and 237 people in September 2023, both announced by CEO Howie Liu. No newer round is on record as of the date this page was checked.`
+
+| Fact | Figure (verbatim on the page) | Source | Checked |
+| --- | --- | --- | --- |
+| September 2023 | `237 people, about 27% of the company` | [Computerworld, 15 September 2023](https://www.computerworld.com/article/1635865/low-code-platform-provider-airtable-enacts-new-round-of-layoffs.html) | 2026-09-01 |
+| December 2022 | `254 people, about 20% of the company` | [Computerworld, 9 December 2022](https://www.computerworld.com/article/1615814/airtable-becomes-latest-company-to-announce-layoffs-cutting-20-of-its-workforce.html) | 2026-09-01 |
+| Severance, as reported | `at least 16 weeks of severance pay, accelerated equity vesting, and immigration counsel for people on visas, as reported for the December 2022 round` | [Computerworld, 9 December 2022](https://www.computerworld.com/article/1615814/airtable-becomes-latest-company-to-announce-layoffs-cutting-20-of-its-workforce.html) | 2026-09-01 |
+
 # Redirect map (SEO-load-bearing; any route rename must update it in the same PR)
 
 `/product`, `/why-offboard` → `/how-it-works` · `/job-packet` →
@@ -1588,6 +1713,7 @@ When one ships, move it into its page section above.
 | 2026-09-01 | ChatGPT and Claude connections confirmed live, shipped labelled "Beta" (owner's framing: they work and are still being refined). Closes plan 028's first verification flag | plan 033, this file § 11 |
 | 2026-09-01 | `/integrations` leads with a card grid of real integrations; "The idea" editorial block cut for length | plan 033, this file § 11 |
 | 2026-09-01 | The `~$12,000` CalJOBS hook ships on `/layoff-support`, with conditions and small print, and stays off the homepage | plan 033, this file § 13 |
+| 2026-09-01 | Company Transition Centers ship as a six-page hand-written pilot (Patreon, Sprout Social, Chime, Zillow, Coursera, Airtable at the owner's request); every figure lives in a generated facts register enforced by CopyDrift; no logos, no member counts, no relationship claims | plan 038, this file § 17 |
 | 2026-09-01 | Mega-menu navigation ships with four tabs (Product / For Organizations / Pricing / Resources) and light panels; Home leaves the bar, How It Works moves inside Product, About inside Resources; header CTA stays `Build my plan`; Company Transition Centers held out of Resources until `/companies` exists | plan 037, this file § Site chrome |
 | 2026-09-01 | `/communities` ships, completing the For Organizations split; no prices and no category claim on it, both by choice and both reversible | plan 036, this file § 16 |
 | 2026-09-01 | `/workforce` ships and `/public-partners` is retired and 301'd to it; the public-sector section leaves `/employers` for a crosslink; no county named and no B2G capability claimed beyond `/act` and `/employers` copy | plan 035, this file § 8 |
