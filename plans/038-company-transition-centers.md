@@ -1,5 +1,7 @@
 # Plan 038 — Company Transition Centers (`/companies`): scope, not build
 
+> **Execute with:** Fable 5.1 · high effort — every page names a real company and states public facts about its layoff with sources; a wrong headcount, an implied relationship, or a stale date is a false public claim about a third party, and the per-page facts register plus CopyDrift assertions have to be built right the first time.
+
 **Status: WRITTEN SCOPE. Nothing is built. Five owner decisions gate the
 start (see STOP conditions).** The last item in plan 026's roadmap.
 
