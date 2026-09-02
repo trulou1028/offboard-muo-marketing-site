@@ -88,8 +88,8 @@ items became four. Nav tests and COPY.md chrome moved with it; the visual
 baselines did **not**, because a 76px header sits under the suite's 1%
 tolerance - the nav was verified by measurement instead.
 
-**Only `/companies` (Company Transition Centers) is left in the roadmap.**
-Scoped in plan 038 (written, not built; five owner decisions open).
+~~**Only `/companies` (Company Transition Centers) is left in the roadmap.**~~
+**DONE, plan 038.** Six-page pilot, shipped 2026-09-01. **The roadmap is complete: every page the target navigation names exists.**
 
 ## Open owner decisions (recorded, not presumed)
 
