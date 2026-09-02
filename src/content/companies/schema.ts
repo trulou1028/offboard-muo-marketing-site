@@ -16,6 +16,19 @@ export type CompanyFact = {
   checked_on: string;
 };
 
+/* A company's own mark, self-hosted in public/marketing/companies/. Never a
+   hotlink: a third-party request on every page load would be both a CDN
+   dependency this repo does not take and a tracker on a site that just
+   shipped a page about who can see your data. `wide` marks a horizontal
+   wordmark rather than a square icon, so the tile can hold both. */
+export type CompanyLogo = {
+  src: string;
+  source_name: string;
+  source_url: string;
+  checked_on: string;
+  wide?: boolean;
+};
+
 export type CompanyState = "CA" | "WA" | "IL";
 
 export type CompanyPage = {
@@ -29,6 +42,8 @@ export type CompanyPage = {
   site: string;
   /* ISO date of the most recent event the page describes */
   event_date: string;
+  /* null renders a monogram instead; no page waits on an asset. */
+  logo: CompanyLogo | null;
   facts: readonly CompanyFact[];
   /* Reported severance terms, stated as reported, or null when no source states them */
   severance: { figure: string; source_name: string; source_url: string; checked_on: string } | null;

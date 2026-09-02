@@ -95,10 +95,10 @@ fact. The page promises nothing.
 
 ## What the pages will never do
 
-- **Imply a relationship.** No "Patreon partners with Offboard", no logo,
-  no "official". The company is named as a matter of public record, the way
-  a newspaper names it. The unshipped logos band is still blocked on owner
-  verification for exactly this reason; company pages inherit that caution.
+- **Imply a relationship.** No "Patreon partners with Offboard", no
+  "official". The company is named as a matter of public record, the way a
+  newspaper names it. *(Logos were originally excluded here too; the owner
+  reversed that on 2026-09-01. See "Logos" below.)*
 - **Show who is here.** No names, no counts under the floor, nothing that
   lets a reader infer that a specific person is on Offboard. Talent-pool
   opt-in governs discoverability of people, and a public page is the most
@@ -233,3 +233,31 @@ image. Three causes, all verified:
    the old and new crops are visually identical.
 
 Nothing in the diff is a layout change on an existing page.
+
+## Logos (owner call, 2026-09-01, reversing this plan's original line)
+
+The owner asked for the companies' own marks. They are in, under four rules,
+all enforced or verified:
+
+1. **Self-hosted** in `public/marketing/companies/`, 40KB for all six. Never
+   hotlinked. A logo CDN would put a third-party request on every page load
+   of a site that ships `/privacy-security`; a browser test asserts the
+   company pages make **no** third-party requests at all.
+2. **Contained, never cropped or recoloured.** Cropping a trademark alters
+   it. The tile holds a square app icon and a horizontal wordmark equally
+   (`object-fit: contain`, percentage inset so it scales with the tile).
+3. **Same size for every company**, so no mark reads as featured.
+4. **The disclaimer shares the block.** The mark sits in the hero directly
+   above `Offboard has no relationship with <Company>`, never beside the
+   sponsorship line. A browser test asserts that ordering geometrically.
+
+**Provenance.** Five are the company's own app icon, fetched from the
+company's own server (`apple-touch-icon`), which is the most authoritative
+source there is: the asset the company publishes for exactly this purpose.
+Chime blocks automated fetching, so its mark is the **public-domain**
+wordmark on Wikimedia Commons (`File:Chime Bank logo.png`, copyright status
+public domain, trademark noted). It is horizontal rather than square, which
+is why the tile supports both shapes. Every logo carries its source URL and
+check date in the JSON, `CopyDrift` asserts the file exists on disk and the
+source is registered in COPY.md § 17, and a `null` logo falls back to a
+monogram so no page ever waits on an asset.

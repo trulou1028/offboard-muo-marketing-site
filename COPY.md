@@ -1539,7 +1539,38 @@ this section together.
 on Offboard, editorialise about the company, promise anything, or go stale
 silently (every page carries `Last checked`; 90 days without a re-check
 means re-verify or unpublish). "Outplacement" stays on `/employers`; the HR
-band links there without the word. No logos.
+band links there without the word.
+
+**Logos: allowed, on the owner's call of 2026-09-01**, reversing this
+section's original "no logos" line. Each is the company's own mark, used
+nominatively to identify the subject of the page. Four rules hold it there:
+
+1. **Self-hosted**, in `public/marketing/companies/`. Never a hotlink: a
+   third-party request on every page load is both a CDN dependency this repo
+   does not take and a tracker on a site that ships `/privacy-security`.
+2. **Contained, never cropped**, and never recoloured. Cropping or restyling
+   a trademark alters it.
+3. **Same size for every company**, so no mark reads as featured.
+4. **The disclaimer shares its block.** The mark sits in the hero directly
+   above `Offboard has no relationship with <Company>`, and never beside the
+   sponsorship line. `CopyDrift` asserts the file exists, the source is
+   registered below, and the disclaimer renders.
+
+### Logo provenance
+
+Five are the company's own app icon, taken from the company's own server.
+Chime's is the public-domain wordmark on Wikimedia Commons, because Chime's
+own asset is behind bot protection; it is horizontal rather than square, and
+the tile holds both shapes.
+
+| Company | File | Source | Checked |
+| --- | --- | --- | --- |
+| Zillow | `/marketing/companies/zillow.png` | [Zillow's own site (apple-touch-icon)](https://zillow.com/apple-touch-icon.png) | 2026-09-01 |
+| Chime *(wordmark)* | `/marketing/companies/chime.png` | [Wikimedia Commons, File:Chime Bank logo.png (public domain, trademarked)](https://commons.wikimedia.org/wiki/File:Chime_Bank_logo.png) | 2026-09-01 |
+| Patreon | `/marketing/companies/patreon.png` | [Patreon's own site (apple-touch-icon)](https://patreon.com/apple-touch-icon.png) | 2026-09-01 |
+| Sprout Social | `/marketing/companies/sprout-social.png` | [Sprout Social's own site (apple-touch-icon)](https://sproutsocial.com/apple-touch-icon.png) | 2026-09-01 |
+| Coursera | `/marketing/companies/coursera.png` | [Coursera's own CDN (apple-touch-icon)](https://d3njjcbhbojbot.cloudfront.net/web/images/favicons/apple-touch-icon-v2-180x180.png) | 2026-09-01 |
+| Airtable | `/marketing/companies/airtable.png` | [Airtable's own CDN (apple-touch-icon)](https://static.airtable.com/images/favicon/baymax/apple-touch-icon.png) | 2026-09-01 |
 
 **Zillow note:** press reported a 5 October 2026 separation date and
 severance of up to 21 weeks, but the one source that stated them could not

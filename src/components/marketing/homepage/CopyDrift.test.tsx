@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type { ReactElement } from "react";
 
@@ -201,6 +201,23 @@ describe("company pages hold the facts-register discipline", () => {
     expect(text).toContain(`Offboard has no relationship with ${company.name}`);
     expect(text).toContain(`independent of ${company.name}`);
     expect(text).not.toContain("—");
+  });
+
+  // Every logo is self-hosted, carries the source it came from, and is
+  // registered in COPY.md. A hotlinked mark would be both a CDN dependency
+  // and a third-party request on a site that ships a privacy page.
+  it.each(COMPANY_PAGES.map((c) => [c.name, c] as const))("%s: logo is self-hosted, sourced, and registered", (_name, company) => {
+    const logo = company.logo;
+    if (!logo) return; // a monogram company is allowed; nothing to check
+    expect(logo.src.startsWith("/marketing/companies/"), `${company.name}: logo must be self-hosted`).toBe(true);
+    expect(existsSync(path.join(process.cwd(), "public", logo.src)), `${company.name}: ${logo.src} is missing from public/`).toBe(true);
+    expect(logo.source_url).toMatch(/^https:\/\//);
+    expect(logo.checked_on).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    const register = registerSection();
+    expect(register, `${company.name}: logo source is not in COPY.md § 17`).toContain(logo.source_url);
+    // the mark and the "no relationship" line share the hero
+    const text = renderedText(<MarketingCompanyPage company={company} />);
+    expect(text).toContain(`Offboard has no relationship with ${company.name}`);
   });
 
   it("never claims a relationship, an endorsement, or a member count", () => {

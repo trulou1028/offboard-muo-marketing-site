@@ -5,10 +5,35 @@
   "state": "CA",
   "site": "San Francisco",
   "event_date": "2023-09-15",
+  "logo": {
+    "src": "/marketing/companies/airtable.png",
+    "source_name": "Airtable's own CDN (apple-touch-icon)",
+    "source_url": "https://static.airtable.com/images/favicon/baymax/apple-touch-icon.png",
+    "checked_on": "2026-09-01"
+  },
   "facts": [
-    { "label": "September 2023", "figure": "237 people, about 27% of the company", "detail": "Announced on 15 September 2023 by CEO Howie Liu.", "source_name": "Computerworld, 15 September 2023", "source_url": "https://www.computerworld.com/article/1635865/low-code-platform-provider-airtable-enacts-new-round-of-layoffs.html", "checked_on": "2026-09-01" },
-    { "label": "December 2022", "figure": "254 people, about 20% of the company", "detail": "Announced on 9 December 2022 by CEO Howie Liu in an internal email; the company's first layoff.", "source_name": "Computerworld, 9 December 2022", "source_url": "https://www.computerworld.com/article/1615814/airtable-becomes-latest-company-to-announce-layoffs-cutting-20-of-its-workforce.html", "checked_on": "2026-09-01" }
+    {
+      "label": "September 2023",
+      "figure": "237 people, about 27% of the company",
+      "detail": "Announced on 15 September 2023 by CEO Howie Liu.",
+      "source_name": "Computerworld, 15 September 2023",
+      "source_url": "https://www.computerworld.com/article/1635865/low-code-platform-provider-airtable-enacts-new-round-of-layoffs.html",
+      "checked_on": "2026-09-01"
+    },
+    {
+      "label": "December 2022",
+      "figure": "254 people, about 20% of the company",
+      "detail": "Announced on 9 December 2022 by CEO Howie Liu in an internal email; the company's first layoff.",
+      "source_name": "Computerworld, 9 December 2022",
+      "source_url": "https://www.computerworld.com/article/1615814/airtable-becomes-latest-company-to-announce-layoffs-cutting-20-of-its-workforce.html",
+      "checked_on": "2026-09-01"
+    }
   ],
-  "severance": { "figure": "at least 16 weeks of severance pay, accelerated equity vesting, and immigration counsel for people on visas, as reported for the December 2022 round", "source_name": "Computerworld, 9 December 2022", "source_url": "https://www.computerworld.com/article/1615814/airtable-becomes-latest-company-to-announce-layoffs-cutting-20-of-its-workforce.html", "checked_on": "2026-09-01" },
+  "severance": {
+    "figure": "at least 16 weeks of severance pay, accelerated equity vesting, and immigration counsel for people on visas, as reported for the December 2022 round",
+    "source_name": "Computerworld, 9 December 2022",
+    "source_url": "https://www.computerworld.com/article/1615814/airtable-becomes-latest-company-to-announce-layoffs-cutting-20-of-its-workforce.html",
+    "checked_on": "2026-09-01"
+  },
   "last_checked": "2026-09-01"
 }

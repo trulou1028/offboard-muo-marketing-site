@@ -3,6 +3,8 @@ import { ArrowRight } from "lucide-react";
 
 import { COMPANY_PAGES } from "@/content/companies";
 
+import { CompanyLogo } from "./CompanyLogo";
+
 import { FinalCta, MarketingShell, PageHero } from "./MarketingSite";
 
 /* Company Transition Centers: the index (plan 038). Copy: COPY.md § 17. */
@@ -33,6 +35,7 @@ export function MarketingCompanies() {
             {COMPANY_PAGES.map((company) => (
               <li key={company.slug}>
                 <Link href={`/companies/${company.slug}`}>
+                  <CompanyLogo company={company} size={44} />
                   <span className="mh-company-list-date">{formatDate(company.event_date)}</span>
                   <strong>{company.name}</strong>
                   <small>{company.summary}</small>

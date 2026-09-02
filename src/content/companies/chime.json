@@ -5,9 +5,30 @@
   "state": "CA",
   "site": "San Francisco",
   "event_date": "2026-07-31",
+  "logo": {
+    "src": "/marketing/companies/chime.png",
+    "source_name": "Wikimedia Commons, File:Chime Bank logo.png (public domain, trademarked)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Chime_Bank_logo.png",
+    "checked_on": "2026-09-01",
+    "wide": true
+  },
   "facts": [
-    { "label": "People affected", "figure": "about 150 people, 10% of a company of about 1,500", "detail": "Announced in an internal memo from CEO Chris Britt.", "source_name": "Banking Dive, 31 July 2026", "source_url": "https://www.bankingdive.com/news/chime-cut-workforce-10-percent-150-employees-ai-smaller-teams-chris-britt/826730/", "checked_on": "2026-09-01" },
-    { "label": "California WARN filing", "figure": "135 people at the San Francisco site, notice dated 31 July 2026", "detail": "WARN is the public notice an employer files with the state ahead of a large layoff. It counts one site, so it is smaller than the company-wide figure.", "source_name": "California WARN filings via WARN Firehose", "source_url": "https://warnfirehose.com/data/layoffs/california", "checked_on": "2026-09-01" }
+    {
+      "label": "People affected",
+      "figure": "about 150 people, 10% of a company of about 1,500",
+      "detail": "Announced in an internal memo from CEO Chris Britt.",
+      "source_name": "Banking Dive, 31 July 2026",
+      "source_url": "https://www.bankingdive.com/news/chime-cut-workforce-10-percent-150-employees-ai-smaller-teams-chris-britt/826730/",
+      "checked_on": "2026-09-01"
+    },
+    {
+      "label": "California WARN filing",
+      "figure": "135 people at the San Francisco site, notice dated 31 July 2026",
+      "detail": "WARN is the public notice an employer files with the state ahead of a large layoff. It counts one site, so it is smaller than the company-wide figure.",
+      "source_name": "California WARN filings via WARN Firehose",
+      "source_url": "https://warnfirehose.com/data/layoffs/california",
+      "checked_on": "2026-09-01"
+    }
   ],
   "severance": null,
   "last_checked": "2026-09-01"

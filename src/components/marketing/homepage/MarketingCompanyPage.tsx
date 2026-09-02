@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import type { CompanyPage } from "@/content/companies/schema";
+
+import { CompanyLogo } from "./CompanyLogo";
 import { STATE_BENEFITS } from "@/content/companies/schema";
 
 import {
@@ -37,6 +39,7 @@ export function MarketingCompanyPage({ company }: { company: CompanyPage }) {
         <PageHero
           current="companies"
           kicker="Company Transition Center"
+          eyebrowVisual={<CompanyLogo company={company} />}
           title={`Laid off from ${company.name}? Start here.`}
           body={company.summary}
           cta="Build my free transition plan"

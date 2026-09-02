@@ -897,6 +897,17 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-workforce-objection h3 { color: var(--mh-forest); }
 .mh-workforce-objection p { margin-top: 12px; color: var(--mh-muted); font-size: 16px; line-height: 1.6; }
 
+/* A company's own mark. Contained, never cropped: cropping a trademark
+   alters it. The tile is white so a mark drawn for a light background (a
+   wordmark) and one drawn as a coloured app icon both sit correctly. */
+.mh-company-logo { position: relative; display: block; overflow: hidden; flex: none; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); background: var(--mh-white); }
+/* Percentage padding so the inset scales with the tile: a fixed 8px left
+   the 40px index tiles with only 24px of actual mark. */
+.mh-company-logo img { object-fit: contain; padding: 13%; }
+.mh-company-logo.is-wide { border-radius: var(--mh-radius-sm); }
+.mh-company-logo.is-monogram { display: grid; place-items: center; color: var(--mh-forest); font-family: var(--mh-font-display); font-size: 24px; font-weight: 500; }
+.mh-hero-eyebrow-visual { display: block; margin-bottom: 22px; }
+
 /* Company Transition Centers (/companies and /companies/[slug], plan 038).
    The facts list is a <dl>: each row is one sourced figure with its source
    and check date under it. It is deliberately plain - a page about a named
@@ -930,8 +941,9 @@ a.mh-company-state-card .mh-nav-feature-cta { margin-top: 8px; }
 .mh-company-hr h2 { font-size: var(--mh-h2-sm); }
 .mh-company-index { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-white); border-bottom: 1px solid var(--mh-line); }
 ul.mh-company-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
-.mh-company-list a { display: grid; align-content: start; gap: 8px; height: 100%; padding: 26px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); transition: border-color var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-company-list a { display: grid; align-content: start; gap: 8px; justify-items: start; height: 100%; padding: 26px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); transition: border-color var(--mh-dur-base) var(--mh-ease-standard); }
 .mh-company-list a:hover { border-color: var(--mh-forest); }
+.mh-company-list .mh-company-logo { margin-bottom: 6px; }
 .mh-company-list-date { color: var(--mh-secondary); font-size: 12px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
 .mh-company-list strong { font-family: var(--mh-font-display); font-size: 26px; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; }
 .mh-company-list small { color: var(--mh-muted); font-size: 14px; line-height: 1.55; }
