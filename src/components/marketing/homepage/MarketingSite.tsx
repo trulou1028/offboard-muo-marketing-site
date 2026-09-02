@@ -19,6 +19,7 @@ export type MarketingRoute =
   | "employers"
   | "workforce"
   | "communities"
+  | "companies"
   | "intake"
   | "act"
   | "career-context"
@@ -132,6 +133,7 @@ export function MarketingFooter() {
             <Link href="/layoff-support">Layoff &amp; Benefits</Link>
             <Link href="/pricing">Pricing</Link>
             <Link href="/resources">Guides</Link>
+            <Link href="/companies">Company Transition Centers</Link>
           </div>
           <div>
             <strong>Partners</strong>
@@ -252,6 +254,7 @@ export function PageHero({
   cta = "Build my plan",
   ctaHref = SIGN_UP_URL,
   footnote,
+  eyebrowVisual,
 }: {
   kicker: string;
   title: string;
@@ -263,6 +266,10 @@ export function PageHero({
   /* A line under the body, above the CTA. Added for /privacy-security, where
      the page has to say what its claims rest on before it makes any. */
   footnote?: string;
+  /* Sits above the kicker. Added for /companies/<slug>, where the company's
+     own mark identifies the page's subject; the hero's footnote carries the
+     "no relationship" line directly beneath it. */
+  eyebrowVisual?: ReactNode;
 }) {
   const ctaNode = cta === false ? null : ctaHref.startsWith("/") ? (
     <Link className="mh-primary-cta" href={ctaHref}><span>{cta}</span><ArrowRight aria-hidden="true" /></Link>
@@ -273,6 +280,7 @@ export function PageHero({
   return (
     <section className={`mh-route-hero mh-section${aside === false ? " is-single" : ""}`}>
       <div>
+        {eyebrowVisual ? <span className="mh-hero-eyebrow-visual">{eyebrowVisual}</span> : null}
         <span className="mh-kicker is-lime">{kicker}</span>
         <h1>{title}</h1>
         <p>{body}</p>

@@ -1,10 +1,11 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type { ReactElement } from "react";
 
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
+import { COMPANY_PAGES, getCompanyPage } from "@/content/companies";
 import { buildResourceSections } from "@/content/resources/registry";
 
 import { MarketingCareerContext } from "./MarketingCareerContext";
@@ -14,6 +15,8 @@ import { MarketingLayoffSupport } from "./MarketingLayoffSupport";
 import { MarketingLumo } from "./MarketingLumo";
 import { MarketingPrivacySecurity } from "./MarketingPrivacySecurity";
 import { MarketingCommunities } from "./MarketingCommunities";
+import { MarketingCompanies } from "./MarketingCompanies";
+import { MarketingCompanyPage } from "./MarketingCompanyPage";
 import { MarketingWorkforce } from "./MarketingWorkforce";
 import MarketingHome from "./MarketingHome";
 import {
@@ -165,6 +168,73 @@ describe("verified-facts ledger matches shipped copy", () => {
     const row = ledgerRow("ACT suggested pilot shape");
     expect(row).toContain("25 to 100 residents");
     expect(renderedText(<MarketingAct />)).toContain("25 to 100 residents");
+  });
+});
+
+// Plan 038. A company page states public facts about a named third party.
+// Three things are asserted for every company, not a sample: every figure in
+// the JSON appears in COPY.md § 17's facts register (a number with no register
+// row cannot ship); every figure actually renders on the page; and every fact
+// carries an https source and a check date. Plus the two sentences that keep
+// the page honest about what Offboard is to the company.
+describe("company pages hold the facts-register discipline", () => {
+  const registerSection = (): string => {
+    const start = COPY_DOC.indexOf("# 17 · Company Transition Centers");
+    expect(start).toBeGreaterThan(-1);
+    return COPY_DOC.slice(start);
+  };
+
+  it.each(COMPANY_PAGES.map((c) => [c.name, c] as const))("%s: every figure is registered, rendered, and sourced", (_name, company) => {
+    const text = renderedText(<MarketingCompanyPage company={company} />);
+    const register = registerSection();
+    const figures = [...company.facts.map((f) => f.figure), ...(company.severance ? [company.severance.figure] : [])];
+    expect(figures.length).toBeGreaterThan(0);
+    for (const figure of figures) {
+      expect(register, `${company.name}: "${figure}" has no row in COPY.md § 17`).toContain(figure);
+      expect(text, `${company.name}: "${figure}" does not render`).toContain(figure);
+    }
+    for (const fact of [...company.facts, ...(company.severance ? [company.severance] : [])]) {
+      expect(fact.source_url).toMatch(/^https:\/\//);
+      expect(fact.checked_on).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
+    expect(company.last_checked).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(text).toContain(`Offboard has no relationship with ${company.name}`);
+    expect(text).toContain(`independent of ${company.name}`);
+    expect(text).not.toContain("—");
+  });
+
+  // Every logo is self-hosted, carries the source it came from, and is
+  // registered in COPY.md. A hotlinked mark would be both a CDN dependency
+  // and a third-party request on a site that ships a privacy page.
+  it.each(COMPANY_PAGES.map((c) => [c.name, c] as const))("%s: logo is self-hosted, sourced, and registered", (_name, company) => {
+    const logo = company.logo;
+    if (!logo) return; // a monogram company is allowed; nothing to check
+    expect(logo.src.startsWith("/marketing/companies/"), `${company.name}: logo must be self-hosted`).toBe(true);
+    expect(existsSync(path.join(process.cwd(), "public", logo.src)), `${company.name}: ${logo.src} is missing from public/`).toBe(true);
+    expect(logo.source_url).toMatch(/^https:\/\//);
+    expect(logo.checked_on).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    const register = registerSection();
+    expect(register, `${company.name}: logo source is not in COPY.md § 17`).toContain(logo.source_url);
+    // the mark and the "no relationship" line share the hero
+    const text = renderedText(<MarketingCompanyPage company={company} />);
+    expect(text).toContain(`Offboard has no relationship with ${company.name}`);
+  });
+
+  it("never claims a relationship, an endorsement, or a member count", () => {
+    for (const company of COMPANY_PAGES) {
+      // Scoped to <main>: the shared footer legitimately says "the official
+      // programs" about government benefits, and that is not this page's claim.
+      const { container } = render(<MarketingCompanyPage company={company} />);
+      const text = container.querySelector("main")?.textContent ?? "";
+      expect(text.length).toBeGreaterThan(500);
+      // "Official source" and "the official page" point at the state agency and
+      // are the point of the page. What must never appear is Offboard being
+      // official, endorsed, or a partner in relation to the company.
+      expect(text).not.toMatch(/partner(s|ed|ship)? with/i);
+      expect(text).not.toMatch(/official(ly)? (partner|program|offboard)/i);
+      expect(text).not.toMatch(/(endorsed|approved|sponsored) by [A-Z]/);
+      expect(text).not.toMatch(/\d+ (Offboard )?members? (are|is) from/i);
+    }
   });
 });
 

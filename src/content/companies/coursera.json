@@ -1,0 +1,42 @@
+{
+  "slug": "coursera",
+  "name": "Coursera",
+  "summary": "Coursera committed to a workforce reduction on 6 July 2026, two months after completing its merger with Udemy, and filed a California WARN notice for 31 people in San Jose on 14 July.",
+  "state": "CA",
+  "site": "San Jose",
+  "event_date": "2026-07-14",
+  "logo": {
+    "src": "/marketing/companies/coursera.png",
+    "source_name": "Coursera's own CDN (apple-touch-icon)",
+    "source_url": "https://d3njjcbhbojbot.cloudfront.net/web/images/favicons/apple-touch-icon-v2-180x180.png",
+    "checked_on": "2026-09-01"
+  },
+  "facts": [
+    {
+      "label": "What the company filed",
+      "figure": "a workforce reduction plan, committed to on 6 July 2026",
+      "detail": "Disclosed in the company's own filing with the SEC, in connection with its merger with Udemy, which completed on 11 May 2026.",
+      "source_name": "Coursera Form 8-K, filed 6 July 2026",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1651562/000165156226000055/cour-20260706.htm",
+      "checked_on": "2026-09-01"
+    },
+    {
+      "label": "Set aside for severance and benefits",
+      "figure": "$8 million to $11 million",
+      "detail": "The company's estimate, which it says consists primarily of severance payments and health benefits for affected employees.",
+      "source_name": "Coursera Form 8-K, filed 6 July 2026",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1651562/000165156226000055/cour-20260706.htm",
+      "checked_on": "2026-09-01"
+    },
+    {
+      "label": "California WARN filing",
+      "figure": "31 people at the San Jose site, notice dated 14 July 2026",
+      "detail": "WARN counts one site in one state. Coverage elsewhere is not on public record, so the company-wide number is not shown here.",
+      "source_name": "California WARN filings via WARN Firehose",
+      "source_url": "https://warnfirehose.com/data/layoffs/company/coursera",
+      "checked_on": "2026-09-01"
+    }
+  ],
+  "severance": null,
+  "last_checked": "2026-09-01"
+}

@@ -24,6 +24,7 @@ represents systems, not features.
 | `/communities` | Universities, alumni orgs, associations, nonprofits | Sponsor a record that outlasts a single workshop, appointment, or program year | Start a sponsorship conversation |
 | `/workforce` | Workforce boards, counties, public programs | Agencies decide, Offboard helps residents prepare and continue; reporting boundary and pilot shape | Start a partnership conversation |
 | `/privacy-security` | Jobseekers, sponsors, buyers | Who can see your record, who cannot, and where the honest limits are; claims ported from the app repo's `SECURITY_CLAIMS.md` | Build my free transition plan |
+| `/companies` + `/companies/:slug` | Jobseekers arriving from a "<company> layoffs" search; HR at that company | One page per company from the public record: sourced facts, this week, what your state owes you; the same page is the sponsorship email's attachment | Build my free transition plan |
 | `/act` | ACT pilot residents | Pilot landing (out of nav, B2G firewall) | Apply for pilot access |
 | `/intake` (+ `/confirmed`) | Members | Native intake form (never redirect) | Submit |
 
@@ -43,11 +44,11 @@ Header (fixed since plan 024, mega menus since plan 037): **Product ▾**
 Search · Layoff & Benefits; featured: How It Works) · **For Organizations ▾**
 (For Employers · Workforce & Government · Universities & Communities;
 featured: the sponsor promise → Privacy & Security) · Pricing ·
-**Resources ▾** (Resources: Guides · Privacy & Security; Company: About ·
+**Resources ▾** (Resources: Guides · Privacy & Security · Company Transition
+Centers; Company: About ·
 Visit Us · Slack Community · Contact; featured: the newsletter) · Sign in ·
 Build my plan (neon). No Home link: the wordmark is home (owner call
-2026-09-01). Company Transition Centers joins Resources when `/companies`
-ships. Below 1180px the header swaps to the mobile menu, which carries the
+2026-09-01). Below 1180px the header swaps to the mobile menu, which carries the
 same groups flattened under headings. Footer adds Career Context,
 Workforce & Government, Universities & Communities, Privacy & Security,
 and company/legal links.

@@ -117,6 +117,7 @@ describe("Offboard marketing routes", () => {
       ["Universities & Communities", "/communities"],
       ["Guides", "/resources"],
       ["Privacy & Security", "/privacy-security"],
+      ["Company Transition Centers", "/companies"],
       ["About", "/about"],
       ["Visit Us", "/intake"],
       ["The Offboard Newsletter", "https://newsletter.offboard.co"],

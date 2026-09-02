@@ -1,0 +1,48 @@
+{
+  "slug": "sprout-social",
+  "name": "Sprout Social",
+  "summary": "Sprout Social began notifying about 260 people, 20% of its staff, on 15 July 2026, under a plan its board approved on 8 July.",
+  "state": "IL",
+  "site": "Chicago",
+  "event_date": "2026-07-15",
+  "logo": {
+    "src": "/marketing/companies/sprout-social.png",
+    "source_name": "Sprout Social's own site (apple-touch-icon)",
+    "source_url": "https://sproutsocial.com/apple-touch-icon.png",
+    "checked_on": "2026-09-01"
+  },
+  "facts": [
+    {
+      "label": "People affected",
+      "figure": "about 260 positions, 20% of staff",
+      "detail": "Disclosed in the company's own filing with the SEC on the day notifications began.",
+      "source_name": "Sprout Social Form 8-K, filed 15 July 2026",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1517375/000151737526000052/spt-20260715.htm",
+      "checked_on": "2026-09-01"
+    },
+    {
+      "label": "Board approval",
+      "figure": "8 July 2026",
+      "source_name": "Investing.com, 15 July 2026",
+      "source_url": "https://www.investing.com/news/stock-market-news/sprout-social-cuts-20-of-workforce-in-restructuring-plan-93CH-4793486",
+      "checked_on": "2026-09-01"
+    },
+    {
+      "label": "Set aside for severance and benefits",
+      "figure": "$18.0 million to $20.0 million",
+      "detail": "The company's estimate of restructuring charges, which it says consist primarily of cash severance payments and benefits, to be recognised in the third quarter of 2026.",
+      "source_name": "Investing.com, 15 July 2026",
+      "source_url": "https://www.investing.com/news/stock-market-news/sprout-social-cuts-20-of-workforce-in-restructuring-plan-93CH-4793486",
+      "checked_on": "2026-09-01"
+    },
+    {
+      "label": "Expected to complete",
+      "figure": "by the end of the third quarter of 2026",
+      "source_name": "Investing.com, 15 July 2026",
+      "source_url": "https://www.investing.com/news/stock-market-news/sprout-social-cuts-20-of-workforce-in-restructuring-plan-93CH-4793486",
+      "checked_on": "2026-09-01"
+    }
+  ],
+  "severance": null,
+  "last_checked": "2026-09-01"
+}

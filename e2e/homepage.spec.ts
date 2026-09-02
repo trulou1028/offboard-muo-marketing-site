@@ -57,6 +57,8 @@ test.describe("Offboard marketing site", () => {
       ["/employers", /outplacement, modernized/i],
       ["/workforce", /agencies decide/i],
       ["/communities", /the workshop ends/i],
+      ["/companies", /start with its page/i],
+      ["/companies/airtable", /laid off from airtable/i],
     ] as const;
 
     for (const [route, heading] of routes) {
@@ -172,7 +174,7 @@ test.describe("Offboard marketing site", () => {
   test("reflows every route without horizontal overflow on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
 
-    for (const route of ["/", "/how-it-works", "/pricing", "/career-context", "/resources", "/resources/first-week-after-a-layoff", "/about", "/employers", "/workforce", "/communities", "/act", "/privacy-security"]) {
+    for (const route of ["/", "/how-it-works", "/pricing", "/career-context", "/resources", "/resources/first-week-after-a-layoff", "/about", "/employers", "/workforce", "/communities", "/act", "/privacy-security", "/companies", "/companies/airtable"]) {
       await page.goto(route);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);

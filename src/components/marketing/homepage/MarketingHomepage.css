@@ -897,6 +897,58 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-workforce-objection h3 { color: var(--mh-forest); }
 .mh-workforce-objection p { margin-top: 12px; color: var(--mh-muted); font-size: 16px; line-height: 1.6; }
 
+/* A company's own mark. Contained, never cropped: cropping a trademark
+   alters it. The tile is white so a mark drawn for a light background (a
+   wordmark) and one drawn as a coloured app icon both sit correctly. */
+.mh-company-logo { position: relative; display: block; overflow: hidden; flex: none; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); background: var(--mh-white); }
+/* Percentage padding so the inset scales with the tile: a fixed 8px left
+   the 40px index tiles with only 24px of actual mark. */
+.mh-company-logo img { object-fit: contain; padding: 13%; }
+.mh-company-logo.is-wide { border-radius: var(--mh-radius-sm); }
+.mh-company-logo.is-monogram { display: grid; place-items: center; color: var(--mh-forest); font-family: var(--mh-font-display); font-size: 24px; font-weight: 500; }
+.mh-hero-eyebrow-visual { display: block; margin-bottom: 22px; }
+
+/* Company Transition Centers (/companies and /companies/[slug], plan 038).
+   The facts list is a <dl>: each row is one sourced figure with its source
+   and check date under it. It is deliberately plain - a page about a named
+   third party earns trust by looking like a record, not a pitch. */
+.mh-company-record { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-white); border-bottom: 1px solid var(--mh-line); }
+.mh-company-record .mh-copy-block { max-width: 820px; }
+dl.mh-company-facts { display: grid; max-width: 900px; margin-top: 44px; border-top: 1px solid var(--mh-ink); }
+.mh-company-facts > div { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 8px 32px; padding: 22px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-company-facts dt { padding-top: 2px; color: var(--mh-forest); font-size: 12px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+.mh-company-facts dd { margin: 0; }
+.mh-company-facts dd strong { display: block; font-family: var(--mh-font-display); font-size: 22px; font-weight: 500; letter-spacing: -.01em; line-height: 1.25; }
+.mh-company-facts dd p { max-width: 60ch; margin-top: 8px; color: var(--mh-muted); font-size: 15px; line-height: 1.55; }
+.mh-company-facts dd small { display: block; margin-top: 10px; color: var(--mh-secondary); font-size: 13px; }
+.mh-company-facts dd small a { border-bottom: 1px solid currentcolor; }
+.mh-morethan ol.mh-numbered-rows { max-width: 820px; margin-top: 40px; }
+.mh-company-state { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
+.mh-company-state .mh-copy-block { max-width: 820px; }
+.mh-company-state-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
+a.mh-company-state-card { display: grid; align-content: start; gap: 8px; padding: 26px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); transition: border-color var(--mh-dur-base) var(--mh-ease-standard); }
+a.mh-company-state-card:hover { border-color: var(--mh-forest); }
+a.mh-company-state-card strong { font-family: var(--mh-font-display); font-size: 20px; font-weight: 500; letter-spacing: -.01em; line-height: 1.25; }
+a.mh-company-state-card small { color: var(--mh-muted); font-size: 14px; line-height: 1.5; }
+a.mh-company-state-card .mh-nav-feature-cta { margin-top: 8px; }
+.mh-company-severance { padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
+.mh-company-severance .mh-copy-block { max-width: 820px; }
+.mh-company-severance .mh-copy-block a:not(.mh-section-link) { border-bottom: 1px solid currentcolor; }
+/* The one line for HR: mist, quiet, and after the independence band, so a
+   jobseeker page never reads as a sales page. */
+.mh-company-hr { padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); background: var(--mh-mist); border-bottom: 1px solid var(--mh-mist-border); }
+.mh-company-hr .mh-copy-block { max-width: 820px; }
+.mh-company-hr h2 { font-size: var(--mh-h2-sm); }
+.mh-company-index { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-white); border-bottom: 1px solid var(--mh-line); }
+ul.mh-company-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
+.mh-company-list a { display: grid; align-content: start; gap: 8px; justify-items: start; height: 100%; padding: 26px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); transition: border-color var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-company-list a:hover { border-color: var(--mh-forest); }
+.mh-company-list .mh-company-logo { margin-bottom: 6px; }
+.mh-company-list-date { color: var(--mh-secondary); font-size: 12px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+.mh-company-list strong { font-family: var(--mh-font-display); font-size: 26px; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; }
+.mh-company-list small { color: var(--mh-muted); font-size: 14px; line-height: 1.55; }
+.mh-company-list .mh-nav-feature-cta { margin-top: 6px; }
+
 /* Privacy & Security (/privacy-security, plan 034).
 
    The who-sees-what table is the page's centerpiece and the one real table on
@@ -1167,7 +1219,10 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
   .mh-lumo-grid,
   .mh-privacy-split,
   .mh-workforce-pilot,
+  .mh-company-state-grid,
+  ul.mh-company-list,
   .mh-pro-grid { grid-template-columns: 1fr; }
+  .mh-company-facts > div { grid-template-columns: 1fr; gap: 6px; }
   .mh-triptych { grid-template-columns: 1fr; height: auto; }
   .mh-triptych .mh-photo-frame { height: 240px; }
   .mh-triptych .mh-photo-frame:nth-child(3) { display: none; }
