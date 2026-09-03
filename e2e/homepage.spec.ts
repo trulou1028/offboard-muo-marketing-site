@@ -59,7 +59,7 @@ test.describe("Offboard marketing site", () => {
     await expect(page.getByRole("heading", { name: /five steps from/i })).toBeVisible();
     await expect(page.getByText("Tell us where you are")).toBeVisible();
     await expect(page.getByRole("heading", { name: /tools didn't go anywhere/i })).toBeVisible();
-    await expect(page.getByRole("heading", { level: 3, name: "Job Packet" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 3, name: "Application Packet" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "An AI guide that knows your actual situation." })).toBeVisible();
     await expect(page.getByText(/never invents a dollar figure/i)).toBeVisible();
     await expect(page.getByRole("heading", { name: "Stop repeating your story to every new tool." })).toBeVisible();

@@ -149,7 +149,7 @@ traceable.
 
 | Site name | Source | App-side name / concept |
 | --- | --- | --- |
-| Application Packet | app | `APPLICATION_PACKET`. Sidebar shows the short form `Packets`. **`Job Packet` vs `Application Packet` is UNRESOLVED — owner sign-off needed, see below** |
+| Application Packet | app | `APPLICATION_PACKET`. Sidebar shows the short form `Packets`. **`Job Packet` is retired — owner decision 2026-09-03, see below** |
 | Resume Tailoring | app-adjacent | `RESUMES` is the app's nav label; `Resume Tailoring` names the action the site sells. **`Resume Studio` is retired** |
 | Cover Letters | app | used throughout the app |
 | Ghost Job Checker | app | `GHOST_CHECKER`. **`Ghost Job Check` and `Ghost-job checker` are retired** |
@@ -158,35 +158,53 @@ traceable.
 | Role Fit | marketing-owned | the app computes a **fit score**; `Role Fit` is the member-facing name |
 | Company Intelligence | marketing-owned | the app's **company research / company intel** |
 | Application Tracker | app | `APPLICATIONS` |
-| Career Context | marketing-owned | the app's nav calls the record `Your Record` (`LEDGER`). **`Career Context` is a site-owned concept name and does not appear in the product.** Recorded, not resolved: an owner conversation with the product side, since the site's whole spine rests on the noun |
+| Career Context | **site, adopted by the product** | the app's nav still says `Your Record` (`LEDGER`). **Owner decision 2026-09-03: `Career Context` is the name, in both the site and the product.** The site is already correct; the app has the rename to do, see below |
 | Paperwork Review | app | `PAPERWORK_REVIEW`, owned by `legalReviewCopy.ts` |
 | Runway calculator | app | `RUNWAY` |
 | Funded Training | app | `FUNDED_TRAINING`. **`Funded training explorer` is retired** |
 | Your Path | app | `YOUR_PATH`, the plan card the homepage renders |
 | Lumo | site | the app writes `LUMO`; see the style rules above |
 
-**Retired names, never to ship again:** `Resume Studio`, `Ghost Job Check`,
-`Ghost-job checker`, `Funded training explorer`, `career ledger`, and
-`career record` as a product noun (the plain phrase "a record of your career"
-is fine). Swept out of the code 2026-09-03.
+**Retired names, never to ship again:** `Job Packet`, `Resume Studio`,
+`Ghost Job Check`, `Ghost-job checker`, `Funded training explorer`,
+`career ledger`, and `career record` as a product noun (the plain phrase "a
+record of your career" is fine). Swept out of the code 2026-09-03.
 
-**UNRESOLVED — `Job Packet` vs `Application Packet` (owner sign-off).** Not
-swept, deliberately. The two names are both live and the cost of picking
-wrong is real:
+### The two names the owner settled, 2026-09-03
 
-- `Job Packet` is the `/how-it-works` flagship, has a product render asset
-  named after it (`renders/toolkit-job-packet`), appears in the "full
-  toolkit" line on `/employers`, `/workforce` and `/communities`, and sits
-  inside an **owner-confirmed pricing fact**: "first Job Packet free"
-  (ledger, confirmed 2026-08-21).
-- `Application Packet` is the app's own full name in `navLabels.ts`, and is
-  what the homepage and `/job-search` say.
-- The app still writes `Job Packet` about 43 times, so the product has not
-  finished its own migration either.
+Both had shipped two ways at once. Plan 040 recorded them rather than
+guessing, because each one touches something a copy edit does not normally
+get to move. The owner decided both: **`Application Packet` and
+`Career Context`, in the site and in the product.**
 
-Renaming touches a confirmed price fact and an image filename, so it waits
-for the owner. Until then both ship, and that is a known, recorded
-inconsistency rather than an accident.
+**`Job Packet` → `Application Packet`.** `Application Packet` is the app's
+own full name in `navLabels.ts`, so the site now matches the product.
+Swept out of every user-facing string the same day. Two consequences that
+were the reason this waited for a decision:
+
+- It rewrites an **owner-confirmed pricing fact**. The ledger line reads
+  "first Application Packet free" from 2026-09-03; the number it carries
+  (one free packet) is unchanged from the 2026-08-21 confirmation, only the
+  noun moved.
+- The product render asset keeps its old filename
+  (`renders/toolkit-job-packets.webp`, manifest id
+  `renders/toolkit-job-packets`). Filenames are not copy, and renaming it
+  would change the imagery cache key and make the next `npm run imagery`
+  pay to regenerate an image that has not changed. The alt text on that
+  image says `Application Packet`.
+- `/job-packet` stays in `next.config.ts` as a 301. It is an inbound legacy
+  URL, not a name the site says.
+- The app still writes `Job Packet` about 43 times as of 2026-09-03. The
+  site is now consistent; the app-side sweep is product work.
+
+**`Career Context` stays, and the product adopts it.** The app's nav calls
+the record `Your Record` (`LEDGER`) and `Career Context` appears once in the
+whole app repo, inside a prompt template. The owner's decision goes the
+other way from the usual rule in this table: the site does not follow the
+app here, the app follows the site. Nothing on the site changes. Until the
+app ships the rename, a member who reads `Career Context` on the site meets
+`Your Record` in the product — a known, recorded gap with an owner decision
+behind it, not drift.
 
 **The count.** The homepage and `/job-search` say "ten tools" and name the
 same ten: Role Fit, Ghost Job Checker, Company Intelligence, Application
@@ -213,7 +231,7 @@ and everywhere it appears in the same PR.
 | Employer seat price | **$199 per employee, one-time**; **$169 per seat at 50 or more**; card or NET-30 | Owner-approved for public display 2026-08-23. Must stay in sync with the app-repo sales one-pager | Employers (+ metadata) |
 | Legacy outplacement comparison | **$3,000 to $7,000 per head**; most firms will not take a layoff under 50 people | From the prospect-facing one-pager | Employers |
 | Sponsored access duration | **90 days of full Offboard Pro** | | Employers, ACT |
-| Consumer tiers | **Free $0 forever · Pro $20/month** · 30 / 300 monthly credits · 3 Lumo messages/day on Free · first Job Packet free | Owner-confirmed 2026-08-21 | Home, Pricing, Lumo (message limit only) |
+| Consumer tiers | **Free $0 forever · Pro $20/month** · 30 / 300 monthly credits · 3 Lumo messages/day on Free · first Application Packet free | Owner-confirmed 2026-08-21 | Home, Pricing, Lumo (message limit only) |
 | Gift Pro prices | 1 mo $20 · 3 mo $54 · 6 mo $99 | **Not yet on site** (plan 015 unexecuted); see § Approved but unshipped | — |
 | SB 617 (California WARN-notice statement) | Shipped verbatim from the founder's public LinkedIn post | **Owner to re-verify the statute stays current**; drop the aside if stale | Employers |
 | ACT suggested pilot shape | One jurisdiction or cohort · 25 to 100 residents · 3-month sponsored access · first review after 30 days | "Suggested", never a claim about actual participation | ACT |
@@ -388,7 +406,7 @@ it did not):
 - Body: `Your benefits, your job search, and your career context in one system, connected to the AI you already use.` *(round 5: was five nouns, and "applications" sits inside "job search")*
 - CTAs: `Get started free` (primary) · `See how it works` → `/how-it-works`
 - Trust line: `Join thousands of people building their next chapter with Offboard.` *(owner-confirmed accurate 2026-08-31)*
-- Hero visual (composition A): kitchen-table photo (the `Benefits check · Done` chip is retired, owner 2026-09-02), and a chat card overlapping its bottom-right corner and overhanging the photo's right edge: You: `I think I'm going to apply to this. Add it to Offboard.` / AI: `Done. I've added the role to your Offboard tracker and saved the company context.` The tracker card `Product Designer / Tesserac / Saved` is lifted out of the chat card and breaks its bottom-left edge.
+- Hero visual (composition A, rebuilt from the Paper artboard "Hero visual", owner 2026-09-03): kitchen-table photo (the `Benefits check · Done` chip is retired, owner 2026-09-02), with **two** cards over its right side, both overhanging the photo's right edge. The question card sits higher and narrower, with the member's face beside the bubble: You: `Can you save a new application for a Senior Product Designer role at Tesserac?` The answer card sits below it, with Lumo's face beside the bubble: AI: `Done. I've added the role to your Offboard application tracker and saved the company context.` Under that reply, inside the same card, the state the reply claims: `Application added` / `Senior Product Designer at Tesserac` / `View application`. The lifted `Product Designer / Tesserac / Saved` tracker card is retired from the homepage; it still ships on `/integrations`.
 
 ### The three steps *(new in v3)*
 
@@ -536,7 +554,7 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 1. `Tell us where you are` — `A few questions: your situation, your state, your dates. That's enough to build a plan that's actually yours, not a template.` — tag `Your situation & state`
 2. `See your money clearly` — `Your runway, how long you can go, beside your money clock: which benefit deadlines are coming and what each one is worth.` — tag `Runway calculator · Money clock`
 3. `Claim what exists` — `Step-by-step paths to unemployment benefits, health coverage, and state-approved funded training, with verified official links. We never promise funding. We show you the exact path to find out.` — tag `Benefit sheets · Funded Training`
-4. `Get ready, then run the search` — `Resume, story, materials, then Job Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.` — tag `Job Packet · Resume Tailoring`
+4. `Get ready, then run the search` — `Resume, story, materials, then Application Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.` — tag `Application Packet · Resume Tailoring`
 5. `Close it, and make it count` — `Interview prep and practice, a paperwork review before you sign, and when you land: mark it, keep your career ledger, and pass what you learned back.` — tag `Interview prep · Paperwork review`
 
 ### Starting plan *(added by plan 016)*
@@ -548,7 +566,7 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 ### Toolkit *(product renders added by plan 016)*
 
 - Kicker: `The toolkit` · H2: `The tools didn't go anywhere. Now they show up at the right moment.`
-- Flagship: `Job Packet` — `Paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person, all kept with the role.` — chips `Ghost check · Fit read · Tailored materials · Warm intro` — link `Explore the Job Packet`
+- Flagship: `Application Packet` — `Paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person, all kept with the role.` — chips `Ghost check · Fit read · Tailored materials · Warm intro` — link `Explore the Application Packet`
 - Cards (renders on the first three):
   - `Resume Tailoring` — `Build and tailor resumes from your real history, ready for the role in front of you.`
   - `Interview prep & practice` — `Drills grounded in the role, the company, and your strongest stories.`
@@ -611,8 +629,8 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 
 - Kicker: `A simple place to start` · H2: `Start free. Add more support when you need it.`
 - Intro: `Begin with a transition plan and the core tools. Add credits or human support only when you choose to go further. You will see the price and what is included before you pay.`
-- **Free** (dark highlight card, per owner decision 2026-08-23): `$0 forever` — `See your plan, your runway, and your benefit deadlines. Then build your first Job Packet.` — features: Transition plan & benefit sheets · Runway calculator · First Job Packet free · Application tracking · 3 Lumo messages per day · 30 monthly credits — CTA `Build my free transition plan`
-- **Offboard Pro** (badge `For active transitions`): `$20/month` — `For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited Lumo.` — features: Unlimited conversations with Lumo · More room for Job Packets and tailoring · Deeper application and interview support · 300 monthly credits — CTA `Upgrade to Pro`
+- **Free** (dark highlight card, per owner decision 2026-08-23): `$0 forever` — `See your plan, your runway, and your benefit deadlines. Then build your first Application Packet.` — features: Transition plan & benefit sheets · Runway calculator · First Application Packet free · Application tracking · 3 Lumo messages per day · 30 monthly credits — CTA `Build my free transition plan`
+- **Offboard Pro** (badge `For active transitions`): `$20/month` — `For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited Lumo.` — features: Unlimited conversations with Lumo · More room for Application Packets and tailoring · Deeper application and interview support · 300 monthly credits — CTA `Upgrade to Pro`
 - **Sponsored access** (badge `May be covered`): `Outplacement, modernized. Your former employer, school, or workforce organization may cover your access.` — features: The full sponsored benefit is delivered to you · Your private career activity remains yours · Sponsors receive aggregate reporting only — CTA `Learn about sponsored access` → `/employers`
 - Deck note: `Quarterly billing details and the full feature comparison are shown at checkout. Claiming your government benefits is always free, on any tier.`
 
@@ -624,7 +642,7 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 
 ### Pricing FAQ — title `Pricing and support, without surprises.`
 
-1. `Do I need a payment method to start?` — `No. The Free tier is not a trial. You can build your plan, see your runway and deadlines, track applications, and build your first Job Packet without adding a payment method.`
+1. `Do I need a payment method to start?` — `No. The Free tier is not a trial. You can build your plan, see your runway and deadlines, track applications, and build your first Application Packet without adding a payment method.`
 2. `What happens when I run out of credits?` — `The core plan, benefit sheets, and tracking keep working. Credits gate the heavier product work, and they refresh monthly on both tiers.`
 3. `Can I cancel Pro any time?` — `Yes. Your plan, materials, and history remain yours on the Free tier after you cancel.`
 4. `Is human support included?` — `Availability, format, eligibility, and pricing vary by support option. The booking page shows the current details before you schedule.`
@@ -721,8 +739,8 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 ### The member experience
 
 - Kicker: `The member experience` · H2: `Support for the whole transition, not only the resume.`
-- Body: `A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Job Packets, and human support options.`
-- Items: `A plan from day one` — `Members start from their situation and state, and see what deserves attention first.` · `Verified benefit facts` — `Deadlines and dollar figures checked by people, with official links. Claiming benefits is always free.` · `The full toolkit` — `Job Packets, resume tailoring, interview prep, application tracking, and Lumo.`
+- Body: `A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Application Packets, and human support options.`
+- Items: `A plan from day one` — `Members start from their situation and state, and see what deserves attention first.` · `Verified benefit facts` — `Deadlines and dollar figures checked by people, with official links. Claiming benefits is always free.` · `The full toolkit` — `Application Packets, resume tailoring, interview prep, application tracking, and Lumo.`
 
 ### Pricing *(plan 012; owner-approved 2026-08-23)*
 
@@ -879,7 +897,7 @@ rules).*
 
 - Kicker: `What residents get` · H2: `The same Offboard workspace, sponsored.`
 - Body: `One connected place for the search: jobs, applications, documents, interviews, and guidance that already knows the resident's plan.`
-- Items: `A private job-search workspace` — `The full Offboard workspace in one place, instead of scattered tools and paperwork.` · `Jobs and Job Packets` — `Find roles and build a Job Packet for each one, with fit and next steps included.` · `Applications, follow-ups, and documents` — `Track every application and follow-up, and keep resumes and other documents in one place.` · `Interview prep and Ask Lumo` — `Practice for interviews and ask Lumo for guidance grounded in the resident's own plan.`
+- Items: `A private job-search workspace` — `The full Offboard workspace in one place, instead of scattered tools and paperwork.` · `Jobs and Application Packets` — `Find roles and build an Application Packet for each one, with fit and next steps included.` · `Applications, follow-ups, and documents` — `Track every application and follow-up, and keep resumes and other documents in one place.` · `Interview prep and Ask Lumo` — `Practice for interviews and ask Lumo for guidance grounded in the resident's own plan.`
 
 ### Worker-controlled privacy *(the reporting-boundary sentence is verbatim from the ACT playbook; do not soften or embellish)*
 
@@ -970,7 +988,7 @@ approval for public display, so this page ends in a conversation.
 - Capabilities:
   1. `A plan from day one` — `Residents start from their own state, dates, and situation, and see what deserves attention first.`
   2. `Verified benefit facts` — `Deadlines and dollar figures checked by people, with the official link for each one. Claiming benefits is always free.`
-  3. `The full toolkit` — `Job Packets, resume tailoring, interview prep, application tracking, and Lumo.`
+  3. `The full toolkit` — `Application Packets, resume tailoring, interview prep, application tracking, and Lumo.`
   4. `It starts the same day` — `A resident who claims access can begin that evening, on a phone, without waiting on a callback.`
 
 ### Aggregate for the program. Private for the resident. *(the sees/stays-private lists are verbatim from the ACT playbook; the body sentence is the approved `/employers` formulation)*
@@ -1660,7 +1678,7 @@ and not Sponsored-tier copy) and the page is in the CopyDrift absence list.
 - Capabilities:
   1. `A record, not a folder` — `Work history, projects, and outcomes stay in one place that they keep, whether or not they are searching this month.`
   2. `Your program stays in it` — `What a member works out in a session lands in the record instead of in notes nobody opens again.`
-  3. `The full toolkit` — `Job Packets, resume tailoring, interview prep, application tracking, and Lumo.`
+  3. `The full toolkit` — `Application Packets, resume tailoring, interview prep, application tracking, and Lumo.`
   4. `It works when your office is closed` — `Members do this work at 9pm and on weekends. Nothing waits for an appointment.`
 
 ### What you see, and what you do not *(the boundary is the approved `/employers` formulation)*

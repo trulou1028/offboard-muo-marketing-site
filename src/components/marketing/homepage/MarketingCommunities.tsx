@@ -27,7 +27,7 @@ import {
 const WHAT_CHANGES = [
   ["A record, not a folder", "Work history, projects, and outcomes stay in one place that they keep, whether or not they are searching this month."],
   ["Your program stays in it", "What a member works out in a session lands in the record instead of in notes nobody opens again."],
-  ["The full toolkit", "Job Packets, resume tailoring, interview prep, application tracking, and Lumo."],
+  ["The full toolkit", "Application Packets, resume tailoring, interview prep, application tracking, and Lumo."],
   ["It works when your office is closed", "Members do this work at 9pm and on weekends. Nothing waits for an appointment."],
 ] as const;
 

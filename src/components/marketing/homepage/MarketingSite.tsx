@@ -51,7 +51,7 @@ export const PRODUCT_FAQS = [
 ] as const;
 
 export const PRICING_FAQS = [
-  ["Do I need a payment method to start?", "No. The Free tier is not a trial. You can build your plan, see your runway and deadlines, track applications, and build your first Job Packet without adding a payment method."],
+  ["Do I need a payment method to start?", "No. The Free tier is not a trial. You can build your plan, see your runway and deadlines, track applications, and build your first Application Packet without adding a payment method."],
   ["What happens when I run out of credits?", "The core plan, benefit sheets, and tracking keep working. Credits gate the heavier product work, and they refresh monthly on both tiers."],
   ["Can I cancel Pro any time?", "Yes. Your plan, materials, and history remain yours on the Free tier after you cancel."],
   ["Is human support included?", "Availability, format, eligibility, and pricing vary by support option. The booking page shows the current details before you schedule."],
@@ -427,8 +427,8 @@ const FIVE_STEPS = [
   },
   {
     title: "Get ready, then run the search",
-    body: "Resume, story, materials, then Job Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.",
-    tag: "Job Packet · Resume Tailoring",
+    body: "Resume, story, materials, then Application Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.",
+    tag: "Application Packet · Resume Tailoring",
   },
   {
     title: "Close it, and make it count",
@@ -483,15 +483,15 @@ export function ToolkitSection() {
       <div className="mh-toolkit-layout" data-reveal="">
         <article className="mh-toolkit-flagship">
           <div className="mh-toolkit-flagship-visual">
-            <Image src="/marketing/homepage/renders/toolkit-job-packets.webp" alt="Product render of the Job Packet view, a document linked to its tailored materials" fill sizes="(max-width: 900px) 100vw, 38vw" />
+            <Image src="/marketing/homepage/renders/toolkit-job-packets.webp" alt="Product render of the Application Packet view, a document linked to its tailored materials" fill sizes="(max-width: 900px) 100vw, 38vw" />
           </div>
           <span className="mh-kicker is-lime">Flagship</span>
-          <h3>Job Packet</h3>
+          <h3>Application Packet</h3>
           <p>Paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person, all kept with the role.</p>
           <ul>
             {TOOLKIT_FLAGSHIP_CHIPS.map((chip) => <li key={chip}>{chip}</li>)}
           </ul>
-          <a className="mh-section-link" href={SIGN_UP_URL}>Explore the Job Packet <ArrowRight aria-hidden="true" /></a>
+          <a className="mh-section-link" href={SIGN_UP_URL}>Explore the Application Packet <ArrowRight aria-hidden="true" /></a>
         </article>
         <div className="mh-toolkit-grid">
           {TOOLKIT_CARDS.map(({ title, body, image, alt }) => (
@@ -613,11 +613,11 @@ export function PricingSection() {
             <h3>Free</h3>
           </header>
           <p className="mh-price-value"><b>$0</b><small>forever</small></p>
-          <p>See your plan, your runway, and your benefit deadlines. Then build your first Job Packet.</p>
+          <p>See your plan, your runway, and your benefit deadlines. Then build your first Application Packet.</p>
           <ul>
             <li><Check aria-hidden="true" />Transition plan &amp; benefit sheets</li>
             <li><Check aria-hidden="true" />Runway calculator</li>
-            <li><Check aria-hidden="true" />First Job Packet free</li>
+            <li><Check aria-hidden="true" />First Application Packet free</li>
             <li><Check aria-hidden="true" />Application tracking</li>
             <li><Check aria-hidden="true" />3 Lumo messages per day</li>
             <li><Check aria-hidden="true" />30 monthly credits</li>
@@ -633,7 +633,7 @@ export function PricingSection() {
           <p>For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited Lumo.</p>
           <ul>
             <li><Check aria-hidden="true" />Unlimited conversations with Lumo</li>
-            <li><Check aria-hidden="true" />More room for Job Packets and tailoring</li>
+            <li><Check aria-hidden="true" />More room for Application Packets and tailoring</li>
             <li><Check aria-hidden="true" />Deeper application and interview support</li>
             <li><Check aria-hidden="true" />300 monthly credits</li>
           </ul>

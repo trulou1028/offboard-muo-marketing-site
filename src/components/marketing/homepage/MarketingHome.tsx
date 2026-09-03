@@ -2,13 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
+  Briefcase,
+  ExternalLink,
   FileText,
   ListChecks,
   MessageSquare,
   Search,
 } from "lucide-react";
 import type { ReactNode } from "react";
-import { AiReply, CommunityStrip, DisclosureList, LumoMark, MarketingShell, SIGN_UP_URL, StartingPlanPreview, TrackerCard, YouBubble } from "./MarketingSite";
+import { AiReply, CommunityStrip, DisclosureList, LumoMark, MarketingShell, SIGN_UP_URL, StartingPlanPreview, YouBubble } from "./MarketingSite";
 import { IntegrationLogo } from "./IntegrationLogos";
 
 /* Homepage v3 (plan 039): the same Civic Modern bands, re-sequenced into one
@@ -69,14 +71,32 @@ function HomeHero() {
             preload
           />
         </figure>
-        <div className="mh-comp mh-hero-comp">
-          <div className="mh-chat-card mh-comp-base" aria-label="Example conversation with an AI assistant">
-            <YouBubble>I think I&apos;m going to apply to this. Add it to Offboard.</YouBubble>
-            <AiReply highlight="Done.">
-              I&apos;ve added the role to your Offboard tracker and saved the company context.
-            </AiReply>
+        <div className="mh-comp mh-hero-comp" aria-label="Example conversation with Lumo">
+          <div className="mh-chat-card mh-comp-satellite mh-hero-ask">
+            <div className="mh-chat-turn is-you">
+              <p className="mh-chat-you">
+                <span className="mh-chat-speaker">You</span>
+                Can you save a new application for a Senior Product Designer role at Tesserac?
+              </p>
+              <img className="mh-chat-avatar" src="/marketing/homepage/member-avatar.webp" alt="" width={40} height={40} decoding="async" />
+            </div>
           </div>
-          <div className="mh-comp-satellite mh-hero-tracker"><TrackerCard /></div>
+          <div className="mh-chat-card mh-comp-base mh-hero-answer">
+            <div className="mh-chat-turn">
+              <span className="mh-chat-avatar is-lumo"><LumoMark /></span>
+              <p className="mh-chat-said">
+                <mark className="mh-ai-highlight">Done.</mark> I&apos;ve added the role to your Offboard application tracker and saved the company context.
+              </p>
+            </div>
+            <div className="mh-saved-card">
+              <span className="mh-saved-icon" aria-hidden="true"><Briefcase /></span>
+              <span className="mh-saved-text">
+                <strong>Application added</strong>
+                <small>Senior Product Designer at Tesserac</small>
+              </span>
+              <span className="mh-saved-action" aria-hidden="true"><ExternalLink />View application</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

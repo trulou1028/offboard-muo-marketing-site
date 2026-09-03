@@ -217,7 +217,7 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { name: /a few questions\. a plan that's actually yours/i })).toBeInTheDocument();
     expect(screen.getByText("Where are you right now?")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /tools didn't go anywhere/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { level: 3, name: "Job Packet" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 3, name: "Application Packet" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "An AI guide that knows your actual situation." })).toBeInTheDocument();
     expect(screen.getByText(/never invents a dollar figure/i)).toBeInTheDocument();
     expect(screen.getByText(/like a caseworker/i)).toBeInTheDocument();

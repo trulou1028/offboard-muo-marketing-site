@@ -371,6 +371,13 @@ satellites, each breaking an edge of the base. A single bordered
 rectangle holding a transcript is not allowed. Use `.mh-comp`,
 `.mh-comp-base`, and `.mh-comp-satellite`.
 
+*Where a composition sits on a photograph, the photo frame is an edge a
+satellite may break instead of the base's. The hero does this: the question
+card and the answer card are stacked with a gutter between them and both
+overhang the photograph's right edge, which is where the depth comes from
+(owner's Paper artboard "Hero visual", 2026-09-03). A satellite that breaks
+neither the base nor a photo is a floating box, and still a defect.*
+
 **R3 · One idea, one section, one CTA.** A concept (Career Context, Lumo,
 Offboard Everywhere) gets one section on a page and one filled button.
 Later mentions are a `.mh-section-link`, never a second filled button.
@@ -444,8 +451,8 @@ section primary is forest; on dark bands it is lime.
 `e2e/composition.spec.ts`. *(Both numbers are measured, not aspired to. The page
 total is part of the rule because the per-section number alone would not
 have caught what prompted it: the v2 homepage ran 17,096px with a 2,896px
-section. Measured at 390 after round 4: **12,859px total, tallest section
-2,016px** ("More than a job search"). The budget still has real headroom
+section. Measured at 390 after the hero rebuild, 2026-09-03: **13,155px total,
+tallest section 2,100px** ("More than a job search"). The budget still has real headroom
 and is deliberately not being lowered in the same pass that earned it.)*
 
 ### Pattern catalogue

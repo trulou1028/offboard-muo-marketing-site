@@ -237,11 +237,11 @@ export function MarketingEmployers() {
         <EditorialGrid
           kicker="The member experience"
           title="Support for the whole transition, not only the resume."
-          body="A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Job Packets, and human support options."
+          body="A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Application Packets, and human support options."
           items={[
             { title: "A plan from day one", body: "Members start from their situation and state, and see what deserves attention first." },
             { title: "Verified benefit facts", body: "Deadlines and dollar figures checked by people, with official links. Claiming benefits is always free." },
-            { title: "The full toolkit", body: "Job Packets, resume tailoring, interview prep, application tracking, and Lumo." },
+            { title: "The full toolkit", body: "Application Packets, resume tailoring, interview prep, application tracking, and Lumo." },
           ]}
         />
         <section className="mh-employer-pricing mh-section" aria-labelledby="employer-pricing-title">
@@ -369,7 +369,7 @@ export function MarketingAct() {
           body="One connected place for the search: jobs, applications, documents, interviews, and guidance that already knows the resident's plan."
           items={[
             { title: "A private job-search workspace", body: "The full Offboard workspace in one place, instead of scattered tools and paperwork." },
-            { title: "Jobs and Job Packets", body: "Find roles and build a Job Packet for each one, with fit and next steps included." },
+            { title: "Jobs and Application Packets", body: "Find roles and build an Application Packet for each one, with fit and next steps included." },
             { title: "Applications, follow-ups, and documents", body: "Track every application and follow-up, and keep resumes and other documents in one place." },
             { title: "Interview prep and Ask Lumo", body: "Practice for interviews and ask Lumo for guidance grounded in the resident's own plan." },
           ]}
