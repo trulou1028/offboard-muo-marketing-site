@@ -65,7 +65,7 @@ From the v2 spec §3, enforced by plan 009's sweep and the test harness.
 | --- | --- |
 | laid off · unemployment · what you're owed | career transition services / support |
 | your plan · the modern unemployment office | platform · infrastructure · solutions |
-| tools · your guide (LUMO) | modules · workspace · agents · career memory |
+| tools · your guide (Lumo) | modules · workspace · agents · career memory |
 | benefits, deadlines, runway | transition intelligence |
 
 **Scoped exceptions:**
@@ -104,11 +104,95 @@ or operator.
 - The independence disclaimer appears near any benefits-adjacent content.
   Canonical short form: *"Offboard is independent, not a government agency,
   and claiming your benefits is always free."*
-- One primary CTA per view. Sitewide primary CTA: **Build my free transition
-  plan** → `https://app.offboard.co/auth?tab=signup`. Exception (homepage v2,
-  plan 022): the homepage's primary CTA is **Get started free**, same URL,
-  per the owner-supplied v2 copy. Route pages keep the sitewide CTA until the
-  owner rolls the new one out.
+- One primary CTA per view. **Sitewide primary CTA: `Get started free`**
+  → `https://app.offboard.co/auth?tab=signup` (owner decision 2026-09-03,
+  plan 040 finding 3). It is the label on the header button, on every page
+  hero, and on every final CTA. Five labels used to point at this one URL
+  (`Build my plan`, `Get started free`, `Build my free transition plan`,
+  `Create my Career Context`, `Ask Lumo`); the homepage's exception had
+  spread into three more pages, so the homepage's label became the rule.
+  - **A section CTA inside a page may still name its own action** when that
+    action is specific and not the page's primary ask: `Build my Career
+    Context` (homepage step 2), `Upgrade to Pro`, `Post a role`,
+    `Learn about sponsored access`, and the B2B/B2G `Talk about…` /
+    `Start a … conversation` mailto buttons, which do not go to signup at all.
+  - **`Ask Lumo` is never a signup button.** It reads as "open a chat" and
+    goes to a signup form, which is the defect the owner removed from the
+    homepage on 2026-09-02. Where a page wants to point at Lumo, it links to
+    `/lumo`.
+
+- **Lumo, not LUMO** (plan 040 finding 4). One casing everywhere, per
+  DESIGN.md's sentence-case rule. *Recorded divergence: the app repo's
+  `src/config/navLabels.ts` — which calls itself "the ONE place a
+  jobseeker-facing feature name is written" — ships `ASK_LUMO: "Ask LUMO"`,
+  and the app uses LUMO about 420 times against Lumo about 250. The site and
+  the product disagree. The site is internally consistent as of this change;
+  reconciling the two is an owner conversation with the product side, not a
+  copy edit.*
+
+## Tool glossary
+
+One name per tool, one casing, everywhere (plan 040 finding 2). Before this
+existed, `/how-it-works` and the homepage named the same tools differently
+(`Job Packet` / `Application Packets`, `Resume Studio` / `Resume Tailoring`,
+`Ghost-job checker` / `Ghost Job Check`), and both pages claimed "ten tools"
+while listing different nines.
+
+**Where the canonical name comes from.** The app repo owns feature names in
+`src/config/navLabels.ts`, which exists for exactly this reason ("the ONE
+place a jobseeker-facing feature name is written… renaming a feature = editing
+one line in this file"). Verified against `lumo-plan-builder` `origin/main`,
+2026-09-03. Where the app has a public name, the site uses it. Where the app
+has no public name for something the site sells, the marketing name is listed
+as marketing-owned, with the app-side concept named so the mapping is
+traceable.
+
+| Site name | Source | App-side name / concept |
+| --- | --- | --- |
+| Application Packet | app | `APPLICATION_PACKET`. Sidebar shows the short form `Packets`. **`Job Packet` vs `Application Packet` is UNRESOLVED — owner sign-off needed, see below** |
+| Resume Tailoring | app-adjacent | `RESUMES` is the app's nav label; `Resume Tailoring` names the action the site sells. **`Resume Studio` is retired** |
+| Cover Letters | app | used throughout the app |
+| Ghost Job Checker | app | `GHOST_CHECKER`. **`Ghost Job Check` and `Ghost-job checker` are retired** |
+| Interview Prep | app | `INTERVIEWS` is the nav label; `Interview Prep` names the action |
+| Voice Practice | marketing-owned | the app ships mock/practice interviews with no settled public name |
+| Role Fit | marketing-owned | the app computes a **fit score**; `Role Fit` is the member-facing name |
+| Company Intelligence | marketing-owned | the app's **company research / company intel** |
+| Application Tracker | app | `APPLICATIONS` |
+| Career Context | marketing-owned | the app's nav calls the record `Your Record` (`LEDGER`). **`Career Context` is a site-owned concept name and does not appear in the product.** Recorded, not resolved: an owner conversation with the product side, since the site's whole spine rests on the noun |
+| Paperwork Review | app | `PAPERWORK_REVIEW`, owned by `legalReviewCopy.ts` |
+| Runway calculator | app | `RUNWAY` |
+| Funded Training | app | `FUNDED_TRAINING`. **`Funded training explorer` is retired** |
+| Your Path | app | `YOUR_PATH`, the plan card the homepage renders |
+| Lumo | site | the app writes `LUMO`; see the style rules above |
+
+**Retired names, never to ship again:** `Resume Studio`, `Ghost Job Check`,
+`Ghost-job checker`, `Funded training explorer`, `career ledger`, and
+`career record` as a product noun (the plain phrase "a record of your career"
+is fine). Swept out of the code 2026-09-03.
+
+**UNRESOLVED — `Job Packet` vs `Application Packet` (owner sign-off).** Not
+swept, deliberately. The two names are both live and the cost of picking
+wrong is real:
+
+- `Job Packet` is the `/how-it-works` flagship, has a product render asset
+  named after it (`renders/toolkit-job-packet`), appears in the "full
+  toolkit" line on `/employers`, `/workforce` and `/communities`, and sits
+  inside an **owner-confirmed pricing fact**: "first Job Packet free"
+  (ledger, confirmed 2026-08-21).
+- `Application Packet` is the app's own full name in `navLabels.ts`, and is
+  what the homepage and `/job-search` say.
+- The app still writes `Job Packet` about 43 times, so the product has not
+  finished its own migration either.
+
+Renaming touches a confirmed price fact and an image filename, so it waits
+for the owner. Until then both ship, and that is a known, recorded
+inconsistency rather than an accident.
+
+**The count.** The homepage and `/job-search` say "ten tools" and name the
+same ten: Role Fit, Ghost Job Checker, Company Intelligence, Application
+Packets, Resume Tailoring, Cover Letters, Interview Prep, Voice Practice,
+Application Tracker, Career Context. `/how-it-works` lists a different set
+and must not claim a number until the two are reconciled.
 
 ## Verified-facts ledger
 
@@ -129,7 +213,7 @@ and everywhere it appears in the same PR.
 | Employer seat price | **$199 per employee, one-time**; **$169 per seat at 50 or more**; card or NET-30 | Owner-approved for public display 2026-08-23. Must stay in sync with the app-repo sales one-pager | Employers (+ metadata) |
 | Legacy outplacement comparison | **$3,000 to $7,000 per head**; most firms will not take a layoff under 50 people | From the prospect-facing one-pager | Employers |
 | Sponsored access duration | **90 days of full Offboard Pro** | | Employers, ACT |
-| Consumer tiers | **Free $0 forever · Pro $20/month** · 30 / 300 monthly credits · 3 LUMO messages/day on Free · first Job Packet free | Owner-confirmed 2026-08-21 | Home, Pricing, Lumo (message limit only) |
+| Consumer tiers | **Free $0 forever · Pro $20/month** · 30 / 300 monthly credits · 3 Lumo messages/day on Free · first Job Packet free | Owner-confirmed 2026-08-21 | Home, Pricing, Lumo (message limit only) |
 | Gift Pro prices | 1 mo $20 · 3 mo $54 · 6 mo $99 | **Not yet on site** (plan 015 unexecuted); see § Approved but unshipped | — |
 | SB 617 (California WARN-notice statement) | Shipped verbatim from the founder's public LinkedIn post | **Owner to re-verify the statute stays current**; drop the aside if stale | Employers |
 | ACT suggested pilot shape | One jurisdiction or cohort · 25 to 100 residents · 3-month sponsored access · first review after 30 days | "Suggested", never a claim about actual participation | ACT |
@@ -145,7 +229,7 @@ and everywhere it appears in the same PR.
   Make your money last · Land what's next.
 - **Trust pillars** (supporting, never the headline): facts verified by
   people, never generated · private, sponsors see aggregates only · free to
-  start · LUMO works from your real situation.
+  start · Lumo works from your real situation.
 
 ---
 
@@ -228,9 +312,22 @@ are `DESIGN.md` § "Composition rules" (R1 to R10).
 **Meta title:** `Offboard | The modern unemployment office`
 **Meta description:** `Offboard is the modern unemployment office: one calm place for your benefits, deadlines, runway, funded training, and next job. Verified facts, AI guidance, and a plan that starts where you are. Independent, not a government agency.`
 
-Section order: Hero → The three steps → Step 1 Career Context → Step 2 Connect
-→ Step 3 Toolkit → More than a job search → Plans (Free, Pro, Sponsored) →
-Community → Final CTA.
+Section order: Hero → The four steps → Step 1 Steady the first week → Step 2
+Career Context → Step 3 Connect → Step 4 Toolkit → Plans (Free, Pro,
+Sponsored) → Community → Final CTA.
+
+**Round 5, 2026-09-03: four steps, not three (plan 040 finding 1).** Owner
+decision. The H1 claims the modern unemployment office, but the three-step
+version described an AI job-search tool: benefits survived only as a trailing
+clause on step three, "with your benefits beside it." A first step —
+**Steady the first week** — puts the deadlines and the money back at the front
+and earns the H1. The sand band that used to close the page as "More than a
+job search" moved up to become that step; step four's trailing clause was
+deleted because step one now says it properly.
+
+Band rhythm after the move: deep, paper, sand, mist, forest, paper,
+paper-soft, mist, deep. No two adjacent bands match, two forest-deep anchors
+bookend the page, and the mid-forest band keeps a light band on both sides.
 
 **Round 4, 2026-09-02: the homepage names things, the pillar pages describe
 them.** Owner direction: several sections were "cramming in extra information
@@ -288,7 +385,7 @@ it did not):
 ### Hero
 
 - H1: `The modern unemployment office.`
-- Body: `Your job search, benefits, applications, career context, and next steps in one system, connected to the AI you already use.`
+- Body: `Your benefits, your job search, and your career context in one system, connected to the AI you already use.` *(round 5: was five nouns, and "applications" sits inside "job search")*
 - CTAs: `Get started free` (primary) · `See how it works` → `/how-it-works`
 - Trust line: `Join thousands of people building their next chapter with Offboard.` *(owner-confirmed accurate 2026-08-31)*
 - Hero visual (composition A): kitchen-table photo (the `Benefits check · Done` chip is retired, owner 2026-09-02), and a chat card overlapping its bottom-right corner and overhanging the photo's right edge: You: `I think I'm going to apply to this. Add it to Offboard.` / AI: `Done. I've added the role to your Offboard tracker and saved the company context.` The tracker card `Product Designer / Tesserac / Saved` is lifted out of the chat card and breaks its bottom-left edge.
@@ -297,7 +394,8 @@ it did not):
 
 - Kicker: `The short version`
 - H2: `How Offboard works.`
-- Lead: `Build your career record once, connect it to the AI you already use, and run your search with tools that read from it.`
+- Lead: `Handle what has a deadline, build a record of your career once, connect it to the AI you already use, and run your search from it.`
+- 01 `Steady the first week.` — `Deadlines, health coverage, and how long your money lasts, in the order they matter.` — link `See what comes first` → `#steady`
 - Steps, each linking to its own section:
   1. `Build your Career Context.` — `Tell Offboard about your career once. It becomes a record you keep adding to.` → `Build your context` → `#build`
   2. `Connect it to the AI you use.` — `Lumo already knows it. ChatGPT and Claude connect in beta.` → `See the connection` → `#connect`
@@ -337,14 +435,16 @@ connections.
 - Lead *(the right half of the two-column intro)*: `Ten tools that read from the same context, so nothing is retyped and nothing is forgotten.`
 - Section link: `See what each tool does` → `/job-search`
 - Four stages, each with the one-line decision already approved on `/job-search`: **Decide** `Whether this one deserves your week.` · **Apply** `What you actually send.` · **Interview** `Walking in prepared, not rehearsed.` · **Organize** `Where all of it is kept.`
-- Tool names unchanged: **Decide** (`Role Fit` · `Ghost Job Check` · `Company Intelligence`) · **Apply** (`Application Packets` · `Resume Tailoring` · `Cover Letters`) · **Interview** (`Interview Prep` · `Voice Practice`) · **Organize** (`Application Tracker` · `Career Context`). Their ten descriptions moved to § 14 in round 4.
+- Tool names unchanged: **Decide** (`Role Fit` · `Ghost Job Checker` · `Company Intelligence`) · **Apply** (`Application Packets` · `Resume Tailoring` · `Cover Letters`) · **Interview** (`Interview Prep` · `Voice Practice`) · **Organize** (`Application Tracker` · `Career Context`). Their ten descriptions moved to § 14 in round 4.
 - Each group carries one product-state chip (`DESIGN.md` R8). Every one is a string the product actually produces, checked against `lumo-plan-builder` `origin/main` at `b8cb77ec`: Decide `Strong fit` (the Role Fit label at a score of 80 or above) · Apply `Ready for review` (a job packet's `review_ready` status) · Interview `Prep ready` (the interview prep state) · Organize `Saved to tracker` (the save-a-job confirmation).
   - **Plan 039 proposed two chips that do not exist in the product** — `Thursday · Prep done` and `12 tracked`. Both were dropped rather than invented. Adding a chip here means finding it in the app first.
 
 ### More than a job search
 
 - Kicker: `More than a job search`
-- H2: `Losing your job creates more than one problem.`
+- Kicker: `Step 1 · Steady the first week` *(was `More than a job search`; round 5)*
+- H2: `Losing your job creates more than one problem.` *(kept: the eyebrow carries the plain label, so the headline may stay evocative, per R5a)*
+- Section link *(new in round 5, the section had no route out)*: `See what to do first` → `/layoff-support`
 - Body: `Finding another role matters. But so do unemployment benefits, health coverage, finances, career decisions, applications, networking, interviews, and figuring out what to do first. Offboard brings those pieces together.`
 - Six questions as a disclosure list (round 4), the first open so it still reads beside the plan card that answers it:
   1. `What do I do first?` — **Your personalized plan** — `Tell Offboard what's happening, and we'll help organize what needs your attention now, what can wait, and what comes next.`
@@ -419,7 +519,7 @@ for the owner.
 **Meta title:** `How Offboard works | One plan after a layoff`
 **Meta description:** `See how Offboard connects financial runway, possible benefits, and the job search in one private transition plan.`
 
-Section order: Hero → Five steps → Starting plan → Toolkit → LUMO → Benefits
+Section order: Hero → Five steps → Starting plan → Toolkit → Lumo → Benefits
 visual (decorative render) → Verified facts (shared with home) → Human support
 → Context → Product FAQ → Final CTA.
 
@@ -435,8 +535,8 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 - Kicker: `The plan, start to finish` · H2: `Five steps from "what just happened" to "what's next."`
 1. `Tell us where you are` — `A few questions: your situation, your state, your dates. That's enough to build a plan that's actually yours, not a template.` — tag `Your situation & state`
 2. `See your money clearly` — `Your runway, how long you can go, beside your money clock: which benefit deadlines are coming and what each one is worth.` — tag `Runway calculator · Money clock`
-3. `Claim what exists` — `Step-by-step paths to unemployment benefits, health coverage, and state-approved funded training, with verified official links. We never promise funding. We show you the exact path to find out.` — tag `Benefit sheets · Funded training explorer`
-4. `Get ready, then run the search` — `Resume, story, materials, then Job Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.` — tag `Job Packet · Resume Studio`
+3. `Claim what exists` — `Step-by-step paths to unemployment benefits, health coverage, and state-approved funded training, with verified official links. We never promise funding. We show you the exact path to find out.` — tag `Benefit sheets · Funded Training`
+4. `Get ready, then run the search` — `Resume, story, materials, then Job Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.` — tag `Job Packet · Resume Tailoring`
 5. `Close it, and make it count` — `Interview prep and practice, a paperwork review before you sign, and when you land: mark it, keep your career ledger, and pass what you learned back.` — tag `Interview prep · Paperwork review`
 
 ### Starting plan *(added by plan 016)*
@@ -450,20 +550,20 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 - Kicker: `The toolkit` · H2: `The tools didn't go anywhere. Now they show up at the right moment.`
 - Flagship: `Job Packet` — `Paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person, all kept with the role.` — chips `Ghost check · Fit read · Tailored materials · Warm intro` — link `Explore the Job Packet`
 - Cards (renders on the first three):
-  - `Resume Studio` — `Build and tailor resumes from your real history, ready for the role in front of you.`
+  - `Resume Tailoring` — `Build and tailor resumes from your real history, ready for the role in front of you.`
   - `Interview prep & practice` — `Drills grounded in the role, the company, and your strongest stories.`
   - `Application tracker` — `Every application, stage, and follow-up stays current without extra busywork.`
-  - `Ghost-job checker` — `Flags fake or stale listings before you waste an application on them.`
+  - `Ghost Job Checker` — `Flags fake or stale listings before you waste an application on them.`
   - `Paperwork review` — `A read on your severance or offer paperwork before you sign anything.`
   - `Runway calculator` — `See how long your money lasts and which deadlines change the math.`
-  - `Funded training explorer` — `Search state-approved programs that may be paid for while you train.`
-  - `Ask LUMO` — `An AI guide that works from your plan, your benefit facts, and your search.`
+  - `Funded Training` — `Search state-approved programs that may be paid for while you train.`
+  - `Ask Lumo` — `An AI guide that works from your plan, your benefit facts, and your search.`
 
-### Meet LUMO *(caseworker line added by plan 016)*
+### Meet Lumo *(caseworker line added by plan 016)*
 
-- Kicker: `Meet LUMO` · H2: `An AI guide that knows your actual situation.`
-- Body: `LUMO works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three. Like a caseworker who answers in seconds, remembers everything, and never has a line.`
-- Trust line: `When LUMO talks about your benefits, it reads from human-verified state facts. It never invents a dollar figure or a deadline.`
+- Kicker: `Meet Lumo` · H2: `An AI guide that knows your actual situation.`
+- Body: `Lumo works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three. Like a caseworker who answers in seconds, remembers everything, and never has a line.`
+- Trust line: `When Lumo talks about your benefits, it reads from human-verified state facts. It never invents a dollar figure or a deadline.`
 - `Ask questions like`: `What deadlines am I coming up on?` · `Am I eligible for funded training?` · `Walk me through this severance agreement.` · `Help me prepare for tomorrow's interview.`
 
 ### Verified facts — identical to the homepage section (shared component).
@@ -511,8 +611,8 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 
 - Kicker: `A simple place to start` · H2: `Start free. Add more support when you need it.`
 - Intro: `Begin with a transition plan and the core tools. Add credits or human support only when you choose to go further. You will see the price and what is included before you pay.`
-- **Free** (dark highlight card, per owner decision 2026-08-23): `$0 forever` — `See your plan, your runway, and your benefit deadlines. Then build your first Job Packet.` — features: Transition plan & benefit sheets · Runway calculator · First Job Packet free · Application tracking · 3 LUMO messages per day · 30 monthly credits — CTA `Build my free transition plan`
-- **Offboard Pro** (badge `For active transitions`): `$20/month` — `For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited LUMO.` — features: Unlimited conversations with LUMO · More room for Job Packets and tailoring · Deeper application and interview support · 300 monthly credits — CTA `Upgrade to Pro`
+- **Free** (dark highlight card, per owner decision 2026-08-23): `$0 forever` — `See your plan, your runway, and your benefit deadlines. Then build your first Job Packet.` — features: Transition plan & benefit sheets · Runway calculator · First Job Packet free · Application tracking · 3 Lumo messages per day · 30 monthly credits — CTA `Build my free transition plan`
+- **Offboard Pro** (badge `For active transitions`): `$20/month` — `For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited Lumo.` — features: Unlimited conversations with Lumo · More room for Job Packets and tailoring · Deeper application and interview support · 300 monthly credits — CTA `Upgrade to Pro`
 - **Sponsored access** (badge `May be covered`): `Outplacement, modernized. Your former employer, school, or workforce organization may cover your access.` — features: The full sponsored benefit is delivered to you · Your private career activity remains yours · Sponsors receive aggregate reporting only — CTA `Learn about sponsored access` → `/employers`
 - Deck note: `Quarterly billing details and the full feature comparison are shown at checkout. Claiming your government benefits is always free, on any tier.`
 
@@ -622,7 +722,7 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 
 - Kicker: `The member experience` · H2: `Support for the whole transition, not only the resume.`
 - Body: `A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Job Packets, and human support options.`
-- Items: `A plan from day one` — `Members start from their situation and state, and see what deserves attention first.` · `Verified benefit facts` — `Deadlines and dollar figures checked by people, with official links. Claiming benefits is always free.` · `The full toolkit` — `Job Packets, resume tailoring, interview prep, application tracking, and LUMO.`
+- Items: `A plan from day one` — `Members start from their situation and state, and see what deserves attention first.` · `Verified benefit facts` — `Deadlines and dollar figures checked by people, with official links. Claiming benefits is always free.` · `The full toolkit` — `Job Packets, resume tailoring, interview prep, application tracking, and Lumo.`
 
 ### Pricing *(plan 012; owner-approved 2026-08-23)*
 
@@ -779,14 +879,14 @@ rules).*
 
 - Kicker: `What residents get` · H2: `The same Offboard workspace, sponsored.`
 - Body: `One connected place for the search: jobs, applications, documents, interviews, and guidance that already knows the resident's plan.`
-- Items: `A private job-search workspace` — `The full Offboard workspace in one place, instead of scattered tools and paperwork.` · `Jobs and Job Packets` — `Find roles and build a Job Packet for each one, with fit and next steps included.` · `Applications, follow-ups, and documents` — `Track every application and follow-up, and keep resumes and other documents in one place.` · `Interview prep and Ask LUMO` — `Practice for interviews and ask LUMO for guidance grounded in the resident's own plan.`
+- Items: `A private job-search workspace` — `The full Offboard workspace in one place, instead of scattered tools and paperwork.` · `Jobs and Job Packets` — `Find roles and build a Job Packet for each one, with fit and next steps included.` · `Applications, follow-ups, and documents` — `Track every application and follow-up, and keep resumes and other documents in one place.` · `Interview prep and Ask Lumo` — `Practice for interviews and ask Lumo for guidance grounded in the resident's own plan.`
 
 ### Worker-controlled privacy *(the reporting-boundary sentence is verbatim from the ACT playbook; do not soften or embellish)*
 
 - Kicker: `Worker-controlled privacy` · H2: `Aggregate for the program. Private for the resident.`
-- Body: `ACT reporting is aggregate-first. The program can understand applications, approvals, claims, onboarding, and engagement without seeing private resumes, documents, LUMO conversations, or individual job-search behavior.`
+- Body: `ACT reporting is aggregate-first. The program can understand applications, approvals, claims, onboarding, and engagement without seeing private resumes, documents, Lumo conversations, or individual job-search behavior.`
 - `What the program sees`: Application funnel · Approval and claim visibility · Aggregate engagement · Weekly signup trends · Cohort or jurisdiction view
-- `What stays private`: Resumes · Documents · LUMO conversations · Individual job-search behavior
+- `What stays private`: Resumes · Documents · Lumo conversations · Individual job-search behavior
 
 ### For public-sector partners
 
@@ -935,8 +1035,8 @@ Product column.
 ### Hero
 
 - Kicker: `Career Context`
-- H1: `Build your career context once. Use it everywhere.`
-- Body: `Your resume is one page about your past. Your Career Context is a living record of your experience, applications, companies, conversations, interviews, preferences, and goals. Offboard builds it with you and puts it to work in every tool you use.`
+- H1: `Build your Career Context once. Use it everywhere.` *(round 5: the product noun is capitalised when it means the product)*
+- Body: `One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use.` *(round 5: the hero, the next H2, and that section's body all made the same resume argument before the page said anything new; the hero now states the promise and section two carries the argument)*
 - CTA: `Create my Career Context` (primary)
 
 ### Why a resume isn't enough
@@ -999,7 +1099,7 @@ Product column.
 ### Works with the AI you already use
 
 - Kicker: `Offboard, wherever you work`
-- H2: `Offboard holds the record. You choose the interface.`
+- H2: `Your context goes with you.` *(round 5: this H2 shipped on two pages; it stays on `/integrations`, where it titles the grid)*
 - Body: `Connect Offboard to supported AI assistants and your Career Context goes with you. Save an opportunity from a conversation, update an application, or add what you just learned, from whichever tool you are already in.`
 - Demo conversation: You: `Save the interview questions I just worked through, and what I answered.` / AI: `Done. I have added them to your interview stories.` *(varied 2026-08-31 so it does not duplicate the /integrations demo, which owns the project-outcomes line)*
 
@@ -1315,7 +1415,7 @@ tools form, and the fact that the loop has a memory.
 
 - Kicker: `Job search`
 - H1: `A job search that works as one system.`
-- Body: `Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, from the role you just found to the interview you just finished, so nothing has to be re-explained at the next step.`
+- Body: `Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, from the role you just found to the note you write after the interview, so nothing has to be re-explained at the next step.`
 - CTA: `Build my free transition plan` (primary)
 
 ### Why one system
@@ -1347,7 +1447,7 @@ tools form, and the fact that the loop has a memory.
 - Kicker: `The toolkit`
 - H2: `Four stages, and what each one decides.`
 - Groups, each stage's decision line followed by its tools. **The ten tool descriptions moved here from § 1 in round 4 (2026-09-02): the homepage names the tools, this page describes them.**
-  1. `Decide` — `Whether this one deserves your week.` — `Role Fit` `Understand how an opportunity matches your experience, strengths, and goals.` · `Ghost Job Check` `Look for signals that a posting may not represent an actively hiring role.` · `Company Intelligence` `Know who you're applying to before you invest your time.`
+  1. `Decide` — `Whether this one deserves your week.` — `Role Fit` `Understand how an opportunity matches your experience, strengths, and goals.` · `Ghost Job Checker` `Look for signals that a posting may not represent an actively hiring role.` · `Company Intelligence` `Know who you're applying to before you invest your time.`
   2. `Apply` — `What you actually send.` — `Application Packets` `Bring together the role, company, resume strategy, positioning, and application materials in one place.` · `Resume Tailoring` `Adapt your resume using the opportunity and your Career Context.` · `Cover Letters` `Create relevant application messaging without starting from a blank page.`
   3. `Interview` — `Walking in prepared, not rehearsed.` — `Interview Prep` `Turn company and role context into a focused preparation plan.` · `Voice Practice` `Practice answering questions in a realistic voice conversation.`
   4. `Organize` — `Where all of it is kept.` — `Application Tracker` `Keep your entire pipeline current.` · `Career Context` `Connect the history behind every application, interaction, and outcome.`

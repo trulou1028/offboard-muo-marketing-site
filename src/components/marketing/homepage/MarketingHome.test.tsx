@@ -292,7 +292,7 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("link", { name: /apply for pilot access/i })).toHaveAttribute("href", "https://app.offboard.co/act/apply");
     expect(
       screen.getByText(
-        "ACT reporting is aggregate-first. The program can understand applications, approvals, claims, onboarding, and engagement without seeing private resumes, documents, LUMO conversations, or individual job-search behavior."
+        "ACT reporting is aggregate-first. The program can understand applications, approvals, claims, onboarding, and engagement without seeing private resumes, documents, Lumo conversations, or individual job-search behavior."
       )
     ).toBeInTheDocument();
     expect(screen.queryByText(/modern unemployment office/i)).not.toBeInTheDocument();

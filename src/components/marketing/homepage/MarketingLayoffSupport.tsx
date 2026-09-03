@@ -143,7 +143,7 @@ export function MarketingLayoffSupport() {
           body="The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in order."
           current="layoff-support"
           aside={false}
-          cta="Build my free transition plan"
+          cta="Get started free"
         />
         <Questions />
         <HookBand />

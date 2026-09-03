@@ -80,7 +80,10 @@ export function Brand() {
 }
 
 export function PrimaryCta({
-  children = "Build my plan",
+  /* The sitewide ask (owner 2026-09-03, plan 040 finding 3). Five labels
+     pointed at this one URL; a section CTA that names an in-page action may
+     still differ, but the nav, every page hero, and every final CTA say this. */
+  children = "Get started free",
   className = "",
 }: {
   children?: ReactNode;
@@ -258,7 +261,7 @@ export function PageHero({
   body,
   current,
   aside,
-  cta = "Build my plan",
+  cta = "Get started free",
   ctaHref = SIGN_UP_URL,
   footnote,
   eyebrowVisual,
@@ -420,16 +423,16 @@ const FIVE_STEPS = [
   {
     title: "Claim what exists",
     body: "Step-by-step paths to unemployment benefits, health coverage, and state-approved funded training, with verified official links. We never promise funding. We show you the exact path to find out.",
-    tag: "Benefit sheets · Funded training explorer",
+    tag: "Benefit sheets · Funded Training",
   },
   {
     title: "Get ready, then run the search",
     body: "Resume, story, materials, then Job Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.",
-    tag: "Job Packet · Resume Studio",
+    tag: "Job Packet · Resume Tailoring",
   },
   {
     title: "Close it, and make it count",
-    body: "Interview prep and practice, a paperwork review before you sign, and when you land: mark it, keep your career ledger, and pass what you learned back.",
+    body: "Interview prep and practice, a paperwork review before you sign, and when you land: mark it, keep your record, and pass what you learned back.",
     tag: "Interview prep · Paperwork review",
   },
 ] as const;
@@ -460,14 +463,14 @@ export function FiveSteps() {
 const TOOLKIT_FLAGSHIP_CHIPS = ["Ghost check", "Fit read", "Tailored materials", "Warm intro"] as const;
 
 const TOOLKIT_CARDS: Array<{ title: string; body: string; image?: string; alt?: string }> = [
-  { title: "Resume Studio", body: "Build and tailor resumes from your real history, ready for the role in front of you.", image: "/marketing/homepage/renders/toolkit-resumes.webp", alt: "Product render of the Resume Studio view, a resume tailored into role-specific cards" },
+  { title: "Resume Tailoring", body: "Build and tailor resumes from your real history, ready for the role in front of you.", image: "/marketing/homepage/renders/toolkit-resumes.webp", alt: "Product render of the Resume Tailoring view, a resume tailored into role-specific cards" },
   { title: "Interview prep & practice", body: "Drills grounded in the role, the company, and your strongest stories.", image: "/marketing/homepage/renders/toolkit-interviews.webp", alt: "Product render of interview prep, two message cards exchanging practice questions" },
   { title: "Application tracker", body: "Every application, stage, and follow-up stays current without extra busywork.", image: "/marketing/homepage/renders/toolkit-applications.webp", alt: "Product render of the application tracker, cards filed by stage" },
-  { title: "Ghost-job checker", body: "Flags fake or stale listings before you waste an application on them." },
+  { title: "Ghost Job Checker", body: "Flags fake or stale listings before you waste an application on them." },
   { title: "Paperwork review", body: "A read on your severance or offer paperwork before you sign anything." },
   { title: "Runway calculator", body: "See how long your money lasts and which deadlines change the math." },
-  { title: "Funded training explorer", body: "Search state-approved programs that may be paid for while you train." },
-  { title: "Ask LUMO", body: "An AI guide that works from your plan, your benefit facts, and your search." },
+  { title: "Funded Training", body: "Search state-approved programs that may be paid for while you train." },
+  { title: "Ask Lumo", body: "An AI guide that works from your plan, your benefit facts, and your search." },
 ];
 
 export function ToolkitSection() {
@@ -519,11 +522,11 @@ export function LumoSection() {
   return (
     <section className="mh-lumo mh-section mh-split" aria-labelledby="lumo-title">
       <div className="mh-copy-block">
-        <span className="mh-kicker is-lime">Meet LUMO</span>
+        <span className="mh-kicker is-lime">Meet Lumo</span>
         <h2 id="lumo-title">An AI guide that knows your actual situation.</h2>
-        <p>LUMO works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three. Like a caseworker who answers in seconds, remembers everything, and never has a line.</p>
+        <p>Lumo works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three. Like a caseworker who answers in seconds, remembers everything, and never has a line.</p>
         <div className="mh-lumo-trust">
-          <p>When LUMO talks about your benefits, it reads from human-verified state facts. It never invents a dollar figure or a deadline.</p>
+          <p>When Lumo talks about your benefits, it reads from human-verified state facts. It never invents a dollar figure or a deadline.</p>
         </div>
       </div>
       <div className="mh-lumo-questions" data-reveal="">
@@ -616,10 +619,10 @@ export function PricingSection() {
             <li><Check aria-hidden="true" />Runway calculator</li>
             <li><Check aria-hidden="true" />First Job Packet free</li>
             <li><Check aria-hidden="true" />Application tracking</li>
-            <li><Check aria-hidden="true" />3 LUMO messages per day</li>
+            <li><Check aria-hidden="true" />3 Lumo messages per day</li>
             <li><Check aria-hidden="true" />30 monthly credits</li>
           </ul>
-          <PrimaryCta>Build my free transition plan</PrimaryCta>
+          <PrimaryCta />
         </article>
         <article>
           <header>
@@ -627,9 +630,9 @@ export function PricingSection() {
             <b className="is-badge">For active transitions</b>
           </header>
           <p className="mh-price-value"><b>$20</b><small>/month</small></p>
-          <p>For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited LUMO.</p>
+          <p>For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited Lumo.</p>
           <ul>
-            <li><Check aria-hidden="true" />Unlimited conversations with LUMO</li>
+            <li><Check aria-hidden="true" />Unlimited conversations with Lumo</li>
             <li><Check aria-hidden="true" />More room for Job Packets and tailoring</li>
             <li><Check aria-hidden="true" />Deeper application and interview support</li>
             <li><Check aria-hidden="true" />300 monthly credits</li>
@@ -799,7 +802,7 @@ export function FinalCta({
       <span className="mh-kicker is-lime">You do not need the whole plan today</span>
       <h2 id="final-title">{title}</h2>
       <p>{body}</p>
-      <div><PrimaryCta>Build my free transition plan</PrimaryCta><a href={HUMAN_SUPPORT_URL}>Talk to a person</a></div>
+      <div><PrimaryCta /><a href={HUMAN_SUPPORT_URL}>Talk to a person</a></div>
       <small>Independent support. Start free.</small>
       <div className="mh-progress-mark" aria-hidden="true"><i /><span /><i /><span /><i /></div>
       </div>

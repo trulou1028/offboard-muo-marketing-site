@@ -22,7 +22,7 @@ export function MarketingCompanies() {
           kicker="Company Transition Centers"
           title="Laid off from a company in the news? Start with its page."
           body="One page per company, built from the public record: what happened, with a source next to every figure, what to do this week, and what your state owes you. Nothing here is an estimate and nothing here is a promise."
-          cta="Build my free transition plan"
+          cta="Get started free"
           footnote="Offboard has no relationship with any company listed. Each page says when it was last checked."
           aside={false}
         />

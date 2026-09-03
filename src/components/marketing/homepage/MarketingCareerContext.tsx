@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import {
   Bookmark,
   Briefcase,
@@ -17,10 +19,8 @@ import {
   AiReply,
   EditorialGrid,
   FinalCta,
-  LumoMark,
   MarketingShell,
   PageHero,
-  SIGN_UP_URL,
   YouBubble,
 } from "./MarketingSite";
 
@@ -170,7 +170,7 @@ function LumoUsesIt() {
         <span className="mh-kicker is-lime">Meet Lumo</span>
         <h2 id="cc-lumo-title">Lumo starts every conversation already caught up.</h2>
         <p>Because Lumo works from your Career Context, you never re-upload a resume, re-explain your goals, or reconstruct what happened with an application. You ask, and the answer starts from everything you have already built.</p>
-        <a className="mh-ai-cta" href={SIGN_UP_URL}><LumoMark className="is-dot" /><span>Ask Lumo</span></a>
+        <Link className="mh-section-link" href="/lumo">See how Lumo works <ArrowRight aria-hidden="true" /></Link>
       </div>
     </section>
   );
@@ -182,7 +182,7 @@ function AssistantsSection() {
       <div className="mh-wherever-grid">
         <div className="mh-copy-block">
           <span className="mh-kicker">Offboard, wherever you work</span>
-          <h2 id="assistants-title">Offboard holds the record. You choose the interface.</h2>
+          <h2 id="assistants-title">Your context goes with you.</h2>
           <p>Connect Offboard to supported AI assistants and your Career Context goes with you. Save an opportunity from a conversation, update an application, or add what you just learned, from whichever tool you are already in.</p>
         </div>
         <div className="mh-chat-card" aria-label="Example conversation updating a Career Context from an AI assistant" data-reveal="">
@@ -214,11 +214,11 @@ export function MarketingCareerContext() {
       <main id="main-content">
         <PageHero
           kicker="Career Context"
-          title="Build your career context once. Use it everywhere."
-          body="Your resume is one page about your past. Your Career Context is a living record of your experience, applications, companies, conversations, interviews, preferences, and goals. Offboard builds it with you and puts it to work in every tool you use."
+          title="Build your Career Context once. Use it everywhere."
+          body="One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use."
           current="career-context"
           aside={false}
-          cta="Create my Career Context"
+          cta="Get started free"
         />
         <EditorialGrid
           kicker="The problem"

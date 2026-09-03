@@ -41,7 +41,7 @@ const LOOP = [
 const STAGES = [
   { name: "Decide", decides: "Whether this one deserves your week.", tools: [
     ["Role Fit", "Understand how an opportunity matches your experience, strengths, and goals."],
-    ["Ghost Job Check", "Look for signals that a posting may not represent an actively hiring role."],
+    ["Ghost Job Checker", "Look for signals that a posting may not represent an actively hiring role."],
     ["Company Intelligence", "Know who you're applying to before you invest your time."],
   ] },
   { name: "Apply", decides: "What you actually send.", tools: [
@@ -118,10 +118,10 @@ export function MarketingJobSearch() {
         <PageHero
           kicker="Job search"
           title="A job search that works as one system."
-          body="Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, from the role you just found to the interview you just finished, so nothing has to be re-explained at the next step."
+          body="Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, from the role you just found to the note you write after the interview, so nothing has to be re-explained at the next step."
           current="job-search"
           aside={false}
-          cta="Build my free transition plan"
+          cta="Get started free"
         />
         <EditorialGrid
           kicker="The difference"

@@ -129,7 +129,7 @@ export function MarketingLumo() {
           body="Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window."
           current="lumo"
           aside={false}
-          cta="Ask Lumo"
+          cta="Get started free"
         />
         <WhatItKnows />
         <WhatToAsk />

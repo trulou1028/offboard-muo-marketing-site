@@ -52,7 +52,7 @@ function HomeHero() {
     <section className="mh-hero2 mh-section" id="top" aria-labelledby="hero-title">
       <div className="mh-hero2-copy">
         <h1 id="hero-title">The modern unemployment office.</h1>
-        <p>Your job search, benefits, applications, career context, and next steps in one system, connected to the AI you already use.</p>
+        <p>Your benefits, your job search, and your career context in one system, connected to the AI you already use.</p>
         <div className="mh-hero2-actions">
           <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Get started free</span><ArrowRight aria-hidden="true" /></a>
           <SecondaryCta href="/how-it-works">See how it works</SecondaryCta>
@@ -84,10 +84,23 @@ function HomeHero() {
 }
 
 /* ---------------------------------------------------------------- */
-/* 2 · The three steps (paper). Pattern E, the stepped strip: the    */
+/* 2 · The four steps (paper). Pattern E, the stepped strip: the     */
 /* whole page in one row, each step linking to its own section.      */
+/*                                                                    */
+/* Four, not three (owner 2026-09-03, plan 040 finding 1). The H1     */
+/* claims the modern unemployment office; the three-step version      */
+/* described an AI job-search tool and carried the benefits story as  */
+/* a trailing clause on step three ("with your benefits beside it").  */
+/* A first step earns the H1 back, and step four loses that clause    */
+/* because step one now says it properly.                             */
 /* ---------------------------------------------------------------- */
 const STEPS = [
+  {
+    title: "Steady the first week.",
+    body: "Deadlines, health coverage, and how long your money lasts, in the order they matter.",
+    href: "#steady",
+    link: "See what comes first",
+  },
   {
     title: "Build your Career Context.",
     body: "Tell Offboard about your career once. It becomes a record you keep adding to.",
@@ -102,13 +115,13 @@ const STEPS = [
   },
   {
     title: "Run your search with real tools.",
-    body: "Decide, apply, interview, and keep it all straight, with your benefits beside it.",
+    body: "Decide, apply, interview, and keep every application straight.",
     href: "#run",
     link: "See the toolkit",
   },
 ] as const;
 
-function ThreeSteps() {
+function FourSteps() {
   return (
     <section className="mh-steps-band mh-section" aria-labelledby="steps-title">
       <div className="mh-intro-split">
@@ -116,7 +129,7 @@ function ThreeSteps() {
           <span className="mh-kicker">The short version</span>
           <h2 id="steps-title">How Offboard works.</h2>
         </div>
-        <p>Build your career record once, connect it to the AI you already use, and run your search with tools that read from it.</p>
+        <p>Handle what has a deadline, build a record of your career once, connect it to the AI you already use, and run your search from it.</p>
       </div>
       <ol className="mh-steps" data-reveal="">
         {STEPS.map(({ title, body, href, link }, index) => (
@@ -170,7 +183,7 @@ function StepContext() {
     <section className="mh-ctx mh-section" id="build" aria-labelledby="ctx-title">
       <div className="mh-split">
         <div className="mh-copy-block">
-          <span className="mh-kicker">Step 1 · Build your context</span>
+          <span className="mh-kicker">Step 2 · Build your context</span>
           <h2 id="ctx-title">One place that remembers your career.</h2>
           <p>Your resume is only a fraction of your career. Offboard builds a living record of your experience, accomplishments, applications, companies, conversations, documents, interviews, goals, and progress so you don&apos;t have to explain yourself from scratch every time you need help.</p>
           <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Build my Career Context</span><ArrowRight aria-hidden="true" /></a>
@@ -220,7 +233,7 @@ function StepConnect() {
     <section className="mh-connect mh-section" id="connect" aria-labelledby="connect-title">
       <div className="mh-split">
         <div className="mh-copy-block">
-          <span className="mh-kicker is-lime">Step 2 · Connect it to the AI you use</span>
+          <span className="mh-kicker is-lime">Step 3 · Connect it to the AI you use</span>
           <h2 id="connect-title">Ask anywhere. The answer is about you.</h2>
           <p>Lumo is Offboard&apos;s own guide and works from your Career Context from the first question. Prefer ChatGPT or Claude? Connect Offboard and take your context with you.</p>
           <SecondaryCta href="/integrations">See how Offboard Everywhere works</SecondaryCta>
@@ -248,7 +261,7 @@ function StepConnect() {
 /*   "Saved to tracker" - the save-a-job toast                       */
 /* ---------------------------------------------------------------- */
 const TOOLKIT_STAGES = [
-  { icon: Search, title: "Decide", chip: "Strong fit", decides: "Whether this one deserves your week.", tools: ["Role Fit", "Ghost Job Check", "Company Intelligence"] },
+  { icon: Search, title: "Decide", chip: "Strong fit", decides: "Whether this one deserves your week.", tools: ["Role Fit", "Ghost Job Checker", "Company Intelligence"] },
   { icon: FileText, title: "Apply", chip: "Ready for review", decides: "What you actually send.", tools: ["Application Packets", "Resume Tailoring", "Cover Letters"] },
   { icon: MessageSquare, title: "Interview", chip: "Prep ready", decides: "Walking in prepared, not rehearsed.", tools: ["Interview Prep", "Voice Practice"] },
   { icon: ListChecks, title: "Organize", chip: "Saved to tracker", decides: "Where all of it is kept.", tools: ["Application Tracker", "Career Context"] },
@@ -259,7 +272,7 @@ function StepSearch() {
     <section className="mh-kit mh-section" id="run" aria-labelledby="kit-title">
       <div className="mh-intro-split">
         <div>
-          <span className="mh-kicker">Step 3 · Run your search</span>
+          <span className="mh-kicker">Step 4 · Run your search</span>
           <h2 id="kit-title">The tools you run your search with.</h2>
         </div>
         <div>
@@ -283,9 +296,11 @@ function StepSearch() {
 }
 
 /* ---------------------------------------------------------------- */
-/* 6 · Beside the search (sand). Six member questions as a disclosure */
-/* list (Pattern H). They were five open answers laid out across the  */
-/* band, plus a sixth wedged into the intro as its own titled block.  */
+/* 3 · Step 1, steady the first week (sand). Moved above the Career   */
+/* Context step (plan 040): the H1 promises an unemployment office,   */
+/* so the first step is the deadlines and the money, not the resume.  */
+/* Six member questions as a disclosure list (Pattern H), and the     */
+/* section now links out to the pillar page that answers them.        */
 /* ---------------------------------------------------------------- */
 /* Six questions, one open. "What do I do first?" used to sit inside the
    section's intro as its own titled block, which is what R5a now forbids; as
@@ -319,14 +334,15 @@ function PathComposition() {
   );
 }
 
-function BesideTheSearch() {
+function StepSteady() {
   return (
-    <section className="mh-morethan mh-section" aria-labelledby="morethan-title">
+    <section className="mh-morethan mh-section" id="steady" aria-labelledby="morethan-title">
       <div className="mh-split">
         <div className="mh-copy-block">
-          <span className="mh-kicker is-sand">More than a job search</span>
+          <span className="mh-kicker is-sand">Step 1 · Steady the first week</span>
           <h2 id="morethan-title">Losing your job creates more than one problem.</h2>
           <p>Finding another role matters. But so do unemployment benefits, health coverage, finances, career decisions, applications, networking, interviews, and figuring out what to do first. Offboard brings those pieces together.</p>
+          <Link className="mh-section-link" href="/layoff-support">See what to do first <ArrowRight aria-hidden="true" /></Link>
         </div>
         <PathComposition />
       </div>
@@ -419,11 +435,11 @@ export default function MarketingHome() {
     <MarketingShell current="home">
       <main id="main-content">
         <HomeHero />
-        <ThreeSteps />
+        <FourSteps />
+        <StepSteady />
         <StepContext />
         <StepConnect />
         <StepSearch />
-        <BesideTheSearch />
         <PlansSection />
         <CommunityStrip />
         <FinalCtaV2 />

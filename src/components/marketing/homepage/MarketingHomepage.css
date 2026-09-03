@@ -856,10 +856,7 @@ img.mh-lumo-mark { display: inline-block; width: 28px; height: 28px; flex: 0 0 2
 
 a.mh-secondary-cta { display: inline-flex; min-height: 50px; align-items: center; padding: 0 20px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); color: var(--mh-ink); font-size: 15px; font-weight: 600; transition: border-color var(--mh-dur-base) var(--mh-ease-standard), color var(--mh-dur-base) var(--mh-ease-standard); }
 a.mh-secondary-cta:hover { border-color: var(--mh-ink); }
-a.mh-ai-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 10px; padding: 0 20px; background: var(--mh-ink); border-radius: var(--mh-radius-sm); color: var(--mh-paper); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-base) var(--mh-ease-standard); }
-a.mh-ai-cta:hover { background: rgb(27 36 34); transform: translateY(-1px); }
 a.mh-lumo-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 12px; padding: 0 22px; background: var(--mh-lime); border-radius: var(--mh-radius-sm); color: var(--mh-deep); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-base) var(--mh-ease-standard); }
-a.mh-ai-cta:active,
 a.mh-lumo-cta:active { transform: translateY(1px); }
 a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1px); }
 .mh-lumo-cta svg { width: 16px; height: 16px; }
@@ -1108,7 +1105,6 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 .mh-lumo-band { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-forest); color: var(--mh-paper); }
 .mh-lumo-band .mh-copy-block > p { color: var(--mh-on-dark-muted); }
 .mh-lumo-band .mh-copy-block > small { color: var(--mh-on-dark-muted); font-size: 13px; }
-.mh-lumo-band .mh-ai-cta { margin-top: 8px; }
 .mh-lumo-prompts { display: flex; flex-direction: column; gap: 12px; }
 .mh-lumo-prompts > span { color: var(--mh-on-dark-muted); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
 .mh-lumo-prompts p { padding: 16px 20px; border: 1px solid var(--mh-hairline-on-dark); border-radius: var(--mh-radius-md); font-size: 16px; line-height: 1.4; }
@@ -1212,7 +1208,7 @@ ol.mh-stage-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: c
 /* `ol.` prefix is load-bearing - see the reset note at the top of this file. */
 /* Contained (owner 2026-09-02): one white card, three cells split by
    hairlines, the number in a forest disc. The card takes the surface shadow. */
-ol.mh-steps { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 48px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); box-shadow: var(--mh-shadow-surface); }
+ol.mh-steps { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 48px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); box-shadow: var(--mh-shadow-surface); }
 .mh-steps li { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 32px; }
 .mh-steps li + li { border-left: 1px solid var(--mh-line); }
 .mh-steps li > span { display: grid; width: 40px; height: 40px; margin-bottom: 6px; place-items: center; background: var(--mh-forest); border-radius: 50%; color: var(--mh-paper); font-size: 14px; font-weight: 600; letter-spacing: .04em; }
@@ -1383,6 +1379,7 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-ctx-grid { grid-template-columns: repeat(2, 1fr); }
   .mh-kit-grid,
   ol.mh-stage-strip,
+  ol.mh-steps,
   .mh-capabilities { grid-template-columns: repeat(2, 1fr); }
   .mh-int-grid { grid-template-columns: repeat(2, 1fr); }
   .mh-site-header { grid-template-columns: auto 1fr; }
