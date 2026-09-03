@@ -12,14 +12,31 @@ test.describe("Offboard marketing site", () => {
     });
 
     await page.goto("/");
-    // Homepage v2 (plan 022): Career Context narrative, COPY.md § 1.
+    // Homepage v3 (plan 039): the Career Context narrative as three numbered
+    // steps, COPY.md § 1.
     await expect(page.getByRole("heading", { level: 1, name: /modern unemployment office/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /your job search goes wherever you do/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "How Offboard works." })).toBeVisible();
     await expect(page.getByRole("heading", { name: /one place that remembers your career/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /ask anywhere\. the answer is about you/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "The tools you run your search with." })).toBeVisible();
+
+    // Round 4: the member questions are a disclosure list, first item open.
+    // Closed answers stay in the DOM, so this asserts the disclosure state
+    // rather than text presence.
+    const questions = page.locator(".mh-morethan details");
+    await expect(questions).toHaveCount(6);
+    await expect(questions.first()).toHaveAttribute("open", "");
+    await questions.nth(1).locator("summary").click();
+    await expect(questions.nth(1)).toHaveAttribute("open", "");
     await expect(page.getByRole("heading", { name: /losing your job creates more than one problem/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /an ai guide that already knows/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /you don't need another place to start over/i })).toBeVisible();
     await expect(page.getByRole("tablist", { name: "Job search stages" })).toHaveCount(0);
+
+    // Each step scrolls to the section that expands it.
+    await page.getByRole("link", { name: /see the connection/i }).click();
+    await expect(page).toHaveURL(/#connect$/);
+    await expect(page.getByRole("heading", { name: /ask anywhere/i })).toBeInViewport();
+    await page.goto("/");
 
     await page.getByRole("link", { name: "How It Works" }).first().click();
     await expect(page).toHaveURL(/\/how-it-works$/);
@@ -42,7 +59,7 @@ test.describe("Offboard marketing site", () => {
     await expect(page.getByRole("heading", { name: /five steps from/i })).toBeVisible();
     await expect(page.getByText("Tell us where you are")).toBeVisible();
     await expect(page.getByRole("heading", { name: /tools didn't go anywhere/i })).toBeVisible();
-    await expect(page.getByRole("heading", { level: 3, name: "Job Packet" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 3, name: "Application Packet" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "An AI guide that knows your actual situation." })).toBeVisible();
     await expect(page.getByText(/never invents a dollar figure/i)).toBeVisible();
     await expect(page.getByRole("heading", { name: "Stop repeating your story to every new tool." })).toBeVisible();
@@ -289,7 +306,7 @@ test.describe("focus indicator contrast", () => {
         }
         return "none";
       }
-      return Array.from(document.querySelectorAll("main a, main button, header a, header summary")).map(
+      return Array.from(document.querySelectorAll("main a, main button, main summary, header a, header summary")).map(
         (el) => ({
           ring: getComputedStyle(el).getPropertyValue("--mh-focus-ring").trim().toLowerCase(),
           surface: surfaceOf(el.parentElement),

@@ -51,7 +51,7 @@ export function MarketingHowItWorks() {
           kicker="How it works"
           title="One plan that starts where you are."
           body="Whether you were laid off yesterday, have been searching for months, or are still employed and reading the room, your plan starts from your situation and your state, not a template."
-          cta="Build my free transition plan"
+          cta="Get started free"
           aside={<><span>The spine and the muscle</span><strong>The plan is the spine. The tools are the muscle.</strong><p>Every step links straight into the tool that does the heavy lifting. No blank pages, no starting over.</p></>}
         />
         <FiveSteps />
@@ -83,7 +83,7 @@ export function MarketingPricing() {
           title="Start free. Upgrade when you need more support."
           body="Begin with the next role in front of you. Move to Pro when your search needs more room, or see whether an organization can sponsor your access."
           aside={<><span>Clear before you pay</span><strong>No hidden starting fee.</strong><p>Free is a real tier, not a trial. You see every price and what is included before you pay.</p></>}
-          cta="Start free"
+          cta="Get started free"
         />
         <PricingSection />
         <EditorialGrid
@@ -237,11 +237,11 @@ export function MarketingEmployers() {
         <EditorialGrid
           kicker="The member experience"
           title="Support for the whole transition, not only the resume."
-          body="A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Job Packets, and human support options."
+          body="A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Application Packets, and human support options."
           items={[
             { title: "A plan from day one", body: "Members start from their situation and state, and see what deserves attention first." },
             { title: "Verified benefit facts", body: "Deadlines and dollar figures checked by people, with official links. Claiming benefits is always free." },
-            { title: "The full toolkit", body: "Job Packets, resume tailoring, interview prep, application tracking, and LUMO." },
+            { title: "The full toolkit", body: "Application Packets, resume tailoring, interview prep, application tracking, and Lumo." },
           ]}
         />
         <section className="mh-employer-pricing mh-section" aria-labelledby="employer-pricing-title">
@@ -369,16 +369,16 @@ export function MarketingAct() {
           body="One connected place for the search: jobs, applications, documents, interviews, and guidance that already knows the resident's plan."
           items={[
             { title: "A private job-search workspace", body: "The full Offboard workspace in one place, instead of scattered tools and paperwork." },
-            { title: "Jobs and Job Packets", body: "Find roles and build a Job Packet for each one, with fit and next steps included." },
+            { title: "Jobs and Application Packets", body: "Find roles and build an Application Packet for each one, with fit and next steps included." },
             { title: "Applications, follow-ups, and documents", body: "Track every application and follow-up, and keep resumes and other documents in one place." },
-            { title: "Interview prep and Ask LUMO", body: "Practice for interviews and ask LUMO for guidance grounded in the resident's own plan." },
+            { title: "Interview prep and Ask Lumo", body: "Practice for interviews and ask Lumo for guidance grounded in the resident's own plan." },
           ]}
         />
         <section className="mh-act-privacy mh-section" aria-labelledby="act-privacy-title">
           <div className="mh-copy-block">
             <span className="mh-kicker is-lime">Worker-controlled privacy</span>
             <h2 id="act-privacy-title">Aggregate for the program. Private for the resident.</h2>
-            <p>ACT reporting is aggregate-first. The program can understand applications, approvals, claims, onboarding, and engagement without seeing private resumes, documents, LUMO conversations, or individual job-search behavior.</p>
+            <p>ACT reporting is aggregate-first. The program can understand applications, approvals, claims, onboarding, and engagement without seeing private resumes, documents, Lumo conversations, or individual job-search behavior.</p>
           </div>
           <div className="mh-route-privacy-columns">
             <div>
@@ -396,7 +396,7 @@ export function MarketingAct() {
               <ul>
                 <li>Resumes</li>
                 <li>Documents</li>
-                <li>LUMO conversations</li>
+                <li>Lumo conversations</li>
                 <li>Individual job-search behavior</li>
               </ul>
             </div>

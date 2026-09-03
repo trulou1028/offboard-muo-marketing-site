@@ -15,7 +15,6 @@ import {
   LumoMark,
   MarketingShell,
   PageHero,
-  SIGN_UP_URL,
 } from "./MarketingSite";
 
 /* Lumo pillar page (plan 029). Lumo already appears on the homepage,
@@ -129,7 +128,7 @@ export function MarketingLumo() {
           body="Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window."
           current="lumo"
           aside={false}
-          cta="Ask Lumo"
+          cta="Get started free"
         />
         <WhatItKnows />
         <WhatToAsk />

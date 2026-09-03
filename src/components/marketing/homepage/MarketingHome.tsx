@@ -2,23 +2,34 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Bookmark,
-  Briefcase,
-  Building2,
   FileText,
   ListChecks,
   MessageSquare,
   Search,
-  Sparkles,
-  Users,
 } from "lucide-react";
 import type { ReactNode } from "react";
-import { AiReply, CommunityStrip, LumoMark, MarketingShell, SIGN_UP_URL, StartingPlanPreview, TrackerCard, YouBubble } from "./MarketingSite";
+import { AiReply, CommunityStrip, DisclosureList, LumoMark, MarketingShell, SIGN_UP_URL, StartingPlanPreview, YouBubble } from "./MarketingSite";
+import { IntegrationLogo } from "./IntegrationLogos";
 
-/* Homepage v2 (plan 022): the Civic Modern homepage. Copy source:
-   offboard-career-context-hp-copy-v1a.md, mirrored in COPY.md § 1. Layout
-   follows docs/design-system-civic-modern (readme.md band order and the
-   marketing ui_kit). */
+/* Homepage v3 (plan 039): the same Civic Modern bands, re-sequenced into one
+   readable order - build your Career Context, connect it to the AI you use,
+   run your search - and rebuilt on the composition rules in DESIGN.md
+   ("Composition rules", R1 to R10).
+
+   What changed from v2 (plan 022) and why:
+   - Career Context was pitched three times with three filled buttons (the
+     8-card grid, the forest inset, and "Built around you"). R3: one idea,
+     one section, one CTA. It is now Step 1, once.
+   - "Wherever you work" and "Meet Lumo" both said "use AI with your context"
+     2,900px apart. They are now Step 2, once.
+   - Every literal chat transcript in a bordered box is now a composition
+     (R2): a base card with satellites breaking its edges.
+   - Three grids left orphan cells (R1): 8 categories in 4 columns, 5
+     questions in 3, and a 3/3/2/2 toolkit. All three are now ruled lists or
+     a filled 2x2.
+   - The photo triptych is gone (R6). The page keeps two photos.
+
+   Copy source: COPY.md § 1. */
 
 function SecondaryCta({ children, href }: { children: ReactNode; href: string }) {
   return href.startsWith("/") ? (
@@ -28,12 +39,20 @@ function SecondaryCta({ children, href }: { children: ReactNode; href: string })
   );
 }
 
-function HomeHeroV2() {
+/* ---------------------------------------------------------------- */
+/* 1 · Hero (forest deep). Composition A: the chat card overlaps the */
+/* photo's bottom-right corner instead of hanging off the container, */
+/* and the tracker card leaves the card to break its bottom-left     */
+/* edge. On a phone the whole thing goes static but keeps its        */
+/* shadow - v2 dropped to a flat bordered box exactly where most     */
+/* visitors first meet it.                                           */
+/* ---------------------------------------------------------------- */
+function HomeHero() {
   return (
     <section className="mh-hero2 mh-section" id="top" aria-labelledby="hero-title">
       <div className="mh-hero2-copy">
         <h1 id="hero-title">The modern unemployment office.</h1>
-        <p>Your job search, benefits, applications, career context, and next steps in one system, connected to the AI you already use.</p>
+        <p>Your benefits, your job search, and your career context in one system, connected to the AI you already use.</p>
         <div className="mh-hero2-actions">
           <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Get started free</span><ArrowRight aria-hidden="true" /></a>
           <SecondaryCta href="/how-it-works">See how it works</SecondaryCta>
@@ -41,236 +60,298 @@ function HomeHeroV2() {
         <small className="mh-hero2-trust">Join thousands of people building their next chapter with Offboard.</small>
       </div>
       <div className="mh-hero2-visual">
-        <figure className="mh-photo-frame">
-          <Image
-            src="/marketing/homepage/raw/hero-kitchen-table.webp"
-            alt="A man at his kitchen table, working through his job search on a laptop"
-            fill
-            sizes="(max-width: 900px) 100vw, 46vw"
-            preload
-          />
-          <span className="mh-photo-chip"><i className="is-lumo" aria-hidden="true" />Benefits check · Done</span>
-        </figure>
-        <div className="mh-chat-card is-floating" aria-label="Example conversation with an AI assistant">
-          <YouBubble>I think I&apos;m going to apply to this. Add it to Offboard.</YouBubble>
-          <AiReply highlight="Done." card={<TrackerCard />}>
-            I&apos;ve added the role to your Offboard tracker and saved the company context.
-          </AiReply>
-        </div>
+        <Image
+          className="mh-hero2-figure"
+          src="/marketing/homepage/hero-composition.avif"
+          alt="A man works at his kitchen table while a conversation floats beside him. He asks Lumo to save a new application for a senior product design role; Lumo replies that it has added the role to his Offboard application tracker and saved the company context, and shows the saved application underneath."
+          width={1354}
+          height={1168}
+          sizes="(max-width: 900px) 100vw, 46vw"
+          priority
+          unoptimized
+        />
       </div>
     </section>
   );
 }
 
-const CAPABILITIES = [
-  ["Save opportunities instantly", "Turn something you're already discussing into a tracked opportunity without filling out another form."],
-  ["Update your search by conversation", "Move stages, add notes, save contacts, record interviews, and update what happened just by asking."],
-  ["Compare opportunities using your context", "Understand which roles actually fit your experience, goals, preferences, and current search."],
-  ["Work across Offboard and AI", "Use Offboard directly or connect it to supported AI assistants. Your job search stays in sync."],
+/* ---------------------------------------------------------------- */
+/* 2 · The four steps (paper). Pattern E, the stepped strip: the     */
+/* whole page in one row, each step linking to its own section.      */
+/*                                                                    */
+/* Four, not three (owner 2026-09-03, plan 040 finding 1). The H1     */
+/* claims the modern unemployment office; the three-step version      */
+/* described an AI job-search tool and carried the benefits story as  */
+/* a trailing clause on step three ("with your benefits beside it").  */
+/* A first step earns the H1 back, and step four loses that clause    */
+/* because step one now says it properly.                             */
+/* ---------------------------------------------------------------- */
+const STEPS = [
+  {
+    title: "Steady the first week.",
+    body: "Deadlines, health coverage, and how long your money lasts, in the order they matter.",
+    href: "#steady",
+    link: "See what comes first",
+  },
+  {
+    title: "Build your Career Context.",
+    body: "Tell Offboard about your career once. It becomes a record you keep adding to.",
+    href: "#build",
+    link: "Build your context",
+  },
+  {
+    title: "Connect it to the AI you use.",
+    body: "Lumo already knows it. ChatGPT and Claude connect in beta.",
+    href: "#connect",
+    link: "See the connection",
+  },
+  {
+    title: "Run your search with real tools.",
+    body: "Decide, apply, interview, and keep every application straight.",
+    href: "#run",
+    link: "See the toolkit",
+  },
 ] as const;
 
-function WhereverYouWork() {
+function FourSteps() {
   return (
-    <section className="mh-wherever mh-section" aria-labelledby="wherever-title">
-      <div className="mh-wherever-grid">
-        <div className="mh-copy-block">
-          <span className="mh-kicker">Offboard, wherever you work</span>
-          <h2 id="wherever-title">Your job search goes wherever you do.</h2>
-          <p>Use Offboard from the AI tools you already use. Research a job, save it to your tracker, compare opportunities, update applications, and keep your search moving without constantly switching tabs.</p>
-          <span className="mh-context-callout"><LumoMark />Powered by Offboard Career Context</span>
-          <Link className="mh-section-link" href="/integrations">See how Offboard Everywhere works <ArrowRight aria-hidden="true" /></Link>
+    <section className="mh-steps-band mh-section" aria-labelledby="steps-title">
+      <div className="mh-intro-split">
+        <div>
+          <span className="mh-kicker">The short version</span>
+          <h2 id="steps-title">How Offboard works.</h2>
         </div>
-        <div className="mh-chat-card" aria-label="Example conversation updating a job search from an AI assistant">
-          <YouBubble>How does this role compare with the other opportunities I&apos;m pursuing?</YouBubble>
-          <AiReply>Based on your Offboard context, Tesserac looks like one of your stronger opportunities. It aligns closely with your AI product experience and gives you more technical ownership than several of the other roles you&apos;re considering.</AiReply>
-          <YouBubble>Move Tesserac to the interview stage and save that Ruben is my recruiter.</YouBubble>
-          <AiReply highlight="Done.">Tesserac is now in Interviewing, and I&apos;ve added Ruben to the opportunity.</AiReply>
-        </div>
+        <p>Handle what has a deadline, build a record of your career once, connect it to the AI you already use, and run your search from it.</p>
       </div>
-      <div className="mh-capabilities" data-reveal="">
-        {CAPABILITIES.map(([title, body]) => (
-          <div className="mh-capability" key={title}>
+      <ol className="mh-steps" data-reveal="">
+        {STEPS.map(({ title, body, href, link }, index) => (
+          <li key={title}>
+            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
             <h3>{title}</h3>
             <p>{body}</p>
-          </div>
+            <a className="mh-section-link" href={href}>{link} <ArrowRight aria-hidden="true" /></a>
+          </li>
         ))}
+      </ol>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------------------- */
+/* 3 · Step 1, Career Context (mist). The eight category rows moved  */
+/* to /career-context (owner, 2026-09-02): they restated this        */
+/* section's own body paragraph, which already names all eight, and  */
+/* that page had no structured account of what the record holds.     */
+/* The homepage names the idea and links out (R5a).                  */
+/* ---------------------------------------------------------------- */
+/* Composition C. The record card is the base and the three sources fan across
+   its top edge. The portrait that used to sit behind it is gone (owner,
+   2026-09-02): it was forcing a photograph into a section that did not need
+   one, and removing it returns final-cta-portrait.webp to being referenced
+   exactly once on the site, in FinalCta. */
+function RecordComposition() {
+  return (
+    <div className="mh-comp mh-record-comp">
+      <div className="mh-comp-base mh-record-card">
+        <strong>Your Career Context</strong>
+        <p>Always evolving. Available wherever you use Offboard.</p>
+        <ul>
+          <li><span>Experience</span><em>Roles, projects, and outcomes</em></li>
+          <li><span>Applications</span><em>Tesserac · Interviewing</em></li>
+          <li><span>Interviews</span><em>Thursday · Prep ready</em></li>
+        </ul>
+      </div>
+      <ul className="mh-comp-satellite mh-record-sources" aria-label="What your Career Context is built from">
+        <li>Resume</li>
+        <li>LinkedIn</li>
+        <li>Interview story</li>
+      </ul>
+    </div>
+  );
+}
+
+function StepContext() {
+  return (
+    <section className="mh-ctx mh-section" id="build" aria-labelledby="ctx-title">
+      <div className="mh-split">
+        <div className="mh-copy-block">
+          <span className="mh-kicker">Step 2 · Build your context</span>
+          <h2 id="ctx-title">One place that remembers your career.</h2>
+          <p>Your resume is only a fraction of your career. Offboard builds a living record of your experience, accomplishments, applications, companies, conversations, documents, interviews, goals, and progress so you don&apos;t have to explain yourself from scratch every time you need help.</p>
+          <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Build my Career Context</span><ArrowRight aria-hidden="true" /></a>
+          <Link className="mh-section-link" href="/career-context">See what your Career Context holds <ArrowRight aria-hidden="true" /></Link>
+        </div>
+        <RecordComposition />
       </div>
     </section>
   );
 }
 
-const CONTEXT_CATEGORIES = [
-  { icon: Briefcase, title: "Experience", body: "Roles, skills, accomplishments, projects, and outcomes." },
-  { icon: ListChecks, title: "Applications", body: "The opportunities you're pursuing and what has happened with each one." },
-  { icon: Building2, title: "Companies", body: "Research, notes, people, hiring signals, and what you've learned." },
-  { icon: Users, title: "Contacts", body: "Recruiters, hiring managers, referrals, and people in your network." },
-  { icon: FileText, title: "Documents", body: "Resumes, application materials, job descriptions, and other files." },
-  { icon: MessageSquare, title: "Interviews", body: "Upcoming conversations, preparation, notes, feedback, and next steps." },
-  { icon: Bookmark, title: "Preferences", body: "The work you want, compensation expectations, location, industries, and constraints." },
-  { icon: Sparkles, title: "Goals", body: "What you're trying to accomplish and what needs your attention next." },
+/* ---------------------------------------------------------------- */
+/* 4 · Step 2, connect (mid forest). One CTA, and it goes somewhere  */
+/* a reader can picture: "Ask Lumo" was a filled button with no      */
+/* obvious destination, so it is gone and the link to /integrations  */
+/* is the section's action (owner, 2026-09-02). The five example     */
+/* prompts went with it - /lumo already ships eight under the same   */
+/* "Ask things like" label, two of them word for word.               */
+/* ---------------------------------------------------------------- */
+function ConnectComposition() {
+  return (
+    <div className="mh-comp mh-connect-comp">
+      {/* The earlier exchange, cropped by the card in front of it. It stays in
+          the DOM at full contrast rather than being faded or removed: the
+          conversation reads in order for a screen reader, and COPY.md's
+          four-message demo stays whole. */}
+      <div className="mh-chat-card mh-comp-ghost">
+        <YouBubble>How does this role compare with the other opportunities I&apos;m pursuing?</YouBubble>
+        <AiReply>Based on your Offboard context, Tesserac looks like one of your stronger opportunities. It aligns closely with your AI product experience and gives you more technical ownership than several of the other roles you&apos;re considering.</AiReply>
+      </div>
+      <div className="mh-chat-card mh-comp-base">
+        <YouBubble>Move Tesserac to the interview stage and save that Ruben is my recruiter.</YouBubble>
+        <AiReply highlight="Done.">Tesserac is now in Interviewing, and I&apos;ve added Ruben to the opportunity.</AiReply>
+      </div>
+      <div className="mh-comp-satellite mh-comp-marks" aria-hidden="true">
+        <LumoMark />
+        <IntegrationLogo id="chatgpt" />
+        <IntegrationLogo id="claude" />
+      </div>
+      <div className="mh-comp-satellite mh-comp-chip"><i className="is-sage" aria-hidden="true" />Contact saved · Ruben</div>
+    </div>
+  );
+}
+
+function StepConnect() {
+  return (
+    <section className="mh-connect mh-section" id="connect" aria-labelledby="connect-title">
+      <div className="mh-split">
+        <div className="mh-copy-block">
+          <span className="mh-kicker is-lime">Step 3 · Connect it to the AI you use</span>
+          <h2 id="connect-title">Ask anywhere. The answer is about you.</h2>
+          <p>Lumo is Offboard&apos;s own guide and works from your Career Context from the first question. Prefer ChatGPT or Claude? Connect Offboard and take your context with you.</p>
+          <SecondaryCta href="/integrations">See how Offboard Everywhere works</SecondaryCta>
+          <small>ChatGPT and Claude connections are in beta.</small>
+        </div>
+        <ConnectComposition />
+      </div>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------------------- */
+/* 5 · Step 3, the toolkit (paper). Ten tools each with a sentence   */
+/* was a wall of text. Four stages carry the names; /job-search      */
+/* carries the descriptions, which is where a reader who wants them  */
+/* is already going (owner, 2026-09-02 - this inverts the split, and */
+/* that page's header comment was updated to match).                 */
+/*                                                                   */
+/* The one-line "what it decides" for each stage is /job-search's    */
+/* own approved copy. Every chip is a string the product actually    */
+/* produces, checked against lumo-plan-builder origin/main b8cb77ec: */
+/*   "Strong fit"       - roleFit label at score >= 80               */
+/*   "Ready for review" - job packet status review_ready             */
+/*   "Prep ready"       - interview prep kicker                      */
+/*   "Saved to tracker" - the save-a-job toast                       */
+/* ---------------------------------------------------------------- */
+const TOOLKIT_STAGES = [
+  { icon: Search, title: "Decide", chip: "Strong fit", decides: "Whether this one deserves your week.", tools: ["Role Fit", "Ghost Job Checker", "Company Intelligence"] },
+  { icon: FileText, title: "Apply", chip: "Ready for review", decides: "What you actually send.", tools: ["Application Packets", "Resume Tailoring", "Cover Letters"] },
+  { icon: MessageSquare, title: "Interview", chip: "Prep ready", decides: "Walking in prepared, not rehearsed.", tools: ["Interview Prep", "Voice Practice"] },
+  { icon: ListChecks, title: "Organize", chip: "Saved to tracker", decides: "Where all of it is kept.", tools: ["Application Tracker", "Career Context"] },
 ] as const;
 
-function CareerContextSection() {
+function StepSearch() {
   return (
-    <section className="mh-ctx mh-section" aria-labelledby="ctx-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">Career Context</span>
-        <h2 id="ctx-title">One place that remembers your career.</h2>
-        <p>Your resume is only a fraction of your career. Offboard builds a living record of your experience, accomplishments, applications, companies, conversations, documents, interviews, goals, and progress so you don&apos;t have to explain yourself from scratch every time you need help.</p>
-        <Link className="mh-section-link" href="/career-context">Learn more about Career Context <ArrowRight aria-hidden="true" /></Link>
+    <section className="mh-kit mh-section" id="run" aria-labelledby="kit-title">
+      <div className="mh-intro-split">
+        <div>
+          <span className="mh-kicker">Step 4 · Run your search</span>
+          <h2 id="kit-title">The tools you run your search with.</h2>
+        </div>
+        <div>
+          <p>Ten tools that read from the same context, so nothing is retyped and nothing is forgotten.</p>
+          <Link className="mh-section-link" href="/job-search">See what each tool does <ArrowRight aria-hidden="true" /></Link>
+        </div>
       </div>
-      <div className="mh-ctx-grid" data-reveal="">
-        {CONTEXT_CATEGORIES.map(({ icon: IconComponent, title, body }) => (
-          <article className="mh-ctx-card" key={title}>
+      <ol className="mh-stage-strip" data-reveal="">
+        {TOOLKIT_STAGES.map(({ icon: IconComponent, title, chip, decides, tools }) => (
+          <li key={title}>
             <IconComponent aria-hidden="true" />
             <h3>{title}</h3>
-            <p>{body}</p>
-          </article>
+            <em className="mh-state-chip">{chip}</em>
+            <p>{decides}</p>
+            <ul>{tools.map((tool) => <li key={tool}>{tool}</li>)}</ul>
+          </li>
         ))}
-      </div>
-      <div className="mh-ctx-inset" data-reveal="">
-        <div>
-          <strong>Your Career Context</strong>
-          <p>Always evolving. Available wherever you use Offboard.</p>
-          <p className="mh-ctx-inset-line">Build it once. Keep making it better. Let the tools you use work from the same understanding of you.</p>
-        </div>
-        <a className="mh-ondark-cta" href={SIGN_UP_URL}><span>Build my Career Context</span><ArrowRight aria-hidden="true" /></a>
-      </div>
+      </ol>
     </section>
   );
 }
 
-// The first question is promoted out of the grid so it can sit beside the
-// plan-preview card that answers it (that card is real product state, built in
-// plan 018 phase 3 and carried into v2).
-const FIRST_QUESTION = ["What do I do first?", "Your personalized plan", "Tell Offboard what's happening, and we'll help organize what needs your attention now, what can wait, and what comes next."] as const;
-
+/* ---------------------------------------------------------------- */
+/* 3 · Step 1, steady the first week (sand). Moved above the Career   */
+/* Context step (plan 040): the H1 promises an unemployment office,   */
+/* so the first step is the deadlines and the money, not the resume.  */
+/* Six member questions as a disclosure list (Pattern H), and the     */
+/* section now links out to the pillar page that answers them.        */
+/* ---------------------------------------------------------------- */
+/* Six questions, one open. "What do I do first?" used to sit inside the
+   section's intro as its own titled block, which is what R5a now forbids; as
+   item one, open by default, it still reads beside the plan card that answers
+   it, which is the pairing COPY.md records. The other five were five open
+   answers in a row - a reader wants one of them, so they open one. */
 const LIFE_QUESTIONS = [
-  ["What support might I qualify for?", "Benefits and workforce programs", "Navigate unemployment insurance, training programs, workforce resources, and other forms of support that may be available where you live."],
-  ["Is this job worth my time?", "Opportunity intelligence", "Check role fit, investigate possible ghost jobs, research companies, and understand whether an opportunity deserves your energy."],
-  ["How do I submit a stronger application?", "Application support", "Turn your Career Context and the opportunity into stronger resumes, application packets, cover letters, and positioning."],
-  ["How do I prepare when I hear back?", "Interview preparation", "Research the company, anticipate questions, prepare stories from your experience, and practice interviews with AI."],
-  ["How do I keep everything straight?", "Tracker + Career Context", "Keep every opportunity, contact, document, conversation, and next step connected."],
+  { question: "What do I do first?", feature: "Your personalized plan", answer: "Tell Offboard what's happening, and we'll help organize what needs your attention now, what can wait, and what comes next." },
+  { question: "What support might I qualify for?", feature: "Benefits and workforce programs", answer: "Navigate unemployment insurance, training programs, workforce resources, and other forms of support that may be available where you live." },
+  { question: "Is this job worth my time?", feature: "Opportunity intelligence", answer: "Check role fit, investigate possible ghost jobs, research companies, and understand whether an opportunity deserves your energy." },
+  { question: "How do I submit a stronger application?", feature: "Application support", answer: "Turn your Career Context and the opportunity into stronger resumes, application packets, cover letters, and positioning." },
+  { question: "How do I prepare when I hear back?", feature: "Interview preparation", answer: "Research the company, anticipate questions, prepare stories from your experience, and practice interviews with AI." },
+  { question: "How do I keep everything straight?", feature: "Tracker + Career Context", answer: "Keep every opportunity, contact, document, conversation, and next step connected." },
 ] as const;
 
-const TRIPTYCH = [
-  { src: "/marketing/homepage/raw/strip-interview-prep.webp", alt: "A woman preparing for an interview at her desk", chip: "Plan · Updated", dot: "is-sage" },
-  { src: "/marketing/homepage/raw/system-desk.webp", alt: "A desk with a laptop, paperwork, and coffee mid-task", chip: "Benefits check", dot: "is-lumo" },
-  { src: "/marketing/homepage/raw/maya-walking.webp", alt: "A woman walking into an office building", chip: "Resume · 3 versions", dot: "is-sage" },
-] as const;
-
-function MoreThanAJobSearch() {
+/* Composition D. The plan card is the base; one completed step lifts out of
+   the stack and breaks its left edge, which is what the card's own "Show 2
+   done" row is telling you exists. "Update your LinkedIn profile" is a real
+   step in the product (lumo-plan-builder layoffPlanItems.ts, id `linkedin`)
+   and carries no dollar figure or deadline, so it needs no ledger row. */
+function PathComposition() {
   return (
-    <section className="mh-morethan mh-section" aria-labelledby="morethan-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker is-sand">More than a job search</span>
-        <h2 id="morethan-title">Losing your job creates more than one problem.</h2>
-        <p>Finding another role matters. But so do unemployment benefits, health coverage, finances, career decisions, applications, networking, interviews, and figuring out what to do first. Offboard brings those pieces together.</p>
+    <div className="mh-comp mh-path-comp">
+      <StartingPlanPreview />
+      <div className="mh-comp-satellite mh-path-done">
+        <i aria-hidden="true" />
+        <strong>Update your LinkedIn profile</strong>
+        <em>Done</em>
       </div>
-      <div className="mh-triptych" data-reveal="">
-        {TRIPTYCH.map(({ src, alt, chip, dot }) => (
-          <figure className="mh-photo-frame" key={chip}>
-            <Image src={src} alt={alt} fill sizes="(max-width: 900px) 100vw, 30vw" />
-            <span className="mh-photo-chip"><i className={dot} aria-hidden="true" />{chip}</span>
-          </figure>
-        ))}
+    </div>
+  );
+}
+
+function StepSteady() {
+  return (
+    <section className="mh-morethan mh-section" id="steady" aria-labelledby="morethan-title">
+      <div className="mh-split">
+        <div className="mh-copy-block">
+          <span className="mh-kicker is-sand">Step 1 · Steady the first week</span>
+          <h2 id="morethan-title">Losing your job creates more than one problem.</h2>
+          <p>Finding another role matters. But so do unemployment benefits, health coverage, finances, career decisions, applications, networking, interviews, and figuring out what to do first. Offboard brings those pieces together.</p>
+          <Link className="mh-section-link" href="/layoff-support">See what to do first <ArrowRight aria-hidden="true" /></Link>
+        </div>
+        <PathComposition />
       </div>
-      <div className="mh-morethan-first" data-reveal="">
-        <article className="mh-qblock">
-          <h3>{FIRST_QUESTION[0]}</h3>
-          <span className="mh-qblock-feature">{FIRST_QUESTION[1]}</span>
-          <p>{FIRST_QUESTION[2]}</p>
-        </article>
-        <StartingPlanPreview />
-      </div>
-      <div className="mh-qgrid" data-reveal="">
-        {LIFE_QUESTIONS.map(([question, feature, body]) => (
-          <article className="mh-qblock" key={question}>
-            <h3>{question}</h3>
-            <span className="mh-qblock-feature">{feature}</span>
-            <p>{body}</p>
-          </article>
-        ))}
-      </div>
+      <DisclosureList items={LIFE_QUESTIONS} openFirst />
       <small className="mh-morethan-note">Offboard is independent, not a government agency, and claiming your benefits is always free.</small>
     </section>
   );
 }
 
-const LUMO_PROMPTS = [
-  "What should I focus on today?",
-  "Which of my open applications need follow-up?",
-  "Help me prepare for tomorrow's interview.",
-  "Why do you think this role is a strong fit for me?",
-  "What should I do differently based on how my search has been going?",
-] as const;
-
-function MeetLumo() {
-  return (
-    <section className="mh-lumo-band mh-section" aria-labelledby="lumo2-title">
-      <div className="mh-lumo-grid">
-        <div className="mh-copy-block">
-          <span className="mh-kicker is-lime">Meet Lumo</span>
-          <h2 id="lumo2-title">An AI guide that already knows what you&apos;re working on.</h2>
-          <p>Lumo is Offboard&apos;s native AI assistant. Because Lumo works from your Career Context, you can ask about your search without repeatedly uploading resumes, explaining your goals, or reconstructing what happened with every application.</p>
-          <a className="mh-ai-cta" href={SIGN_UP_URL}><LumoMark className="is-dot" /><span>Ask Lumo</span></a>
-          <small>Prefer another AI assistant? Connect Offboard and take your context with you.</small>
-        </div>
-        <div className="mh-lumo-prompts" data-reveal="" aria-label="Example questions to ask Lumo">
-          <span>Ask things like</span>
-          {LUMO_PROMPTS.map((prompt) => <p key={prompt}>{prompt}</p>)}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const TOOLKIT_GROUPS = [
-  { icon: Search, title: "Decide", tools: [
-    ["Role Fit", "Understand how an opportunity matches your experience, strengths, and goals."],
-    ["Ghost Job Check", "Look for signals that a posting may not represent an actively hiring role."],
-    ["Company Intelligence", "Know who you're applying to before you invest your time."],
-  ] },
-  { icon: FileText, title: "Apply", tools: [
-    ["Application Packets", "Bring together the role, company, resume strategy, positioning, and application materials in one place."],
-    ["Resume Tailoring", "Adapt your resume using the opportunity and your Career Context."],
-    ["Cover Letters", "Create relevant application messaging without starting from a blank page."],
-  ] },
-  { icon: MessageSquare, title: "Interview", tools: [
-    ["Interview Prep", "Turn company and role context into a focused preparation plan."],
-    ["Voice Practice", "Practice answering questions in a realistic voice conversation."],
-  ] },
-  { icon: ListChecks, title: "Organize", tools: [
-    ["Application Tracker", "Keep your entire pipeline current."],
-    ["Career Context", "Connect the history behind every application, interaction, and outcome."],
-  ] },
-] as const;
-
-function ToolkitV2() {
-  return (
-    <section className="mh-kit mh-section" aria-labelledby="kit-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">Your job search toolkit</span>
-        <h2 id="kit-title">Everything you need when the next opportunity appears.</h2>
-      </div>
-      <div className="mh-kit-grid" data-reveal="">
-        {TOOLKIT_GROUPS.map(({ icon: IconComponent, title, tools }) => (
-          <div className="mh-kit-col" key={title}>
-            <IconComponent aria-hidden="true" />
-            <h3>{title}</h3>
-            {tools.map(([name, body]) => (
-              <div className="mh-kit-tool" key={name}>
-                <strong>{name}</strong>
-                <p>{body}</p>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
+/* ---------------------------------------------------------------- */
+/* 7 · Plans (paper deep). Owner direction 2026-09-02: sponsored access */
+/* is the third plan card, as it is on /pricing, rather than its own   */
+/* band. Three cards in three columns fill the row (R1). The sponsored */
+/* card takes the warm sand tint so it reads as "may be covered"       */
+/* rather than as a third thing to buy. Copy is /pricing's deck copy,  */
+/* already approved; the homepage's own sponsored band is retired.     */
+/* ---------------------------------------------------------------- */
 const FREE_FEATURES = [
   "Build your Career Context.",
   "Track opportunities.",
@@ -288,73 +369,43 @@ const PRO_FEATURES = [
   "Get more personalized recommendations about what to do next.",
 ] as const;
 
-function ProSection() {
-  return (
-    <section className="mh-pro mh-section" aria-labelledby="pro-title">
-      <div className="mh-pro-grid">
-        <div className="mh-copy-block">
-          <span className="mh-kicker">Offboard Pro</span>
-          <h2 id="pro-title">Free remembers your search. Pro puts it to work.</h2>
-          <p>Start free and build the foundation of your Career Context. When you want deeper intelligence, preparation, and personalized help, Offboard Pro uses that context to help you make better decisions and move faster.</p>
-          <small>Don&apos;t pay just to keep your job search organized. Upgrade when you want Offboard to do more with everything it knows.</small>
-        </div>
-        <div className="mh-pro-cards" data-reveal="">
-          <article className="mh-plan-card">
-            <h3>Free</h3>
-            <p className="mh-plan-price"><b>$0</b><small>forever</small></p>
-            <ul>{FREE_FEATURES.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-            <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Start free</span><ArrowRight aria-hidden="true" /></a>
-          </article>
-          <article className="mh-plan-card is-emphasized">
-            <h3>Pro</h3>
-            <p className="mh-plan-price"><b>$20</b><small>/month</small></p>
-            <ul>{PRO_FEATURES.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-            <SecondaryCta href="/pricing">See Pro pricing</SecondaryCta>
-          </article>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const SPONSOR_AUDIENCES = [
-  ["Employers", "Support people through layoffs of any size without requiring them to learn another outplacement portal."],
-  ["Workforce and government", "Give residents personalized guidance and modern career tools alongside existing public programs."],
-  ["Universities and communities", "Help members navigate career transitions with tools that stay useful beyond a single workshop or program."],
+const SPONSORED_FEATURES = [
+  "The full sponsored benefit is delivered to you.",
+  "Your private career activity remains yours.",
+  "Sponsors receive aggregate reporting only.",
 ] as const;
 
-function SponsoredAccess() {
+function PlansSection() {
   return (
-    <section className="mh-sponsor mh-section" aria-labelledby="sponsor-title">
-      <div className="mh-sponsor-inset" data-reveal="">
-        <div className="mh-copy-block">
-          <span className="mh-kicker is-ondark">Sponsored access</span>
-          <h2 id="sponsor-title">Job-search support people will actually use.</h2>
-          <p>Offboard can be sponsored by employers, workforce organizations, universities, and community partners so people navigating job loss can use the same system in Offboard or from the AI tools already part of their workflow.</p>
-          <Link className="mh-ondark-cta" href="/employers"><span>Sponsor Offboard</span><ArrowRight aria-hidden="true" /></Link>
+    <section className="mh-pro mh-section" aria-labelledby="pro-title">
+      <div className="mh-intro-split">
+        <div>
+          <span className="mh-kicker">Offboard Pro</span>
+          <h2 id="pro-title">Free remembers your search. Pro puts it to work.</h2>
         </div>
-        <div className="mh-sponsor-audiences">
-          {SPONSOR_AUDIENCES.map(([title, body]) => (
-            <div key={title}><h3>{title}</h3><p>{body}</p></div>
-          ))}
-        </div>
+        <p>Start free and build the foundation of your Career Context. When you want deeper intelligence, preparation, and personalized help, Offboard Pro uses that context to help you make better decisions and move faster.</p>
       </div>
-    </section>
-  );
-}
-
-function BuiltAroundYou() {
-  return (
-    <section className="mh-belong mh-section" aria-labelledby="belong-title">
-      <figure className="mh-photo-frame mh-belong-photo">
-        <Image src="/marketing/homepage/raw/final-cta-portrait.webp" alt="A woman outdoors, looking ahead" fill sizes="(max-width: 900px) 100vw, 32vw" />
-      </figure>
-      <div className="mh-copy-block">
-        <span className="mh-kicker">Built around you</span>
-        <h2 id="belong-title">Your career context should belong to you.</h2>
-        <p>Your professional history shouldn&apos;t be trapped inside a single resume, recruiting site, or AI conversation. Offboard is building a portable Career Context that can grow with you across jobs, searches, career changes, and the AI tools you choose to use.</p>
-        <p className="mh-belong-affirm">Your experience. Your progress. Your context. Available when you need it.</p>
-        <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Create my Career Context</span><ArrowRight aria-hidden="true" /></a>
+      <div className="mh-pro-cards" data-reveal="">
+        <article className="mh-plan-card">
+          <h3>Free</h3>
+          <p className="mh-plan-price"><b>$0</b><small>forever</small></p>
+          <ul>{FREE_FEATURES.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+          <small className="mh-plan-note">Don&apos;t pay just to keep your job search organized. Upgrade when you want Offboard to do more with everything it knows.</small>
+          <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Start free</span><ArrowRight aria-hidden="true" /></a>
+        </article>
+        <article className="mh-plan-card is-emphasized">
+          <h3>Pro</h3>
+          <p className="mh-plan-price"><b>$20</b><small>/month</small></p>
+          <ul>{PRO_FEATURES.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+          <SecondaryCta href="/pricing">See Pro pricing</SecondaryCta>
+        </article>
+        <article className="mh-plan-card is-sponsored">
+          <h3>Sponsored access</h3>
+          <p className="mh-plan-price"><b>May be covered</b></p>
+          <p className="mh-plan-lede">Outplacement, modernized. Your former employer, school, or workforce organization may cover your access.</p>
+          <ul>{SPONSORED_FEATURES.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+          <SecondaryCta href="/employers">Learn about sponsored access</SecondaryCta>
+        </article>
       </div>
     </section>
   );
@@ -375,15 +426,13 @@ export default function MarketingHome() {
   return (
     <MarketingShell current="home">
       <main id="main-content">
-        <HomeHeroV2 />
-        <WhereverYouWork />
-        <CareerContextSection />
-        <MoreThanAJobSearch />
-        <MeetLumo />
-        <ToolkitV2 />
-        <ProSection />
-        <SponsoredAccess />
-        <BuiltAroundYou />
+        <HomeHero />
+        <FourSteps />
+        <StepSteady />
+        <StepContext />
+        <StepConnect />
+        <StepSearch />
+        <PlansSection />
         <CommunityStrip />
         <FinalCtaV2 />
       </main>

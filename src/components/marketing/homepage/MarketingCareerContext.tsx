@@ -1,21 +1,26 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import {
+  Bookmark,
   Briefcase,
+  Building2,
   Compass,
   FileText,
   FolderOpen,
   Linkedin,
   ListChecks,
+  MessageSquare,
   MessagesSquare,
   Mic,
+  Sparkles,
+  Users,
 } from "lucide-react";
 import {
   AiReply,
   EditorialGrid,
   FinalCta,
-  LumoMark,
   MarketingShell,
   PageHero,
-  SIGN_UP_URL,
   YouBubble,
 } from "./MarketingSite";
 
@@ -23,6 +28,23 @@ import {
    site-architecture strategy. Copy: COPY.md § 10. Every section reuses an
    existing pattern; the page mints no new classes. Band rhythm: deep hero >
    paper > mist > sand > paper > forest > mist > white > forest. */
+
+/* What the record holds. Moved here from the homepage on 2026-09-02: it
+   restated the homepage section's own body paragraph, and this page - which
+   is where a reader goes to find out what a Career Context actually is - had
+   no structured account of it, only seven of the eight named in passing in
+   the hero. "Preferences" keeps the wording already used by IMPORT_SOURCES'
+   "Goals & preferences" rather than a second phrasing of the same thing. */
+const HOLDS = [
+  { icon: Briefcase, title: "Experience", body: "Roles, skills, accomplishments, and outcomes." },
+  { icon: ListChecks, title: "Applications", body: "Every opportunity and what happened with it." },
+  { icon: Building2, title: "Companies", body: "Research, notes, people, and hiring signals." },
+  { icon: Users, title: "Contacts", body: "Recruiters, hiring managers, and referrals." },
+  { icon: FileText, title: "Documents", body: "Resumes, job descriptions, and other files." },
+  { icon: MessageSquare, title: "Interviews", body: "Conversations, preparation, notes, and next steps." },
+  { icon: Bookmark, title: "Preferences", body: "The work you want, where, and on what terms." },
+  { icon: Sparkles, title: "Goals", body: "What you are working toward and what needs attention." },
+] as const;
 
 const RESUME_CONTRAST = [
   { title: "What a resume holds", body: "Titles, dates, and a dozen bullet points, tuned for the last role you applied to." },
@@ -102,6 +124,26 @@ function ImprovesSection() {
   );
 }
 
+function HoldsSection() {
+  return (
+    <section className="mh-ctx mh-section" aria-labelledby="holds-title">
+      <div className="mh-copy-block">
+        <span className="mh-kicker">What it holds</span>
+        <h2 id="holds-title">Eight kinds of record, one place.</h2>
+      </div>
+      <div className="mh-ctx-grid" data-reveal="">
+        {HOLDS.map(({ icon: IconComponent, title, body }) => (
+          <article className="mh-ctx-card" key={title}>
+            <IconComponent aria-hidden="true" />
+            <h3>{title}</h3>
+            <p>{body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function OutputsSection() {
   return (
     <section className="mh-ctx mh-section" aria-labelledby="outputs-title">
@@ -128,7 +170,7 @@ function LumoUsesIt() {
         <span className="mh-kicker is-lime">Meet Lumo</span>
         <h2 id="cc-lumo-title">Lumo starts every conversation already caught up.</h2>
         <p>Because Lumo works from your Career Context, you never re-upload a resume, re-explain your goals, or reconstruct what happened with an application. You ask, and the answer starts from everything you have already built.</p>
-        <a className="mh-ai-cta" href={SIGN_UP_URL}><LumoMark className="is-dot" /><span>Ask Lumo</span></a>
+        <Link className="mh-section-link" href="/lumo">See how Lumo works <ArrowRight aria-hidden="true" /></Link>
       </div>
     </section>
   );
@@ -140,7 +182,7 @@ function AssistantsSection() {
       <div className="mh-wherever-grid">
         <div className="mh-copy-block">
           <span className="mh-kicker">Offboard, wherever you work</span>
-          <h2 id="assistants-title">Offboard holds the record. You choose the interface.</h2>
+          <h2 id="assistants-title">Your context goes with you.</h2>
           <p>Connect Offboard to supported AI assistants and your Career Context goes with you. Save an opportunity from a conversation, update an application, or add what you just learned, from whichever tool you are already in.</p>
         </div>
         <div className="mh-chat-card" aria-label="Example conversation updating a Career Context from an AI assistant" data-reveal="">
@@ -172,11 +214,11 @@ export function MarketingCareerContext() {
       <main id="main-content">
         <PageHero
           kicker="Career Context"
-          title="Build your career context once. Use it everywhere."
-          body="Your resume is one page about your past. Your Career Context is a living record of your experience, applications, companies, conversations, interviews, preferences, and goals. Offboard builds it with you and puts it to work in every tool you use."
+          title="Build your Career Context once. Use it everywhere."
+          body="One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use."
           current="career-context"
           aside={false}
-          cta="Create my Career Context"
+          cta="Get started free"
         />
         <EditorialGrid
           kicker="The problem"
@@ -185,6 +227,7 @@ export function MarketingCareerContext() {
           items={RESUME_CONTRAST}
         />
         <ImportsSection />
+        <HoldsSection />
         <ImprovesSection />
         <OutputsSection />
         <LumoUsesIt />

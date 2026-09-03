@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarDays, Check, GraduationCap, LockKeyhole } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { MarketingMobileMenu, MarketingNav } from "./MarketingNav";
@@ -51,7 +51,7 @@ export const PRODUCT_FAQS = [
 ] as const;
 
 export const PRICING_FAQS = [
-  ["Do I need a payment method to start?", "No. The Free tier is not a trial. You can build your plan, see your runway and deadlines, track applications, and build your first Job Packet without adding a payment method."],
+  ["Do I need a payment method to start?", "No. The Free tier is not a trial. You can build your plan, see your runway and deadlines, track applications, and build your first Application Packet without adding a payment method."],
   ["What happens when I run out of credits?", "The core plan, benefit sheets, and tracking keep working. Credits gate the heavier product work, and they refresh monthly on both tiers."],
   ["Can I cancel Pro any time?", "Yes. Your plan, materials, and history remain yours on the Free tier after you cancel."],
   ["Is human support included?", "Availability, format, eligibility, and pricing vary by support option. The booking page shows the current details before you schedule."],
@@ -80,7 +80,10 @@ export function Brand() {
 }
 
 export function PrimaryCta({
-  children = "Build my plan",
+  /* The sitewide ask (owner 2026-09-03, plan 040 finding 3). Five labels
+     pointed at this one URL; a section CTA that names an in-page action may
+     still differ, but the nav, every page hero, and every final CTA say this. */
+  children = "Get started free",
   className = "",
 }: {
   children?: ReactNode;
@@ -183,8 +186,15 @@ export function MarketingShell({
 
 /* Chat primitives (moved from MarketingHome for reuse on product pages -
    plan 025; no visual change). */
+/* The AI avatar. Owner direction 2026-09-02: the avatar is Lumo's face, the
+   same asset the app uses (ported from lumo-plan-builder origin/main
+   src/assets/lumo-head.png), not the lime disc. The `is-dot` variant on the
+   AI button stays a lime dot - it is an accent, not a portrait. */
 export function LumoMark({ className = "" }: { className?: string }) {
-  return <i className={`mh-lumo-mark ${className}`.trim()} aria-hidden="true" />;
+  if (className.includes("is-dot")) {
+    return <i className={`mh-lumo-mark ${className}`.trim()} aria-hidden="true" />;
+  }
+  return <img className={`mh-lumo-mark ${className}`.trim()} src="/marketing/lumo-head.png" alt="" width={28} height={28} loading="lazy" decoding="async" />;
 }
 
 export function YouBubble({ children }: { children: ReactNode }) {
@@ -251,7 +261,7 @@ export function PageHero({
   body,
   current,
   aside,
-  cta = "Build my plan",
+  cta = "Get started free",
   ctaHref = SIGN_UP_URL,
   footnote,
   eyebrowVisual,
@@ -413,16 +423,16 @@ const FIVE_STEPS = [
   {
     title: "Claim what exists",
     body: "Step-by-step paths to unemployment benefits, health coverage, and state-approved funded training, with verified official links. We never promise funding. We show you the exact path to find out.",
-    tag: "Benefit sheets · Funded training explorer",
+    tag: "Benefit sheets · Funded Training",
   },
   {
     title: "Get ready, then run the search",
-    body: "Resume, story, materials, then Job Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.",
-    tag: "Job Packet · Resume Studio",
+    body: "Resume, story, materials, then Application Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.",
+    tag: "Application Packet · Resume Tailoring",
   },
   {
     title: "Close it, and make it count",
-    body: "Interview prep and practice, a paperwork review before you sign, and when you land: mark it, keep your career ledger, and pass what you learned back.",
+    body: "Interview prep and practice, a paperwork review before you sign, and when you land: mark it, keep your record, and pass what you learned back.",
     tag: "Interview prep · Paperwork review",
   },
 ] as const;
@@ -453,14 +463,14 @@ export function FiveSteps() {
 const TOOLKIT_FLAGSHIP_CHIPS = ["Ghost check", "Fit read", "Tailored materials", "Warm intro"] as const;
 
 const TOOLKIT_CARDS: Array<{ title: string; body: string; image?: string; alt?: string }> = [
-  { title: "Resume Studio", body: "Build and tailor resumes from your real history, ready for the role in front of you.", image: "/marketing/homepage/renders/toolkit-resumes.webp", alt: "Product render of the Resume Studio view, a resume tailored into role-specific cards" },
+  { title: "Resume Tailoring", body: "Build and tailor resumes from your real history, ready for the role in front of you.", image: "/marketing/homepage/renders/toolkit-resumes.webp", alt: "Product render of the Resume Tailoring view, a resume tailored into role-specific cards" },
   { title: "Interview prep & practice", body: "Drills grounded in the role, the company, and your strongest stories.", image: "/marketing/homepage/renders/toolkit-interviews.webp", alt: "Product render of interview prep, two message cards exchanging practice questions" },
   { title: "Application tracker", body: "Every application, stage, and follow-up stays current without extra busywork.", image: "/marketing/homepage/renders/toolkit-applications.webp", alt: "Product render of the application tracker, cards filed by stage" },
-  { title: "Ghost-job checker", body: "Flags fake or stale listings before you waste an application on them." },
+  { title: "Ghost Job Checker", body: "Flags fake or stale listings before you waste an application on them." },
   { title: "Paperwork review", body: "A read on your severance or offer paperwork before you sign anything." },
   { title: "Runway calculator", body: "See how long your money lasts and which deadlines change the math." },
-  { title: "Funded training explorer", body: "Search state-approved programs that may be paid for while you train." },
-  { title: "Ask LUMO", body: "An AI guide that works from your plan, your benefit facts, and your search." },
+  { title: "Funded Training", body: "Search state-approved programs that may be paid for while you train." },
+  { title: "Ask Lumo", body: "An AI guide that works from your plan, your benefit facts, and your search." },
 ];
 
 export function ToolkitSection() {
@@ -473,15 +483,15 @@ export function ToolkitSection() {
       <div className="mh-toolkit-layout" data-reveal="">
         <article className="mh-toolkit-flagship">
           <div className="mh-toolkit-flagship-visual">
-            <Image src="/marketing/homepage/renders/toolkit-job-packets.webp" alt="Product render of the Job Packet view, a document linked to its tailored materials" fill sizes="(max-width: 900px) 100vw, 38vw" />
+            <Image src="/marketing/homepage/renders/toolkit-job-packets.webp" alt="Product render of the Application Packet view, a document linked to its tailored materials" fill sizes="(max-width: 900px) 100vw, 38vw" />
           </div>
           <span className="mh-kicker is-lime">Flagship</span>
-          <h3>Job Packet</h3>
+          <h3>Application Packet</h3>
           <p>Paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person, all kept with the role.</p>
           <ul>
             {TOOLKIT_FLAGSHIP_CHIPS.map((chip) => <li key={chip}>{chip}</li>)}
           </ul>
-          <a className="mh-section-link" href={SIGN_UP_URL}>Explore the Job Packet <ArrowRight aria-hidden="true" /></a>
+          <a className="mh-section-link" href={SIGN_UP_URL}>Explore the Application Packet <ArrowRight aria-hidden="true" /></a>
         </article>
         <div className="mh-toolkit-grid">
           {TOOLKIT_CARDS.map(({ title, body, image, alt }) => (
@@ -512,11 +522,11 @@ export function LumoSection() {
   return (
     <section className="mh-lumo mh-section mh-split" aria-labelledby="lumo-title">
       <div className="mh-copy-block">
-        <span className="mh-kicker is-lime">Meet LUMO</span>
+        <span className="mh-kicker is-lime">Meet Lumo</span>
         <h2 id="lumo-title">An AI guide that knows your actual situation.</h2>
-        <p>LUMO works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three. Like a caseworker who answers in seconds, remembers everything, and never has a line.</p>
+        <p>Lumo works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three. Like a caseworker who answers in seconds, remembers everything, and never has a line.</p>
         <div className="mh-lumo-trust">
-          <p>When LUMO talks about your benefits, it reads from human-verified state facts. It never invents a dollar figure or a deadline.</p>
+          <p>When Lumo talks about your benefits, it reads from human-verified state facts. It never invents a dollar figure or a deadline.</p>
         </div>
       </div>
       <div className="mh-lumo-questions" data-reveal="">
@@ -603,16 +613,16 @@ export function PricingSection() {
             <h3>Free</h3>
           </header>
           <p className="mh-price-value"><b>$0</b><small>forever</small></p>
-          <p>See your plan, your runway, and your benefit deadlines. Then build your first Job Packet.</p>
+          <p>See your plan, your runway, and your benefit deadlines. Then build your first Application Packet.</p>
           <ul>
             <li><Check aria-hidden="true" />Transition plan &amp; benefit sheets</li>
             <li><Check aria-hidden="true" />Runway calculator</li>
-            <li><Check aria-hidden="true" />First Job Packet free</li>
+            <li><Check aria-hidden="true" />First Application Packet free</li>
             <li><Check aria-hidden="true" />Application tracking</li>
-            <li><Check aria-hidden="true" />3 LUMO messages per day</li>
+            <li><Check aria-hidden="true" />3 Lumo messages per day</li>
             <li><Check aria-hidden="true" />30 monthly credits</li>
           </ul>
-          <PrimaryCta>Build my free transition plan</PrimaryCta>
+          <PrimaryCta />
         </article>
         <article>
           <header>
@@ -620,10 +630,10 @@ export function PricingSection() {
             <b className="is-badge">For active transitions</b>
           </header>
           <p className="mh-price-value"><b>$20</b><small>/month</small></p>
-          <p>For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited LUMO.</p>
+          <p>For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited Lumo.</p>
           <ul>
-            <li><Check aria-hidden="true" />Unlimited conversations with LUMO</li>
-            <li><Check aria-hidden="true" />More room for Job Packets and tailoring</li>
+            <li><Check aria-hidden="true" />Unlimited conversations with Lumo</li>
+            <li><Check aria-hidden="true" />More room for Application Packets and tailoring</li>
             <li><Check aria-hidden="true" />Deeper application and interview support</li>
             <li><Check aria-hidden="true" />300 monthly credits</li>
           </ul>
@@ -648,6 +658,49 @@ export function PricingSection() {
   );
 }
 
+/* Pattern H, the disclosure list (DESIGN.md). One implementation for the five
+   route FAQs and the homepage's member questions, because the site had been
+   about to grow a second accordion.
+
+   Native <details>, no client component: the mobile menu has used the same
+   technique since plan 037, and `.marketing-homepage summary:focus-visible`
+   already carries the focus ring. The container is a <div> rather than a <ul>
+   on purpose - the stylesheet resets `ul` margin at (0,1,1), so a bare-class
+   margin on a list would be a dead declaration and e2e/reset-shadowing.spec.ts
+   would fail on six routes.
+
+   A closed answer is still in the DOM, so CopyDrift's textContent comparison
+   against COPY.md is unaffected by collapsing anything. */
+export type DisclosureItem = {
+  question: string;
+  /* The homepage's questions carry a short feature label between the question
+     and its answer; a route FAQ has only the two parts. */
+  feature?: string;
+  answer: string;
+};
+
+export function DisclosureList({
+  items,
+  openFirst = false,
+}: {
+  items: readonly DisclosureItem[];
+  openFirst?: boolean;
+}) {
+  return (
+    <div className="mh-disclosure-list" data-reveal="">
+      {items.map(({ question, feature, answer }, index) => (
+        <details className="mh-disclosure" key={question} open={openFirst && index === 0}>
+          <summary><h3>{question}</h3></summary>
+          <div>
+            {feature ? <span className="mh-qblock-feature">{feature}</span> : null}
+            <p>{answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  );
+}
+
 export function FaqSection({
   title,
   items,
@@ -658,29 +711,43 @@ export function FaqSection({
   return (
     <section className="mh-faq mh-section" id="faq" aria-labelledby="faq-title">
       <div><span className="mh-kicker">Good questions</span><h2 id="faq-title">{title}</h2></div>
-      <div className="mh-faq-list" data-reveal="">{items.map(([question, answer]) => <article key={question}><header><h3>{question}</h3></header><p>{answer}</p></article>)}</div>
+      <DisclosureList items={items.map(([question, answer]) => ({ question, answer }))} />
     </section>
   );
 }
 
+/* Owner direction 2026-09-02: the three-card layout from the live site, with
+   each partner's real mark (public/marketing/logos, sourced in COPY.md § 1),
+   restyled to Civic Modern. Three cards in three columns fills its row
+   (DESIGN.md R1). No filled button: three primaries in one view would break
+   the one-primary rule, so all three take the outline treatment. */
 const COMMUNITY_ROWS = [
   {
+    logo: "/marketing/logos/beehiiv.png",
+    icon: true,
     title: "The Offboard Newsletter",
     body: "Weekly job-market analysis and honest takes on tech hiring. 5,000+ subscribers.",
     cta: "Subscribe free",
     href: "https://newsletter.offboard.co",
+    note: "Free, weekly, unsubscribe anytime",
   },
   {
+    logo: "/marketing/logos/slack.svg",
+    icon: false,
     title: "Slack community",
     body: "Job seekers sharing leads, asking questions, and keeping each other accountable.",
     cta: "Join the Slack",
     href: "https://offboard.co/community",
+    note: "Free to join",
   },
   {
+    logo: "/marketing/logos/offboard-symbol.png",
+    icon: true,
     title: "Meet with a human",
     body: "Stuck on your search? Share where you are and our team reaches out directly. Free.",
     cta: "Say hello",
     href: HUMAN_SUPPORT_URL,
+    note: "Free, reviewed by our team",
   },
 ] as const;
 
@@ -692,12 +759,18 @@ export function CommunityStrip() {
         <h2 id="community-title">Job searching is hard enough without doing it alone.</h2>
         <p>Practical job-market intelligence, people navigating the same uncertainty, and a real person when you feel stuck.</p>
       </div>
-      <div className="mh-community-rows" data-reveal="">
+      <div className="mh-community-cards" data-reveal="">
         {COMMUNITY_ROWS.map((row) => (
           <article key={row.title}>
+            <span className={`mh-community-logo${row.icon ? " is-icon" : ""}`}><img src={row.logo} alt="" width={56} height={56} loading="lazy" decoding="async" /></span>
             <h3>{row.title}</h3>
             <p>{row.body}</p>
-            <a href={row.href}>{row.cta} <ArrowRight aria-hidden="true" /></a>
+            {row.href.startsWith("/") ? (
+              <Link className="mh-secondary-cta" href={row.href}><span>{row.cta}</span><ArrowRight aria-hidden="true" /></Link>
+            ) : (
+              <a className="mh-secondary-cta" href={row.href}><span>{row.cta}</span><ArrowRight aria-hidden="true" /></a>
+            )}
+            <small>{row.note}</small>
           </article>
         ))}
       </div>
@@ -729,7 +802,7 @@ export function FinalCta({
       <span className="mh-kicker is-lime">You do not need the whole plan today</span>
       <h2 id="final-title">{title}</h2>
       <p>{body}</p>
-      <div><PrimaryCta>Build my free transition plan</PrimaryCta><a href={HUMAN_SUPPORT_URL}>Talk to a person</a></div>
+      <div><PrimaryCta /><a href={HUMAN_SUPPORT_URL}>Talk to a person</a></div>
       <small>Independent support. Start free.</small>
       <div className="mh-progress-mark" aria-hidden="true"><i /><span /><i /><span /><i /></div>
       </div>
@@ -753,6 +826,11 @@ export function EditorialGrid({
   return (
     <section className="mh-route-content mh-section" aria-labelledby={headingId}>
       <div className="mh-route-content-heading"><span className="mh-kicker">{kicker}</span><h2 id={headingId}>{title}</h2><p>{body}</p></div>
+      {/* An odd number of cards in this two-column grid used to leave an empty
+          cell - the defect the owner flagged on /career-context. The fix is
+          Pattern B and it lives entirely in the stylesheet (see the
+          `:nth-last-child` block there), so it holds for every caller and
+          every count without this component knowing either. */}
       <div className="mh-route-card-grid" data-reveal="">{items.map((item, index) => <article key={item.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
     </section>
   );

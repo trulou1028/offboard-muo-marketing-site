@@ -47,9 +47,10 @@ edge crisp where the step alone is subtle.
 dark-green surface (`--mh-forest` / `--mh-deep`, including the fixed
 header) the primary CTA is neon: lime fill, `--mh-deep` text (~12:1),
 hover `--mh-lime-hover`. On light surfaces lime remains forbidden and
-primaries stay forest-on-paper. The AI accents keep lime too: the avatar
-disc (`.mh-lumo-mark`), the AI reply highlight (`.mh-ai-highlight`), AI
-chip dots, and the LUMO section eyebrow. Supporting CTAs on dark stay
+primaries stay forest-on-paper. The AI accents keep lime too: the AI reply highlight (`.mh-ai-highlight`),
+the dot on the AI button, and the LUMO section eyebrow. **The avatar is
+Lumo's face, not a lime disc** (owner 2026-09-02): `.mh-lumo-mark` renders
+`public/marketing/lumo-head.png`, the same asset the app uses. Supporting CTAs on dark stay
 paper (`.mh-ondark-cta`) and the AI button stays ink with a lumo dot
 (`.mh-ai-cta`) — that contrast is what keeps the neon reading as THE
 primary. `e2e/homepage.spec.ts` guards the focus-ring half of this; the
@@ -314,10 +315,12 @@ than anything the scale offers.
 | Token | Value | Use |
 |---|---|---|
 | `--mh-shadow-surface` | `0 16px 40px rgb(10 17 16 / 12%)` | Resting elements that need separation without floating (e.g. `.mh-job-pill`) |
-| `--mh-shadow-overlay` | `0 16px 40px rgb(10 17 16 / 12%)` | Floating/absolute-positioned elements — the onboarding illustration pieces, the mobile nav dropdown |
+| `--mh-shadow-overlay` | `0 28px 64px rgb(10 17 16 / 24%)` | Compositions and floating pieces (the base card, satellites over the band, the mobile nav dropdown). Deepened 2026-09-02 on owner direction so overlap reads as depth |
 
 Only two shadows exist in this stylesheet. If a new component needs
-elevation, it's one of these two — there's no third tier.
+elevation, it's one of these two — there's no third tier. Surface is the
+resting tier; overlay is the one that says "this piece sits on top of
+that one".
 
 ## Hard rules (carried over, unchanged)
 
@@ -346,6 +349,157 @@ elevation, it's one of these two — there's no third tier.
 - **No em dashes in site copy.** Copy content and its rules live in
   `COPY.md` at the repo root — this doc doesn't duplicate them.
 
+## Composition rules (plan 039, adopted 2026-09-02)
+
+The tokens above say what a section is made of. These say what shape it
+takes. They exist because the homepage audit found eleven sections and
+eight of them were the same unit — a copy block, then a grid — which read
+as unfinished even though every individual piece was correct.
+
+**R1 · No orphan cells.** A repeating grid must fill its last row. If the
+item count doesn't divide by the column count, change the layout, not the
+count: a ruled list (Pattern C), a lead-plus-pair (Pattern B), a stepped
+strip (Pattern E), or a disclosure list (Pattern H), which takes any count
+at all and is the escape hatch for an awkward one. `repeat(3, 1fr)` with 5 items, or
+`repeat(2, 1fr)` with 3, is a defect. Enforced by
+`e2e/composition.spec.ts`, which walks every route, finds every grid whose
+tracks are equal, and fails on a remainder.
+
+**R2 · Product UI is a composition, never a screenshot.** Chat, tracker,
+plan, and packet UI shown on the site is a base card plus one to three
+satellites, each breaking an edge of the base. A single bordered
+rectangle holding a transcript is not allowed. Use `.mh-comp`,
+`.mh-comp-base`, and `.mh-comp-satellite`.
+
+*Where a composition sits on a photograph, the photo frame is an edge a
+satellite may break instead of the base's. A satellite that breaks neither the
+base nor a photo is a floating box, and still a defect.*
+
+**R2a · A composition may ship as one exported image, and the homepage hero
+does.** Built in markup, the hero's two cards sized themselves from their own
+text, so their heights — and therefore where they sat over the photograph —
+moved with every copy edit and every breakpoint. It is now a single
+transparent `.avif` exported from Paper with its shadows baked in
+(owner 2026-09-03). What you give up is real:
+
+- The words are pixels. They are not selectable, they do not scale with the
+  reader's font size, and they scale down with the picture — on a 390px phone
+  the hero's chat text renders around 8px. The `alt` has to carry the whole
+  exchange, and it does.
+- **No test can read them.** `CopyDrift.test.tsx` compares `COPY.md` against
+  the DOM; text inside an image is invisible to it. `COPY.md` becomes the only
+  record, and it must transcribe the image verbatim, breaches included.
+- Editing a word means a new export, not a diff.
+
+So this is the exception, not the pattern. Reach for it when a composition's
+placement is genuinely fighting its own content, and never for a section whose
+copy is still moving. `/integrations`, `/lumo` and `/career-context` keep their
+coded chat compositions.
+
+**R3 · One idea, one section, one CTA.** A concept (Career Context, Lumo,
+Offboard Everywhere) gets one section on a page and one filled button.
+Later mentions are a `.mh-section-link`, never a second filled button.
+
+**R4 · Vary the section shape.** No more than two consecutive sections
+share a composition. The five compositions are Split, Stacked, Inset,
+Ruled, and Stepped. A page plan lists the composition of every section
+before the build starts.
+
+**R5 · Intros claim the width or share it.** A single-column
+`.mh-copy-block` either caps at `max-width: 820px` **and** puts something
+in the right half (a visual, a link cluster, a lead), or it becomes a
+two-column intro (`.mh-intro-split`: headline left, lead right). An empty
+right half beside an intro is a defect above 1180px.
+
+**R5a · An intro is an intro.** A section intro is an eyebrow, one
+headline, one description paragraph, and at most one action pair (a filled
+CTA and/or a `.mh-section-link`), plus a ledger-required `<small>` where one
+applies. It never nests another titled block: no `<article>`, no second
+`<h3>`, no second body paragraph, no list. Content that needs its own title
+is a row of the section's list, not part of its intro. **Headlines say what
+the section is about** — an eyebrow may be plain and a headline evocative,
+but between them a reader must know what they are looking at before the
+description.
+
+*Honest state, 2026-09-02: the homepage satisfies R5a and
+`MarketingHome.test.tsx` guards it there. Seventeen copy blocks across eight
+route files still violate it, and six intro classes compete for one job
+(`.mh-copy-block`, `.mh-intro-split`, `.mh-section-heading`,
+`.mh-route-content-heading`, `.mh-verified-heading`, `.mh-pricing-heading`).
+That sweep is tracked, not done.*
+
+**R6 · Photos explain or leave.** At most one photo per section on
+jobseeker pages, and it sits beside product UI or the question it
+answers. Photo triptychs and strips are retired.
+
+**R7 · Insets share one padding.** `--mh-inset-pad` (`48px 56px`
+desktop, `36px 28px` below 900). Both forest insets use it.
+
+**R7a · Real logos are real files.** Any third-party mark (Slack, ChatGPT,
+Claude, beehiiv, a partner) is the brand's own asset, fetched from the
+brand or from a stable public archive of it and recorded in `COPY.md`.
+Never a hand-drawn approximation. The five Google, Calendly and Notion
+marks still in `IntegrationLogos.tsx` predate this rule and are tracked
+for replacement.
+
+**R7c · An app icon fills its tile.** A brand mark that carries its own
+background (beehiiv's circle, the Offboard app icon) renders edge to edge
+at the tile's radius. Only a transparent mark sits on a paper tile with a
+hairline. Shrinking an icon inside a tile makes it read as a coloured
+square rather than as the brand.
+
+**R7b · No chips on photographs.** The `Benefits check · Done` style
+badge over a photo is retired (owner 2026-09-02): it read as forced and
+added nothing the composition beside it did not already say. Product
+state belongs on product UI.
+
+**R8 · Feature lists carry state.** A toolkit, capability, or category
+item shows one real product state (a chip, a count, a status pill) or it
+is a plain ruled row. No more icon-plus-label cards that link nowhere.
+Every state shown must be one the product can actually produce, verified
+against `lumo-plan-builder` `origin/main`.
+
+**R9 · The fixed header's button counts as a primary.** The header CTA is
+always lime and always on screen, so a section must not place its own
+filled button in the top 96px of the viewport at rest. On light bands a
+section primary is forest; on dark bands it is lime.
+
+**R10 · Mobile budget.** At 390 wide, no homepage section exceeds
+**2,600px** and the page total stays under **15,500px**. Enforced by
+`e2e/composition.spec.ts`. *(Both numbers are measured, not aspired to. The page
+total is part of the rule because the per-section number alone would not
+have caught what prompted it: the v2 homepage ran 17,096px with a 2,896px
+section. Measured at 390 after the hero rebuild, 2026-09-03: **13,155px total,
+tallest section 2,100px** ("More than a job search"). The budget still has real headroom
+and is deliberately not being lowered in the same pass that earned it.)*
+
+### Pattern catalogue
+
+Every "three things" or "five things" moment picks one of these instead of
+minting a grid:
+
+| Pattern | Shape | Reference in the code |
+| --- | --- | --- |
+| A · Split | Copy one side, visual the other | `.mh-split`, `.mh-hero2` |
+| B · Lead + pair | First item spans the full width, the rest sit as a pair under it. Fixes any odd count in a 2-column grid | `.mh-route-card-grid.is-lead-pair` |
+| C · Ruled list | Rows with hairlines, title left, body and optional link right. Any count | `ol.mh-five-steps-rows` |
+| D · Inset with ruled aside | Dark inset, copy left, ruled rows right | `.mh-sponsor-inset` |
+| E · Stepped strip | Numbered items in one row with hairline rules, 3 or 4 | `.mh-steps` |
+| F · Definition rows | `<dl>`, label column and value column | `.mh-company-facts` |
+| G · Two-column intro | Headline left, lead right, no grid | `.mh-intro-split` |
+| H · Disclosure list | Questions the reader opens one at a time. Any count, and closed answers stay in the DOM | `.mh-disclosure-list` |
+
+### Composition primitives (R2)
+
+`.mh-comp` is the positioning context. `.mh-comp-base` is the white card
+that carries `--mh-shadow-overlay`. `.mh-comp-satellite` is absolutely
+positioned and breaks at least one edge of the base by 12 to 32px.
+Satellites are existing atoms only: a chat bubble, an `AiReply`, a
+`TrackerCard`, a plan step row, a chip, an integration mark. Two depths,
+no third tier. Below 900px every composition goes static and stacks in
+flow, keeping its shadow — a composition that flattens into a bordered
+box on a phone has lost the point.
+
 ## How to add a section
 
 1. Compose `.mh-section` (from plan 013) for the horizontal gutter, or give
@@ -362,7 +516,9 @@ elevation, it's one of these two — there's no third tier.
    `-on-dark` roles for muted text, hairlines, and subtle surfaces rather
    than writing a new `rgb(255 255 255 / N%)`.
 5. Pick a radius/shadow from the scales above, not a new literal.
-6. **Never introduce a literal hex color, px font-size, border-radius, or
+6. Pick a composition from the pattern catalogue above before you write
+   a `grid-template-columns`, and check it against R1 and R4.
+7. **Never introduce a literal hex color, px font-size, border-radius, or
    box-shadow without adding a token for it first.** `npm run lint:css`
    enforces this for colors outside the token block; the rest is
    discipline, not tooling — but it's the same rule.

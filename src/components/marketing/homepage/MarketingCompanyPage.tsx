@@ -42,7 +42,7 @@ export function MarketingCompanyPage({ company }: { company: CompanyPage }) {
           eyebrowVisual={<CompanyLogo company={company} />}
           title={`Laid off from ${company.name}? Start here.`}
           body={company.summary}
-          cta="Build my free transition plan"
+          cta="Get started free"
           footnote={`Facts on this page come from the public record, with a source next to each one. Last checked ${formatDate(company.last_checked)}. Offboard has no relationship with ${company.name}.`}
           aside={false}
         />

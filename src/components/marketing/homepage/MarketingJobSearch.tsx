@@ -8,10 +8,16 @@ import {
   PageHero,
 } from "./MarketingSite";
 
-/* Job Search pillar page (plan 031, the last of phase 2). The homepage
-   toolkit already names these ten tools, so this page deliberately does not
-   repeat that as feature copy. Its argument is the loop the tools form and
-   the fact that the loop has a memory: the eighth step feeds the first.
+/* Job Search pillar page (plan 031, the last of phase 2).
+
+   Owner direction 2026-09-02 inverted the split with the homepage: the
+   homepage now names the ten tools and THIS page describes them, because a
+   reader who wants the detail is already on their way here. The ten
+   description sentences below moved from MarketingHome.tsx; COPY.md §§ 1 and
+   14 both record the move.
+
+   The page's own argument is unchanged: the loop the tools form, and the
+   fact that the loop has a memory, since the eighth step feeds the first.
    Copy: COPY.md § 14. Existing patterns only, no new classes. Bands: deep,
    paper, mist, paper, sand, forest, footer. */
 
@@ -33,10 +39,24 @@ const LOOP = [
 ] as const;
 
 const STAGES = [
-  ["Decide", "Whether this one deserves your week.", "Role Fit · Ghost Job Check · Company Intelligence"],
-  ["Apply", "What you actually send.", "Application Packets · Resume Tailoring · Cover Letters"],
-  ["Interview", "Walking in prepared, not rehearsed.", "Interview Prep · Voice Practice"],
-  ["Organize", "Where all of it is kept.", "Application Tracker · Career Context"],
+  { name: "Decide", decides: "Whether this one deserves your week.", tools: [
+    ["Role Fit", "Understand how an opportunity matches your experience, strengths, and goals."],
+    ["Ghost Job Checker", "Look for signals that a posting may not represent an actively hiring role."],
+    ["Company Intelligence", "Know who you're applying to before you invest your time."],
+  ] },
+  { name: "Apply", decides: "What you actually send.", tools: [
+    ["Application Packets", "Bring together the role, company, resume strategy, positioning, and application materials in one place."],
+    ["Resume Tailoring", "Adapt your resume using the opportunity and your Career Context."],
+    ["Cover Letters", "Create relevant application messaging without starting from a blank page."],
+  ] },
+  { name: "Interview", decides: "Walking in prepared, not rehearsed.", tools: [
+    ["Interview Prep", "Turn company and role context into a focused preparation plan."],
+    ["Voice Practice", "Practice answering questions in a realistic voice conversation."],
+  ] },
+  { name: "Organize", decides: "Where all of it is kept.", tools: [
+    ["Application Tracker", "Keep your entire pipeline current."],
+    ["Career Context", "Connect the history behind every application, interaction, and outcome."],
+  ] },
 ] as const;
 
 function Loop() {
@@ -61,13 +81,16 @@ function Stages() {
         <h2 id="stages-title">Four stages, and what each one decides.</h2>
       </div>
       <div className="mh-kit-grid" data-reveal="">
-        {STAGES.map(([name, decides, tools]) => (
+        {STAGES.map(({ name, decides, tools }) => (
           <div className="mh-kit-col" key={name}>
             <h3>{name}</h3>
-            <div className="mh-kit-tool">
-              <strong>{decides}</strong>
-              <p>{tools}</p>
-            </div>
+            <p className="mh-kit-decides">{decides}</p>
+            {tools.map(([tool, body]) => (
+              <div className="mh-kit-tool" key={tool}>
+                <strong>{tool}</strong>
+                <p>{body}</p>
+              </div>
+            ))}
           </div>
         ))}
       </div>
@@ -95,10 +118,10 @@ export function MarketingJobSearch() {
         <PageHero
           kicker="Job search"
           title="A job search that works as one system."
-          body="Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, from the role you just found to the interview you just finished, so nothing has to be re-explained at the next step."
+          body="Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, from the role you just found to the note you write after the interview, so nothing has to be re-explained at the next step."
           current="job-search"
           aside={false}
-          cta="Build my free transition plan"
+          cta="Get started free"
         />
         <EditorialGrid
           kicker="The difference"

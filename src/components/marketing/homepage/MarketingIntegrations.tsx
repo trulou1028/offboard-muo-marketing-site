@@ -1,11 +1,11 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 import {
   AiReply,
   FinalCta,
-  LumoMark,
   MarketingShell,
   PageHero,
-  SIGN_UP_URL,
   TrackerCard,
   YouBubble,
 } from "./MarketingSite";
@@ -170,7 +170,7 @@ function PreferLumo() {
         <span className="mh-kicker is-lime">Or use Lumo</span>
         <h2 id="prefer-lumo-title">Lumo is the assistant that lives inside your record.</h2>
         <p>If you would rather not connect anything, Lumo works from the same Career Context without leaving Offboard. Connecting an outside assistant is an option, not a requirement.</p>
-        <a className="mh-ai-cta" href={SIGN_UP_URL}><LumoMark className="is-dot" /><span>Ask Lumo</span></a>
+        <Link className="mh-section-link" href="/lumo">See how Lumo works <ArrowRight aria-hidden="true" /></Link>
       </div>
     </section>
   );

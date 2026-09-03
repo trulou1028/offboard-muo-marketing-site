@@ -11,7 +11,7 @@ that map directly to product workflows.
 
 | Cluster | Search intent | Product landing path |
 | --- | --- | --- |
-| Ghost jobs | "is this job posting real", "ghost job checker", "fake job posting signs" | Jobs, Ghost Checker, or Job Packet |
+| Ghost jobs | "is this job posting real", "ghost job checker", "fake job posting signs" | Jobs, Ghost Checker, or Application Packet |
 | Resume tailoring | "tailor resume to job description", "resume keyword match", "resume for ATS" | Resume tailor |
 | Jobs directory | "curated jobs", "recommended jobs", "find jobs that match my resume" | Jobs |
 | Job tracker | "job application tracker", "track job applications", "job search spreadsheet alternative" | Applications |

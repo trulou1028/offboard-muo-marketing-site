@@ -28,7 +28,7 @@ import {
 const RESIDENT_GETS = [
   ["A plan from day one", "Residents start from their own state, dates, and situation, and see what deserves attention first."],
   ["Verified benefit facts", "Deadlines and dollar figures checked by people, with the official link for each one. Claiming benefits is always free."],
-  ["The full toolkit", "Job Packets, resume tailoring, interview prep, application tracking, and Lumo."],
+  ["The full toolkit", "Application Packets, resume tailoring, interview prep, application tracking, and Lumo."],
   ["It starts the same day", "A resident who claims access can begin that evening, on a phone, without waiting on a callback."],
 ] as const;
 

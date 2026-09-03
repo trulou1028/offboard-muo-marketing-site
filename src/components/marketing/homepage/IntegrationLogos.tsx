@@ -1,6 +1,9 @@
 /* Integration brand marks (plan 033).
 
-   Hand-authored SVG, deliberately: the site self-hosts every asset (no font
+   ChatGPT and Claude are the partners' real files (see below). The five
+   Google, Calendly and Notion marks are still hand-authored SVG, and the
+   owner's 2026-09-02 rule says they should become real files too - that is
+   tracked, not done here. The original reasoning for drawing them: the site self-hosts every asset (no font
    or icon CDNs, DESIGN.md), and an icon dependency would ship several hundred
    marks to render seven. Each mark is a simplified, recognizable rendering of
    the partner's logo in the partner's own colors, sized for a 40px tile and
@@ -11,50 +14,17 @@
 
 const BOX = { viewBox: "0 0 48 48", "aria-hidden": true, focusable: "false" } as const;
 
-/* Anthropic's burst. Twelve tapered rays, alternating length. */
+/* ChatGPT and Claude are the real marks, not drawings (owner rule
+   2026-09-02: "any time a real logo is needed, find the real logo").
+   Sources are recorded in COPY.md § 1; the files live in
+   public/marketing/logos. Plain <img>: an SVG through next/image would
+   need the optimizer told to allow SVG for no gain. */
 function ClaudeMark() {
-  return (
-    <svg {...BOX}>
-      {Array.from({ length: 12 }, (_, i) => (
-        <rect
-          key={i}
-          x="22.55"
-          y={i % 2 === 0 ? 4.5 : 8.5}
-          width="2.9"
-          height={i % 2 === 0 ? 16 : 12}
-          rx="1.45"
-          fill="#d97757"
-          transform={`rotate(${i * 30} 24 24)`}
-        />
-      ))}
-    </svg>
-  );
+  return <img src="/marketing/logos/claude.svg" alt="" width={34} height={34} loading="lazy" decoding="async" />;
 }
 
-/* OpenAI's knot: a rounded hexagonal ring with three ends tucked toward the
-   middle. Drawn as a ring plus three spokes rather than three interlocking
-   hooks, which at 34px collapses into a solid blob. */
 function ChatGptMark() {
-  const ring =
-    "M36.5 18.8 Q39.5 24 36.5 29.2 L34.75 32.22 Q31.75 37.42 25.75 37.42 " +
-    "L22.25 37.42 Q16.25 37.42 13.25 32.22 L11.5 29.2 Q8.5 24 11.5 18.8 " +
-    "L13.25 15.78 Q16.25 10.58 22.25 10.58 L25.75 10.58 Q31.75 10.58 34.75 15.78 Z";
-  return (
-    <svg {...BOX}>
-      <path d={ring} fill="none" stroke="#0d0d0d" strokeWidth="3.4" strokeLinejoin="round" />
-      {[0, 120, 240].map((deg) => (
-        <path
-          key={deg}
-          d="M30.75 35.69 L27.6 30.24"
-          fill="none"
-          stroke="#0d0d0d"
-          strokeWidth="3.4"
-          strokeLinecap="round"
-          transform={`rotate(${deg} 24 24)`}
-        />
-      ))}
-    </svg>
-  );
+  return <img src="/marketing/logos/chatgpt.svg" alt="" width={34} height={34} loading="lazy" decoding="async" />;
 }
 
 /* Google Calendar: the dated page. */

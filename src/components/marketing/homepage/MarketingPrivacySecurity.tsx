@@ -305,7 +305,7 @@ export function MarketingPrivacySecurity() {
           body="Severance math. Runway numbers. The things you would only write down at 1am. This page answers the question that actually matters: who can see it, and who cannot."
           current="privacy-security"
           aside={false}
-          cta="Build my free transition plan"
+          cta="Get started free"
           footnote="Every claim below maps to a specific control in our code. We keep a claims register, audited it in July 2026, and fixed what did not hold up."
         />
         <WhoSeesWhat />

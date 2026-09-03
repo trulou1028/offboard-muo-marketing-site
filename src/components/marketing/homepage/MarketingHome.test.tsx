@@ -38,19 +38,88 @@ describe("Offboard marketing routes", () => {
   it("keeps the homepage focused on what Offboard does and who it serves", () => {
     render(<MarketingHome />);
 
-    // Homepage v2 (plan 022): Career Context narrative from the owner's copy
-    // doc, mirrored in COPY.md § 1.
+    // Homepage v3 (plan 039): the same Career Context narrative, re-sequenced
+    // as three numbered steps. COPY.md § 1.
     expect(screen.getByRole("heading", { level: 1, name: "The modern unemployment office." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Your job search goes wherever you do." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "How Offboard works." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "One place that remembers your career." })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /learn more about career context/i })).toHaveAttribute("href", "/career-context");
+    expect(screen.getByRole("link", { name: /see what your career context holds/i })).toHaveAttribute("href", "/career-context");
+    expect(screen.getByRole("heading", { name: "Ask anywhere. The answer is about you." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The tools you run your search with." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Losing your job creates more than one problem." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /an ai guide that already knows/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /everything you need when the next opportunity appears/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Free remembers your search. Pro puts it to work." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /job-search support people will actually use/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Your career context should belong to you." })).toBeInTheDocument();
+    // Sponsored access is the third plan card (owner 2026-09-02), not a band.
+    expect(screen.getByRole("heading", { name: "Sponsored access" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /learn about sponsored access/i })).toHaveAttribute("href", "/employers");
+    expect(screen.queryByRole("heading", { name: /job-search support people will actually use/i })).not.toBeInTheDocument();
+    // Community: three cards, and "Meet with a human" goes to the intake form.
+    expect(screen.getByRole("link", { name: /say hello/i })).toHaveAttribute("href", "/intake");
+    expect(screen.getByRole("link", { name: /join the slack/i })).toHaveAttribute("href", "https://offboard.co/community");
     expect(screen.getByRole("heading", { name: /you don't need another place to start over/i })).toBeInTheDocument();
+
+    // The three steps are the page's spine, and each one links to the section
+    // that expands it. A broken anchor here silently strands the reader.
+    for (const [label, href] of [
+      ["Build your context", "#build"],
+      ["See the connection", "#connect"],
+      ["See the toolkit", "#run"],
+    ] as const) {
+      expect(screen.getByRole("link", { name: new RegExp(label, "i") })).toHaveAttribute("href", href);
+    }
+    for (const id of ["build", "connect", "run"]) {
+      expect(document.getElementById(id), `#${id} is a real section`).not.toBeNull();
+    }
+
+    // DESIGN.md R3, the defect this rebuild exists to fix: Career Context was
+    // pitched in three sections with three filled buttons. Exactly one now.
+    expect(screen.getAllByRole("link", { name: /(build|create) my career context/i })).toHaveLength(1);
+
+    // The ledger row "Live integrations" governs every mention of the ChatGPT
+    // and Claude connections on this page: they ship labelled beta.
+    expect(within(screen.getByRole("main")).getByText(/ChatGPT and Claude connections are in beta/i)).toBeInTheDocument();
+
+    // DESIGN.md R5a: a section intro is an eyebrow, a headline, a description
+    // and at most one action pair. Nothing nested and titled, and never a
+    // second body paragraph. Scoped to this page on purpose - eight route
+    // files still violate R5a and are tracked in DESIGN.md, not fixed.
+    const copyBlocks = Array.from(document.querySelectorAll(".mh-page-home .mh-copy-block"));
+    expect(copyBlocks.length).toBeGreaterThan(0);
+    for (const block of copyBlocks) {
+      expect(block.querySelector("article"), "a titled block nested in an intro").toBeNull();
+      expect(block.querySelectorAll(":scope > p").length, "more than one description paragraph").toBeLessThanOrEqual(1);
+    }
+
+    // Each step section links out rather than trying to be the pillar page.
+    // Queried by href rather than by accessible name: this test already runs
+    // ~40 getByRole lookups, and each one computes accessible names across the
+    // whole tree, which is what pushes it toward the 5s timeout under load.
+    for (const [href, label] of [
+      ["/career-context", "See what your Career Context holds"],
+      ["/integrations", "See how Offboard Everywhere works"],
+      ["/job-search", "See what each tool does"],
+    ] as const) {
+      const link = document.querySelector(`main a[href="${href}"]`);
+      expect(link, `a link to ${href}`).not.toBeNull();
+      expect(link?.textContent).toContain(label);
+    }
+
+    // Six member questions, as a disclosure list. The first is open so it
+    // still reads beside the plan card that answers it.
+    const questions = Array.from(document.querySelectorAll(".mh-morethan details"));
+    expect(questions).toHaveLength(6);
+    expect(questions.filter((item) => item.hasAttribute("open"))).toHaveLength(1);
+    expect(questions[0].querySelector("summary")?.textContent).toBe("What do I do first?");
+
+    // Retired in this pass: the second CTA whose destination was unclear, and
+    // the prompt list /lumo already carries under the same label.
+    const mainText = screen.getByRole("main").textContent ?? "";
+    expect(mainText).not.toMatch(/ask things like/i);
+    expect(Array.from(document.querySelectorAll("main a")).map((a) => a.textContent?.trim())).not.toContain("Ask Lumo");
+
+    // Retired with v3: two sections that told a story the page already told.
+    expect(screen.queryByRole("heading", { name: "Your job search goes wherever you do." })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /an ai guide that already knows/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Your career context should belong to you." })).not.toBeInTheDocument();
 
     // Verified facts that stay on the homepage (COPY.md ledger).
     expect(screen.getByText("$0")).toBeInTheDocument();
@@ -148,7 +217,7 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { name: /a few questions\. a plan that's actually yours/i })).toBeInTheDocument();
     expect(screen.getByText("Where are you right now?")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /tools didn't go anywhere/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { level: 3, name: "Job Packet" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 3, name: "Application Packet" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "An AI guide that knows your actual situation." })).toBeInTheDocument();
     expect(screen.getByText(/never invents a dollar figure/i)).toBeInTheDocument();
     expect(screen.getByText(/like a caseworker/i)).toBeInTheDocument();
@@ -223,7 +292,7 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("link", { name: /apply for pilot access/i })).toHaveAttribute("href", "https://app.offboard.co/act/apply");
     expect(
       screen.getByText(
-        "ACT reporting is aggregate-first. The program can understand applications, approvals, claims, onboarding, and engagement without seeing private resumes, documents, LUMO conversations, or individual job-search behavior."
+        "ACT reporting is aggregate-first. The program can understand applications, approvals, claims, onboarding, and engagement without seeing private resumes, documents, Lumo conversations, or individual job-search behavior."
       )
     ).toBeInTheDocument();
     expect(screen.queryByText(/modern unemployment office/i)).not.toBeInTheDocument();
