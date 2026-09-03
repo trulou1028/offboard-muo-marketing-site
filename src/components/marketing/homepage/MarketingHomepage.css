@@ -861,7 +861,7 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-lumo-cta svg { width: 16px; height: 16px; }
 
 /* Hero */
-.mh-hero2 { display: grid; grid-template-columns: minmax(0, 0.94fr) minmax(0, 1fr); gap: clamp(40px, 4vw, 64px); align-items: center; padding-top: 168px; padding-bottom: 128px; background: var(--mh-deep); color: var(--mh-paper); }
+.mh-hero2 { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); gap: clamp(40px, 4vw, 64px); align-items: center; padding-top: 168px; padding-bottom: 128px; background: var(--mh-deep); color: var(--mh-paper); }
 .mh-hero2-copy h1 { color: var(--mh-paper); font-size: var(--mh-h1); line-height: 1.02; }
 .mh-hero2-copy > p { max-width: 33em; margin-top: 24px; color: var(--mh-on-dark-muted); font-size: 20px; line-height: 1.45; }
 .mh-hero2-actions { display: flex; align-items: center; gap: 12px; margin-top: 32px; }
@@ -878,18 +878,20 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
    otherwise re-encode it. Do not crop, re-compress, or regenerate this file.
    A change to it is a new export from Paper.
 
-   The image is a 2x export of a 677px-wide artboard, so its baked text reads
-   at its intended size only when the figure is displayed near 677px. That is
-   what the width calc buys: the figure takes its grid column plus the page
-   gutter, minus 28px of breathing room from the viewport edge. Narrower than
-   that and the chat text starts shrinking, because it is pixels now, not text.
+   The figure is capped at its grid column - no overhang into the gutter
+   (owner 2026-09-03, after seeing both). An earlier version widened it to the
+   full 677px the artboard was drawn at, so the baked text rendered at its
+   intended 15px; it read as oversized and ran past the fold. Contained, it
+   sits near 562px at 1440, so that text renders around 12px. That is the
+   deliberate trade: the composition is sized to the layout, and the text
+   inside it is illustrative rather than meant to be read.
 
    Two costs that came with flattening: the chat text is no longer selectable
    and no longer scales with the reader's font size, so the `alt` carries the
    whole exchange; and the words inside it are no longer covered by
    CopyDrift.test.tsx, so COPY.md is the only record of them. */
 .mh-hero2-visual { position: relative; }
-.mh-hero2-figure { width: calc(100% + max(0px, var(--mh-page-x) - 28px)); max-width: none; height: auto; }
+.mh-hero2-figure { width: 100%; height: auto; }
 /* On the dark hero both buttons take the on-dark treatment: forest would sit
    too close to the forest-deep band to read as a button. */
 .marketing-homepage.mh-page-home .mh-hero2-actions a.mh-primary-cta { background: var(--mh-lime); color: var(--mh-deep); }
@@ -1409,7 +1411,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .marketing-homepage.mh-page-home { --mh-section-y: 96px; --mh-section-y-loose: 96px; --mh-section-y-tight: 64px; }
   .mh-hero2 { grid-template-columns: 1fr; padding-top: 116px; padding-bottom: 72px; }
   .mh-hero2-visual { margin-top: 12px; }
-  .mh-hero2-figure { width: 100%; }
   .mh-wherever-grid,
   .mh-privacy-split,
   .mh-workforce-pilot,
