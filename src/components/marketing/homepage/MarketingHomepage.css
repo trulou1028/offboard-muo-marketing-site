@@ -32,11 +32,6 @@
   --mh-on-dark-muted: #b9c4bb;
   /* stylelint-enable color-no-hex */
   --mh-chip-fill: rgb(10 17 16 / 62%);
-  /* Deep green at low alpha. The saved-state inset inside a white product card:
-     tinted enough to read as a result the product produced, light enough that a
-     white button sits on top of it (hero composition, plan 041). */
-  --mh-forest-surface: rgb(15 38 23 / 10%);
-  --mh-forest-tile: rgb(15 38 23 / 20%);
   --mh-hairline-on-dark: rgb(246 244 238 / 16%);
   --mh-surface-on-dark: rgb(246 244 238 / 6%);
   --mh-border-on-dark: rgb(246 244 238 / 16%);
@@ -835,8 +830,6 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
 /* ------------------------------------------------------------------ */
 
 /* Shared v2 atoms */
-.mh-photo-frame { position: relative; margin: 0; overflow: hidden; background: var(--mh-paper-soft); border-radius: var(--mh-radius-card); }
-.mh-photo-frame img { object-fit: cover; }
 
 /* Lumo's face (owner 2026-09-02), the asset the app uses. The lime disc
    survives only as the 8px dot on the AI button. */
@@ -852,31 +845,6 @@ img.mh-lumo-mark { display: inline-block; width: 28px; height: 28px; flex: 0 0 2
 .mh-chat-ai p { font-size: 15px; line-height: 1.5; color: var(--mh-ink); }
 .mh-ai-highlight { padding: 1px 4px; background: var(--mh-lime); border-radius: 3px; color: var(--mh-ink); }
 
-/* A chat turn with a face beside it (Paper artboard "Hero visual", owner
-   2026-09-03). The rest of the site's chat depictions put the speaker's name
-   in a visually-hidden span and nothing in the margin; the hero earns the
-   avatars because it is the one place a reader has not yet been told who is
-   talking. Both faces sit in the same 40px lane, so the two cards line up.
-   Lumo's head keeps its own 28px inside that lane rather than filling it: it
-   is a drawn mark, and blown up to 40px it stops reading as a face. */
-.mh-chat-turn { display: flex; align-items: flex-start; gap: 10px; }
-.mh-chat-turn.is-you { justify-content: flex-end; }
-.mh-chat-turn .mh-chat-you { max-width: 280px; min-width: 0; align-self: auto; }
-.mh-chat-avatar { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 50%; object-fit: cover; }
-.mh-chat-avatar.is-lumo { display: grid; place-items: center; }
-.mh-chat-said { min-width: 0; padding: 12px 16px; background: var(--mh-paper-soft); border-radius: 16px 16px 16px 4px; color: var(--mh-ink); font-size: 15px; line-height: 1.45; }
-
-/* The state the answer claims, shown rather than asserted (R8). Not a link:
-   nothing on a marketing page should look clickable and do nothing, so the
-   action is a `<span>` and stays out of the tab order. */
-.mh-saved-card { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; padding: 16px; border: 1px solid var(--mh-forest-surface); border-radius: var(--mh-radius-md); background: var(--mh-forest-surface); }
-.mh-saved-icon { display: grid; width: 36px; height: 36px; place-items: center; border-radius: var(--mh-radius-md); background: var(--mh-forest-tile); }
-.mh-saved-icon svg { width: 20px; height: 20px; color: var(--mh-forest); }
-.mh-saved-text { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
-.mh-saved-text strong { font-size: 14px; font-weight: 600; line-height: 1.35; }
-.mh-saved-text small { overflow: hidden; color: var(--mh-muted); font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
-.mh-saved-action { display: flex; height: 36px; align-items: center; justify-content: center; grid-column: 1 / -1; gap: 8px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); background: var(--mh-white); color: var(--mh-ink); font-size: 13px; font-weight: 600; }
-.mh-saved-action svg { width: 15px; height: 15px; }
 
 .mh-tracker-card { display: flex; align-items: center; gap: 12px; margin-top: 12px; padding: 12px 14px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); color: var(--mh-ink); }
 .mh-tracker-monogram { display: grid; width: 32px; height: 32px; flex: 0 0 32px; place-items: center; background: var(--mh-paper-soft); border-radius: var(--mh-radius-sm); color: var(--mh-forest); font-size: 14px; font-weight: 600; }
@@ -893,13 +861,35 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-lumo-cta svg { width: 16px; height: 16px; }
 
 /* Hero */
-.mh-hero2 { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); gap: clamp(40px, 4vw, 64px); align-items: center; padding-top: 168px; padding-bottom: 128px; background: var(--mh-deep); color: var(--mh-paper); }
+.mh-hero2 { display: grid; grid-template-columns: minmax(0, 0.94fr) minmax(0, 1fr); gap: clamp(40px, 4vw, 64px); align-items: center; padding-top: 168px; padding-bottom: 128px; background: var(--mh-deep); color: var(--mh-paper); }
 .mh-hero2-copy h1 { color: var(--mh-paper); font-size: var(--mh-h1); line-height: 1.02; }
 .mh-hero2-copy > p { max-width: 33em; margin-top: 24px; color: var(--mh-on-dark-muted); font-size: 20px; line-height: 1.45; }
 .mh-hero2-actions { display: flex; align-items: center; gap: 12px; margin-top: 32px; }
 .mh-hero2-trust { display: block; margin-top: 24px; color: rgb(246 244 238 / 62%); font-size: 14px; line-height: 1.5; }
-.mh-hero2-visual { position: relative; padding-bottom: 44px; }
-.mh-hero2-visual > .mh-photo-frame { aspect-ratio: 4 / 3; }
+/* The hero visual is one exported image (owner 2026-09-03), not a coded
+   composition. Built in code it drifted: the two cards sized themselves from
+   their own text, so their heights - and therefore where they sat over the
+   photograph - moved with every copy edit and every breakpoint. The export is
+   a transparent avif with the shadows baked in, so it lands in exactly one
+   place.
+
+   It ships byte-for-byte as the owner exported it from the Paper artboard
+   "Hero visual", which is why the `<Image>` carries `unoptimized`: Next would
+   otherwise re-encode it. Do not crop, re-compress, or regenerate this file.
+   A change to it is a new export from Paper.
+
+   The image is a 2x export of a 677px-wide artboard, so its baked text reads
+   at its intended size only when the figure is displayed near 677px. That is
+   what the width calc buys: the figure takes its grid column plus the page
+   gutter, minus 28px of breathing room from the viewport edge. Narrower than
+   that and the chat text starts shrinking, because it is pixels now, not text.
+
+   Two costs that came with flattening: the chat text is no longer selectable
+   and no longer scales with the reader's font size, so the `alt` carries the
+   whole exchange; and the words inside it are no longer covered by
+   CopyDrift.test.tsx, so COPY.md is the only record of them. */
+.mh-hero2-visual { position: relative; }
+.mh-hero2-figure { width: calc(100% + max(0px, var(--mh-page-x) - 28px)); max-width: none; height: auto; }
 /* On the dark hero both buttons take the on-dark treatment: forest would sit
    too close to the forest-deep band to read as a button. */
 .marketing-homepage.mh-page-home .mh-hero2-actions a.mh-primary-cta { background: var(--mh-lime); color: var(--mh-deep); }
@@ -1217,14 +1207,6 @@ ol.mh-stage-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: c
 .mh-comp-base { position: relative; z-index: 2; border-color: transparent; box-shadow: var(--mh-shadow-overlay); }
 .mh-comp-satellite { position: absolute; z-index: 3; }
 
-/* Composition A - hero. Rebuilt from the Paper artboard "Hero visual" (owner
-   2026-09-03). The exchange is two cards now, not one: the question overhangs
-   the photograph's right edge, the answer sits under it and carries the state
-   it claims. Right-aligned with a 14px gutter and a narrower question card, so
-   the pair reads as one exchange with a direction rather than two panels.
-   The edge both of them break is the photo frame's (R2). */
-.mh-hero-comp { position: absolute; right: -40px; bottom: 0; width: min(392px, 88%); }
-.mh-hero-ask { right: 0; bottom: calc(100% + 14px); width: min(362px, 100%); border-color: transparent; box-shadow: var(--mh-shadow-overlay); }
 
 /* Pattern E - the stepped strip, and Pattern G - the two-column intro that
    keeps a single-column section from leaving its right half empty (R5). */
@@ -1320,8 +1302,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-community-cards { grid-template-columns: 1fr; }
   .mh-steps li + li { border-top: 1px solid var(--mh-line); border-left: 0; }
 
-  .mh-hero-comp { position: static; width: auto; margin-top: 18px; }
-  .mh-hero-ask { position: relative; right: auto; bottom: auto; width: min(362px, 96%); margin: 0 0 14px auto; }
 
   .mh-record-comp { display: flex; flex-direction: column; align-items: flex-start; padding: 0; }
   ul.mh-record-sources { position: relative; top: auto; right: auto; order: 1; margin: 0 0 0 18px; }
@@ -1428,7 +1408,8 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-privacy-stack { display: block; }
   .marketing-homepage.mh-page-home { --mh-section-y: 96px; --mh-section-y-loose: 96px; --mh-section-y-tight: 64px; }
   .mh-hero2 { grid-template-columns: 1fr; padding-top: 116px; padding-bottom: 72px; }
-  .mh-hero2-visual { margin-top: 12px; padding-bottom: 0; }
+  .mh-hero2-visual { margin-top: 12px; }
+  .mh-hero2-figure { width: 100%; }
   .mh-wherever-grid,
   .mh-privacy-split,
   .mh-workforce-pilot,

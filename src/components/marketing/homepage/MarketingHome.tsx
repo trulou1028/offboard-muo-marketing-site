@@ -2,8 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Briefcase,
-  ExternalLink,
   FileText,
   ListChecks,
   MessageSquare,
@@ -62,42 +60,16 @@ function HomeHero() {
         <small className="mh-hero2-trust">Join thousands of people building their next chapter with Offboard.</small>
       </div>
       <div className="mh-hero2-visual">
-        <figure className="mh-photo-frame">
-          <Image
-            src="/marketing/homepage/raw/hero-kitchen-table.webp"
-            alt="A man at his kitchen table, working through his job search on a laptop"
-            fill
-            sizes="(max-width: 900px) 100vw, 46vw"
-            preload
-          />
-        </figure>
-        <div className="mh-comp mh-hero-comp" aria-label="Example conversation with Lumo">
-          <div className="mh-chat-card mh-comp-satellite mh-hero-ask">
-            <div className="mh-chat-turn is-you">
-              <p className="mh-chat-you">
-                <span className="mh-chat-speaker">You</span>
-                Can you save a new application for a Senior Product Designer role at Tesserac?
-              </p>
-              <img className="mh-chat-avatar" src="/marketing/homepage/member-avatar.webp" alt="" width={40} height={40} decoding="async" />
-            </div>
-          </div>
-          <div className="mh-chat-card mh-comp-base mh-hero-answer">
-            <div className="mh-chat-turn">
-              <span className="mh-chat-avatar is-lumo"><LumoMark /></span>
-              <p className="mh-chat-said">
-                <mark className="mh-ai-highlight">Done.</mark> I&apos;ve added the role to your Offboard application tracker and saved the company context.
-              </p>
-            </div>
-            <div className="mh-saved-card">
-              <span className="mh-saved-icon" aria-hidden="true"><Briefcase /></span>
-              <span className="mh-saved-text">
-                <strong>Application added</strong>
-                <small>Senior Product Designer at Tesserac</small>
-              </span>
-              <span className="mh-saved-action" aria-hidden="true"><ExternalLink />View application</span>
-            </div>
-          </div>
-        </div>
+        <Image
+          className="mh-hero2-figure"
+          src="/marketing/homepage/hero-composition.avif"
+          alt="A man works at his kitchen table while a conversation floats beside him. He asks Lumo to save a new application for a senior product design role; Lumo replies that it has added the role to his Offboard application tracker and saved the company context, and shows the saved application underneath."
+          width={1354}
+          height={1168}
+          sizes="(max-width: 900px) 100vw, 46vw"
+          priority
+          unoptimized
+        />
       </div>
     </section>
   );

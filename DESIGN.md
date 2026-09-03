@@ -372,11 +372,29 @@ rectangle holding a transcript is not allowed. Use `.mh-comp`,
 `.mh-comp-base`, and `.mh-comp-satellite`.
 
 *Where a composition sits on a photograph, the photo frame is an edge a
-satellite may break instead of the base's. The hero does this: the question
-card and the answer card are stacked with a gutter between them and both
-overhang the photograph's right edge, which is where the depth comes from
-(owner's Paper artboard "Hero visual", 2026-09-03). A satellite that breaks
-neither the base nor a photo is a floating box, and still a defect.*
+satellite may break instead of the base's. A satellite that breaks neither the
+base nor a photo is a floating box, and still a defect.*
+
+**R2a · A composition may ship as one exported image, and the homepage hero
+does.** Built in markup, the hero's two cards sized themselves from their own
+text, so their heights — and therefore where they sat over the photograph —
+moved with every copy edit and every breakpoint. It is now a single
+transparent `.avif` exported from Paper with its shadows baked in
+(owner 2026-09-03). What you give up is real:
+
+- The words are pixels. They are not selectable, they do not scale with the
+  reader's font size, and they scale down with the picture — on a 390px phone
+  the hero's chat text renders around 8px. The `alt` has to carry the whole
+  exchange, and it does.
+- **No test can read them.** `CopyDrift.test.tsx` compares `COPY.md` against
+  the DOM; text inside an image is invisible to it. `COPY.md` becomes the only
+  record, and it must transcribe the image verbatim, breaches included.
+- Editing a word means a new export, not a diff.
+
+So this is the exception, not the pattern. Reach for it when a composition's
+placement is genuinely fighting its own content, and never for a section whose
+copy is still moving. `/integrations`, `/lumo` and `/career-context` keep their
+coded chat compositions.
 
 **R3 · One idea, one section, one CTA.** A concept (Career Context, Lumo,
 Offboard Everywhere) gets one section on a page and one filled button.
