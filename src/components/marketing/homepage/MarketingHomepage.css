@@ -35,6 +35,7 @@
   --mh-hairline-on-dark: rgb(246 244 238 / 16%);
   --mh-surface-on-dark: rgb(246 244 238 / 6%);
   --mh-border-on-dark: rgb(246 244 238 / 16%);
+  --mh-cta-border-on-dark: rgb(246 244 238 / 44%); /* an outline BUTTON on dark needs more than a hairline */
   /* stylelint-disable color-no-hex -- status colors below */
   --mh-success: #006b52;
   --mh-warning: #9a5b0b;
@@ -449,15 +450,24 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-community-cards .mh-secondary-cta svg { width: 16px; height: 16px; }
 .mh-community-cards small { width: 100%; color: var(--mh-secondary); font-size: 13px; text-align: center; }
 
-.mh-faq { min-height: 1340px; display: grid; grid-template-columns: 36fr 64fr; gap: 72px; padding-top: 80px; padding-bottom: 80px; background: var(--mh-paper-soft); }
+/* No min-height: a collapsed accordion inside a 1,340px section is a void. */
+.mh-faq { display: grid; grid-template-columns: 36fr 64fr; gap: 72px; padding-top: 80px; padding-bottom: 80px; background: var(--mh-paper-soft); }
 .mh-faq > div:first-child { display: flex; flex-direction: column; gap: 16px; }
 .mh-faq h2 { max-width: 470px; font-size: 48px; line-height: 52px; }
-.mh-faq-list { border-top: 1px solid var(--mh-ink); }
-.mh-faq-list article { display: flex; flex-direction: column; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--mh-line); }
-.mh-faq-list header { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; }
-.mh-faq-list h3 { font-family: var(--mh-font-body); font-size: 16px; font-weight: 650; letter-spacing: 0; line-height: 24px; }
-.mh-faq-list svg { width: 16px; flex: 0 0 16px; }
-.mh-faq-list p { max-width: 620px; color: var(--mh-muted); font-size: 16px; line-height: 24px; }
+
+/* Pattern H - the disclosure list. One implementation for the five route FAQs
+   and the homepage's member questions. Native <details>: the open state is a
+   rotated border corner rather than two icons, and `summary:focus-visible` is
+   already in the focus-ring contract at the top of this file. */
+.mh-disclosure-list { border-top: 1px solid var(--mh-ink); }
+.mh-disclosure { border-bottom: 1px solid var(--mh-line); }
+.mh-disclosure summary { display: flex; align-items: baseline; justify-content: space-between; gap: 32px; padding: 18px 0; cursor: pointer; list-style: none; }
+.mh-disclosure summary::-webkit-details-marker { display: none; }
+.mh-disclosure summary h3 { font-family: var(--mh-font-body); font-size: 16px; font-weight: 650; letter-spacing: 0; line-height: 24px; }
+.mh-disclosure summary::after { width: 8px; height: 8px; flex: none; align-self: center; margin-right: 3px; border-right: 1.5px solid currentcolor; border-bottom: 1.5px solid currentcolor; content: ""; transform: translateY(-2px) rotate(45deg); transition: transform var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-disclosure[open] summary::after { transform: translateY(2px) rotate(-135deg); }
+.mh-disclosure > div { padding-bottom: 20px; }
+.mh-disclosure p { max-width: 620px; color: var(--mh-muted); font-size: 16px; line-height: 24px; }
 
 .mh-final-cta { min-height: 520px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); background: var(--mh-forest); color: var(--mh-paper); text-align: center; }
 .mh-final-cta-copy { display: flex; max-width: var(--mh-page-max); flex-direction: column; align-items: center; gap: 20px; }
@@ -866,8 +876,13 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
    too close to the forest-deep band to read as a button. */
 .marketing-homepage.mh-page-home .mh-hero2-actions a.mh-primary-cta { background: var(--mh-lime); color: var(--mh-deep); }
 .marketing-homepage.mh-page-home .mh-hero2-actions a.mh-primary-cta:hover { background: var(--mh-lime-hover); }
-.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-secondary-cta { border-color: rgb(246 244 238 / 44%); color: var(--mh-paper); }
-.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-secondary-cta:hover { border-color: var(--mh-paper); }
+/* The outline CTA on a dark band. Was hero-only with a raw literal; step 2
+   needs the same treatment, so the value became a token. Deliberately NOT
+   --mh-border-on-dark, which is 16% and would have thinned the hero. */
+.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-secondary-cta,
+.mh-connect a.mh-secondary-cta { border-color: var(--mh-cta-border-on-dark); color: var(--mh-paper); }
+.marketing-homepage.mh-page-home .mh-hero2-actions a.mh-secondary-cta:hover,
+.mh-connect a.mh-secondary-cta:hover { border-color: var(--mh-paper); }
 
 /* Wherever you work */
 .mh-wherever { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-mist); border-bottom: 1px solid var(--mh-mist-border); }
@@ -891,6 +906,11 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 /* More than a job search */
 .mh-morethan { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-sand); }
 .mh-morethan .mh-copy-block { max-width: 820px; }
+.mh-morethan .mh-disclosure-list { margin-top: clamp(40px, 4vw, 56px); }
+.mh-morethan .mh-disclosure { border-bottom-color: var(--mh-ink); }
+.mh-morethan .mh-disclosure summary { padding: 24px 0; }
+.mh-morethan .mh-disclosure summary h3 { font-family: var(--mh-font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.2; }
+.mh-morethan .mh-disclosure p { font-size: 15px; line-height: 1.55; }
 /* The first question sits beside the plan-preview card that answers it. The
    card is a light island, so it carries its own ink color on the sand band. */
 .mh-qgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; margin-top: 56px; }
@@ -1102,6 +1122,26 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 .mh-kit-tool { margin-top: 18px; }
 .mh-kit-tool strong { font-size: 15px; font-weight: 600; }
 .mh-kit-tool p { margin-top: 4px; color: var(--mh-muted); font-size: 14px; line-height: 1.5; }
+/* /job-search: the one-line "what this stage decides", above the tools it now
+   describes (the descriptions moved here from the homepage, 2026-09-02). */
+p.mh-kit-decides { margin-top: 12px; color: var(--mh-muted); font-size: 15px; line-height: 1.5; }
+
+/* Pattern E on the homepage - four stages in one row. Replaces a 2x2 holding
+   ten tool descriptions: the homepage names the tools, /job-search describes
+   them. Four items in four equal tracks fill the row, and at 1180 it halves
+   to a 2x2, which also fills (R1). Never three tracks - four items would
+   orphan two cells, and e2e/composition.spec.ts only measures 1440.
+   `ol.` prefix is load-bearing for margin-top; see the reset note up top. */
+ol.mh-stage-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(24px, 2.6vw, 36px); margin-top: 56px; }
+.mh-stage-strip > li { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; gap: 10px 12px; align-content: start; padding-top: 20px; border-top: 1px solid var(--mh-ink); }
+.mh-stage-strip > li > svg { width: 20px; height: 20px; color: var(--mh-forest); stroke-width: 1.5; }
+.mh-stage-strip h3 { font-size: 22px; font-weight: 500; line-height: 1.2; }
+.mh-stage-strip > li > .mh-state-chip { align-self: center; }
+.mh-stage-strip > li > p { grid-column: 2 / -1; color: var(--mh-muted); font-size: 15px; line-height: 1.5; }
+/* Tool names as a hairline list, deliberately not a grid: three names beside
+   two would read as an orphan the moment anyone gave it equal tracks. */
+.mh-stage-strip ul { grid-column: 2 / -1; margin-top: 4px; }
+.mh-stage-strip ul li { padding: 9px 0; border-top: 1px solid var(--mh-line); font-size: 14px; font-weight: 600; }
 
 /* Pro */
 .mh-pro { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
@@ -1123,7 +1163,6 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 
 
 /* Built around you */
-.mh-belong-affirm { font-size: 16px; font-weight: 600; color: var(--mh-ink); }
 
 /* Final CTA */
 .mh-final2 { display: flex; flex-direction: column; align-items: center; gap: 20px; padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-deep); color: var(--mh-paper); text-align: center; }
@@ -1164,7 +1203,12 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 .mh-steps-band { padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); background: var(--mh-paper); }
 .mh-intro-split { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 72px); align-items: end; }
 .mh-intro-split h2 { margin-top: 16px; font-size: var(--mh-h2); line-height: 1.15; }
-.mh-intro-split > p { color: var(--mh-muted); font-size: 18px; line-height: 29px; }
+/* The lead is a direct child in two uses and wrapped beside a section link
+   in the third, so both shapes are matched. */
+.mh-intro-split > p,
+.mh-intro-split > div:last-child > p { color: var(--mh-muted); font-size: 18px; line-height: 29px; }
+.mh-intro-split > div:last-child { display: flex; flex-direction: column; align-items: flex-start; }
+.mh-intro-split > div:last-child .mh-section-link { margin-top: 20px; }
 /* `ol.` prefix is load-bearing - see the reset note at the top of this file. */
 /* Contained (owner 2026-09-02): one white card, three cells split by
    hairlines, the number in a forest disc. The card takes the surface shadow. */
@@ -1180,22 +1224,11 @@ ol.mh-steps { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 
    does not fill its rows: eight Career Context categories that were eight
    identical cards, and five questions that left an empty sixth cell.
    `ul.` prefix is load-bearing (the reset zeroes ul margin). */
-ul.mh-ruled { display: grid; margin-top: clamp(40px, 4vw, 56px); }
-.mh-ruled.is-two { grid-template-columns: repeat(2, 1fr); column-gap: clamp(32px, 4vw, 64px); }
-.mh-ruled.is-two li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 4px 14px; align-items: start; padding: 17px 0; border-top: 1px solid var(--mh-line); }
-.mh-ruled.is-two svg { width: 18px; height: 18px; margin-top: 3px; color: var(--mh-forest); stroke-width: 1.5; }
-.mh-ruled.is-two h3 { font-family: var(--mh-font-body); font-size: 16px; font-weight: 600; line-height: 1.3; }
-.mh-ruled.is-two p { grid-column: 2; color: var(--mh-muted); font-size: 14px; line-height: 1.5; }
-.mh-ruled.is-questions li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr); gap: 10px clamp(32px, 4vw, 64px); align-items: start; padding: 26px 0; border-top: 1px solid var(--mh-ink); }
-.mh-ruled.is-questions h3 { font-size: 24px; font-weight: 500; line-height: 1.2; }
-.mh-ruled.is-questions p { margin-top: 8px; color: var(--mh-muted); font-size: 15px; line-height: 1.55; }
 
 /* Composition C - the record. The portrait is the section's one photograph
    (R6): the card covers its bottom-right corner, so what stays visible is
    the top band across its full width rather than a sliver. */
-.mh-record-comp { padding-top: 96px; padding-left: 68px; }
-.mh-record-photo { position: absolute; z-index: 1; top: 0; left: 0; width: 172px; height: 208px; box-shadow: var(--mh-shadow-overlay); }
-.mh-record-photo img { object-position: 50% 26%; }
+.mh-record-comp { padding-top: 44px; }
 .mh-record-card { display: flex; flex-direction: column; gap: 8px; padding: 28px; background: var(--mh-white); border: 1px solid transparent; border-radius: var(--mh-radius-card); color: var(--mh-ink); }
 .mh-record-card > strong { font-family: var(--mh-font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; }
 .mh-record-card > p { color: var(--mh-muted); font-size: 14px; line-height: 1.5; }
@@ -1204,7 +1237,7 @@ ul.mh-ruled { display: grid; margin-top: clamp(40px, 4vw, 56px); }
 .mh-record-card li:last-child { border-bottom: 0; }
 .mh-record-card li span { font-size: 14px; font-weight: 600; }
 .mh-record-card li em { color: var(--mh-secondary); font-size: 13px; font-style: normal; text-align: right; }
-ul.mh-record-sources { top: 74px; right: 0; display: flex; }
+ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 .mh-record-sources li { padding: 7px 13px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-pill); box-shadow: var(--mh-shadow-surface); font-size: 12px; font-weight: 600; white-space: nowrap; }
 .mh-record-sources li + li { margin-left: -8px; }
 
@@ -1214,7 +1247,6 @@ ul.mh-record-sources { top: 74px; right: 0; display: flex; }
 .mh-connect .mh-copy-block > p { color: var(--mh-on-dark-muted); }
 .mh-connect .mh-copy-block > small { margin-top: -8px; color: var(--mh-on-dark-muted); font-size: 13px; }
 .mh-connect .mh-section-link { margin-top: 12px; border-bottom-color: var(--mh-hairline-on-dark); color: var(--mh-paper); }
-.mh-connect .mh-ai-cta { margin-top: 8px; }
 
 /* Composition B - the conversation. v2 rendered all four messages in one
    bordered box, which made the transcript the tallest thing in its section.
@@ -1233,22 +1265,8 @@ ul.mh-record-sources { top: 74px; right: 0; display: flex; }
 .mh-comp-chip i { width: 6px; height: 6px; flex: none; border-radius: 50%; }
 .mh-comp-chip i.is-sage { background: var(--mh-sage); }
 
-/* The Lumo prompts were five equal pills in a column, which read as a form of
-   buttons that do nothing. A ruled list says "these are questions". */
-.mh-prompt-list { margin-top: clamp(40px, 4vw, 56px); }
-.mh-prompt-list > span { display: block; color: var(--mh-on-dark-muted); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
-.mh-prompt-list ul { margin-top: 18px; border-top: 1px solid var(--mh-hairline-on-dark); }
-.mh-prompt-list li { padding: 17px 0; border-bottom: 1px solid var(--mh-hairline-on-dark); font-size: 17px; line-height: 1.4; }
 
-/* Step 3 - the toolkit. Four groups of 3/3/2/2 in four columns ended ragged;
-   a 2x2 fills its rows (R1) and each cell carries one real product state
-   (R8). Scoped to the homepage: /job-search shares .mh-kit-grid with four
-   items in four columns, which already fills. */
-.mh-page-home .mh-kit-grid { grid-template-columns: repeat(2, 1fr); gap: clamp(32px, 3.4vw, 48px) clamp(32px, 4vw, 64px); }
-.mh-kit-col-head { display: flex; align-items: center; gap: 12px; }
-.mh-kit-col-head h3 { margin-top: 0; }
-.mh-kit-col-head svg { flex: none; }
-.mh-state-chip { margin-left: auto; padding: 6px 12px; background: var(--mh-paper-soft); border-radius: var(--mh-radius-pill); color: var(--mh-forest); font-size: 12px; font-style: normal; font-weight: 600; white-space: nowrap; }
+.mh-state-chip { padding: 6px 12px; background: var(--mh-paper-soft); border-radius: var(--mh-radius-pill); color: var(--mh-forest); font-size: 12px; font-style: normal; font-weight: 600; white-space: nowrap; }
 
 /* Composition D - the plan. The card's own "Show 2 done" row says completed
    steps exist; one of them lifts out of the stack and breaks the left edge. */
@@ -1271,18 +1289,15 @@ ul.mh-record-sources { top: 74px; right: 0; display: flex; }
      z-index still applies. */
   .mh-intro-split,
   ol.mh-steps,
-  .mh-community-cards,
-  .mh-ruled.is-two { grid-template-columns: 1fr; }
+  .mh-community-cards { grid-template-columns: 1fr; }
   .mh-steps li + li { border-top: 1px solid var(--mh-line); border-left: 0; }
-  .mh-ruled.is-questions li { grid-template-columns: 1fr; gap: 6px; }
 
   .mh-hero-comp { position: static; width: auto; margin-top: 18px; }
   .mh-hero-tracker { position: relative; bottom: auto; left: auto; width: min(272px, 88%); margin: -12px 0 0 22px; }
 
   .mh-record-comp { display: flex; flex-direction: column; align-items: flex-start; padding: 0; }
-  figure.mh-record-photo { position: relative; order: 1; width: 132px; height: 166px; margin-left: 6px; }
-  ul.mh-record-sources { position: relative; top: auto; right: auto; order: 2; margin: -18px 0 0 18px; }
-  .mh-record-card { order: 3; width: 100%; margin-top: -14px; }
+  ul.mh-record-sources { position: relative; top: auto; right: auto; order: 1; margin: 0 0 0 18px; }
+  .mh-record-card { order: 2; width: 100%; margin-top: -14px; }
 
   .mh-connect-comp { display: flex; flex-direction: column; padding-top: 0; }
   .mh-comp-ghost { position: relative; order: 1; width: 100%; max-height: 118px; }
@@ -1296,10 +1311,7 @@ ul.mh-record-sources { top: 74px; right: 0; display: flex; }
 
 @media (max-width: 560px) {
   .mh-steps h3,
-  .mh-ruled.is-questions h3 { font-size: 20px; }
   .mh-record-card { padding: 22px; }
-  .mh-kit-col-head { flex-wrap: wrap; }
-  .mh-state-chip { margin-left: 0; }
 }
 
 /* ------------------------------------------------------------------ */
@@ -1370,6 +1382,7 @@ ul.mh-record-sources { top: 74px; right: 0; display: flex; }
 @media (max-width: 1180px) {
   .mh-ctx-grid { grid-template-columns: repeat(2, 1fr); }
   .mh-kit-grid,
+  ol.mh-stage-strip,
   .mh-capabilities { grid-template-columns: repeat(2, 1fr); }
   .mh-int-grid { grid-template-columns: repeat(2, 1fr); }
   .mh-site-header { grid-template-columns: auto 1fr; }
@@ -1458,7 +1471,7 @@ ul.mh-record-sources { top: 74px; right: 0; display: flex; }
   .mh-integrations { margin-top: 40px; }
   .mh-human-photo { min-height: 560px; }
   .mh-price-deck > article { min-height: 330px; }
-  .mh-faq { min-height: 0; padding-top: 72px; padding-bottom: 72px; gap: 48px; }
+  .mh-faq { padding-top: 72px; padding-bottom: 72px; gap: 48px; }
   .mh-site-footer nav { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -1473,7 +1486,7 @@ ul.mh-record-sources { top: 74px; right: 0; display: flex; }
   .mh-ctx-grid,
   .mh-int-grid,
   .mh-kit-grid,
-  .mh-page-home .mh-kit-grid,
+  ol.mh-stage-strip,
   .mh-pro-cards { grid-template-columns: 1fr; }
   .mh-final2 h2 { font-size: 36px; }
   .mh-qblock h3 { font-size: 20px; }

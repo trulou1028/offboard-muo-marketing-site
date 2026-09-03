@@ -43,9 +43,9 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { level: 1, name: "The modern unemployment office." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "How Offboard works." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "One place that remembers your career." })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /learn more about career context/i })).toHaveAttribute("href", "/career-context");
+    expect(screen.getByRole("link", { name: /see what your career context holds/i })).toHaveAttribute("href", "/career-context");
     expect(screen.getByRole("heading", { name: "Ask anywhere. The answer is about you." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /everything you need when the next opportunity appears/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The tools you run your search with." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Losing your job creates more than one problem." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Free remembers your search. Pro puts it to work." })).toBeInTheDocument();
     // Sponsored access is the third plan card (owner 2026-09-02), not a band.
@@ -77,6 +77,44 @@ describe("Offboard marketing routes", () => {
     // The ledger row "Live integrations" governs every mention of the ChatGPT
     // and Claude connections on this page: they ship labelled beta.
     expect(within(screen.getByRole("main")).getByText(/ChatGPT and Claude connections are in beta/i)).toBeInTheDocument();
+
+    // DESIGN.md R5a: a section intro is an eyebrow, a headline, a description
+    // and at most one action pair. Nothing nested and titled, and never a
+    // second body paragraph. Scoped to this page on purpose - eight route
+    // files still violate R5a and are tracked in DESIGN.md, not fixed.
+    const copyBlocks = Array.from(document.querySelectorAll(".mh-page-home .mh-copy-block"));
+    expect(copyBlocks.length).toBeGreaterThan(0);
+    for (const block of copyBlocks) {
+      expect(block.querySelector("article"), "a titled block nested in an intro").toBeNull();
+      expect(block.querySelectorAll(":scope > p").length, "more than one description paragraph").toBeLessThanOrEqual(1);
+    }
+
+    // Each step section links out rather than trying to be the pillar page.
+    // Queried by href rather than by accessible name: this test already runs
+    // ~40 getByRole lookups, and each one computes accessible names across the
+    // whole tree, which is what pushes it toward the 5s timeout under load.
+    for (const [href, label] of [
+      ["/career-context", "See what your Career Context holds"],
+      ["/integrations", "See how Offboard Everywhere works"],
+      ["/job-search", "See what each tool does"],
+    ] as const) {
+      const link = document.querySelector(`main a[href="${href}"]`);
+      expect(link, `a link to ${href}`).not.toBeNull();
+      expect(link?.textContent).toContain(label);
+    }
+
+    // Six member questions, as a disclosure list. The first is open so it
+    // still reads beside the plan card that answers it.
+    const questions = Array.from(document.querySelectorAll(".mh-morethan details"));
+    expect(questions).toHaveLength(6);
+    expect(questions.filter((item) => item.hasAttribute("open"))).toHaveLength(1);
+    expect(questions[0].querySelector("summary")?.textContent).toBe("What do I do first?");
+
+    // Retired in this pass: the second CTA whose destination was unclear, and
+    // the prompt list /lumo already carries under the same label.
+    const mainText = screen.getByRole("main").textContent ?? "";
+    expect(mainText).not.toMatch(/ask things like/i);
+    expect(Array.from(document.querySelectorAll("main a")).map((a) => a.textContent?.trim())).not.toContain("Ask Lumo");
 
     // Retired with v3: two sections that told a story the page already told.
     expect(screen.queryByRole("heading", { name: "Your job search goes wherever you do." })).not.toBeInTheDocument();

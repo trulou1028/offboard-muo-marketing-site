@@ -655,6 +655,49 @@ export function PricingSection() {
   );
 }
 
+/* Pattern H, the disclosure list (DESIGN.md). One implementation for the five
+   route FAQs and the homepage's member questions, because the site had been
+   about to grow a second accordion.
+
+   Native <details>, no client component: the mobile menu has used the same
+   technique since plan 037, and `.marketing-homepage summary:focus-visible`
+   already carries the focus ring. The container is a <div> rather than a <ul>
+   on purpose - the stylesheet resets `ul` margin at (0,1,1), so a bare-class
+   margin on a list would be a dead declaration and e2e/reset-shadowing.spec.ts
+   would fail on six routes.
+
+   A closed answer is still in the DOM, so CopyDrift's textContent comparison
+   against COPY.md is unaffected by collapsing anything. */
+export type DisclosureItem = {
+  question: string;
+  /* The homepage's questions carry a short feature label between the question
+     and its answer; a route FAQ has only the two parts. */
+  feature?: string;
+  answer: string;
+};
+
+export function DisclosureList({
+  items,
+  openFirst = false,
+}: {
+  items: readonly DisclosureItem[];
+  openFirst?: boolean;
+}) {
+  return (
+    <div className="mh-disclosure-list" data-reveal="">
+      {items.map(({ question, feature, answer }, index) => (
+        <details className="mh-disclosure" key={question} open={openFirst && index === 0}>
+          <summary><h3>{question}</h3></summary>
+          <div>
+            {feature ? <span className="mh-qblock-feature">{feature}</span> : null}
+            <p>{answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  );
+}
+
 export function FaqSection({
   title,
   items,
@@ -665,7 +708,7 @@ export function FaqSection({
   return (
     <section className="mh-faq mh-section" id="faq" aria-labelledby="faq-title">
       <div><span className="mh-kicker">Good questions</span><h2 id="faq-title">{title}</h2></div>
-      <div className="mh-faq-list" data-reveal="">{items.map(([question, answer]) => <article key={question}><header><h3>{question}</h3></header><p>{answer}</p></article>)}</div>
+      <DisclosureList items={items.map(([question, answer]) => ({ question, answer }))} />
     </section>
   );
 }

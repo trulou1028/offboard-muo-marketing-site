@@ -18,7 +18,16 @@ test.describe("Offboard marketing site", () => {
     await expect(page.getByRole("heading", { name: "How Offboard works." })).toBeVisible();
     await expect(page.getByRole("heading", { name: /one place that remembers your career/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /ask anywhere\. the answer is about you/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /everything you need when the next opportunity appears/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "The tools you run your search with." })).toBeVisible();
+
+    // Round 4: the member questions are a disclosure list, first item open.
+    // Closed answers stay in the DOM, so this asserts the disclosure state
+    // rather than text presence.
+    const questions = page.locator(".mh-morethan details");
+    await expect(questions).toHaveCount(6);
+    await expect(questions.first()).toHaveAttribute("open", "");
+    await questions.nth(1).locator("summary").click();
+    await expect(questions.nth(1)).toHaveAttribute("open", "");
     await expect(page.getByRole("heading", { name: /losing your job creates more than one problem/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /you don't need another place to start over/i })).toBeVisible();
     await expect(page.getByRole("tablist", { name: "Job search stages" })).toHaveCount(0);
@@ -297,7 +306,7 @@ test.describe("focus indicator contrast", () => {
         }
         return "none";
       }
-      return Array.from(document.querySelectorAll("main a, main button, header a, header summary")).map(
+      return Array.from(document.querySelectorAll("main a, main button, main summary, header a, header summary")).map(
         (el) => ({
           ring: getComputedStyle(el).getPropertyValue("--mh-focus-ring").trim().toLowerCase(),
           surface: surfaceOf(el.parentElement),

@@ -358,8 +358,9 @@ as unfinished even though every individual piece was correct.
 
 **R1 · No orphan cells.** A repeating grid must fill its last row. If the
 item count doesn't divide by the column count, change the layout, not the
-count: a ruled list (Pattern C), a lead-plus-pair (Pattern B), or a
-stepped strip (Pattern E). `repeat(3, 1fr)` with 5 items, or
+count: a ruled list (Pattern C), a lead-plus-pair (Pattern B), a stepped
+strip (Pattern E), or a disclosure list (Pattern H), which takes any count
+at all and is the escape hatch for an awkward one. `repeat(3, 1fr)` with 5 items, or
 `repeat(2, 1fr)` with 3, is a defect. Enforced by
 `e2e/composition.spec.ts`, which walks every route, finds every grid whose
 tracks are equal, and fails on a remainder.
@@ -384,6 +385,23 @@ before the build starts.
 in the right half (a visual, a link cluster, a lead), or it becomes a
 two-column intro (`.mh-intro-split`: headline left, lead right). An empty
 right half beside an intro is a defect above 1180px.
+
+**R5a · An intro is an intro.** A section intro is an eyebrow, one
+headline, one description paragraph, and at most one action pair (a filled
+CTA and/or a `.mh-section-link`), plus a ledger-required `<small>` where one
+applies. It never nests another titled block: no `<article>`, no second
+`<h3>`, no second body paragraph, no list. Content that needs its own title
+is a row of the section's list, not part of its intro. **Headlines say what
+the section is about** — an eyebrow may be plain and a headline evocative,
+but between them a reader must know what they are looking at before the
+description.
+
+*Honest state, 2026-09-02: the homepage satisfies R5a and
+`MarketingHome.test.tsx` guards it there. Seventeen copy blocks across eight
+route files still violate it, and six intro classes compete for one job
+(`.mh-copy-block`, `.mh-intro-split`, `.mh-section-heading`,
+`.mh-route-content-heading`, `.mh-verified-heading`, `.mh-pricing-heading`).
+That sweep is tracked, not done.*
 
 **R6 · Photos explain or leave.** At most one photo per section on
 jobseeker pages, and it sits beside product UI or the question it
@@ -423,13 +441,12 @@ section primary is forest; on dark bands it is lime.
 
 **R10 · Mobile budget.** At 390 wide, no homepage section exceeds
 **2,600px** and the page total stays under **15,500px**. Enforced by
-`e2e/composition.spec.ts`. *(Both numbers are measured, not aspired to.
-Plan 039 proposed a 1,400px section budget; the rebuilt page's tallest
-section is "More than a job search" at 2,409px, which is six questions
-and a composition and does not shrink without cutting content. The page
+`e2e/composition.spec.ts`. *(Both numbers are measured, not aspired to. The page
 total is part of the rule because the per-section number alone would not
-have caught what prompted it: the v2 homepage ran 17,096px with a
-2,896px section. The rebuild measures 14,404px with a 2,409px maximum.)*
+have caught what prompted it: the v2 homepage ran 17,096px with a 2,896px
+section. Measured at 390 after round 4: **12,859px total, tallest section
+2,016px** ("More than a job search"). The budget still has real headroom
+and is deliberately not being lowered in the same pass that earned it.)*
 
 ### Pattern catalogue
 
@@ -440,11 +457,12 @@ minting a grid:
 | --- | --- | --- |
 | A · Split | Copy one side, visual the other | `.mh-split`, `.mh-hero2` |
 | B · Lead + pair | First item spans the full width, the rest sit as a pair under it. Fixes any odd count in a 2-column grid | `.mh-route-card-grid.is-lead-pair` |
-| C · Ruled list | Rows with hairlines, title left, body and optional link right. Any count | `.mh-ruled`, `.mh-community-rows` |
+| C · Ruled list | Rows with hairlines, title left, body and optional link right. Any count | `ol.mh-five-steps-rows` |
 | D · Inset with ruled aside | Dark inset, copy left, ruled rows right | `.mh-sponsor-inset` |
 | E · Stepped strip | Numbered items in one row with hairline rules, 3 or 4 | `.mh-steps` |
 | F · Definition rows | `<dl>`, label column and value column | `.mh-company-facts` |
 | G · Two-column intro | Headline left, lead right, no grid | `.mh-intro-split` |
+| H · Disclosure list | Questions the reader opens one at a time. Any count, and closed answers stay in the DOM | `.mh-disclosure-list` |
 
 ### Composition primitives (R2)
 
