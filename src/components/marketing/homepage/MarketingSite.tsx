@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarDays, Check, GraduationCap, LockKeyhole } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { MarketingMobileMenu, MarketingNav } from "./MarketingNav";

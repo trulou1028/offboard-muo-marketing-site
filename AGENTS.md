@@ -70,8 +70,20 @@ supersedes the app repo's strategy docs.
 
 ## Definition of done — you run the checks, unprompted
 
-1. **Always:** `npm test` and `npm run build` green. Never report work as done
-   on a red suite; if something fails, say so with the output.
+1. **Always:** `npm test`, `npm run lint`, `npm run lint:css` and
+   `npm run build` green. Never report work as done on a red suite; if
+   something fails, say so with the output.
+
+   *`npm run lint` is on this list because it was missing from it. CI's
+   `test-and-build` job runs it, so from the day the vendored design-system
+   export landed (3f96385) that job failed on `main` and on every branch,
+   while agent after agent reported "all green" off `npm test` and
+   `npm run build` alone. A check nobody runs locally and everybody has
+   learned to ignore in CI is worse than no check. Fixed 2026-09-03.*
+
+   **Run what CI runs, not a subset of it.** Before reporting done, read
+   `.github/workflows/ci.yml` and confirm every command in it has been run
+   or is named as one you could not run.
 2. **Touched routes, nav, redirects, or the intake form?** → `npm run e2e` too.
 3. **Visual change?** → verify it actually renders, with no console errors, at
    desktop AND mobile width. Use whatever browser tooling your harness gives

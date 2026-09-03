@@ -5,7 +5,7 @@ import type { ReactElement } from "react";
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { COMPANY_PAGES, getCompanyPage } from "@/content/companies";
+import { COMPANY_PAGES } from "@/content/companies";
 import { buildResourceSections } from "@/content/resources/registry";
 
 import { MarketingCareerContext } from "./MarketingCareerContext";
@@ -15,7 +15,6 @@ import { MarketingLayoffSupport } from "./MarketingLayoffSupport";
 import { MarketingLumo } from "./MarketingLumo";
 import { MarketingPrivacySecurity } from "./MarketingPrivacySecurity";
 import { MarketingCommunities } from "./MarketingCommunities";
-import { MarketingCompanies } from "./MarketingCompanies";
 import { MarketingCompanyPage } from "./MarketingCompanyPage";
 import { MarketingWorkforce } from "./MarketingWorkforce";
 import MarketingHome from "./MarketingHome";

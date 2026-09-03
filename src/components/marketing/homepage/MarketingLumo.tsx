@@ -15,7 +15,6 @@ import {
   LumoMark,
   MarketingShell,
   PageHero,
-  SIGN_UP_URL,
 } from "./MarketingSite";
 
 /* Lumo pillar page (plan 029). Lumo already appears on the homepage,
