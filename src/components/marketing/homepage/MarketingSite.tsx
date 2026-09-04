@@ -433,7 +433,7 @@ const FIVE_STEPS = [
   {
     title: "Close it, and make it count",
     body: "Interview prep and practice, a paperwork review before you sign, and when you land: mark it, keep your record, and pass what you learned back.",
-    tag: "Interview prep · Paperwork review",
+    tag: "Interview Prep · Paperwork Review",
   },
 ] as const;
 
@@ -465,9 +465,9 @@ const TOOLKIT_FLAGSHIP_CHIPS = ["Ghost check", "Fit read", "Tailored materials",
 const TOOLKIT_CARDS: Array<{ title: string; body: string; image?: string; alt?: string }> = [
   { title: "Resume Tailoring", body: "Build and tailor resumes from your real history, ready for the role in front of you.", image: "/marketing/homepage/renders/toolkit-resumes.webp", alt: "Product render of the Resume Tailoring view, a resume tailored into role-specific cards" },
   { title: "Interview prep & practice", body: "Drills grounded in the role, the company, and your strongest stories.", image: "/marketing/homepage/renders/toolkit-interviews.webp", alt: "Product render of interview prep, two message cards exchanging practice questions" },
-  { title: "Application tracker", body: "Every application, stage, and follow-up stays current without extra busywork.", image: "/marketing/homepage/renders/toolkit-applications.webp", alt: "Product render of the application tracker, cards filed by stage" },
+  { title: "Application Tracker", body: "Every application, stage, and follow-up stays current without extra busywork.", image: "/marketing/homepage/renders/toolkit-applications.webp", alt: "Product render of the application tracker, cards filed by stage" },
   { title: "Ghost Job Checker", body: "Flags fake or stale listings before you waste an application on them." },
-  { title: "Paperwork review", body: "A read on your severance or offer paperwork before you sign anything." },
+  { title: "Paperwork Review", body: "A read on your severance or offer paperwork before you sign anything." },
   { title: "Runway calculator", body: "See how long your money lasts and which deadlines change the math." },
   { title: "Funded Training", body: "Search state-approved programs that may be paid for while you train." },
   { title: "Ask Lumo", body: "An AI guide that works from your plan, your benefit facts, and your search." },
