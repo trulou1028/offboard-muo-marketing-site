@@ -1362,6 +1362,14 @@ also the most claim-sensitive page on the site.
   rule). The ledger's "Appears on" column was updated for both rows.
 - **"Outplacement" must not appear here** (jobseeker narrative copy), and
   the page is in the CopyDrift absence list.
+- **No benefit or legal day counts, owner decision 2026-09-04 (plan 041).**
+  The app knows the COBRA election window, the lag before a first payment,
+  and the ADEA consideration and revocation windows. None of them render on
+  this site. The marketing site does not get that granular: every sentence
+  that would carry one is qualitative instead, and no ledger row was added
+  for any of them. This is the same call the owner made for the homepage
+  plan card on 2026-08-26. `CopyDrift.test.tsx` enforces it - the page must
+  not say `60 days`, `21 days`, `45 days`, `7 days`, or `2-3 weeks`.
 
 **The `~$12,000` CalJOBS hook ships here (owner approval 2026-09-01, plan
 033).** It left the homepage in v2 and this page is its documented home. It
@@ -1377,41 +1385,72 @@ decision, so it was not resurrected.
 
 - Kicker: `Layoff and benefits`
 - H1: `Losing your job creates a lot of problems at once.`
-- Body: `The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in order.`
-- CTA: `Build my free transition plan` (primary)
+- Body: `The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in the order that matters to you.`
+- CTA: `Get started free` (sitewide primary, owner decision 2026-09-03)
 
-### The questions underneath
+*Body last clause changed by plan 041: it said "take them in order", while
+the product's own path card says "Do them in any order." The page and the
+app now agree.*
 
-- Kicker: `What people actually ask`
-- H2: `Six questions, in the order they usually arrive.`
-- Question blocks:
-  1. `What do I do first?` — **Your transition plan** — `Tell Offboard what happened and it organizes what needs attention now, what can wait, and what comes next.`
-  2. `What am I eligible for?` — **Unemployment benefits** — `Plain-language steps toward the official process in your state, with the deadlines that matter surfaced early.`
-  3. `How do I keep health insurance?` — **Health coverage** — `Understand the windows you are inside, and what your options are before one of them closes.`
-  4. `Is there funding for training?` — **Workforce and retraining programs** — `Find state-approved programs that may be paid for while you train, with the official source for each one.`
-  5. `How long can I afford to search?` — **Runway** — `See how long your money lasts, and which decisions change that number.`
-  6. `How do I find another job?` — **The search itself** — `The tracker, the packets, the interview prep, and the record behind them.`
+### The first week *(plan 041)*
 
-### What Offboard does about it
+- Kicker: `The first week`
+- H2: `Before the search, protect yourself and your paperwork.`
+- Body: `The first days after a layoff decide more than people expect. Work logins disappear, notices arrive with short windows, and the documents you will need later are easiest to get now. Offboard starts from your state, your dates, and what actually happened, not from a template.`
+- Composition (R2): the `Your Path` card as the base, the runway view as a satellite.
+  - Card heading `Your Path` · lede `The steps that fit your situation. Do them in any order.` · stage row `Protect the first week` / `5 left`
+  - Steps, titles verbatim from the app (`layoffPlanItems.ts`, `stages.ts`), no sub-lines: `Write down your key dates` · `Understand your COBRA / health insurance options` · `Secure your accounts and access` · `Save all layoff documents in one place` · `Request your personnel file`
+  - Satellite, a labelled sample: `Runway · sample` / `7 months`
 
-- Kicker: `How it helps`
-- H2: `One plan, in the order that matters.`
-- Capabilities:
-  1. `Your situation, not a template` — `The plan starts from your state, your dates, and what actually happened.`
-  2. `Deadlines surfaced early` — `The clocks that expire quietly are the expensive ones. Offboard puts them in front of you.`
-  3. `Official sources, every time` — `Every program links to the official source that decides it. You are never asked to take our word for it.`
-  4. `The search stays connected` — `The money side and the job side live in one place instead of two.`
+### Paperwork Review *(plan 041)*
+
+- Kicker: `Paperwork Review` (the canonical tool name, see the glossary)
+- H2: `Read the agreement before you sign it.`
+- Body: `Severance agreements, offers, PIPs, and NDAs are written for the company that wrote them. Offboard gives you a plain-English breakdown of the deadlines, the money, and the parts worth a second look, so you know what you are agreeing to.`
+- Small print (required, never shipped without it): `AI guidance, not legal advice. Offboard does not replace qualified legal, tax, financial, healthcare, or benefits guidance.`
+- Composition: a review summary card, `Severance agreement` / `Reviewed`, with rows `Signing deadline` — `On your calendar` · `Release of claims` — `What you give up` · `Health coverage` — `COBRA notice enclosed` · `Equity treatment` — `Flagged to check`. Satellite chip `Plain English · every clause`.
+- **Every value in that card is a state word, never a date or a day count.** See the claim discipline note above.
+
+### The money side *(plan 041, replaces "The questions underneath" and "What Offboard does about it")*
+
+- Kicker: `The money side`
+- H2: `What you may be owed, and what it takes to keep it.`
+- Lead: `Benefits, health coverage, funded training, and runway are four clocks running at once. Offboard tracks them together and tells you which one needs you next.`
+- Ruled rows (Pattern C, no numerals):
+  1. `File early, then keep certifying.` — `Payments do not start the day you are laid off, and a missed weekly certification pauses them. It takes far longer to fix than to prevent.`
+  2. `Keep health coverage without a gap.` — `COBRA is not your only option, and the decision has a deadline. Offboard puts that date in front of you with the alternatives beside it.`
+  3. `Training money runs on its own clock.` — `State-approved programs may be paid for while you train, and that clock is not your benefits clock. Every program links to the official source that decides it.`
+  4. `Know how long you can search.` — `The runway view turns your savings, severance, and benefits into a number of months, and shows which decisions change it.`
+
+*What the two retired sections said is all still here: "your situation, not a
+template" is in the first-week body, "deadlines surfaced early" is rows 1 and
+2, "official sources, every time" is row 3, and "the search stays connected"
+is the "And then the job" band. The sixth question card, `How do I find
+another job?`, is deleted outright: the job search has its own band on this
+page and its own pillar page.*
 
 ### The CalJOBS hook
 
-Placed between "The questions underneath" and "What Offboard does about
-it". Approved v7 copy, shipped verbatim with the small print.
+Placed after "The money side". Approved v7 copy, shipped verbatim with the
+small print.
 
 - Kicker: `One example`
 - H2: `There is a deadline worth roughly $12,000 that most people have never heard of.`
 - Body: `If you were laid off in California, you may be able to keep your unemployment benefits while you train full-time, including an extension worth roughly $12,000. But only if you contact EDD before week 16 of your benefit payments. Most people have never heard of it. Offboard watches that clock for you.`
 - Small print (required, never shipped without it): `Amounts and timing vary by situation. We never promise funding, we show you the exact path to find out.`
 - Sample card (labelled a sample, never live data): `Benefit payments` / `Sample · CA` / `Week 12 of 16` / `Now · week 12` / `Deadline · week 16` / `~$12,000 at stake` / `4 weeks left to contact EDD`
+
+### Been out a while *(plan 041)*
+
+Placed after the CalJOBS hook, not before it: the hook is a week-16 example,
+and "you may be past that" immediately beforehand would undercut it. The
+app's intake has a whole branch for this reader (`I've been out a while`) and
+the page had nothing for them.
+
+- Kicker: `Not week one?`
+- H2: `Been out a while? Start with what you are still owed.`
+- Body: `Benefits may be running low or gone. That does not close the door on funded training, or on the rest of the plan. Tell Offboard where you are now and it starts from there, not from the day you were laid off.`
+- Section link: `Start where you are` → sign-up
 
 ### Verified facts (shared component)
 
@@ -1431,8 +1470,10 @@ the three columns including `4,000+` state-approved California programs.
 
 - Kicker: `And then the job`
 - H2: `When the paperwork is handled, the search is still there.`
-- Body: `Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other.`
+- Body: `Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other. The tracker, the Application Packets, the interview prep, and the record behind them are all here when you are ready.`
 - Section link: `See how Offboard works` → `/how-it-works`
+
+*Second sentence added by plan 041: it carries what the deleted sixth question card said, on the band where the search actually belongs.*
 
 ### Final CTA (shared component, overridden copy)
 

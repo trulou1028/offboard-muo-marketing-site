@@ -121,6 +121,47 @@ describe("verified-facts ledger matches shipped copy", () => {
     expect(renderedText(<MarketingHome />)).not.toContain("$12,000");
   });
 
+  // Plan 041 makes permanent the throwaway spec plan 030 described in prose.
+  // /layoff-support is the most claim-sensitive page on the site, and it is
+  // now also the longest, so the guard lives in the suite rather than in a
+  // paragraph telling a future executor to re-create it.
+  describe("/layoff-support claim discipline (plan 030 spec, made permanent by 041)", () => {
+    it("ships all three required safeguard lines", () => {
+      const text = renderedText(<MarketingLayoffSupport />);
+      expect(text).toContain("We never promise funding");
+      expect(text).toContain("Offboard is not a government agency");
+      expect(text).toContain("AI guidance, not legal advice");
+    });
+
+    it("promises nothing about funding, eligibility, or outcome", () => {
+      const text = renderedText(<MarketingLayoffSupport />);
+      for (const banned of [/you qualify/i, /you are eligible/i, /we will get you/i, /guarantee/i]) {
+        expect(text).not.toMatch(banned);
+      }
+    });
+
+    // Owner decision 2026-09-04: the marketing site does not get granular
+    // about benefit or legal deadlines. The app knows every one of these
+    // figures; none of them belong on a marketing page without a ledger row,
+    // and the owner's call was to cut them rather than add the rows. Same
+    // call as the homepage plan card, 2026-08-26. COPY.md § 13 records it.
+    it("carries no benefit or legal day count", () => {
+      const text = renderedText(<MarketingLayoffSupport />);
+      for (const banned of [/\b60 days\b/i, /\b21 days\b/i, /\b45 days\b/i, /\b7 days\b/i, /\b2-3 weeks\b/i, /\b2 to 3 weeks\b/i, /\b14 days\b/i]) {
+        expect(text).not.toMatch(banned);
+      }
+    });
+
+    // The page's own numbers are exactly two ledger-backed things: the
+    // CalJOBS hook and whatever VerifiedFactsStrip renders. This asserts the
+    // rewrite did not quietly reintroduce the search as a headline topic.
+    it("keeps the job search to its own band, not the benefits sections", () => {
+      const text = renderedText(<MarketingLayoffSupport />);
+      expect(text).toContain("When the paperwork is handled, the search is still there.");
+      expect(text).not.toContain("How do I find another job?");
+    });
+  });
+
   // Which assistants and tools are connectable is a claim, not decoration: the
   // grid and the ledger row have to agree, including the beta labelling the
   // owner asked for (2026-09-01).
