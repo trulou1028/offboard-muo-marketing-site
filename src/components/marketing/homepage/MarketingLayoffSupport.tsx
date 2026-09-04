@@ -4,50 +4,165 @@ import {
   FinalCta,
   MarketingShell,
   PageHero,
+  SIGN_UP_URL,
   VerifiedFactsStrip,
 } from "./MarketingSite";
 
-/* Layoff & Benefits pillar page (plan 030). The strategy doc calls this the
-   strategically important one: without it the product pages drift toward an
-   AI job-search tool and away from the modern unemployment office.
+/* Layoff & Benefits pillar page (plan 030, rebuilt by plan 041). The strategy
+   doc calls this the strategically important one: without it the product
+   pages drift toward an AI job-search tool and away from the modern
+   unemployment office.
 
-   It is also the most claim-sensitive page on the site. Every number here
+   Plan 041 (2026-09-04) rebuilt the middle of the page. It used to be six
+   one-sentence question cards - one of which was the job search - followed by
+   four tiles restating the hero. The app ships far more stabilization
+   substance than that showed: a first-week checklist, Paperwork Review, the
+   runway view, and a path for people who have been out a while. Those are now
+   the page.
+
+   It is still the most claim-sensitive page on the site. Every number here
    comes from an existing verified-facts ledger row via the shared
-   VerifiedFactsStrip; the page promises no funding, eligibility, or amount;
-   and the independence disclaimer gets its own band. Copy: COPY.md § 13. */
+   VerifiedFactsStrip or the CalJOBS hook; the page promises no funding,
+   eligibility, or amount; and the independence disclaimer gets its own band.
+   Copy: COPY.md § 13.
 
-const QUESTIONS = [
-  ["What do I do first?", "Your transition plan", "Tell Offboard what happened and it organizes what needs attention now, what can wait, and what comes next."],
-  ["What am I eligible for?", "Unemployment benefits", "Plain-language steps toward the official process in your state, with the deadlines that matter surfaced early."],
-  ["How do I keep health insurance?", "Health coverage", "Understand the windows you are inside, and what your options are before one of them closes."],
-  ["Is there funding for training?", "Workforce and retraining programs", "Find state-approved programs that may be paid for while you train, with the official source for each one."],
-  ["How long can I afford to search?", "Runway", "See how long your money lasts, and which decisions change that number."],
-  ["How do I find another job?", "The search itself", "The tracker, the packets, the interview prep, and the record behind them."],
+   OWNER DECISION 2026-09-04, and the reason this file carries no day counts:
+   the marketing site does not get granular about benefit or legal deadlines.
+   The real figures behind these sections exist in the app (COBRA election
+   window, first-payment lag, ADEA consideration and revocation windows) and
+   are deliberately NOT rendered here. Every sentence that would have carried
+   one is qualitative instead. This is the same call the owner made for the
+   homepage plan card on 2026-08-26 - see the note above PLAN_PREVIEW_STEPS in
+   MarketingSite.tsx. Do not "improve" these sentences by adding the numbers
+   back; that is a claim the ledger does not carry. */
+
+/* Stage 1 of the app's path, titles verbatim from `layoffPlanItems.ts` /
+   `stages.ts` on `lumo-plan-builder` origin/main. Titles only: the app's
+   sub-lines for the last two steps are not in COPY.md, and this card is a
+   checklist, not a second copy block. */
+const FIRST_WEEK_STEPS = [
+  "Write down your key dates",
+  "Understand your COBRA / health insurance options",
+  "Secure your accounts and access",
+  "Save all layoff documents in one place",
+  "Request your personnel file",
 ] as const;
 
-const HOW_IT_HELPS = [
-  ["Your situation, not a template", "The plan starts from your state, your dates, and what actually happened."],
-  ["Deadlines surfaced early", "The clocks that expire quietly are the expensive ones. Offboard puts them in front of you."],
-  ["Official sources, every time", "Every program links to the official source that decides it. You are never asked to take our word for it."],
-  ["The search stays connected", "The money side and the job side live in one place instead of two."],
+/* Paperwork Review, the canonical name (COPY.md § Tool glossary, app-owned by
+   `legalReviewCopy.ts`). Every value is a state word, never a deadline. */
+const REVIEW_ROWS = [
+  ["Signing deadline", "On your calendar"],
+  ["Release of claims", "What you give up"],
+  ["Health coverage", "COBRA notice enclosed"],
+  ["Equity treatment", "Flagged to check"],
 ] as const;
 
-function Questions() {
+const BENEFIT_ROWS = [
+  ["File early, then keep certifying.", "Payments do not start the day you are laid off, and a missed weekly certification pauses them. It takes far longer to fix than to prevent."],
+  ["Keep health coverage without a gap.", "COBRA is not your only option, and the decision has a deadline. Offboard puts that date in front of you with the alternatives beside it."],
+  ["Training money runs on its own clock.", "State-approved programs may be paid for while you train, and that clock is not your benefits clock. Every program links to the official source that decides it."],
+  ["Know how long you can search.", "The runway view turns your savings, severance, and benefits into a number of months, and shows which decisions change it."],
+] as const;
+
+/* Composition A (R2): the path card, with the runway view lifted out as a
+   satellite. The runway figure is a labelled sample, exactly as the money
+   clock on this page is - sample product output, not a claim about anyone's
+   situation. */
+function FirstWeekComposition() {
   return (
-    <section className="mh-morethan mh-section" aria-labelledby="questions-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker is-sand">What people actually ask</span>
-        <h2 id="questions-title">Six questions, in the order they usually arrive.</h2>
+    <div className="mh-comp mh-first-week-comp">
+      <div className="mh-ui-card mh-plan-preview mh-comp-base" aria-label="Example Offboard path, the first week">
+        <div className="mh-ui-card-heading"><h3>Your Path</h3></div>
+        <p className="mh-plan-lede">The steps that fit your situation. Do them in any order.</p>
+        <div className="mh-plan-stage"><strong>Protect the first week</strong><span>5 left</span></div>
+        <ul className="mh-plan-steps is-checklist">
+          {FIRST_WEEK_STEPS.map((title) => (
+            <li key={title}><i aria-hidden="true" /><strong>{title}</strong></li>
+          ))}
+        </ul>
       </div>
-      <div className="mh-qgrid" data-reveal="">
-        {QUESTIONS.map(([question, feature, body]) => (
-          <article className="mh-qblock" key={question}>
-            <h3>{question}</h3>
-            <span className="mh-qblock-feature">{feature}</span>
+      <div className="mh-comp-satellite mh-runway-chip" aria-label="Sample runway estimate">
+        <span>Runway · sample</span>
+        <strong>7 months</strong>
+      </div>
+    </div>
+  );
+}
+
+function FirstWeek() {
+  return (
+    <section className="mh-first-week mh-section" aria-labelledby="first-week-title">
+      <div className="mh-split">
+        <div className="mh-copy-block">
+          <span className="mh-kicker is-sand">The first week</span>
+          <h2 id="first-week-title">Before the search, protect yourself and your paperwork.</h2>
+          <p>The first days after a layoff decide more than people expect. Work logins disappear, notices arrive with short windows, and the documents you will need later are easiest to get now. Offboard starts from your state, your dates, and what actually happened, not from a template.</p>
+        </div>
+        <FirstWeekComposition />
+      </div>
+    </section>
+  );
+}
+
+/* Composition A again, mirrored above 900px so the pair does not read as one
+   repeated unit (R4). DOM order stays copy-first for reading and screen
+   reader order; the swap is `order` in the stylesheet. */
+function PaperworkComposition() {
+  return (
+    <div className="mh-comp mh-review-comp">
+      <div className="mh-ui-card mh-review-card mh-comp-base" aria-label="Example Paperwork Review summary">
+        <div className="mh-review-head">
+          <strong>Severance agreement</strong>
+          <b>Reviewed</b>
+        </div>
+        <ul>
+          {REVIEW_ROWS.map(([label, value]) => (
+            <li key={label}><span>{label}</span><em>{value}</em></li>
+          ))}
+        </ul>
+      </div>
+      <div className="mh-comp-satellite mh-comp-chip"><i className="is-sage" aria-hidden="true" />Plain English · every clause</div>
+    </div>
+  );
+}
+
+function Paperwork() {
+  return (
+    <section className="mh-paperwork mh-section" aria-labelledby="paperwork-title">
+      <div className="mh-split">
+        <div className="mh-copy-block">
+          <span className="mh-kicker">Paperwork Review</span>
+          <h2 id="paperwork-title">Read the agreement before you sign it.</h2>
+          <p>Severance agreements, offers, PIPs, and NDAs are written for the company that wrote them. Offboard gives you a plain-English breakdown of the deadlines, the money, and the parts worth a second look, so you know what you are agreeing to.</p>
+          <small>AI guidance, not legal advice. Offboard does not replace qualified legal, tax, financial, healthcare, or benefits guidance.</small>
+        </div>
+        <PaperworkComposition />
+      </div>
+    </section>
+  );
+}
+
+/* Pattern C, a ruled list. Replaces the six question cards and the four
+   "How it helps" tiles: those two sections between them said this in
+   fourteen sentences, one of which was about the job search. */
+function Benefits() {
+  return (
+    <section className="mh-benefits mh-section" aria-labelledby="benefits-title">
+      <div className="mh-intro-split">
+        <div>
+          <span className="mh-kicker">The money side</span>
+          <h2 id="benefits-title">What you may be owed, and what it takes to keep it.</h2>
+        </div>
+        <p>Benefits, health coverage, funded training, and runway are four clocks running at once. Offboard tracks them together and tells you which one needs you next.</p>
+      </div>
+      <ol className="mh-benefit-rows" data-reveal="">
+        {BENEFIT_ROWS.map(([title, body]) => (
+          <li key={title}>
+            <strong>{title}</strong>
             <p>{body}</p>
-          </article>
+          </li>
         ))}
-      </div>
+      </ol>
     </section>
   );
 }
@@ -86,20 +201,22 @@ function HookBand() {
   );
 }
 
-function HowItHelps() {
+/* Placed after the hook, not before it: the hook is a week-16 example, and
+   "you may be past that" immediately beforehand would undercut it. The app's
+   intake has a whole branch for this reader ("I've been out a while") and the
+   page had nothing for them. */
+function StillOwed() {
   return (
-    <section className="mh-ctx mh-section" aria-labelledby="helps-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">How it helps</span>
-        <h2 id="helps-title">One plan, in the order that matters.</h2>
-      </div>
-      <div className="mh-capabilities" data-reveal="">
-        {HOW_IT_HELPS.map(([title, body]) => (
-          <div className="mh-capability" key={title}>
-            <h3>{title}</h3>
-            <p>{body}</p>
-          </div>
-        ))}
+    <section className="mh-still-owed mh-section" aria-labelledby="still-owed-title">
+      <div className="mh-intro-split">
+        <div>
+          <span className="mh-kicker">Not week one?</span>
+          <h2 id="still-owed-title">Been out a while? Start with what you are still owed.</h2>
+        </div>
+        <div>
+          <p>Benefits may be running low or gone. That does not close the door on funded training, or on the rest of the plan. Tell Offboard where you are now and it starts from there, not from the day you were laid off.</p>
+          <a className="mh-section-link" href={SIGN_UP_URL}>Start where you are <ArrowRight aria-hidden="true" /></a>
+        </div>
       </div>
     </section>
   );
@@ -126,7 +243,7 @@ function ThenTheSearch() {
       <div className="mh-copy-block">
         <span className="mh-kicker">And then the job</span>
         <h2 id="then-search-title">When the paperwork is handled, the search is still there.</h2>
-        <p>Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other.</p>
+        <p>Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other. The tracker, the Application Packets, the interview prep, and the record behind them are all here when you are ready.</p>
         <Link className="mh-section-link" href="/how-it-works">See how Offboard works <ArrowRight aria-hidden="true" /></Link>
       </div>
     </section>
@@ -140,14 +257,16 @@ export function MarketingLayoffSupport() {
         <PageHero
           kicker="Layoff and benefits"
           title="Losing your job creates a lot of problems at once."
-          body="The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in order."
+          body="The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in the order that matters to you."
           current="layoff-support"
           aside={false}
           cta="Get started free"
         />
-        <Questions />
+        <FirstWeek />
+        <Paperwork />
+        <Benefits />
         <HookBand />
-        <HowItHelps />
+        <StillOwed />
         <VerifiedFactsStrip />
         <StraightAnswers />
         <ThenTheSearch />

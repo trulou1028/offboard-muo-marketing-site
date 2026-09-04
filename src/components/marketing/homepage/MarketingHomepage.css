@@ -1097,6 +1097,63 @@ small.mh-route-hero-footnote { display: block; max-width: 60ch; margin-top: 18px
 .mh-money-clock-ends { display: flex; justify-content: space-between; color: var(--mh-on-dark-muted); font-size: 12px; }
 .mh-money-clock-footer { display: flex; justify-content: space-between; gap: 16px; padding-top: 16px; border-top: 1px solid var(--mh-hairline-on-dark); font-size: 14px; font-weight: 650; }
 
+/* ------------------------------------------------------------------ */
+/* Layoff & Benefits stabilization sections (plan 041). Three new bands  */
+/* in the middle of /layoff-support: the first week, Paperwork Review,   */
+/* and the benefits rows, plus a short "been out a while" band.          */
+/* Band order across the page is deep, sand, paper, white, forest, mist, */
+/* white, forest, mist, deep - no two adjacent bands share a background. */
+/* ------------------------------------------------------------------ */
+
+.mh-first-week { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-sand); }
+
+/* Composition A. The path card is the base; the runway view breaks its
+   bottom-left edge. The runway figure is a labelled sample, the same
+   contract the money-clock card on this page runs under. */
+/* The satellite is 73px tall and anchors to the bottom of this box, so the
+   padding is what decides how far it breaks the card's edge: overlap =
+   satellite height - padding. 52px puts it at 21px, inside DESIGN.md's
+   12-32px range, and clear of the card's last checklist row. Changing the
+   card's bottom padding without changing this number will clip that row. */
+.mh-first-week-comp { padding-bottom: 52px; }
+.mh-plan-steps.is-checklist li { grid-template-columns: 18px minmax(0, 1fr); padding: 14px 0; }
+.mh-plan-steps.is-checklist li:last-child { padding-bottom: 0; border-bottom: 0; }
+.mh-runway-chip { bottom: 0; left: -34px; display: flex; flex-direction: column; gap: 2px; padding: 14px 18px; background: var(--mh-white); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-overlay); }
+.mh-runway-chip span { color: var(--mh-muted); font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+.mh-runway-chip strong { font-family: var(--mh-font-display); font-size: 24px; font-weight: 500; letter-spacing: -.02em; line-height: 1.1; }
+
+/* Mirrored above 900px so two consecutive split-with-composition sections
+   do not read as one repeated unit (DESIGN.md R4). DOM order stays
+   copy-first, so reading and screen-reader order are unchanged. */
+.mh-paperwork { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
+.mh-paperwork .mh-split > .mh-copy-block { order: 2; }
+.mh-paperwork .mh-split > .mh-comp { order: 1; }
+/* No padding-bottom here on purpose: `.mh-comp-chip` already carries
+   `bottom: -18px`, which is the edge break. Adding padding under the card
+   pushes the chip clear of it and the satellite stops being a satellite. */
+.mh-review-comp { position: relative; }
+.mh-review-card { display: flex; flex-direction: column; gap: 18px; padding: 28px; }
+.mh-review-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.mh-review-head strong { font-family: var(--mh-font-display); font-size: 22px; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; }
+.mh-review-head b { padding: 5px 10px; background: var(--mh-paper-soft); border-radius: var(--mh-radius-pill); color: var(--mh-forest); font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+.mh-review-card ul { border-top: 1px solid var(--mh-line); }
+.mh-review-card li { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-review-card li:last-child { padding-bottom: 0; border-bottom: 0; }
+.mh-review-card li span { font-size: 14px; font-weight: 600; }
+.mh-review-card li em { color: var(--mh-secondary); font-size: 13px; font-style: normal; text-align: right; }
+
+/* Pattern C. No numerals: these are four things that are true at once, not
+   four steps in an order. */
+.mh-benefits { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-white); border-bottom: 1px solid var(--mh-line); }
+ol.mh-benefit-rows { width: 100%; margin-top: 54px; border-top: 1px solid var(--mh-ink); }
+.mh-benefit-rows li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 28px; align-items: start; padding: 28px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-benefit-rows li:last-child { border-bottom: 0; }
+.mh-benefit-rows strong { max-width: 22ch; font-family: var(--mh-font-display); font-size: 26px; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; }
+.mh-benefit-rows p { max-width: 62ch; color: var(--mh-muted); font-size: 16px; line-height: 26px; }
+
+.mh-still-owed { padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); background: var(--mh-mist); border-bottom: 1px solid var(--mh-mist-border); }
+.mh-still-owed h2 { font-size: var(--mh-h2-sm); }
+
 /* Integration showcase (/integrations, plan 033). A card grid of the real
    connections, in place of the page's longest prose section. The logo tile is
    the only surface on the site that carries partner colors; everything around
@@ -1317,6 +1374,20 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 
   .mh-path-comp { display: flex; flex-direction: column; }
   .mh-path-done { position: relative; bottom: auto; left: auto; align-self: flex-start; margin: -16px 0 0 14px; }
+
+  /* Plan 041's two compositions. Same contract as the ones above: the
+     pieces stay stacked and overlapping and the base keeps its shadow. */
+  .mh-first-week-comp,
+  .mh-review-comp { display: flex; flex-direction: column; padding-bottom: 0; }
+  .mh-runway-chip { position: relative; bottom: auto; left: auto; align-self: flex-start; margin: -16px 0 0 14px; }
+
+  /* The mirror is a desktop device; on one column it would put a card
+     above its own heading. */
+  .mh-paperwork .mh-split > .mh-copy-block,
+  .mh-paperwork .mh-split > .mh-comp { order: 0; }
+
+  .mh-benefit-rows li { grid-template-columns: 1fr; row-gap: 12px; padding: 24px 0; }
+  .mh-benefit-rows strong { max-width: none; font-size: 23px; }
 }
 
 @media (max-width: 560px) {
