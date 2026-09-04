@@ -1087,36 +1087,50 @@ Product column.
 - Body: `One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use.` *(round 5: the hero, the next H2, and that section's body all made the same resume argument before the page said anything new; the hero now states the promise and section two carries the argument)*
 - CTA: `Create my Career Context` (primary)
 
-### Why a resume isn't enough
+*Hero aside added by plan 042. The page is about an object and the hero
+never showed it: it shipped `aside={false}`. The aside is the standard
+hero card with a three-row record inside it — `Your Career Context` /
+`One living record.` / `Experience` — `Roles, projects, and outcomes` ·
+`Applications` — `Tesserac · Interviewing` · `Interviews` —
+`Thursday · Prep ready`. Sample rows, the same contract as every other
+product sample on the site.*
+
+### Why a resume isn't enough *(rebuilt by plan 042)*
 
 - Kicker: `The problem`
 - H2: `A resume is a fraction of your career.`
 - Body: `A resume compresses years of work into one page for one audience. It leaves out the projects that went well, the numbers behind them, the people you worked with, what you learned in interviews, and what you actually want next. So every new tool, and every new conversation, starts from scratch.`
-- Contrast blocks:
-  1. `What a resume holds` — `Titles, dates, and a dozen bullet points, tuned for the last role you applied to.`
-  2. `What your career holds` — `Projects, outcomes, relationships, decisions, feedback, and direction. The material that makes your next application stronger.`
-  3. `What keeps getting lost` — `Every time you explain yourself to a new tool or a new chat window, the context evaporates when the tab closes.`
+- Payoff line: `Every time you explain yourself to a new tool or a new chat window, the context evaporates when the tab closes.`
+- Composition (R2/R13): a `RESUME.PDF` sheet as the base, drawn as bars rather than fake prose, with three chips breaking its left edge: `Project · Billing migration` · `Story · Why we cut scope` · `Goal · Staff role, remote`.
 
-### What goes in
+*This section used to be a three-cell numbered grid, and it was the worst
+instance of that pattern on the site: the odd-count rule promoted cell 01,
+`What a resume holds`, to full width, which made the resume the visual hero
+of a section arguing the resume is the small thing. Cells 1 and 2
+(`What a resume holds`, `What your career holds`) are retired: the body
+paragraph above already says everything they said, and the composition now
+shows it. Cell 3, `What keeps getting lost`, survives verbatim as the
+payoff line.*
 
-- Kicker: `Start fast`
-- H2: `Bring what you already have.`
-- Body: `Offboard builds the first version of your Career Context from the things you already have, in minutes. Then it keeps getting better as you use it.`
-- Cards:
-  1. `Resume import` — `Start from the document you have. Offboard turns it into structured experience you can build on.`
-  2. `LinkedIn` — `Bring your profile history in instead of retyping it.`
-  3. `AI conversations` — `Import the career context you have already built up in your ChatGPT history.`
-  4. `Portfolio & documents` — `Work samples, case studies, and files that show what you did.`
-  5. `Projects & outcomes` — `The work behind the bullet points, with the results that made it matter.`
-  6. `Interview stories` — `The examples you reach for in interviews, saved once and ready to reuse.`
-  7. `Goals & preferences` — `The work you want, where, and on what terms.`
-  8. `Applications & contacts` — `The opportunities you are pursuing and the people connected to them.`
+### What goes in *(merged into "What it holds" by plan 042)*
+
+*This section was an eight-card grid sitting directly above another
+eight-card grid, sixteen identical cards in a row, and the two lists
+overlapped: `Goals & preferences` against `Preferences` plus `Goals`,
+`Applications & contacts` against `Applications` plus `Contacts`, and
+`Resume import` against `Experience` plus `Documents`. The sources are now
+a chip row under the one grid that matters, which is what they always were:
+where the record comes from, not a second taxonomy of it. The eight
+`Bring what you already have` cards are retired.*
 
 ### What it holds *(moved here from § 1 in round 4, 2026-09-02)*
 
 - Kicker: `What it holds` · H2: `Eight kinds of record, one place.`
 - `Experience` — `Roles, skills, accomplishments, and outcomes.` · `Applications` — `Every opportunity and what happened with it.` · `Companies` — `Research, notes, people, and hiring signals.` · `Contacts` — `Recruiters, hiring managers, and referrals.` · `Documents` — `Resumes, job descriptions, and other files.` · `Interviews` — `Conversations, preparation, notes, and next steps.` · `Preferences` — `The work you want, where, and on what terms.` · `Goals` — `What you are working toward and what needs attention.`
 - `Preferences` keeps the wording already used by `Goals & preferences` in § What goes in, rather than a second phrasing of the same idea.
+
+- Body *(added by plan 042, carrying the retired "What goes in" lede)*: `Offboard builds the first version from the things you already have, in minutes, and it keeps getting better as you use it.`
+- Source chips, under the grid: label `Built from what you already have` · `Resume` · `LinkedIn` · `ChatGPT history` · `Portfolio and documents` · `Interview stories`
 
 ### It gets better as you go
 
@@ -1151,7 +1165,7 @@ Product column.
 - Body: `Connect Offboard to supported AI assistants and your Career Context goes with you. Save an opportunity from a conversation, update an application, or add what you just learned, from whichever tool you are already in.`
 - Demo conversation: You: `Save the interview questions I just worked through, and what I answered.` / AI: `Done. I have added them to your interview stories.` *(varied 2026-08-31 so it does not duplicate the /integrations demo, which owns the project-outcomes line)*
 
-### Yours, and private
+### Yours, and private *(numbering moved to CSS by plan 042)*
 
 - Kicker: `Private by default`
 - H2: `Your Career Context belongs to you.`
@@ -1323,6 +1337,13 @@ a resume into a general assistant. Not in header nav yet.
 - Kicker: `The difference`
 - H2: `Not a smarter chatbot. A better starting point.`
 - Body: `Lumo is not claiming to out-think a general assistant. The difference is what it is working from: the structured, continuously updated state of your career, rather than whatever you can paste into a message box.`
+- Payoff line *(plan 042)*: `You spend the conversation on the decision instead of on context, and the answer is about your search rather than job searching in general.`
+- Composition *(plan 042, R2/R13)*: the Career Context record card as the base, because it is what Lumo starts from, with a blank composer breaking its left edge: `Any other assistant` / `Tell me about yourself...`
+
+*Was a three-cell numbered grid. Cells 1 and 2 (`Pasting a resume into a
+chat`, `Asking Lumo`) described the two starting points; the composition
+shows them. Cell 3, `What that changes`, survives verbatim as the payoff
+line.*
 - Contrast blocks:
   1. `Pasting a resume into a chat` — `One document, no history, and none of it is there tomorrow. Every conversation restarts from zero.`
   2. `Asking Lumo` — `Your experience, applications, interviews, and goals are already there, and what you decide together is saved back.`
@@ -1512,10 +1533,13 @@ tools form, and the fact that the loop has a memory.
 - Kicker: `The difference`
 - H2: `A bag of tools makes you the integration.`
 - Body: `Separately, a resume tool, a tracker, and a chat window each solve one step. Together they leave you carrying context between them: pasting the same history, re-explaining the same goals, and rebuilding the same picture of a company you already researched last week.`
-- Contrast blocks:
-  1. `Ten tools, ten starting points` — `Each one asks who you are before it can help, and none of them remembers what the last one learned.`
-  2. `One system, one record` — `Every step reads from and writes to the same Career Context, so the work compounds instead of resetting.`
-  3. `What that changes` — `The tenth application takes less effort than the first, because everything the first nine taught the system is still there.`
+- Payoff line *(plan 042)*: `The tenth application takes less effort than the first, because everything the first nine taught the system is still there.`
+- Composition *(plan 042, R2/R13)*: an Application Packet card as the base — `Application Packet` / `Tesserac`, rows `Ghost check` — `Clear` · `Fit read` — `Strong on platform work` · `Tailored resume` — `Ready` · `Warm intro` — `Two paths` — with a greyed `Every other tool` card breaking its left edge: `Who are you?` / `Paste your resume.`
+
+*Was a three-cell numbered grid. Cells 1 and 2 (`Ten tools, ten starting
+points`, `One system, one record`) described the two sides; the composition
+shows them. Cell 3, `What that changes`, survives verbatim as the payoff
+line.*
 
 ### The loop
 

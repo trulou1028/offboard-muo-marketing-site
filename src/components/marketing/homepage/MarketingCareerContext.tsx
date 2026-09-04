@@ -4,20 +4,15 @@ import {
   Bookmark,
   Briefcase,
   Building2,
-  Compass,
   FileText,
-  FolderOpen,
-  Linkedin,
   ListChecks,
   MessageSquare,
-  MessagesSquare,
-  Mic,
   Sparkles,
   Users,
 } from "lucide-react";
 import {
   AiReply,
-  EditorialGrid,
+  ContrastSection,
   FinalCta,
   MarketingShell,
   PageHero,
@@ -46,22 +41,42 @@ const HOLDS = [
   { icon: Sparkles, title: "Goals", body: "What you are working toward and what needs attention." },
 ] as const;
 
-const RESUME_CONTRAST = [
-  { title: "What a resume holds", body: "Titles, dates, and a dozen bullet points, tuned for the last role you applied to." },
-  { title: "What your career holds", body: "Projects, outcomes, relationships, decisions, feedback, and direction. The material that makes your next application stronger." },
-  { title: "What keeps getting lost", body: "Every time you explain yourself to a new tool or a new chat window, the context evaporates when the tab closes." },
-] as const;
+/* Was a three-cell numbered grid, and the worst instance of it on the site:
+   the odd-count rule promoted cell 01, "What a resume holds", to full width,
+   making the resume the visual hero of a section arguing the resume is the
+   small thing. Cells 1 and 2 are now shown rather than described (plan 042,
+   DESIGN.md R13); cell 3 was the consequence and survives verbatim as the
+   payoff line. */
+function ResumeComposition() {
+  return (
+    <div className="mh-comp mh-resume-comp">
+      <div className="mh-ui-card mh-resume-sheet mh-comp-base" aria-label="A resume, and the career it leaves out">
+        <span>Resume.pdf</span>
+        <div className="mh-resume-lines" aria-hidden="true">
+          <em className="is-name" />
+          <em className="is-role" />
+          <em /><em /><em />
+          <em className="is-role" />
+          <em /><em />
+        </div>
+      </div>
+      <ul className="mh-comp-satellite mh-resume-missing" aria-label="What the resume leaves out">
+        <li>Project · Billing migration</li>
+        <li>Story · Why we cut scope</li>
+        <li>Goal · Staff role, remote</li>
+      </ul>
+    </div>
+  );
+}
 
-const IMPORT_SOURCES = [
-  { icon: FileText, title: "Resume import", body: "Start from the document you have. Offboard turns it into structured experience you can build on." },
-  { icon: Linkedin, title: "LinkedIn", body: "Bring your profile history in instead of retyping it." },
-  { icon: MessagesSquare, title: "AI conversations", body: "Import the career context you have already built up in your ChatGPT history." },
-  { icon: FolderOpen, title: "Portfolio & documents", body: "Work samples, case studies, and files that show what you did." },
-  { icon: Briefcase, title: "Projects & outcomes", body: "The work behind the bullet points, with the results that made it matter." },
-  { icon: Mic, title: "Interview stories", body: "The examples you reach for in interviews, saved once and ready to reuse." },
-  { icon: Compass, title: "Goals & preferences", body: "The work you want, where, and on what terms." },
-  { icon: ListChecks, title: "Applications & contacts", body: "The opportunities you are pursuing and the people connected to them." },
-] as const;
+/* The eight import sources used to be their own eight-card grid directly
+   above the eight-card HOLDS grid: sixteen identical cards in a row, and the
+   two lists overlapped ("Goals & preferences" against "Preferences" plus
+   "Goals", "Applications & contacts" against "Applications" plus
+   "Contacts"). The sources are now a chip row under the one grid that
+   matters, which is what they always were: where the record comes from, not
+   a second taxonomy of it. */
+const IMPORT_CHIPS = ["Resume", "LinkedIn", "ChatGPT history", "Portfolio and documents", "Interview stories"] as const;
 
 const IMPROVES = [
   ["You apply to a role", "Applications", "The role, the company research, and the materials you used stay connected to the outcome."],
@@ -76,33 +91,15 @@ const OUTPUTS = [
   ["Better decisions", "Compare opportunities against your experience, preferences, and how your search is going."],
 ] as const;
 
+/* Numbering is a CSS counter (`.is-numbered`), not a prefix baked into each
+   string. It was "01 You choose...", which put presentation in the copy and
+   meant COPY.md and the drift test had to carry it too. */
 const OWNERSHIP = [
-  "01 You choose what goes in, and you can edit or remove anything.",
-  "02 Connected assistants see what you authorize, not everything.",
-  "03 Sponsors only ever see aggregate participation, never your record.",
-  "04 You can export what you have built. It is yours.",
+  "You choose what goes in, and you can edit or remove anything.",
+  "Connected assistants see what you authorize, not everything.",
+  "Sponsors only ever see aggregate participation, never your record.",
+  "You can export what you have built. It is yours.",
 ] as const;
-
-function ImportsSection() {
-  return (
-    <section className="mh-wherever mh-section" aria-labelledby="imports-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">Start fast</span>
-        <h2 id="imports-title">Bring what you already have.</h2>
-        <p>Offboard builds the first version of your Career Context from the things you already have, in minutes. Then it keeps getting better as you use it.</p>
-      </div>
-      <div className="mh-ctx-grid" data-reveal="">
-        {IMPORT_SOURCES.map(({ icon: IconComponent, title, body }) => (
-          <article className="mh-ctx-card" key={title}>
-            <IconComponent aria-hidden="true" />
-            <h3>{title}</h3>
-            <p>{body}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 function ImprovesSection() {
   return (
@@ -130,6 +127,7 @@ function HoldsSection() {
       <div className="mh-copy-block">
         <span className="mh-kicker">What it holds</span>
         <h2 id="holds-title">Eight kinds of record, one place.</h2>
+        <p>Offboard builds the first version from the things you already have, in minutes, and it keeps getting better as you use it.</p>
       </div>
       <div className="mh-ctx-grid" data-reveal="">
         {HOLDS.map(({ icon: IconComponent, title, body }) => (
@@ -139,6 +137,10 @@ function HoldsSection() {
             <p>{body}</p>
           </article>
         ))}
+      </div>
+      <div className="mh-holds-sources" data-reveal="">
+        <span>Built from what you already have</span>
+        <ul>{IMPORT_CHIPS.map((chip) => <li key={chip}>{chip}</li>)}</ul>
       </div>
     </section>
   );
@@ -201,7 +203,7 @@ function OwnershipSection() {
         <span className="mh-kicker">Private by default</span>
         <h2 id="ownership-title">Your Career Context belongs to you.</h2>
       </div>
-      <ul className="mh-plain-list ruled" data-reveal="">
+      <ul className="mh-plain-list ruled is-numbered" data-reveal="">
         {OWNERSHIP.map((line) => <li key={line}>{line}</li>)}
       </ul>
     </section>
@@ -217,16 +219,25 @@ export function MarketingCareerContext() {
           title="Build your Career Context once. Use it everywhere."
           body="One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use."
           current="career-context"
-          aside={false}
+          aside={<>
+            <span>Your Career Context</span>
+            <strong>One living record.</strong>
+            <ul className="mh-hero-record-list">
+              <li><span>Experience</span><em>Roles, projects, and outcomes</em></li>
+              <li><span>Applications</span><em>Tesserac · Interviewing</em></li>
+              <li><span>Interviews</span><em>Thursday · Prep ready</em></li>
+            </ul>
+          </>}
           cta="Get started free"
         />
-        <EditorialGrid
+        <ContrastSection
           kicker="The problem"
           title="A resume is a fraction of your career."
           body="A resume compresses years of work into one page for one audience. It leaves out the projects that went well, the numbers behind them, the people you worked with, what you learned in interviews, and what you actually want next. So every new tool, and every new conversation, starts from scratch."
-          items={RESUME_CONTRAST}
-        />
-        <ImportsSection />
+          payoff="Every time you explain yourself to a new tool or a new chat window, the context evaporates when the tab closes."
+        >
+          <ResumeComposition />
+        </ContrastSection>
         <HoldsSection />
         <ImprovesSection />
         <OutputsSection />

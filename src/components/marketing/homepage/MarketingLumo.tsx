@@ -10,7 +10,7 @@ import {
   Wallet,
 } from "lucide-react";
 import {
-  EditorialGrid,
+  ContrastSection,
   FinalCta,
   LumoMark,
   MarketingShell,
@@ -46,11 +46,28 @@ const PROMPTS = [
   "Move Tesserac to the interview stage.",
 ] as const;
 
-const DIFFERENCE = [
-  { title: "Pasting a resume into a chat", body: "One document, no history, and none of it is there tomorrow. Every conversation restarts from zero." },
-  { title: "Asking Lumo", body: "Your experience, applications, interviews, and goals are already there, and what you decide together is saved back." },
-  { title: "What that changes", body: "You spend the conversation on the decision instead of on context, and the answer is about your search rather than job searching in general." },
-] as const;
+/* Was a three-cell numbered grid. Cells 1 and 2 described the blank box and
+   the record; the section now shows them (plan 042, DESIGN.md R13). Cell 3
+   was the consequence, and it survives verbatim as the payoff line. */
+function StartingPointComposition() {
+  return (
+    <div className="mh-comp mh-startingpoint-comp">
+      <div className="mh-record-card mh-comp-base" aria-label="What Lumo starts every conversation from">
+        <strong>Your Career Context</strong>
+        <p>What Lumo starts from, every time.</p>
+        <ul>
+          <li><span>Experience</span><em>Roles, projects, and outcomes</em></li>
+          <li><span>Applications</span><em>Tesserac · Interviewing</em></li>
+          <li><span>Goals</span><em>Staff role, remote</em></li>
+        </ul>
+      </div>
+      <div className="mh-comp-satellite mh-blank-composer" aria-label="A general assistant's starting point">
+        <span>Any other assistant</span>
+        <p>Tell me about yourself...</p>
+      </div>
+    </div>
+  );
+}
 
 function WhatItKnows() {
   return (
@@ -132,12 +149,14 @@ export function MarketingLumo() {
         />
         <WhatItKnows />
         <WhatToAsk />
-        <EditorialGrid
+        <ContrastSection
           kicker="The difference"
           title="Not a smarter chatbot. A better starting point."
           body="Lumo is not claiming to out-think a general assistant. The difference is what it is working from: the structured, continuously updated state of your career, rather than whatever you can paste into a message box."
-          items={DIFFERENCE}
-        />
+          payoff="You spend the conversation on the decision instead of on context, and the answer is about your search rather than job searching in general."
+        >
+          <StartingPointComposition />
+        </ContrastSection>
         <Straight />
         <BringYourOwn />
         <FinalCta

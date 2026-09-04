@@ -8,7 +8,8 @@ import {
   ABOUT_FAQS,
   ContactBand,
   ContextSection,
-  EditorialGrid,
+  FeatureRows,
+  Statements,
   EMPLOYER_FAQS,
   FaqSection,
   FinalCta,
@@ -86,7 +87,7 @@ export function MarketingPricing() {
           cta="Get started free"
         />
         <PricingSection />
-        <EditorialGrid
+        <Statements
           kicker="How credits work"
           title="Pay only for the work that needs more horsepower."
           body="Credits cover the heavier product work: deeper research, tailored materials, and interview preparation. Every credit-spending action shows its cost before you run it."
@@ -176,7 +177,7 @@ export function MarketingAbout() {
             <p>Before the product, Offboard was a weekly newsletter on the job market read by 5,000+ subscribers, and a community of people navigating the same uncertainty. The product organizes what those people were piecing together by hand.</p>
           </div>
         </section>
-        <EditorialGrid
+        <Statements
           kicker="What guides the work"
           title="Calm is part of the product."
           body="People use Offboard during a stressful transition. The experience should reduce noise, preserve choice, and make the next useful action easier to see."
@@ -234,7 +235,7 @@ export function MarketingEmployers() {
           ctaHref="mailto:hello@offboard.co?subject=Employer%20support"
           aside={<><span>How sponsorship works</span><strong>Self-serve. One-time per employee.</strong><p>Buy seats for a departing group, send invitations, and see aggregate program reporting. No enterprise contract.</p></>}
         />
-        <EditorialGrid
+        <FeatureRows
           kicker="The member experience"
           title="Support for the whole transition, not only the resume."
           body="A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Application Packets, and human support options."
@@ -277,7 +278,7 @@ export function MarketingEmployers() {
           </div>
           <div className="mh-route-sponsor-card"><span>Member view</span><strong>Chosen by the member</strong><p>Transition details, saved roles, documents, and requested support stay in the member experience according to the applicable notice.</p><span>Sponsor view</span><strong>Explained before enrollment</strong><p>Program reporting and visibility are defined before participation begins. Sponsors receive aggregate participation and outcome reporting, never individual applications, conversations, finances, or reflections.</p></div>
         </section>
-        <EditorialGrid
+        <Statements
           kicker="Why companies do this"
           title="The cheapest line item in the layoff, and the one people remember."
           body="Glassdoor reviews, boomerang hires, and references are written in the last week of employment. Sponsorship is the part of a layoff people actually tell other people about."
@@ -363,7 +364,7 @@ export function MarketingAct() {
             <p>Between drop-off, a shift, and bedtime, most residents do not have room for another appointment window. ACT gives them a plan they can work at 9pm or 6am, on a phone or a laptop, without waiting on a callback.</p>
           </div>
         </section>
-        <EditorialGrid
+        <FeatureRows
           kicker="What residents get"
           title="The same Offboard workspace, sponsored."
           body="One connected place for the search: jobs, applications, documents, interviews, and guidance that already knows the resident's plan."

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import {
-  EditorialGrid,
+  ContrastSection,
   FinalCta,
   MarketingShell,
   NumberedRows,
@@ -21,11 +21,29 @@ import {
    Copy: COPY.md § 14. Existing patterns only, no new classes. Bands: deep,
    paper, mist, paper, sand, forest, footer. */
 
-const WHY_ONE_SYSTEM = [
-  { title: "Ten tools, ten starting points", body: "Each one asks who you are before it can help, and none of them remembers what the last one learned." },
-  { title: "One system, one record", body: "Every step reads from and writes to the same Career Context, so the work compounds instead of resetting." },
-  { title: "What that changes", body: "The tenth application takes less effort than the first, because everything the first nine taught the system is still there." },
-] as const;
+/* Was a three-cell numbered grid. Cells 1 and 2 described the scattered
+   tools and the one system; the section now shows them (plan 042, R13).
+   Cell 3 was the consequence and survives verbatim as the payoff line. */
+function OneSystemComposition() {
+  return (
+    <div className="mh-comp mh-onesystem-comp">
+      <div className="mh-ui-card mh-packet-mini mh-comp-base" aria-label="An Application Packet, built from one record">
+        <div className="mh-packet-mini-head"><strong>Application Packet</strong><b>Tesserac</b></div>
+        <ul>
+          <li><span>Ghost check</span><em>Clear</em></li>
+          <li><span>Fit read</span><em>Strong on platform work</em></li>
+          <li><span>Tailored resume</span><em>Ready</em></li>
+          <li><span>Warm intro</span><em>Two paths</em></li>
+        </ul>
+      </div>
+      <div className="mh-comp-satellite mh-tool-stack" aria-label="What separate tools ask instead">
+        <span>Every other tool</span>
+        <p>Who are you?</p>
+        <p>Paste your resume.</p>
+      </div>
+    </div>
+  );
+}
 
 const LOOP = [
   ["Find a role", "Something lands in front of you, from a board, a referral, or a conversation you were already having."],
@@ -123,12 +141,14 @@ export function MarketingJobSearch() {
           aside={false}
           cta="Get started free"
         />
-        <EditorialGrid
+        <ContrastSection
           kicker="The difference"
           title="A bag of tools makes you the integration."
           body="Separately, a resume tool, a tracker, and a chat window each solve one step. Together they leave you carrying context between them: pasting the same history, re-explaining the same goals, and rebuilding the same picture of a company you already researched last week."
-          items={WHY_ONE_SYSTEM}
-        />
+          payoff="The tenth application takes less effort than the first, because everything the first nine taught the system is still there."
+        >
+          <OneSystemComposition />
+        </ContrastSection>
         <Loop />
         <Stages />
         <TheMemory />

@@ -399,6 +399,51 @@ describe("MarketingResources sweep still covers real article content", () => {
   });
 });
 
+describe("plan 042: the retired numbered grid stays retired", () => {
+  const CSS = readFileSync(path.join(__dirname, "MarketingHomepage.css"), "utf8");
+
+  // The grid itself. DeadSelectors guards CSS with no TSX reference; this
+  // guards the other direction, a re-introduction of the shape.
+  it("the .mh-route-card-grid rule is gone from the stylesheet", () => {
+    expect(CSS).not.toMatch(/^\.mh-route-card-grid/m);
+  });
+
+  // R11. Numerals promise an order. Every contrast section lost them, and
+  // the one caller that is a real sequence (/workforce) kept them.
+  it.each([
+    ["MarketingCareerContext", () => <MarketingCareerContext />, "Every time you explain yourself to a new tool"],
+    ["MarketingLumo", () => <MarketingLumo />, "You spend the conversation on the decision instead of on context"],
+    ["MarketingJobSearch", () => <MarketingJobSearch />, "The tenth application takes less effort than the first"],
+  ] as const)("%s keeps its contrast payoff line", (_name, factory, payoff) => {
+    expect(renderedText(factory())).toContain(payoff);
+  });
+
+  it("/workforce keeps numerals, because Orient/Route/Follow through is a real sequence", () => {
+    const text = renderedText(<MarketingWorkforce />);
+    expect(text).toContain("Orient");
+    expect(text).toContain("Route");
+    expect(text).toContain("Follow through");
+  });
+
+  // The two eight-card grids that sat back to back on /career-context, and
+  // overlapped each other, are one grid plus a chip row now.
+  it("/career-context no longer ships the duplicate import grid", () => {
+    const text = renderedText(<MarketingCareerContext />);
+    expect(text).toContain("Eight kinds of record, one place.");
+    expect(text).toContain("Built from what you already have");
+    expect(text).not.toContain("Bring what you already have.");
+    expect(text).not.toContain("Goals & preferences");
+    expect(text).not.toContain("Applications & contacts");
+  });
+
+  // Numbering is a CSS counter now, so it must not be back in the strings.
+  it("/career-context ownership copy carries no baked-in numbering", () => {
+    const text = renderedText(<MarketingCareerContext />);
+    expect(text).toContain("You choose what goes in, and you can edit or remove anything.");
+    expect(text).not.toMatch(/0[1-4] You choose what goes in/);
+  });
+});
+
 describe("language rules hold on shipped pages", () => {
   // Built at runtime (rather than as a literal string) so this file itself
   // never contains the retired phrase — the existing MarketingHome.test.tsx

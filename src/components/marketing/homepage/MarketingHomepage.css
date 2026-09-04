@@ -550,7 +550,116 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-route-content-heading .mh-kicker { grid-column: 1 / -1; }
 .mh-route-content-heading h2 { max-width: 790px; margin-top: 16px; font-size: var(--mh-h2); line-height: 1.08; }
 .mh-route-content-heading p { align-self: end; color: var(--mh-muted); font-size: 18px; line-height: 29px; }
-.mh-route-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); margin-top: 54px; border-top: 1px solid var(--mh-line); border-left: 1px solid var(--mh-line); }
+/* ------------------------------------------------------------------ */
+/* Route content shapes (plan 042). These replace the retired            */
+/* mh-route-card-grid, the bordered 01/02/03 grid that rendered every    */
+/* "three or four things" moment on ten routes. See the note above the   */
+/* components in MarketingSite.tsx for why it went. All three keep the   */
+/* `.mh-route-content` band, so no caller's band rhythm moved when the   */
+/* inside of its section changed.                                        */
+/* ------------------------------------------------------------------ */
+
+/* An argument or a set of principles. One column, so R1 has nothing to
+   balance and any item count is legal. */
+ul.mh-statements { width: 100%; margin-top: 54px; border-top: 1px solid var(--mh-ink); }
+.mh-statements li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 28px; align-items: start; padding: 28px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-statements li:last-child { border-bottom: 0; }
+.mh-statements strong { max-width: 22ch; font-family: var(--mh-font-display); font-size: 26px; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; }
+.mh-statements p { max-width: 62ch; color: var(--mh-muted); font-size: 16px; line-height: 26px; }
+
+/* What someone gets. Lighter than `.mh-statements` on purpose: /employers
+   ships both, and two identical ruled lists on one page would be the same
+   defect this plan removed. */
+ul.mh-feature-rows { width: 100%; margin-top: 48px; border-top: 1px solid var(--mh-line); }
+.mh-feature-rows li { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); gap: 12px 40px; padding: 22px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-feature-rows strong { font-size: 17px; font-weight: 650; line-height: 1.35; }
+.mh-feature-rows p { max-width: 66ch; color: var(--mh-muted); font-size: 15px; line-height: 24px; }
+
+/* "This vs that" (R13). The section shows the two things instead of
+   describing them in equal cells, so it is a split, not a grid. */
+.mh-contrast .mh-split { align-items: center; }
+strong.mh-contrast-payoff { max-width: 52ch; padding-top: 18px; border-top: 1px solid var(--mh-line); color: var(--mh-ink); font-size: 16px; font-weight: 650; line-height: 26px; }
+
+/* The three contrast compositions share one geometry, and it is load-bearing.
+   The base card takes 70% of the column and the satellite is anchored to the
+   column's left edge at `calc(30% + 24px)`, so it always breaks the base's
+   left edge by exactly 24px - inside DESIGN.md R2's 12-32px range, and
+   inside the base's own 28-30px padding, so it can never cover a row label.
+   The first build of all three had the satellite eating the last row's
+   label and leaving an orphan value on the right. If you change a base's
+   width or padding, re-run the overlap assertions before shipping. */
+.mh-resume-comp,
+.mh-onesystem-comp,
+.mh-startingpoint-comp { position: relative; display: flex; justify-content: flex-end; }
+.mh-resume-sheet,
+.mh-packet-mini,
+.mh-startingpoint-comp .mh-record-card { width: 70%; }
+.mh-resume-missing,
+.mh-tool-stack,
+.mh-blank-composer { left: 0; width: calc(30% + 24px); }
+
+/* /career-context. The base is the resume because the resume is the
+   section's subject; the satellite spills past its edge, which is the
+   argument. The lines are bars, not lorem: fake resume prose would be one
+   more thing to keep true. */
+.mh-resume-comp { padding: 8px 0 26px; }
+.mh-resume-sheet { display: flex; flex-direction: column; gap: 20px; padding: 30px; }
+.mh-resume-sheet > span { color: var(--mh-muted); font-size: 11px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+.mh-resume-lines { display: flex; flex-direction: column; gap: 11px; }
+.mh-resume-lines em { display: block; height: 9px; width: 100%; background: var(--mh-line); border-radius: var(--mh-radius-pill); }
+.mh-resume-lines em.is-name { height: 17px; width: 62%; background: var(--mh-secondary); }
+.mh-resume-lines em.is-role { height: 12px; width: 78%; margin-top: 12px; background: var(--mh-muted); }
+.mh-resume-lines em:last-child { width: 74%; }
+ul.mh-resume-missing { top: 30px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.mh-resume-missing li { padding: 10px 14px; background: var(--mh-white); border-radius: var(--mh-radius-pill); box-shadow: var(--mh-shadow-overlay); font-size: 13px; font-weight: 600; }
+
+/* /job-search. One connected packet, and the tools that each ask again,
+   dwarfed beside it. */
+.mh-onesystem-comp { padding-bottom: 26px; }
+.mh-packet-mini { display: flex; flex-direction: column; gap: 18px; padding: 28px; }
+.mh-packet-mini-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.mh-packet-mini-head strong { font-family: var(--mh-font-display); font-size: 21px; font-weight: 500; letter-spacing: -.02em; }
+.mh-packet-mini-head b { padding: 5px 10px; background: var(--mh-paper-soft); border-radius: var(--mh-radius-pill); color: var(--mh-forest); font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+.mh-packet-mini ul { border-top: 1px solid var(--mh-line); }
+.mh-packet-mini li { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-packet-mini li:last-child { padding-bottom: 0; border-bottom: 0; }
+.mh-packet-mini li span { font-size: 14px; font-weight: 600; }
+.mh-packet-mini li em { color: var(--mh-secondary); font-size: 13px; font-style: normal; text-align: right; }
+.mh-tool-stack { bottom: 26px; display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; background: var(--mh-paper-soft); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-surface); }
+.mh-tool-stack > span { color: var(--mh-muted); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.mh-tool-stack > p { color: var(--mh-secondary); font-size: 13px; line-height: 19px; }
+
+/* /lumo. The record is the base because it is what Lumo starts from; the
+   blank composer every other assistant starts from is the satellite. */
+.mh-startingpoint-comp { padding-bottom: 30px; }
+.mh-startingpoint-comp .mh-record-card { box-shadow: var(--mh-shadow-overlay); }
+.mh-blank-composer { bottom: 30px; display: flex; flex-direction: column; gap: 8px; padding: 18px; background: var(--mh-paper-soft); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-surface); }
+.mh-blank-composer > span { color: var(--mh-muted); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.mh-blank-composer > p { padding: 9px 12px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); color: var(--mh-secondary); font-size: 13px; }
+
+/* /career-context. Where the record comes from, under the one grid that
+   says what it holds - not a second eight-card taxonomy of it. */
+.mh-holds-sources { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 28px; }
+.mh-holds-sources > span { color: var(--mh-muted); font-size: 12px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+.mh-holds-sources ul { display: flex; flex-wrap: wrap; gap: 8px; }
+.mh-holds-sources li { padding: 7px 13px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-pill); font-size: 13px; font-weight: 600; }
+
+/* /career-context hero. The page is about an object; it used to run
+   `aside={false}` and never show it. */
+ul.mh-hero-record-list { margin-top: 18px; border-top: 1px solid var(--mh-line); }
+.mh-hero-record-list li { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-hero-record-list li:last-child { border-bottom: 0; }
+.mh-hero-record-list span { font-size: 13px; font-weight: 650; }
+.mh-hero-record-list em { color: var(--mh-secondary); font-size: 12px; font-style: normal; text-align: right; }
+
+/* Numbering belongs in the stylesheet, not baked into each copy string. */
+/* stylelint-disable-next-line selector-class-pattern -- .ruled predates the mh-/is- naming contract, see the note above .mh-plain-list.ruled */
+.mh-plain-list.ruled.is-numbered { counter-reset: mh-plain-list; }
+/* stylelint-disable-next-line selector-class-pattern -- see above */
+.mh-plain-list.ruled.is-numbered li { display: grid; grid-template-columns: 44px minmax(0, 1fr); }
+/* stylelint-disable-next-line selector-class-pattern -- see above */
+.mh-plain-list.ruled.is-numbered li::before { counter-increment: mh-plain-list; content: counter(mh-plain-list, decimal-leading-zero); color: var(--mh-muted); font-family: var(--mh-font-display); font-size: 18px; }
+
 /* Pattern B, the lead-plus-pair (DESIGN.md R1), generalised. When a card
    grid's item count does not divide by its column count, the FIRST card
    widens to absorb the remainder, so the last row is always full. The count
@@ -565,8 +674,6 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
    would invent implicit columns. The lead card also takes a shorter
    min-height: at full width its heading and body need less vertical room. */
 @media (min-width: 901px) {
-  .mh-route-card-grid > article:first-child:nth-last-child(2n + 1) { min-height: 220px; grid-column: span 2; }
-  .mh-route-card-grid > article:first-child:nth-last-child(2n + 1) h3 { max-width: 760px; margin-top: 34px; }
   .mh-route-resources-grid > article:first-child:nth-last-child(3n + 2) { grid-column: span 2; }
   .mh-route-resources-grid > article:first-child:nth-last-child(3n + 1) { grid-column: span 3; }
 }
@@ -579,10 +686,6 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 @media (min-width: 561px) and (max-width: 1180px) {
   .mh-int-grid > article:first-child:nth-last-child(2n + 1) { grid-column: span 2; }
 }
-.mh-route-card-grid article { min-height: 280px; padding: 30px; border-right: 1px solid var(--mh-line); border-bottom: 1px solid var(--mh-line); }
-.mh-route-card-grid article > span { color: var(--mh-muted); font-family: var(--mh-font-display); font-size: 22px; }
-.mh-route-card-grid h3 { max-width: 500px; margin-top: 70px; font-size: 31px; line-height: 1.12; }
-.mh-route-card-grid p { max-width: 580px; margin-top: 12px; color: var(--mh-muted); font-size: 16px; line-height: 25px; }
 
 .mh-route-story { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: white; }
 .mh-route-story-photo { position: relative; min-height: 610px; overflow: hidden; border-radius: var(--mh-radius-card); }
@@ -921,7 +1024,7 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-ctx-card { padding: 24px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); }
 .mh-ctx-card svg { width: 20px; height: 20px; color: var(--mh-forest); stroke-width: 1.5; }
 .mh-ctx-card h3 { margin-top: 18px; font-family: var(--mh-font-body); font-size: 16px; font-weight: 600; }
-.mh-ctx-card p { margin-top: 8px; color: var(--mh-muted); font-size: 14px; line-height: 1.5; }
+.mh-ctx-card p { margin-top: 8px; color: var(--mh-muted); font-size: 15px; line-height: 1.55; }
 
 /* More than a job search */
 .mh-morethan { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-sand); }
@@ -1388,6 +1491,20 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 
   .mh-benefit-rows li { grid-template-columns: 1fr; row-gap: 12px; padding: 24px 0; }
   .mh-benefit-rows strong { max-width: none; font-size: 23px; }
+
+  /* Plan 042's three contrast compositions. Same contract as the ones
+     above: stacked and overlapping, and the base keeps its shadow. */
+  .mh-resume-comp,
+  .mh-onesystem-comp,
+  .mh-startingpoint-comp { flex-direction: column; padding: 0; }
+  .mh-resume-sheet,
+  .mh-packet-mini,
+  .mh-startingpoint-comp .mh-record-card { width: 100%; }
+  ul.mh-resume-missing,
+  .mh-tool-stack,
+  .mh-blank-composer { position: relative; inset: auto; width: auto; align-self: flex-start; margin: -16px 0 0 14px; }
+  ul.mh-resume-missing { order: 2; }
+  .mh-resume-sheet { order: 1; }
 }
 
 @media (max-width: 560px) {
@@ -1506,6 +1623,10 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-intake-card { padding: 22px; }
   .mh-intake-logistics-grid { grid-template-columns: 1fr; }
   .mh-intake-vibe-labels { grid-template-columns: 1fr; text-align: left !important; gap: 4px; }
+  .mh-statements li,
+  .mh-feature-rows li { grid-template-columns: 1fr; row-gap: 10px; }
+  .mh-statements li { padding: 24px 0; }
+  .mh-statements strong { max-width: none; font-size: 23px; }
   .mh-route-content-heading,
   .mh-route-independence,
   .mh-route-contact,
@@ -1520,7 +1641,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-context-chips { grid-template-columns: 1fr; margin-top: 32px; }
   .mh-verified-heading { flex-direction: column; align-items: flex-start; gap: 20px; }
   .mh-route-content-heading p { margin-top: 26px; }
-  .mh-route-card-grid { grid-template-columns: 1fr; }
   .mh-route-story-photo { min-height: 520px; }
   .mh-route-contact { align-items: start; }
   .mh-route-sponsor-card { grid-template-columns: 1fr; }
@@ -1595,8 +1715,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-route-content-heading h2,
   .mh-route-independence h2,
   .mh-route-contact h2 { line-height: 46px; }
-  .mh-route-card-grid article { min-height: 240px; padding: 24px; }
-  .mh-route-card-grid h3 { margin-top: 44px; font-size: 27px; }
   .mh-route-story-photo { min-height: 430px; }
   .mh-route-sponsor-card { padding: 24px; }
   .mh-route-agency { padding-inline: var(--mh-gutter); padding-top: 72px; padding-bottom: 72px; }

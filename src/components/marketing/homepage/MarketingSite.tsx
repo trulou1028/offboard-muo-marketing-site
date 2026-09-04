@@ -810,7 +810,61 @@ export function FinalCta({
   );
 }
 
-export function EditorialGrid({
+/* ------------------------------------------------------------------ */
+/* Route content sections (plan 042).                                   */
+/*                                                                      */
+/* These replace `EditorialGrid`, which rendered every "three or four    */
+/* things" moment on ten routes as the same bordered 01/02/03 grid.      */
+/* It was wrong three ways at once: the numerals said "steps" over       */
+/* content that was a contrast, each 280px cell held a title and one     */
+/* sentence with about 60% of the box empty, and the odd-count fix       */
+/* (`:nth-last-child`, Pattern B) promoted item 01 to full width - which */
+/* on /career-context made "What a resume holds" the visual hero of a    */
+/* section arguing that the resume is the small thing.                   */
+/*                                                                       */
+/* Three shapes replace it, chosen by what the content IS. All three     */
+/* keep the `.mh-route-content` band so every caller's band rhythm is    */
+/* unchanged; only the inside of the section moves.                      */
+/*                                                                       */
+/*   Statements  - an argument or a set of principles. Serif lines on    */
+/*                 hairlines, no boxes, no numerals.                     */
+/*   FeatureRows - what someone gets. Compact rows, body font.           */
+/*   Contrast    - "this vs that". Shows the two things as product UI    */
+/*                 (R2/R13) instead of describing them in cells.         */
+/*                                                                       */
+/* A real sequence still takes numerals, and still uses NumberedRows.    */
+/* ------------------------------------------------------------------ */
+
+function headingIdFor(title: string) {
+  return `${title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}-title`;
+}
+
+function RouteContentSection({
+  title,
+  kicker,
+  body,
+  modifier,
+  children,
+}: {
+  title: string;
+  kicker: string;
+  body: string;
+  modifier?: string;
+  children: ReactNode;
+}) {
+  const headingId = headingIdFor(title);
+
+  return (
+    <section className={`mh-route-content mh-section${modifier ? ` ${modifier}` : ""}`} aria-labelledby={headingId}>
+      <div className="mh-route-content-heading"><span className="mh-kicker">{kicker}</span><h2 id={headingId}>{title}</h2><p>{body}</p></div>
+      {children}
+    </section>
+  );
+}
+
+/* An argument, or a set of principles. Any count: it is one column, so R1
+   has nothing to balance. */
+export function Statements({
   kicker,
   title,
   body,
@@ -821,17 +875,92 @@ export function EditorialGrid({
   body: string;
   items: readonly { title: string; body: string }[];
 }) {
-  const headingId = `${title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}-title`;
+  return (
+    <RouteContentSection kicker={kicker} title={title} body={body}>
+      <ul className="mh-statements" data-reveal="">
+        {items.map((item) => (
+          <li key={item.title}><strong>{item.title}</strong><p>{item.body}</p></li>
+        ))}
+      </ul>
+    </RouteContentSection>
+  );
+}
+
+/* What a member, resident, or partner actually gets. Lighter than
+   Statements on purpose: /employers ships both, and two identical ruled
+   lists on one page would be the same defect this plan removed. */
+export function FeatureRows({
+  kicker,
+  title,
+  body,
+  items,
+}: {
+  kicker: string;
+  title: string;
+  body: string;
+  items: readonly { title: string; body: string }[];
+}) {
+  return (
+    <RouteContentSection kicker={kicker} title={title} body={body}>
+      <ul className="mh-feature-rows" data-reveal="">
+        {items.map((item) => (
+          <li key={item.title}><strong>{item.title}</strong><p>{item.body}</p></li>
+        ))}
+      </ul>
+    </RouteContentSection>
+  );
+}
+
+/* A real sequence - things that happen in an order - is the one shape that
+   still earns numerals (DESIGN.md R11). */
+export function SequenceSection({
+  kicker,
+  title,
+  body,
+  items,
+}: {
+  kicker: string;
+  title: string;
+  body: string;
+  items: readonly { title: string; body: string }[];
+}) {
+  return (
+    <RouteContentSection kicker={kicker} title={title} body={body}>
+      <NumberedRows rows={items.map((item) => [item.title, item.body] as const)} />
+    </RouteContentSection>
+  );
+}
+
+/* "This vs that". The section shows the two things rather than describing
+   them in equal cells (R13). `payoff` is the line the retired third cell
+   used to carry - the consequence - and it reads better as one statement
+   under the pair than as a peer of the two things being contrasted. */
+export function ContrastSection({
+  kicker,
+  title,
+  body,
+  payoff,
+  children,
+}: {
+  kicker: string;
+  title: string;
+  body: string;
+  payoff: string;
+  children: ReactNode;
+}) {
+  const headingId = headingIdFor(title);
 
   return (
-    <section className="mh-route-content mh-section" aria-labelledby={headingId}>
-      <div className="mh-route-content-heading"><span className="mh-kicker">{kicker}</span><h2 id={headingId}>{title}</h2><p>{body}</p></div>
-      {/* An odd number of cards in this two-column grid used to leave an empty
-          cell - the defect the owner flagged on /career-context. The fix is
-          Pattern B and it lives entirely in the stylesheet (see the
-          `:nth-last-child` block there), so it holds for every caller and
-          every count without this component knowing either. */}
-      <div className="mh-route-card-grid" data-reveal="">{items.map((item, index) => <article key={item.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+    <section className="mh-route-content mh-contrast mh-section" aria-labelledby={headingId}>
+      <div className="mh-split">
+        <div className="mh-copy-block">
+          <span className="mh-kicker">{kicker}</span>
+          <h2 id={headingId}>{title}</h2>
+          <p>{body}</p>
+          <strong className="mh-contrast-payoff">{payoff}</strong>
+        </div>
+        {children}
+      </div>
     </section>
   );
 }

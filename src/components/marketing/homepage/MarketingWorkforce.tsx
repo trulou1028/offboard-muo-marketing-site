@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import {
   ContactBand,
-  EditorialGrid,
+  SequenceSection,
   MarketingShell,
   PageHero,
 } from "./MarketingSite";
@@ -160,7 +160,7 @@ export function MarketingWorkforce() {
           ctaHref="mailto:hello@offboard.co?subject=Workforce%20partnership"
           aside={<><span>A clear boundary</span><strong>Planning support, not an eligibility authority.</strong><p>Offboard organizes the practical work and routes residents to the responsible agency or provider for official decisions and applications.</p></>}
         />
-        <EditorialGrid
+        <SequenceSection
           kicker="Beside what you already run"
           title="Agencies decide. Offboard helps people prepare and continue."
           body="For workforce boards, education partners, and public programs: Offboard organizes the practical work around the official system and routes residents to the responsible agency or provider for decisions and applications. Offboard does not determine eligibility, calculate benefits, or replace case workers."
