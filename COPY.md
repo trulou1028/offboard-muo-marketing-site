@@ -147,6 +147,14 @@ has no public name for something the site sells, the marketing name is listed
 as marketing-owned, with the app-side concept named so the mapping is
 traceable.
 
+**How this table gets checked, after 2026-09-03.** Owner rule: work on the
+marketing site does not open, change, or run anything in `lumo-plan-builder`.
+Reading it to port a name or a fact is still correct and still required. So
+every app-side column here is either read from `origin/main` on the date given,
+or reported by the owner and labelled as such. A row with no date behind it is
+a row to re-check before trusting. When a name needs to change in the product,
+write it down here and hand it over; do not go and change it.
+
 | Site name | Source | App-side name / concept |
 | --- | --- | --- |
 | Application Packet | app | `APPLICATION_PACKET`. Sidebar shows the short form `Packets`. **`Job Packet` is retired — owner decision 2026-09-03, see below** |
@@ -158,7 +166,7 @@ traceable.
 | Role Fit | marketing-owned | the app computes a **fit score**; `Role Fit` is the member-facing name |
 | Company Intelligence | marketing-owned | the app's **company research / company intel** |
 | Application Tracker | app | `APPLICATIONS` |
-| Career Context | **site, adopted by the product** | the app's nav still says `Your Record` (`LEDGER`). **Owner decision 2026-09-03: `Career Context` is the name, in both the site and the product.** The site is already correct; the app has the rename to do, see below |
+| Career Context | **site, adopted by the product** | **Owner decision 2026-09-03: `Career Context` is the name, in both the site and the product.** Shipped on both sides; the app's `LEDGER` nav label was `Your Record` until then, see below |
 | Paperwork Review | app | `PAPERWORK_REVIEW`, owned by `legalReviewCopy.ts` |
 | Runway calculator | app | `RUNWAY` |
 | Funded Training | app | `FUNDED_TRAINING`. **`Funded training explorer` is retired** |
@@ -194,17 +202,22 @@ were the reason this waited for a decision:
   image says `Application Packet`.
 - `/job-packet` stays in `next.config.ts` as a 301. It is an inbound legacy
   URL, not a name the site says.
-- The app still writes `Job Packet` about 43 times as of 2026-09-03. The
-  site is now consistent; the app-side sweep is product work.
+- The app's own `Job Packet` sweep, about 43 uses, was outstanding when the
+  site shipped this and was **completed separately on 2026-09-04** (owner
+  report). Both sides now say `Application Packet`.
 
-**`Career Context` stays, and the product adopts it.** The app's nav calls
-the record `Your Record` (`LEDGER`) and `Career Context` appears once in the
-whole app repo, inside a prompt template. The owner's decision goes the
-other way from the usual rule in this table: the site does not follow the
-app here, the app follows the site. Nothing on the site changes. Until the
-app ships the rename, a member who reads `Career Context` on the site meets
-`Your Record` in the product — a known, recorded gap with an owner decision
-behind it, not drift.
+**`Career Context` stays, and the product adopts it.** Before this decision
+the app's nav called the record `Your Record` (`LEDGER`), and `Career Context`
+appeared once in the whole app repo, inside a prompt template. The owner's
+decision goes the other way from the usual rule in this table: the site does
+not follow the app here, the app follows the site. Nothing on the site
+changed. The app shipped its side the same day, and the leftover plain-English
+"your record" phrasing was cleaned up separately on 2026-09-04 (owner report).
+Site and product now use one name.
+
+*Sourced from the owner, not verified here. This repo does not open the app
+repo to check (see the note under the tool glossary heading); if the two ever
+read differently to a member, that is the thing to re-check first.*
 
 **The count.** The homepage and `/job-search` say "ten tools" and name the
 same ten: Role Fit, Ghost Job Checker, Company Intelligence, Application
