@@ -173,6 +173,14 @@ write it down here and hand it over; do not go and change it.
 | Your Path | app | `YOUR_PATH`, the plan card the homepage renders |
 | Lumo | site | the app writes `LUMO`; see the style rules above |
 
+**Casing swept 2026-09-04.** The toolkit card list and the five-steps tags
+were checked against this table name by name. `Paperwork review` and
+`Application tracker` were shipping in lower case and are fixed.
+`Interview prep & practice` is deliberately left as it is: it is a composite
+title covering two glossary tools (`Interview Prep` and `Voice Practice`),
+not a bare tool name, so Title Case would misname it. If that card is ever
+split, both halves take their glossary names.
+
 **Retired names, never to ship again:** `Job Packet`, `Resume Studio`,
 `Ghost Job Check`, `Ghost-job checker`, `Funded training explorer`,
 `career ledger`, and `career record` as a product noun (the plain phrase "a
@@ -577,7 +585,7 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 2. `See your money clearly` — `Your runway, how long you can go, beside your money clock: which benefit deadlines are coming and what each one is worth.` — tag `Runway calculator · Money clock`
 3. `Claim what exists` — `Step-by-step paths to unemployment benefits, health coverage, and state-approved funded training, with verified official links. We never promise funding. We show you the exact path to find out.` — tag `Benefit sheets · Funded Training`
 4. `Get ready, then run the search` — `Resume, story, materials, then Application Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.` — tag `Application Packet · Resume Tailoring`
-5. `Close it, and make it count` — `Interview prep and practice, a paperwork review before you sign, and when you land: mark it, keep your career ledger, and pass what you learned back.` — tag `Interview prep · Paperwork review`
+5. `Close it, and make it count` — `Interview prep and practice, a paperwork review before you sign, and when you land: mark it, keep your record, and pass what you learned back.` — tag `Interview Prep · Paperwork Review`
 
 ### Starting plan *(added by plan 016)*
 
@@ -592,9 +600,9 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 - Cards (renders on the first three):
   - `Resume Tailoring` — `Build and tailor resumes from your real history, ready for the role in front of you.`
   - `Interview prep & practice` — `Drills grounded in the role, the company, and your strongest stories.`
-  - `Application tracker` — `Every application, stage, and follow-up stays current without extra busywork.`
+  - `Application Tracker` — `Every application, stage, and follow-up stays current without extra busywork.`
   - `Ghost Job Checker` — `Flags fake or stale listings before you waste an application on them.`
-  - `Paperwork review` — `A read on your severance or offer paperwork before you sign anything.`
+  - `Paperwork Review` — `A read on your severance or offer paperwork before you sign anything.`
   - `Runway calculator` — `See how long your money lasts and which deadlines change the math.`
   - `Funded Training` — `Search state-approved programs that may be paid for while you train.`
   - `Ask Lumo` — `An AI guide that works from your plan, your benefit facts, and your search.`
