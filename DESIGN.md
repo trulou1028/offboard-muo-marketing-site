@@ -473,6 +473,36 @@ section. Measured at 390 after the hero rebuild, 2026-09-03: **13,155px total,
 tallest section 2,100px** ("More than a job search"). The budget still has real headroom
 and is deliberately not being lowered in the same pass that earned it.)*
 
+**R11 · Numerals only on sequences.** A `01 / 02 / 03` label is a promise
+that these happen, or should be done, in that order. A contrast, a set of
+principles, and a list of what someone gets carry no numerals. *(Plan 042.
+Before it, one grid rendered all four content types the same way on ten
+routes, numerals included — including `01 What a resume holds / 02 What
+your career holds / 03 What keeps getting lost`, which is a contrast.)*
+
+**R12 · One sentence gets a rule, not a box.** A card whose body is a
+single sentence is a row of a ruled list. Boxes are for compositions and
+for bodies of two sentences or more. *(The retired grid gave a title and one
+sentence a 280px bordered cell with a 70px gap above the title: about 60%
+of every cell was empty, so the eye read the rules instead of the words.)*
+
+**R13 · A contrast is a composition.** A "this versus that" section shows
+the two things as product UI (R2). It is never a grid of equal cells
+describing them, and never two columns of prose. *(Owner decision
+2026-09-04.)* The consequence — the "so what" that a third cell used to
+carry — is one statement under the pair, not a peer of the two things being
+contrasted.
+
+**R14 · A satellite may only break padding.** A `.mh-comp-satellite`
+overlaps its base by 12 to 32px (R2), and that overlap has to land inside
+the base card's own padding so it can never cover a row label or a value.
+Express it in the stylesheet rather than eyeballing it: the plan 042
+compositions set the base to `width: 70%` and the satellite to
+`calc(30% + 24px)`, which is 24px of overlap at every viewport width.
+*(Every composition built in plans 041 and 042 got this wrong on the first
+attempt, in the same way: the satellite ate the last row's label and left
+an orphan value on the right.)*
+
 ### Pattern catalogue
 
 Every "three things" or "five things" moment picks one of these instead of
@@ -481,13 +511,16 @@ minting a grid:
 | Pattern | Shape | Reference in the code |
 | --- | --- | --- |
 | A · Split | Copy one side, visual the other | `.mh-split`, `.mh-hero2` |
-| B · Lead + pair | First item spans the full width, the rest sit as a pair under it. Fixes any odd count in a 2-column grid | `.mh-route-card-grid.is-lead-pair` |
+| B · Lead + pair | First item spans the full width, the rest sit as a pair under it. Fixes any odd count in a 2-column grid | `.mh-route-resources-grid` (its only remaining home: plan 042 retired `.mh-route-card-grid`) |
 | C · Ruled list | Rows with hairlines, title left, body and optional link right. Any count | `ol.mh-five-steps-rows` |
 | D · Inset with ruled aside | Dark inset, copy left, ruled rows right | `.mh-sponsor-inset` |
 | E · Stepped strip | Numbered items in one row with hairline rules, 3 or 4 | `.mh-steps` |
 | F · Definition rows | `<dl>`, label column and value column | `.mh-company-facts` |
 | G · Two-column intro | Headline left, lead right, no grid | `.mh-intro-split` |
 | H · Disclosure list | Questions the reader opens one at a time. Any count, and closed answers stay in the DOM | `.mh-disclosure-list` |
+| I · Statements | An argument or a set of principles. Serif line, one sentence, hairline between. Any count, no numerals | `.mh-statements` |
+| J · Feature rows | What someone gets. Label column, body column, compact. Lighter than I on purpose, so a page can carry both | `.mh-feature-rows` |
+| K · Contrast | "This vs that" shown as product UI, with the consequence as one statement under it (R13) | `.mh-contrast` |
 
 ### Composition primitives (R2)
 

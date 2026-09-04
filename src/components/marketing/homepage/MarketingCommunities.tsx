@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import {
   ContactBand,
-  EditorialGrid,
+  FeatureRows,
   MarketingShell,
   PageHero,
 } from "./MarketingSite";
@@ -120,7 +120,7 @@ export function MarketingCommunities() {
           ctaHref="mailto:hello@offboard.co?subject=Community%20sponsorship"
           aside={<><span>What sponsorship covers</span><strong>The account, not a view into it.</strong><p>You sponsor access for your members. What they build inside it stays theirs, and your reporting is aggregate only.</p></>}
         />
-        <EditorialGrid
+        <FeatureRows
           kicker="Who this is for"
           title="Programs whose people come back."
           body="The relationship outlasts the event. That is what makes this different from a company running a layoff, and it is what a record built once and kept is actually for."

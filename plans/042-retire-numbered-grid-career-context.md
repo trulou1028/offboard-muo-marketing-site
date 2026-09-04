@@ -2,7 +2,7 @@
 
 > **Execute with:** Opus 5 · high effort — a sitewide layout replacement across ten routes plus a page re-sequence, all verified in a browser at two widths; no claim or compliance copy changes, but the visual baselines for ten routes move and each diff must be proven intentional.
 
-**Status: PLANNED, not built.** Written 2026-09-04 from the owner's design
+**Status: BUILT 2026-09-04, awaiting owner review.** Written 2026-09-04 from the owner's design
 critique request, reviewed at commit `5d7e110` (`main`). Owner decision
 2026-09-04: the contrast sections become **product compositions**, not
 prose comparisons.
@@ -148,3 +148,69 @@ swap must not import any string from another page into it.
   `npm run e2e` green. Preview URL via `node scripts/preview-url.mjs`,
   with `/career-context` first and the three contrast pages named as
   things to look at.
+
+
+## Execution record (2026-09-04)
+
+Built. Five places where the plan's stated facts disagreed with the repo, and
+the repo won.
+
+1. **The content-type table was wrong about two callers.** The plan said
+   `/pricing` "How credits work" was the one real sequence. It is not: its
+   three items (`Included monthly`, `Clear costs`, `Human support`) are three
+   parallel facts, so it took Statements. `/workforce` "Beside what you
+   already run" IS a sequence (`Orient` then `Route` then `Follow through`)
+   and it kept its numerals, through `SequenceSection`. So the numerals moved
+   from the caller the plan named to a different one.
+2. **Two ruled shapes, not one.** `/employers` calls the replacement twice.
+   One ruled list used for both would have been the same defect this plan
+   removed, so there are two weights: `.mh-statements` for an argument (serif
+   line, 26px) and `.mh-feature-rows` for what someone gets (label column,
+   body font). Catalogue entries I and J.
+3. **The hero composition did not survive contact with the hero.**
+   `.mh-route-hero aside` is already a paper card with its own padding and a
+   1 degree rotation, so putting a `.mh-comp` inside it would have been a card
+   in a card. `/career-context` instead gets a record list inside the standard
+   aside, which still ends the "the page never shows the object" problem: the
+   hero previously ran `aside={false}` and showed nothing at all.
+4. **`ImprovesSection` kept its three-column qblock layout.** The plan wanted
+   it converted to ruled statements. Two reasons not to: the page already has
+   enough shape variety after the merge, and `/career-context` is the last
+   caller of `.mh-qgrid` / `.mh-qblock`, so converting it would have left
+   those rules dead and failed `DeadSelectors.test.ts`.
+5. **Satellite geometry needed a rule, not a value.** All three contrast
+   compositions were first built with the satellite covering the base card's
+   last row label, leaving an orphan value on the right - the same defect,
+   three times, and the same one plan 041 hit. The fix is expressed as a
+   ratio: base `width: 70%`, satellite `calc(30% + 24px)`, which is 24px of
+   overlap at any width, inside R2's 12-32px range and inside the card's own
+   28-30px padding so it cannot reach text. This is now **DESIGN.md R14**,
+   which the plan did not anticipate.
+
+**Mobile height on `/career-context`: 10,742px to 9,163px** (desktop 6,779px
+to 5,830px). The plan's target was under 8,000px and this does not reach it.
+The merge of the two eight-card grids is what was available without cutting
+content the page needs; getting under 8,000 would mean removing sections, not
+re-laying them out, and that is a copy decision rather than a layout one.
+
+**Verification.** Every command in `.github/workflows/ci.yml`'s
+`test-and-build` and `e2e` jobs: `npm run lint`, `npm run lint:css`,
+`npm run typecheck`, `npm test` (177), `npm run build`, `npm run e2e` (105).
+All green. The `cms-contract` job was **not** run locally - it needs Docker
+and this change touches no migration, CMS content, or database path.
+
+Browser checked at 1440 and 390 on all nine touched routes: zero console
+errors and `scrollWidth === innerWidth` everywhere. The three satellite
+overlaps were asserted numerically rather than eyeballed - 24px on each, with
+a check that no text node inside the base intersects the satellite.
+
+**27 visual baselines re-captured**, deliberately: nine routes at three
+viewports. Those nine are exactly the pages whose sections changed, and the
+other 78 e2e assertions passed untouched before the re-capture. That is the
+evidence the new CSS is scoped and that no page inherited a layout change it
+did not ask for.
+
+**Follow-up, not done here.** Plan 041's `.mh-benefit-rows` on
+`/layoff-support` is the same shape as `.mh-statements` and should converge
+on it once both branches land. They were built on independent branches on
+purpose, so neither PR depends on the other.
