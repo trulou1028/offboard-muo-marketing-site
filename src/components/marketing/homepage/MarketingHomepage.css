@@ -121,9 +121,14 @@ a.mh-skip-link:focus { transform: translateY(0); }
 /* Plan 018 phase 4: the filled lime button is the signup role. An internal
    route link that looked identical competed with it on the same screen, so
    it keeps the button shape and loses the fill. */
-.mh-secondary-cta { display: inline-flex; width: fit-content; min-height: 50px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 22px; background: transparent; border: 1px solid var(--mh-ink); color: var(--mh-ink); font-size: 15px; font-weight: 650; line-height: 20px; transition: background-color 180ms ease-out, transform 180ms ease-out; }
+.mh-secondary-cta { --mh-cta-hover-bg: var(--mh-paper-soft); display: inline-flex; width: fit-content; min-height: 50px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 22px; background: transparent; border: 1px solid var(--mh-ink); color: var(--mh-ink); font-size: 15px; font-weight: 650; line-height: 20px; transition: background-color 180ms ease-out, transform 180ms ease-out; }
 .mh-secondary-cta svg { width: 17px; height: 17px; transition: transform 180ms ease-out; }
-.mh-secondary-cta:hover { background: var(--mh-paper-soft); transform: translateY(-1px); }
+/* The hover fill travels with the text colour. It used to be a hard
+   --mh-paper-soft, so an on-dark secondary CTA - whose label is paper -
+   hovered to paper-on-paper at 1.1:1 and vanished under the cursor. The
+   fill is now a custom property that any on-dark context re-points below,
+   so the pair can never drift apart again. Guarded by e2e/cta-contrast.spec.ts. */
+.mh-secondary-cta:hover { background: var(--mh-cta-hover-bg); transform: translateY(-1px); }
 .mh-secondary-cta:hover svg { transform: translateX(3px); }
 .mh-secondary-cta:active { transform: translateY(0); }
 .mh-primary-cta:hover { background: var(--mh-deep); transform: translateY(-1px); }
@@ -1011,7 +1016,7 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
    needs the same treatment, so the value became a token. Deliberately NOT
    --mh-border-on-dark, which is 16% and would have thinned the hero. */
 .marketing-homepage.mh-page-home .mh-hero2-actions a.mh-secondary-cta,
-.mh-connect a.mh-secondary-cta { border-color: var(--mh-cta-border-on-dark); color: var(--mh-paper); }
+.mh-connect a.mh-secondary-cta { --mh-cta-hover-bg: var(--mh-surface-on-dark); border-color: var(--mh-cta-border-on-dark); color: var(--mh-paper); }
 .marketing-homepage.mh-page-home .mh-hero2-actions a.mh-secondary-cta:hover,
 .mh-connect a.mh-secondary-cta:hover { border-color: var(--mh-paper); }
 

@@ -503,6 +503,17 @@ compositions set the base to `width: 70%` and the satellite to
 attempt, in the same way: the satellite ate the last row's label and left
 an orphan value on the right.)*
 
+**R15 · A hover fill travels with its text colour.** A button that changes
+background on hover states both halves of the pair in the same place, as a
+custom property the on-dark context re-points, never as a literal in the
+base rule. The secondary CTA's hover fill was a hard `--mh-paper-soft`
+while its on-dark label is `--mh-paper`: hovering the homepage hero button
+painted paper on paper at **1.1:1** and the label vanished under the
+cursor. The rest state was fine, and the visual suite's 1% pixel tolerance
+never sees a hover at all, so nothing caught it until someone moved a
+mouse. `e2e/cta-contrast.spec.ts` now sweeps every CTA on every route at
+rest and hovered, and fails below 4.5:1.
+
 ### Pattern catalogue
 
 Every "three things" or "five things" moment picks one of these instead of
