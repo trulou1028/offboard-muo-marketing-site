@@ -40,18 +40,38 @@ function SecondaryCta({ children, href }: { children: ReactNode; href: string })
 }
 
 /* ---------------------------------------------------------------- */
-/* 1 · Hero (forest deep). Composition A: the chat card overlaps the */
-/* photo's bottom-right corner instead of hanging off the container, */
-/* and the tracker card leaves the card to break its bottom-left     */
-/* edge. On a phone the whole thing goes static but keeps its        */
-/* shadow - v2 dropped to a flat bordered box exactly where most     */
-/* visitors first meet it.                                           */
+/* 1 · Hero (forest deep). Owner composition 2026-09-07, refined in   */
+/* Figma: a full-bleed photograph of one person working late at home  */
+/* fills the band, its dark-green wall carrying the headline on the   */
+/* left; the Lumo exchange floats over the photo's lower right as one */
+/* flat image (see COPY.md § Hero for why it is pixels, not markup).  */
+/* Two photographs were approved; HERO_PHOTO picks the one that ships. */
 /* ---------------------------------------------------------------- */
+const HERO_PHOTOS = {
+  livingRoom: {
+    src: "/marketing/homepage/hero/living-room.webp",
+    alt: "A man works on his laptop on a sofa at night, lit by a floor lamp beside a window.",
+  },
+  bedroom: {
+    src: "/marketing/homepage/hero/bedroom.webp",
+    alt: "A woman sits cross-legged on her bed with a laptop at dusk, a lamp lit on the nightstand beside her.",
+  },
+} as const;
+const HERO_PHOTO = HERO_PHOTOS.livingRoom;
+
 function HomeHero() {
   return (
     <section className="mh-hero2 mh-section" id="top" aria-labelledby="hero-title">
+      <Image
+        className="mh-hero2-photo"
+        src={HERO_PHOTO.src}
+        alt={HERO_PHOTO.alt}
+        fill
+        sizes="100vw"
+        priority
+      />
       <div className="mh-hero2-copy">
-        <h1 id="hero-title">The modern unemployment office.</h1>
+        <h1 id="hero-title"><span>The Modern</span> <span>Unemployment Office</span></h1>
         <p>Your benefits, your job search, and your career context in one system, connected to the AI you already use.</p>
         <div className="mh-hero2-actions">
           <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Get started free</span><ArrowRight aria-hidden="true" /></a>
@@ -62,11 +82,11 @@ function HomeHero() {
       <div className="mh-hero2-visual">
         <Image
           className="mh-hero2-figure"
-          src="/marketing/homepage/hero-composition.avif"
-          alt="A man works at his kitchen table while a conversation floats beside him. He asks Lumo to save a new application for a senior product design role; Lumo replies that it has added the role to his Offboard application tracker and saved the company context, and shows the saved application underneath."
-          width={1354}
-          height={1168}
-          sizes="(max-width: 900px) 100vw, 46vw"
+          src="/marketing/homepage/hero/lumo-chat.png"
+          alt="A conversation floats beside him. He asks Offboard what he should focus on today; Lumo notes it used his profile, applications, interviews, and integrations, and answers that two things deserve his attention: preparing for a senior product design interview, and updating the status of a product engineer application."
+          width={1000}
+          height={750}
+          sizes="(max-width: 900px) 100vw, 500px"
           priority
           unoptimized
         />

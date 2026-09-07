@@ -318,7 +318,9 @@ plus one featured card on the right with a render. Panels are light
 no-dead-links rule.
 
 **Navigation labels are Title Case** (owner decision 2026-08-31); prose,
-headlines, and CTA button labels stay sentence case. The mixed casing this
+headlines, and CTA button labels stay sentence case. One exception: the
+homepage H1 `The Modern Unemployment Office` is Title Case with no period
+(owner 2026-09-07), as the category name rather than a sentence. The mixed casing this
 replaced was visible: product links like "Career Context" were already Title
 Case while "How it works" and "For employers" were not.
 
@@ -423,20 +425,19 @@ it did not):
 
 ### Hero
 
-- H1: `The modern unemployment office.`
+- H1: `The Modern Unemployment Office` *(owner 2026-09-07, from the Figma hero: Title Case and no period, the one headline exempt from the sentence-case rule in § Language rules; it is the category name, treated as a proper noun)*
 - Body: `Your benefits, your job search, and your career context in one system, connected to the AI you already use.` *(round 5: was five nouns, and "applications" sits inside "job search")*
 - CTAs: `Get started free` (primary) · `See how it works` → `/how-it-works`
 - Trust line: `Join thousands of people building their next chapter with Offboard.` *(owner-confirmed accurate 2026-08-31)*
-- Hero visual: **a flat image**, `public/marketing/homepage/hero-composition.avif`, shipped byte-for-byte as the owner exported it from the Paper artboard "Hero visual" (owner 2026-09-03). It is not markup and it is not built from these strings. Kitchen-table photo (the `Benefits check · Done` chip is retired, owner 2026-09-02) with two cards over its right side. Question, with the member's face beside the bubble: `Can you save a new application for a Senior Product Design role at Figma?` Answer, with Lumo's face: `Done. I've added the role to your Offboard application  tracker and saved the company context.` Then the state the answer claims: `Application Added` / `Senior Product Design at Figma` / `View Application`. The lifted `Product Designer / Tesserac / Saved` tracker card is retired from the homepage; it still ships on `/integrations`.
+- Hero visual (owner composition 2026-09-07, refined in Figma): **a full-bleed photograph with one flat chat image over it.** The photograph fills the band; two were approved and ship in `public/marketing/homepage/hero/` (`living-room.webp`, a man on a sofa at night; `bedroom.webp`, a woman on her bed at dusk). `HERO_PHOTO` in `MarketingHome.tsx` picks the one that ships; the living room is live. Photo `alt`: `A man works on his laptop on a sofa at night, lit by a floor lamp beside a window.` / `A woman sits cross-legged on her bed with a laptop at dusk, a lamp lit on the nightstand beside her.`
 
-  **Three known copy-law breaches inside this image, and they are pixels, so no test can see them.** `CopyDrift.test.tsx` reads the DOM, and this text is not in the DOM — this entry is the only record of it. They are recorded rather than fixed because the owner asked for the export as-is (2026-09-03), and fixing any of them means a new export from Paper, not a code change:
-  1. It names **Figma**, twice. Everywhere else the site invents its example company (`Tesserac`). A real company's name inside a fabricated product screenshot is a different claim from an invented one.
-  2. `Application Added` and `View Application` are title case; the site is sentence case.
-  3. `application  tracker` carries a double space.
+  The exchange over the photo's lower right is `public/marketing/homepage/hero/lumo-chat.png`, one transparent image at 2x. It is not markup and it is not built from these strings; a change to it is a new export, not a code edit. Member bubble: `@offboard What should I focus on today?` (the handle in lime). Lumo's card, with Lumo's face beside it: a context chip `Used profile, applications, interviews, integrations`, then `Got it! Two things deserve your attention today.`, then two rows: `Prepare for your Figma interview` / `Senior Product Design at Figma` and `Update application status` / `Product Engineer at Stripe`. The 2026-09-03 Paper export (`hero-composition.avif`, the kitchen-table photo with the save-an-application exchange) is retired.
 
-  A fourth, non-copy issue: `Senior Product Design at Figma` renders at roughly **3.7:1** on the tinted card, under the 4.5:1 that 14px text needs. In markup this was fixed with a darker token; in an image it needs the export changed.
+  **Two known copy-law breaches inside this image, and they are pixels, so no test can see them.** `CopyDrift.test.tsx` reads the DOM, and this text is not in the DOM — this entry is the only record of it. Recorded rather than fixed because the image reproduces the owner's Figma composition as drawn (2026-09-07); fixing either means a new export:
+  1. It names **Figma** (twice) and **Stripe**. Everywhere else the site invents its example company (`Tesserac`). A real company's name inside a fabricated product screenshot is a different claim from an invented one.
+  2. `Senior Product Design at Figma` and `Product Engineer at Stripe` render at roughly **3.5:1** on the near-black list, under the 4.5:1 that 12.5px text needs.
 
-  **The `alt` deliberately does not name the company**, so the breach stays inside the picture rather than entering the site's own text: `A man works at his kitchen table while a conversation floats beside him. He asks Lumo to save a new application for a senior product design role; Lumo replies that it has added the role to his Offboard application tracker and saved the company context, and shows the saved application underneath.`
+  **The `alt` deliberately does not name the companies**, so the breach stays inside the picture rather than entering the site's own text: `A conversation floats beside him. He asks Offboard what he should focus on today; Lumo notes it used his profile, applications, interviews, and integrations, and answers that two things deserve his attention: preparing for a senior product design interview, and updating the status of a product engineer application.`
 
 ### The three steps *(new in v3)*
 

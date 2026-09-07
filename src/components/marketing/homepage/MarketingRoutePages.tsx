@@ -296,8 +296,10 @@ export function MarketingEmployers() {
             <span className="mh-kicker">Also for employers</span>
             <h2 id="employer-hiring-title">Hiring? Post roles free.</h2>
             <p>Offboard employers can post open roles at no cost. Postings reach members actively searching, with materials prepared and context attached.</p>
-            <a className="mh-section-link" href={RECRUIT_URL}>Post a role <ArrowRight aria-hidden="true" /></a>
-            <a className="mh-employer-hiring-secondary" href="mailto:hello@offboard.co?subject=Hiring%20on%20Offboard">or email us</a>
+            <p className="mh-employer-hiring-actions">
+              <a className="mh-section-link" href={RECRUIT_URL}>Post a role <ArrowRight aria-hidden="true" /></a>
+              <a className="mh-employer-hiring-secondary" href="mailto:hello@offboard.co?subject=Hiring%20on%20Offboard">or email us</a>
+            </p>
           </div>
           <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/strip-walking-in.webp" alt="A person walking into an office building for an interview, bag on shoulder" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
         </section>

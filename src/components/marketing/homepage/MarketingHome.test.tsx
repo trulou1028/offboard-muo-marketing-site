@@ -40,7 +40,7 @@ describe("Offboard marketing routes", () => {
 
     // Homepage v3 (plan 039): the same Career Context narrative, re-sequenced
     // as three numbered steps. COPY.md § 1.
-    expect(screen.getByRole("heading", { level: 1, name: "The modern unemployment office." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: "The Modern Unemployment Office" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "How Offboard works." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "One place that remembers your career." })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /see what your career context holds/i })).toHaveAttribute("href", "/career-context");
