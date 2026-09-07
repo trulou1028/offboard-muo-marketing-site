@@ -71,7 +71,7 @@ function HomeHero() {
         priority
       />
       <div className="mh-hero2-copy">
-        <h1 id="hero-title">The modern unemployment office.</h1>
+        <h1 id="hero-title">The Modern Unemployment Office</h1>
         <p>Your benefits, your job search, and your career context in one system, connected to the AI you already use.</p>
         <div className="mh-hero2-actions">
           <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Get started free</span><ArrowRight aria-hidden="true" /></a>

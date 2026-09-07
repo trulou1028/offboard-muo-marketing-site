@@ -318,7 +318,9 @@ plus one featured card on the right with a render. Panels are light
 no-dead-links rule.
 
 **Navigation labels are Title Case** (owner decision 2026-08-31); prose,
-headlines, and CTA button labels stay sentence case. The mixed casing this
+headlines, and CTA button labels stay sentence case. One exception: the
+homepage H1 `The Modern Unemployment Office` is Title Case with no period
+(owner 2026-09-07), as the category name rather than a sentence. The mixed casing this
 replaced was visible: product links like "Career Context" were already Title
 Case while "How it works" and "For employers" were not.
 
@@ -423,7 +425,7 @@ it did not):
 
 ### Hero
 
-- H1: `The modern unemployment office.`
+- H1: `The Modern Unemployment Office` *(owner 2026-09-07, from the Figma hero: Title Case and no period, the one headline exempt from the sentence-case rule in § Language rules; it is the category name, treated as a proper noun)*
 - Body: `Your benefits, your job search, and your career context in one system, connected to the AI you already use.` *(round 5: was five nouns, and "applications" sits inside "job search")*
 - CTAs: `Get started free` (primary) · `See how it works` → `/how-it-works`
 - Trust line: `Join thousands of people building their next chapter with Offboard.` *(owner-confirmed accurate 2026-08-31)*
