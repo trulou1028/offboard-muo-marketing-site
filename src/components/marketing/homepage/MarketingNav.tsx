@@ -6,47 +6,34 @@ import Link from "next/link";
 import {
   ArrowRight,
   BookOpen,
-  Briefcase,
-  Building2,
   ChevronDown,
-  GraduationCap,
-  IdCard,
   Info,
-  Landmark,
-  LifeBuoy,
   Mail,
   MapPin,
   MessageCircle,
-  Plug,
   ShieldCheck,
-  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 
 import type { MarketingRoute } from "./MarketingSite";
 
-/* The mega-menu navigation (plan 037, phase 4 of the site IA roadmap; owner
-   revision 2026-09-01: four tabs, light panels).
+/* The navigation (plan 037's mega menu, trimmed to the launch set by plan
+   043 on 2026-09-07).
 
-   Product ▾ · For Organizations ▾ · Pricing · Resources ▾. Home left the bar
-   (the wordmark is the home link), How It Works moved inside Product as its
-   featured panel, and About moved inside Resources under a Company column.
-   Each panel is columns of links plus one featured card on the right, so a
-   panel says what a page is rather than only naming it.
+   How It Works · For Employers · Pricing · Resources ▾.
+
+   It was four tabs, three of them mega menus. Eight pages left the nav at
+   the launch trim (src/lib/launch.ts), which emptied Product down to its
+   featured card and For Organizations down to a single link, so both became
+   plain links to the page that survived. Resources is the one panel left.
+   The structure that was here is in git history and in
+   docs/site-architecture.md; un-deferring a page restores its entry.
 
    Built as a disclosure-navigation pattern, not a menubar: each trigger is a
    plain button with aria-expanded, and each panel is a container of links.
    The ARIA authoring practices recommend this over menu/menuitem roles for
    navigation, because these are links to pages, not commands, and screen
    reader users expect link semantics.
-
-   The featured images are the three renders nothing else on the site used,
-   which keeps plan 007's every-image-referenced-once goal intact without
-   spending on new imagery.
-
-   Deliberately NOT in Resources: Company Transition Centers. The target
-   navigation lists it; /companies does not exist, and plan 026's rule is
-   that the nav ships only when its pages exist - no dead links.
 
    /act never appears here, in either presentation. */
 
@@ -77,61 +64,8 @@ export type NavEntry =
   | { kind: "group"; id: string; label: string; columns: readonly NavColumn[]; feature: NavFeature };
 
 export const NAV_ENTRIES: readonly NavEntry[] = [
-  {
-    kind: "group",
-    id: "product",
-    label: "Product",
-    columns: [
-      {
-        heading: "The system",
-        items: [
-          { route: "career-context", href: "/career-context", label: "Career Context", blurb: "The record everything else reads from.", icon: IdCard },
-          { route: "lumo", href: "/lumo", label: "Lumo", blurb: "The guide that knows your situation.", icon: Sparkles },
-          { route: "integrations", href: "/integrations", label: "Offboard Everywhere", blurb: "Use Offboard from the AI you already use.", icon: Plug },
-        ],
-      },
-      {
-        heading: "The work",
-        items: [
-          { route: "job-search", href: "/job-search", label: "Job Search", blurb: "The whole search as one system.", icon: Briefcase },
-          { route: "layoff-support", href: "/layoff-support", label: "Layoff & Benefits", blurb: "Deadlines, coverage, and runway.", icon: LifeBuoy },
-        ],
-      },
-    ],
-    feature: {
-      kicker: "Start here",
-      title: "How It Works",
-      body: "Five steps from the layoff to the next job, and what Offboard does at each one.",
-      cta: "See how it works",
-      href: "/how-it-works",
-      route: "how-it-works",
-      image: "/marketing/homepage/renders/path-stage.webp",
-    },
-  },
-  {
-    kind: "group",
-    id: "organizations",
-    label: "For Organizations",
-    columns: [
-      {
-        heading: "Who you serve",
-        items: [
-          { route: "employers", href: "/employers", label: "For Employers", blurb: "Sponsor a group through a layoff.", icon: Building2 },
-          { route: "workforce", href: "/workforce", label: "Workforce & Government", blurb: "Agencies, boards, and public programs.", icon: Landmark },
-          { route: "communities", href: "/communities", label: "Universities & Communities", blurb: "Alumni, members, and career offices.", icon: GraduationCap },
-        ],
-      },
-    ],
-    feature: {
-      kicker: "What a sponsor sees",
-      title: "Aggregate only. Never the person.",
-      body: "Sponsors receive aggregate participation and outcome reporting, never individual applications, conversations, finances, or reflections.",
-      cta: "See exactly who can see what",
-      href: "/privacy-security",
-      route: "privacy-security",
-      image: "/marketing/homepage/renders/privacy-three-panel.webp",
-    },
-  },
+  { kind: "link", route: "how-it-works", href: "/how-it-works", label: "How It Works" },
+  { kind: "link", route: "employers", href: "/employers", label: "For Employers" },
   { kind: "link", route: "pricing", href: "/pricing", label: "Pricing" },
   {
     kind: "group",
@@ -143,7 +77,6 @@ export const NAV_ENTRIES: readonly NavEntry[] = [
         items: [
           { route: "resources", href: "/resources", label: "Guides", blurb: "Practical answers, checked by people.", icon: BookOpen },
           { route: "privacy-security", href: "/privacy-security", label: "Privacy & Security", blurb: "Who can see your record, and who cannot.", icon: ShieldCheck },
-          { route: "companies", href: "/companies", label: "Company Transition Centers", blurb: "Laid off from a company in the news? Start there.", icon: Building2 },
         ],
       },
       {
@@ -364,7 +297,11 @@ export function MarketingMobileMenu({ current, signInUrl }: { current: Marketing
           ) : (
             <div className="mh-mobile-group" key={entry.id}>
               <strong>{entry.label}</strong>
-              {entry.id === "product" && (
+              {/* Was product-only, which left the Resources panel's
+                  featured newsletter with no entry on a phone. */}
+              {entry.feature.external ? (
+                <a href={entry.feature.href}>{entry.feature.title}</a>
+              ) : (
                 <Link href={entry.feature.href} aria-current={current === entry.feature.route ? "page" : undefined}>
                   {entry.feature.title}
                 </Link>

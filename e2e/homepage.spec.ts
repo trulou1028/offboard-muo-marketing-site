@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { DEFERRED_ROBOTS, DEFERRED_ROUTES } from "../src/lib/launch";
+
 test.describe("Offboard marketing site", () => {
   test("keeps the homepage focused and routes visitors to deeper pages", async ({ page }) => {
     const consoleErrors: string[] = [];
@@ -81,20 +83,28 @@ test.describe("Offboard marketing site", () => {
     for (const [route, heading] of routes) {
       await page.goto(route);
       await expect(page.getByRole("heading", { level: 1, name: heading })).toBeVisible();
-      await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow, noarchive");
+      // Deferred routes (plan 043) override the layout value with their own,
+      // so this asserts whichever one the route is supposed to render rather
+      // than accepting either.
+      const expectedRobots = DEFERRED_ROUTES.some((deferred) => route.startsWith(deferred))
+        ? DEFERRED_ROBOTS
+        : "noindex, nofollow, noarchive";
+      await expect(page.locator('meta[name="robots"]'), `${route} robots`).toHaveAttribute("content", expectedRobots);
     }
   });
 
-  // Plan 037 replaced the flat six-link nav with one top-level link and
-  // three mega-menu triggers. What is asserted here is the shape and the guardrails:
-  // exactly one panel open at a time, Escape closing it, and /act absent from
-  // both the desktop nav and the mobile menu.
-  test("opens one dropdown at a time and keeps /act out of the nav", async ({ page }) => {
+  // Plan 043 trimmed plan 037's four tabs to three top-level links and one
+  // mega-menu trigger. What is asserted here is the shape and the guardrails:
+  // the panel opens and closes, the deferred set is absent from both nav
+  // presentations, and /act is absent from both.
+  test("opens and closes its one dropdown and keeps deferred routes and /act out of the nav", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
     const headerNav = page.getByRole("navigation", { name: "Marketing navigation" });
-    await expect(headerNav.getByRole("link")).toHaveCount(1);
-    await expect(headerNav.getByRole("button")).toHaveCount(3);
+    await expect(headerNav.getByRole("link")).toHaveCount(3);
+    await expect(headerNav.getByRole("button")).toHaveCount(1);
+    await expect(headerNav.getByRole("link", { name: "How It Works" })).toHaveAttribute("href", "/how-it-works");
+    await expect(headerNav.getByRole("link", { name: "For Employers" })).toHaveAttribute("href", "/employers");
     await expect(headerNav.getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
     expect(await page.locator('.mh-site-header a[href="/act"]').count()).toBe(0);
 
@@ -104,22 +114,39 @@ test.describe("Offboard marketing site", () => {
       );
 
     expect(await visiblePanels()).toBe(0);
-    const product = headerNav.getByRole("button", { name: "Product" });
-    await product.click();
-    await expect(product).toHaveAttribute("aria-expanded", "true");
-    expect(await visiblePanels()).toBe(1);
-
-    await headerNav.getByRole("button", { name: "Resources" }).click();
-    await expect(product).toHaveAttribute("aria-expanded", "false");
+    const resources = headerNav.getByRole("button", { name: "Resources" });
+    await resources.click();
+    await expect(resources).toHaveAttribute("aria-expanded", "true");
     expect(await visiblePanels()).toBe(1);
 
     await page.keyboard.press("Escape");
+    await expect(resources).toHaveAttribute("aria-expanded", "false");
     expect(await visiblePanels()).toBe(0);
 
     const footerNav = page.getByRole("navigation", { name: "Footer navigation" });
-    await expect(footerNav.getByRole("link", { name: "Workforce & Government" })).toBeVisible();
-    await expect(footerNav.getByRole("link", { name: "Universities & Communities" })).toBeVisible();
     await expect(footerNav.getByRole("link", { name: "For Employers" })).toBeVisible();
+    await expect(footerNav.getByRole("link", { name: "Privacy & Security" })).toBeVisible();
+
+    // The deferred set (src/lib/launch.ts) leaves the header, the mobile
+    // menu, the footer, and the homepage body, while its URLs keep working.
+    for (const route of DEFERRED_ROUTES) {
+      expect(await page.locator(`.mh-site-header a[href="${route}"]`).count(), `${route} in the header`).toBe(0);
+      expect(await page.locator(`.mh-site-footer a[href="${route}"]`).count(), `${route} in the footer`).toBe(0);
+      expect(await page.locator(`main a[href="${route}"]`).count(), `${route} in the homepage body`).toBe(0);
+    }
+  });
+
+  // The deferred pages stay reachable and keep their own noindex. Asserting
+  // the exact DEFERRED_ROBOTS string, which differs from the layout's, is
+  // what makes this fail if a page loses its override rather than passing on
+  // the inherited value - and it keeps working after the operator flips the
+  // layout value at cutover (docs/cutover-checklist.md).
+  test("serves every deferred route with its own noindex", async ({ page }) => {
+    for (const route of DEFERRED_ROUTES) {
+      const response = await page.goto(route);
+      expect(response?.status(), `${route} status`).toBe(200);
+      await expect(page.locator('meta[name="robots"]'), `${route} robots`).toHaveAttribute("content", DEFERRED_ROBOTS);
+    }
   });
 
   // Plan 035 retired the thin /public-partners page into /workforce. The old
@@ -166,12 +193,17 @@ test.describe("Offboard marketing site", () => {
     await page.goto("/");
     await page.getByText("Menu", { exact: true }).click();
     const menu = page.locator(".mh-mobile-menu > div");
-    await expect(menu.getByRole("link", { name: "Universities & Communities" })).toBeVisible();
+    await expect(menu.getByRole("link", { name: "For Employers" })).toBeVisible();
     await expect(menu.getByRole("link", { name: "Privacy & Security" })).toBeVisible();
     // The featured destinations are plain links on a phone, so nothing that
-    // only the desktop panels carry is lost here.
+    // only the desktop panel carries is lost here - including the newsletter,
+    // which had no phone entry until plan 043 generalized the feature link.
     await expect(menu.getByRole("link", { name: "How It Works" })).toBeVisible();
     await expect(menu.getByRole("link", { name: "About" })).toBeVisible();
+    await expect(menu.getByRole("link", { name: "The Offboard Newsletter" })).toBeVisible();
+    for (const route of DEFERRED_ROUTES) {
+      expect(await menu.locator(`a[href="${route}"]`).count(), `${route} in the mobile menu`).toBe(0);
+    }
     expect(await menu.locator('a[href="/act"]').count()).toBe(0);
     expect(
       await menu.evaluate((el) => {

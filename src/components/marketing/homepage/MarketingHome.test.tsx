@@ -10,12 +10,35 @@ vi.mock("next/font/local", () => ({
 }));
 
 import { metadata as layoutMetadata } from "@/app/layout";
+import { metadata as careerContextMetadata } from "@/app/career-context/page";
+import { metadata as communitiesMetadata } from "@/app/communities/page";
+import { metadata as companiesMetadata } from "@/app/companies/page";
+import { metadata as integrationsMetadata } from "@/app/integrations/page";
+import { metadata as jobSearchMetadata } from "@/app/job-search/page";
+import { metadata as layoffSupportMetadata } from "@/app/layoff-support/page";
+import { metadata as lumoMetadata } from "@/app/lumo/page";
+import { metadata as workforceMetadata } from "@/app/workforce/page";
+import { DEFERRED_ROBOTS, DEFERRED_ROUTES } from "@/lib/launch";
 import { GuideArticle } from "@/components/marketing/resources/GuideArticle";
 import { RenderBlocks } from "@/components/marketing/resources/RenderBlocks";
 import { getPostBlocks } from "@/content/resources/blocks";
 import { buildResourceSections, getResource } from "@/content/resources/registry";
 
 import MarketingHome from "./MarketingHome";
+
+// Keyed by route so the "every deferred route is covered" assertion below
+// fails when a page joins src/lib/launch.ts without being imported here.
+const deferredMetadata = {
+  "/career-context": careerContextMetadata,
+  "/lumo": lumoMetadata,
+  "/integrations": integrationsMetadata,
+  "/job-search": jobSearchMetadata,
+  "/layoff-support": layoffSupportMetadata,
+  "/workforce": workforceMetadata,
+  "/communities": communitiesMetadata,
+  "/companies": companiesMetadata,
+};
+
 import {
   MarketingAbout,
   MarketingAct,
@@ -43,7 +66,6 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { level: 1, name: "The Modern Unemployment Office" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "How Offboard works." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "One place that remembers your career." })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /see what your career context holds/i })).toHaveAttribute("href", "/career-context");
     expect(screen.getByRole("heading", { name: "Ask anywhere. The answer is about you." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "The tools you run your search with." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Losing your job creates more than one problem." })).toBeInTheDocument();
@@ -89,18 +111,17 @@ describe("Offboard marketing routes", () => {
       expect(block.querySelectorAll(":scope > p").length, "more than one description paragraph").toBeLessThanOrEqual(1);
     }
 
-    // Each step section links out rather than trying to be the pillar page.
-    // Queried by href rather than by accessible name: this test already runs
-    // ~40 getByRole lookups, and each one computes accessible names across the
-    // whole tree, which is what pushes it toward the 5s timeout under load.
-    for (const [href, label] of [
-      ["/career-context", "See what your Career Context holds"],
-      ["/integrations", "See how Offboard Everywhere works"],
-      ["/job-search", "See what each tool does"],
-    ] as const) {
-      const link = document.querySelector(`main a[href="${href}"]`);
-      expect(link, `a link to ${href}`).not.toBeNull();
-      expect(link?.textContent).toContain(label);
+    // Plan 043's launch trim: each step section used to end in a link to its
+    // pillar page. All four pillars are deferred, so the homepage must not
+    // advertise them. Queried by href rather than by accessible name: this
+    // test already runs ~40 getByRole lookups, and each one computes
+    // accessible names across the whole tree, which is what pushes it toward
+    // the 5s timeout under load.
+    for (const route of DEFERRED_ROUTES) {
+      expect(
+        document.querySelector(`main a[href="${route}"]`),
+        `${route} is deferred and must not be linked from the homepage body`,
+      ).toBeNull();
     }
 
     // Six member questions, as a disclosure list. The first is open so it
@@ -157,36 +178,24 @@ describe("Offboard marketing routes", () => {
   it("uses real routes for product, company, and partner navigation", () => {
     render(<MarketingHome />);
 
-    // Plan 037 (owner revision): the header nav is one top-level link and
-    // three mega-menu triggers. Home left the bar (the wordmark is the home
-    // link), How It Works lives inside Product as its featured card, About
-    // inside Resources. The panels render collapsed, so their links are
-    // queried with hidden: true -- the point is that every route the target
-    // navigation names is present and correct, not that it is on screen
-    // before the visitor opens anything.
+    // Plan 043's launch trim: three top-level links and one mega-menu
+    // trigger. Product and For Organizations each emptied to a single
+    // surviving page when the deferred set left, so both became plain links;
+    // Resources is the one panel left. Its links render collapsed, so they
+    // are queried with hidden: true -- the point is that every route the
+    // launch navigation names is present and correct, not that it is on
+    // screen before the visitor opens anything.
     const headerNav = screen.getByRole("navigation", { name: "Marketing navigation" });
-    expect(within(headerNav).getAllByRole("link")).toHaveLength(1);
-    expect(within(headerNav).getAllByRole("button")).toHaveLength(3);
-    expect(within(headerNav).getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
+    expect(within(headerNav).getAllByRole("button")).toHaveLength(1);
+    expect(within(headerNav).getByRole("button", { name: "Resources" })).toHaveAttribute("aria-expanded", "false");
     expect(within(headerNav).queryByRole("link", { name: "Home" })).not.toBeInTheDocument();
 
-    for (const name of ["Product", "For Organizations", "Resources"]) {
-      expect(within(headerNav).getByRole("button", { name })).toHaveAttribute("aria-expanded", "false");
-    }
-
     for (const [name, href] of [
-      ["Career Context", "/career-context"],
-      ["Lumo", "/lumo"],
-      ["Offboard Everywhere", "/integrations"],
-      ["Job Search", "/job-search"],
-      ["Layoff & Benefits", "/layoff-support"],
       ["How It Works", "/how-it-works"],
       ["For Employers", "/employers"],
-      ["Workforce & Government", "/workforce"],
-      ["Universities & Communities", "/communities"],
+      ["Pricing", "/pricing"],
       ["Guides", "/resources"],
       ["Privacy & Security", "/privacy-security"],
-      ["Company Transition Centers", "/companies"],
       ["About", "/about"],
       ["Visit Us", "/intake"],
       ["The Offboard Newsletter", "https://newsletter.offboard.co"],
@@ -196,11 +205,20 @@ describe("Offboard marketing routes", () => {
       expect(matches[0]).toHaveAttribute("href", href);
     }
 
+    // The deferred set leaves both nav presentations entirely (plan 043).
+    for (const route of DEFERRED_ROUTES) {
+      expect(headerNav.querySelector(`a[href="${route}"]`), `${route} in the header nav`).toBeNull();
+    }
+
     // /act stays out of the nav in both presentations (standing guardrail).
     expect(headerNav.querySelector('a[href="/act"]')).toBeNull();
 
     const footerNav = screen.getByRole("navigation", { name: "Footer navigation" });
-    expect(within(footerNav).getByRole("link", { name: "Workforce & Government" })).toHaveAttribute("href", "/workforce");
+    expect(within(footerNav).getByRole("link", { name: "For Employers" })).toHaveAttribute("href", "/employers");
+    expect(within(footerNav).getByRole("link", { name: "Privacy & Security" })).toHaveAttribute("href", "/privacy-security");
+    for (const route of DEFERRED_ROUTES) {
+      expect(footerNav.querySelector(`a[href="${route}"]`), `${route} in the footer`).toBeNull();
+    }
   });
 
   it("gives how it works a five-step spine, a toolkit, and LUMO", () => {
@@ -261,9 +279,11 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { level: 1, name: /outplacement, modernized/i })).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /talk about sponsored access/i })[0]).toHaveAttribute("href", expect.stringContaining("Employer%20support"));
     expect(screen.getByRole("link", { name: /post a role/i })).toHaveAttribute("href", expect.stringContaining("intent=recruit"));
-    // The public-sector section left /employers for /workforce in plan 035;
-    // what stays behind is the crosslink.
-    expect(screen.getByRole("link", { name: /see workforce & government/i })).toHaveAttribute("href", "/workforce");
+    // The public-sector section left /employers for /workforce in plan 035,
+    // and plan 043's launch trim took the crosslink with it: /workforce is
+    // deferred, so a buyer must not be sent there from here.
+    expect(screen.queryByRole("link", { name: /see workforce & government/i })).not.toBeInTheDocument();
+    expect(document.querySelector('a[href="/workforce"]')).toBeNull();
     expect(screen.getAllByText(/\$199/).length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: /cheapest line item/i })).toBeInTheDocument();
     expect(screen.getByText("Why companies do this")).toBeInTheDocument();
@@ -283,6 +303,18 @@ describe("Offboard marketing routes", () => {
     // it now lives once on the root layout and every route inherits it, so
     // this asserts the single source of truth rather than 8 hand-copied ones.
     expect(layoutMetadata.robots).toBe("noindex, nofollow, noarchive");
+  });
+
+  it("keeps the deferred routes noindexed by their own metadata, not the layout's", () => {
+    // The operator flips the layout value at cutover; these eight pages have
+    // to stay hidden through that. Asserting the distinct DEFERRED_ROBOTS
+    // string (not merely "is it noindexed") is what makes this fail if a
+    // page loses its override and silently falls back to the layout.
+    expect(DEFERRED_ROBOTS).not.toBe(layoutMetadata.robots);
+    for (const [route, metadata] of Object.entries(deferredMetadata)) {
+      expect(metadata.robots, `${route} carries its own robots value`).toBe(DEFERRED_ROBOTS);
+    }
+    expect(Object.keys(deferredMetadata).sort()).toEqual([...DEFERRED_ROUTES].sort());
   });
 
   it("gives the ACT pilot its own resident-first landing page", () => {

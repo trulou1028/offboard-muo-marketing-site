@@ -134,22 +134,17 @@ export function MarketingFooter() {
         </div>
         <nav aria-label="Footer navigation">
           <div>
+            {/* Trimmed to the launch set by plan 043; the deferred pages
+                (src/lib/launch.ts) stay live but unadvertised. Each comes
+                back to the column it left. */}
             <strong>Product</strong>
             <Link href="/how-it-works">How It Works</Link>
-            <Link href="/career-context">Career Context</Link>
-            <Link href="/lumo">Lumo</Link>
-            <Link href="/job-search">Job Search</Link>
-            <Link href="/integrations">Offboard Everywhere</Link>
-            <Link href="/layoff-support">Layoff &amp; Benefits</Link>
             <Link href="/pricing">Pricing</Link>
             <Link href="/resources">Guides</Link>
-            <Link href="/companies">Company Transition Centers</Link>
           </div>
           <div>
             <strong>Partners</strong>
             <Link href="/employers">For Employers</Link>
-            <Link href="/workforce">Workforce &amp; Government</Link>
-            <Link href="/communities">Universities &amp; Communities</Link>
           </div>
           <div>
             <strong>Company</strong>

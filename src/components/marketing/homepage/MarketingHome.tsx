@@ -29,7 +29,12 @@ import { IntegrationLogo } from "./IntegrationLogos";
      a filled 2x2.
    - The photo triptych is gone (R6). The page keeps two photos.
 
-   Copy source: COPY.md § 1. */
+   Copy source: COPY.md § 1.
+
+   Plan 043 (2026-09-07) removed the trailing "See ..." link from each of the
+   four step sections. All four pointed at pillar pages the owner is holding
+   back for a polish pass (src/lib/launch.ts), and the four-step strip above
+   already anchors into these sections. Each link returns with its page. */
 
 function SecondaryCta({ children, href }: { children: ReactNode; href: string }) {
   return href.startsWith("/") ? (
@@ -199,7 +204,6 @@ function StepContext() {
           <h2 id="ctx-title">One place that remembers your career.</h2>
           <p>Your resume is only a fraction of your career. Offboard builds a living record of your experience, accomplishments, applications, companies, conversations, documents, interviews, goals, and progress so you don&apos;t have to explain yourself from scratch every time you need help.</p>
           <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Build my Career Context</span><ArrowRight aria-hidden="true" /></a>
-          <Link className="mh-section-link" href="/career-context">See what your Career Context holds <ArrowRight aria-hidden="true" /></Link>
         </div>
         <RecordComposition />
       </div>
@@ -248,7 +252,6 @@ function StepConnect() {
           <span className="mh-kicker is-lime">Step 3 · Connect it to the AI you use</span>
           <h2 id="connect-title">Ask anywhere. The answer is about you.</h2>
           <p>Lumo is Offboard&apos;s own guide and works from your Career Context from the first question. Prefer ChatGPT or Claude? Connect Offboard and take your context with you.</p>
-          <SecondaryCta href="/integrations">See how Offboard Everywhere works</SecondaryCta>
           <small>ChatGPT and Claude connections are in beta.</small>
         </div>
         <ConnectComposition />
@@ -289,7 +292,6 @@ function StepSearch() {
         </div>
         <div>
           <p>Ten tools that read from the same context, so nothing is retyped and nothing is forgotten.</p>
-          <Link className="mh-section-link" href="/job-search">See what each tool does <ArrowRight aria-hidden="true" /></Link>
         </div>
       </div>
       <ol className="mh-stage-strip" data-reveal="">
@@ -354,7 +356,6 @@ function StepSteady() {
           <span className="mh-kicker is-sand">Step 1 · Steady the first week</span>
           <h2 id="morethan-title">Losing your job creates more than one problem.</h2>
           <p>Finding another role matters. But so do unemployment benefits, health coverage, finances, career decisions, applications, networking, interviews, and figuring out what to do first. Offboard brings those pieces together.</p>
-          <Link className="mh-section-link" href="/layoff-support">See what to do first <ArrowRight aria-hidden="true" /></Link>
         </div>
         <PathComposition />
       </div>

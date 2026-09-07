@@ -287,31 +287,42 @@ Each panel is columns of links, each with a small icon and a one-line blurb,
 plus one featured card on the right with a render. Panels are light
 (white, featured card on paper-soft).
 
-- **Product ▾** — *The system:* Career Context `The record everything else
+**Trimmed to the launch set by plan 043 (owner 2026-09-07).** The nav is now
+**How It Works · For Employers · Pricing · Resources ▾**. Eight pages left it
+(`src/lib/launch.ts`), which emptied Product down to its featured card and For
+Organizations down to a single link, so both became plain links to the page
+that survived. Resources is the one panel left, minus Company Transition
+Centers. The full four-tab structure is preserved below, struck through, so
+un-deferring a page restores its exact blurb.
+
+- ~~**Product ▾** — *The system:* Career Context `The record everything else
   reads from.` · Lumo `The guide that knows your situation.` · Offboard
   Everywhere `Use Offboard from the AI you already use.` · *The work:* Job
   Search `The whole search as one system.` · Layoff & Benefits `Deadlines,
   coverage, and runway.` · *Featured, "Start here":* **How It Works** `Five
   steps from the layoff to the next job, and what Offboard does at each
-  one.` → `See how it works` → `/how-it-works`
-- **For Organizations ▾** — *Who you serve:* For Employers `Sponsor a group
+  one.` → `See how it works` → `/how-it-works`~~ — **now the plain link
+  `How It Works` → `/how-it-works`**
+- ~~**For Organizations ▾** — *Who you serve:* For Employers `Sponsor a group
   through a layoff.` · Workforce & Government `Agencies, boards, and public
   programs.` · Universities & Communities `Alumni, members, and career
   offices.` · *Featured, "What a sponsor sees":* **Aggregate only. Never
   the person.** `Sponsors receive aggregate participation and outcome
   reporting, never individual applications, conversations, finances, or
-  reflections.` → `See exactly who can see what` → `/privacy-security`
+  reflections.` → `See exactly who can see what` → `/privacy-security`~~ —
+  **now the plain link `For Employers` → `/employers`**
 - **Resources ▾** — *Resources:* Guides `Practical answers, checked by
   people.` · Privacy & Security `Who can see your record, and who cannot.`
-  · Company Transition Centers `Laid off from a company in the news? Start
-  there.` (joined in plan 038)
+  ~~· Company Transition Centers `Laid off from a company in the news? Start
+  there.` (joined in plan 038, deferred by 043)~~
   · *Company:* About `Why Offboard exists, and who is behind it.` · Visit Us
   `Talk to a person, online or in Concord.` → `/intake` · Slack Community
   `People searching alongside you.` → `https://offboard.co/community` ·
   Contact `hello@offboard.co. A human reads it.` → mailto · *Featured, "The
   newsletter":* **The Offboard Newsletter** `Weekly job-market analysis and
   honest takes on tech hiring. 5,000+ subscribers.` → `Subscribe free` →
-  `https://newsletter.offboard.co`
+  `https://newsletter.offboard.co` *(the featured card is a plain link in the
+  mobile menu since plan 043; before that the newsletter had no phone entry)*
 
 **Company Transition Centers joined Resources in plan 038**, the moment
 `/companies` existed; it was held out of the first cut under plan 026's
@@ -329,14 +340,18 @@ Case while "How it works" and "For employers" were not.
 > **Offboard**
 > Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
 
-Columns — **Product:** How it works, Career Context, Lumo, Job Search,
-Offboard Everywhere, Layoff & Benefits, Pricing, Guides, Company Transition
-Centers ·
-**Partners:** For
-Employers, Workforce & Government, Universities & Communities ·
+Columns, trimmed to the launch set by plan 043 — **Product:** How It Works,
+Pricing, Guides ~~, Career Context, Lumo, Job Search, Offboard Everywhere,
+Layoff & Benefits, Company Transition Centers~~ ·
+**Partners:** For Employers ~~, Workforce & Government, Universities &
+Communities~~ ·
 **Company:** About, Visit Us
 (`/intake`), Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy &
 Security (`/privacy-security`), Privacy Policy, Terms (app.offboard.co).
+
+The struck-through entries are the deferred pages (`src/lib/launch.ts`). Each
+returns to the column it left. The four columns stay so un-deferring is purely
+additive.
 
 > © 2026 Offboard · Independent support for life after a layoff
 
@@ -460,7 +475,7 @@ connections.
 - H2: `One place that remembers your career.` *(widened from "your entire job search", owner strategy doc, plan 025)*
 - Body: `Your resume is only a fraction of your career. Offboard builds a living record of your experience, accomplishments, applications, companies, conversations, documents, interviews, goals, and progress so you don't have to explain yourself from scratch every time you need help.`
 - CTA: `Build my Career Context` — the section's only filled button (R3)
-- Section link: `See what your Career Context holds` → `/career-context`
+- ~~Section link: `See what your Career Context holds` → `/career-context`~~ *(removed by plan 043: `/career-context` is deferred. Returns with the page.)*
 - The eight categories moved to `/career-context` § 10 in round 4. This section names them in its body paragraph and links out.
 - Record card (composition C), the section's only visual since the portrait behind it was retired in round 4: `Your Career Context` · `Always evolving. Available wherever you use Offboard.` · three rows — `Experience` / `Roles, projects, and outcomes`, `Applications` / `Tesserac · Interviewing`, `Interviews` / `Thursday · Prep ready`. Three source chips break its top edge: `Resume`, `LinkedIn`, `Interview story` (the same three sources `/career-context` § What goes in already names). The portrait photograph behind it is the one that used to open Built around you.
   - `Interviewing` is a real application stage (it is what the demo conversation moves Tesserac into). `Prep ready` is a real interview state in the product. Neither is a claim about outcomes.
@@ -472,7 +487,7 @@ connections.
 - H2: `Ask anywhere. The answer is about you.`
 - Body: `Lumo is Offboard's own guide and works from your Career Context from the first question. Prefer ChatGPT or Claude? Connect Offboard and take your context with you.`
 - Beta note *(ledger-governed)*: `ChatGPT and Claude connections are in beta.`
-- CTA: `See how Offboard Everywhere works` → `/integrations` (the section's only action since `Ask Lumo` was retired in round 4)
+- ~~CTA: `See how Offboard Everywhere works` → `/integrations`~~ *(was the section's only action since `Ask Lumo` was retired in round 4; removed by plan 043 because `/integrations` is deferred. The section is narrative until it returns.)*
 - Demo conversation (composition B), unchanged from v2 and complete in the DOM. The earlier exchange sits behind the later one and is cropped by it, so the section shows one exchange at full size while both remain readable in order: You: `How does this role compare with the other opportunities I'm pursuing?` / AI: `Based on your Offboard context, Tesserac looks like one of your stronger opportunities. It aligns closely with your AI product experience and gives you more technical ownership than several of the other roles you're considering.` / You: `Move Tesserac to the interview stage and save that Ruben is my recruiter.` / AI: `Done. Tesserac is now in Interviewing, and I've added Ruben to the opportunity.`
 - Chip on the composition: `Contact saved · Ruben`
 - Retired here: v2's `Powered by Offboard Career Context` callout and the supporting line `Prefer another AI assistant? Connect Offboard and take your context with you.` (its substance is in the body above).
@@ -482,7 +497,7 @@ connections.
 - Kicker: `Step 3 · Run your search`
 - H2: `The tools you run your search with.` *(round 4; the previous `Everything you need when the next opportunity appears.` read as a promise rather than a label, and the eyebrow already carries the plain one)*
 - Lead *(the right half of the two-column intro)*: `Ten tools that read from the same context, so nothing is retyped and nothing is forgotten.`
-- Section link: `See what each tool does` → `/job-search`
+- ~~Section link: `See what each tool does` → `/job-search`~~ *(removed by plan 043: `/job-search` is deferred. Returns with the page.)*
 - Four stages, each with the one-line decision already approved on `/job-search`: **Decide** `Whether this one deserves your week.` · **Apply** `What you actually send.` · **Interview** `Walking in prepared, not rehearsed.` · **Organize** `Where all of it is kept.`
 - Tool names unchanged: **Decide** (`Role Fit` · `Ghost Job Checker` · `Company Intelligence`) · **Apply** (`Application Packets` · `Resume Tailoring` · `Cover Letters`) · **Interview** (`Interview Prep` · `Voice Practice`) · **Organize** (`Application Tracker` · `Career Context`). Their ten descriptions moved to § 14 in round 4.
 - Each group carries one product-state chip (`DESIGN.md` R8). Every one is a string the product actually produces, checked against `lumo-plan-builder` `origin/main` at `b8cb77ec`: Decide `Strong fit` (the Role Fit label at a score of 80 or above) · Apply `Ready for review` (a job packet's `review_ready` status) · Interview `Prep ready` (the interview prep state) · Organize `Saved to tracker` (the save-a-job confirmation).
@@ -493,7 +508,7 @@ connections.
 - Kicker: `More than a job search`
 - Kicker: `Step 1 · Steady the first week` *(was `More than a job search`; round 5)*
 - H2: `Losing your job creates more than one problem.` *(kept: the eyebrow carries the plain label, so the headline may stay evocative, per R5a)*
-- Section link *(new in round 5, the section had no route out)*: `See what to do first` → `/layoff-support`
+- ~~Section link *(new in round 5, the section had no route out)*: `See what to do first` → `/layoff-support`~~ *(removed by plan 043: `/layoff-support` is deferred. Returns with the page.)*
 - Body: `Finding another role matters. But so do unemployment benefits, health coverage, finances, career decisions, applications, networking, interviews, and figuring out what to do first. Offboard brings those pieces together.`
 - Six questions as a disclosure list (round 4), the first open so it still reads beside the plan card that answers it:
   1. `What do I do first?` — **Your personalized plan** — `Tell Offboard what's happening, and we'll help organize what needs your attention now, what can wait, and what comes next.`
@@ -812,7 +827,7 @@ visual (decorative render) → Verified facts (shared with home) → Human suppo
 - Body: `Offboard employers can post open roles at no cost. Postings reach members actively searching, with materials prepared and context attached.`
 - CTA: `Post a role` → `https://app.offboard.co/workspace/new?intent=recruit` *(hard URL contract with the app; never relative, never renamed unilaterally)* · secondary `or email us` → mailto
 
-### Public & workforce partners *(moved to `/workforce` in plan 035; a crosslink stays)*
+### Public & workforce partners *(moved to `/workforce` in plan 035; the crosslink that stayed behind was removed by plan 043, because `/workforce` is deferred and a buyer must not be sent to a page being held back. The whole section returns when `/workforce` does.)*
 
 - Kicker: `Public and workforce partners` · H2: `Agencies and workforce programs have their own page.`
 - Body: `Workforce boards, counties, education partners, and public programs work differently from a company running a layoff. The reporting boundary, the pilot shape, and the agency handoff live on their own page.`

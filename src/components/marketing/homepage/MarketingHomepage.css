@@ -234,6 +234,10 @@ a.mh-skip-link:focus { transform: translateY(0); }
    (owner review). Column tracks are fixed so the width is determinate; the
    clamp keeps it inside the page gutters on narrow desktops. */
 .mh-nav-panel { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: calc(100% + 12px); left: 50%; display: grid; grid-template-columns: repeat(2, 300px) 400px; max-width: calc(100vw - 2 * var(--mh-page-x)); min-height: 400px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); translate: -50% 0; }
+/* No panel renders data-columns="1" since plan 043's launch trim left
+   Resources as the only group, and it has two columns. Kept, not deleted:
+   For Organizations was the one-column panel and comes back with
+   /workforce and /communities. */
 .mh-nav-panel[data-columns="1"] { grid-template-columns: 340px 400px; }
 /* The `hidden` attribute alone does NOT close these panels: `display: grid`
    above is an author rule and beats the user-agent's `[hidden] {display:none}`,
