@@ -379,8 +379,9 @@ base nor a photo is a floating box, and still a defect.*
 does.** Built in markup, the hero's two cards sized themselves from their own
 text, so their heights — and therefore where they sat over the photograph —
 moved with every copy edit and every breakpoint. It is now a single
-transparent `.avif` exported from Paper with its shadows baked in
-(owner 2026-09-03). What you give up is real:
+transparent image with its shadows baked in (first a Paper `.avif`, owner
+2026-09-03; since 2026-09-07 a 2x `.png` of the owner's Figma composition,
+pinned over a full-bleed photograph). What you give up is real:
 
 - The words are pixels. They are not selectable, they do not scale with the
   reader's font size, and they scale down with the picture — on a 390px phone

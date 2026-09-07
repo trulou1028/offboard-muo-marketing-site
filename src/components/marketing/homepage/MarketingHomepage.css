@@ -170,6 +170,16 @@ a.mh-skip-link:focus { transform: translateY(0); }
    motion. */
 .mh-site-header { position: fixed; z-index: 20; inset: 0 0 auto; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; height: 76px; padding-inline: var(--mh-page-x); background: rgb(15 38 23 / 90%); border-bottom: 1px solid rgb(246 244 238 / 12%); backdrop-filter: blur(18px); transition: box-shadow var(--mh-dur-base) var(--mh-ease-standard), background-color var(--mh-dur-base) var(--mh-ease-standard); }
 .mh-site-header.is-scrolled { background: rgb(15 38 23 / 96%); box-shadow: var(--mh-shadow-surface); }
+/* Homepage only (owner 2026-09-07): at the top of the page the header reads
+   as transparent over the hero photograph, with a hairline bottom border.
+   20% deep rather than a true transparent: the e2e focus-ring check resolves
+   a control's surface by walking up to the first painted ancestor, and a
+   transparent header would resolve to the page's paper while the ring is
+   drawn over the deep-green photo. The tint returns in full as soon as the
+   page scrolls, because the header is fixed and the bands below the hero are
+   light. Other routes keep the tint from the start: /resources articles and
+   /intake open on paper, where paper-coloured nav text would vanish. */
+.mh-page-home .mh-site-header:not(.is-scrolled) { background: rgb(15 38 23 / 20%); border-bottom-color: rgb(246 244 238 / 8%); }
 /* A fixed header covers in-page anchor targets without this. #community,
    #faq, #toolkit and #pricing are targets of SEO-load-bearing redirects. */
 .marketing-homepage section[id] { scroll-margin-top: 96px; }
@@ -968,45 +978,36 @@ a.mh-lumo-cta:active { transform: translateY(1px); }
 a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1px); }
 .mh-lumo-cta svg { width: 16px; height: 16px; }
 
-/* Hero */
-.mh-hero2 { position: relative; z-index: 0; display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); gap: clamp(40px, 4vw, 64px); align-items: center; padding-top: 168px; padding-bottom: 128px; background: var(--mh-deep); color: var(--mh-paper); }
-/* A faint civic-grid wash on the hero's flat deep-green field, at the
-   48px step already in the spacing scale. z-index: -1 keeps it under
-   every in-flow child without touching their own stacking - .mh-hero2
-   gets its own stacking context (position + z-index: 0) so the negative
-   layer stays contained and can never show through behind the section
-   above it. 5% paper is barely there at rest; it reads through the
-   transparent corners of the hero composition photo rather than fighting it. */
-.mh-hero2::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(to right, rgb(246 244 238 / 5%) 1px, transparent 1px), linear-gradient(to bottom, rgb(246 244 238 / 5%) 1px, transparent 1px); background-size: 48px 48px; }
-.mh-hero2-copy h1 { color: var(--mh-paper); font-size: var(--mh-h1); line-height: 1.02; }
-.mh-hero2-copy > p { max-width: 33em; margin-top: 24px; color: var(--mh-on-dark-muted); font-size: 20px; line-height: 1.45; }
-.mh-hero2-actions { display: flex; align-items: center; gap: 12px; margin-top: 32px; }
-.mh-hero2-trust { display: block; margin-top: 24px; color: rgb(246 244 238 / 62%); font-size: 14px; line-height: 1.5; }
-/* The hero visual is one exported image (owner 2026-09-03), not a coded
-   composition. Built in code it drifted: the two cards sized themselves from
-   their own text, so their heights - and therefore where they sat over the
-   photograph - moved with every copy edit and every breakpoint. The export is
-   a transparent avif with the shadows baked in, so it lands in exactly one
-   place.
+/* Hero (owner composition 2026-09-07, refined in Figma). One photograph
+   fills the band edge to edge; its subject sits at the right and its dark
+   green wall carries the copy on the left. The band is the first viewport
+   (900px at 1440x900), the copy centred in it, and the Lumo exchange - a
+   flat image, see COPY.md § Hero - is pinned over the photo's lower right.
 
-   It ships byte-for-byte as the owner exported it from the Paper artboard
-   "Hero visual", which is why the `<Image>` carries `unoptimized`: Next would
-   otherwise re-encode it. Do not crop, re-compress, or regenerate this file.
-   A change to it is a new export from Paper.
-
-   The figure is capped at its grid column - no overhang into the gutter
-   (owner 2026-09-03, after seeing both). An earlier version widened it to the
-   full 677px the artboard was drawn at, so the baked text rendered at its
-   intended 15px; it read as oversized and ran past the fold. Contained, it
-   sits near 562px at 1440, so that text renders around 12px. That is the
-   deliberate trade: the composition is sized to the layout, and the text
-   inside it is illustrative rather than meant to be read.
-
-   Two costs that came with flattening: the chat text is no longer selectable
-   and no longer scales with the reader's font size, so the `alt` carries the
-   whole exchange; and the words inside it are no longer covered by
-   CopyDrift.test.tsx, so COPY.md is the only record of them. */
-.mh-hero2-visual { position: relative; }
+   Stacking: the section makes its own context (position + z-index: 0) so
+   the photo (z -2) and the wash over it (z -1) stay under every in-flow
+   child and can never show through behind the band above. */
+.mh-hero2 { position: relative; z-index: 0; display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; min-height: clamp(720px, 100svh, 960px); padding-top: 128px; padding-bottom: 128px; overflow: hidden; background: var(--mh-deep); color: var(--mh-paper); }
+.mh-hero2-photo { z-index: -2; object-fit: cover; object-position: right center; }
+/* The wash keeps the left of the band forest-deep however wide the viewport:
+   the photo is cropped from the right, so on a very wide screen its wall
+   runs out before the copy's left edge and the gradient takes over. */
+.mh-hero2::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(to right, var(--mh-deep) 0%, rgb(15 38 23 / 55%) 24%, rgb(15 38 23 / 0%) 50%); }
+.mh-hero2-copy { position: relative; max-width: min(700px, 54%); }
+/* 9.7em breaks the H1 after "modern" (two balanced lines) instead of leaving
+   "office." alone on the second. */
+.mh-hero2-copy h1 { max-width: 9.7em; color: var(--mh-paper); font-size: var(--mh-h1); line-height: 1.02; }
+.mh-hero2-copy > p { max-width: 33em; margin-top: 28px; color: var(--mh-on-dark-muted); font-size: 20px; line-height: 1.45; }
+.mh-hero2-actions { display: flex; align-items: center; gap: 12px; margin-top: 40px; }
+.mh-hero2-trust { display: block; margin-top: 36px; color: rgb(246 244 238 / 62%); font-size: 14px; line-height: 1.5; }
+/* The exchange ships as one transparent image at 2x (1000x750 for a 500px
+   box), `unoptimized` so Next never re-encodes it. Rendered from the owner's
+   Figma composition; a new export from Figma replaces the file, not this
+   rule. Width scales with the viewport between 900 and 1440 so it clears the
+   copy column (at 1024 the copy ends near 530px and the image starts near
+   580px); it is pinned to the lower right so the exchange sits over the
+   subject's laptop rather than their face. */
+.mh-hero2-visual { position: absolute; right: calc(var(--mh-page-x) + 16px); bottom: 62px; width: clamp(380px, 34.7vw, 500px); }
 .mh-hero2-figure { width: 100%; height: auto; }
 /* On the dark hero both buttons take the on-dark treatment: forest would sit
    too close to the forest-deep band to read as a button. */
@@ -1610,8 +1611,14 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-privacy-scroll { display: none; }
   .mh-privacy-stack { display: block; }
   .marketing-homepage.mh-page-home { --mh-section-y: 96px; --mh-section-y-loose: 96px; --mh-section-y-tight: 64px; }
-  .mh-hero2 { grid-template-columns: 1fr; padding-top: 116px; padding-bottom: 72px; }
-  .mh-hero2-visual { margin-top: 12px; }
+  /* Stacked: the copy sits over the photo's upper half under a heavier
+     top-down wash, and the exchange leaves its pinned corner to flow after
+     the copy, right-aligned, so it never covers the subject's face. */
+  .mh-hero2 { min-height: 0; align-content: start; padding-top: 128px; padding-bottom: 48px; }
+  .mh-hero2::before { background: linear-gradient(to bottom, rgb(15 38 23 / 88%) 0%, rgb(15 38 23 / 72%) 55%, rgb(15 38 23 / 20%) 100%); }
+  .mh-hero2-photo { object-position: 70% center; }
+  .mh-hero2-copy { max-width: 620px; }
+  .mh-hero2-visual { position: static; width: min(100%, 460px); margin: 40px 0 0 auto; }
   .mh-wherever-grid,
   .mh-privacy-split,
   .mh-workforce-pilot,
