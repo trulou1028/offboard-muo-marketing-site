@@ -494,7 +494,7 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-site-footer { min-height: 360px; padding: 62px var(--mh-page-x) 34px; background: var(--mh-footer); border-top: 1px solid var(--mh-hairline-on-dark); color: var(--mh-paper); }
 .mh-site-footer > div { display: grid; grid-template-columns: .83fr 1fr; gap: 90px; }
 .mh-site-footer > div > div { display: flex; flex-direction: column; gap: 18px; }
-.mh-site-footer > div > div strong { font-size: 20px; }
+.mh-footer-brand { width: 168px; height: auto; }
 .mh-site-footer > div > div p { color: rgb(246 244 238 / 66%); font-size: 13px; line-height: 21px; }
 .mh-site-footer nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
 .mh-site-footer nav div { display: flex; flex-direction: column; gap: 12px; }
@@ -964,7 +964,15 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-lumo-cta svg { width: 16px; height: 16px; }
 
 /* Hero */
-.mh-hero2 { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); gap: clamp(40px, 4vw, 64px); align-items: center; padding-top: 168px; padding-bottom: 128px; background: var(--mh-deep); color: var(--mh-paper); }
+.mh-hero2 { position: relative; z-index: 0; display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); gap: clamp(40px, 4vw, 64px); align-items: center; padding-top: 168px; padding-bottom: 128px; background: var(--mh-deep); color: var(--mh-paper); }
+/* A faint civic-grid wash on the hero's flat deep-green field, at the
+   48px step already in the spacing scale. z-index: -1 keeps it under
+   every in-flow child without touching their own stacking - .mh-hero2
+   gets its own stacking context (position + z-index: 0) so the negative
+   layer stays contained and can never show through behind the section
+   above it. 5% paper is barely there at rest; it reads through the
+   transparent corners of the hero composition photo rather than fighting it. */
+.mh-hero2::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(to right, rgb(246 244 238 / 5%) 1px, transparent 1px), linear-gradient(to bottom, rgb(246 244 238 / 5%) 1px, transparent 1px); background-size: 48px 48px; }
 .mh-hero2-copy h1 { color: var(--mh-paper); font-size: var(--mh-h1); line-height: 1.02; }
 .mh-hero2-copy > p { max-width: 33em; margin-top: 24px; color: var(--mh-on-dark-muted); font-size: 20px; line-height: 1.45; }
 .mh-hero2-actions { display: flex; align-items: center; gap: 12px; margin-top: 32px; }
@@ -1647,6 +1655,7 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-route-sponsor-card p { grid-column: 1; }
   .mh-route-privacy-columns { grid-template-columns: 1fr; }
   .mh-brand { width: 132px; }
+  .mh-footer-brand { width: 144px; }
   .mh-split,
   .mh-pricing-heading,
   .mh-price-deck,

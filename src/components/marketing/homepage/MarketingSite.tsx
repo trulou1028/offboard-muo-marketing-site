@@ -120,7 +120,14 @@ export function MarketingFooter() {
     <footer className="mh-site-footer">
       <div>
         <div>
-          <strong>Offboard</strong>
+          <Image
+            className="mh-footer-brand"
+            src="/marketing/homepage/offboard-logo-light.png"
+            alt="Offboard"
+            width={520}
+            height={106}
+            loading="lazy"
+          />
           <p>
             Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
           </p>
