@@ -94,6 +94,13 @@
 .marketing-homepage h1,
 .marketing-homepage h2,
 .marketing-homepage h3 { font-family: var(--mh-font-display); font-weight: 500; letter-spacing: -0.03em; }
+/* No single-word last lines ("A sponsor never sees / you."). `pretty` only
+   moves the final break of a block, so it never changes a heading's line
+   count the way `balance` would; the route heroes keep their `balance`. */
+.marketing-homepage h1,
+.marketing-homepage h2,
+.marketing-homepage h3,
+.marketing-homepage p { text-wrap: pretty; }
 .marketing-homepage img { display: block; }
 
 /* `a.` prefix is load-bearing: `.marketing-homepage a { color: inherit }` is
@@ -752,7 +759,12 @@ ul.mh-hero-record-list { margin-top: 18px; border-top: 1px solid var(--mh-line);
 .mh-route-hiring .mh-copy-block,
 .mh-route-community .mh-copy-block { max-width: 660px; }
 .mh-route-hiring .mh-section-link { border-bottom-color: var(--mh-ink); color: var(--mh-ink); }
-.mh-employer-hiring-secondary { display: inline-block; margin-top: 14px; color: var(--mh-muted); font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
+/* The section link and its "or email us" alternative share one row; as two
+   flex children of the copy block they stacked, and the 14px underlined
+   afterthought read as a stray line (polish 2026-09-07). */
+.mh-employer-hiring-actions { display: flex; flex-wrap: wrap; align-items: baseline; gap: 16px; }
+.mh-employer-hiring-actions .mh-section-link { margin-top: 0; }
+.mh-employer-hiring-secondary { color: var(--mh-muted); font-size: 15px; text-decoration: underline; text-underline-offset: 4px; }
 
 
 .mh-route-resources { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
@@ -994,9 +1006,11 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
    runs out before the copy's left edge and the gradient takes over. */
 .mh-hero2::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(to right, var(--mh-deep) 0%, rgb(15 38 23 / 55%) 24%, rgb(15 38 23 / 0%) 50%); }
 .mh-hero2-copy { position: relative; max-width: min(700px, 54%); }
-/* 9.7em breaks the H1 after "modern" (two balanced lines) instead of leaving
-   "office." alone on the second. */
-.mh-hero2-copy h1 { max-width: 9.7em; color: var(--mh-paper); font-size: var(--mh-h1); line-height: 1.02; }
+/* Two lines, "The Modern" over "Unemployment Office" (owner 2026-09-07):
+   each half is a block, so the break never depends on measuring the serif.
+   On a phone the second half wraps to a third line on its own. */
+.mh-hero2-copy h1 { color: var(--mh-paper); font-size: var(--mh-h1); line-height: 1.02; }
+.mh-hero2-copy h1 span { display: block; }
 .mh-hero2-copy > p { max-width: 33em; margin-top: 28px; color: var(--mh-on-dark-muted); font-size: 20px; line-height: 1.45; }
 .mh-hero2-actions { display: flex; align-items: center; gap: 12px; margin-top: 40px; }
 .mh-hero2-trust { display: block; margin-top: 36px; color: rgb(246 244 238 / 62%); font-size: 14px; line-height: 1.5; }
@@ -1522,6 +1536,13 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 }
 
 @media (max-width: 560px) {
+  /* Polish 2026-09-07: the 1180px block pairs these grids into two columns
+     and, coming later in the file, also won on phones over the 900px block
+     that meant to stack them. Two 150px columns broke "Steady the first
+     week" into four lines. Pairs stay at tablet width, where they fit. */
+  ol.mh-stage-strip,
+  ol.mh-steps,
+  .mh-capabilities { grid-template-columns: 1fr; }
   .mh-steps h3,
   .mh-record-card { padding: 22px; }
 }
