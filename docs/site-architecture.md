@@ -28,6 +28,32 @@ represents systems, not features.
 | `/act` | ACT pilot residents | Pilot landing (out of nav, B2G firewall) | Apply for pilot access |
 | `/intake` (+ `/confirmed`) | Members | Native intake form (never redirect) | Submit |
 
+## The launch split (plan 043, owner 2026-09-07)
+
+The site goes live with nine routes; eight more stay live at their URLs but
+leave the nav, leave the sitemap, and carry their own `noindex`. The list is
+`src/lib/launch.ts` and it is the single source of truth — the sitemap filters
+against it, every deferred `page.tsx` imports its `robots` value from it, and
+`MarketingHome.test.tsx` and `e2e/homepage.spec.ts` both assert the nav,
+footer, homepage body and served pages agree with it.
+
+| | Routes |
+| --- | --- |
+| **Launch set** | `/` · `/how-it-works` · `/pricing` · `/employers` · `/about` · `/privacy-security` · `/resources` (+ the 11 articles) · `/intake` (+ `/confirmed`) · `/act` |
+| **Deferred** | `/career-context` · `/lumo` · `/integrations` · `/job-search` · `/layoff-support` · `/workforce` · `/communities` · `/companies` (+ `/companies/:slug`) |
+
+Deferred, not redirected: the homepage links to five of them, `/employers`
+linked to `/workforce`, and `next.config.ts` points `/public-partners` at
+`/workforce`. Redirecting would mean editing every one of those now and again
+at un-deferral. `noindex` plus a nav trim is one line per route and fully
+reversible.
+
+Un-deferring a page: remove its entry from `src/lib/launch.ts`, delete the
+`robots: DEFERRED_ROBOTS` line from its `page.tsx`, and restore its nav entry
+(the four-tab mega-menu structure is struck through in `COPY.md` § Navigation
+and in git history before commit `320786c`). The tests then tell you what else
+to put back.
+
 All routes remain `noindex` until the public launch decision.
 
 ## Homepage section order (v2, plan 022)
@@ -39,33 +65,29 @@ COPY.md § 1.
 
 ## Navigation
 
-Header (fixed since plan 024, mega menus since plan 037): **Product ▾**
-(The system: Career Context · Lumo · Offboard Everywhere; The work: Job
-Search · Layoff & Benefits; featured: How It Works) · **For Organizations ▾**
-(For Employers · Workforce & Government · Universities & Communities;
-featured: the sponsor promise → Privacy & Security) · Pricing ·
-**Resources ▾** (Resources: Guides · Privacy & Security · Company Transition
-Centers; Company: About ·
+Header (fixed since plan 024; mega menus in plan 037, trimmed to the launch
+set by plan 043): **How It Works** · **For Employers** · **Pricing** ·
+**Resources ▾** (Resources: Guides · Privacy & Security; Company: About ·
 Visit Us · Slack Community · Contact; featured: the newsletter) · Sign in ·
-Build my plan (neon). No Home link: the wordmark is home (owner call
-2026-09-01). Below 1180px the header swaps to the mobile menu, which carries the
-same groups flattened under headings. Footer adds Career Context,
-Workforce & Government, Universities & Communities, Privacy & Security,
-and company/legal links.
-`/privacy-security` is out of header nav until the Resources dropdown
-ships (plan 026 phase 4); the footer's Legal column is its entry point,
-and `/security` 301s to it (retargeted from `/about` in plan 034).
+Get started free (neon). No Home link: the wordmark is home (owner call
+2026-09-01). Below 1180px the header swaps to the mobile menu, which carries
+the same entries flattened, including each panel's featured card. Footer:
+Product (How It Works, Pricing, Guides) · Partners (For Employers) · Company
+(About, Visit Us, Contact) · Legal (Privacy & Security, Privacy Policy,
+Terms).
+
+Plan 037's Product and For Organizations panels emptied to one page each when
+the deferred set left, so both became plain links; their columns are recorded
+in `COPY.md` § Navigation for un-deferral.
 
 **Guardrails:** `/act` is intentionally excluded from header and footer nav
 and must never receive a redirect (live out-of-nav B2G landing URL; the
 resident application flow lives at `https://app.offboard.co/act/apply`).
 `/public-partners` was **retired into `/workforce` in plan 035** (owner
-decision 2026-09-01, plan 026 decision 1): the thin page is gone, the URL
-301s to `/workforce`, and the public-sector section left `/employers` for a
-crosslink. `/workforce` is in the footer's Partners column and enters header
-nav with the For Organizations dropdown (plan 026 phase 4). It runs under
-the same B2G language firewall as `/act`, and names no county.
-`/intake` is a native route, never redirected.
+decision 2026-09-01, plan 026 decision 1): the thin page is gone and the URL
+301s to `/workforce`, which is deferred but still serves that redirect with a
+200. `/workforce` runs under the same B2G language firewall as `/act`, and
+names no county. `/intake` is a native route, never redirected.
 
 ## Target IA
 
@@ -85,8 +107,8 @@ the homepage community section keeping `id="community"`.
 
 ## Release checks
 
-`npm test` · `npm run lint` · `npm run lint:css` · `npm run build` ·
-`npm run e2e` · `npm run test:visual` (33+ darwin baselines; deliberate
+`npm test` · `npm run lint` · `npm run lint:css` · `npm run typecheck` ·
+`npm run build` · `npm run e2e` · `npm run test:visual` (33+ darwin baselines; deliberate
 recapture only) · no unexpected network or console output · every route
 fits a 390px viewport (e2e-enforced) · preview link + owner sign-off for
 any visible change (AGENTS.md).

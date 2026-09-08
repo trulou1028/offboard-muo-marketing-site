@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { getPublishedPosts } from "@/lib/content/posts";
+import { DEFERRED_ROUTES, isDeferredRoute } from "@/lib/launch";
 
 // Static, sourced-from-code content routes. /companies/<slug> pages are
 // deliberately absent until they leave noindex (plan 038). Deliberately excludes /intake
@@ -14,6 +15,17 @@ import { getPublishedPosts } from "@/lib/content/posts";
 const STATIC_ROUTES = ["/", "/how-it-works", "/pricing",
   "/career-context", "/integrations", "/lumo", "/layoff-support", "/job-search", "/about", "/employers", "/workforce", "/communities", "/act", "/resources", "/privacy-security", "/companies"] as const;
 
+// Plan 043 filters the deferred routes out rather than deleting them: the
+// list above stays complete, and a page re-enters the sitemap the moment it
+// leaves src/lib/launch.ts. DEFERRED_ROUTES is imported (not only the
+// predicate) so a route dropped from STATIC_ROUTES while still deferred
+// fails typecheck instead of silently vanishing from both.
+type StaticRoute = (typeof STATIC_ROUTES)[number];
+const DEFERRED_ARE_LISTED_ABOVE: readonly StaticRoute[] = DEFERRED_ROUTES;
+void DEFERRED_ARE_LISTED_ABOVE;
+
+const LAUNCH_ROUTES = STATIC_ROUTES.filter((route) => !isDeferredRoute(route));
+
 const BASE_URL = "https://offboard.co";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -24,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getPublishedPosts();
 
   return [
-    ...STATIC_ROUTES.map((route) => ({
+    ...LAUNCH_ROUTES.map((route) => ({
       url: `${BASE_URL}${route}`,
     })),
     ...posts.map((post) => ({

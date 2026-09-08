@@ -303,17 +303,9 @@ export function MarketingEmployers() {
           </div>
           <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/strip-walking-in.webp" alt="A person walking into an office building for an interview, bag on shoulder" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
         </section>
-        {/* The full public-sector story moved to /workforce in plan 035;
-            a workforce board buys differently from a company running a
-            layoff, and the reporting boundary is not the same conversation. */}
-        <section className="mh-wherever mh-section" aria-labelledby="employer-partners-title">
-          <div className="mh-copy-block">
-            <span className="mh-kicker">Public and workforce partners</span>
-            <h2 id="employer-partners-title">Agencies and workforce programs have their own page.</h2>
-            <p>Workforce boards, counties, education partners, and public programs work differently from a company running a layoff. The reporting boundary, the pilot shape, and the agency handoff live on their own page.</p>
-            <Link className="mh-section-link" href="/workforce">See Workforce &amp; Government <ArrowRight aria-hidden="true" /></Link>
-          </div>
-        </section>
+        {/* The public-sector crosslink section (plan 035) left with
+            /workforce at plan 043's launch trim: it sent a buyer to a page
+            the owner is holding back. It returns when /workforce does. */}
         <FaqSection title="What employers ask." items={EMPLOYER_FAQS} />
         <ContactBand kicker="Sponsored access" title="Talk about sponsoring a group." body="Tell us how many people are affected and when. Setup is self-serve, and we can walk you through it." cta="Talk about sponsored access" href="mailto:hello@offboard.co?subject=Employer%20support" />
       </main>
