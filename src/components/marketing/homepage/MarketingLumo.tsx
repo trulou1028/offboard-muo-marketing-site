@@ -107,7 +107,7 @@ function Straight() {
         <h2 id="straight-title">It works from verified facts, and it does not decide anything for you.</h2>
         <p>When Lumo talks about benefits, it reads from state facts a person verified. It does not invent a dollar figure or a deadline.</p>
         <p>Offboard is independent, not a government agency. Agencies and providers decide eligibility and benefit amounts. Lumo helps you do the work, and it does not replace your review and judgment on anything you send out.</p>
-        <Link className="mh-section-link" href="/pricing">Free includes 3 Lumo messages a day. Pro removes the limit. <ArrowRight aria-hidden="true" /></Link>
+        <Link className="mh-section-link" href="/pricing">Free includes 10 Lumo messages a day. Pro removes the limit. <ArrowRight aria-hidden="true" /></Link>
       </div>
     </section>
   );

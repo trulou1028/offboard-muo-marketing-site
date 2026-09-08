@@ -380,19 +380,18 @@ function StepSteady() {
 /* ---------------------------------------------------------------- */
 const FREE_FEATURES = [
   "Build your Career Context.",
-  "Track opportunities.",
-  "Save companies, contacts, notes, and activity.",
-  "Connect supported AI assistants.",
-  "Use core job-search tools.",
+  "Track opportunities, companies, contacts, and activity.",
+  "One complete Application Packet, every step free.",
+  "Ask Lumo, 10 messages a day.",
+  "Connect ChatGPT or Claude to read your Offboard.",
 ] as const;
 
 const PRO_FEATURES = [
-  "Compare opportunities using your complete context.",
-  "Get deeper role and company intelligence.",
-  "Create advanced application materials.",
-  "Prepare for interviews using everything Offboard knows about you and the opportunity.",
-  "Analyze patterns across your job search.",
-  "Get more personalized recommendations about what to do next.",
+  "Tailored resumes, cover letters, and interview briefs on every packet.",
+  "Enriched ghost checks and a path to a real person.",
+  "Ask Lumo without a daily limit, on the advanced model.",
+  "Compare opportunities using your complete Career Context.",
+  "Your connected assistant can run packets and checks for you.",
 ] as const;
 
 const SPONSORED_FEATURES = [
@@ -409,7 +408,7 @@ function PlansSection() {
           <span className="mh-kicker">Offboard Pro</span>
           <h2 id="pro-title">Free remembers your search. Pro puts it to work.</h2>
         </div>
-        <p>Start free and build the foundation of your Career Context. When you want deeper intelligence, preparation, and personalized help, Offboard Pro uses that context to help you make better decisions and move faster.</p>
+        <p>Free is the record: your path, your tracker, your benefit facts, and one complete Application Packet. Pro is Offboard doing the repeated application work for you, on every packet after it.</p>
       </div>
       <div className="mh-pro-cards" data-reveal="">
         <article className="mh-plan-card">

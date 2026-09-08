@@ -59,7 +59,8 @@ export const PRODUCT_FAQS = [
 
 export const PRICING_FAQS = [
   ["Do I need a payment method to start?", "No. The Free tier is not a trial. You can build your plan, see your runway and deadlines, track applications, and build your first Application Packet without adding a payment method."],
-  ["What happens when I run out of credits?", "The core plan, benefit sheets, and tracking keep working. Credits gate the heavier product work, and they refresh monthly on both tiers."],
+  ["What happens after my first Application Packet?", "Every packet after it still runs the assessment: whether the job is real, who the company is, and how you fit. Tailored resumes, cover letters, interview briefs, and the path to a person are part of Pro."],
+  ["Is there a limit on Pro?", "Pro covers about 30 full packets a month. We email you at 25 and never stop a build without warning. Ask Lumo has no daily limit on Pro."],
   ["Can I cancel Pro any time?", "Yes. Your plan, materials, and history remain yours on the Free tier after you cancel."],
   ["Is human support included?", "Availability, format, eligibility, and pricing vary by support option. The booking page shows the current details before you schedule."],
   ["Does any tier charge for government benefits?", "Never. Claiming your benefits is always free. Offboard charges for its own tools and support, not for access to public programs."],
@@ -621,30 +622,32 @@ export function PricingSection() {
             <h3>Free</h3>
           </header>
           <p className="mh-price-value"><b>$0</b><small>forever</small></p>
-          <p>See your plan, your runway, and your benefit deadlines. Then build your first Application Packet.</p>
+          <p>Everything you need to run the search, and one complete Application Packet with every step free.</p>
           <ul>
-            <li><Check aria-hidden="true" />Transition plan &amp; benefit sheets</li>
-            <li><Check aria-hidden="true" />Runway calculator</li>
-            <li><Check aria-hidden="true" />First Application Packet free</li>
-            <li><Check aria-hidden="true" />Application tracking</li>
-            <li><Check aria-hidden="true" />3 Lumo messages per day</li>
-            <li><Check aria-hidden="true" />30 monthly credits</li>
+            <li><Check aria-hidden="true" />Your Path, tracker, benefit facts, and documents</li>
+            <li><Check aria-hidden="true" />One complete Application Packet, every step free</li>
+            <li><Check aria-hidden="true" />The assessment on every packet after that: is it real, who is the company, how you fit</li>
+            <li><Check aria-hidden="true" />3 basic ghost checks a month</li>
+            <li><Check aria-hidden="true" />Ask Lumo, 10 messages a day</li>
+            <li><Check aria-hidden="true" />Connect ChatGPT or Claude to read your Offboard and update your tracker</li>
           </ul>
           <PrimaryCta />
         </article>
         <article>
           <header>
             <h3>Offboard Pro</h3>
-            <b className="is-badge">For active transitions</b>
+            <b className="is-badge">For active searches</b>
           </header>
           <p className="mh-price-value"><b>$20</b><small>/month</small></p>
-          <p>For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited Lumo.</p>
+          <p>Offboard does the repeated application work for you, on every packet.</p>
           <ul>
-            <li><Check aria-hidden="true" />Unlimited conversations with Lumo</li>
-            <li><Check aria-hidden="true" />More room for Application Packets and tailoring</li>
-            <li><Check aria-hidden="true" />Deeper application and interview support</li>
-            <li><Check aria-hidden="true" />300 monthly credits</li>
+            <li><Check aria-hidden="true" />Tailored resumes, cover letters, interview briefs, and a path to a person on every packet</li>
+            <li><Check aria-hidden="true" />Enriched ghost checks: duplicate postings, employer reviews, salary benchmark</li>
+            <li><Check aria-hidden="true" />Ask Lumo without a daily limit, on the advanced model</li>
+            <li><Check aria-hidden="true" />Your connected assistant can run packets and checks for you</li>
+            <li><Check aria-hidden="true" />About 30 full packets a month. We email you at 25 and never stop a build without warning.</li>
           </ul>
+          <small className="mh-price-billing">Or $45 every 3 months, which is $15 a month. Cancel anytime.</small>
           <PrimaryCta>Upgrade to Pro</PrimaryCta>
         </article>
         <article>
@@ -661,7 +664,7 @@ export function PricingSection() {
           <Link className="mh-secondary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
         </article>
       </div>
-      <p className="mh-price-note">Quarterly billing details and the full feature comparison are shown at checkout. Claiming your government benefits is always free, on any tier.</p>
+      <p className="mh-price-note">Credits pay for the extras outside your search: headshots, the brand kit, voice practice, and paperwork review. Everything in the Application Packet is covered by your plan. Claiming your government benefits is always free, on any tier.</p>
     </section>
   );
 }
