@@ -7,13 +7,12 @@ import { categoryMeta, type ResourceSection } from "@/content/resources/registry
 import {
   ABOUT_FAQS,
   ContactBand,
-  ContextSection,
   FeatureRows,
   Statements,
   EMPLOYER_FAQS,
   FaqSection,
   FinalCta,
-  FiveSteps,
+  HowStepFirstWeek,
   HUMAN_SUPPORT_URL,
   HumanSupportSection,
   LumoSection,
@@ -23,7 +22,7 @@ import {
   PricingSection,
   PRICING_FAQS,
   PRODUCT_FAQS,
-  StartingPlanSection,
+  HowStepContext,
   ToolkitSection,
   VerifiedFactsStrip,
 } from "./MarketingSite";
@@ -43,6 +42,10 @@ const WHY_COMPANIES_ITEMS = [
   { title: "Proof, not promises", body: "No placement guarantees, no inflated promises. You see real aggregate usage and claims activity, so you know the support landed." },
 ] as const;
 
+/* Plan 044 (owner 2026-09-07): the long form of the homepage's four steps,
+   same names, same order, same kickers, so a visitor arriving from the
+   strip can find their place. The anchors #toolkit and #faq are SEO-load-
+   bearing (next.config.ts sends /job-packet and /faq to them). */
 export function MarketingHowItWorks() {
   return (
     <MarketingShell current="how-it-works">
@@ -50,23 +53,22 @@ export function MarketingHowItWorks() {
         <PageHero
           current="how-it-works"
           kicker="How it works"
-          title="One plan that starts where you are."
-          body="Whether you were laid off yesterday, have been searching for months, or are still employed and reading the room, your plan starts from your situation and your state, not a template."
+          title="One system that starts where you are."
+          body="Whether you were laid off yesterday, have been searching for months, or are still employed and reading the room: steady the first week, build your Career Context, connect it to the AI you already use, and run your search from it."
           cta="Get started free"
-          aside={<><span>The spine and the muscle</span><strong>The plan is the spine. The tools are the muscle.</strong><p>Every step links straight into the tool that does the heavy lifting. No blank pages, no starting over.</p></>}
+          aside={<><span>The spine and the muscle</span><strong>Your Career Context is the spine. The tools are the muscle.</strong><p>Every step adds to one record, and every tool reads from it. No blank pages, no starting over.</p></>}
         />
-        <FiveSteps />
-        <StartingPlanSection />
-        <ToolkitSection />
-        <LumoSection />
+        <HowStepFirstWeek />
         <section className="mh-verified-visual mh-section" aria-hidden="true">
           <div className="mh-verified-visual-frame">
             <Image src="/marketing/homepage/renders/benefits-stack.webp" alt="" fill sizes="(max-width: 900px) 100vw, 1200px" />
           </div>
         </section>
         <VerifiedFactsStrip />
+        <HowStepContext />
+        <LumoSection />
+        <ToolkitSection />
         <HumanSupportSection />
-        <ContextSection />
         <FaqSection title="What to know about the product." items={PRODUCT_FAQS} />
         <FinalCta />
       </main>

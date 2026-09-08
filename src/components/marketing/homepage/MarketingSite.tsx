@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  FileText,
+  ListChecks,
+  MessageSquare,
+  Search,
+} from "lucide-react";
 import type { ReactNode } from "react";
 
 import { MarketingMobileMenu, MarketingNav } from "./MarketingNav";
@@ -367,13 +374,32 @@ export function StartingPlanPreview() {
   );
 }
 
-export function StartingPlanSection() {
+/* Plan 044: /how-it-works is the long form of the homepage's four steps.
+   This is step 2. The onboarding composition is unchanged (its strings are
+   product state, verified in lumo-plan-builder origin/main 2026-09-07); what
+   changed is what the page says it shows - where the Career Context starts,
+   not "step 1 of the product". The chips came from the retired "Your context,
+   kept" section. */
+const CONTEXT_ADDS = ["Your situation & state", "Roles & resumes", "Network"] as const;
+const CONTEXT_IMPROVES = ["Applications", "Interviews", "Runway", "Offers"] as const;
+
+export function HowStepContext() {
   return (
-    <section className="mh-starting-plan mh-section mh-split" aria-labelledby="starting-plan-title">
+    <section className="mh-how-context mh-section mh-split" id="build" aria-labelledby="how-context-title">
       <div className="mh-copy-block">
-        <span className="mh-kicker">The first ten minutes</span>
-        <h2 id="starting-plan-title">A few questions. A plan that&apos;s actually yours.</h2>
-        <p>Your situation, your state, your dates. That&apos;s enough to build a starting plan around what changed, with the option to skip straight to the tools if you already know what you need. Private by default, and you can change your answers any time.</p>
+        <span className="mh-kicker">Step 2 · Build your Career Context</span>
+        <h2 id="how-context-title">A few questions. A record that&apos;s actually yours.</h2>
+        <p>Your situation, your state, your dates start it. Your resume, your LinkedIn, and the stories you tell in interviews fill it in. Offboard keeps one living record of your experience, applications, companies, conversations, documents, interviews, goals, and progress, so you never explain yourself from scratch again. Private by default, and you can change any of it.</p>
+        <div className="mh-context-chips" data-reveal="">
+          <div>
+            <span>Adds context</span>
+            <ul>{CONTEXT_ADDS.map((chip) => <li key={chip}>{chip}</li>)}</ul>
+          </div>
+          <div>
+            <span>Improves next</span>
+            <ul>{CONTEXT_IMPROVES.map((chip) => <li key={chip}>{chip}</li>)}</ul>
+          </div>
+        </div>
       </div>
       <StartingPlan />
     </section>
@@ -411,77 +437,94 @@ export function VerifiedFactsStrip() {
   );
 }
 
-const FIVE_STEPS = [
-  {
-    title: "Tell us where you are",
-    body: "A few questions: your situation, your state, your dates. That's enough to build a plan that's actually yours, not a template.",
-    tag: "Your situation & state",
-  },
-  {
-    title: "See your money clearly",
-    body: "Your runway, how long you can go, beside your money clock: which benefit deadlines are coming and what each one is worth.",
-    tag: "Runway calculator · Money clock",
-  },
-  {
-    title: "Claim what exists",
-    body: "Step-by-step paths to unemployment benefits, health coverage, and state-approved funded training, with verified official links. We never promise funding. We show you the exact path to find out.",
-    tag: "Benefit sheets · Funded Training",
-  },
-  {
-    title: "Get ready, then run the search",
-    body: "Resume, story, materials, then Application Packets: paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person.",
-    tag: "Application Packet · Resume Tailoring",
-  },
-  {
-    title: "Close it, and make it count",
-    body: "Interview prep and practice, a paperwork review before you sign, and when you land: mark it, keep your record, and pass what you learned back.",
-    tag: "Interview Prep · Paperwork Review",
-  },
+/* Step 1 of four (plan 044). The first-week rows are the substance of the
+   retired five-step list's steps 2 and 3, under the homepage's own step
+   name. While /layoff-support is deferred (plan 043) this is the launch
+   set's only first-week page, so it carries the depth (owner 2026-09-07).
+   "Benefit deadlines" is the plain phrase, not a product noun (owner
+   2026-09-07, plan 044 decision 3); the app's public label is Benefits. */
+const FIRST_WEEK_ROWS = [
+  ["Runway calculator", "How long your money lasts, and which deadlines change the math."],
+  ["Benefit deadlines", "Which unemployment, health coverage, and severance dates are coming, and what each one is worth."],
+  ["Funded Training", "State-approved programs that may be paid for while you train, with verified official links."],
+  ["Paperwork Review", "A read on your severance or offer paperwork before you sign anything."],
 ] as const;
 
-export function FiveSteps() {
+export function HowStepFirstWeek() {
   return (
-    <section className="mh-five-steps mh-section" aria-labelledby="five-steps-title">
-      <div className="mh-section-heading">
-        <span className="mh-kicker">The plan, start to finish</span>
-        <h2 id="five-steps-title">Five steps from &quot;what just happened&quot; to &quot;what&apos;s next.&quot;</h2>
+    <section className="mh-how-first-week mh-section" id="steady" aria-labelledby="first-week-title">
+      <div className="mh-intro-split">
+        <div>
+          <span className="mh-kicker">Step 1 · Steady the first week</span>
+          <h2 id="first-week-title">See your money clearly, then claim what exists.</h2>
+        </div>
+        <div>
+          <p>Your runway, how long you can go, beside the benefit deadlines that are coming and what each one is worth. Then step-by-step paths to unemployment benefits, health coverage, and state-approved funded training, with verified official links. We never promise funding. We show you the exact path to find out.</p>
+        </div>
       </div>
-      <ol className="mh-five-steps-rows">
-        {FIVE_STEPS.map((step, index) => (
-          <li key={step.title}>
+      <ol className="mh-how-first-week-rows" data-reveal="">
+        {FIRST_WEEK_ROWS.map(([title, body], index) => (
+          <li key={title}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             <div>
-              <strong>{step.title}</strong>
-              <p>{step.body}</p>
+              <strong>{title}</strong>
+              <p>{body}</p>
             </div>
-            <em>{step.tag}</em>
           </li>
         ))}
       </ol>
+      <small className="mh-how-first-week-note">Offboard is independent, not a government agency, and claiming your benefits is always free.</small>
     </section>
   );
 }
 
 const TOOLKIT_FLAGSHIP_CHIPS = ["Ghost check", "Fit read", "Tailored materials", "Warm intro"] as const;
 
-const TOOLKIT_CARDS: Array<{ title: string; body: string; image?: string; alt?: string }> = [
-  { title: "Resume Tailoring", body: "Build and tailor resumes from your real history, ready for the role in front of you.", image: "/marketing/homepage/renders/toolkit-resumes.webp", alt: "Product render of the Resume Tailoring view, a resume tailored into role-specific cards" },
-  { title: "Interview prep & practice", body: "Drills grounded in the role, the company, and your strongest stories.", image: "/marketing/homepage/renders/toolkit-interviews.webp", alt: "Product render of interview prep, two message cards exchanging practice questions" },
+/* Step 4 of four (plan 044). The stage strip is the homepage's, name for
+   name and chip for chip (every chip is a string the product produces; see
+   MarketingHome.tsx). Before this the page listed a different set with no
+   stages and could not claim a number; now both pages list the same ten.
+   The three cards with renders stay; Ghost Job Checker, Paperwork Review,
+   Runway calculator, Funded Training and Ask Lumo left the grid (the last
+   four belong to steps 1 and 3, the first is in the strip). The composite
+   "Interview prep & practice" card split as the glossary anticipated: it is
+   Interview Prep here, Voice Practice sits beside it in the strip. */
+const TOOLKIT_STAGES = [
+  { icon: Search, title: "Decide", chip: "Strong fit", decides: "Whether this one deserves your week.", tools: ["Role Fit", "Ghost Job Checker", "Company Intelligence"] },
+  { icon: FileText, title: "Apply", chip: "Ready for review", decides: "What you actually send.", tools: ["Application Packets", "Resume Tailoring", "Cover Letters"] },
+  { icon: MessageSquare, title: "Interview", chip: "Prep ready", decides: "Walking in prepared, not rehearsed.", tools: ["Interview Prep", "Voice Practice"] },
+  { icon: ListChecks, title: "Organize", chip: "Saved to tracker", decides: "Where all of it is kept.", tools: ["Application Tracker", "Career Context"] },
+] as const;
+
+const TOOLKIT_CARDS: Array<{ title: string; body: string; image: string; alt: string }> = [
+  { title: "Resume Tailoring", body: "Build and tailor resumes from your real history, ready for the role in front of you.", image: "/marketing/homepage/renders/toolkit-resumes.webp", alt: "Product render of the Resume Tailoring view, a resume tailored to a role beside the original" },
+  { title: "Interview Prep", body: "Drills grounded in the role, the company, and your strongest stories, with practice runs before the real one.", image: "/marketing/homepage/renders/toolkit-interviews.webp", alt: "Product render of interview prep, two message cards exchanging a question and a prepared answer" },
   { title: "Application Tracker", body: "Every application, stage, and follow-up stays current without extra busywork.", image: "/marketing/homepage/renders/toolkit-applications.webp", alt: "Product render of the application tracker, cards filed by stage" },
-  { title: "Ghost Job Checker", body: "Flags fake or stale listings before you waste an application on them." },
-  { title: "Paperwork Review", body: "A read on your severance or offer paperwork before you sign anything." },
-  { title: "Runway calculator", body: "See how long your money lasts and which deadlines change the math." },
-  { title: "Funded Training", body: "Search state-approved programs that may be paid for while you train." },
-  { title: "Ask Lumo", body: "An AI guide that works from your plan, your benefit facts, and your search." },
 ];
 
 export function ToolkitSection() {
   return (
     <section className="mh-toolkit mh-section" id="toolkit" aria-labelledby="toolkit-title">
-      <div className="mh-section-heading">
-        <span className="mh-kicker">The toolkit</span>
-        <h2 id="toolkit-title">The tools didn&apos;t go anywhere. Now they show up at the right moment.</h2>
+      <div className="mh-intro-split">
+        <div>
+          <span className="mh-kicker">Step 4 · Run your search</span>
+          <h2 id="toolkit-title">The tools didn&apos;t go anywhere. Now they show up at the right moment.</h2>
+        </div>
+        <div>
+          <p>Ten tools that read from the same context, so nothing is retyped and nothing is forgotten.</p>
+        </div>
       </div>
+      <ol className="mh-stage-strip" data-reveal="">
+        {TOOLKIT_STAGES.map(({ icon: IconComponent, title, chip, decides, tools }) => (
+          <li key={title}>
+            <IconComponent aria-hidden="true" />
+            <h3>{title}</h3>
+            <em className="mh-state-chip">{chip}</em>
+            <p>{decides}</p>
+            <ul>{tools.map((tool) => <li key={tool}>{tool}</li>)}</ul>
+          </li>
+        ))}
+      </ol>
       <div className="mh-toolkit-layout" data-reveal="">
         <article className="mh-toolkit-flagship">
           <div className="mh-toolkit-flagship-visual">
@@ -498,11 +541,9 @@ export function ToolkitSection() {
         <div className="mh-toolkit-grid">
           {TOOLKIT_CARDS.map(({ title, body, image, alt }) => (
             <article key={title}>
-              {image && (
-                <div className="mh-toolkit-card-visual">
-                  <Image src={image} alt={alt ?? ""} fill sizes="(max-width: 900px) 100vw, 22vw" />
-                </div>
-              )}
+              <div className="mh-toolkit-card-visual">
+                <Image src={image} alt={alt} fill sizes="(max-width: 900px) 100vw, 22vw" />
+              </div>
               <h3>{title}</h3>
               <p>{body}</p>
             </article>
@@ -522,14 +563,18 @@ const LUMO_QUESTIONS = [
 
 export function LumoSection() {
   return (
-    <section className="mh-lumo mh-section mh-split" aria-labelledby="lumo-title">
+    <section className="mh-lumo mh-section mh-split" id="connect" aria-labelledby="lumo-title">
       <div className="mh-copy-block">
-        <span className="mh-kicker is-lime">Meet Lumo</span>
+        <span className="mh-kicker is-lime">Step 3 · Connect it to the AI you use</span>
         <h2 id="lumo-title">An AI guide that knows your actual situation.</h2>
-        <p>Lumo works from your plan, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three. Like a caseworker who answers in seconds, remembers everything, and never has a line.</p>
+        <p>Lumo works from your Career Context, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three. Like a caseworker who answers in seconds, remembers everything, and never has a line.</p>
         <div className="mh-lumo-trust">
           <p>When Lumo talks about your benefits, it reads from human-verified state facts. It never invents a dollar figure or a deadline.</p>
         </div>
+        {/* The homepage's own sentence (plan 044). The beta line is governed
+            by the ledger row "Live integrations" and is not optional. */}
+        <p>Prefer ChatGPT or Claude? Connect Offboard and take your context with you.</p>
+        <small>ChatGPT and Claude connections are in beta.</small>
       </div>
       <div className="mh-lumo-questions" data-reveal="">
         <span>Ask questions like</span>
@@ -541,49 +586,6 @@ export function LumoSection() {
             </li>
           ))}
         </ol>
-      </div>
-    </section>
-  );
-}
-
-const CONTEXT_ADDS = ["Your situation & state", "Money clock", "Roles & resumes", "Network"] as const;
-const CONTEXT_IMPROVES = ["Applications", "Interviews", "Runway", "Offers"] as const;
-
-const INTEGRATIONS = [
-  { name: "Calendar", soon: false },
-  { name: "Gmail", soon: false },
-  { name: "Drive", soon: false },
-  { name: "Slack", soon: true },
-  { name: "Notion", soon: true },
-] as const;
-
-export function ContextSection() {
-  return (
-    <section className="mh-context mh-section" aria-labelledby="context-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">Your context, kept</span>
-        <h2 id="context-title">Stop repeating your story to every new tool.</h2>
-        <p>Your situation, state, runway, roles, resumes, applications, interviews, and outcomes stay connected. Every step of the plan, and every tool, starts from your real context instead of a blank page.</p>
-      </div>
-      <div className="mh-context-chips" data-reveal="">
-        <div>
-          <span>Adds context</span>
-          <ul>{CONTEXT_ADDS.map((chip) => <li key={chip}>{chip}</li>)}</ul>
-        </div>
-        <div>
-          <span>Improves next</span>
-          <ul>{CONTEXT_IMPROVES.map((chip) => <li key={chip}>{chip}</li>)}</ul>
-        </div>
-      </div>
-      <div className="mh-integrations">
-        <p>Connects to your stack. Your tools provide context. Offboard provides the plan.</p>
-        <ul>
-          {INTEGRATIONS.map((integration) => (
-            <li key={integration.name} className={integration.soon ? "is-soon" : undefined}>
-              {integration.name}{integration.soon ? " · soon" : ""}
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );
