@@ -51,7 +51,16 @@ function SecondaryCta({ children, href }: { children: ReactNode; href: string })
 /* fills the band, its dark-green wall carrying the headline on the   */
 /* left; the Lumo exchange floats over the photo's lower right as one */
 /* flat image (see COPY.md § Hero for why it is pixels, not markup).  */
-/* Two photographs were approved; HERO_PHOTO picks the one that ships. */
+/* The five-image library (docs/marketing-image-library.md, owner 2026-09-08);
+   HERO_PHOTO picks the one that ships. Every alt below is the library's own
+   suggested text.
+
+   All five are drop-in: the hero's left-to-right wash was tuned on the two
+   night scenes, and the three daylight ones still hold the headline. Measured
+   at 1440 against the paper headline colour, worst-case background behind the
+   H1: living room 13.8:1, public library 12.3:1, bedroom 11.1:1, coffee shop
+   10.6:1, coworking 7.7:1. The floor for 44px+ text is 3:1, so the tightest
+   has better than double the margin. Re-measure if the wash changes. */
 /* ---------------------------------------------------------------- */
 const HERO_PHOTOS = {
   livingRoom: {
@@ -62,7 +71,20 @@ const HERO_PHOTOS = {
     src: "/marketing/homepage/hero/bedroom.webp",
     alt: "A woman sits cross-legged on her bed with a laptop at dusk, a lamp lit on the nightstand beside her.",
   },
+  coffeeShop: {
+    src: "/marketing/homepage/hero/coffee-shop.webp",
+    alt: "A woman works on her laptop at a wooden table in a brick-and-concrete coffee shop.",
+  },
+  coworking: {
+    src: "/marketing/homepage/hero/coworking.webp",
+    alt: "A woman works on her laptop at a communal table in a daylight-filled coworking space.",
+  },
+  publicLibrary: {
+    src: "/marketing/homepage/hero/public-library.webp",
+    alt: "A man works on his laptop with notes and reading glasses at a public library table.",
+  },
 } as const;
+
 const HERO_PHOTO = HERO_PHOTOS.livingRoom;
 
 function HomeHero() {
