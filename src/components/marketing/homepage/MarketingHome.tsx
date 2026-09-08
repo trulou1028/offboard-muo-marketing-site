@@ -55,12 +55,12 @@ function SecondaryCta({ children, href }: { children: ReactNode; href: string })
    HERO_PHOTO picks the one that ships. Every alt below is the library's own
    suggested text.
 
-   All five are drop-in: the hero's left-to-right wash was tuned on the two
-   night scenes, and the three daylight ones still hold the headline. Measured
-   at 1440 against the paper headline colour, worst-case background behind the
-   H1: living room 13.8:1, public library 12.3:1, bedroom 11.1:1, coffee shop
-   10.6:1, coworking 7.7:1. The floor for 44px+ text is 3:1, so the tightest
-   has better than double the margin. Re-measure if the wash changes. */
+   Above 900px there is no wash any more (owner 2026-09-08): each photograph's
+   own wall is the green behind the copy. Measured on the bedroom scene with
+   the wash gone, worst-case background behind the H1: 10.7:1 at 1440, 9.9:1
+   at 1920, 8.7:1 at 2560, 9.6:1 at a tall 1200x1000, 9.1:1 at 901. The floor
+   for 44px+ text is 3:1. Swapping HERO_PHOTO now means re-measuring, because
+   nothing sits between the copy and the picture. */
 /* ---------------------------------------------------------------- */
 const HERO_PHOTOS = {
   livingRoom: {
