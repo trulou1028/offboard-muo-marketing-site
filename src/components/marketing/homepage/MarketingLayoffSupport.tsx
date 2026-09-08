@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import {
+  AlsoStrip,
   FinalCta,
+  Shot,
   MarketingShell,
   PageHero,
   SIGN_UP_URL,
@@ -36,17 +37,6 @@ import {
    MarketingSite.tsx. Do not "improve" these sentences by adding the numbers
    back; that is a claim the ledger does not carry. */
 
-/* Stage 1 of the app's path, titles verbatim from `layoffPlanItems.ts` /
-   `stages.ts` on `lumo-plan-builder` origin/main. Titles only: the app's
-   sub-lines for the last two steps are not in COPY.md, and this card is a
-   checklist, not a second copy block. */
-const FIRST_WEEK_STEPS = [
-  "Write down your key dates",
-  "Understand your COBRA / health insurance options",
-  "Secure your accounts and access",
-  "Save all layoff documents in one place",
-  "Request your personnel file",
-] as const;
 
 /* Paperwork Review, the canonical name (COPY.md § Tool glossary, app-owned by
    `legalReviewCopy.ts`). Every value is a state word, never a deadline. */
@@ -64,41 +54,17 @@ const BENEFIT_ROWS = [
   ["Know how long you can search.", "The runway view turns your savings, severance, and benefits into a number of months, and shows which decisions change it."],
 ] as const;
 
-/* Composition A (R2): the path card, with the runway view lifted out as a
-   satellite. The runway figure is a labelled sample, exactly as the money
-   clock on this page is - sample product output, not a claim about anyone's
-   situation. */
-function FirstWeekComposition() {
-  return (
-    <div className="mh-comp mh-first-week-comp">
-      <div className="mh-ui-card mh-plan-preview mh-comp-base" aria-label="Example Offboard path, the first week">
-        <div className="mh-ui-card-heading"><h3>Your Path</h3></div>
-        <p className="mh-plan-lede">The steps that fit your situation. Do them in any order.</p>
-        <div className="mh-plan-stage"><strong>Protect the first week</strong><span>5 left</span></div>
-        <ul className="mh-plan-steps is-checklist">
-          {FIRST_WEEK_STEPS.map((title) => (
-            <li key={title}><i aria-hidden="true" /><strong>{title}</strong></li>
-          ))}
-        </ul>
-      </div>
-      <div className="mh-comp-satellite mh-runway-chip" aria-label="Sample runway estimate">
-        <span>Runway · sample</span>
-        <strong>7 months</strong>
-      </div>
-    </div>
-  );
-}
-
+/* Plan 048: the hero shows the real Runway page; the plan-041 path card
+   composition is retired (the Your Path card still ships on the homepage). */
+/* Plan 046: the composition moved into the hero, where the page now opens
+   on the path card and the runway sample; this band keeps the copy. */
 function FirstWeek() {
   return (
     <section className="mh-first-week mh-section" aria-labelledby="first-week-title">
-      <div className="mh-split">
-        <div className="mh-copy-block">
-          <span className="mh-kicker is-sand">The first week</span>
-          <h2 id="first-week-title">Before the search, protect yourself and your paperwork.</h2>
-          <p>The first days after a layoff decide more than people expect. Work logins disappear, notices arrive with short windows, and the documents you will need later are easiest to get now. Offboard starts from your state, your dates, and what actually happened, not from a template.</p>
-        </div>
-        <FirstWeekComposition />
+      <div className="mh-copy-block">
+        <span className="mh-kicker is-sand">The first week</span>
+        <h2 id="first-week-title">Before the search, protect yourself and your paperwork.</h2>
+        <p>The first days after a layoff decide more than people expect. Work logins disappear, notices arrive with short windows, and the documents you will need later are easiest to get now. Offboard starts from your state, your dates, and what actually happened, not from a template.</p>
       </div>
     </section>
   );
@@ -237,19 +203,7 @@ function StraightAnswers() {
   );
 }
 
-function ThenTheSearch() {
-  return (
-    <section className="mh-wherever mh-section" aria-labelledby="then-search-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">And then the job</span>
-        <h2 id="then-search-title">When the paperwork is handled, the search is still there.</h2>
-        <p>Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other. The tracker, the Application Packets, the interview prep, and the record behind them are all here when you are ready.</p>
-        <Link className="mh-section-link" href="/#how-it-works">See how Offboard works <ArrowRight aria-hidden="true" /></Link>
-      </div>
-    </section>
-  );
-}
-
+/* "And then the job" became an item in the shared AlsoStrip (plan 046). */
 export function MarketingLayoffSupport() {
   return (
     <MarketingShell current="layoff-support">
@@ -259,7 +213,7 @@ export function MarketingLayoffSupport() {
           title="Losing your job creates a lot of problems at once."
           body="The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in the order that matters to you."
           current="layoff-support"
-          aside={false}
+          visual={<Shot src="/marketing/app/runway.webp" alt="The Runway page in Offboard: a rough estimate of how many months you can cover, fields for monthly expenses and savings, and planning guidance beside it" width={1256} height={746} />}
           cta="Get started free"
         />
         <FirstWeek />
@@ -269,7 +223,10 @@ export function MarketingLayoffSupport() {
         <StillOwed />
         <VerifiedFactsStrip />
         <StraightAnswers />
-        <ThenTheSearch />
+        <AlsoStrip items={[
+          { title: "When the paperwork is handled, the search is still there.", body: "Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other.", href: "/job-search", cta: "See how the search runs" },
+          { title: "It all lands in one record.", body: "Your situation, your dates, your documents, and every decision you make here become part of your Career Context, so the search starts from what actually happened.", href: "/career-context", cta: "See what it holds" },
+        ]} />
         <FinalCta
           title="Start with what changed."
           body="Tell Offboard what happened and get a plan that covers the money, the benefits, and the search, in the order they actually matter."

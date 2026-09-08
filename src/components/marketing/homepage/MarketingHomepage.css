@@ -601,8 +601,6 @@ ul.mh-feature-rows { width: 100%; margin-top: 48px; border-top: 1px solid var(--
 
 /* "This vs that" (R13). The section shows the two things instead of
    describing them in equal cells, so it is a split, not a grid. */
-.mh-contrast .mh-split { align-items: center; }
-strong.mh-contrast-payoff { max-width: 52ch; padding-top: 18px; border-top: 1px solid var(--mh-line); color: var(--mh-ink); font-size: 16px; font-weight: 650; line-height: 26px; }
 
 /* The three contrast compositions share one geometry, and it is load-bearing.
    The base card takes 70% of the column and the satellite is anchored to the
@@ -612,54 +610,17 @@ strong.mh-contrast-payoff { max-width: 52ch; padding-top: 18px; border-top: 1px 
    The first build of all three had the satellite eating the last row's
    label and leaving an orphan value on the right. If you change a base's
    width or padding, re-run the overlap assertions before shipping. */
-.mh-resume-comp,
-.mh-onesystem-comp,
-.mh-startingpoint-comp { position: relative; display: flex; justify-content: flex-end; }
-.mh-resume-sheet,
-.mh-packet-mini,
-.mh-startingpoint-comp .mh-record-card { width: 70%; }
-.mh-resume-missing,
-.mh-tool-stack,
-.mh-blank-composer { left: 0; width: calc(30% + 24px); }
 
 /* /career-context. The base is the resume because the resume is the
    section's subject; the satellite spills past its edge, which is the
    argument. The lines are bars, not lorem: fake resume prose would be one
    more thing to keep true. */
-.mh-resume-comp { padding: 8px 0 26px; }
-.mh-resume-sheet { display: flex; flex-direction: column; gap: 20px; padding: 30px; }
-.mh-resume-sheet > span { color: var(--mh-muted); font-size: 11px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
-.mh-resume-lines { display: flex; flex-direction: column; gap: 11px; }
-.mh-resume-lines em { display: block; height: 9px; width: 100%; background: var(--mh-line); border-radius: var(--mh-radius-pill); }
-.mh-resume-lines em.is-name { height: 17px; width: 62%; background: var(--mh-secondary); }
-.mh-resume-lines em.is-role { height: 12px; width: 78%; margin-top: 12px; background: var(--mh-muted); }
-.mh-resume-lines em:last-child { width: 74%; }
-ul.mh-resume-missing { top: 30px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
-.mh-resume-missing li { padding: 10px 14px; background: var(--mh-white); border-radius: var(--mh-radius-pill); box-shadow: var(--mh-shadow-overlay); font-size: 13px; font-weight: 600; }
 
 /* /job-search. One connected packet, and the tools that each ask again,
    dwarfed beside it. */
-.mh-onesystem-comp { padding-bottom: 26px; }
-.mh-packet-mini { display: flex; flex-direction: column; gap: 18px; padding: 28px; }
-.mh-packet-mini-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.mh-packet-mini-head strong { font-family: var(--mh-font-display); font-size: 21px; font-weight: 500; letter-spacing: -.02em; }
-.mh-packet-mini-head b { padding: 5px 10px; background: var(--mh-paper-soft); border-radius: var(--mh-radius-pill); color: var(--mh-forest); font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
-.mh-packet-mini ul { border-top: 1px solid var(--mh-line); }
-.mh-packet-mini li { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--mh-line); }
-.mh-packet-mini li:last-child { padding-bottom: 0; border-bottom: 0; }
-.mh-packet-mini li span { font-size: 14px; font-weight: 600; }
-.mh-packet-mini li em { color: var(--mh-secondary); font-size: 13px; font-style: normal; text-align: right; }
-.mh-tool-stack { bottom: 26px; display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; background: var(--mh-paper-soft); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-surface); }
-.mh-tool-stack > span { color: var(--mh-muted); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.mh-tool-stack > p { color: var(--mh-secondary); font-size: 13px; line-height: 19px; }
 
 /* /lumo. The record is the base because it is what Lumo starts from; the
    blank composer every other assistant starts from is the satellite. */
-.mh-startingpoint-comp { padding-bottom: 30px; }
-.mh-startingpoint-comp .mh-record-card { box-shadow: var(--mh-shadow-overlay); }
-.mh-blank-composer { bottom: 30px; display: flex; flex-direction: column; gap: 8px; padding: 18px; background: var(--mh-paper-soft); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-surface); }
-.mh-blank-composer > span { color: var(--mh-muted); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.mh-blank-composer > p { padding: 9px 12px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); color: var(--mh-secondary); font-size: 13px; }
 
 /* /career-context. Where the record comes from, under the one grid that
    says what it holds - not a second eight-card taxonomy of it. */
@@ -670,11 +631,6 @@ ul.mh-resume-missing { top: 30px; display: flex; flex-direction: column; align-i
 
 /* /career-context hero. The page is about an object; it used to run
    `aside={false}` and never show it. */
-ul.mh-hero-record-list { margin-top: 18px; border-top: 1px solid var(--mh-line); }
-.mh-hero-record-list li { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--mh-line); }
-.mh-hero-record-list li:last-child { border-bottom: 0; }
-.mh-hero-record-list span { font-size: 13px; font-weight: 650; }
-.mh-hero-record-list em { color: var(--mh-secondary); font-size: 12px; font-style: normal; text-align: right; }
 
 /* Numbering belongs in the stylesheet, not baked into each copy string. */
 /* stylelint-disable-next-line selector-class-pattern -- .ruled predates the mh-/is- naming contract, see the note above .mh-plain-list.ruled */
@@ -1037,6 +993,53 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .marketing-homepage.mh-page-home .mh-hero2-actions a.mh-secondary-cta:hover,
 .mh-connect a.mh-secondary-cta:hover { border-color: var(--mh-paper); }
 
+/* ---- Plan 046: product-page visual pass ---- */
+/* Plan 048: a real screenshot, framed. Dark app on the deep hero, so the
+   frame is the on-dark hairline and the deeper shadow tier. */
+.mh-shot { overflow: hidden; margin: 0; background: rgb(11 11 11); border: 1px solid var(--mh-hairline-on-dark); border-radius: var(--mh-radius-card); box-shadow: var(--mh-shadow-overlay); }
+.mh-shot img { display: block; width: 100%; height: auto; }
+.mh-shot.is-tall { width: min(380px, 100%); margin-left: auto; }
+/* A composition in the hero's right column instead of the paper aside. */
+.mh-route-hero-visual { position: relative; align-self: center; color: var(--mh-ink); }
+/* The compositions were drawn for light bands; the hero's paper text colour
+   made the packet and path cards white on white. A composition also needs
+   more room than the paper aside card did. */
+.mh-route-hero.is-visual { grid-template-columns: minmax(0, 1.1fr) minmax(380px, .9fr); }
+.mh-route-hero-visual .mh-comp { padding-bottom: 32px; }
+/* The payoff line that used to close ContrastSection, now inside a copy block. */
+strong.mh-payoff { max-width: 52ch; padding-top: 18px; border-top: 1px solid var(--mh-line); color: var(--mh-ink); font-size: 16px; font-weight: 650; line-height: 26px; }
+/* /integrations hero: the five marks with their status. */
+.mh-int-hero-marks { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 14px; }
+.mh-int-hero-marks li { display: flex; min-width: 118px; flex-direction: column; align-items: center; gap: 10px; padding: 18px 14px 14px; background: var(--mh-white); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); }
+.mh-int-hero-marks strong { font-size: 12px; font-weight: 650; }
+/* The shared "also part of the system" strip. */
+.mh-also { padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); background: var(--mh-paper-soft); border-top: 1px solid var(--mh-line); }
+ul.mh-also-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px clamp(32px, 4vw, 64px); margin-top: 24px; }
+.mh-also-list li { display: flex; flex-direction: column; align-items: flex-start; padding-top: 20px; border-top: 1px solid var(--mh-ink); }
+.mh-also-list h3 { font-size: 24px; line-height: 1.2; }
+.mh-also-list p { max-width: 46ch; margin-top: 10px; color: var(--mh-muted); font-size: 15px; line-height: 1.55; }
+.mh-also-list .mh-section-link { margin-top: 18px; }
+.mh-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* /career-context: the record as a record, and the in/out split. */
+.mh-holds-card { box-shadow: var(--mh-shadow-overlay); }
+.mh-holds-card li em { max-width: 60%; }
+.mh-ctx .mh-holds-sources { margin-top: 8px; }
+.mh-inout { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px clamp(32px, 4vw, 64px); margin-top: 48px; }
+.mh-inout > div > span { display: block; padding-bottom: 12px; border-bottom: 1px solid var(--mh-ink); color: var(--mh-forest); font-size: 12px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+.mh-inout li { padding: 14px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-inout li:last-child { border-bottom: 0; }
+.mh-inout strong { display: block; font-size: 16px; font-weight: 650; }
+.mh-inout p { margin-top: 4px; color: var(--mh-muted); font-size: 14px; line-height: 1.5; }
+.mh-route-privacy .mh-section-link { margin-top: 28px; }
+/* /lumo: prompts as messages, and the photo on the forest band. */
+.mh-lumo-prompts.is-bubbles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.mh-lumo-prompts.is-bubbles > span { grid-column: 1 / -1; }
+.mh-lumo-prompts .mh-chat-you { max-width: none; align-self: auto; background: var(--mh-white); border: 1px solid var(--mh-line); }
+.mh-lumo-band .mh-route-story-photo { min-height: 480px; }
+/* /job-search: a shorter photo beside the stages intro. */
+.mh-route-story-photo.is-short { min-height: 380px; }
+.mh-kit .mh-split { align-items: center; }
+
 /* Wherever you work */
 .mh-wherever { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-mist); border-bottom: 1px solid var(--mh-mist-border); }
 .mh-wherever-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(40px, 4vw, 64px); align-items: center; }
@@ -1050,11 +1053,6 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 /* Career Context */
 .mh-ctx { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); }
 .mh-ctx .mh-copy-block { max-width: 820px; }
-.mh-ctx-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 56px; }
-.mh-ctx-card { padding: 24px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); }
-.mh-ctx-card svg { width: 20px; height: 20px; color: var(--mh-forest); stroke-width: 1.5; }
-.mh-ctx-card h3 { margin-top: 18px; font-family: var(--mh-font-body); font-size: 16px; font-weight: 600; }
-.mh-ctx-card p { margin-top: 8px; color: var(--mh-muted); font-size: 15px; line-height: 1.55; }
 
 /* More than a job search */
 .mh-morethan { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-sand); }
@@ -1248,12 +1246,8 @@ small.mh-route-hero-footnote { display: block; max-width: 60ch; margin-top: 18px
    satellite height - padding. 52px puts it at 21px, inside DESIGN.md's
    12-32px range, and clear of the card's last checklist row. Changing the
    card's bottom padding without changing this number will clip that row. */
-.mh-first-week-comp { padding-bottom: 52px; }
 .mh-plan-steps.is-checklist li { grid-template-columns: 18px minmax(0, 1fr); padding: 14px 0; }
 .mh-plan-steps.is-checklist li:last-child { padding-bottom: 0; border-bottom: 0; }
-.mh-runway-chip { bottom: 0; left: -34px; display: flex; flex-direction: column; gap: 2px; padding: 14px 18px; background: var(--mh-white); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-overlay); }
-.mh-runway-chip span { color: var(--mh-muted); font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
-.mh-runway-chip strong { font-family: var(--mh-font-display); font-size: 24px; font-weight: 500; letter-spacing: -.02em; line-height: 1.1; }
 
 /* Mirrored above 900px so two consecutive split-with-composition sections
    do not read as one repeated unit (DESIGN.md R4). DOM order stays
@@ -1514,9 +1508,7 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 
   /* Plan 041's two compositions. Same contract as the ones above: the
      pieces stay stacked and overlapping and the base keeps its shadow. */
-  .mh-first-week-comp,
   .mh-review-comp { display: flex; flex-direction: column; padding-bottom: 0; }
-  .mh-runway-chip { position: relative; bottom: auto; left: auto; align-self: flex-start; margin: -16px 0 0 14px; }
 
   /* The mirror is a desktop device; on one column it would put a card
      above its own heading. */
@@ -1528,17 +1520,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 
   /* Plan 042's three contrast compositions. Same contract as the ones
      above: stacked and overlapping, and the base keeps its shadow. */
-  .mh-resume-comp,
-  .mh-onesystem-comp,
-  .mh-startingpoint-comp { flex-direction: column; padding: 0; }
-  .mh-resume-sheet,
-  .mh-packet-mini,
-  .mh-startingpoint-comp .mh-record-card { width: 100%; }
-  ul.mh-resume-missing,
-  .mh-tool-stack,
-  .mh-blank-composer { position: relative; inset: auto; width: auto; align-self: flex-start; margin: -16px 0 0 14px; }
-  ul.mh-resume-missing { order: 2; }
-  .mh-resume-sheet { order: 1; }
 }
 
 @media (max-width: 560px) {
@@ -1585,11 +1566,9 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 
 /* Card lifts: flat bordered cards only. Ruled rows and shared-border grid
    cells are excluded - lifting them breaks their borders. */
-.mh-ctx-card,
 .mh-plan-card,
 .mh-toolkit-grid article,
 .mh-route-resources-grid article { transition: transform var(--mh-dur-base) var(--mh-ease-standard), box-shadow var(--mh-dur-base) var(--mh-ease-standard), border-color var(--mh-dur-base) var(--mh-ease-standard); }
-.mh-ctx-card:hover,
 .mh-plan-card:hover,
 .mh-toolkit-grid article:hover,
 .mh-route-resources-grid article:hover { border-color: var(--mh-mist-border); box-shadow: var(--mh-shadow-surface); transform: translateY(-2px); }
@@ -1619,7 +1598,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 }
 
 @media (max-width: 1180px) {
-  .mh-ctx-grid { grid-template-columns: repeat(2, 1fr); }
   .mh-kit-grid,
   ol.mh-stage-strip,
   ol.mh-steps,
@@ -1646,6 +1624,16 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-hero2-photo { object-position: 70% center; }
   .mh-hero2-copy { max-width: 620px; }
   .mh-hero2-visual { position: static; width: min(100%, 460px); margin: 40px 0 0 auto; }
+  /* The two-column visual rule is later in the file than the 900px stack,
+     so it won on phones and squeezed the copy column to nothing. */
+  .mh-route-hero.is-visual { grid-template-columns: 1fr; }
+  .mh-route-hero-visual { max-width: 560px; }
+  .mh-int-hero-marks { justify-content: flex-start; }
+  .mh-also-list,
+  .mh-inout,
+  .mh-lumo-prompts.is-bubbles { grid-template-columns: 1fr; }
+  .mh-lumo-band .mh-route-story-photo,
+  .mh-route-story-photo.is-short { min-height: 320px; }
   .mh-wherever-grid,
   .mh-privacy-split,
   .mh-workforce-pilot,
@@ -1731,7 +1719,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-hero2-actions { align-items: stretch; flex-direction: column; }
   .mh-hero2-actions > a { justify-content: center; }
   .mh-capabilities,
-  .mh-ctx-grid,
   .mh-int-grid,
   .mh-kit-grid,
   ol.mh-stage-strip,

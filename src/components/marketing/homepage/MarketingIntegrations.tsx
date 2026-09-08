@@ -1,8 +1,7 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 import {
   AiReply,
+  AlsoStrip,
   FinalCta,
   MarketingShell,
   PageHero,
@@ -48,6 +47,22 @@ const PERMISSIONS = [
   "03 You can disconnect an assistant at any time. Your record stays with Offboard.",
   "04 Sponsors never see your record. Sponsored access reports participation in aggregate only.",
 ] as const;
+
+/* Plan 046: the hero shows what connects before the page says it. Five
+   marks, the two beta chips, nothing clickable (same contract as the grid). */
+function HeroMarks() {
+  return (
+    <ul className="mh-int-hero-marks" aria-label="What connects to Offboard">
+      {CONNECTED.map(({ id, name, status }) => (
+        <li key={id}>
+          <IntegrationLogo id={id} />
+          <strong>{name}</strong>
+          <em className={`mh-int-status is-${status.toLowerCase()}`}>{status}</em>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 function IntegrationCard({ integration }: { integration: Integration }) {
   const { id, name, status, body } = integration;
@@ -139,19 +154,7 @@ function Permissions() {
   );
 }
 
-function PreferLumo() {
-  return (
-    <section className="mh-lumo-band mh-section" aria-labelledby="prefer-lumo-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker is-lime">Or use Lumo</span>
-        <h2 id="prefer-lumo-title">Lumo is the assistant that lives inside your record.</h2>
-        <p>If you would rather not connect anything, Lumo works from the same Career Context without leaving Offboard. Connecting an outside assistant is an option, not a requirement.</p>
-        <Link className="mh-section-link" href="/lumo">See how Lumo works <ArrowRight aria-hidden="true" /></Link>
-      </div>
-    </section>
-  );
-}
-
+/* "Or use Lumo" became an item in the shared AlsoStrip (plan 046). */
 export function MarketingIntegrations() {
   return (
     <MarketingShell current="integrations">
@@ -161,13 +164,16 @@ export function MarketingIntegrations() {
           title="Use Offboard from the AI you already use."
           body="Your job search does not live in one tab. Connect Offboard to the assistants you already work in, and save opportunities, update applications, and add to your Career Context from wherever the conversation happens."
           current="integrations"
-          aside={false}
+          visual={<HeroMarks />}
           cta="Get started free"
         />
         <Showcase />
         <Demos />
         <Permissions />
-        <PreferLumo />
+        <AlsoStrip items={[
+          { title: "Lumo is the assistant that lives inside your record.", body: "If you would rather not connect anything, Lumo works from the same Career Context without leaving Offboard. Connecting an outside assistant is an option, not a requirement.", href: "/lumo", cta: "See how Lumo works" },
+          { title: "One record, whichever door you use.", body: "Every connection reads from and writes to your Career Context. Build it once and it is there in Offboard, in ChatGPT, and in Claude.", href: "/career-context", cta: "See what it holds" },
+        ]} />
         <FinalCta
           title="Keep your search in one place, wherever you work."
           body="Build your Career Context once, then reach it from Offboard or from the assistants you already use."
