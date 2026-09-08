@@ -85,7 +85,7 @@ const HERO_PHOTOS = {
   },
 } as const;
 
-const HERO_PHOTO = HERO_PHOTOS.livingRoom;
+const HERO_PHOTO = HERO_PHOTOS.bedroom;
 
 function HomeHero() {
   return (
