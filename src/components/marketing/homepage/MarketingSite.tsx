@@ -957,6 +957,20 @@ export function SequenceSection({
    compositions now sit in the heroes. The payoff lines moved into the hero
    bodies; COPY.md §§ 10, 12, 14 record each. */
 
+/* Plan 048 (owner 2026-09-07): a real screenshot of the app, cropped to a
+   region with no personal data and no figure the ledger does not cover,
+   framed by CSS. Sources: public/marketing/app/*.webp, captured from the
+   owner's session at 1512x810 on 2026-09-07. They are 1x, so they read a
+   little soft on a Retina screen; a 2x capture replaces the file, not the
+   markup. */
+export function Shot({ src, alt, width, height, tall = false, sizes = "(max-width: 900px) 100vw, 44vw" }: { src: string; alt: string; width: number; height: number; tall?: boolean; sizes?: string }) {
+  return (
+    <figure className={`mh-shot${tall ? " is-tall" : ""}`}>
+      <Image src={src} alt={alt} width={width} height={height} sizes={sizes} />
+    </figure>
+  );
+}
+
 /* Plan 046 part B. One shared "also part of the system" strip replaces the
    four different sibling-promo bands the product pages carried. Two items,
    ruled, above the final CTA. */

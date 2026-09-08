@@ -7,6 +7,7 @@ import {
   LumoMark,
   MarketingShell,
   PageHero,
+  Shot,
   YouBubble,
 } from "./MarketingSite";
 
@@ -37,30 +38,8 @@ const PROMPTS = [
   "Move Tesserac to the interview stage.",
 ] as const;
 
-/* Plan 042 built this as the "The difference" composition; plan 046 moved it
-   into the hero, where the page opens on it, and the payoff line ("You
-   spend the conversation on the decision instead of on context") is the
-   hero body's last sentence. */
-function StartingPointComposition() {
-  return (
-    <div className="mh-comp mh-startingpoint-comp">
-      <div className="mh-record-card mh-comp-base" aria-label="What Lumo starts every conversation from">
-        <strong>Your Career Context</strong>
-        <p>What Lumo starts from, every time.</p>
-        <ul>
-          <li><span>Experience</span><em>Roles, projects, and outcomes</em></li>
-          <li><span>Applications</span><em>Tesserac · Interviewing</em></li>
-          <li><span>Goals</span><em>Staff role, remote</em></li>
-        </ul>
-      </div>
-      <div className="mh-comp-satellite mh-blank-composer" aria-label="A general assistant's starting point">
-        <span>Any other assistant</span>
-        <p>Tell me about yourself...</p>
-      </div>
-    </div>
-  );
-}
-
+/* Plan 048: the hero shows the real Ask LUMO panel from the app's home
+   screen; the plan-042 record-and-composer composition is retired. */
 function WhatItKnows() {
   return (
     <section className="mh-ctx mh-section" aria-labelledby="knows-title">
@@ -128,7 +107,7 @@ export function MarketingLumo() {
           title="The AI that already understands your career."
           body="Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window. You spend the conversation on the decision instead of on context."
           current="lumo"
-          visual={<StartingPointComposition />}
+          visual={<Shot tall src="/marketing/app/ask-lumo-panel.webp" alt="The Ask LUMO panel in Offboard. It says it already knows your situation, lists what it knows, and offers four prompts: what should I do first, what benefits am I missing, review my resume, which application needs a follow-up" width={372} height={746} sizes="(max-width: 900px) 80vw, 380px" />}
           cta="Get started free"
         />
         <WhatItKnows />

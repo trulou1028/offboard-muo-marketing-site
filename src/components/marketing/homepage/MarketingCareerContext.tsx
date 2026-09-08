@@ -6,6 +6,7 @@ import {
   FinalCta,
   MarketingShell,
   PageHero,
+  Shot,
 } from "./MarketingSite";
 
 /* Career Context pillar page (plan 025; restructured by plan 042 around the
@@ -141,15 +142,7 @@ export function MarketingCareerContext() {
           title="Build your Career Context once. Use it everywhere."
           body="One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use."
           current="career-context"
-          aside={<>
-            <span>Your Career Context</span>
-            <strong>One living record.</strong>
-            <ul className="mh-hero-record-list">
-              <li><span>Experience</span><em>Roles, projects, and outcomes</em></li>
-              <li><span>Applications</span><em>Tesserac · Interviewing</em></li>
-              <li><span>Interviews</span><em>Thursday · Prep ready</em></li>
-            </ul>
-          </>}
+          visual={<Shot src="/marketing/app/career-context.webp" alt="The Career Context page in Offboard: a context score of 71 out of 100, and three cards for resume, job search target, and layoff and urgency" width={1256} height={746} />}
           cta="Get started free"
         />
         <ProblemSection />

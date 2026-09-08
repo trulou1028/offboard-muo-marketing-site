@@ -610,12 +610,6 @@ ul.mh-feature-rows { width: 100%; margin-top: 48px; border-top: 1px solid var(--
    The first build of all three had the satellite eating the last row's
    label and leaving an orphan value on the right. If you change a base's
    width or padding, re-run the overlap assertions before shipping. */
-.mh-onesystem-comp,
-.mh-startingpoint-comp { position: relative; display: flex; justify-content: flex-end; }
-.mh-packet-mini,
-.mh-startingpoint-comp .mh-record-card { width: 70%; }
-.mh-tool-stack,
-.mh-blank-composer { left: 0; width: calc(30% + 24px); }
 
 /* /career-context. The base is the resume because the resume is the
    section's subject; the satellite spills past its edge, which is the
@@ -624,27 +618,9 @@ ul.mh-feature-rows { width: 100%; margin-top: 48px; border-top: 1px solid var(--
 
 /* /job-search. One connected packet, and the tools that each ask again,
    dwarfed beside it. */
-.mh-onesystem-comp { padding-bottom: 26px; }
-.mh-packet-mini { display: flex; flex-direction: column; gap: 18px; padding: 28px; }
-.mh-packet-mini-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.mh-packet-mini-head strong { font-family: var(--mh-font-display); font-size: 21px; font-weight: 500; letter-spacing: -.02em; }
-.mh-packet-mini-head b { padding: 5px 10px; background: var(--mh-paper-soft); border-radius: var(--mh-radius-pill); color: var(--mh-forest); font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
-.mh-packet-mini ul { border-top: 1px solid var(--mh-line); }
-.mh-packet-mini li { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--mh-line); }
-.mh-packet-mini li:last-child { padding-bottom: 0; border-bottom: 0; }
-.mh-packet-mini li span { font-size: 14px; font-weight: 600; }
-.mh-packet-mini li em { color: var(--mh-secondary); font-size: 13px; font-style: normal; text-align: right; }
-.mh-tool-stack { bottom: 26px; display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; background: var(--mh-paper-soft); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-surface); }
-.mh-tool-stack > span { color: var(--mh-muted); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.mh-tool-stack > p { color: var(--mh-secondary); font-size: 13px; line-height: 19px; }
 
 /* /lumo. The record is the base because it is what Lumo starts from; the
    blank composer every other assistant starts from is the satellite. */
-.mh-startingpoint-comp { padding-bottom: 30px; }
-.mh-startingpoint-comp .mh-record-card { box-shadow: var(--mh-shadow-overlay); }
-.mh-blank-composer { bottom: 30px; display: flex; flex-direction: column; gap: 8px; padding: 18px; background: var(--mh-paper-soft); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-surface); }
-.mh-blank-composer > span { color: var(--mh-muted); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.mh-blank-composer > p { padding: 9px 12px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); color: var(--mh-secondary); font-size: 13px; }
 
 /* /career-context. Where the record comes from, under the one grid that
    says what it holds - not a second eight-card taxonomy of it. */
@@ -655,11 +631,6 @@ ul.mh-feature-rows { width: 100%; margin-top: 48px; border-top: 1px solid var(--
 
 /* /career-context hero. The page is about an object; it used to run
    `aside={false}` and never show it. */
-ul.mh-hero-record-list { margin-top: 18px; border-top: 1px solid var(--mh-line); }
-.mh-hero-record-list li { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--mh-line); }
-.mh-hero-record-list li:last-child { border-bottom: 0; }
-.mh-hero-record-list span { font-size: 13px; font-weight: 650; }
-.mh-hero-record-list em { color: var(--mh-secondary); font-size: 12px; font-style: normal; text-align: right; }
 
 /* Numbering belongs in the stylesheet, not baked into each copy string. */
 /* stylelint-disable-next-line selector-class-pattern -- .ruled predates the mh-/is- naming contract, see the note above .mh-plain-list.ruled */
@@ -1023,6 +994,11 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-connect a.mh-secondary-cta:hover { border-color: var(--mh-paper); }
 
 /* ---- Plan 046: product-page visual pass ---- */
+/* Plan 048: a real screenshot, framed. Dark app on the deep hero, so the
+   frame is the on-dark hairline and the deeper shadow tier. */
+.mh-shot { overflow: hidden; margin: 0; background: rgb(11 11 11); border: 1px solid var(--mh-hairline-on-dark); border-radius: var(--mh-radius-card); box-shadow: var(--mh-shadow-overlay); }
+.mh-shot img { display: block; width: 100%; height: auto; }
+.mh-shot.is-tall { width: min(380px, 100%); margin-left: auto; }
 /* A composition in the hero's right column instead of the paper aside. */
 .mh-route-hero-visual { position: relative; align-self: center; color: var(--mh-ink); }
 /* The compositions were drawn for light bands; the hero's paper text colour
@@ -1270,12 +1246,8 @@ small.mh-route-hero-footnote { display: block; max-width: 60ch; margin-top: 18px
    satellite height - padding. 52px puts it at 21px, inside DESIGN.md's
    12-32px range, and clear of the card's last checklist row. Changing the
    card's bottom padding without changing this number will clip that row. */
-.mh-first-week-comp { padding-bottom: 52px; }
 .mh-plan-steps.is-checklist li { grid-template-columns: 18px minmax(0, 1fr); padding: 14px 0; }
 .mh-plan-steps.is-checklist li:last-child { padding-bottom: 0; border-bottom: 0; }
-.mh-runway-chip { bottom: 0; left: -34px; display: flex; flex-direction: column; gap: 2px; padding: 14px 18px; background: var(--mh-white); border-radius: var(--mh-radius-md); box-shadow: var(--mh-shadow-overlay); }
-.mh-runway-chip span { color: var(--mh-muted); font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
-.mh-runway-chip strong { font-family: var(--mh-font-display); font-size: 24px; font-weight: 500; letter-spacing: -.02em; line-height: 1.1; }
 
 /* Mirrored above 900px so two consecutive split-with-composition sections
    do not read as one repeated unit (DESIGN.md R4). DOM order stays
@@ -1536,9 +1508,7 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 
   /* Plan 041's two compositions. Same contract as the ones above: the
      pieces stay stacked and overlapping and the base keeps its shadow. */
-  .mh-first-week-comp,
   .mh-review-comp { display: flex; flex-direction: column; padding-bottom: 0; }
-  .mh-runway-chip { position: relative; bottom: auto; left: auto; align-self: flex-start; margin: -16px 0 0 14px; }
 
   /* The mirror is a desktop device; on one column it would put a card
      above its own heading. */
@@ -1550,12 +1520,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 
   /* Plan 042's three contrast compositions. Same contract as the ones
      above: stacked and overlapping, and the base keeps its shadow. */
-  .mh-onesystem-comp,
-  .mh-startingpoint-comp { flex-direction: column; padding: 0; }
-  .mh-packet-mini,
-  .mh-startingpoint-comp .mh-record-card { width: 100%; }
-  .mh-tool-stack,
-  .mh-blank-composer { position: relative; inset: auto; width: auto; align-self: flex-start; margin: -16px 0 0 14px; }
 }
 
 @media (max-width: 560px) {
@@ -1660,6 +1624,9 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-hero2-photo { object-position: 70% center; }
   .mh-hero2-copy { max-width: 620px; }
   .mh-hero2-visual { position: static; width: min(100%, 460px); margin: 40px 0 0 auto; }
+  /* The two-column visual rule is later in the file than the 900px stack,
+     so it won on phones and squeezed the copy column to nothing. */
+  .mh-route-hero.is-visual { grid-template-columns: 1fr; }
   .mh-route-hero-visual { max-width: 560px; }
   .mh-int-hero-marks { justify-content: flex-start; }
   .mh-also-list,

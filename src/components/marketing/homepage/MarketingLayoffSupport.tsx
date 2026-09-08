@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import {
   AlsoStrip,
   FinalCta,
+  Shot,
   MarketingShell,
   PageHero,
   SIGN_UP_URL,
@@ -36,17 +37,6 @@ import {
    MarketingSite.tsx. Do not "improve" these sentences by adding the numbers
    back; that is a claim the ledger does not carry. */
 
-/* Stage 1 of the app's path, titles verbatim from `layoffPlanItems.ts` /
-   `stages.ts` on `lumo-plan-builder` origin/main. Titles only: the app's
-   sub-lines for the last two steps are not in COPY.md, and this card is a
-   checklist, not a second copy block. */
-const FIRST_WEEK_STEPS = [
-  "Write down your key dates",
-  "Understand your COBRA / health insurance options",
-  "Secure your accounts and access",
-  "Save all layoff documents in one place",
-  "Request your personnel file",
-] as const;
 
 /* Paperwork Review, the canonical name (COPY.md § Tool glossary, app-owned by
    `legalReviewCopy.ts`). Every value is a state word, never a deadline. */
@@ -64,31 +54,8 @@ const BENEFIT_ROWS = [
   ["Know how long you can search.", "The runway view turns your savings, severance, and benefits into a number of months, and shows which decisions change it."],
 ] as const;
 
-/* Composition A (R2): the path card, with the runway view lifted out as a
-   satellite. The runway figure is a labelled sample, exactly as the money
-   clock on this page is - sample product output, not a claim about anyone's
-   situation. */
-function FirstWeekComposition() {
-  return (
-    <div className="mh-comp mh-first-week-comp">
-      <div className="mh-ui-card mh-plan-preview mh-comp-base" aria-label="Example Offboard path, the first week">
-        <div className="mh-ui-card-heading"><h3>Your Path</h3></div>
-        <p className="mh-plan-lede">The steps that fit your situation. Do them in any order.</p>
-        <div className="mh-plan-stage"><strong>Protect the first week</strong><span>5 left</span></div>
-        <ul className="mh-plan-steps is-checklist">
-          {FIRST_WEEK_STEPS.map((title) => (
-            <li key={title}><i aria-hidden="true" /><strong>{title}</strong></li>
-          ))}
-        </ul>
-      </div>
-      <div className="mh-comp-satellite mh-runway-chip" aria-label="Sample runway estimate">
-        <span>Runway · sample</span>
-        <strong>7 months</strong>
-      </div>
-    </div>
-  );
-}
-
+/* Plan 048: the hero shows the real Runway page; the plan-041 path card
+   composition is retired (the Your Path card still ships on the homepage). */
 /* Plan 046: the composition moved into the hero, where the page now opens
    on the path card and the runway sample; this band keeps the copy. */
 function FirstWeek() {
@@ -246,7 +213,7 @@ export function MarketingLayoffSupport() {
           title="Losing your job creates a lot of problems at once."
           body="The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in the order that matters to you."
           current="layoff-support"
-          visual={<FirstWeekComposition />}
+          visual={<Shot src="/marketing/app/runway.webp" alt="The Runway page in Offboard: a rough estimate of how many months you can cover, fields for monthly expenses and savings, and planning guidance beside it" width={1256} height={746} />}
           cta="Get started free"
         />
         <FirstWeek />
