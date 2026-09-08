@@ -244,7 +244,7 @@ function ThenTheSearch() {
         <span className="mh-kicker">And then the job</span>
         <h2 id="then-search-title">When the paperwork is handled, the search is still there.</h2>
         <p>Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other. The tracker, the Application Packets, the interview prep, and the record behind them are all here when you are ready.</p>
-        <Link className="mh-section-link" href="/how-it-works">See how Offboard works <ArrowRight aria-hidden="true" /></Link>
+        <Link className="mh-section-link" href="/#how-it-works">See how Offboard works <ArrowRight aria-hidden="true" /></Link>
       </div>
     </section>
   );

@@ -28,31 +28,35 @@ represents systems, not features.
 | `/act` | ACT pilot residents | Pilot landing (out of nav, B2G firewall) | Apply for pilot access |
 | `/intake` (+ `/confirmed`) | Members | Native intake form (never redirect) | Submit |
 
-## The launch split (plan 043, owner 2026-09-07)
+## The launch split (plan 043, revised by plan 045; owner 2026-09-07)
 
-The site goes live with nine routes; eight more stay live at their URLs but
-leave the nav, leave the sitemap, and carry their own `noindex`. The list is
-`src/lib/launch.ts` and it is the single source of truth — the sitemap filters
-against it, every deferred `page.tsx` imports its `robots` value from it, and
-`MarketingHome.test.tsx` and `e2e/homepage.spec.ts` both assert the nav,
-footer, homepage body and served pages agree with it.
+The site goes live with the routes below; the deferred ones stay live at their
+URLs but leave the nav, leave the sitemap, and carry their own `noindex`. The
+list is `src/lib/launch.ts` and it is the single source of truth — the sitemap
+filters against it, every deferred `page.tsx` imports its `robots` value from
+it, and `MarketingHome.test.tsx` and `e2e/homepage.spec.ts` both assert the
+nav, footer, homepage body and served pages agree with it.
 
 | | Routes |
 | --- | --- |
-| **Launch set** | `/` · `/how-it-works` · `/pricing` · `/employers` · `/about` · `/privacy-security` · `/resources` (+ the 11 articles) · `/intake` (+ `/confirmed`) · `/act` |
-| **Deferred** | `/career-context` · `/lumo` · `/integrations` · `/job-search` · `/layoff-support` · `/workforce` · `/communities` · `/companies` (+ `/companies/:slug`) |
+| **Launch set** | `/` · `/pricing` · `/employers` · `/about` · `/privacy-security` · `/resources` (+ the 11 articles) · `/intake` (+ `/confirmed`) · `/act` · `/career-context` · `/lumo` · `/integrations` · `/job-search` · `/layoff-support` |
+| **Deferred** | `/how-it-works` · `/workforce` · `/communities` · `/companies` (+ `/companies/:slug`) |
 
-Deferred, not redirected: the homepage links to five of them, `/employers`
-linked to `/workforce`, and `next.config.ts` points `/public-partners` at
-`/workforce`. Redirecting would mean editing every one of those now and again
-at un-deferral. `noindex` plus a nav trim is one line per route and fully
-reversible.
+Plan 043 first deferred the five product pages and kept How It Works. The
+owner reversed that the same day (plan 045): the product pages are the
+substance, and How It Works was "not valuable enough to be a more in-depth
+version of the homepage". It stays live because `/product`, `/why-offboard`,
+`/job-packet` and `/faq` 301 to it.
+
+Deferred, not redirected: `/employers` linked to `/workforce`, and
+`next.config.ts` points `/public-partners` at `/workforce`. Redirecting would
+mean editing every one of those now and again at un-deferral. `noindex` plus
+a nav trim is one line per route and fully reversible.
 
 Un-deferring a page: remove its entry from `src/lib/launch.ts`, delete the
 `robots: DEFERRED_ROBOTS` line from its `page.tsx`, and restore its nav entry
-(the four-tab mega-menu structure is struck through in `COPY.md` § Navigation
-and in git history before commit `320786c`). The tests then tell you what else
-to put back.
+(For Organizations' panel is struck through in `COPY.md` § Navigation). The
+tests then tell you what else to put back.
 
 All routes remain `noindex` until the public launch decision.
 
@@ -65,20 +69,21 @@ COPY.md § 1.
 
 ## Navigation
 
-Header (fixed since plan 024; mega menus in plan 037, trimmed to the launch
-set by plan 043): **How It Works** · **For Employers** · **Pricing** ·
-**Resources ▾** (Resources: Guides · Privacy & Security; Company: About ·
-Visit Us · Slack Community · Contact; featured: the newsletter) · Sign in ·
-Get started free (neon). No Home link: the wordmark is home (owner call
-2026-09-01). Below 1180px the header swaps to the mobile menu, which carries
-the same entries flattened, including each panel's featured card. Footer:
-Product (How It Works, Pricing, Guides) · Partners (For Employers) · Company
-(About, Visit Us, Contact) · Legal (Privacy & Security, Privacy Policy,
-Terms).
+Header (fixed since plan 024; mega menus in plan 037; trimmed by plan 043 and
+revised by plan 045): **Product ▾** (The system: Lumo · Offboard Everywhere;
+The work: Job Search · Layoff & Benefits; featured: Career Context) · **For
+Employers** · **Pricing** · **Resources ▾** (Resources: Guides · Privacy &
+Security; Company: About · Visit Us · Slack Community · Contact; featured:
+the newsletter) · Sign in · Get started free (neon). No Home link: the
+wordmark is home (owner call 2026-09-01). Below 1180px the header swaps to
+the mobile menu, which carries the same entries flattened, including each
+panel's featured card. Footer: Product (Career Context, Lumo, Job Search,
+Offboard Everywhere, Layoff & Benefits, Pricing, Guides) · Partners (For
+Employers) · Company (About, Visit Us, Contact) · Legal (Privacy & Security,
+Privacy Policy, Terms).
 
-Plan 037's Product and For Organizations panels emptied to one page each when
-the deferred set left, so both became plain links; their columns are recorded
-in `COPY.md` § Navigation for un-deferral.
+The homepage hero's "See how it works" scrolls to the four-step strip
+(`#how-it-works`) rather than leaving the page.
 
 **Guardrails:** `/act` is intentionally excluded from header and footer nav
 and must never receive a redirect (live out-of-nav B2G landing URL; the

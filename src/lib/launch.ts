@@ -1,7 +1,12 @@
 /* The launch split (plan 043, owner decision 2026-09-07).
  *
- * The site goes live with nine routes. Eight more are built, reviewed, and
- * live at their URLs, but the owner is holding them back for a polish pass.
+ * Owner revision 2026-09-07 (plan 045): the five product pages came back
+ * with the Product dropdown, and /how-it-works went the other way - "not
+ * valuable enough to be a more in-depth version of the homepage". It stays
+ * live because four legacy URLs 301 to it (next.config.ts).
+ *
+ * The routes below are built, reviewed, and live at their URLs, but the
+ * owner is holding them back for a polish pass.
  * They stay routable — the redirect map points at some of them, and nothing
  * should 404 — while leaving the nav, leaving the sitemap, and carrying
  * their own `noindex`.
@@ -12,11 +17,7 @@
  * structure before the trim is in git history and docs/site-architecture.md).
  */
 export const DEFERRED_ROUTES = [
-  "/career-context",
-  "/lumo",
-  "/integrations",
-  "/job-search",
-  "/layoff-support",
+  "/how-it-works",
   "/workforce",
   "/communities",
   "/companies",

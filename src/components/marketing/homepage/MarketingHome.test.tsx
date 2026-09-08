@@ -10,13 +10,9 @@ vi.mock("next/font/local", () => ({
 }));
 
 import { metadata as layoutMetadata } from "@/app/layout";
-import { metadata as careerContextMetadata } from "@/app/career-context/page";
 import { metadata as communitiesMetadata } from "@/app/communities/page";
+import { metadata as howItWorksMetadata } from "@/app/how-it-works/page";
 import { metadata as companiesMetadata } from "@/app/companies/page";
-import { metadata as integrationsMetadata } from "@/app/integrations/page";
-import { metadata as jobSearchMetadata } from "@/app/job-search/page";
-import { metadata as layoffSupportMetadata } from "@/app/layoff-support/page";
-import { metadata as lumoMetadata } from "@/app/lumo/page";
 import { metadata as workforceMetadata } from "@/app/workforce/page";
 import { DEFERRED_ROBOTS, DEFERRED_ROUTES } from "@/lib/launch";
 import { GuideArticle } from "@/components/marketing/resources/GuideArticle";
@@ -29,11 +25,7 @@ import MarketingHome from "./MarketingHome";
 // Keyed by route so the "every deferred route is covered" assertion below
 // fails when a page joins src/lib/launch.ts without being imported here.
 const deferredMetadata = {
-  "/career-context": careerContextMetadata,
-  "/lumo": lumoMetadata,
-  "/integrations": integrationsMetadata,
-  "/job-search": jobSearchMetadata,
-  "/layoff-support": layoffSupportMetadata,
+  "/how-it-works": howItWorksMetadata,
   "/workforce": workforceMetadata,
   "/communities": communitiesMetadata,
   "/companies": companiesMetadata,
@@ -178,20 +170,25 @@ describe("Offboard marketing routes", () => {
   it("uses real routes for product, company, and partner navigation", () => {
     render(<MarketingHome />);
 
-    // Plan 043's launch trim: three top-level links and one mega-menu
-    // trigger. Product and For Organizations each emptied to a single
-    // surviving page when the deferred set left, so both became plain links;
-    // Resources is the one panel left. Its links render collapsed, so they
-    // are queried with hidden: true -- the point is that every route the
-    // launch navigation names is present and correct, not that it is on
-    // screen before the visitor opens anything.
+    // Plan 045 (owner 2026-09-07): Product is back as a mega menu with its
+    // five pages, How It Works left the nav, and For Organizations stays a
+    // plain link while its other pages are deferred. Panel links render
+    // collapsed, so they are queried with hidden: true -- the point is that
+    // every route the launch navigation names is present and correct, not
+    // that it is on screen before the visitor opens anything.
     const headerNav = screen.getByRole("navigation", { name: "Marketing navigation" });
-    expect(within(headerNav).getAllByRole("button")).toHaveLength(1);
-    expect(within(headerNav).getByRole("button", { name: "Resources" })).toHaveAttribute("aria-expanded", "false");
+    expect(within(headerNav).getAllByRole("button")).toHaveLength(2);
+    for (const name of ["Product", "Resources"]) {
+      expect(within(headerNav).getByRole("button", { name })).toHaveAttribute("aria-expanded", "false");
+    }
     expect(within(headerNav).queryByRole("link", { name: "Home" })).not.toBeInTheDocument();
 
     for (const [name, href] of [
-      ["How It Works", "/how-it-works"],
+      ["Career Context", "/career-context"],
+      ["Lumo", "/lumo"],
+      ["Offboard Everywhere", "/integrations"],
+      ["Job Search", "/job-search"],
+      ["Layoff & Benefits", "/layoff-support"],
       ["For Employers", "/employers"],
       ["Pricing", "/pricing"],
       ["Guides", "/resources"],
