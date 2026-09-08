@@ -51,9 +51,9 @@ function OneSystemComposition() {
    keeps the rows. */
 const STAGES = [
   { name: "Decide", decides: "Whether this one deserves your week.", tools: [
-    ["Role Fit", "Understand how an opportunity matches your experience, strengths, and goals."],
+    ["Role Match", "Understand how an opportunity matches your experience, strengths, and goals."],
     ["Ghost Job Checker", "Look for signals that a posting may not represent an actively hiring role."],
-    ["Company Intelligence", "Know who you're applying to before you invest your time."],
+    ["Company Intel", "Know who you're applying to before you invest your time."],
   ] },
   { name: "Apply", decides: "What you actually send.", tools: [
     ["Application Packets", "Bring together the role, company, resume strategy, positioning, and application materials in one place."],

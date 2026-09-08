@@ -279,7 +279,7 @@ function StepConnect() {
 /*   "Saved to tracker" - the save-a-job toast                       */
 /* ---------------------------------------------------------------- */
 const TOOLKIT_STAGES = [
-  { icon: Search, title: "Decide", chip: "Strong fit", decides: "Whether this one deserves your week.", tools: ["Role Fit", "Ghost Job Checker", "Company Intelligence"] },
+  { icon: Search, title: "Decide", chip: "Strong fit", decides: "Whether this one deserves your week.", tools: ["Role Match", "Ghost Job Checker", "Company Intel"] },
   { icon: FileText, title: "Apply", chip: "Ready for review", decides: "What you actually send.", tools: ["Application Packets", "Resume Tailoring", "Cover Letters"] },
   { icon: MessageSquare, title: "Interview", chip: "Prep ready", decides: "Walking in prepared, not rehearsed.", tools: ["Interview Prep", "Voice Practice"] },
   { icon: ListChecks, title: "Organize", chip: "Saved to tracker", decides: "Where all of it is kept.", tools: ["Application Tracker", "Career Context"] },

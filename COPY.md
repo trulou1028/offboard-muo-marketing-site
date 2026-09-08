@@ -163,8 +163,8 @@ write it down here and hand it over; do not go and change it.
 | Ghost Job Checker | app | `GHOST_CHECKER`. **`Ghost Job Check` and `Ghost-job checker` are retired** |
 | Interview Prep | app | `INTERVIEWS` is the nav label; `Interview Prep` names the action |
 | Voice Practice | marketing-owned | the app ships mock/practice interviews with no settled public name |
-| Role Fit | marketing-owned | the app computes a **fit score**; `Role Fit` is the member-facing name |
-| Company Intelligence | marketing-owned | the app's **company research / company intel** |
+| Role Match | app | `Role Match` (`RoleMatchCard.tsx`, packet step `Role Match Analysis`), read from `origin/main` 2026-09-07. **`Role Match` is retired** (owner 2026-09-07, plan 047); it was marketing-owned while the app had no name |
+| Company Intel | app | the packet step and card label `Company Intel`, read from `origin/main` 2026-09-07. **`Company Intel` is retired** (owner 2026-09-07, plan 047) |
 | Application Tracker | app | `APPLICATIONS` |
 | Career Context | **site, adopted by the product** | **Owner decision 2026-09-03: `Career Context` is the name, in both the site and the product.** Shipped on both sides; the app's `LEDGER` nav label was `Your Record` until then, see below |
 | Paperwork Review | app | `PAPERWORK_REVIEW`, owned by `legalReviewCopy.ts` |
@@ -181,7 +181,7 @@ title covering two glossary tools (`Interview Prep` and `Voice Practice`),
 not a bare tool name, so Title Case would misname it. If that card is ever
 split, both halves take their glossary names.
 
-**Retired names, never to ship again:** `Job Packet`, `Resume Studio`,
+**Retired names, never to ship again:** `Role Match`, `Company Intel` (plan 047), `Job Packet`, `Resume Studio`,
 `Ghost Job Check`, `Ghost-job checker`, `Funded training explorer`,
 `career ledger`, and `career record` as a product noun (the plain phrase "a
 record of your career" is fine). Swept out of the code 2026-09-03.
@@ -228,7 +228,7 @@ repo to check (see the note under the tool glossary heading); if the two ever
 read differently to a member, that is the thing to re-check first.*
 
 **The count.** The homepage and `/job-search` say "ten tools" and name the
-same ten: Role Fit, Ghost Job Checker, Company Intelligence, Application
+same ten: Role Match, Ghost Job Checker, Company Intel, Application
 Packets, Resume Tailoring, Cover Letters, Interview Prep, Voice Practice,
 Application Tracker, Career Context. `/how-it-works` listed a different set and could not claim a number until plan 044 (2026-09-07) rebuilt its toolkit on the same four stages and the same ten; it now says "ten tools" too.
 
@@ -501,8 +501,8 @@ connections.
 - Lead *(the right half of the two-column intro)*: `Ten tools that read from the same context, so nothing is retyped and nothing is forgotten.`
 - Section link: `See what each tool does` → `/job-search` *(off the page under plan 043, back under plan 045)*
 - Four stages, each with the one-line decision already approved on `/job-search`: **Decide** `Whether this one deserves your week.` · **Apply** `What you actually send.` · **Interview** `Walking in prepared, not rehearsed.` · **Organize** `Where all of it is kept.`
-- Tool names unchanged: **Decide** (`Role Fit` · `Ghost Job Checker` · `Company Intelligence`) · **Apply** (`Application Packets` · `Resume Tailoring` · `Cover Letters`) · **Interview** (`Interview Prep` · `Voice Practice`) · **Organize** (`Application Tracker` · `Career Context`). Their ten descriptions moved to § 14 in round 4.
-- Each group carries one product-state chip (`DESIGN.md` R8). Every one is a string the product actually produces, checked against `lumo-plan-builder` `origin/main` at `b8cb77ec`: Decide `Strong fit` (the Role Fit label at a score of 80 or above) · Apply `Ready for review` (a job packet's `review_ready` status) · Interview `Prep ready` (the interview prep state) · Organize `Saved to tracker` (the save-a-job confirmation).
+- Tool names unchanged: **Decide** (`Role Match` · `Ghost Job Checker` · `Company Intel`) · **Apply** (`Application Packets` · `Resume Tailoring` · `Cover Letters`) · **Interview** (`Interview Prep` · `Voice Practice`) · **Organize** (`Application Tracker` · `Career Context`). Their ten descriptions moved to § 14 in round 4.
+- Each group carries one product-state chip (`DESIGN.md` R8). Every one is a string the product actually produces, checked against `lumo-plan-builder` `origin/main` at `b8cb77ec`: Decide `Strong fit` (the Role Match label at a score of 80 or above) · Apply `Ready for review` (a job packet's `review_ready` status) · Interview `Prep ready` (the interview prep state) · Organize `Saved to tracker` (the save-a-job confirmation).
   - **Plan 039 proposed two chips that do not exist in the product** — `Thursday · Prep done` and `12 tracked`. Both were dropped rather than invented. Adding a chip here means finding it in the app first.
 
 ### More than a job search
@@ -639,7 +639,7 @@ Final CTA. The two ids are SEO-load-bearing: `next.config.ts` sends
 
 - Kicker: `Step 4 · Run your search` *(was `The toolkit`)* · H2: `The tools didn't go anywhere. Now they show up at the right moment.`
 - Lead: `Ten tools that read from the same context, so nothing is retyped and nothing is forgotten.` *(this page may now say the number: it lists the homepage's ten)*
-- Four stages, the homepage's, with the same approved one-liners, product-state chips and glossary names: **Decide** `Whether this one deserves your week.` (`Role Fit` · `Ghost Job Checker` · `Company Intelligence`, chip `Strong fit`) · **Apply** `What you actually send.` (`Application Packets` · `Resume Tailoring` · `Cover Letters`, chip `Ready for review`) · **Interview** `Walking in prepared, not rehearsed.` (`Interview Prep` · `Voice Practice`, chip `Prep ready`) · **Organize** `Where all of it is kept.` (`Application Tracker` · `Career Context`, chip `Saved to tracker`).
+- Four stages, the homepage's, with the same approved one-liners, product-state chips and glossary names: **Decide** `Whether this one deserves your week.` (`Role Match` · `Ghost Job Checker` · `Company Intel`, chip `Strong fit`) · **Apply** `What you actually send.` (`Application Packets` · `Resume Tailoring` · `Cover Letters`, chip `Ready for review`) · **Interview** `Walking in prepared, not rehearsed.` (`Interview Prep` · `Voice Practice`, chip `Prep ready`) · **Organize** `Where all of it is kept.` (`Application Tracker` · `Career Context`, chip `Saved to tracker`).
 - Flagship: `Application Packet` — `Paste a posting and get a ghost-job check, a fit read, tailored materials, and a warm path to a real person, all kept with the role.` — chips `Ghost check · Fit read · Tailored materials · Warm intro` — link `Explore the Application Packet`
 - Cards (renders on all three): `Resume Tailoring` — `Build and tailor resumes from your real history, ready for the role in front of you.` · `Interview Prep` — `Drills grounded in the role, the company, and your strongest stories, with practice runs before the real one.` *(the composite `Interview prep & practice` card split as the glossary anticipated; `Voice Practice` sits beside it in the strip)* · `Application Tracker` — `Every application, stage, and follow-up stays current without extra busywork.`
 - Left this section with plan 044: the `Ghost Job Checker` card (it is in the strip), `Paperwork Review`, `Runway calculator` and `Funded Training` (step 1), and `Ask Lumo` (step 3 is Lumo).
@@ -1594,7 +1594,7 @@ line.*
 - Kicker: `The toolkit`
 - H2: `Four stages, and what each one decides.`
 - Groups, each stage's decision line followed by its tools. **The ten tool descriptions moved here from § 1 in round 4 (2026-09-02): the homepage names the tools, this page describes them.**
-  1. `Decide` — `Whether this one deserves your week.` — `Role Fit` `Understand how an opportunity matches your experience, strengths, and goals.` · `Ghost Job Checker` `Look for signals that a posting may not represent an actively hiring role.` · `Company Intelligence` `Know who you're applying to before you invest your time.`
+  1. `Decide` — `Whether this one deserves your week.` — `Role Match` `Understand how an opportunity matches your experience, strengths, and goals.` · `Ghost Job Checker` `Look for signals that a posting may not represent an actively hiring role.` · `Company Intel` `Know who you're applying to before you invest your time.`
   2. `Apply` — `What you actually send.` — `Application Packets` `Bring together the role, company, resume strategy, positioning, and application materials in one place.` · `Resume Tailoring` `Adapt your resume using the opportunity and your Career Context.` · `Cover Letters` `Create relevant application messaging without starting from a blank page.`
   3. `Interview` — `Walking in prepared, not rehearsed.` — `Interview Prep` `Turn company and role context into a focused preparation plan.` · `Voice Practice` `Practice answering questions in a realistic voice conversation.`
   4. `Organize` — `Where all of it is kept.` — `Application Tracker` `Keep your entire pipeline current.` · `Career Context` `Connect the history behind every application, interaction, and outcome.`
