@@ -221,27 +221,45 @@ describe("Offboard marketing routes", () => {
     }
   });
 
-  it("gives how it works a five-step spine, a toolkit, and LUMO", () => {
+  it("gives how it works the homepage's four steps, in order, with the toolkit and Lumo", () => {
     render(<MarketingHowItWorks />);
 
-    expect(screen.getByRole("heading", { level: 1, name: "One plan that starts where you are." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /five steps from/i })).toBeInTheDocument();
-    expect(screen.getByText("Tell us where you are")).toBeInTheDocument();
-    expect(screen.getByText("See your money clearly")).toBeInTheDocument();
-    expect(screen.getByText("Claim what exists")).toBeInTheDocument();
-    expect(screen.getByText("Get ready, then run the search")).toBeInTheDocument();
-    expect(screen.getByText("Close it, and make it count")).toBeInTheDocument();
+    // Plan 044: the long form of the homepage's four steps, same kickers.
+    expect(screen.getByRole("heading", { level: 1, name: "One system that starts where you are." })).toBeInTheDocument();
+    expect(screen.getByText("Your Career Context is the spine. The tools are the muscle.")).toBeInTheDocument();
+    const kickers = ["Step 1 · Steady the first week", "Step 2 · Build your Career Context", "Step 3 · Connect it to the AI you use", "Step 4 · Run your search"];
+    const found = kickers.map((kicker) => screen.getByText(kicker));
+    for (let i = 1; i < found.length; i += 1) {
+      expect(found[i - 1].compareDocumentPosition(found[i]) & Node.DOCUMENT_POSITION_FOLLOWING, `${kickers[i]} comes after ${kickers[i - 1]}`).toBeTruthy();
+    }
+    expect(screen.getByRole("heading", { name: "See your money clearly, then claim what exists." })).toBeInTheDocument();
+    for (const row of ["Runway calculator", "Benefit deadlines", "Funded Training", "Paperwork Review"]) {
+      expect(screen.getAllByText(row).length, row).toBeGreaterThan(0);
+    }
     expect(screen.getByText(/we never promise funding/i)).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /a few questions\. a plan that's actually yours/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /a few questions\. a record that's actually yours/i })).toBeInTheDocument();
     expect(screen.getByText("Where are you right now?")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /tools didn't go anywhere/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { level: 3, name: "Application Packet" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "An AI guide that knows your actual situation." })).toBeInTheDocument();
     expect(screen.getByText(/never invents a dollar figure/i)).toBeInTheDocument();
     expect(screen.getByText(/like a caseworker/i)).toBeInTheDocument();
+    expect(screen.getByText("ChatGPT and Claude connections are in beta.")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /tools didn't go anywhere/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 3, name: "Application Packet" })).toBeInTheDocument();
+    // The same ten tools the homepage names, so the page may say the number.
+    expect(screen.getByText(/ten tools that read from the same context/i)).toBeInTheDocument();
+    for (const tool of ["Role Fit", "Ghost Job Checker", "Company Intelligence", "Application Packets", "Resume Tailoring", "Cover Letters", "Interview Prep", "Voice Practice", "Application Tracker", "Career Context"]) {
+      expect(screen.getAllByText(tool).length, tool).toBeGreaterThan(0);
+    }
     expect(screen.getByRole("heading", { name: /checked by people, never generated/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "You can do this yourself. You should not have to do it alone." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Stop repeating your story to every new tool." })).toBeInTheDocument();
+    // Retired with plan 044: the five-step list, the plan-as-spine aside, the
+    // "Your context, kept" section and its integrations line, "money clock".
+    for (const gone of [/five steps from/i, /the plan is the spine/i, /stop repeating your story/i, /money clock/i, /^Gmail$/]) {
+      expect(screen.queryByText(gone)).not.toBeInTheDocument();
+    }
+    // Anchors the redirect map depends on.
+    expect(document.getElementById("toolkit")).not.toBeNull();
+    expect(document.getElementById("faq")).not.toBeNull();
   });
 
   it("gives pricing a dedicated evaluation page", () => {
