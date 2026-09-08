@@ -296,17 +296,17 @@ a.mh-nav-feature:hover .mh-nav-feature-cta svg { transform: translateX(3px); }
    strip is the stepped-down member; the route pages' shared member stays
    .mh-verified-heading h2. */
 .mh-page-home .mh-community .mh-copy-block h2 { font-size: var(--mh-h2-sm); line-height: 1.15; }
-.mh-five-steps { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: white; border-bottom: 1px solid var(--mh-line); }
-.mh-five-steps .mh-section-heading h2 { max-width: 900px; }
+.mh-how-first-week { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: white; border-bottom: 1px solid var(--mh-line); }
+.mh-how-first-week .mh-intro-split p { color: var(--mh-muted); font-size: 18px; line-height: 29px; }
+.mh-how-first-week-note { display: block; margin-top: 28px; color: var(--mh-muted); font-size: 13px; line-height: 20px; }
 /* `ol.` prefix is load-bearing - see the reset note at the top of this file. */
-ol.mh-five-steps-rows { width: 100%; margin-top: 54px; border-top: 1px solid var(--mh-line); }
-.mh-five-steps-rows li { display: grid; grid-template-columns: 56px minmax(0, 1fr) 240px; gap: 28px; align-items: start; padding: 30px 0; border-bottom: 1px solid var(--mh-line); }
-.mh-five-steps-rows li:last-child { border-bottom: 0; }
-.mh-five-steps-rows li > span { width: 56px; flex: 0 0 56px; font-family: var(--mh-font-display); font-size: 34px; line-height: 40px; color: var(--mh-muted); }
-.mh-five-steps-rows li > div { display: flex; flex-direction: column; gap: 8px; }
-.mh-five-steps-rows strong { font-size: 22px; line-height: 28px; }
-.mh-five-steps-rows p { color: var(--mh-muted); font-size: 15px; line-height: 23px; max-width: 620px; }
-.mh-five-steps-rows em { justify-self: end; padding: 8px 14px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-pill); background: var(--mh-paper); color: var(--mh-muted); font-size: 12px; font-style: normal; font-weight: 650; letter-spacing: .04em; text-align: center; white-space: normal; }
+ol.mh-how-first-week-rows { width: 100%; margin-top: 54px; border-top: 1px solid var(--mh-line); }
+.mh-how-first-week-rows li { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 28px; align-items: start; padding: 30px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-how-first-week-rows li:last-child { border-bottom: 0; }
+.mh-how-first-week-rows li > span { width: 56px; flex: 0 0 56px; font-family: var(--mh-font-display); font-size: 34px; line-height: 40px; color: var(--mh-muted); }
+.mh-how-first-week-rows li > div { display: flex; flex-direction: column; gap: 8px; }
+.mh-how-first-week-rows strong { font-size: 22px; line-height: 28px; }
+.mh-how-first-week-rows p { color: var(--mh-muted); font-size: 15px; line-height: 23px; max-width: 620px; }
 
 .mh-toolkit { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
 .mh-toolkit .mh-section-heading h2 { max-width: 900px; }
@@ -319,14 +319,16 @@ ol.mh-five-steps-rows { width: 100%; margin-top: 54px; border-top: 1px solid var
 .mh-toolkit-flagship ul { display: flex; flex-wrap: wrap; gap: 10px; }
 .mh-toolkit-flagship li { padding: 7px 13px; background: rgb(246 244 238 / 10%); border: 1px solid rgb(246 244 238 / 22%); border-radius: var(--mh-radius-pill); font-size: 13px; font-weight: 650; }
 .mh-toolkit-flagship .mh-section-link { margin-top: auto; border-bottom-color: var(--mh-paper); color: var(--mh-paper); }
-.mh-toolkit-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.mh-toolkit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.mh-toolkit .mh-intro-split p { color: var(--mh-muted); font-size: 18px; line-height: 29px; }
+.mh-toolkit ol.mh-stage-strip { margin-top: 48px; }
 .mh-toolkit-grid article { padding: 24px; background: white; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); }
 .mh-toolkit-card-visual { position: relative; width: 100%; height: clamp(110px, 16vw, 150px); margin-bottom: 14px; overflow: hidden; border-radius: var(--mh-radius-sm); }
 .mh-toolkit-card-visual img { object-fit: cover; }
 .mh-toolkit-grid h3 { font-size: 18px; line-height: 24px; }
 .mh-toolkit-grid p { margin-top: 10px; color: var(--mh-muted); font-size: 14px; line-height: 21px; }
 
-.mh-starting-plan { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
+.mh-how-context { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
 
 .mh-verified-visual { padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); background: var(--mh-deep); /* deep, not forest: band rhythm, see below */ }
 .mh-verified-visual-frame { position: relative; width: 100%; height: clamp(200px, 26vw, 320px); overflow: hidden; border-radius: var(--mh-radius-card); }
@@ -337,6 +339,7 @@ ol.mh-five-steps-rows { width: 100%; margin-top: 54px; border-top: 1px solid var
 .mh-lumo .mh-copy-block > p { color: var(--mh-on-dark-muted); }
 .mh-lumo-trust { padding: 22px; background: var(--mh-surface-on-dark); border: 1px solid rgb(246 244 238 / 22%); border-radius: var(--mh-radius-lg); }
 .mh-lumo-trust p { color: var(--mh-paper); font-size: 15px; line-height: 24px; }
+.mh-lumo .mh-copy-block > small { color: var(--mh-on-dark-muted); font-size: 13px; }
 .mh-lumo-questions { display: flex; flex-direction: column; gap: 18px; }
 .mh-lumo-questions > span { color: rgb(246 244 238 / 68%); font-size: 13px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
 .mh-lumo-questions ol { border-top: 1px solid rgb(246 244 238 / 20%); }
@@ -345,18 +348,11 @@ ol.mh-five-steps-rows { width: 100%; margin-top: 54px; border-top: 1px solid var
 .mh-lumo-questions li > span { width: 34px; flex: 0 0 34px; font-family: var(--mh-font-display); font-size: 20px; color: var(--mh-lime); }
 .mh-lumo-questions li > p { font-size: 18px; line-height: 26px; }
 
-.mh-context { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
-.mh-context .mh-copy-block { max-width: 720px; }
-.mh-context-chips { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 46px; }
+.mh-context-chips { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 12px; }
 .mh-context-chips > div { display: flex; flex-direction: column; gap: 14px; }
 .mh-context-chips > div > span { color: var(--mh-muted); font-size: 13px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
 .mh-context-chips ul { display: flex; flex-wrap: wrap; gap: 10px; }
 .mh-context-chips li { padding: 9px 16px; background: white; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-pill); font-size: 14px; font-weight: 650; }
-.mh-integrations { margin-top: 54px; padding-top: 34px; border-top: 1px solid var(--mh-line); }
-.mh-integrations > p { max-width: 640px; color: var(--mh-muted); font-size: 16px; line-height: 25px; }
-.mh-integrations ul { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
-.mh-integrations li { padding: 9px 16px; background: white; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-pill); font-size: 14px; font-weight: 650; }
-.mh-integrations li.is-soon { border-style: dashed; color: var(--mh-muted); }
 
 
 .mh-numbered-rows { width: 100%; border-top: 1px solid var(--mh-line); }
@@ -1681,6 +1677,7 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-final-cta.is-photo { grid-template-columns: 1fr; }
   .mh-final-cta-photo { min-height: 340px; }
   .mh-toolkit-layout { grid-template-columns: 1fr; margin-top: 40px; }
+  /* Three cards in two columns leaves an orphan (R1); stacked, they read. */
   .mh-toolkit-grid { grid-template-columns: 1fr; }
   .mh-route-resources-grid { grid-template-columns: 1fr; }
   .mh-context-chips { grid-template-columns: 1fr; margin-top: 32px; }
@@ -1702,21 +1699,18 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-pricing,
   .mh-verified,
   .mh-community,
-  .mh-five-steps,
+  .mh-how-first-week,
   .mh-toolkit,
-  .mh-starting-plan,
+  .mh-how-context,
   .mh-verified-visual,
-  .mh-lumo,
-  .mh-context{ min-height: 0; }
+  .mh-lumo { min-height: 0; }
   .mh-employer-pricing,
   .mh-employer-steps { min-height: 0; }
   .mh-route-ethos,
   .mh-route-privacy,
   .mh-act-privacy { min-height: 0; }
-  .mh-five-steps-rows li { grid-template-columns: 40px 1fr; row-gap: 12px; padding: 24px 0; }
-  .mh-five-steps-rows li > span { width: 40px; flex: 0 0 40px; font-size: 26px; line-height: 32px; }
-  .mh-five-steps-rows em { grid-column: 2; justify-self: start; }
-  .mh-integrations { margin-top: 40px; }
+  .mh-how-first-week-rows li { grid-template-columns: 40px 1fr; row-gap: 12px; padding: 24px 0; }
+  .mh-how-first-week-rows li > span { width: 40px; flex: 0 0 40px; font-size: 26px; line-height: 32px; }
   .mh-human-photo { min-height: 560px; }
   .mh-price-deck > article { min-height: 330px; }
   .mh-faq { padding-top: 72px; padding-bottom: 72px; gap: 48px; }

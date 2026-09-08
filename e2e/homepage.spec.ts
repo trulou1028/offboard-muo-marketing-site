@@ -42,12 +42,12 @@ test.describe("Offboard marketing site", () => {
 
     await page.getByRole("link", { name: "How It Works" }).first().click();
     await expect(page).toHaveURL(/\/how-it-works$/);
-    await expect(page.getByRole("heading", { level: 1, name: /one plan that starts where you are/i })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: /one system that starts where you are/i })).toBeVisible();
     expect(backendRequests).toEqual([]);
     expect(consoleErrors).toEqual([]);
   });
 
-  test("gives how it works its five-step spine, toolkit, and LUMO", async ({ page }) => {
+  test("gives how it works the homepage's four steps, toolkit, and Lumo", async ({ page }) => {
     const consoleErrors: string[] = [];
     const backendRequests: string[] = [];
     page.on("console", (message) => {
@@ -58,13 +58,16 @@ test.describe("Offboard marketing site", () => {
     });
 
     await page.goto("/how-it-works");
-    await expect(page.getByRole("heading", { name: /five steps from/i })).toBeVisible();
-    await expect(page.getByText("Tell us where you are")).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "One system that starts where you are." })).toBeVisible();
+    for (const kicker of ["Step 1 · Steady the first week", "Step 2 · Build your Career Context", "Step 3 · Connect it to the AI you use", "Step 4 · Run your search"]) {
+      await expect(page.getByText(kicker, { exact: true })).toBeVisible();
+    }
+    await expect(page.getByRole("heading", { name: /see your money clearly, then claim what exists/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /tools didn't go anywhere/i })).toBeVisible();
     await expect(page.getByRole("heading", { level: 3, name: "Application Packet" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "An AI guide that knows your actual situation." })).toBeVisible();
     await expect(page.getByText(/never invents a dollar figure/i)).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Stop repeating your story to every new tool." })).toBeVisible();
+    await expect(page.getByText("ChatGPT and Claude connections are in beta.")).toBeVisible();
     expect(backendRequests).toEqual([]);
     expect(consoleErrors).toEqual([]);
   });
