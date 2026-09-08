@@ -118,10 +118,8 @@ describe("Offboard marketing routes", () => {
 
     // Six member questions, as a disclosure list. The first is open so it
     // still reads beside the plan card that answers it.
-    const questions = Array.from(document.querySelectorAll(".mh-morethan details"));
-    expect(questions).toHaveLength(6);
-    expect(questions.filter((item) => item.hasAttribute("open"))).toHaveLength(1);
-    expect(questions[0].querySelector("summary")?.textContent).toBe("What do I do first?");
+// The six questions left this band on 2026-09-08 (owner); COPY.md keeps them.
+    expect(document.querySelectorAll(".mh-morethan details")).toHaveLength(0);
 
     // Retired in this pass: the second CTA whose destination was unclear, and
     // the prompt list /lumo already carries under the same label.

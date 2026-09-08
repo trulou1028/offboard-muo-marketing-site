@@ -44,7 +44,23 @@ function probe(el: Element): Probe {
     const chain: Element[] = [];
     for (let n: Element | null = node; n; n = n.parentElement) chain.push(n);
     let acc: Rgba = { r: 255, g: 255, b: 255, a: 1 };
-    for (const n of chain.reverse()) {
+    // The site header is fixed and, at the top of the homepage, fully
+    // transparent (owner 2026-09-08). Its ancestors are not behind it - the
+    // hero band is - so for a control inside the header the chain stops at
+    // the header and starts from the hero instead. Without this the walk
+    // reaches the page's paper background and measures paper text on paper,
+    // failing a header that is in fact readable.
+    const headerIndex = chain.findIndex(
+      (n) => n instanceof HTMLElement && n.classList.contains("mh-site-header"),
+    );
+    let walk = chain;
+    if (headerIndex >= 0) {
+      walk = chain.slice(0, headerIndex + 1);
+      const hero = document.querySelector(".mh-hero2, .mh-route-hero");
+      const heroBg = hero ? parse(getComputedStyle(hero).backgroundColor) : null;
+      if (heroBg && heroBg.a > 0) acc = over(heroBg, acc);
+    }
+    for (const n of walk.reverse()) {
       const c = parse(getComputedStyle(n).backgroundColor);
       if (c && c.a > 0) acc = over(c, acc);
     }

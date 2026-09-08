@@ -120,7 +120,7 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-kicker.is-sand { color: var(--mh-sand-eyebrow); }
 .mh-kicker.is-ondark { color: var(--mh-on-dark-muted); }
 
-.mh-primary-cta { display: inline-flex; width: fit-content; min-height: 50px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 22px; background: var(--mh-forest); border-radius: var(--mh-radius-sm); color: var(--mh-paper); font-size: 15px; font-weight: 600; line-height: 20px; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), color var(--mh-dur-base) var(--mh-ease-standard), border-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-primary-cta { display: inline-flex; width: fit-content; min-height: 50px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 26px; background: var(--mh-forest); border-radius: var(--mh-radius-pill); color: var(--mh-paper); font-size: 15px; font-weight: 600; line-height: 20px; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), color var(--mh-dur-base) var(--mh-ease-standard), border-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-base) var(--mh-ease-standard); }
 .marketing-homepage a.mh-primary-cta { color: var(--mh-paper); }
 .mh-primary-cta svg { width: 17px; height: 17px; transition: transform var(--mh-dur-base) var(--mh-ease-standard); }
 .mh-primary-cta:hover svg { transform: translateX(3px); }
@@ -186,7 +186,7 @@ a.mh-skip-link:focus { transform: translateY(0); }
    page scrolls, because the header is fixed and the bands below the hero are
    light. Other routes keep the tint from the start: /resources articles and
    /intake open on paper, where paper-coloured nav text would vanish. */
-.mh-page-home .mh-site-header:not(.is-scrolled) { background: rgb(15 38 23 / 20%); border-bottom-color: rgb(246 244 238 / 8%); }
+.mh-page-home .mh-site-header:not(.is-scrolled) { background: transparent; border-bottom-color: transparent; backdrop-filter: none; }
 /* A fixed header covers in-page anchor targets without this. #community,
    #faq, #toolkit and #pricing are targets of SEO-load-bearing redirects. */
 .marketing-homepage section[id] { scroll-margin-top: 96px; }
@@ -233,12 +233,12 @@ a.mh-skip-link:focus { transform: translateY(0); }
    page container: a one-column panel spanning 1200px read as forced space
    (owner review). Column tracks are fixed so the width is determinate; the
    clamp keeps it inside the page gutters on narrow desktops. */
-.mh-nav-panel { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: calc(100% + 12px); left: 50%; display: grid; grid-template-columns: repeat(2, 300px) 400px; max-width: calc(100vw - 2 * var(--mh-page-x)); min-height: 400px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); translate: -50% 0; }
+.mh-nav-panel { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: calc(100% + 12px); left: 50%; display: grid; grid-template-columns: 400px repeat(2, 300px); max-width: calc(100vw - 2 * var(--mh-page-x)); min-height: 400px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); translate: -50% 0; }
 /* No panel renders data-columns="1" since plan 043's launch trim left
    Resources as the only group, and it has two columns. Kept, not deleted:
    For Organizations was the one-column panel and comes back with
    /workforce and /communities. */
-.mh-nav-panel[data-columns="1"] { grid-template-columns: 340px 400px; }
+.mh-nav-panel[data-columns="1"] { grid-template-columns: 400px 340px; }
 /* The `hidden` attribute alone does NOT close these panels: `display: grid`
    above is an author rule and beats the user-agent's `[hidden] {display:none}`,
    so all three panels rendered at once and overlapped. Caught in a screenshot,
@@ -248,6 +248,9 @@ a.mh-skip-link:focus { transform: translateY(0); }
    pointer does not fire mouseleave and close the panel under the cursor. */
 .mh-nav-panel::before { position: absolute; top: -12px; right: 0; left: 0; height: 12px; content: ""; }
 .mh-nav-column { display: grid; align-content: start; gap: 2px; padding: 28px 20px 28px 26px; border-right: 1px solid var(--mh-line); }
+/* The feature leads (owner 2026-09-08), so the rule now falls between the
+   link columns and never on the panel's own right edge. */
+.mh-nav-column:last-child { border-right: 0; }
 .mh-nav-heading { padding: 0 12px 10px; color: var(--mh-secondary); font-size: 11px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
 .mh-nav-column a { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; align-items: start; padding: 10px 12px; border-radius: var(--mh-radius-sm); }
 .mh-nav-column a svg { width: 20px; height: 20px; margin-top: 1px; color: var(--mh-forest); }
@@ -259,7 +262,7 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-nav-column a[aria-current="page"] strong { color: var(--mh-forest); }
 /* The featured card: light on light, per the owner. The render inside is
    the only dark thing in the panel, and it is an image, not a surface. */
-a.mh-nav-feature { display: grid; align-content: start; gap: 6px; padding: 28px; background: var(--mh-paper-soft); border-radius: 0 var(--mh-radius-lg) var(--mh-radius-lg) 0; transition: background-color var(--mh-dur-base) var(--mh-ease-standard); }
+a.mh-nav-feature { display: grid; align-content: start; gap: 6px; padding: 28px; background: var(--mh-paper-soft); border-radius: var(--mh-radius-lg) 0 0 var(--mh-radius-lg); transition: background-color var(--mh-dur-base) var(--mh-ease-standard); }
 a.mh-nav-feature:hover { background: var(--mh-sand); }
 /* Taller than a thumbnail: the render is the card's hero, not its icon. */
 .mh-nav-feature-visual { order: -2; position: relative; display: block; height: 190px; margin-bottom: 10px; overflow: hidden; border-radius: var(--mh-radius-md); }
@@ -273,8 +276,10 @@ a.mh-nav-feature small { color: var(--mh-muted); font-size: 13px; line-height: 1
 .mh-nav-feature-cta svg { width: 16px; height: 16px; transition: transform var(--mh-dur-base) var(--mh-ease-standard); }
 a.mh-nav-feature:hover .mh-nav-feature-cta svg { transform: translateX(3px); }
 .mh-header-actions { justify-self: end; display: flex; align-items: center; gap: 24px; color: var(--mh-paper); }
-.mh-header-actions a.mh-primary-cta { min-height: 42px; background: var(--mh-lime); border: 0; border-radius: var(--mh-radius-sm); color: var(--mh-deep); }
-.mh-header-actions a.mh-primary-cta:hover { background: var(--mh-lime-hover); }
+/* Outlined, not filled (owner 2026-09-08): the lime button in the bar
+   competed with the hero's own primary action directly below it. */
+.mh-header-actions a.mh-primary-cta { min-height: 42px; background: transparent; border: 1px solid var(--mh-paper); border-radius: var(--mh-radius-pill); color: var(--mh-paper); }
+.mh-header-actions a.mh-primary-cta:hover { background: var(--mh-surface-on-dark); border-color: var(--mh-paper); }
 .mh-header-actions .mh-primary-cta svg { display: none; }
 
 
@@ -869,7 +874,7 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
 .mh-intake-submit { display: flex; flex-direction: column; gap: 14px; }
 /* stylelint-disable-next-line color-no-hex -- readable text color on --mh-danger-surface; darker than --mh-danger itself, no token defined for it */
 .mh-intake-submit-error { padding: 12px 14px; background: var(--mh-danger-surface); border: 1px solid var(--mh-danger-border); border-radius: var(--mh-radius-sm); color: #7a231c; font-size: 14px; }
-.mh-intake-submit button { min-height: 56px; background: var(--mh-forest); border: 0; border-radius: var(--mh-radius-sm); color: var(--mh-paper); font-size: 16px; font-weight: 600; cursor: pointer; transition: background-color 150ms ease-out; }
+.mh-intake-submit button { min-height: 56px; background: var(--mh-forest); border: 0; border-radius: var(--mh-radius-pill); color: var(--mh-paper); font-size: 16px; font-weight: 600; cursor: pointer; transition: background-color 150ms ease-out; }
 .mh-intake-submit button:hover:not(:disabled) { background: var(--mh-deep); }
 .mh-intake-submit button:disabled { cursor: not-allowed; opacity: .6; }
 .mh-intake-submit button:focus-visible { outline: 3px solid var(--mh-forest); outline-offset: 3px; }
@@ -878,7 +883,7 @@ p.mh-intake-card-subtitle { margin-top: 6px; color: var(--mh-muted); font-size: 
 .mh-intake-confirmed { display: flex; flex-direction: column; align-items: center; gap: 28px; padding-top: 40px; padding-bottom: 100px; text-align: center; }
 .mh-intake-confirmed p { max-width: 520px; color: var(--mh-muted); font-size: 15px; line-height: 24px; }
 .mh-intake-confirmed a[href^="mailto"] { color: var(--mh-forest); text-decoration: underline; }
-.mh-intake-confirmed-back { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); font-size: 14px; font-weight: 650; }
+.mh-intake-confirmed-back { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 26px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-pill); font-size: 14px; font-weight: 650; }
 .mh-intake-confirmed-back:hover { background: var(--mh-paper-soft); }
 
 /* ------------------------------------------------------------------ */
@@ -941,9 +946,9 @@ img.mh-lumo-mark { display: inline-block; width: 28px; height: 28px; flex: 0 0 2
 .mh-tracker-card small { color: var(--mh-secondary); font-size: 13px; }
 .mh-tracker-status { margin-left: auto; padding: 5px 10px; background: var(--mh-paper-soft); border-radius: var(--mh-radius-pill); font-size: 12px; font-style: normal; font-weight: 600; }
 
-a.mh-secondary-cta { display: inline-flex; min-height: 50px; align-items: center; padding: 0 20px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); color: var(--mh-ink); font-size: 15px; font-weight: 600; transition: border-color var(--mh-dur-base) var(--mh-ease-standard), color var(--mh-dur-base) var(--mh-ease-standard); }
+a.mh-secondary-cta { display: inline-flex; min-height: 50px; align-items: center; padding: 0 24px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-pill); color: var(--mh-ink); font-size: 15px; font-weight: 600; transition: border-color var(--mh-dur-base) var(--mh-ease-standard), color var(--mh-dur-base) var(--mh-ease-standard); }
 a.mh-secondary-cta:hover { border-color: var(--mh-ink); }
-a.mh-lumo-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 12px; padding: 0 22px; background: var(--mh-lime); border-radius: var(--mh-radius-sm); color: var(--mh-deep); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-base) var(--mh-ease-standard); }
+a.mh-lumo-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 12px; padding: 0 26px; background: var(--mh-lime); border-radius: var(--mh-radius-pill); color: var(--mh-deep); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-base) var(--mh-ease-standard); }
 a.mh-lumo-cta:active { transform: translateY(1px); }
 a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1px); }
 .mh-lumo-cta svg { width: 16px; height: 16px; }

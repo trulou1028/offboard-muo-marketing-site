@@ -282,9 +282,23 @@ Home left the bar (the wordmark is the home link; owner call 2026-09-01,
 reversing plan 024's Home link). `/act` is deliberately out of nav, in both
 the desktop panels and the mobile menu.
 
-Each panel is columns of links, each with a small icon and a one-line blurb,
-plus one featured card on the right with a render. Panels are light
+Each panel leads with its featured card and its render, then the columns of
+links, each with a small icon and a one-line blurb (owner 2026-09-08; the
+featured card sat on the right until then, and it now leads in the DOM as
+well as visually, so reading order matches the screen). Panels are light
 (white, featured card on paper-soft).
+
+**The bar itself** (owner 2026-09-08): at the top of the homepage the header
+is fully transparent, with no blur and no bottom rule, so the hero photograph
+runs behind it unbroken. The forest fill and its shadow return as soon as the
+page scrolls, because the bands below the hero are light. Other routes keep
+the fill from the start. **`Get started free` in the bar is outlined**, not
+filled: transparent, a one-pixel paper border, paper label. It competed with
+the hero's own filled primary action directly beneath it.
+
+**Every CTA on the site is a pill** (owner 2026-09-08): primary, secondary,
+the Lumo button, the header button, and the intake form's submit all take the
+full radius.
 
 **Trimmed to the launch set by plan 043, then revised by plan 045 (both owner,
 2026-09-07).** The nav is **Product ▾ · For Employers · Pricing · Resources ▾**.
@@ -514,7 +528,7 @@ connections.
 - H2: `Losing your job creates more than one problem.` *(kept: the eyebrow carries the plain label, so the headline may stay evocative, per R5a)*
 - Section link *(new in round 5, the section had no route out)*: `See what to do first` → `/layoff-support` *(off the page under plan 043, back under plan 045)*
 - Body: `Finding another role matters. But so do unemployment benefits, health coverage, finances, career decisions, applications, networking, interviews, and figuring out what to do first. Offboard brings those pieces together.`
-- Six questions as a disclosure list (round 4), the first open so it still reads beside the plan card that answers it:
+- ~~Six questions as a disclosure list (round 4), the first open so it still reads beside the plan card that answers it~~ — **retired from this band 2026-09-08 (owner)**: the two-column split above already carries the step, and six closed rows beneath it made the section long without adding an idea. The questions and answers are kept below for the record, and the disclosure pattern still ships on the five route FAQs.
   1. `What do I do first?` — **Your personalized plan** — `Tell Offboard what's happening, and we'll help organize what needs your attention now, what can wait, and what comes next.`
   2. `What support might I qualify for?` — **Benefits and workforce programs** — `Navigate unemployment insurance, training programs, workforce resources, and other forms of support that may be available where you live.`
   3. `Is this job worth my time?` — **Opportunity intelligence** — `Check role fit, investigate possible ghost jobs, research companies, and understand whether an opportunity deserves your energy.`

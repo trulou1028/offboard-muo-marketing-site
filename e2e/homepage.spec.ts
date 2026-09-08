@@ -22,14 +22,10 @@ test.describe("Offboard marketing site", () => {
     await expect(page.getByRole("heading", { name: /ask anywhere\. the answer is about you/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: "The tools you run your search with." })).toBeVisible();
 
-    // Round 4: the member questions are a disclosure list, first item open.
-    // Closed answers stay in the DOM, so this asserts the disclosure state
-    // rather than text presence.
-    const questions = page.locator(".mh-morethan details");
-    await expect(questions).toHaveCount(6);
-    await expect(questions.first()).toHaveAttribute("open", "");
-    await questions.nth(1).locator("summary").click();
-    await expect(questions.nth(1)).toHaveAttribute("open", "");
+    // The six-question disclosure list left this band on 2026-09-08 (owner):
+    // the split above it already carries the step. The route FAQs still use
+    // the same component, so the pattern is covered by those specs.
+    await expect(page.locator(".mh-morethan details")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: /losing your job creates more than one problem/i })).toBeVisible();
     await expect(page.getByRole("heading", { name: /you don't need another place to start over/i })).toBeVisible();
     await expect(page.getByRole("tablist", { name: "Job search stages" })).toHaveCount(0);
@@ -342,6 +338,16 @@ test.describe("focus indicator contrast", () => {
         while (node) {
           const bg = getComputedStyle(node).backgroundColor;
           if (bg && bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") return bg;
+          // The homepage header is transparent at the top of the page (owner
+          // 2026-09-08), and it is fixed, so walking up the DOM lands on the
+          // page's paper background rather than on what is actually behind
+          // it. What is behind it is the hero band, which is forest-deep.
+          // Without this the check would compare a paper ring against paper
+          // and fail on a header that is in fact readable.
+          if (node instanceof HTMLElement && node.classList.contains("mh-site-header")) {
+            const hero = document.querySelector(".mh-hero2, .mh-route-hero");
+            if (hero) return getComputedStyle(hero).backgroundColor;
+          }
           node = node.parentElement;
         }
         return "none";
