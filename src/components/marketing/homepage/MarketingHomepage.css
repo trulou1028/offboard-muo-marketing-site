@@ -443,6 +443,8 @@ ol.mh-how-first-week-rows { width: 100%; margin-top: 54px; border-top: 1px solid
 .mh-price-deck p { font-size: 15px; line-height: 22px; }
 .mh-price-deck .mh-price-value { display: flex; align-items: baseline; gap: 6px; }
 .mh-price-deck .mh-price-value b { font-size: 40px; line-height: 1; font-weight: 650; }
+/* The quarterly line under Pro's price (plan 047): the app bills $45 a quarter. */
+small.mh-price-billing { display: block; margin-top: -6px; color: var(--mh-muted); font-size: 13px; line-height: 1.5; }
 .mh-price-deck .mh-price-value small { font-size: 15px; color: var(--mh-muted); }
 .mh-price-deck .mh-primary-cta,
 .mh-price-deck .mh-secondary-cta { width: 100%; min-height: 48px; }

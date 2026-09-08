@@ -90,12 +90,12 @@ export function MarketingPricing() {
         />
         <PricingSection />
         <Statements
-          kicker="How credits work"
-          title="Pay only for the work that needs more horsepower."
-          body="Credits cover the heavier product work: deeper research, tailored materials, and interview preparation. Every credit-spending action shows its cost before you run it."
+          kicker="What the plan covers"
+          title="The plan covers the search. Credits cover the extras."
+          body="Everything inside an Application Packet is covered by your plan, Free or Pro. Credits only pay for the extras outside the search, and the cost shows on the button before you run anything."
           items={[
-            { title: "Included monthly", body: "Free includes 30 credits a month, Pro includes 300. They refresh monthly." },
-            { title: "Clear costs", body: "The price in credits is shown on the button before you spend anything." },
+            { title: "Covered by your plan", body: "The path, the tracker, benefit facts, documents, ghost checks, Ask Lumo, and every step of an Application Packet your plan includes." },
+            { title: "What credits buy", body: "AI headshots, the brand kit, voice practice sessions, and paperwork review. Every tier includes a monthly allowance, and the price shows before you spend." },
             { title: "Human support", body: "Eligible one-on-one support options are booked separately, with price and scope shown before you schedule." },
           ]}
         />
