@@ -6,12 +6,16 @@ import Link from "next/link";
 import {
   ArrowRight,
   BookOpen,
+  Briefcase,
   ChevronDown,
   Info,
+  LifeBuoy,
   Mail,
   MapPin,
   MessageCircle,
+  Plug,
   ShieldCheck,
+  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 
@@ -20,14 +24,13 @@ import type { MarketingRoute } from "./MarketingSite";
 /* The navigation (plan 037's mega menu, trimmed to the launch set by plan
    043 on 2026-09-07).
 
-   How It Works · For Employers · Pricing · Resources ▾.
+   Product ▾ · For Employers · Pricing · Resources ▾.
 
-   It was four tabs, three of them mega menus. Eight pages left the nav at
-   the launch trim (src/lib/launch.ts), which emptied Product down to its
-   featured card and For Organizations down to a single link, so both became
-   plain links to the page that survived. Resources is the one panel left.
-   The structure that was here is in git history and in
-   docs/site-architecture.md; un-deferring a page restores its entry.
+   Plan 043 trimmed plan 037's four tabs to the launch set; plan 045 (owner
+   2026-09-07) brought Product back with its five pages and retired How It
+   Works from the nav instead. For Organizations stays a plain link while
+   /workforce and /communities are deferred (src/lib/launch.ts); its panel
+   is in git history and docs/site-architecture.md.
 
    Built as a disclosure-navigation pattern, not a menubar: each trigger is a
    plain button with aria-expanded, and each panel is a container of links.
@@ -64,7 +67,40 @@ export type NavEntry =
   | { kind: "group"; id: string; label: string; columns: readonly NavColumn[]; feature: NavFeature };
 
 export const NAV_ENTRIES: readonly NavEntry[] = [
-  { kind: "link", route: "how-it-works", href: "/how-it-works", label: "How It Works" },
+  {
+    kind: "group",
+    id: "product",
+    label: "Product",
+    columns: [
+      {
+        heading: "The system",
+        items: [
+          { route: "lumo", href: "/lumo", label: "Lumo", blurb: "The guide that knows your situation.", icon: Sparkles },
+          { route: "integrations", href: "/integrations", label: "Offboard Everywhere", blurb: "Use Offboard from the AI you already use.", icon: Plug },
+        ],
+      },
+      {
+        heading: "The work",
+        items: [
+          { route: "job-search", href: "/job-search", label: "Job Search", blurb: "The whole search as one system.", icon: Briefcase },
+          { route: "layoff-support", href: "/layoff-support", label: "Layoff & Benefits", blurb: "Deadlines, coverage, and runway.", icon: LifeBuoy },
+        ],
+      },
+    ],
+    /* Career Context is the featured card, not a column row: it is the
+       record every other product page reads from, and plan 037's featured
+       slot went to How It Works, which the owner retired from the nav on
+       2026-09-07 (plan 045). */
+    feature: {
+      kicker: "Start here",
+      title: "Career Context",
+      body: "One living record of your experience, applications, companies, interviews, and goals, put to work in every tool you use.",
+      cta: "See what it holds",
+      href: "/career-context",
+      route: "career-context",
+      image: "/marketing/homepage/renders/path-stage.webp",
+    },
+  },
   { kind: "link", route: "employers", href: "/employers", label: "For Employers" },
   { kind: "link", route: "pricing", href: "/pricing", label: "Pricing" },
   {

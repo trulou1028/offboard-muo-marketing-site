@@ -145,7 +145,11 @@ export function MarketingFooter() {
                 (src/lib/launch.ts) stay live but unadvertised. Each comes
                 back to the column it left. */}
             <strong>Product</strong>
-            <Link href="/how-it-works">How It Works</Link>
+            <Link href="/career-context">Career Context</Link>
+            <Link href="/lumo">Lumo</Link>
+            <Link href="/job-search">Job Search</Link>
+            <Link href="/integrations">Offboard Everywhere</Link>
+            <Link href="/layoff-support">Layoff &amp; Benefits</Link>
             <Link href="/pricing">Pricing</Link>
             <Link href="/resources">Guides</Link>
           </div>

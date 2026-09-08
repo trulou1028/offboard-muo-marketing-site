@@ -11,12 +11,10 @@ import {
   Users,
 } from "lucide-react";
 import {
-  AiReply,
   ContrastSection,
   FinalCta,
   MarketingShell,
   PageHero,
-  YouBubble,
 } from "./MarketingSite";
 
 /* Career Context pillar page (plan 025) - the first page of the owner's
@@ -86,7 +84,7 @@ const IMPROVES = [
 
 const OUTPUTS = [
   ["Tailored resumes", "Resume versions built from your real history, tuned to the role in front of you."],
-  ["Application packets", "The role, the company, your positioning, and your materials in one place."],
+  ["Application Packets", "The role, the company, your positioning, and your materials in one place."],
   ["Interview preparation", "Prep plans and practice grounded in your actual experience and the actual role."],
   ["Better decisions", "Compare opportunities against your experience, preferences, and how your search is going."],
 ] as const;
@@ -178,24 +176,10 @@ function LumoUsesIt() {
   );
 }
 
-function AssistantsSection() {
-  return (
-    <section className="mh-wherever mh-section" aria-labelledby="assistants-title">
-      <div className="mh-wherever-grid">
-        <div className="mh-copy-block">
-          <span className="mh-kicker">Offboard, wherever you work</span>
-          <h2 id="assistants-title">Your context goes with you.</h2>
-          <p>Connect Offboard to supported AI assistants and your Career Context goes with you. Save an opportunity from a conversation, update an application, or add what you just learned, from whichever tool you are already in.</p>
-        </div>
-        <div className="mh-chat-card" aria-label="Example conversation updating a Career Context from an AI assistant" data-reveal="">
-          <YouBubble>Save the interview questions I just worked through, and what I answered.</YouBubble>
-          <AiReply highlight="Done.">I have added them to your interview stories.</AiReply>
-        </div>
-      </div>
-    </section>
-  );
-}
-
+/* "Your context goes with you" (the connected-assistant band) left this page
+   in plan 045's messaging pass: it restated /integrations, which the Lumo
+   band directly above already hands the reader on to, and the page had two
+   sibling-page promos in a row. COPY.md § 10 keeps the copy. */
 function OwnershipSection() {
   return (
     <section className="mh-route-privacy mh-section" aria-labelledby="ownership-title">
@@ -242,7 +226,6 @@ export function MarketingCareerContext() {
         <ImprovesSection />
         <OutputsSection />
         <LumoUsesIt />
-        <AssistantsSection />
         <OwnershipSection />
         <FinalCta
           title="Stop starting from scratch."

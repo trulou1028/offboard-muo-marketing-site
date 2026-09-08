@@ -42,13 +42,6 @@ const IN_PROGRESS: readonly Integration[] = [
   { id: "notion", name: "Notion", status: "In progress", body: "Export your job search record to Notion." },
 ];
 
-const CAPABILITIES = [
-  ["Save an opportunity", "Turn a role you are already discussing into a tracked opportunity, without filling out a form."],
-  ["Move it forward", "Change a stage, add a recruiter, record what happened in an interview, or leave yourself a note."],
-  ["Add to your Career Context", "Capture a project, an outcome, or a story while it is fresh, straight from the conversation."],
-  ["Ask across your whole search", "Compare opportunities, or ask what needs attention, against everything Offboard already holds."],
-] as const;
-
 const PERMISSIONS = [
   "01 A connection is scoped. An assistant works with the parts of your Career Context you authorize, not everything in your account.",
   "02 You can review and change what a connected assistant can reach.",
@@ -76,7 +69,6 @@ function Showcase() {
       <div className="mh-copy-block">
         <span className="mh-kicker">What connects</span>
         <h2 id="showcase-title">Offboard holds the record. You choose the interface.</h2>
-        <p>Connect the tools you already work in. Offboard keeps one record of your search, and a connection reads and updates it with your permission.</p>
       </div>
       <h3 className="mh-int-grouphead">Connected today</h3>
       <div className="mh-int-grid" data-reveal="">
@@ -129,25 +121,9 @@ function Demos() {
   );
 }
 
-function Capabilities() {
-  return (
-    <section className="mh-ctx mh-section" aria-labelledby="int-caps-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">From a conversation</span>
-        <h2 id="int-caps-title">What you can do without switching tabs.</h2>
-      </div>
-      <div className="mh-capabilities" data-reveal="">
-        {CAPABILITIES.map(([title, body]) => (
-          <div className="mh-capability" key={title}>
-            <h3>{title}</h3>
-            <p>{body}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
+/* "What you can do without switching tabs" left in plan 045's messaging
+   pass: its four capabilities restated the three demos directly above it.
+   COPY.md § 11 keeps the copy. */
 function Permissions() {
   return (
     <section className="mh-route-privacy mh-section" aria-labelledby="permissions-title">
@@ -190,7 +166,6 @@ export function MarketingIntegrations() {
         />
         <Showcase />
         <Demos />
-        <Capabilities />
         <Permissions />
         <PreferLumo />
         <FinalCta

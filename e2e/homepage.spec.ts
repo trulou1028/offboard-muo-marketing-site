@@ -40,9 +40,11 @@ test.describe("Offboard marketing site", () => {
     await expect(page.getByRole("heading", { name: /ask anywhere/i })).toBeInViewport();
     await page.goto("/");
 
-    await page.getByRole("link", { name: "How It Works" }).first().click();
-    await expect(page).toHaveURL(/\/how-it-works$/);
-    await expect(page.getByRole("heading", { level: 1, name: /one system that starts where you are/i })).toBeVisible();
+    // Plan 045: /how-it-works is deferred, so the hero's secondary CTA
+    // scrolls to the four-step strip instead of leaving the page.
+    await page.getByRole("link", { name: "See how it works" }).click();
+    await expect(page).toHaveURL(/#how-it-works$/);
+    await expect(page.getByRole("heading", { name: "How Offboard works." })).toBeInViewport();
     expect(backendRequests).toEqual([]);
     expect(consoleErrors).toEqual([]);
   });
@@ -104,9 +106,8 @@ test.describe("Offboard marketing site", () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
     const headerNav = page.getByRole("navigation", { name: "Marketing navigation" });
-    await expect(headerNav.getByRole("link")).toHaveCount(3);
-    await expect(headerNav.getByRole("button")).toHaveCount(1);
-    await expect(headerNav.getByRole("link", { name: "How It Works" })).toHaveAttribute("href", "/how-it-works");
+    await expect(headerNav.getByRole("link")).toHaveCount(2);
+    await expect(headerNav.getByRole("button")).toHaveCount(2);
     await expect(headerNav.getByRole("link", { name: "For Employers" })).toHaveAttribute("href", "/employers");
     await expect(headerNav.getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
     expect(await page.locator('.mh-site-header a[href="/act"]').count()).toBe(0);
@@ -117,13 +118,16 @@ test.describe("Offboard marketing site", () => {
       );
 
     expect(await visiblePanels()).toBe(0);
-    const resources = headerNav.getByRole("button", { name: "Resources" });
-    await resources.click();
-    await expect(resources).toHaveAttribute("aria-expanded", "true");
+    const product = headerNav.getByRole("button", { name: "Product" });
+    await product.click();
+    await expect(product).toHaveAttribute("aria-expanded", "true");
+    expect(await visiblePanels()).toBe(1);
+
+    await headerNav.getByRole("button", { name: "Resources" }).click();
+    await expect(product).toHaveAttribute("aria-expanded", "false");
     expect(await visiblePanels()).toBe(1);
 
     await page.keyboard.press("Escape");
-    await expect(resources).toHaveAttribute("aria-expanded", "false");
     expect(await visiblePanels()).toBe(0);
 
     const footerNav = page.getByRole("navigation", { name: "Footer navigation" });
@@ -201,7 +205,8 @@ test.describe("Offboard marketing site", () => {
     // The featured destinations are plain links on a phone, so nothing that
     // only the desktop panel carries is lost here - including the newsletter,
     // which had no phone entry until plan 043 generalized the feature link.
-    await expect(menu.getByRole("link", { name: "How It Works" })).toBeVisible();
+    await expect(menu.getByRole("link", { name: "Career Context" })).toBeVisible();
+    await expect(menu.getByRole("link", { name: "Layoff & Benefits" })).toBeVisible();
     await expect(menu.getByRole("link", { name: "About" })).toBeVisible();
     await expect(menu.getByRole("link", { name: "The Offboard Newsletter" })).toBeVisible();
     for (const route of DEFERRED_ROUTES) {

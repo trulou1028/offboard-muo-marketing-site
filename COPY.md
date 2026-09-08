@@ -286,22 +286,25 @@ Each panel is columns of links, each with a small icon and a one-line blurb,
 plus one featured card on the right with a render. Panels are light
 (white, featured card on paper-soft).
 
-**Trimmed to the launch set by plan 043 (owner 2026-09-07).** The nav is now
-**How It Works · For Employers · Pricing · Resources ▾**. Eight pages left it
-(`src/lib/launch.ts`), which emptied Product down to its featured card and For
-Organizations down to a single link, so both became plain links to the page
-that survived. Resources is the one panel left, minus Company Transition
-Centers. The full four-tab structure is preserved below, struck through, so
-un-deferring a page restores its exact blurb.
+**Trimmed to the launch set by plan 043, then revised by plan 045 (both owner,
+2026-09-07).** The nav is **Product ▾ · For Employers · Pricing · Resources ▾**.
+Plan 043 deferred eight pages and emptied both mega menus to plain links; the
+owner then decided How It Works was "not valuable enough to be a more in-depth
+version of the homepage", so plan 045 brought the five product pages and the
+Product panel back and deferred `/how-it-works` instead (it stays live: four
+legacy URLs 301 to it). For Organizations stays a plain link while
+`/workforce` and `/communities` are deferred; its panel is preserved below,
+struck through, so un-deferring restores the exact blurb.
 
-- ~~**Product ▾** — *The system:* Career Context `The record everything else
-  reads from.` · Lumo `The guide that knows your situation.` · Offboard
-  Everywhere `Use Offboard from the AI you already use.` · *The work:* Job
-  Search `The whole search as one system.` · Layoff & Benefits `Deadlines,
-  coverage, and runway.` · *Featured, "Start here":* **How It Works** `Five
-  steps from the layoff to the next job, and what Offboard does at each
-  one.` → `See how it works` → `/how-it-works`~~ — **now the plain link
-  `How It Works` → `/how-it-works`**
+- **Product ▾** — *The system:* Lumo `The guide that knows your situation.` ·
+  Offboard Everywhere `Use Offboard from the AI you already use.` · *The
+  work:* Job Search `The whole search as one system.` · Layoff & Benefits
+  `Deadlines, coverage, and runway.` · *Featured, "Start here":* **Career
+  Context** `One living record of your experience, applications, companies,
+  interviews, and goals, put to work in every tool you use.` → `See what it
+  holds` → `/career-context` *(plan 045: Career Context moved from the first
+  column to the featured slot, which plan 037 gave to How It Works; the
+  render is the same `path-stage` image)*
 - ~~**For Organizations ▾** — *Who you serve:* For Employers `Sponsor a group
   through a layoff.` · Workforce & Government `Agencies, boards, and public
   programs.` · Universities & Communities `Alumni, members, and career
@@ -339,9 +342,9 @@ Case while "How it works" and "For employers" were not.
 > **Offboard**
 > Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
 
-Columns, trimmed to the launch set by plan 043 — **Product:** How It Works,
-Pricing, Guides ~~, Career Context, Lumo, Job Search, Offboard Everywhere,
-Layoff & Benefits, Company Transition Centers~~ ·
+Columns (plan 043 trim, plan 045 revision) — **Product:** Career Context,
+Lumo, Job Search, Offboard Everywhere, Layoff & Benefits, Pricing, Guides
+~~, How It Works, Company Transition Centers~~ ·
 **Partners:** For Employers ~~, Workforce & Government, Universities &
 Communities~~ ·
 **Company:** About, Visit Us
@@ -441,7 +444,7 @@ it did not):
 
 - H1: `The Modern Unemployment Office` *(owner 2026-09-07, from the Figma hero: Title Case and no period, the one headline exempt from the sentence-case rule in § Language rules; it is the category name, treated as a proper noun)*
 - Body: `Your benefits, your job search, and your career context in one system, connected to the AI you already use.` *(round 5: was five nouns, and "applications" sits inside "job search")*
-- CTAs: `Get started free` (primary) · `See how it works` → `/how-it-works`
+- CTAs: `Get started free` (primary) · `See how it works` → `#how-it-works`, the four-step strip on this page *(plan 045: `/how-it-works` is deferred, so the button scrolls instead of leaving)*
 - Trust line: `Join thousands of people building their next chapter with Offboard.` *(owner-confirmed accurate 2026-08-31)*
 - Hero visual (owner composition 2026-09-07, refined in Figma): **a full-bleed photograph with one flat chat image over it.** The photograph fills the band; two were approved and ship in `public/marketing/homepage/hero/` (`living-room.webp`, a man on a sofa at night; `bedroom.webp`, a woman on her bed at dusk). `HERO_PHOTO` in `MarketingHome.tsx` picks the one that ships; the living room is live. Photo `alt`: `A man works on his laptop on a sofa at night, lit by a floor lamp beside a window.` / `A woman sits cross-legged on her bed with a laptop at dusk, a lamp lit on the nightstand beside her.`
 
@@ -474,7 +477,7 @@ connections.
 - H2: `One place that remembers your career.` *(widened from "your entire job search", owner strategy doc, plan 025)*
 - Body: `Your resume is only a fraction of your career. Offboard builds a living record of your experience, accomplishments, applications, companies, conversations, documents, interviews, goals, and progress so you don't have to explain yourself from scratch every time you need help.`
 - CTA: `Build my Career Context` — the section's only filled button (R3)
-- ~~Section link: `See what your Career Context holds` → `/career-context`~~ *(removed by plan 043: `/career-context` is deferred. Returns with the page.)*
+- Section link: `See what your Career Context holds` → `/career-context` *(off the page under plan 043 while the pillar was deferred; back with it under plan 045)*
 - The eight categories moved to `/career-context` § 10 in round 4. This section names them in its body paragraph and links out.
 - Record card (composition C), the section's only visual since the portrait behind it was retired in round 4: `Your Career Context` · `Always evolving. Available wherever you use Offboard.` · three rows — `Experience` / `Roles, projects, and outcomes`, `Applications` / `Tesserac · Interviewing`, `Interviews` / `Thursday · Prep ready`. Three source chips break its top edge: `Resume`, `LinkedIn`, `Interview story` (the same three sources `/career-context` § What goes in already names). The portrait photograph behind it is the one that used to open Built around you.
   - `Interviewing` is a real application stage (it is what the demo conversation moves Tesserac into). `Prep ready` is a real interview state in the product. Neither is a claim about outcomes.
@@ -486,7 +489,7 @@ connections.
 - H2: `Ask anywhere. The answer is about you.`
 - Body: `Lumo is Offboard's own guide and works from your Career Context from the first question. Prefer ChatGPT or Claude? Connect Offboard and take your context with you.`
 - Beta note *(ledger-governed)*: `ChatGPT and Claude connections are in beta.`
-- ~~CTA: `See how Offboard Everywhere works` → `/integrations`~~ *(was the section's only action since `Ask Lumo` was retired in round 4; removed by plan 043 because `/integrations` is deferred. The section is narrative until it returns.)*
+- CTA: `See how Offboard Everywhere works` → `/integrations` (the section's only action since `Ask Lumo` was retired in round 4; off the page under plan 043, back under plan 045)
 - Demo conversation (composition B), unchanged from v2 and complete in the DOM. The earlier exchange sits behind the later one and is cropped by it, so the section shows one exchange at full size while both remain readable in order: You: `How does this role compare with the other opportunities I'm pursuing?` / AI: `Based on your Offboard context, Tesserac looks like one of your stronger opportunities. It aligns closely with your AI product experience and gives you more technical ownership than several of the other roles you're considering.` / You: `Move Tesserac to the interview stage and save that Ruben is my recruiter.` / AI: `Done. Tesserac is now in Interviewing, and I've added Ruben to the opportunity.`
 - Chip on the composition: `Contact saved · Ruben`
 - Retired here: v2's `Powered by Offboard Career Context` callout and the supporting line `Prefer another AI assistant? Connect Offboard and take your context with you.` (its substance is in the body above).
@@ -496,7 +499,7 @@ connections.
 - Kicker: `Step 4 · Run your search`
 - H2: `The tools you run your search with.` *(round 4; the previous `Everything you need when the next opportunity appears.` read as a promise rather than a label, and the eyebrow already carries the plain one)*
 - Lead *(the right half of the two-column intro)*: `Ten tools that read from the same context, so nothing is retyped and nothing is forgotten.`
-- ~~Section link: `See what each tool does` → `/job-search`~~ *(removed by plan 043: `/job-search` is deferred. Returns with the page.)*
+- Section link: `See what each tool does` → `/job-search` *(off the page under plan 043, back under plan 045)*
 - Four stages, each with the one-line decision already approved on `/job-search`: **Decide** `Whether this one deserves your week.` · **Apply** `What you actually send.` · **Interview** `Walking in prepared, not rehearsed.` · **Organize** `Where all of it is kept.`
 - Tool names unchanged: **Decide** (`Role Fit` · `Ghost Job Checker` · `Company Intelligence`) · **Apply** (`Application Packets` · `Resume Tailoring` · `Cover Letters`) · **Interview** (`Interview Prep` · `Voice Practice`) · **Organize** (`Application Tracker` · `Career Context`). Their ten descriptions moved to § 14 in round 4.
 - Each group carries one product-state chip (`DESIGN.md` R8). Every one is a string the product actually produces, checked against `lumo-plan-builder` `origin/main` at `b8cb77ec`: Decide `Strong fit` (the Role Fit label at a score of 80 or above) · Apply `Ready for review` (a job packet's `review_ready` status) · Interview `Prep ready` (the interview prep state) · Organize `Saved to tracker` (the save-a-job confirmation).
@@ -507,7 +510,7 @@ connections.
 - Kicker: `More than a job search`
 - Kicker: `Step 1 · Steady the first week` *(was `More than a job search`; round 5)*
 - H2: `Losing your job creates more than one problem.` *(kept: the eyebrow carries the plain label, so the headline may stay evocative, per R5a)*
-- ~~Section link *(new in round 5, the section had no route out)*: `See what to do first` → `/layoff-support`~~ *(removed by plan 043: `/layoff-support` is deferred. Returns with the page.)*
+- Section link *(new in round 5, the section had no route out)*: `See what to do first` → `/layoff-support` *(off the page under plan 043, back under plan 045)*
 - Body: `Finding another role matters. But so do unemployment benefits, health coverage, finances, career decisions, applications, networking, interviews, and figuring out what to do first. Offboard brings those pieces together.`
 - Six questions as a disclosure list (round 4), the first open so it still reads beside the plan card that answers it:
   1. `What do I do first?` — **Your personalized plan** — `Tell Offboard what's happening, and we'll help organize what needs your attention now, what can wait, and what comes next.`
@@ -578,6 +581,8 @@ Their copy remains in git history; re-adding any of them is a copy decision
 for the owner.
 
 # 2 · How it works `/how-it-works`
+
+**Deferred by plan 045 (owner 2026-09-07):** out of the nav, out of the sitemap, `noindex` on its own metadata. Still live because `/product`, `/why-offboard`, `/job-packet` and `/faq` 301 here. The copy below is what ships at that URL.
 
 **Rebuilt 2026-09-07 (plan 044, owner decisions the same day).** The page is
 the long form of the homepage's four steps: same names, same order, the
@@ -1169,7 +1174,7 @@ where the record comes from, not a second taxonomy of it. The eight
 - H2: `One record. Every output.`
 - Capabilities:
   1. `Tailored resumes` — `Resume versions built from your real history, tuned to the role in front of you.`
-  2. `Application packets` — `The role, the company, your positioning, and your materials in one place.`
+  2. `Application Packets` — `The role, the company, your positioning, and your materials in one place.` *(glossary casing, plan 045)*
   3. `Interview preparation` — `Prep plans and practice grounded in your actual experience and the actual role.`
   4. `Better decisions` — `Compare opportunities against your experience, preferences, and how your search is going.`
 
@@ -1180,9 +1185,9 @@ where the record comes from, not a second taxonomy of it. The eight
 - Body: `Because Lumo works from your Career Context, you never re-upload a resume, re-explain your goals, or reconstruct what happened with an application. You ask, and the answer starts from everything you have already built.`
 - CTA: `Ask Lumo` (AI button)
 
-### Works with the AI you already use
+### Works with the AI you already use *(retired from this page by plan 045's messaging pass, 2026-09-07: it restated `/integrations`, and it sat directly under a Lumo band that already hands the reader on. Kept for the record.)*
 
-- Kicker: `Offboard, wherever you work`
+- ~~Kicker: `Offboard, wherever you work`~~
 - H2: `Your context goes with you.` *(round 5: this H2 shipped on two pages; it stays on `/integrations`, where it titles the grid)*
 - Body: `Connect Offboard to supported AI assistants and your Career Context goes with you. Save an opportunity from a conversation, update an application, or add what you just learned, from whichever tool you are already in.`
 - Demo conversation: You: `Save the interview questions I just worked through, and what I answered.` / AI: `Done. I have added them to your interview stories.` *(varied 2026-08-31 so it does not duplicate the /integrations demo, which owns the project-outcomes line)*
@@ -1241,7 +1246,7 @@ belongs here.
 
 - Kicker: `What connects`
 - H2: `Offboard holds the record. You choose the interface.`
-- Body: `Connect the tools you already work in. Offboard keeps one record of your search, and a connection reads and updates it with your permission.`
+- ~~Body: `Connect the tools you already work in. Offboard keeps one record of your search, and a connection reads and updates it with your permission.`~~ *(cut by plan 045: the H2 says it, and Permissions below owns "with your permission")*
 - Group heading: `Connected today`
   1. **Google Calendar** · `Live` — `Interviews and deadlines land on the calendar you already keep.`
   2. **Google Drive** · `Live` — `Save resumes and cover letters straight to your Drive.`
@@ -1276,9 +1281,9 @@ carried moved to the grid above.
 - **Claude** — You: `Add the project outcomes we just discussed to my Career Context.` / AI: `Done. I've added the migration project and its results to your experience.`
 - **Lumo** — You: `Which applications need attention today?` / AI: `Three need follow-up. Tesserac has an interview on Thursday, and two applications have been open for more than two weeks without a reply.`
 
-### What you can do from a conversation
+### What you can do from a conversation *(retired by plan 045's messaging pass: the four capabilities restated the three demos directly above. Kept for the record.)*
 
-- Capabilities:
+- ~~Capabilities:~~
   1. `Save an opportunity` — `Turn a role you are already discussing into a tracked opportunity, without filling out a form.`
   2. `Move it forward` — `Change a stage, add a recruiter, record what happened in an interview, or leave yourself a note.`
   3. `Add to your Career Context` — `Capture a project, an outcome, or a story while it is fresh, straight from the conversation.`
@@ -1326,11 +1331,14 @@ a resume into a general assistant. Not in header nav yet.
 - Body: `Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window.`
 - CTA: `Ask Lumo` (primary)
 
-### What Lumo knows
+### What Lumo knows *(rebuilt by plan 045, plan 040 finding 10: the eight cards re-listed `/career-context`'s eight kinds of record)*
 
 - Kicker: `What it knows`
 - H2: `It starts from your record, not a blank page.`
-- Cards:
+- Body: `Everything in your Career Context is already there: your experience, applications, companies, interviews, and goals. Lumo also carries three things no other assistant has.`
+- Section link: `See what your Career Context holds` → `/career-context`
+- Three blocks (Pattern H): `Your plan` — *Your Path* — `What needs attention now, what can wait, and what comes next.` · `Benefits context` — *The practical side* — `Where you are with deadlines, coverage, and runway, so the answer fits the week you are actually in.` · `Previous conversations` — *Memory* — `What you already worked out together, so you are not repeating it.`
+- ~~Cards (the eight, retired):~~
   1. `Your Career Context` — `Experience, projects, outcomes, and the stories you reach for in interviews.`
   2. `Your applications` — `What you applied to, what stage it is at, and what happened.`
   3. `Companies` — `What you researched and learned about the teams you are talking to.`
@@ -1358,7 +1366,7 @@ a resume into a general assistant. Not in header nav yet.
 
 - Kicker: `The difference`
 - H2: `Not a smarter chatbot. A better starting point.`
-- Body: `Lumo is not claiming to out-think a general assistant. The difference is what it is working from: the structured, continuously updated state of your career, rather than whatever you can paste into a message box.`
+- Body: `The difference is not a smarter model. It is what the conversation starts from: your Career Context, kept current, instead of whatever you can paste into a message box.` *(plan 045; was `Lumo is not claiming to out-think a general assistant. The difference is what it is working from: the structured, continuously updated state of your career, rather than whatever you can paste into a message box.`, the "cooler register" plan 040 flagged)*
 - Payoff line *(plan 042)*: `You spend the conversation on the decision instead of on context, and the answer is about your search rather than job searching in general.`
 - Composition *(plan 042, R2/R13)*: the Career Context record card as the base, because it is what Lumo starts from, with a blank composer breaking its left edge: `Any other assistant` / `Tell me about yourself...`
 
@@ -1522,7 +1530,7 @@ the three columns including `4,000+` state-approved California programs.
 - Kicker: `And then the job`
 - H2: `When the paperwork is handled, the search is still there.`
 - Body: `Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other. The tracker, the Application Packets, the interview prep, and the record behind them are all here when you are ready.`
-- Section link: `See how Offboard works` → `/how-it-works`
+- Section link: `See how Offboard works` → `/#how-it-works` *(plan 045: the homepage's four-step strip; `/how-it-works` is deferred)*
 
 *Second sentence added by plan 041: it carries what the deleted sixth question card said, on the band where the search actually belongs.*
 
@@ -1547,7 +1555,7 @@ tools form, and the fact that the loop has a memory.
 
 - Kicker: `Job search`
 - H1: `A job search that works as one system.`
-- Body: `Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, from the role you just found to the note you write after the interview, so nothing has to be re-explained at the next step.`
+- Body: `Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, so nothing has to be re-explained at the next step.` *(plan 045 trimmed the middle clause; the next section's body made the same point)*
 - CTA: `Build my free transition plan` (primary)
 
 ### Why one system
@@ -1563,9 +1571,9 @@ points`, `One system, one record`) described the two sides; the composition
 shows them. Cell 3, `What that changes`, survives verbatim as the payoff
 line.*
 
-### The loop
+### The loop *(retired by plan 045's messaging pass: the eight rows walked the same process the four stages structure, so the page described its loop twice. Its one idea now titles the closing band. Kept for the record.)*
 
-- Kicker: `How it runs`
+- ~~Kicker: `How it runs`~~
 - H2: `Eight steps, and the last one feeds the first.`
 - Steps:
   1. `Find a role` — `Something lands in front of you, from a board, a referral, or a conversation you were already having.`
@@ -1590,8 +1598,8 @@ line.*
 ### The memory underneath
 
 - Kicker: `What makes it compound`
-- H2: `The loop only works because something remembers.`
-- Body: `Every stage reads from your Career Context and writes back to it. That is the difference between a set of tools that happen to sit in one account and a search that gets better the longer you run it.`
+- H2: `The last step feeds the first.` *(plan 045; was `The loop only works because something remembers.`)*
+- Body: `Every stage reads from your Career Context and writes back to it: what you learn in one interview is already there for the next application. That is the difference between tools that happen to sit in one account and a search that gets better the longer you run it.`
 - Section link: `Learn more about Career Context` → `/career-context`
 
 ### Final CTA (shared component, overridden copy)
