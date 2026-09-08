@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { FileText, ListChecks, MessageSquare, Search } from "lucide-react";
 import {
-  ContrastSection,
+  AlsoStrip,
   FinalCta,
   MarketingShell,
   PageHero,
@@ -20,9 +20,9 @@ import {
    Copy: COPY.md § 14. Existing patterns only, no new classes. Bands: deep,
    paper, mist, paper, sand, forest, footer. */
 
-/* Was a three-cell numbered grid. Cells 1 and 2 described the scattered
-   tools and the one system; the section now shows them (plan 042, R13).
-   Cell 3 was the consequence and survives verbatim as the payoff line. */
+/* Plan 042 built this as the "The difference" composition; plan 046 moved it
+   into the hero and the payoff line ("The tenth application takes less
+   effort than the first") into the hero body. */
 function OneSystemComposition() {
   return (
     <div className="mh-comp mh-onesystem-comp">
@@ -50,21 +50,21 @@ function OneSystemComposition() {
    last step feeds the first, now titles the closing band. COPY.md § 14
    keeps the rows. */
 const STAGES = [
-  { name: "Decide", decides: "Whether this one deserves your week.", tools: [
+  { icon: Search, name: "Decide", decides: "Whether this one deserves your week.", tools: [
     ["Role Match", "Understand how an opportunity matches your experience, strengths, and goals."],
     ["Ghost Job Checker", "Look for signals that a posting may not represent an actively hiring role."],
     ["Company Intel", "Know who you're applying to before you invest your time."],
   ] },
-  { name: "Apply", decides: "What you actually send.", tools: [
+  { icon: FileText, name: "Apply", decides: "What you actually send.", tools: [
     ["Application Packets", "Bring together the role, company, resume strategy, positioning, and application materials in one place."],
     ["Resume Tailoring", "Adapt your resume using the opportunity and your Career Context."],
     ["Cover Letters", "Create relevant application messaging without starting from a blank page."],
   ] },
-  { name: "Interview", decides: "Walking in prepared, not rehearsed.", tools: [
+  { icon: MessageSquare, name: "Interview", decides: "Walking in prepared, not rehearsed.", tools: [
     ["Interview Prep", "Turn company and role context into a focused preparation plan."],
     ["Voice Practice", "Practice answering questions in a realistic voice conversation."],
   ] },
-  { name: "Organize", decides: "Where all of it is kept.", tools: [
+  { icon: ListChecks, name: "Organize", decides: "Where all of it is kept.", tools: [
     ["Application Tracker", "Keep your entire pipeline current."],
     ["Career Context", "Connect the history behind every application, interaction, and outcome."],
   ] },
@@ -74,13 +74,20 @@ const STAGES = [
 function Stages() {
   return (
     <section className="mh-kit mh-section" aria-labelledby="stages-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">The toolkit</span>
-        <h2 id="stages-title">Four stages, and what each one decides.</h2>
+      <div className="mh-split">
+        <div className="mh-copy-block">
+          <span className="mh-kicker">The toolkit</span>
+          <h2 id="stages-title">Four stages, and what each one decides.</h2>
+          <p>The same ten tools the homepage names, described. Every one reads from your Career Context and writes back to it.</p>
+        </div>
+        {/* Plan 046: the first photograph on this page, at the human moment
+            the stages lead to. */}
+        <div className="mh-route-story-photo is-short"><Image src="/marketing/homepage/raw/strip-interview-prep.webp" alt="A woman practicing interview answers in front of a mirror, notes taped around it" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
       </div>
       <div className="mh-kit-grid" data-reveal="">
-        {STAGES.map(({ name, decides, tools }) => (
+        {STAGES.map(({ icon: IconComponent, name, decides, tools }) => (
           <div className="mh-kit-col" key={name}>
+            <IconComponent aria-hidden="true" />
             <h3>{name}</h3>
             <p className="mh-kit-decides">{decides}</p>
             {tools.map(([tool, body]) => (
@@ -96,19 +103,6 @@ function Stages() {
   );
 }
 
-function TheMemory() {
-  return (
-    <section className="mh-morethan mh-section" aria-labelledby="memory-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker is-sand">What makes it compound</span>
-        <h2 id="memory-title">The last step feeds the first.</h2>
-        <p>Every stage reads from your Career Context and writes back to it: what you learn in one interview is already there for the next application. That is the difference between tools that happen to sit in one account and a search that gets better the longer you run it.</p>
-        <Link className="mh-section-link" href="/career-context">Learn more about Career Context <ArrowRight aria-hidden="true" /></Link>
-      </div>
-    </section>
-  );
-}
-
 export function MarketingJobSearch() {
   return (
     <MarketingShell current="job-search">
@@ -116,21 +110,16 @@ export function MarketingJobSearch() {
         <PageHero
           kicker="Job search"
           title="A job search that works as one system."
-          body="Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, so nothing has to be re-explained at the next step."
+          body="Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, so nothing has to be re-explained at the next step. The tenth application takes less effort than the first."
           current="job-search"
-          aside={false}
+          visual={<OneSystemComposition />}
           cta="Get started free"
         />
-        <ContrastSection
-          kicker="The difference"
-          title="A bag of tools makes you the integration."
-          body="Separately, a resume tool, a tracker, and a chat window each solve one step. Together they leave you carrying context between them: pasting the same history, re-explaining the same goals, and rebuilding the same picture of a company you already researched last week."
-          payoff="The tenth application takes less effort than the first, because everything the first nine taught the system is still there."
-        >
-          <OneSystemComposition />
-        </ContrastSection>
         <Stages />
-        <TheMemory />
+        <AlsoStrip items={[
+          { title: "The last step feeds the first.", body: "Every stage reads from your Career Context and writes back to it: what you learn in one interview is already there for the next application.", href: "/career-context", cta: "See what your Career Context holds" },
+          { title: "Ask about the whole search, not one application.", body: "Lumo works from every stage at once, so it can tell you what needs attention today and what pattern it sees across your search.", href: "/lumo", cta: "See how Lumo works" },
+        ]} />
         <FinalCta
           title="Run the whole search in one place."
           body="Start with the role in front of you, and let everything you learn stay where the next application can use it."

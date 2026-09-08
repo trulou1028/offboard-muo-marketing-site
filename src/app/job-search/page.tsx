@@ -4,8 +4,7 @@ import { MarketingJobSearch } from "@/components/marketing/homepage/MarketingJob
 
 export const metadata: Metadata = {
   title: "Job Search | Offboard",
-  description:
-    "A job search that works as one system. Decide whether a role is worth pursuing, build the application, track it, prepare for the interview, and record what happened, with every pass making the next one better.",
+  description: "A job search that works as one system: decide, apply, interview, and organize with ten tools that all read from the same Career Context.",
 };
 
 export default function Page() {

@@ -4,8 +4,7 @@ import { MarketingIntegrations } from "@/components/marketing/homepage/Marketing
 
 export const metadata: Metadata = {
   title: "Offboard Everywhere | Use Offboard from the AI you already use",
-  description:
-    "Connect Offboard to the AI assistants you already work in. Save opportunities, update applications, and add to your Career Context from wherever the conversation happens. Offboard holds the record, you choose the interface.",
+  description: "Connect Offboard to ChatGPT, Claude, and the tools you already use. Save roles, update applications, and add to your Career Context from wherever you are working.",
 };
 
 export default function Page() {

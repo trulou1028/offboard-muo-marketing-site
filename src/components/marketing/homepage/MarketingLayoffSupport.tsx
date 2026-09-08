@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import {
+  AlsoStrip,
   FinalCta,
   MarketingShell,
   PageHero,
@@ -89,16 +89,15 @@ function FirstWeekComposition() {
   );
 }
 
+/* Plan 046: the composition moved into the hero, where the page now opens
+   on the path card and the runway sample; this band keeps the copy. */
 function FirstWeek() {
   return (
     <section className="mh-first-week mh-section" aria-labelledby="first-week-title">
-      <div className="mh-split">
-        <div className="mh-copy-block">
-          <span className="mh-kicker is-sand">The first week</span>
-          <h2 id="first-week-title">Before the search, protect yourself and your paperwork.</h2>
-          <p>The first days after a layoff decide more than people expect. Work logins disappear, notices arrive with short windows, and the documents you will need later are easiest to get now. Offboard starts from your state, your dates, and what actually happened, not from a template.</p>
-        </div>
-        <FirstWeekComposition />
+      <div className="mh-copy-block">
+        <span className="mh-kicker is-sand">The first week</span>
+        <h2 id="first-week-title">Before the search, protect yourself and your paperwork.</h2>
+        <p>The first days after a layoff decide more than people expect. Work logins disappear, notices arrive with short windows, and the documents you will need later are easiest to get now. Offboard starts from your state, your dates, and what actually happened, not from a template.</p>
       </div>
     </section>
   );
@@ -237,19 +236,7 @@ function StraightAnswers() {
   );
 }
 
-function ThenTheSearch() {
-  return (
-    <section className="mh-wherever mh-section" aria-labelledby="then-search-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">And then the job</span>
-        <h2 id="then-search-title">When the paperwork is handled, the search is still there.</h2>
-        <p>Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other. The tracker, the Application Packets, the interview prep, and the record behind them are all here when you are ready.</p>
-        <Link className="mh-section-link" href="/#how-it-works">See how Offboard works <ArrowRight aria-hidden="true" /></Link>
-      </div>
-    </section>
-  );
-}
-
+/* "And then the job" became an item in the shared AlsoStrip (plan 046). */
 export function MarketingLayoffSupport() {
   return (
     <MarketingShell current="layoff-support">
@@ -259,7 +246,7 @@ export function MarketingLayoffSupport() {
           title="Losing your job creates a lot of problems at once."
           body="The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in the order that matters to you."
           current="layoff-support"
-          aside={false}
+          visual={<FirstWeekComposition />}
           cta="Get started free"
         />
         <FirstWeek />
@@ -269,7 +256,10 @@ export function MarketingLayoffSupport() {
         <StillOwed />
         <VerifiedFactsStrip />
         <StraightAnswers />
-        <ThenTheSearch />
+        <AlsoStrip items={[
+          { title: "When the paperwork is handled, the search is still there.", body: "Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other.", href: "/job-search", cta: "See how the search runs" },
+          { title: "It all lands in one record.", body: "Your situation, your dates, your documents, and every decision you make here become part of your Career Context, so the search starts from what actually happened.", href: "/career-context", cta: "See what it holds" },
+        ]} />
         <FinalCta
           title="Start with what changed."
           body="Tell Offboard what happened and get a plan that covers the money, the benefits, and the search, in the order they actually matter."

@@ -4,8 +4,7 @@ import { MarketingCareerContext } from "@/components/marketing/homepage/Marketin
 
 export const metadata: Metadata = {
   title: "Career Context | Offboard",
-  description:
-    "Build your career context once and use it everywhere: a living record of your experience, applications, companies, interviews, and goals that improves every tool you use, in Offboard and in the AI assistants you already work with.",
+  description: "Build your Career Context once: one living record of your experience, applications, interviews, and goals that every Offboard tool and connected AI reads from.",
 };
 
 export default function Page() {

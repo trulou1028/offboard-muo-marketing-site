@@ -4,8 +4,7 @@ import { MarketingLayoffSupport } from "@/components/marketing/homepage/Marketin
 
 export const metadata: Metadata = {
   title: "Layoff & Benefits | Offboard",
-  description:
-    "A layoff is not only a job search. Offboard helps you work out what to do first, what support you may qualify for, how to keep health coverage, whether training is funded, and how long your money lasts.",
+  description: "A layoff is not only a job search. Offboard helps with what to do first, what support you may qualify for, health coverage, and how long your money lasts.",
 };
 
 export default function Page() {

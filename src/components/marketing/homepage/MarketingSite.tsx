@@ -279,12 +279,17 @@ export function PageHero({
   ctaHref = SIGN_UP_URL,
   footnote,
   eyebrowVisual,
+  visual,
 }: {
   kicker: string;
   title: string;
   body: string;
   current: MarketingRoute;
   aside?: ReactNode | false;
+  /* Plan 046: a product composition in the right column instead of the
+     paper aside card. Four product pages opened on 700px of empty green;
+     their plan-042 compositions moved up here from the section below. */
+  visual?: ReactNode;
   cta?: string | false;
   ctaHref?: string;
   /* A line under the body, above the CTA. Added for /privacy-security, where
@@ -302,7 +307,7 @@ export function PageHero({
   );
 
   return (
-    <section className={`mh-route-hero mh-section${aside === false ? " is-single" : ""}`}>
+    <section className={`mh-route-hero mh-section${aside === false && !visual ? " is-single" : ""}${visual ? " is-visual" : ""}`}>
       <div>
         {eyebrowVisual ? <span className="mh-hero-eyebrow-visual">{eyebrowVisual}</span> : null}
         <span className="mh-kicker is-lime">{kicker}</span>
@@ -311,7 +316,8 @@ export function PageHero({
         {footnote ? <small className="mh-route-hero-footnote">{footnote}</small> : null}
         {ctaNode}
       </div>
-      {aside !== false && (
+      {visual ? <div className="mh-route-hero-visual">{visual}</div> : null}
+      {!visual && aside !== false && (
         <aside aria-label={`${current} summary`}>
           {aside ?? (
             <>
@@ -946,32 +952,28 @@ export function SequenceSection({
    them in equal cells (R13). `payoff` is the line the retired third cell
    used to carry - the consequence - and it reads better as one statement
    under the pair than as a peer of the two things being contrasted. */
-export function ContrastSection({
-  kicker,
-  title,
-  body,
-  payoff,
-  children,
-}: {
-  kicker: string;
-  title: string;
-  body: string;
-  payoff: string;
-  children: ReactNode;
-}) {
-  const headingId = headingIdFor(title);
+/* ContrastSection (plan 042) retired by plan 046: every product page opened
+   with the same kicker / H2 / body / payoff / composition move, and the
+   compositions now sit in the heroes. The payoff lines moved into the hero
+   bodies; COPY.md §§ 10, 12, 14 record each. */
 
+/* Plan 046 part B. One shared "also part of the system" strip replaces the
+   four different sibling-promo bands the product pages carried. Two items,
+   ruled, above the final CTA. */
+export function AlsoStrip({ items }: { items: readonly { title: string; body: string; href: string; cta: string }[] }) {
   return (
-    <section className="mh-route-content mh-contrast mh-section" aria-labelledby={headingId}>
-      <div className="mh-split">
-        <div className="mh-copy-block">
-          <span className="mh-kicker">{kicker}</span>
-          <h2 id={headingId}>{title}</h2>
-          <p>{body}</p>
-          <strong className="mh-contrast-payoff">{payoff}</strong>
-        </div>
-        {children}
-      </div>
+    <section className="mh-also mh-section" aria-labelledby="also-title">
+      <span className="mh-kicker">Also part of the system</span>
+      <h2 id="also-title" className="mh-visually-hidden">Also part of the system</h2>
+      <ul className="mh-also-list" data-reveal="">
+        {items.map(({ title, body, href, cta }) => (
+          <li key={href}>
+            <h3>{title}</h3>
+            <p>{body}</p>
+            <Link className="mh-section-link" href={href}>{cta} <ArrowRight aria-hidden="true" /></Link>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

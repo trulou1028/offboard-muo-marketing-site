@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import {
-  ContrastSection,
+  AlsoStrip,
   FinalCta,
   LumoMark,
   MarketingShell,
   PageHero,
+  YouBubble,
 } from "./MarketingSite";
 
 /* Lumo pillar page (plan 029). Lumo already appears on the homepage,
@@ -35,9 +37,10 @@ const PROMPTS = [
   "Move Tesserac to the interview stage.",
 ] as const;
 
-/* Was a three-cell numbered grid. Cells 1 and 2 described the blank box and
-   the record; the section now shows them (plan 042, DESIGN.md R13). Cell 3
-   was the consequence, and it survives verbatim as the payoff line. */
+/* Plan 042 built this as the "The difference" composition; plan 046 moved it
+   into the hero, where the page opens on it, and the payoff line ("You
+   spend the conversation on the decision instead of on context") is the
+   hero body's last sentence. */
 function StartingPointComposition() {
   return (
     <div className="mh-comp mh-startingpoint-comp">
@@ -90,9 +93,11 @@ function WhatToAsk() {
           <p>Lumo answers from the record you have already built, so you can skip the setup and get to the decision.</p>
           <span className="mh-context-callout"><LumoMark />Powered by Offboard Career Context</span>
         </div>
-        <div className="mh-lumo-prompts" aria-label="Example questions to ask Lumo" data-reveal="">
+        {/* Plan 046: the prompts are things a person would type, so they
+            render as the site's chat bubble, two columns. */}
+        <div className="mh-lumo-prompts is-bubbles" aria-label="Example questions to ask Lumo" data-reveal="">
           <span>Ask things like</span>
-          {PROMPTS.map((prompt) => <p key={prompt}>{prompt}</p>)}
+          {PROMPTS.map((prompt) => <YouBubble key={prompt}>{prompt}</YouBubble>)}
         </div>
       </div>
     </section>
@@ -101,26 +106,14 @@ function WhatToAsk() {
 
 function Straight() {
   return (
-    <section className="mh-lumo-band mh-section" aria-labelledby="straight-title">
+    <section className="mh-lumo-band mh-section mh-split" aria-labelledby="straight-title">
+      <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/hero-kitchen-table.webp" alt="A man at his kitchen table with a laptop, coffee, and a notebook" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
       <div className="mh-copy-block">
         <span className="mh-kicker is-lime">Straight answers</span>
         <h2 id="straight-title">It works from verified facts, and it does not decide anything for you.</h2>
         <p>When Lumo talks about benefits, it reads from state facts a person verified. It does not invent a dollar figure or a deadline.</p>
         <p>Offboard is independent, not a government agency. Agencies and providers decide eligibility and benefit amounts. Lumo helps you do the work, and it does not replace your review and judgment on anything you send out.</p>
         <Link className="mh-section-link" href="/pricing">Free includes 10 Lumo messages a day. Pro removes the limit. <ArrowRight aria-hidden="true" /></Link>
-      </div>
-    </section>
-  );
-}
-
-function BringYourOwn() {
-  return (
-    <section className="mh-morethan mh-section" aria-labelledby="byo-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker is-sand">Or bring your own</span>
-        <h2 id="byo-title">Prefer ChatGPT or Claude? That works too.</h2>
-        <p>Lumo is the assistant that lives inside Offboard, but it is not the only way in. Connect the assistant you already use and it works from the same record.</p>
-        <Link className="mh-section-link" href="/integrations">See how Offboard Everywhere works <ArrowRight aria-hidden="true" /></Link>
       </div>
     </section>
   );
@@ -133,23 +126,18 @@ export function MarketingLumo() {
         <PageHero
           kicker="Meet Lumo"
           title="The AI that already understands your career."
-          body="Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window."
+          body="Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window. You spend the conversation on the decision instead of on context."
           current="lumo"
-          aside={false}
+          visual={<StartingPointComposition />}
           cta="Get started free"
         />
         <WhatItKnows />
         <WhatToAsk />
-        <ContrastSection
-          kicker="The difference"
-          title="Not a smarter chatbot. A better starting point."
-          body="The difference is not a smarter model. It is what the conversation starts from: your Career Context, kept current, instead of whatever you can paste into a message box."
-          payoff="You spend the conversation on the decision instead of on context, and the answer is about your search rather than job searching in general."
-        >
-          <StartingPointComposition />
-        </ContrastSection>
         <Straight />
-        <BringYourOwn />
+        <AlsoStrip items={[
+          { title: "Prefer ChatGPT or Claude? That works too.", body: "Lumo lives inside Offboard, but it is not the only way in. Connect the assistant you already use and it works from the same record.", href: "/integrations", cta: "See how Offboard Everywhere works" },
+          { title: "Everything Lumo knows starts here.", body: "Your Career Context is the record every answer is built from. Build it once and every conversation starts further ahead.", href: "/career-context", cta: "See what it holds" },
+        ]} />
         <FinalCta
           title="Ask something only your own record could answer."
           body="Build your Career Context, then ask Lumo what to do about it."
