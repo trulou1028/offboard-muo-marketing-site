@@ -1174,7 +1174,7 @@ where the record comes from, not a second taxonomy of it. The eight
 - H2: `One record. Every output.`
 - Capabilities:
   1. `Tailored resumes` — `Resume versions built from your real history, tuned to the role in front of you.`
-  2. `Application packets` — `The role, the company, your positioning, and your materials in one place.`
+  2. `Application Packets` — `The role, the company, your positioning, and your materials in one place.` *(glossary casing, plan 045)*
   3. `Interview preparation` — `Prep plans and practice grounded in your actual experience and the actual role.`
   4. `Better decisions` — `Compare opportunities against your experience, preferences, and how your search is going.`
 
@@ -1185,9 +1185,9 @@ where the record comes from, not a second taxonomy of it. The eight
 - Body: `Because Lumo works from your Career Context, you never re-upload a resume, re-explain your goals, or reconstruct what happened with an application. You ask, and the answer starts from everything you have already built.`
 - CTA: `Ask Lumo` (AI button)
 
-### Works with the AI you already use
+### Works with the AI you already use *(retired from this page by plan 045's messaging pass, 2026-09-07: it restated `/integrations`, and it sat directly under a Lumo band that already hands the reader on. Kept for the record.)*
 
-- Kicker: `Offboard, wherever you work`
+- ~~Kicker: `Offboard, wherever you work`~~
 - H2: `Your context goes with you.` *(round 5: this H2 shipped on two pages; it stays on `/integrations`, where it titles the grid)*
 - Body: `Connect Offboard to supported AI assistants and your Career Context goes with you. Save an opportunity from a conversation, update an application, or add what you just learned, from whichever tool you are already in.`
 - Demo conversation: You: `Save the interview questions I just worked through, and what I answered.` / AI: `Done. I have added them to your interview stories.` *(varied 2026-08-31 so it does not duplicate the /integrations demo, which owns the project-outcomes line)*
@@ -1246,7 +1246,7 @@ belongs here.
 
 - Kicker: `What connects`
 - H2: `Offboard holds the record. You choose the interface.`
-- Body: `Connect the tools you already work in. Offboard keeps one record of your search, and a connection reads and updates it with your permission.`
+- ~~Body: `Connect the tools you already work in. Offboard keeps one record of your search, and a connection reads and updates it with your permission.`~~ *(cut by plan 045: the H2 says it, and Permissions below owns "with your permission")*
 - Group heading: `Connected today`
   1. **Google Calendar** · `Live` — `Interviews and deadlines land on the calendar you already keep.`
   2. **Google Drive** · `Live` — `Save resumes and cover letters straight to your Drive.`
@@ -1281,9 +1281,9 @@ carried moved to the grid above.
 - **Claude** — You: `Add the project outcomes we just discussed to my Career Context.` / AI: `Done. I've added the migration project and its results to your experience.`
 - **Lumo** — You: `Which applications need attention today?` / AI: `Three need follow-up. Tesserac has an interview on Thursday, and two applications have been open for more than two weeks without a reply.`
 
-### What you can do from a conversation
+### What you can do from a conversation *(retired by plan 045's messaging pass: the four capabilities restated the three demos directly above. Kept for the record.)*
 
-- Capabilities:
+- ~~Capabilities:~~
   1. `Save an opportunity` — `Turn a role you are already discussing into a tracked opportunity, without filling out a form.`
   2. `Move it forward` — `Change a stage, add a recruiter, record what happened in an interview, or leave yourself a note.`
   3. `Add to your Career Context` — `Capture a project, an outcome, or a story while it is fresh, straight from the conversation.`
@@ -1331,11 +1331,14 @@ a resume into a general assistant. Not in header nav yet.
 - Body: `Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window.`
 - CTA: `Ask Lumo` (primary)
 
-### What Lumo knows
+### What Lumo knows *(rebuilt by plan 045, plan 040 finding 10: the eight cards re-listed `/career-context`'s eight kinds of record)*
 
 - Kicker: `What it knows`
 - H2: `It starts from your record, not a blank page.`
-- Cards:
+- Body: `Everything in your Career Context is already there: your experience, applications, companies, interviews, and goals. Lumo also carries three things no other assistant has.`
+- Section link: `See what your Career Context holds` → `/career-context`
+- Three blocks (Pattern H): `Your plan` — *Your Path* — `What needs attention now, what can wait, and what comes next.` · `Benefits context` — *The practical side* — `Where you are with deadlines, coverage, and runway, so the answer fits the week you are actually in.` · `Previous conversations` — *Memory* — `What you already worked out together, so you are not repeating it.`
+- ~~Cards (the eight, retired):~~
   1. `Your Career Context` — `Experience, projects, outcomes, and the stories you reach for in interviews.`
   2. `Your applications` — `What you applied to, what stage it is at, and what happened.`
   3. `Companies` — `What you researched and learned about the teams you are talking to.`
@@ -1363,7 +1366,7 @@ a resume into a general assistant. Not in header nav yet.
 
 - Kicker: `The difference`
 - H2: `Not a smarter chatbot. A better starting point.`
-- Body: `Lumo is not claiming to out-think a general assistant. The difference is what it is working from: the structured, continuously updated state of your career, rather than whatever you can paste into a message box.`
+- Body: `The difference is not a smarter model. It is what the conversation starts from: your Career Context, kept current, instead of whatever you can paste into a message box.` *(plan 045; was `Lumo is not claiming to out-think a general assistant. The difference is what it is working from: the structured, continuously updated state of your career, rather than whatever you can paste into a message box.`, the "cooler register" plan 040 flagged)*
 - Payoff line *(plan 042)*: `You spend the conversation on the decision instead of on context, and the answer is about your search rather than job searching in general.`
 - Composition *(plan 042, R2/R13)*: the Career Context record card as the base, because it is what Lumo starts from, with a blank composer breaking its left edge: `Any other assistant` / `Tell me about yourself...`
 
@@ -1552,7 +1555,7 @@ tools form, and the fact that the loop has a memory.
 
 - Kicker: `Job search`
 - H1: `A job search that works as one system.`
-- Body: `Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, from the role you just found to the note you write after the interview, so nothing has to be re-explained at the next step.`
+- Body: `Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, so nothing has to be re-explained at the next step.` *(plan 045 trimmed the middle clause; the next section's body made the same point)*
 - CTA: `Build my free transition plan` (primary)
 
 ### Why one system
@@ -1568,9 +1571,9 @@ points`, `One system, one record`) described the two sides; the composition
 shows them. Cell 3, `What that changes`, survives verbatim as the payoff
 line.*
 
-### The loop
+### The loop *(retired by plan 045's messaging pass: the eight rows walked the same process the four stages structure, so the page described its loop twice. Its one idea now titles the closing band. Kept for the record.)*
 
-- Kicker: `How it runs`
+- ~~Kicker: `How it runs`~~
 - H2: `Eight steps, and the last one feeds the first.`
 - Steps:
   1. `Find a role` — `Something lands in front of you, from a board, a referral, or a conversation you were already having.`
@@ -1595,8 +1598,8 @@ line.*
 ### The memory underneath
 
 - Kicker: `What makes it compound`
-- H2: `The loop only works because something remembers.`
-- Body: `Every stage reads from your Career Context and writes back to it. That is the difference between a set of tools that happen to sit in one account and a search that gets better the longer you run it.`
+- H2: `The last step feeds the first.` *(plan 045; was `The loop only works because something remembers.`)*
+- Body: `Every stage reads from your Career Context and writes back to it: what you learn in one interview is already there for the next application. That is the difference between tools that happen to sit in one account and a search that gets better the longer you run it.`
 - Section link: `Learn more about Career Context` → `/career-context`
 
 ### Final CTA (shared component, overridden copy)

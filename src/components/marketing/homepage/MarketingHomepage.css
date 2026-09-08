@@ -1319,6 +1319,10 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 .mh-lumo-prompts { display: flex; flex-direction: column; gap: 12px; }
 .mh-lumo-prompts > span { color: var(--mh-on-dark-muted); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
 .mh-lumo-prompts p { padding: 16px 20px; border: 1px solid var(--mh-hairline-on-dark); border-radius: var(--mh-radius-md); font-size: 16px; line-height: 1.4; }
+/* /lumo renders the prompt list on the light mist band, where the on-dark
+   label was invisible and the hairline vanished (plan 045 polish). */
+.mh-wherever .mh-lumo-prompts > span { color: var(--mh-muted); }
+.mh-wherever .mh-lumo-prompts p { background: var(--mh-white); border-color: var(--mh-line); }
 
 /* Toolkit */
 .mh-kit { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); }

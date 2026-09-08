@@ -4,7 +4,6 @@ import {
   ContrastSection,
   FinalCta,
   MarketingShell,
-  NumberedRows,
   PageHero,
 } from "./MarketingSite";
 
@@ -45,17 +44,11 @@ function OneSystemComposition() {
   );
 }
 
-const LOOP = [
-  ["Find a role", "Something lands in front of you, from a board, a referral, or a conversation you were already having."],
-  ["Decide if it is worth it", "Check the fit against your experience and goals, and look for signals that the posting may not be an actively hiring role."],
-  ["Research the company", "What you learn is saved to the company, not to a chat window you will close."],
-  ["Build the application", "Resume, cover letter, and positioning built from your record and the specific role."],
-  ["Track it", "Stage, dates, contacts, and next steps, without a separate spreadsheet."],
-  ["Prepare for the interview", "A prep plan from the company and role context you already gathered, and practice out loud."],
-  ["Record what happened", "Questions asked, what you answered, and what to do next."],
-  ["Your Career Context improves", "Which is why the next role starts further ahead than this one did."],
-] as const;
-
+/* The eight-step "loop" list left in plan 045's messaging pass: it walked
+   the same process the four stages below already structure, in different
+   words, so the page described its own loop twice. Its one idea, that the
+   last step feeds the first, now titles the closing band. COPY.md § 14
+   keeps the rows. */
 const STAGES = [
   { name: "Decide", decides: "Whether this one deserves your week.", tools: [
     ["Role Fit", "Understand how an opportunity matches your experience, strengths, and goals."],
@@ -77,19 +70,6 @@ const STAGES = [
   ] },
 ] as const;
 
-function Loop() {
-  return (
-    <section className="mh-wherever mh-section" aria-labelledby="loop-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">How it runs</span>
-        <h2 id="loop-title">Eight steps, and the last one feeds the first.</h2>
-      </div>
-      <div data-reveal="">
-        <NumberedRows rows={LOOP} />
-      </div>
-    </section>
-  );
-}
 
 function Stages() {
   return (
@@ -121,8 +101,8 @@ function TheMemory() {
     <section className="mh-morethan mh-section" aria-labelledby="memory-title">
       <div className="mh-copy-block">
         <span className="mh-kicker is-sand">What makes it compound</span>
-        <h2 id="memory-title">The loop only works because something remembers.</h2>
-        <p>Every stage reads from your Career Context and writes back to it. That is the difference between a set of tools that happen to sit in one account and a search that gets better the longer you run it.</p>
+        <h2 id="memory-title">The last step feeds the first.</h2>
+        <p>Every stage reads from your Career Context and writes back to it: what you learn in one interview is already there for the next application. That is the difference between tools that happen to sit in one account and a search that gets better the longer you run it.</p>
         <Link className="mh-section-link" href="/career-context">Learn more about Career Context <ArrowRight aria-hidden="true" /></Link>
       </div>
     </section>
@@ -136,7 +116,7 @@ export function MarketingJobSearch() {
         <PageHero
           kicker="Job search"
           title="A job search that works as one system."
-          body="Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, from the role you just found to the note you write after the interview, so nothing has to be re-explained at the next step."
+          body="Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, so nothing has to be re-explained at the next step."
           current="job-search"
           aside={false}
           cta="Get started free"
@@ -149,7 +129,6 @@ export function MarketingJobSearch() {
         >
           <OneSystemComposition />
         </ContrastSection>
-        <Loop />
         <Stages />
         <TheMemory />
         <FinalCta

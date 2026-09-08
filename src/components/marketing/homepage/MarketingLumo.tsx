@@ -1,14 +1,5 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  Briefcase,
-  Building2,
-  Compass,
-  ListChecks,
-  MessageSquare,
-  Sparkles,
-  Wallet,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import {
   ContrastSection,
   FinalCta,
@@ -24,15 +15,13 @@ import {
    patterns only; no new classes. Band order: deep > paper > mist > paper >
    forest > sand > forest > footer, no two adjacent alike. */
 
-const KNOWS = [
-  { icon: Briefcase, title: "Your Career Context", body: "Experience, projects, outcomes, and the stories you reach for in interviews." },
-  { icon: ListChecks, title: "Your applications", body: "What you applied to, what stage it is at, and what happened." },
-  { icon: Building2, title: "Companies", body: "What you researched and learned about the teams you are talking to." },
-  { icon: MessageSquare, title: "Interviews", body: "Questions asked, answers given, and what to prepare next." },
-  { icon: Compass, title: "Your goals", body: "The work you want, and what you said you were optimizing for." },
-  { icon: Sparkles, title: "Your plan", body: "What needs attention now, what can wait, and what comes next." },
-  { icon: Wallet, title: "Benefits context", body: "Where you are in the practical side of a transition." },
-  { icon: MessageSquare, title: "Previous conversations", body: "What you already worked out together, so you are not repeating it." },
+/* Plan 045 messaging pass (plan 040 finding 10): the eight-card grid here
+   re-listed /career-context's eight kinds of record. The page now says that
+   once, links, and spends its cards on the three things only Lumo carries. */
+const ONLY_LUMO = [
+  ["Your plan", "Your Path", "What needs attention now, what can wait, and what comes next."],
+  ["Benefits context", "The practical side", "Where you are with deadlines, coverage, and runway, so the answer fits the week you are actually in."],
+  ["Previous conversations", "Memory", "What you already worked out together, so you are not repeating it."],
 ] as const;
 
 const PROMPTS = [
@@ -75,12 +64,14 @@ function WhatItKnows() {
       <div className="mh-copy-block">
         <span className="mh-kicker">What it knows</span>
         <h2 id="knows-title">It starts from your record, not a blank page.</h2>
+        <p>Everything in your Career Context is already there: your experience, applications, companies, interviews, and goals. Lumo also carries three things no other assistant has.</p>
+        <Link className="mh-section-link" href="/career-context">See what your Career Context holds <ArrowRight aria-hidden="true" /></Link>
       </div>
-      <div className="mh-ctx-grid" data-reveal="">
-        {KNOWS.map(({ icon: IconComponent, title, body }) => (
-          <article className="mh-ctx-card" key={title}>
-            <IconComponent aria-hidden="true" />
+      <div className="mh-qgrid" data-reveal="">
+        {ONLY_LUMO.map(([title, feature, body]) => (
+          <article className="mh-qblock" key={title}>
             <h3>{title}</h3>
+            <span className="mh-qblock-feature">{feature}</span>
             <p>{body}</p>
           </article>
         ))}
@@ -152,7 +143,7 @@ export function MarketingLumo() {
         <ContrastSection
           kicker="The difference"
           title="Not a smarter chatbot. A better starting point."
-          body="Lumo is not claiming to out-think a general assistant. The difference is what it is working from: the structured, continuously updated state of your career, rather than whatever you can paste into a message box."
+          body="The difference is not a smarter model. It is what the conversation starts from: your Career Context, kept current, instead of whatever you can paste into a message box."
           payoff="You spend the conversation on the decision instead of on context, and the answer is about your search rather than job searching in general."
         >
           <StartingPointComposition />
