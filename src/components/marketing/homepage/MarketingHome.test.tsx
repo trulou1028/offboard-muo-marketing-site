@@ -244,7 +244,7 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { level: 3, name: "Application Packet" })).toBeInTheDocument();
     // The same ten tools the homepage names, so the page may say the number.
     expect(screen.getByText(/ten tools that read from the same context/i)).toBeInTheDocument();
-    for (const tool of ["Role Fit", "Ghost Job Checker", "Company Intelligence", "Application Packets", "Resume Tailoring", "Cover Letters", "Interview Prep", "Voice Practice", "Application Tracker", "Career Context"]) {
+    for (const tool of ["Role Match", "Ghost Job Checker", "Company Intel", "Application Packets", "Resume Tailoring", "Cover Letters", "Interview Prep", "Voice Practice", "Application Tracker", "Career Context"]) {
       expect(screen.getAllByText(tool).length, tool).toBeGreaterThan(0);
     }
     expect(screen.getByRole("heading", { name: /checked by people, never generated/i })).toBeInTheDocument();
