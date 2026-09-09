@@ -43,6 +43,10 @@ next-env.d.ts
 # playwright
 /test-results/
 /playwright-report/
+# Accessibility-tree dumps written by the Playwright CLI. Scratch output of a
+# tool run, never part of a change; one was swept into a PR by `git add -A`
+# on 2026-09-08 before this line existed.
+/.playwright-cli/
 
 # vercel
 .vercel
