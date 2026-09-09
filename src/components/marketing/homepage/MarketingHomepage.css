@@ -1006,6 +1006,12 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-shot { overflow: hidden; margin: 0; background: rgb(11 11 11); border: 1px solid var(--mh-hairline-on-dark); border-radius: var(--mh-radius-card); box-shadow: var(--mh-shadow-overlay); }
 .mh-shot img { display: block; width: 100%; height: auto; }
 .mh-shot.is-tall { width: min(380px, 100%); margin-left: auto; }
+/* Plan 049: the Civic Modern compositions carry their own ground and their
+   own rounded corners, so they take no frame, border or shadow. Only the app
+   screenshots, which are raw captures, need one. */
+.mh-shot.is-plain { background: none; border: 0; border-radius: 0; box-shadow: none; }
+.mh-benefits .mh-shot { width: min(760px, 100%); margin: 48px auto 0; }
+.mh-route-privacy .mh-split { align-items: center; }
 /* A composition in the hero's right column instead of the paper aside. */
 .mh-route-hero-visual { position: relative; align-self: center; color: var(--mh-ink); }
 /* The compositions were drawn for light bands; the hero's paper text colour
