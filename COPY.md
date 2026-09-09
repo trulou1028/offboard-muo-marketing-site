@@ -282,9 +282,23 @@ Home left the bar (the wordmark is the home link; owner call 2026-09-01,
 reversing plan 024's Home link). `/act` is deliberately out of nav, in both
 the desktop panels and the mobile menu.
 
-Each panel is columns of links, each with a small icon and a one-line blurb,
-plus one featured card on the right with a render. Panels are light
+Each panel leads with its featured card and its render, then the columns of
+links, each with a small icon and a one-line blurb (owner 2026-09-08; the
+featured card sat on the right until then, and it now leads in the DOM as
+well as visually, so reading order matches the screen). Panels are light
 (white, featured card on paper-soft).
+
+**The bar itself** (owner 2026-09-08): at the top of the homepage the header
+is fully transparent, with no blur and no bottom rule, so the hero photograph
+runs behind it unbroken. The forest fill and its shadow return as soon as the
+page scrolls, because the bands below the hero are light. Other routes keep
+the fill from the start. **`Get started free` in the bar is outlined**, not
+filled: transparent, a one-pixel paper border, paper label. It competed with
+the hero's own filled primary action directly beneath it.
+
+**Every CTA on the site is a pill** (owner 2026-09-08): primary, secondary,
+the Lumo button, the header button, and the intake form's submit all take the
+full radius.
 
 **Trimmed to the launch set by plan 043, then revised by plan 045 (both owner,
 2026-09-07).** The nav is **Product ▾ · For Employers · Pricing · Resources ▾**.
@@ -446,7 +460,9 @@ it did not):
 - Body: `Your benefits, your job search, and your career context in one system, connected to the AI you already use.` *(round 5: was five nouns, and "applications" sits inside "job search")*
 - CTAs: `Get started free` (primary) · `See how it works` → `#how-it-works`, the four-step strip on this page *(plan 045: `/how-it-works` is deferred, so the button scrolls instead of leaving)*
 - Trust line: `Join thousands of people building their next chapter with Offboard.` *(owner-confirmed accurate 2026-08-31)*
-- Hero visual (owner composition 2026-09-07, refined in Figma): **a full-bleed photograph with one flat chat image over it.** The photograph fills the band. **Five ship** in `public/marketing/homepage/hero/`, catalogued in `docs/marketing-image-library.md` (owner 2026-09-08): `living-room.webp` (a man on a sofa at night), `bedroom.webp` (a woman on her bed at dusk), `coffee-shop.webp`, `coworking.webp`, `public-library.webp`. All five share one crop, and all five hold the headline (measured 2026-09-08: 7.7:1 at worst, against a 3:1 floor). `HERO_PHOTO` in `MarketingHome.tsx` picks the one that ships; the living room is live. Photo `alt` for each is the library's own suggested text; the code carries all five verbatim.
+- Hero visual (owner composition 2026-09-07, refined in Figma): **a full-bleed photograph with one flat chat image over it.** The photograph fills the band. **Five ship** in `public/marketing/homepage/hero/`, catalogued in `docs/marketing-image-library.md` (owner 2026-09-08): `living-room.webp` (a man on a sofa at night), `bedroom.webp` (a woman on her bed at dusk), `coffee-shop.webp`, `coworking.webp`, `public-library.webp`. All five share one crop. **Above 900px the hero has no overlay** (owner 2026-09-08): the photograph's own wall is the green behind the copy, so a gradient over it only muddied it. Measured on the shipping photograph with the wash gone: 10.7:1 at 1440 and 8.7:1 at 2560, against a 3:1 floor. Swapping the photograph means re-measuring. On a phone the copy stacks over the picture, so a top-down wash stays, clearing by the time the subject is in frame. `HERO_PHOTO` in `MarketingHome.tsx` picks the one that ships; **the bedroom is live** (owner 2026-09-08; the living room shipped from 2026-09-07). Photo `alt` for each is the library's own suggested text; the code carries all five verbatim.
+
+  The photo `alt` shipping today: `A woman sits cross-legged on her bed with a laptop at dusk, a lamp lit on the nightstand beside her.`
 
   The exchange over the photo's lower right is `public/marketing/homepage/hero/lumo-chat.png`, one transparent image at 2x. It is not markup and it is not built from these strings; a change to it is a new export, not a code edit. Member bubble: `@offboard What should I focus on today?` (the handle in lime). Lumo's card, with Lumo's face beside it: a context chip `Used profile, applications, interviews, integrations`, then `Got it! Two things deserve your attention today.`, then two rows: `Prepare for your Figma interview` / `Senior Product Design at Figma` and `Update application status` / `Product Engineer at Stripe`. The 2026-09-03 Paper export (`hero-composition.avif`, the kitchen-table photo with the save-an-application exchange) is retired.
 
@@ -512,7 +528,7 @@ connections.
 - H2: `Losing your job creates more than one problem.` *(kept: the eyebrow carries the plain label, so the headline may stay evocative, per R5a)*
 - Section link *(new in round 5, the section had no route out)*: `See what to do first` → `/layoff-support` *(off the page under plan 043, back under plan 045)*
 - Body: `Finding another role matters. But so do unemployment benefits, health coverage, finances, career decisions, applications, networking, interviews, and figuring out what to do first. Offboard brings those pieces together.`
-- Six questions as a disclosure list (round 4), the first open so it still reads beside the plan card that answers it:
+- ~~Six questions as a disclosure list (round 4), the first open so it still reads beside the plan card that answers it~~ — **retired from this band 2026-09-08 (owner)**: the two-column split above already carries the step, and six closed rows beneath it made the section long without adding an idea. The questions and answers are kept below for the record, and the disclosure pattern still ships on the five route FAQs.
   1. `What do I do first?` — **Your personalized plan** — `Tell Offboard what's happening, and we'll help organize what needs your attention now, what can wait, and what comes next.`
   2. `What support might I qualify for?` — **Benefits and workforce programs** — `Navigate unemployment insurance, training programs, workforce resources, and other forms of support that may be available where you live.`
   3. `Is this job worth my time?` — **Opportunity intelligence** — `Check role fit, investigate possible ghost jobs, research companies, and understand whether an opportunity deserves your energy.`

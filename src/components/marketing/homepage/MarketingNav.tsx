@@ -246,6 +246,9 @@ function NavGroup({
         <ChevronDown aria-hidden="true" />
       </button>
       <div className="mh-nav-panel" id={panelId} hidden={!open} data-columns={entry.columns.length}>
+        {/* The featured card leads the panel (owner 2026-09-08), in the DOM
+            as well as visually, so reading order matches what is on screen. */}
+        <Feature feature={entry.feature} current={current} onFollow={follow} />
         {entry.columns.map((column) => (
           <div className="mh-nav-column" key={column.heading}>
             <span className="mh-nav-heading">{column.heading}</span>
@@ -254,7 +257,6 @@ function NavGroup({
             ))}
           </div>
         ))}
-        <Feature feature={entry.feature} current={current} onFollow={follow} />
       </div>
     </div>
   );

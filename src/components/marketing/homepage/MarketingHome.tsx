@@ -8,7 +8,7 @@ import {
   Search,
 } from "lucide-react";
 import type { ReactNode } from "react";
-import { AiReply, CommunityStrip, DisclosureList, LumoMark, MarketingShell, SIGN_UP_URL, StartingPlanPreview, YouBubble } from "./MarketingSite";
+import { AiReply, CommunityStrip, LumoMark, MarketingShell, SIGN_UP_URL, StartingPlanPreview, YouBubble } from "./MarketingSite";
 import { IntegrationLogo } from "./IntegrationLogos";
 
 /* Homepage v3 (plan 039): the same Civic Modern bands, re-sequenced into one
@@ -55,12 +55,12 @@ function SecondaryCta({ children, href }: { children: ReactNode; href: string })
    HERO_PHOTO picks the one that ships. Every alt below is the library's own
    suggested text.
 
-   All five are drop-in: the hero's left-to-right wash was tuned on the two
-   night scenes, and the three daylight ones still hold the headline. Measured
-   at 1440 against the paper headline colour, worst-case background behind the
-   H1: living room 13.8:1, public library 12.3:1, bedroom 11.1:1, coffee shop
-   10.6:1, coworking 7.7:1. The floor for 44px+ text is 3:1, so the tightest
-   has better than double the margin. Re-measure if the wash changes. */
+   Above 900px there is no wash any more (owner 2026-09-08): each photograph's
+   own wall is the green behind the copy. Measured on the bedroom scene with
+   the wash gone, worst-case background behind the H1: 10.7:1 at 1440, 9.9:1
+   at 1920, 8.7:1 at 2560, 9.6:1 at a tall 1200x1000, 9.1:1 at 901. The floor
+   for 44px+ text is 3:1. Swapping HERO_PHOTO now means re-measuring, because
+   nothing sits between the copy and the picture. */
 /* ---------------------------------------------------------------- */
 const HERO_PHOTOS = {
   livingRoom: {
@@ -85,7 +85,7 @@ const HERO_PHOTOS = {
   },
 } as const;
 
-const HERO_PHOTO = HERO_PHOTOS.livingRoom;
+const HERO_PHOTO = HERO_PHOTOS.bedroom;
 
 function HomeHero() {
   return (
@@ -342,19 +342,10 @@ function StepSearch() {
 /* Six member questions as a disclosure list (Pattern H), and the     */
 /* section now links out to the pillar page that answers them.        */
 /* ---------------------------------------------------------------- */
-/* Six questions, one open. "What do I do first?" used to sit inside the
-   section's intro as its own titled block, which is what R5a now forbids; as
-   item one, open by default, it still reads beside the plan card that answers
-   it, which is the pairing COPY.md records. The other five were five open
-   answers in a row - a reader wants one of them, so they open one. */
-const LIFE_QUESTIONS = [
-  { question: "What do I do first?", feature: "Your personalized plan", answer: "Tell Offboard what's happening, and we'll help organize what needs your attention now, what can wait, and what comes next." },
-  { question: "What support might I qualify for?", feature: "Benefits and workforce programs", answer: "Navigate unemployment insurance, training programs, workforce resources, and other forms of support that may be available where you live." },
-  { question: "Is this job worth my time?", feature: "Opportunity intelligence", answer: "Check role fit, investigate possible ghost jobs, research companies, and understand whether an opportunity deserves your energy." },
-  { question: "How do I submit a stronger application?", feature: "Application support", answer: "Turn your Career Context and the opportunity into stronger resumes, application packets, cover letters, and positioning." },
-  { question: "How do I prepare when I hear back?", feature: "Interview preparation", answer: "Research the company, anticipate questions, prepare stories from your experience, and practice interviews with AI." },
-  { question: "How do I keep everything straight?", feature: "Tracker + Career Context", answer: "Keep every opportunity, contact, document, conversation, and next step connected." },
-] as const;
+/* The six-question disclosure list left this band on 2026-09-08 (owner):
+   the two-column split above it already carries the step, and six closed
+   rows under it made the section long without adding an idea. COPY.md § 1
+   keeps every question and answer. */
 
 /* Composition D. The plan card is the base; one completed step lifts out of
    the stack and breaks its left edge, which is what the card's own "Show 2
@@ -386,7 +377,6 @@ function StepSteady() {
         </div>
         <PathComposition />
       </div>
-      <DisclosureList items={LIFE_QUESTIONS} openFirst />
       <small className="mh-morethan-note">Offboard is independent, not a government agency, and claiming your benefits is always free.</small>
     </section>
   );
