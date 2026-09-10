@@ -71,16 +71,21 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("link", { name: /join the slack/i })).toHaveAttribute("href", "https://offboard.co/community");
     expect(screen.getByRole("heading", { name: /you don't need another place to start over/i })).toBeInTheDocument();
 
-    // The three steps are the page's spine, and each one links to the section
-    // that expands it. A broken anchor here silently strands the reader.
+    // The four steps are the page's spine, in the app's order (plan 050:
+    // the same four stage cards Home shows after onboarding), and each one
+    // links to the section that expands it. A broken anchor here silently
+    // strands the reader; a reorder here contradicts the app on day one.
+    const stepTitles = Array.from(document.querySelectorAll(".mh-steps h3")).map((h) => h.textContent);
+    expect(stepTitles).toEqual(["Build your Career Context.", "Talk with Lumo.", "Run your search.", "Follow your layoff plan."]);
     for (const [label, href] of [
       ["Build your context", "#build"],
       ["See the connection", "#connect"],
       ["See the toolkit", "#run"],
+      ["See the plan", "#plan"],
     ] as const) {
       expect(screen.getByRole("link", { name: new RegExp(label, "i") })).toHaveAttribute("href", href);
     }
-    for (const id of ["build", "connect", "run"]) {
+    for (const id of ["build", "connect", "run", "plan"]) {
       expect(document.getElementById(id), `#${id} is a real section`).not.toBeNull();
     }
 
@@ -219,10 +224,10 @@ describe("Offboard marketing routes", () => {
   it("gives how it works the homepage's four steps, in order, with the toolkit and Lumo", () => {
     render(<MarketingHowItWorks />);
 
-    // Plan 044: the long form of the homepage's four steps, same kickers.
+    // Plan 044, reordered by plan 050: the long form of the homepage's four steps, same kickers.
     expect(screen.getByRole("heading", { level: 1, name: "One system that starts where you are." })).toBeInTheDocument();
     expect(screen.getByText("Your Career Context is the spine. The tools are the muscle.")).toBeInTheDocument();
-    const kickers = ["Step 1 · Steady the first week", "Step 2 · Build your Career Context", "Step 3 · Connect it to the AI you use", "Step 4 · Run your search"];
+    const kickers = ["Step 1 · Build your Career Context", "Step 2 · Talk with Lumo", "Step 3 · Run your search", "Step 4 · Follow your layoff plan"];
     const found = kickers.map((kicker) => screen.getByText(kicker));
     for (let i = 1; i < found.length; i += 1) {
       expect(found[i - 1].compareDocumentPosition(found[i]) & Node.DOCUMENT_POSITION_FOLLOWING, `${kickers[i]} comes after ${kickers[i - 1]}`).toBeTruthy();

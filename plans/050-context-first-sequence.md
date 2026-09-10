@@ -4,7 +4,7 @@
 
 ## Status
 
-- **Status:** PLAN WRITTEN 2026-09-10. Owner review of the copy decisions below, then execute.
+- **Status:** BUILT 2026-09-10. Decision 1: headline kept. Decision 2: meta left. Owner 2026-09-10 also renamed Your Path to Layoff Plan in the app ("clarity outweighs the downsides of someone who technically wasn't laid off"); the site follows in the same PR.
 - **Priority:** P1. Owner direction 2026-09-10.
 - **Effort:** M. One homepage reorder, one deferred-page reorder, the copy law, three test files, visual baselines.
 - **Risk:** MED. Changes the first thing the homepage says after the hero. No route, redirect, or pricing change.

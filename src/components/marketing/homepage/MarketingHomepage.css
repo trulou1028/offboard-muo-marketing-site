@@ -1590,8 +1590,9 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
    as one undifferentiated block (the same complaint the footer had). Found by
    auditing every route's section backgrounds; each fix steps the second band
    rather than adding a divider, so the page still reads as bands. */
-/* .mh-verified-visual: on /how-it-works it followed the forest Lumo band, so
-   its own background is declared deep at the rule above. */
+/* .mh-verified-visual: its background is declared deep at the rule above.
+   On /how-it-works it followed the forest Lumo band until plan 050; it now
+   follows the white step-4 band, where deep still steps cleanly. */
 .mh-page-how-it-works .mh-human { background: var(--mh-paper-soft); }
 .mh-page-pricing .mh-route-content { background: var(--mh-white); }
 .mh-page-integrations .mh-lumo-band { background: var(--mh-deep); }

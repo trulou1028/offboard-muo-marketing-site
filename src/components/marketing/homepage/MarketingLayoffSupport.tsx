@@ -56,7 +56,7 @@ const BENEFIT_ROWS = [
 ] as const;
 
 /* Plan 048: the hero shows the real Runway page; the plan-041 path card
-   composition is retired (the Your Path card still ships on the homepage). */
+   composition is retired (the Layoff Plan card still ships on the homepage). */
 /* Plan 046: the composition moved into the hero, where the page now opens
    on the path card and the runway sample; this band keeps the copy. */
 function FirstWeek() {

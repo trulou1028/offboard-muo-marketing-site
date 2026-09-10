@@ -372,7 +372,7 @@ const PLAN_PREVIEW_STEPS = [
 export function StartingPlanPreview() {
   return (
     <div className="mh-ui-card mh-plan-preview" aria-label="Example Offboard path">
-      <div className="mh-ui-card-heading"><h3>Your Path</h3></div>
+      <div className="mh-ui-card-heading"><h3>Layoff Plan</h3></div>
       <p className="mh-plan-lede">The steps that fit your situation. Do them in any order.</p>
       <div className="mh-plan-stage"><strong>Protect the first week</strong><span>3 left</span></div>
       <ul className="mh-plan-steps">
@@ -386,7 +386,7 @@ export function StartingPlanPreview() {
 }
 
 /* Plan 044: /how-it-works is the long form of the homepage's four steps.
-   This is step 2. The onboarding composition is unchanged (its strings are
+   This is step 1 (plan 050; was step 2). The onboarding composition is unchanged (its strings are
    product state, verified in lumo-plan-builder origin/main 2026-09-07); what
    changed is what the page says it shows - where the Career Context starts,
    not "step 1 of the product". The chips came from the retired "Your context,
@@ -398,7 +398,7 @@ export function HowStepContext() {
   return (
     <section className="mh-how-context mh-section mh-split" id="build" aria-labelledby="how-context-title">
       <div className="mh-copy-block">
-        <span className="mh-kicker">Step 2 · Build your Career Context</span>
+        <span className="mh-kicker">Step 1 · Build your Career Context</span>
         <h2 id="how-context-title">A few questions. A record that&apos;s actually yours.</h2>
         <p>Your situation, your state, your dates start it. Your resume, your LinkedIn, and the stories you tell in interviews fill it in. Offboard keeps one living record of your experience, applications, companies, conversations, documents, interviews, goals, and progress, so you never explain yourself from scratch again. Private by default, and you can change any of it.</p>
         <div className="mh-context-chips" data-reveal="">
@@ -448,7 +448,7 @@ export function VerifiedFactsStrip() {
   );
 }
 
-/* Step 1 of four (plan 044). The first-week rows are the substance of the
+/* Step 4 of four (plan 050; step 1 under plan 044). The first-week rows are the substance of the
    retired five-step list's steps 2 and 3, under the homepage's own step
    name. While /layoff-support is deferred (plan 043) this is the launch
    set's only first-week page, so it carries the depth (owner 2026-09-07).
@@ -466,7 +466,7 @@ export function HowStepFirstWeek() {
     <section className="mh-how-first-week mh-section" id="steady" aria-labelledby="first-week-title">
       <div className="mh-intro-split">
         <div>
-          <span className="mh-kicker">Step 1 · Steady the first week</span>
+          <span className="mh-kicker">Step 4 · Follow your layoff plan</span>
           <h2 id="first-week-title">See your money clearly, then claim what exists.</h2>
         </div>
         <div>
@@ -491,7 +491,7 @@ export function HowStepFirstWeek() {
 
 const TOOLKIT_FLAGSHIP_CHIPS = ["Ghost check", "Fit read", "Tailored materials", "Warm intro"] as const;
 
-/* Step 4 of four (plan 044). The stage strip is the homepage's, name for
+/* Step 3 of four (plan 050; step 4 under plan 044). The stage strip is the homepage's, name for
    name and chip for chip (every chip is a string the product produces; see
    MarketingHome.tsx). Before this the page listed a different set with no
    stages and could not claim a number; now both pages list the same ten.
@@ -518,7 +518,7 @@ export function ToolkitSection() {
     <section className="mh-toolkit mh-section" id="toolkit" aria-labelledby="toolkit-title">
       <div className="mh-intro-split">
         <div>
-          <span className="mh-kicker">Step 4 · Run your search</span>
+          <span className="mh-kicker">Step 3 · Run your search</span>
           <h2 id="toolkit-title">The tools didn&apos;t go anywhere. Now they show up at the right moment.</h2>
         </div>
         <div>
@@ -576,7 +576,7 @@ export function LumoSection() {
   return (
     <section className="mh-lumo mh-section mh-split" id="connect" aria-labelledby="lumo-title">
       <div className="mh-copy-block">
-        <span className="mh-kicker is-lime">Step 3 · Connect it to the AI you use</span>
+        <span className="mh-kicker is-lime">Step 2 · Talk with Lumo</span>
         <h2 id="lumo-title">An AI guide that knows your actual situation.</h2>
         <p>Lumo works from your Career Context, your benefit facts, your runway, and your search, not a blank chat window. It paces with you: triage in week one, interview drills in month three. Like a caseworker who answers in seconds, remembers everything, and never has a line.</p>
         <div className="mh-lumo-trust">
@@ -630,7 +630,7 @@ export function PricingSection() {
           <p className="mh-price-value"><b>$0</b><small>forever</small></p>
           <p>Everything you need to run the search, and one complete Application Packet with every step free.</p>
           <ul>
-            <li><Check aria-hidden="true" />Your Path, tracker, benefit facts, and documents</li>
+            <li><Check aria-hidden="true" />Layoff Plan, tracker, benefit facts, and documents</li>
             <li><Check aria-hidden="true" />One complete Application Packet, every step free</li>
             <li><Check aria-hidden="true" />The assessment on every packet after that: is it real, who is the company, how you fit</li>
             <li><Check aria-hidden="true" />3 basic ghost checks a month</li>

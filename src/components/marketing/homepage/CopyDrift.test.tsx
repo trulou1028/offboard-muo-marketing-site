@@ -332,7 +332,7 @@ describe("/privacy-security holds the claims-register discipline", () => {
 // verified-facts ledger row to back it. Both directions are asserted.
 describe("homepage plan-preview card stays real product state", () => {
   const PLAN_PREVIEW_STRINGS = [
-    "Your Path",
+    "Layoff Plan",
     "The steps that fit your situation. Do them in any order.",
     "Protect the first week",
     "Write down your key dates",
