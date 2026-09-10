@@ -1134,7 +1134,7 @@ Product column.
 - Body: `One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use.` *(round 5: the hero, the next H2, and that section's body all made the same resume argument before the page said anything new; the hero now states the promise and section two carries the argument)*
 - CTA: `Create my Career Context` (primary)
 
-*Plan 048 (owner 2026-09-07): the hero's right column is a real screenshot of the app's Career Context page (`public/marketing/app/career-context.webp`, captured from the owner's session, cropped to the main column: the 71/100 context score and the three About-you cards). The plan-042 paper aside below is retired.*
+*Plan 049 (owner 2026-09-08): the hero's right column is the Civic Modern composition `career-context-sources-civic-modern-v2-transparent.webp`. It reads: `Your Career Context` · `Always evolving. Available whenever you use Offboard.` · a completeness bar at `71/100` · rows `Experience` / `Applications` / `Interviews` / `Goals` · sources `Resume`, `LinkedIn`, `Chat history` · state `Context updated`. Pixels; this is the record. It replaces plan 048's app screenshot, and the plan-042 paper aside stays retired.*
 
 *Hero aside added by plan 042. The page is about an object and the hero
 never showed it: it shipped `aside={false}`. The aside is the standard
@@ -1366,7 +1366,7 @@ a resume into a general assistant. Not in header nav yet.
 - Kicker: `Meet Lumo`
 - H1: `The AI that already understands your career.`
 - Body: `Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window. You spend the conversation on the decision instead of on context.` *(plan 046: the last sentence is the retired "difference" section's payoff line)*
-- Hero visual *(plan 048; was plan 046's record-card-plus-blank-composer composition, now retired)*: a real screenshot of the app's Ask LUMO panel (`public/marketing/app/ask-lumo-panel.webp`): `Ask LUMO anything` · `It already knows your situation, so you can skip the background and just ask.` · `What it knows` · four prompts `What should I do first?` / `What benefits am I missing?` / `Review my resume and tell me what to fix` / `Which of my applications needs a follow-up?` The words inside are the app's own, not this document's.
+- Hero visual *(plan 049; was plan 048's app screenshot of the Ask LUMO panel, now unused)*: the Civic Modern composition `lumo-interview-context-civic-modern-v1-transparent.webp`. It reads: chip `Used role, resume, interview notes` · question `How should I prepare for this interview?` · answer `Start with the role.` (highlighted) `I pulled the requirements, your strongest examples, and the company context.` · state `Interview brief · Ready`. Pixels, so no test can read them; this is the record.
 - CTA: `Get started free` (primary)
 
 ### What Lumo knows *(rebuilt by plan 045, plan 040 finding 10: the eight cards re-listed `/career-context`'s eight kinds of record)*
@@ -1496,7 +1496,7 @@ app now agree.*
 
 ### Hero visual *(plan 048)*
 
-- A real screenshot of the app's Runway page (`public/marketing/app/runway.webp`): the rough-estimate field, the monthly expenses and savings inputs, and the planning guidance beside them. Plan 046's path-card-plus-runway-chip composition is retired; the `Your Path` card still ships on the homepage. The `1 months` sample estimate inside the image is the app's own placeholder state, not a claim.
+- The Civic Modern composition `first-week-plan-civic-modern-v1-transparent.webp` *(plan 049; was plan 048's Runway screenshot)*. It reads: `Your first-week plan` · `Review separation agreement` / `File unemployment claim` / `Check health coverage` / `Save key deadlines` · `2 deadlines saved` · `Paperwork reviewed` · `You decide what happens next.` **No dollar figure and no day count**, which is this page's standing rule. Pixels; this is the record.
 
 ### The first week *(plan 041; plan 046 moved its composition into the hero, so the band is copy only)*
 
@@ -1605,7 +1605,7 @@ tools form, and the fact that the loop has a memory.
 - Kicker: `Job search`
 - H1: `A job search that works as one system.`
 - Body: `Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, so nothing has to be re-explained at the next step. The tenth application takes less effort than the first.` *(plan 045 trimmed the middle clause; plan 046 added the retired "difference" section's payoff line)*
-- Hero visual *(plan 048; was plan 046's Application Packet card plus "every other tool" stack, now retired)*: a real screenshot of the app's Application Packet builder with the six-step picker open (`public/marketing/app/packet-builder.webp`). The step names inside are the app's (`Ghost Check`, `Company Intel`, `Role Match Analysis`, `Tailor Resume`, `Cover Letter`, `Path to a Person`).
+- Hero visual *(plan 049; was plan 048's app screenshot of the packet builder, now unused)*: the Civic Modern composition `application-packet-civic-modern-v1-transparent.webp`. It reads: `Your Application Packet` · `Company intel` / `Role match` / `Tailored resume`, each ticked · chip `Strong fit` · state `Ready for review`. Pixels; this is the record.
 - CTA: `Build my free transition plan` (primary)
 
 ### Why one system *(retired by plan 046: its composition is the hero visual and its payoff line is the hero body's last sentence. Kept for the record.)*

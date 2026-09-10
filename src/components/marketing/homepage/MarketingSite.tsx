@@ -963,9 +963,9 @@ export function SequenceSection({
    owner's session at 1512x810 on 2026-09-07. They are 1x, so they read a
    little soft on a Retina screen; a 2x capture replaces the file, not the
    markup. */
-export function Shot({ src, alt, width, height, tall = false, sizes = "(max-width: 900px) 100vw, 44vw" }: { src: string; alt: string; width: number; height: number; tall?: boolean; sizes?: string }) {
+export function Shot({ src, alt, width, height, tall = false, plain = false, sizes = "(max-width: 900px) 100vw, 44vw" }: { src: string; alt: string; width: number; height: number; tall?: boolean; plain?: boolean; sizes?: string }) {
   return (
-    <figure className={`mh-shot${tall ? " is-tall" : ""}`}>
+    <figure className={`mh-shot${tall ? " is-tall" : ""}${plain ? " is-plain" : ""}`}>
       <Image src={src} alt={alt} width={width} height={height} sizes={sizes} />
     </figure>
   );

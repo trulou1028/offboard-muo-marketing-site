@@ -5,6 +5,7 @@ import {
   FinalCta,
   MarketingShell,
   PageHero,
+  Shot,
   TrackerCard,
   YouBubble,
 } from "./MarketingSite";
@@ -142,14 +143,19 @@ function Demos() {
 function Permissions() {
   return (
     <section className="mh-route-privacy mh-section" aria-labelledby="permissions-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker">Permissions</span>
-        <h2 id="permissions-title">You decide what a connected assistant can reach.</h2>
-        <p>Connecting an assistant does not hand over your whole account. You authorize what it can read and what it can change, and the connection is yours to end.</p>
+      <div className="mh-split">
+        <div className="mh-copy-block">
+          <span className="mh-kicker">Permissions</span>
+          <h2 id="permissions-title">You decide what a connected assistant can reach.</h2>
+          <p>Connecting an assistant does not hand over your whole account. You authorize what it can read and what it can change, and the connection is yours to end.</p>
+          <ul className="mh-plain-list ruled" data-reveal="">
+            {PERMISSIONS.map((line) => <li key={line}>{line}</li>)}
+          </ul>
+        </div>
+        {/* Plan 049: the band was four rules of text on a page about a thing
+            you grant and can take back. The picture shows the grant. */}
+        <Shot plain src="/marketing/site-imagery/product-compositions/connected-tools-permissions-civic-modern-v1-transparent.webp" alt="A connected tools card: calendar limited to deadlines only, Drive to selected files, and an AI assistant able to ask with context, marked permission granted and revocable at any time" width={1536} height={1024} />
       </div>
-      <ul className="mh-plain-list ruled" data-reveal="">
-        {PERMISSIONS.map((line) => <li key={line}>{line}</li>)}
-      </ul>
     </section>
   );
 }

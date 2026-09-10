@@ -59,7 +59,7 @@ const OWNERSHIP = [
 function ProblemSection() {
   return (
     <section className="mh-route-story mh-section mh-split" aria-labelledby="problem-title">
-      <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/system-desk.webp" alt="A man at a desk by a window, writing in a notebook beside an open laptop" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
+      <div className="mh-route-story-photo"><Image src="/marketing/site-imagery/documentary/career-context-reflection-civic-modern-v1.webp" alt="A woman at her dining table with a laptop, an open notebook and printed pages, thinking through what to write down" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
       <div className="mh-copy-block">
         <span className="mh-kicker">The problem</span>
         <h2 id="problem-title">A resume is a fraction of your career.</h2>
@@ -142,7 +142,7 @@ export function MarketingCareerContext() {
           title="Build your Career Context once. Use it everywhere."
           body="One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use."
           current="career-context"
-          visual={<Shot src="/marketing/app/career-context.webp" alt="The Career Context page in Offboard: a context score of 71 out of 100, and three cards for resume, job search target, and layoff and urgency" width={1256} height={746} />}
+          visual={<Shot plain src="/marketing/site-imagery/product-compositions/career-context-sources-civic-modern-v2-transparent.webp" alt="A Career Context card: a completeness score of 71 out of 100, rows for experience, applications, interviews and goals, and the sources it is built from, a resume, LinkedIn and chat history" width={1536} height={1024} />}
           cta="Get started free"
         />
         <ProblemSection />

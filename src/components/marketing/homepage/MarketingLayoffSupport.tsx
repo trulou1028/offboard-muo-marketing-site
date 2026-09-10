@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import {
   AlsoStrip,
@@ -60,12 +61,15 @@ const BENEFIT_ROWS = [
    on the path card and the runway sample; this band keeps the copy. */
 function FirstWeek() {
   return (
-    <section className="mh-first-week mh-section" aria-labelledby="first-week-title">
+    <section className="mh-first-week mh-section mh-split" aria-labelledby="first-week-title">
       <div className="mh-copy-block">
         <span className="mh-kicker is-sand">The first week</span>
         <h2 id="first-week-title">Before the search, protect yourself and your paperwork.</h2>
         <p>The first days after a layoff decide more than people expect. Work logins disappear, notices arrive with short windows, and the documents you will need later are easiest to get now. Offboard starts from your state, your dates, and what actually happened, not from a template.</p>
       </div>
+      {/* Plan 049: plan 046 moved this band's composition into the hero and
+          left it copy only. The photograph is the moment it describes. */}
+      <div className="mh-route-story-photo"><Image src="/marketing/site-imagery/documentary/first-week-paperwork-civic-modern-v1.webp" alt="A woman at her kitchen table reading a printed notice, pen in hand, laptop and papers spread in front of her" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
     </section>
   );
 }
@@ -129,6 +133,9 @@ function Benefits() {
           </li>
         ))}
       </ol>
+      {/* Plan 049. Every value inside is a state word or a label, never a
+          dollar figure or a day count: this page's standing rule. */}
+      <Shot plain src="/marketing/homepage/graphics-civic-modern/benefits-summary-civic-modern-v1-transparent.webp" alt="A benefits summary card: California training benefits shown as a possible match, a prompt to file the claim first, a time-sensitive marker, and a note that the agency decides eligibility, sourced to California EDD" width={1536} height={1024} />
     </section>
   );
 }
@@ -213,7 +220,7 @@ export function MarketingLayoffSupport() {
           title="Losing your job creates a lot of problems at once."
           body="The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in the order that matters to you."
           current="layoff-support"
-          visual={<Shot src="/marketing/app/runway.webp" alt="The Runway page in Offboard: a rough estimate of how many months you can cover, fields for monthly expenses and savings, and planning guidance beside it" width={1256} height={746} />}
+          visual={<Shot plain src="/marketing/site-imagery/product-compositions/first-week-plan-civic-modern-v1-transparent.webp" alt="A first-week plan card: review the separation agreement, file the unemployment claim, check health coverage and save key deadlines, with two deadlines saved and the paperwork marked reviewed" width={1536} height={1024} />}
           cta="Get started free"
         />
         <FirstWeek />

@@ -61,7 +61,7 @@ function Stages() {
         </div>
         {/* Plan 046: the first photograph on this page, at the human moment
             the stages lead to. */}
-        <div className="mh-route-story-photo is-short"><Image src="/marketing/homepage/raw/strip-interview-prep.webp" alt="A woman practicing interview answers in front of a mirror, notes taped around it" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
+        <div className="mh-route-story-photo is-short"><Image src="/marketing/site-imagery/documentary/interview-prep-at-home-civic-modern-v1.webp" alt="A man at his kitchen table talking through an answer aloud, laptop open and notes in front of him" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
       </div>
       <div className="mh-kit-grid" data-reveal="">
         {STAGES.map(({ icon: IconComponent, name, decides, tools }) => (
@@ -91,7 +91,7 @@ export function MarketingJobSearch() {
           title="A job search that works as one system."
           body="Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, so nothing has to be re-explained at the next step. The tenth application takes less effort than the first."
           current="job-search"
-          visual={<Shot src="/marketing/app/packet-builder.webp" alt="The Application Packet builder in Offboard: a field for a job posting link, and the six steps a packet runs: ghost check, company intel, role match analysis, tailor resume, cover letter, path to a person" width={672} height={690} />}
+          visual={<Shot plain src="/marketing/homepage/graphics-civic-modern/application-packet-civic-modern-v1-transparent.webp" alt="An Application Packet card: company intel, role match and tailored resume all ticked, a strong-fit reading, and the packet marked ready for review" width={1536} height={1024} />}
           cta="Get started free"
         />
         <Stages />
