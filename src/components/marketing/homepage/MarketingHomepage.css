@@ -964,11 +964,9 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
    child and can never show through behind the band above. */
 .mh-hero2 { position: relative; z-index: 0; display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; min-height: clamp(720px, 100svh, 960px); padding-top: 128px; padding-bottom: 128px; overflow: hidden; background: var(--mh-deep); color: var(--mh-paper); }
 .mh-hero2-photo { z-index: -2; object-fit: cover; object-position: right center; }
-/* No wash above 900px (owner 2026-09-08): the photograph's own wall is the
-   green behind the copy, and a gradient over it only muddied it. The rule
-   still exists for the phone, where the layout stacks the copy over the
-   subject and the picture cannot carry the contrast on its own. Measured
-   without it before removing; the numbers are beside HERO_PHOTOS. */
+/* The photograph's own wall carries the copy above 1180px. Narrow desktop
+   crops and the stacked layout add breakpoint-specific washes below. Current
+   measurements are beside HERO_PHOTOS. */
 .mh-hero2::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
 .mh-hero2-copy { position: relative; max-width: min(700px, 54%); }
 /* Two lines, "The Modern" over "Unemployment Office" (owner 2026-09-07):
@@ -978,7 +976,7 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-hero2-copy h1 span { display: block; }
 .mh-hero2-copy > p { max-width: 33em; margin-top: 28px; color: var(--mh-on-dark-muted); font-size: 20px; line-height: 1.45; }
 .mh-hero2-actions { display: flex; align-items: center; gap: 12px; margin-top: 40px; }
-.mh-hero2-trust { display: block; margin-top: 36px; color: rgb(246 244 238 / 62%); font-size: 14px; line-height: 1.5; }
+.mh-hero2-trust { display: block; margin-top: 36px; color: rgb(246 244 238 / 80%); font-size: 14px; line-height: 1.5; }
 /* The exchange ships as one transparent image at 2x (1000x750 for a 500px
    box), `unoptimized` so Next never re-encodes it. Rendered from the owner's
    Figma composition; a new export from Figma replaces the file, not this
@@ -1621,6 +1619,15 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-mobile-menu { display: block; }
   .mh-header-actions { grid-column: 2; justify-self: end; }
   .mh-onboarding-screen { padding-inline: 38px; }
+  /* Keep the portrait and gallery clear of the copy as the full-bleed image
+     crops inward between the desktop and stacked hero layouts. */
+  .mh-hero2-photo { object-position: 84% center; }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  /* A restrained left wash protects the body copy when the narrower crop
+     brings the bed into the text column. It clears before the portrait. */
+  .mh-hero2::before { background: linear-gradient(to right, rgb(15 38 23 / 78%) 0%, rgb(15 38 23 / 72%) 50%, rgb(15 38 23 / 22%) 68%, rgb(15 38 23 / 0%) 80%); }
 }
 
 @media (max-width: 900px) {
@@ -1637,7 +1644,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
      washed; it clears by the time the subject is in frame (owner 2026-09-08:
      the person should read below the text, not behind it). */
   .mh-hero2::before { background: linear-gradient(to bottom, rgb(15 38 23 / 92%) 0%, rgb(15 38 23 / 86%) 42%, rgb(15 38 23 / 30%) 68%, rgb(15 38 23 / 12%) 100%); }
-  .mh-hero2-photo { object-position: 84% center; }
   .mh-hero2-copy { max-width: 620px; }
   .mh-hero2-visual { position: static; width: min(100%, 460px); margin: 40px 0 0 auto; }
   /* The two-column visual rule is later in the file than the 900px stack,

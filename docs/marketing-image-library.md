@@ -12,7 +12,7 @@ right-weighted composition fits the page.
 | File | Setting and representation | Suggested alt text |
 | --- | --- | --- |
 | `living-room.webp` | Black man in his 40s, living room at night | A man works on his laptop on a sofa at night, lit by a floor lamp beside a window. |
-| `bedroom.webp` | Latina woman in her late 20s, bedroom at dusk | A woman sits cross-legged on her bed with a laptop at dusk, a lamp lit on the nightstand beside her. |
+| `bedroom.webp` | Latina woman in her late 20s, bedroom at dusk | A woman sits cross-legged on her bed with a laptop at dusk, with modern artwork above the bed. |
 | `coffee-shop.webp` | East Asian woman in her late 50s, industrial coffee shop | A woman works on her laptop at a wooden table in a brick-and-concrete coffee shop. |
 | `coworking.webp` | South Asian woman in her 40s, coworking space | A woman works on her laptop at a communal table in a daylight-filled coworking space. |
 | `public-library.webp` | White man in his late 50s, public library | A man works on his laptop with notes and reading glasses at a public library table. |
