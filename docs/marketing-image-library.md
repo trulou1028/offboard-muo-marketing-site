@@ -21,6 +21,8 @@ right-weighted composition fits the page.
 
 - For full-width hero use, start with `object-fit: cover` and
   `object-position: right center`.
+- The homepage adds `civic-grid-overlay.png` as a separate decorative layer,
+  so the photograph remains reusable without the pattern.
 - Keep the left side available for copy. The current homepage supplies its own
   dark readability treatment in CSS.
 - Do not bake copy, logos, interface cards, gradients, or color overlays into

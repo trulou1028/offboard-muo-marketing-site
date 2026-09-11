@@ -960,14 +960,16 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
    flat image, see COPY.md § Hero - is pinned over the photo's lower right.
 
    Stacking: the section makes its own context (position + z-index: 0) so
-   the photo (z -2) and the wash over it (z -1) stay under every in-flow
-   child and can never show through behind the band above. */
+   the photo (z -2), wash, and quiet civic grid (z -1) stay under every
+   in-flow child and can never show through behind the band above. */
 .mh-hero2 { position: relative; z-index: 0; display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; min-height: clamp(720px, 100svh, 960px); padding-top: 128px; padding-bottom: 128px; overflow: hidden; background: var(--mh-deep); color: var(--mh-paper); }
 .mh-hero2-photo { z-index: -2; object-fit: cover; object-position: right center; }
 /* The photograph's own wall carries the copy above 1180px. Narrow desktop
    crops and the stacked layout add breakpoint-specific washes below. Current
    measurements are beside HERO_PHOTOS. */
-.mh-hero2::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.mh-hero2::before,
+.mh-hero2::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.mh-hero2::after { background-image: url("/marketing/homepage/hero/civic-grid-overlay.png"); background-position: center top; background-size: 96px 96px; }
 .mh-hero2-copy { position: relative; max-width: min(700px, 54%); }
 /* Two lines, "The Modern" over "Unemployment Office" (owner 2026-09-07):
    each half is a block, so the break never depends on measuring the serif.
@@ -976,7 +978,7 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
 .mh-hero2-copy h1 span { display: block; }
 .mh-hero2-copy > p { max-width: 33em; margin-top: 28px; color: var(--mh-on-dark-muted); font-size: 20px; line-height: 1.45; }
 .mh-hero2-actions { display: flex; align-items: center; gap: 12px; margin-top: 40px; }
-.mh-hero2-trust { display: block; margin-top: 36px; color: rgb(246 244 238 / 80%); font-size: 14px; line-height: 1.5; }
+.mh-hero2-trust { display: block; margin-top: 36px; color: rgb(246 244 238 / 90%); font-size: 14px; line-height: 1.5; }
 /* The exchange ships as one transparent image at 2x (1000x750 for a 500px
    box), `unoptimized` so Next never re-encodes it. Rendered from the owner's
    Figma composition; a new export from Figma replaces the file, not this
