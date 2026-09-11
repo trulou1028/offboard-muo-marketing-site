@@ -969,7 +969,7 @@ a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1
    measurements are beside HERO_PHOTOS. */
 .mh-hero2::before,
 .mh-hero2::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-.mh-hero2::after { background-image: url("/marketing/homepage/hero/civic-grid-overlay.png"); background-position: center top; background-size: 96px 96px; }
+.mh-hero2::after { background-image: url("/marketing/homepage/hero/civic-grid-overlay.png"); background-position: center top; background-size: 48px 48px; }
 .mh-hero2-copy { position: relative; max-width: min(700px, 54%); }
 /* Two lines, "The Modern" over "Unemployment Office" (owner 2026-09-07):
    each half is a block, so the break never depends on measuring the serif.
