@@ -596,12 +596,20 @@ Commons `ChatGPT_logo.svg` (the app icon) · Claude `claude.svg` from Commons
 icon · Offboard `offboard-symbol.png` from the Civic Modern export. All fetched
 2026-09-02.
 
-### Final CTA
+### Final CTA *(the shared band since 2026-09-11)*
 
+- Kicker: `You do not need the whole plan today` *(the shared band's kicker; the homepage had none)*
 - H2: `You don't need another place to start over.`
 - Body: `Build one Career Context. Keep your job search organized. Get help with what comes next. Use Offboard directly or bring it into the AI tools you already use.`
-- CTA: `Get started free` (the Lumo-filled button, per the design system's final-CTA rule)
-- Small print: `No credit card required.`
+- CTAs: `Get started free` (primary) · `Talk to a person` *(the shared band's second link; new on the homepage)*
+- Small print: `No credit card required.` *(this page's own; the shared default is `Independent support. Start free.`)*
+
+**One closing band, every page (owner 2026-09-11).** The homepage shipped its
+own `FinalCtaV2` with a different shape from the `FinalCta` every route page
+uses, and `FinalCta` carried a three-dot progress mark under its small print
+that nothing on the site used or explained. Both are retired. The words
+change per page through props (kicker, H2, body, small print); the shape does
+not.
 
 The v1 homepage sections this version retired: The real problem, Identity
 contrast, The three jobs, The hook band ($12k), One connected plan (its
@@ -2135,6 +2143,7 @@ When one ships, move it into its page section above.
 | 2026-09-01 | `/public-partners` folds into `/workforce` and redirects when `/workforce` ships (no thin page kept) | plan 026 decision 1, docs/site-architecture.md |
 | 2026-08-24 | Clarified the "outplacement" scope: allowed on /employers AND in Sponsored-tier copy wherever it renders (home teaser, /pricing deck), per the 2026-08-21 owner call. The earlier "one page only" wording in Language rules was inaccurate and is corrected. | COPY.md, plan 019 |
 | 2026-09-10 | Context first (plan 050). The homepage and `/how-it-works` tell the app's four Home stages in the app's order: Build your Career Context, Talk with Lumo, Run your search, Follow your layoff plan. "Steady the first week" leaves as a step and becomes step four's content and what Lumo raises first. `Your Path` becomes `Layoff Plan` everywhere the site names the product surface (owner rename 2026-09-10) | plan 050, this file § 1 and § How It Works |
+| 2026-09-11 | One closing band on every page: the homepage's `FinalCtaV2` and the route pages' three-dot progress mark are retired; `FinalCta` takes kicker, H2, body and small print as props. Homepage gains the kicker and `Talk to a person` | this file § 1 |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·

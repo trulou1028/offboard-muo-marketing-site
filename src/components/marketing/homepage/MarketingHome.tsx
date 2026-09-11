@@ -8,7 +8,7 @@ import {
   Search,
 } from "lucide-react";
 import type { ReactNode } from "react";
-import { AiReply, CommunityStrip, LumoMark, MarketingShell, SIGN_UP_URL, StartingPlanPreview, YouBubble } from "./MarketingSite";
+import { AiReply, CommunityStrip, FinalCta, LumoMark, MarketingShell, SIGN_UP_URL, StartingPlanPreview, YouBubble } from "./MarketingSite";
 import { IntegrationLogo } from "./IntegrationLogos";
 
 /* Homepage v3 (plan 039): the same Civic Modern bands, re-sequenced into one
@@ -447,17 +447,6 @@ function PlansSection() {
   );
 }
 
-function FinalCtaV2() {
-  return (
-    <section className="mh-final2 mh-section" aria-labelledby="final2-title">
-      <h2 id="final2-title">You don&apos;t need another place to start over.</h2>
-      <p>Build one Career Context. Keep your job search organized. Get help with what comes next. Use Offboard directly or bring it into the AI tools you already use.</p>
-      <a className="mh-lumo-cta" href={SIGN_UP_URL}><span>Get started free</span><ArrowRight aria-hidden="true" /></a>
-      <small>No credit card required.</small>
-    </section>
-  );
-}
-
 export default function MarketingHome() {
   return (
     <MarketingShell current="home">
@@ -470,7 +459,13 @@ export default function MarketingHome() {
         <StepPlan />
         <PlansSection />
         <CommunityStrip />
-        <FinalCtaV2 />
+        {/* The site's one closing band (owner 2026-09-11); the homepage's own
+            FinalCtaV2 is retired. Words are this page's, the shape is shared. */}
+        <FinalCta
+          title="You don't need another place to start over."
+          body="Build one Career Context. Keep your job search organized. Get help with what comes next. Use Offboard directly or bring it into the AI tools you already use."
+          note="No credit card required."
+        />
       </main>
     </MarketingShell>
   );
