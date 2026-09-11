@@ -1343,16 +1343,34 @@ p.mh-kit-decides { margin-top: 12px; color: var(--mh-muted); font-size: 15px; li
    to a 2x2, which also fills (R1). Never three tracks - four items would
    orphan two cells, and e2e/composition.spec.ts only measures 1440.
    `ol.` prefix is load-bearing for margin-top; see the reset note up top. */
-ol.mh-stage-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(24px, 2.6vw, 36px); margin-top: 56px; }
-.mh-stage-strip > li { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; gap: 10px 12px; align-content: start; padding-top: 20px; border-top: 1px solid var(--mh-ink); }
-.mh-stage-strip > li > svg { width: 20px; height: 20px; color: var(--mh-forest); stroke-width: 1.5; }
-.mh-stage-strip h3 { font-size: 22px; font-weight: 500; line-height: 1.2; }
-.mh-stage-strip > li > .mh-state-chip { align-self: center; }
-.mh-stage-strip > li > p { grid-column: 2 / -1; color: var(--mh-muted); font-size: 15px; line-height: 1.5; }
+/* Four ruled rows, not four columns (owner 2026-09-11). Equal columns read
+   as four unrelated buckets rather than the order a search happens in, and
+   3/3/2/2 tools left Interview and Organize ending 80px short of the other
+   two - the ragged-cell complaint R1 names. Full-width rows carry the
+   sequence in the numbering, and an uneven tool count just makes one row's
+   tool cell wider. Same ruled-row pattern as .mh-how-first-week-rows.
+   The <ol> supplies the numbers through a counter, so the markup stays
+   the four fields the stage data already has. */
+ol.mh-stage-strip { margin-top: 48px; counter-reset: mh-stage; border-top: 1px solid var(--mh-ink); }
+.mh-stage-strip > li { display: grid; grid-template-columns: 56px minmax(190px, 1fr) minmax(0, 1.4fr) 140px; gap: 14px 28px; align-items: center; padding: 26px 0; border-bottom: 1px solid var(--mh-line); counter-increment: mh-stage; }
+/* Every row is its own grid container, so a column only lines up across the
+   four rows when its width cannot depend on that row's own content. Hence
+   fixed and fractional tracks rather than max-content or auto: the chip
+   track is 140px (the widest chip, "Saved to tracker", needs 124px), which
+   holds the four stage names, the four pill groups and the four chips each
+   on one line. Rows with two tools leave a gap before their chip; that is
+   what an aligned table does, and it beats four columns ending ragged. */
+.mh-stage-strip > li > .mh-state-chip { justify-self: end; }
+.mh-stage-strip > li:last-child { border-bottom: 0; }
+.mh-stage-strip > li::before { content: counter(mh-stage, decimal-leading-zero); font-family: var(--mh-font-display); font-size: 30px; line-height: 1; color: var(--mh-muted); }
+.mh-stage-head h3 { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 500; line-height: 1.2; }
+.mh-stage-head h3 svg { width: 20px; height: 20px; color: var(--mh-forest); stroke-width: 1.5; }
+.mh-stage-head p { margin-top: 6px; color: var(--mh-muted); font-size: 15px; line-height: 1.5; }
 /* Tool names as a hairline list, deliberately not a grid: three names beside
    two would read as an orphan the moment anyone gave it equal tracks. */
-.mh-stage-strip ul { grid-column: 2 / -1; margin-top: 4px; }
-.mh-stage-strip ul li { padding: 9px 0; border-top: 1px solid var(--mh-line); font-size: 14px; font-weight: 600; }
+.mh-stage-strip ul { display: flex; flex-wrap: wrap; gap: 8px; }
+/* Outlined, so they never read as the filled product-state chip beside them. */
+.mh-stage-strip ul li { padding: 7px 14px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-pill); font-size: 14px; font-weight: 600; }
 
 /* Pro */
 .mh-pro { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
@@ -1524,7 +1542,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
      and, coming later in the file, also won on phones over the 900px block
      that meant to stack them. Two 150px columns broke "Steady the first
      week" into four lines. Pairs stay at tablet width, where they fit. */
-  ol.mh-stage-strip,
   ol.mh-steps,
   .mh-capabilities { grid-template-columns: 1fr; }
   .mh-steps h3,
@@ -1597,9 +1614,16 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 
 @media (max-width: 1180px) {
   .mh-kit-grid,
-  ol.mh-stage-strip,
   ol.mh-steps,
   .mh-capabilities { grid-template-columns: repeat(2, 1fr); }
+  /* The tools drop to their own line under the stage, and the state chip
+     rides up beside the stage name. Every child is placed by hand: leave the
+     chip to auto-placement and it lands in the number column on a third row,
+     140px of pill in a 48px track, hanging off the left of the section. */
+  .mh-stage-strip > li { grid-template-columns: 48px minmax(0, 1fr) 140px; }
+  .mh-stage-strip > li::before { grid-row: 1 / span 2; align-self: start; }
+  .mh-stage-strip > li > .mh-state-chip { grid-row: 1; grid-column: 3; }
+  .mh-stage-strip ul { grid-row: 2; grid-column: 2 / -1; }
   .mh-int-grid { grid-template-columns: repeat(2, 1fr); }
   .mh-site-header { grid-template-columns: auto 1fr; }
   .mh-site-nav { display: none; }
@@ -1730,8 +1754,12 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-capabilities,
   .mh-int-grid,
   .mh-kit-grid,
-  ol.mh-stage-strip,
   .mh-pro-cards { grid-template-columns: 1fr; }
+  /* Phone: the chip has no room beside a two-line stage name, so it drops
+     to its own row under the tools, with the extra space that says it is a
+     state the app shows rather than an eleventh tool. */
+  .mh-stage-strip > li { grid-template-columns: 40px minmax(0, 1fr); }
+  .mh-stage-strip > li > .mh-state-chip { grid-row: 3; grid-column: 2; justify-self: start; margin-top: 4px; }
   .mh-qblock h3 { font-size: 20px; }
   .marketing-homepage { --mh-gutter: 20px; --mh-h2: 40px; --mh-h2-sm: 32px; }
   .mh-kicker { font-size: 12px; line-height: 18px; }

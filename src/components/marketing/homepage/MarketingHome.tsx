@@ -291,6 +291,11 @@ function StepConnect() {
 /* is already going (owner, 2026-09-02 - this inverts the split, and */
 /* that page's header comment was updated to match).                 */
 /*                                                                   */
+/* Four rows, not four columns (owner 2026-09-11): equal columns read */
+/* as four unrelated buckets, and 3/3/2/2 tools left two of them      */
+/* ending short. Numbered full-width rows read as the order the       */
+/* search actually happens in, and no row can end ragged.             */
+/*                                                                    */
 /* The one-line "what it decides" for each stage is /job-search's    */
 /* own approved copy. Every chip is a string the product actually    */
 /* produces, checked against lumo-plan-builder origin/main b8cb77ec: */
@@ -322,11 +327,12 @@ function StepSearch() {
       <ol className="mh-stage-strip" data-reveal="">
         {TOOLKIT_STAGES.map(({ icon: IconComponent, title, chip, decides, tools }) => (
           <li key={title}>
-            <IconComponent aria-hidden="true" />
-            <h3>{title}</h3>
-            <em className="mh-state-chip">{chip}</em>
-            <p>{decides}</p>
+            <div className="mh-stage-head">
+              <h3><IconComponent aria-hidden="true" />{title}</h3>
+              <p>{decides}</p>
+            </div>
             <ul>{tools.map((tool) => <li key={tool}>{tool}</li>)}</ul>
+            <em className="mh-state-chip">{chip}</em>
           </li>
         ))}
       </ol>

@@ -450,3 +450,58 @@ test.describe("in-page anchors scroll smoothly", () => {
     expect(clearance.sectionTop).toBeGreaterThanOrEqual(clearance.headerBottom);
   });
 });
+
+// Step 3's stage rows are a hand-placed CSS grid: each row is its own grid
+// container, and at two breakpoints the number, the state chip and the tool
+// pills are assigned their cells by hand. Leave the tool row and the chip
+// to auto-placement and the chip lands in the 48px number column on a row of
+// its own, because the placement cursor never goes back past the tool row.
+// That is how the state chip first rendered, hanging off the left edge of
+// the section between 901px and 1180px. The visual suite did not catch it:
+// 1% of pixels is a low bar for one small pill. This asserts the geometry
+// instead, and it was checked against the pre-fix rules, where three of the
+// five widths below fail.
+test.describe("the Run your search rows stay inside their section", () => {
+  for (const width of [1440, 1100, 901, 768, 390]) {
+    test(`nothing escapes #run at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/");
+      await page.evaluate(() => document.fonts.ready);
+
+      const escaped = await page.evaluate(() => {
+        const section = document.querySelector("#run")!.getBoundingClientRect();
+        const bad: string[] = [];
+        document.querySelectorAll("#run .mh-stage-strip *").forEach((el) => {
+          const box = el.getBoundingClientRect();
+          if (!box.width) return;
+          if (box.left < section.left - 0.5 || box.right > section.right + 0.5) {
+            bad.push(`${el.tagName}.${el.className} ${Math.round(box.left)}-${Math.round(box.right)}`);
+          }
+        });
+        return bad;
+      });
+      expect(escaped).toEqual([]);
+    });
+  }
+
+  test("the four stages read as an ordered list of rows, not four columns", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await page.evaluate(() => document.fonts.ready);
+
+    const rows = await page.evaluate(() =>
+      Array.from(document.querySelectorAll("#run .mh-stage-strip > li")).map((li) => {
+        const box = li.getBoundingClientRect();
+        return { top: Math.round(box.top), left: Math.round(box.left), width: Math.round(box.width) };
+      }),
+    );
+    expect(rows).toHaveLength(4);
+    // Stacked, not side by side: every row starts below the one before it and
+    // they all share one left edge and one width.
+    for (let i = 1; i < rows.length; i += 1) {
+      expect(rows[i].top).toBeGreaterThan(rows[i - 1].top);
+      expect(rows[i].left).toBe(rows[0].left);
+      expect(rows[i].width).toBe(rows[0].width);
+    }
+  });
+});
