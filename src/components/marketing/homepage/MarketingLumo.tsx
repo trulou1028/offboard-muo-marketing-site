@@ -22,7 +22,7 @@ import {
    re-listed /career-context's eight kinds of record. The page now says that
    once, links, and spends its cards on the three things only Lumo carries. */
 const ONLY_LUMO = [
-  ["Your plan", "Your Path", "What needs attention now, what can wait, and what comes next."],
+  ["Your plan", "Layoff Plan", "What needs attention now, what can wait, and what comes next."],
   ["Benefits context", "The practical side", "Where you are with deadlines, coverage, and runway, so the answer fits the week you are actually in."],
   ["Previous conversations", "Memory", "What you already worked out together, so you are not repeating it."],
 ] as const;

@@ -42,8 +42,8 @@ const WHY_COMPANIES_ITEMS = [
   { title: "Proof, not promises", body: "No placement guarantees, no inflated promises. You see real aggregate usage and claims activity, so you know the support landed." },
 ] as const;
 
-/* Plan 044 (owner 2026-09-07): the long form of the homepage's four steps,
-   same names, same order, same kickers, so a visitor arriving from the
+/* Plan 044 (owner 2026-09-07), reordered by plan 050 (owner 2026-09-10): the
+   long form of the homepage's four steps, same names, same order, same kickers, so a visitor arriving from the
    strip can find their place. The anchors #toolkit and #faq are SEO-load-
    bearing (next.config.ts sends /job-packet and /faq to them). */
 export function MarketingHowItWorks() {
@@ -54,20 +54,23 @@ export function MarketingHowItWorks() {
           current="how-it-works"
           kicker="How it works"
           title="One system that starts where you are."
-          body="Whether you were laid off yesterday, have been searching for months, or are still employed and reading the room: steady the first week, build your Career Context, connect it to the AI you already use, and run your search from it."
+          body="Whether you were laid off yesterday, have been searching for months, or are still employed and reading the room: build your Career Context, talk it through with Lumo, run your search from it, and follow your layoff plan."
           cta="Get started free"
           aside={<><span>The spine and the muscle</span><strong>Your Career Context is the spine. The tools are the muscle.</strong><p>Every step adds to one record, and every tool reads from it. No blank pages, no starting over.</p></>}
         />
-        <HowStepFirstWeek />
-        <section className="mh-verified-visual mh-section" aria-hidden="true">
-          <div className="mh-verified-visual-frame">
-            <Image src="/marketing/homepage/renders/benefits-stack.webp" alt="" fill sizes="(max-width: 900px) 100vw, 1200px" />
-          </div>
-        </section>
-        <VerifiedFactsStrip />
         <HowStepContext />
         <LumoSection />
         <ToolkitSection />
+        <HowStepFirstWeek />
+        <section className="mh-verified-visual mh-section" aria-hidden="true">
+          <div className="mh-verified-visual-frame">
+            {/* Eager (plan 050): the band moved below the fold on this page, and a lazy
+                image here loads after the full-page visual capture, so the baseline
+                showed an empty deep band. It is one webp; the cost is nothing. */}
+            <Image src="/marketing/homepage/renders/benefits-stack.webp" alt="" fill sizes="(max-width: 900px) 100vw, 1200px" loading="eager" />
+          </div>
+        </section>
+        <VerifiedFactsStrip />
         <HumanSupportSection />
         <FaqSection title="What to know about the product." items={PRODUCT_FAQS} />
         <FinalCta />

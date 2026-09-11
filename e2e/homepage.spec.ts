@@ -57,7 +57,7 @@ test.describe("Offboard marketing site", () => {
 
     await page.goto("/how-it-works");
     await expect(page.getByRole("heading", { level: 1, name: "One system that starts where you are." })).toBeVisible();
-    for (const kicker of ["Step 1 · Steady the first week", "Step 2 · Build your Career Context", "Step 3 · Connect it to the AI you use", "Step 4 · Run your search"]) {
+    for (const kicker of ["Step 1 · Build your Career Context", "Step 2 · Talk with Lumo", "Step 3 · Run your search", "Step 4 · Follow your layoff plan"]) {
       await expect(page.getByText(kicker, { exact: true })).toBeVisible();
     }
     await expect(page.getByRole("heading", { name: /see your money clearly, then claim what exists/i })).toBeVisible();

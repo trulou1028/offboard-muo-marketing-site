@@ -55,12 +55,11 @@ function SecondaryCta({ children, href }: { children: ReactNode; href: string })
    HERO_PHOTO picks the one that ships. Every alt below is the library's own
    suggested text.
 
-   Above 900px there is no wash any more (owner 2026-09-08): each photograph's
-   own wall is the green behind the copy. Measured on the bedroom scene with
-   the wash gone, worst-case background behind the H1: 10.7:1 at 1440, 9.9:1
-   at 1920, 8.7:1 at 2560, 9.6:1 at a tall 1200x1000, 9.1:1 at 901. The floor
-   for 44px+ text is 3:1. Swapping HERO_PHOTO now means re-measuring, because
-   nothing sits between the copy and the picture. */
+   Above 1180px there is no wash: this photograph's own wall carries the copy.
+   From 901px to 1180px a left wash protects the body copy as the crop brings
+   the bed inward; the stacked layout keeps its top-down wash. Re-audited on
+   2026-09-10: the H1 stays at or above 7.3:1, body copy at or above 4.57:1,
+   and trust copy at or above 4.5:1 across 1440, 1024, 901, 834, and 390px. */
 /* ---------------------------------------------------------------- */
 const HERO_PHOTOS = {
   livingRoom: {
@@ -69,7 +68,7 @@ const HERO_PHOTOS = {
   },
   bedroom: {
     src: "/marketing/homepage/hero/bedroom.webp",
-    alt: "A woman sits cross-legged on her bed with a laptop at dusk, a lamp lit on the nightstand beside her.",
+    alt: "A woman sits cross-legged on her bed with a laptop at dusk, with modern artwork above the bed.",
   },
   coffeeShop: {
     src: "/marketing/homepage/hero/coffee-shop.webp",
@@ -127,37 +126,37 @@ function HomeHero() {
 /* 2 · The four steps (paper). Pattern E, the stepped strip: the     */
 /* whole page in one row, each step linking to its own section.      */
 /*                                                                    */
-/* Four, not three (owner 2026-09-03, plan 040 finding 1). The H1     */
-/* claims the modern unemployment office; the three-step version      */
-/* described an AI job-search tool and carried the benefits story as  */
-/* a trailing clause on step three ("with your benefits beside it").  */
-/* A first step earns the H1 back, and step four loses that clause    */
-/* because step one now says it properly.                             */
+/* Four steps, in the app's order (owner 2026-09-10, plan 050). These  */
+/* are the four stage cards a member sees on Home after onboarding,   */
+/* so the site and the app tell one story. The benefits step used to  */
+/* lead (plan 040); putting money and paperwork first asked for trust */
+/* the app had not earned yet, so it is now the last step and what    */
+/* Lumo raises first. The H1 is still earned: step four carries it.   */
 /* ---------------------------------------------------------------- */
 const STEPS = [
   {
-    title: "Steady the first week.",
-    body: "Deadlines, health coverage, and how long your money lasts, in the order they matter.",
-    href: "#steady",
-    link: "See what comes first",
-  },
-  {
     title: "Build your Career Context.",
-    body: "Tell Offboard about your career once. It becomes a record you keep adding to.",
+    body: "Your resume and where you are. Everything else reads from this.",
     href: "#build",
     link: "Build your context",
   },
   {
-    title: "Connect it to the AI you use.",
-    body: "Lumo already knows it. ChatGPT and Claude connect in beta.",
+    title: "Talk with Lumo.",
+    body: "It reads your Career Context from the first question. Or connect the ChatGPT or Claude you already use, in beta.",
     href: "#connect",
     link: "See the connection",
   },
   {
-    title: "Run your search with real tools.",
-    body: "Decide, apply, interview, and keep every application straight.",
+    title: "Run your search.",
+    body: "Packets, tailoring, and a tracker that all read from your context.",
     href: "#run",
     link: "See the toolkit",
+  },
+  {
+    title: "Follow your layoff plan.",
+    body: "The steps that fit your situation, in order.",
+    href: "#plan",
+    link: "See the plan",
   },
 ] as const;
 
@@ -169,7 +168,7 @@ function FourSteps() {
           <span className="mh-kicker">The short version</span>
           <h2 id="steps-title">How Offboard works.</h2>
         </div>
-        <p>Handle what has a deadline, build a record of your career once, connect it to the AI you already use, and run your search from it.</p>
+        <p>Build a record of your career once, talk it through with Lumo, run your search from it, and follow the steps that fit your situation.</p>
       </div>
       <ol className="mh-steps" data-reveal="">
         {STEPS.map(({ title, body, href, link }, index) => (
@@ -223,7 +222,7 @@ function StepContext() {
     <section className="mh-ctx mh-section" id="build" aria-labelledby="ctx-title">
       <div className="mh-split">
         <div className="mh-copy-block">
-          <span className="mh-kicker">Step 2 · Build your context</span>
+          <span className="mh-kicker">Step 1 · Build your Career Context</span>
           <h2 id="ctx-title">One place that remembers your career.</h2>
           <p>Your resume is only a fraction of your career. Offboard builds a living record of your experience, accomplishments, applications, companies, conversations, documents, interviews, goals, and progress so you don&apos;t have to explain yourself from scratch every time you need help.</p>
           <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Build my Career Context</span><ArrowRight aria-hidden="true" /></a>
@@ -236,7 +235,7 @@ function StepContext() {
 }
 
 /* ---------------------------------------------------------------- */
-/* 4 · Step 2, connect (mid forest). One CTA, and it goes somewhere  */
+/* 4 · Step 2, talk with Lumo (mid forest). One CTA, and it goes     */
 /* a reader can picture: "Ask Lumo" was a filled button with no      */
 /* obvious destination, so it is gone and the link to /integrations  */
 /* is the section's action (owner, 2026-09-02). The five example     */
@@ -273,9 +272,9 @@ function StepConnect() {
     <section className="mh-connect mh-section" id="connect" aria-labelledby="connect-title">
       <div className="mh-split">
         <div className="mh-copy-block">
-          <span className="mh-kicker is-lime">Step 3 · Connect it to the AI you use</span>
+          <span className="mh-kicker is-lime">Step 2 · Talk with Lumo</span>
           <h2 id="connect-title">Ask anywhere. The answer is about you.</h2>
-          <p>Lumo is Offboard&apos;s own guide and works from your Career Context from the first question. Prefer ChatGPT or Claude? Connect Offboard and take your context with you.</p>
+          <p>Lumo reads your Career Context from the first question and tells you what matters first, including the deadlines and the money you may be owed. Prefer ChatGPT or Claude? Connect Offboard and take your context with you.</p>
           <SecondaryCta href="/integrations">See how Offboard Everywhere works</SecondaryCta>
           <small>ChatGPT and Claude connections are in beta.</small>
         </div>
@@ -312,7 +311,7 @@ function StepSearch() {
     <section className="mh-kit mh-section" id="run" aria-labelledby="kit-title">
       <div className="mh-intro-split">
         <div>
-          <span className="mh-kicker">Step 4 · Run your search</span>
+          <span className="mh-kicker">Step 3 · Run your search</span>
           <h2 id="kit-title">The tools you run your search with.</h2>
         </div>
         <div>
@@ -336,11 +335,11 @@ function StepSearch() {
 }
 
 /* ---------------------------------------------------------------- */
-/* 3 · Step 1, steady the first week (sand). Moved above the Career   */
-/* Context step (plan 040): the H1 promises an unemployment office,   */
-/* so the first step is the deadlines and the money, not the resume.  */
-/* Six member questions as a disclosure list (Pattern H), and the     */
-/* section now links out to the pillar page that answers them.        */
+/* 6 · Step 4, follow your layoff plan (sand). This band led the page */
+/* as "Steady the first week" (plan 040); it is the last step now     */
+/* (owner 2026-09-10, plan 050), matching the app's Home, where money */
+/* and paperwork wait until the context exists to make them specific. */
+/* The H1 still lands here: this is the unemployment-office step.     */
 /* ---------------------------------------------------------------- */
 /* The six-question disclosure list left this band on 2026-09-08 (owner):
    the two-column split above it already carries the step, and six closed
@@ -365,15 +364,15 @@ function PathComposition() {
   );
 }
 
-function StepSteady() {
+function StepPlan() {
   return (
-    <section className="mh-morethan mh-section" id="steady" aria-labelledby="morethan-title">
+    <section className="mh-morethan mh-section" id="plan" aria-labelledby="morethan-title">
       <div className="mh-split">
         <div className="mh-copy-block">
-          <span className="mh-kicker is-sand">Step 1 · Steady the first week</span>
+          <span className="mh-kicker is-sand">Step 4 · Follow your layoff plan</span>
           <h2 id="morethan-title">Losing your job creates more than one problem.</h2>
-          <p>Finding another role matters. But so do unemployment benefits, health coverage, finances, career decisions, applications, networking, interviews, and figuring out what to do first. Offboard brings those pieces together.</p>
-          <Link className="mh-section-link" href="/layoff-support">See what to do first <ArrowRight aria-hidden="true" /></Link>
+          <p>Unemployment benefits, health coverage, paperwork, funded training, the search, the offer. Offboard lays out the steps that fit your situation, in order, and Lumo tells you which one matters first.</p>
+          <Link className="mh-section-link" href="/layoff-support">See the steps after a layoff <ArrowRight aria-hidden="true" /></Link>
         </div>
         <PathComposition />
       </div>
@@ -420,7 +419,7 @@ function PlansSection() {
           <span className="mh-kicker">Offboard Pro</span>
           <h2 id="pro-title">Free remembers your search. Pro puts it to work.</h2>
         </div>
-        <p>Free is the record: your path, your tracker, your benefit facts, and one complete Application Packet. Pro is Offboard doing the repeated application work for you, on every packet after it.</p>
+        <p>Free is the record: your layoff plan, your tracker, your benefit facts, and one complete Application Packet. Pro is Offboard doing the repeated application work for you, on every packet after it.</p>
       </div>
       <div className="mh-pro-cards" data-reveal="">
         <article className="mh-plan-card">
@@ -465,10 +464,10 @@ export default function MarketingHome() {
       <main id="main-content">
         <HomeHero />
         <FourSteps />
-        <StepSteady />
         <StepContext />
         <StepConnect />
         <StepSearch />
+        <StepPlan />
         <PlansSection />
         <CommunityStrip />
         <FinalCtaV2 />

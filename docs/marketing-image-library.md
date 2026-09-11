@@ -12,7 +12,7 @@ right-weighted composition fits the page.
 | File | Setting and representation | Suggested alt text |
 | --- | --- | --- |
 | `living-room.webp` | Black man in his 40s, living room at night | A man works on his laptop on a sofa at night, lit by a floor lamp beside a window. |
-| `bedroom.webp` | Latina woman in her late 20s, bedroom at dusk | A woman sits cross-legged on her bed with a laptop at dusk, a lamp lit on the nightstand beside her. |
+| `bedroom.webp` | Latina woman in her late 20s, bedroom at dusk | A woman sits cross-legged on her bed with a laptop at dusk, with modern artwork above the bed. |
 | `coffee-shop.webp` | East Asian woman in her late 50s, industrial coffee shop | A woman works on her laptop at a wooden table in a brick-and-concrete coffee shop. |
 | `coworking.webp` | South Asian woman in her 40s, coworking space | A woman works on her laptop at a communal table in a daylight-filled coworking space. |
 | `public-library.webp` | White man in his late 50s, public library | A man works on his laptop with notes and reading glasses at a public library table. |
@@ -21,6 +21,9 @@ right-weighted composition fits the page.
 
 - For full-width hero use, start with `object-fit: cover` and
   `object-position: right center`.
+- The homepage adds `civic-grid-overlay.png` as a separate decorative layer,
+  rendered with 24px minor squares and 48px major squares, so the photograph
+  remains reusable without the pattern.
 - Keep the left side available for copy. The current homepage supplies its own
   dark readability treatment in CSS.
 - Do not bake copy, logos, interface cards, gradients, or color overlays into
