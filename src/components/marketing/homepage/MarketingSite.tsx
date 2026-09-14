@@ -528,11 +528,12 @@ export function ToolkitSection() {
       <ol className="mh-stage-strip" data-reveal="">
         {TOOLKIT_STAGES.map(({ icon: IconComponent, title, chip, decides, tools }) => (
           <li key={title}>
-            <IconComponent aria-hidden="true" />
-            <h3>{title}</h3>
-            <em className="mh-state-chip">{chip}</em>
-            <p>{decides}</p>
+            <div className="mh-stage-head">
+              <h3><IconComponent aria-hidden="true" />{title}</h3>
+              <p>{decides}</p>
+            </div>
             <ul>{tools.map((tool) => <li key={tool}>{tool}</li>)}</ul>
+            <em className="mh-state-chip">{chip}</em>
           </li>
         ))}
       </ol>
