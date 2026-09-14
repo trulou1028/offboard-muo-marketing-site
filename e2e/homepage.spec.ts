@@ -505,3 +505,49 @@ test.describe("the Run your search rows stay inside their section", () => {
     }
   });
 });
+
+// /job-search carries two more hand-placed row grids (plan 051): the packet
+// steps and the detailed stage rows. Same failure mode as the homepage's, and
+// the same reason the visual suite is weak evidence for it - a chip escaping
+// its column is a few hundred pixels on a 4,900px page, well inside the 1%
+// screenshot tolerance.
+test.describe("the /job-search rows stay inside their sections", () => {
+  for (const width of [1440, 1100, 901, 768, 390]) {
+    test(`nothing escapes at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/job-search");
+      await page.evaluate(() => document.fonts.ready);
+
+      const escaped = await page.evaluate(() => {
+        const bad: string[] = [];
+        for (const selector of [".mh-packet", ".mh-kit"]) {
+          const band = document.querySelector(selector);
+          if (!band) {
+            bad.push(`${selector} is missing`);
+            continue;
+          }
+          const box = band.getBoundingClientRect();
+          band.querySelectorAll(".mh-packet-steps *, .mh-stage-strip *").forEach((el) => {
+            const r = el.getBoundingClientRect();
+            if (!r.width) return;
+            if (r.left < box.left - 0.5 || r.right > box.right + 0.5) {
+              bad.push(`${selector} ${el.tagName}.${el.className} ${Math.round(r.left)}-${Math.round(r.right)}`);
+            }
+          });
+        }
+        return bad;
+      });
+      expect(escaped).toEqual([]);
+    });
+  }
+
+  test("the packet band names the app's six steps and marks two of them free", async ({ page }) => {
+    await page.goto("/job-search");
+    // Pinned in the browser as well as in the unit test: these six strings and
+    // their two Free chips are a pricing claim, ported from packetSteps.ts in
+    // the app repo. A silent flip here is a promise the product does not keep.
+    await expect(page.locator(".mh-packet-steps > li")).toHaveCount(6);
+    await expect(page.locator(".mh-packet-steps .mh-state-chip", { hasText: /^Free$/ })).toHaveCount(2);
+    await expect(page.locator(".mh-packet-steps .mh-state-chip.is-pro")).toHaveCount(4);
+  });
+});

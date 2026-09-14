@@ -2,6 +2,7 @@ import Image from "next/image";
 import { FileText, ListChecks, MessageSquare, Search } from "lucide-react";
 import {
   AlsoStrip,
+  FaqSection,
   FinalCta,
   MarketingShell,
   PageHero,
@@ -23,6 +24,63 @@ import {
 
 /* Plan 048: the hero shows the real Application Packet builder (the step
    picker open) instead of the plan-042 composition, which is retired. */
+
+/* The six steps an Application Packet runs, verbatim from the app
+   (`lumo-plan-builder` `origin/main` `src/components/job-packet/packetSteps.ts`,
+   read 2026-09-13): the labels, the one-line descriptions, and which of them
+   are Pro. Parse Job and Save Application are foundational and never appear in
+   the app's own picker, so they are not listed here either. Two are free and
+   four are Pro; a chip says which, per the owner's decision 2026-09-13.
+   The two lines under the rows are the app's own strings, `FIRST_PACKET_LINE`
+   and the Free tier's basic-ghost-check allowance from `/pricing`. */
+const PACKET_STEPS = [
+  ["Ghost Check", "Is this posting real and active?", true],
+  ["Company Intel", "Research the company", false],
+  ["Role Match Analysis", "Score your fit for the role", false],
+  ["Tailor Resume", "Adapt your resume to this job", true],
+  ["Cover Letter", "Draft a cover letter", true],
+  ["Path to a Person", "Find someone to reach out to", true],
+] as const;
+
+function PacketBand() {
+  return (
+    <section className="mh-packet mh-section" aria-labelledby="packet-title">
+      <div className="mh-split">
+        <div className="mh-copy-block">
+          <span className="mh-kicker">Application Packet</span>
+          <h2 id="packet-title">Paste the posting. The packet does the rest.</h2>
+          <p>One link becomes a company brief, a fit read, and the materials you send, all kept with the role instead of scattered across six tabs.</p>
+        </div>
+        <figure className="mh-packet-visual">
+          <Image src="/marketing/homepage/renders/toolkit-job-packets.webp" alt="The Application Packet view in Offboard, a job posting linked to the materials built from it" fill sizes="(max-width: 900px) 100vw, 44vw" />
+        </figure>
+      </div>
+      <ol className="mh-packet-steps" data-reveal="">
+        {PACKET_STEPS.map(([label, body, pro]) => (
+          <li key={label}>
+            <div>
+              <strong>{label}</strong>
+              <p>{body}</p>
+            </div>
+            <em className={`mh-state-chip${pro ? " is-pro" : ""}`}>{pro ? "Pro" : "Free"}</em>
+          </li>
+        ))}
+      </ol>
+      <small className="mh-packet-note">Your first complete packet runs every step free. Free also includes three basic ghost checks a month, outside a packet.</small>
+    </section>
+  );
+}
+
+/* Plain answers, the pattern /lumo and /layoff-support close on. Every one is
+   checked against the app or a COPY.md ledger row: there is no auto-apply
+   anywhere in `lumo-plan-builder`, and the tracker has no inbox connection
+   (the ledger row "Live integrations" has Gmail in progress, not live). */
+const JOB_SEARCH_FAQS = [
+  ["Where do the job postings come from?", "You bring them. A board, a referral, a recruiter's email: paste the link and Offboard reads the posting, checks whether it looks real, and builds the application around it."],
+  ["Does Offboard apply for me?", "No. It builds what you send and keeps it with the role. You send it, so nothing goes out under your name that you have not read."],
+  ["What does Free include?", "Your first complete Application Packet runs every step free. After that, Free keeps the tracker, your Career Context, and the company and fit reads on every packet. Tailored resumes, cover letters, and the path to a person are Pro."],
+  ["Where does the tracker get its information?", "From the packets you build and what you add yourself. Offboard does not read your inbox."],
+] as const;
 /* The eight-step "loop" list left in plan 045's messaging pass: it walked
    the same process the four stages below already structure, in different
    words, so the page described its own loop twice. Its one idea, that the
@@ -57,27 +115,35 @@ function Stages() {
         <div className="mh-copy-block">
           <span className="mh-kicker">The toolkit</span>
           <h2 id="stages-title">Four stages, and what each one decides.</h2>
-          <p>The same ten tools the homepage names, described. Every one reads from your Career Context and writes back to it.</p>
+          <p>Every tool reads from your Career Context and writes back to it, so the tenth application starts further ahead than the first.</p>
         </div>
         {/* Plan 046: the first photograph on this page, at the human moment
             the stages lead to. */}
         <div className="mh-route-story-photo is-short"><Image src="/marketing/site-imagery/documentary/interview-prep-at-home-civic-modern-v1.webp" alt="A man at his kitchen table talking through an answer aloud, laptop open and notes in front of him" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
       </div>
-      <div className="mh-kit-grid" data-reveal="">
+      {/* Rows, not four columns (owner 2026-09-11, the homepage's Step 3 first):
+          equal columns read as four unrelated buckets rather than the order a
+          search runs in, and 3/3/2/2 tools left two of them ending short.
+          `is-detailed` is this page's variant of the homepage row: the tools
+          carry their sentence here, so they are a list rather than pills. */}
+      <ol className="mh-stage-strip is-detailed" data-reveal="">
         {STAGES.map(({ icon: IconComponent, name, decides, tools }) => (
-          <div className="mh-kit-col" key={name}>
-            <IconComponent aria-hidden="true" />
-            <h3>{name}</h3>
-            <p className="mh-kit-decides">{decides}</p>
-            {tools.map(([tool, body]) => (
-              <div className="mh-kit-tool" key={tool}>
-                <strong>{tool}</strong>
-                <p>{body}</p>
-              </div>
-            ))}
-          </div>
+          <li key={name}>
+            <div className="mh-stage-head">
+              <h3><IconComponent aria-hidden="true" />{name}</h3>
+              <p>{decides}</p>
+            </div>
+            <ul>
+              {tools.map(([tool, body]) => (
+                <li key={tool}>
+                  <strong>{tool}</strong>
+                  <p>{body}</p>
+                </li>
+              ))}
+            </ul>
+          </li>
         ))}
-      </div>
+      </ol>
     </section>
   );
 }
@@ -94,7 +160,9 @@ export function MarketingJobSearch() {
           visual={<Shot plain src="/marketing/homepage/graphics-civic-modern/application-packet-civic-modern-v1-transparent.webp" alt="An Application Packet card: company intel, role match and tailored resume all ticked, a strong-fit reading, and the packet marked ready for review" width={1536} height={1024} />}
           cta="Get started free"
         />
+        <PacketBand />
         <Stages />
+        <FaqSection title="Straight answers about the search." items={JOB_SEARCH_FAQS} />
         <AlsoStrip items={[
           { title: "The last step feeds the first.", body: "Every stage reads from your Career Context and writes back to it: what you learn in one interview is already there for the next application.", href: "/career-context", cta: "See what your Career Context holds" },
           { title: "Ask about the whole search, not one application.", body: "Lumo works from every stage at once, so it can tell you what needs attention today and what pattern it sees across your search.", href: "/lumo", cta: "See how Lumo works" },

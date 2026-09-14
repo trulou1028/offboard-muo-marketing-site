@@ -1629,7 +1629,23 @@ tools form, and the fact that the loop has a memory.
 - H1: `A job search that works as one system.`
 - Body: `Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, so nothing has to be re-explained at the next step. The tenth application takes less effort than the first.` *(plan 045 trimmed the middle clause; plan 046 added the retired "difference" section's payoff line)*
 - Hero visual *(plan 049; was plan 048's app screenshot of the packet builder, now unused)*: the Civic Modern composition `application-packet-civic-modern-v1-transparent.webp`. It reads: `Your Application Packet` · `Company intel` / `Role match` / `Tailored resume`, each ticked · chip `Strong fit` · state `Ready for review`. Pixels; this is the record.
-- CTA: `Build my free transition plan` (primary)
+- CTA: `Get started free` (primary) *(corrected 2026-09-13: the doc carried `Build my free transition plan` while the code shipped the sitewide label from plan 040 finding 3. The code was right.)*
+
+### The Application Packet *(new, plan 051)*
+
+- Kicker: `Application Packet` · H2: `Paste the posting. The packet does the rest.`
+- Body: `One link becomes a company brief, a fit read, and the materials you send, all kept with the role instead of scattered across six tabs.`
+- Visual: `renders/toolkit-job-packets.webp`, the Application Packet view. `/how-it-works` renders the same file in its flagship block; that page is deferred.
+- **The six rows are the app's own packet steps, verbatim** from `lumo-plan-builder` `origin/main` `src/components/job-packet/packetSteps.ts` (read 2026-09-13), in the app's order, each with the app's one-line description and a chip saying whether Free covers it (owner decision 2026-09-13). Parse Job and Save Application are foundational, never appear in the app's own picker, and are not listed here.
+  1. `Ghost Check` — `Is this posting real and active?` — chip `Pro`
+  2. `Company Intel` — `Research the company` — chip `Free`
+  3. `Role Match Analysis` — `Score your fit for the role` — chip `Free`
+  4. `Tailor Resume` — `Adapt your resume to this job` — chip `Pro`
+  5. `Cover Letter` — `Draft a cover letter` — chip `Pro`
+  6. `Path to a Person` — `Find someone to reach out to` — chip `Pro`
+- Note under the rows: `Your first complete packet runs every step free. Free also includes three basic ghost checks a month, outside a packet.`
+  - The first sentence is the app's own `FIRST_PACKET_LINE`. The second reconciles the `Pro` chip on Ghost Check with `/pricing`'s Free feature `3 basic ghost checks a month`: the free allowance is the standalone checker, and the enriched check inside a packet is Pro. Without that sentence the chip reads as a contradiction of `/pricing`.
+- Every chip is a claim. Changing one means re-reading `packetSteps.ts` and `/pricing` in the same PR.
 
 ### Why one system *(retired by plan 046: its composition is the hero visual and its payoff line is the hero body's last sentence. Kept for the record.)*
 
@@ -1662,7 +1678,8 @@ line.*
 
 - Kicker: `The toolkit`
 - H2: `Four stages, and what each one decides.`
-- Lead *(plan 046)*: `The same ten tools the homepage names, described. Every one reads from your Career Context and writes back to it.` · Photo beside it: `raw/strip-interview-prep.webp` (a woman practicing interview answers in front of a mirror). The four stage names carry the homepage strip's icons.
+- Lead *(plan 051; was plan 046's `The same ten tools the homepage names, described. Every one reads from your Career Context and writes back to it.`, which described the website rather than the reader)*: `Every tool reads from your Career Context and writes back to it, so the tenth application starts further ahead than the first.`
+- **Layout, plan 051:** four numbered full-width rows, the pattern the homepage's step 3 took on 2026-09-11, not the four equal columns this section shipped until then. Same reasons: equal columns read as four unrelated buckets rather than the order a search runs in, and 3/3/2/2 tools left two of them ending short. · Photo beside it: `raw/strip-interview-prep.webp` (a woman practicing interview answers in front of a mirror). The four stage names carry the homepage strip's icons.
 - Groups, each stage's decision line followed by its tools. **The ten tool descriptions moved here from § 1 in round 4 (2026-09-02): the homepage names the tools, this page describes them.**
   1. `Decide` — `Whether this one deserves your week.` — `Role Match` `Understand how an opportunity matches your experience, strengths, and goals.` · `Ghost Job Checker` `Look for signals that a posting may not represent an actively hiring role.` · `Company Intel` `Know who you're applying to before you invest your time.`
   2. `Apply` — `What you actually send.` — `Application Packets` `Bring together the role, company, resume strategy, positioning, and application materials in one place.` · `Resume Tailoring` `Adapt your resume using the opportunity and your Career Context.` · `Cover Letters` `Create relevant application messaging without starting from a blank page.`
@@ -1677,6 +1694,15 @@ line.*
 - H2: `The last step feeds the first.` *(plan 045; was `The loop only works because something remembers.`)*
 - Body: `Every stage reads from your Career Context and writes back to it: what you learn in one interview is already there for the next application. That is the difference between tools that happen to sit in one account and a search that gets better the longer you run it.`
 - Section link: `Learn more about Career Context` → `/career-context`
+
+### Straight answers about the search *(new, plan 051)*
+
+The pattern `/lumo` and `/layoff-support` close on. Four questions, the site's disclosure list. Every answer is checked against the app or a ledger row; the checks are recorded beside each one.
+
+1. `Where do the job postings come from?` — `You bring them. A board, a referral, a recruiter's email: paste the link and Offboard reads the posting, checks whether it looks real, and builds the application around it.` *(The draft asked `Is Offboard a job board?` and answered `It does not list jobs.` That is false: the app has a Jobs feed, and `/employers` promises `a real job feed for each person`. The question was rewritten rather than the answer softened.)*
+2. `Does Offboard apply for me?` — `No. It builds what you send and keeps it with the role. You send it, so nothing goes out under your name that you have not read.` *(Verified: no auto-apply path exists in `lumo-plan-builder` `origin/main`.)*
+3. `What does Free include?` — `Your first complete Application Packet runs every step free. After that, Free keeps the tracker, your Career Context, and the company and fit reads on every packet. Tailored resumes, cover letters, and the path to a person are Pro.` *(Deliberately says less than `/pricing`'s FAQ 2, which lists `whether the job is real` among what every later packet still runs while `packetSteps.ts` marks Ghost Check Pro. See the open question in the changelog.)*
+4. `Where does the tracker get its information?` — `From the packets you build and what you add yourself. Offboard does not read your inbox.` *(Ledger row "Live integrations": Gmail is in progress, not live. The answer states the present fact and makes no promise about a future one.)*
 
 ### Final CTA (shared component, overridden copy)
 
@@ -2144,6 +2170,7 @@ When one ships, move it into its page section above.
 | 2026-08-24 | Clarified the "outplacement" scope: allowed on /employers AND in Sponsored-tier copy wherever it renders (home teaser, /pricing deck), per the 2026-08-21 owner call. The earlier "one page only" wording in Language rules was inaccurate and is corrected. | COPY.md, plan 019 |
 | 2026-09-10 | Context first (plan 050). The homepage and `/how-it-works` tell the app's four Home stages in the app's order: Build your Career Context, Talk with Lumo, Run your search, Follow your layoff plan. "Steady the first week" leaves as a step and becomes step four's content and what Lumo raises first. `Your Path` becomes `Layoff Plan` everywhere the site names the product surface (owner rename 2026-09-10) | plan 050, this file § 1 and § How It Works |
 | 2026-09-11 | One closing band on every page: the homepage's `FinalCtaV2` and the route pages' three-dot progress mark are retired; `FinalCta` takes kicker, H2, body and small print as props. Homepage gains the kicker and `Talk to a person` | this file § 1 |
+| 2026-09-13 | `/job-search` rebuilt (plan 051): a new Application Packet band carrying the app's six packet steps with Free/Pro chips, the four-column stage grid rebuilt as numbered rows, a new Straight answers band, and the hero CTA doc drift corrected. **Open question for the owner:** `/pricing` FAQ 2 says every packet after the first still runs `whether the job is real`, while the app marks Ghost Check a Pro step. One of the two is wrong | plan 051, this file § 14 |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·

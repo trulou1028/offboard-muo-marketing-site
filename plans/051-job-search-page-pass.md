@@ -4,7 +4,7 @@
 
 ## Status
 
-- **Status:** PLAN WRITTEN 2026-09-11. Owner review of the three decisions below, then execute.
+- **Status:** BUILT 2026-09-13. Decision 1: yes, Free/Pro chips (owner). Decision 2: **reversed** on the evidence — the photograph stays. The plan argued it should leave because it illustrates one tool beside a heading about four; with the packet band added, the page has three visuals that each match their band and removing it would leave the stages band bare. Decision 3: shipped, but draft question 1 (`Is Offboard a job board?` / `It does not list jobs.`) was **false** — the app has a Jobs feed and `/employers` promises one — so the question was rewritten rather than the answer softened.
 - **Priority:** P1. The homepage's Step 3 now sends every reader who wants detail here ("See what each tool does"), and the page is not ready for them.
 - **Effort:** M. One new band, one rebuilt band, one new FAQ, copy law, tests, baselines.
 - **Risk:** MED. Claims about what is free. No route, nav or redirect change.
