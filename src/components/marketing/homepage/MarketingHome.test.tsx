@@ -313,6 +313,47 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByText("$0")).toBeInTheDocument();
     expect(screen.getByText("$20")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Sponsored access" })).toBeInTheDocument();
+
+    // The plan ledger is a real comparison matrix (owner 2026-09-14): one row
+    // per thing, read across. Asserted through table roles, so a rebuild as a
+    // grid of divs fails here rather than silently costing a screen reader the
+    // ability to hear which plan and which row a cell belongs to.
+    const ledger = within(document.querySelector(".mh-plan-ledger") as HTMLElement);
+    expect(ledger.getAllByRole("rowheader").map((h) => h.querySelector("strong")?.textContent)).toEqual([
+      "Search foundation",
+      "Application Packets",
+      "Ghost checks",
+      "Ask Lumo",
+      "Connected assistant",
+    ]);
+    // The privacy line is a full-width closing row, not a compared feature.
+    expect(ledger.getByText(/your private career activity remains yours, on every plan/i)).toBeInTheDocument();
+
+    // "Unlimited" on ghost checks is what the owner's second mockup drew and
+    // what the app does not do: Pro's enriched checks run on the monthly
+    // credit allowance. The claim was corrected on 2026-09-14 and this keeps
+    // it corrected.
+    const ghostRow = ledger.getByRole("rowheader", { name: /ghost checks/i }).closest("tr")!;
+    expect(ghostRow.textContent).not.toMatch(/unlimited/i);
+    expect(ghostRow.textContent).toContain("3 basic/month");
+    // Three columns since 2026-09-14: Sponsored access left the table for its
+    // own band, where the three facts a single "Included" cell could not hold
+    // now ship.
+    expect(ledger.getAllByRole("columnheader")).toHaveLength(3);
+    const sponsored = within(document.querySelector(".mh-sponsored-band") as HTMLElement);
+    expect(sponsored.getByRole("heading", { name: "Sponsored access" })).toBeInTheDocument();
+    expect(sponsored.getAllByRole("listitem")).toHaveLength(3);
+    expect(sponsored.getByText(/sponsors receive aggregate reporting only/i)).toBeInTheDocument();
+
+    // Two cells in the owner's mockup were not shipped, because both were
+    // false against the app. COPY.md records why; this keeps them out.
+    const ledgerText = (document.querySelector(".mh-plan-ledger") as HTMLElement).textContent ?? "";
+    expect(ledgerText).not.toMatch(/basic tracker/i);
+    expect(ledgerText).not.toMatch(/unlimited ghost/i);
+    // Free keeps the whole foundation; that sameness is the headline's claim,
+    // so the row says so on both sides rather than showing Free as lesser.
+    expect(ledgerText).toContain("Layoff Plan, tracker, documents");
+    expect(ledgerText).toContain("Same as Free");
     expect(screen.getByText(/claiming your government benefits is always free/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /learn about sponsored access/i })).toHaveAttribute("href", "/employers");
   });

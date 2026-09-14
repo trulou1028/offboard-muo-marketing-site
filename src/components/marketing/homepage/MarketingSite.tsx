@@ -5,10 +5,11 @@ import {
   Check,
   FileText,
   ListChecks,
+  Lock,
   MessageSquare,
   Search,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 import { MarketingMobileMenu, MarketingNav } from "./MarketingNav";
 import { MotionController } from "./MotionController";
@@ -269,9 +270,48 @@ export function NumberedRows({ rows }: { rows: readonly (readonly [string, strin
   );
 }
 
+/* Where a hero headline breaks (owner 2026-09-14).
+ *
+ * `text-wrap: balance` gives even line lengths, which is a typographic fact
+ * and not a grammatical one. Measured across ten routes at 1440 and 390 it was
+ * splitting the product name "Career Context" over two lines, leaving
+ * "Start free. Upgrade when / you need more support.", and stranding
+ * "understands" on a line of its own.
+ *
+ * The rule is deliberately small: a multi-word PRODUCT NAME never splits.
+ * That is it.
+ *
+ * The obvious bigger rule - never end a line on a short function word, glued
+ * with non-breaking spaces - was built, measured and thrown away. Every glued
+ * pair is an unbreakable run, so the longest run sets the effective measure
+ * and the headline gains lines rather than losing bad breaks: `/job-search`
+ * went from a clean two lines to three, `/career-context` to four. The
+ * measurement is in the commit that removed it.
+ *
+ * So the bend is authored, not automatic. A headline whose break is a design
+ * decision carries one <span> per line and the CSS makes each a block; the
+ * homepage H1 has worked that way since 2026-09-07. `e2e/homepage.spec.ts`
+ * measures the real line boxes and fails when a product name splits. */
+const HEADLINE_KEEP_WHOLE = [
+  "Career Context",
+  "Application Packet",
+  "Layoff Plan",
+  "Offboard Pro",
+  "Ghost Job Checker",
+] as const;
+
+export function balanceHeadline(title: string): string {
+  let out = title;
+  for (const phrase of HEADLINE_KEEP_WHOLE) {
+    out = out.split(phrase).join(phrase.replace(/ /g, "\u00a0"));
+  }
+  return out;
+}
+
 export function PageHero({
   kicker,
   title,
+  titleLines,
   body,
   current,
   aside,
@@ -285,6 +325,10 @@ export function PageHero({
   title: string;
   body: string;
   current: MarketingRoute;
+  /* The bend. One entry per line, for a headline whose break is a decision
+     rather than wherever the measure lands. `title` stays the name COPY.md
+     uses; these are the lines it renders as. */
+  titleLines?: readonly string[];
   aside?: ReactNode | false;
   /* Plan 046: a product composition in the right column instead of the
      paper aside card. Four product pages opened on 700px of empty green;
@@ -311,7 +355,16 @@ export function PageHero({
       <div>
         {eyebrowVisual ? <span className="mh-hero-eyebrow-visual">{eyebrowVisual}</span> : null}
         <span className="mh-kicker is-lime">{kicker}</span>
-        <h1>{title}</h1>
+        <h1>
+          {titleLines
+            ? titleLines.map((line, index) => (
+                <Fragment key={line}>
+                  {index > 0 ? " " : null}
+                  <span>{balanceHeadline(line)}</span>
+                </Fragment>
+              ))
+            : balanceHeadline(title)}
+        </h1>
         <p>{body}</p>
         {footnote ? <small className="mh-route-hero-footnote">{footnote}</small> : null}
         {ctaNode}
@@ -619,58 +672,156 @@ export function HumanSupportSection({ compact = false }: { compact?: boolean }) 
   );
 }
 
+/* The plan ledger (owner 2026-09-14, from the owner's own comparison mockup).
+   The three cards it replaces listed each tier's features in its own order, so
+   nothing lined up and a reader could not answer "what do I actually get more
+   of". A matrix answers that by construction: one row per thing, read across.
+
+   It is a real <table>, not a grid of divs. A comparison matrix is what tables
+   are for, and it buys the row and column headers a screen reader needs. On a
+   phone the same DOM collapses to blocks and each cell names its own plan
+   through `data-plan`, so there is no second copy of this copy to drift.
+
+   Every cell is a claim, checked 2026-09-14 against the verified-facts ledger
+   row "Consumer tiers" and the app's server entitlements. Two cells in the
+   owner's mockup could not ship as drawn, and COPY.md § 5 records why:
+   "Basic tracker" on Free (Free gets the whole foundation, which is the point
+   of the headline) and "Unlimited ghost checks" on Pro (Pro's enriched checks
+   run on the monthly credit allowance, about 30 full packets' worth). */
+const PLAN_ROWS = [
+  {
+    name: "Search foundation",
+    scent: "Plan, track, and stay organized.",
+    free: "Layoff Plan, tracker, documents",
+    pro: "Same as Free",
+  },
+  {
+    name: "Application Packets",
+    scent: "Tailored materials for every opportunity.",
+    free: "1 complete packet",
+    pro: "About 30/month",
+  },
+  {
+    name: "Ghost checks",
+    scent: "Find and evaluate opportunities faster.",
+    free: "3 basic/month",
+    /* NOT "Unlimited", which is what the owner's mockup drew. Pro's enriched
+       checks run on the monthly credit allowance; the claim was corrected
+       against the app's server entitlements two days earlier and must not
+       come back. COPY.md § 5 carries the reasoning. */
+    pro: "Enriched, on every packet",
+  },
+  {
+    name: "Ask Lumo",
+    scent: "Get guidance, practice, and answers.",
+    free: "10/day",
+    /* The site's approved wording. "Unlimited" is true here - a Lumo message
+       costs no credits and Pro lifts the daily cap - but the ledger row and
+       every other page say "no daily limit", so this one does too. */
+    pro: "No daily limit",
+  },
+  {
+    name: "Connected assistant",
+    scent: "Bring in the help you already use.",
+    free: "Connect ChatGPT or Claude",
+    pro: "It can run packets and checks",
+  },
+] as const;
+
+const SPONSORED_FACTS = [
+  "The full sponsored benefit is delivered to you",
+  "Your private career activity remains yours",
+  "Sponsors receive aggregate reporting only",
+] as const;
+
+function PlanCell({ plan, children }: { plan: string; children: ReactNode }) {
+  return (
+    <td data-plan={plan}>
+      <Check aria-hidden="true" />
+      <span>{children}</span>
+    </td>
+  );
+}
+
 export function PricingSection() {
   return (
     <section className="mh-pricing mh-section" id="pricing" aria-labelledby="pricing-title">
-      <div className="mh-pricing-heading"><div><span className="mh-kicker">A simple place to start</span><h2 id="pricing-title">Start free. Add more support when you need it.</h2></div><p>Begin with a transition plan and the core tools. Add credits or human support only when you choose to go further. You will see the price and what is included before you pay.</p></div>
-      <div className="mh-price-deck" data-reveal="">
-        <article className="is-primary">
-          <header>
-            <h3>Free</h3>
-          </header>
-          <p className="mh-price-value"><b>$0</b><small>forever</small></p>
-          <p>Everything you need to run the search, and one complete Application Packet with every step free.</p>
-          <ul>
-            <li><Check aria-hidden="true" />Layoff Plan, tracker, benefit facts, and documents</li>
-            <li><Check aria-hidden="true" />One complete Application Packet, every step free</li>
-            <li><Check aria-hidden="true" />The assessment on every packet after that: who is the company, how you fit</li>
-            <li><Check aria-hidden="true" />3 basic ghost checks a month</li>
-            <li><Check aria-hidden="true" />Ask Lumo, 10 messages a day</li>
-            <li><Check aria-hidden="true" />Connect ChatGPT or Claude to read your Offboard and update your tracker</li>
-          </ul>
-          <PrimaryCta />
-        </article>
-        <article>
-          <header>
-            <h3>Offboard Pro</h3>
-            <b className="is-badge">For active searches</b>
-          </header>
-          <p className="mh-price-value"><b>$20</b><small>/month</small></p>
-          <p>Offboard does the repeated application work for you, on every packet.</p>
-          <ul>
-            <li><Check aria-hidden="true" />Tailored resumes, cover letters, interview briefs, and a path to a person on every packet</li>
-            <li><Check aria-hidden="true" />Enriched ghost checks: duplicate postings, employer reviews, salary benchmark</li>
-            <li><Check aria-hidden="true" />Ask Lumo without a daily limit, on the advanced model</li>
-            <li><Check aria-hidden="true" />Your connected assistant can run packets and checks for you</li>
-            <li><Check aria-hidden="true" />About 30 full packets a month. We email you at 25 and never stop a build without warning.</li>
-          </ul>
-          <small className="mh-price-billing">Or $45 every 3 months, which is $15 a month. Cancel anytime.</small>
-          <PrimaryCta>Upgrade to Pro</PrimaryCta>
-        </article>
-        <article>
-          <header>
-            <h3>Sponsored access</h3>
-            <b className="is-badge">May be covered</b>
-          </header>
-          <p>Outplacement, modernized. Your former employer, school, or workforce organization may cover your access.</p>
-          <ul>
-            <li><Check aria-hidden="true" />The full sponsored benefit is delivered to you</li>
-            <li><Check aria-hidden="true" />Your private career activity remains yours</li>
-            <li><Check aria-hidden="true" />Sponsors receive aggregate reporting only</li>
-          </ul>
-          <Link className="mh-secondary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
-        </article>
+      <div className="mh-pricing-heading"><div><span className="mh-kicker">Plan ledger</span><h2 id="pricing-title">Start free. Add more support when you need it.</h2></div><p>The same core tools, with more support as your search needs more room, or an organization can sponsor your access.</p></div>
+      <div className="mh-plan-ledger" data-reveal="">
+        {/* The two plan cards sit ABOVE the table rather than inside its head
+            (owner 2026-09-14, round two). They share the table's column widths
+            so everything lines up, and being a flex row rather than a table
+            cell is what puts both CTAs on one line - no percentage height
+            resolving inside a table cell, which is the fragile version this
+            replaces. The table then keeps a compact header of its own, so the
+            plan and its price are still legible beside every row. */}
+        <div className="mh-plan-cards">
+          {/* The cards sit over the two plan columns, which leaves the first
+              column empty. It carries the table's own framing line rather than
+              350px of nothing. */}
+          <div className="mh-plan-cards-lede">
+            <strong>Two plans, the same core tools.</strong>
+            <p>Compare what you get with each, then start free.</p>
+          </div>
+          <article>
+            <div className="mh-plan-ledger-name"><h3>Free</h3></div>
+            <p className="mh-price-value"><b>$0</b><small>forever</small></p>
+            <p>Everything you need to run the search.</p>
+            <PrimaryCta />
+          </article>
+          <article className="is-primary">
+            {/* The badge sits beside the heading, not inside it: folding it into
+                the h3 changes the heading's accessible name. */}
+            <div className="mh-plan-ledger-name"><h3>Offboard Pro</h3><b className="is-badge">For active searches</b></div>
+            <p className="mh-price-value"><b>$20</b><small>/month</small></p>
+            <small className="mh-plan-ledger-billing">Or $45 every 3 months, which is $15 a month. Cancel anytime.</small>
+            <p>Offboard does the repeated application work for you.</p>
+            <PrimaryCta>Upgrade to Pro</PrimaryCta>
+          </article>
+        </div>
+        <table>
+          <caption className="mh-visually-hidden">What each plan includes, compared row by row.</caption>
+          <thead>
+            <tr>
+              <th scope="col"><strong>Plan comparison</strong></th>
+              <th scope="col">Free<span>$0 forever</span></th>
+              <th scope="col">Offboard Pro<span>$20/month</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {PLAN_ROWS.map(({ name, scent, free, pro }) => (
+              <tr key={name}>
+                <th scope="row">
+                  <strong>{name}</strong>
+                  <p>{scent}</p>
+                </th>
+                <PlanCell plan="Free">{free}</PlanCell>
+                <PlanCell plan="Offboard Pro">{pro}</PlanCell>
+              </tr>
+            ))}
+            <tr className="mh-plan-ledger-privacy">
+              <td colSpan={3}>
+                <Lock aria-hidden="true" />
+                <span>Your private career activity remains yours, on every plan.</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      {/* Sponsored access is a different transaction: somebody else pays, and
+          what they buy is 90 days of Pro rather than a tier of its own. */}
+      <aside className="mh-sponsored-band" aria-labelledby="sponsored-title">
+        <div>
+          <div className="mh-plan-ledger-name"><h3 id="sponsored-title">Sponsored access</h3><b className="is-badge">May be covered</b></div>
+          <p>Outplacement, modernized. Your former employer, school, or workforce organization may cover 90 days of Offboard Pro.</p>
+          <Link className="mh-secondary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
+        </div>
+        <ul>
+          {SPONSORED_FACTS.map((fact) => (
+            <li key={fact}><Check aria-hidden="true" /><span>{fact}</span></li>
+          ))}
+        </ul>
+      </aside>
       <p className="mh-price-note">Credits pay for the extras outside your search: headshots, the brand kit, voice practice, and paperwork review. Everything in the Application Packet is covered by your plan. Claiming your government benefits is always free, on any tier.</p>
     </section>
   );
