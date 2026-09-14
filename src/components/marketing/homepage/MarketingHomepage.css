@@ -439,77 +439,76 @@ ol.mh-how-first-week-rows { width: 100%; margin-top: 54px; border-top: 1px solid
 .mh-pricing-heading > div { display: flex; flex-direction: column; gap: 12px; }
 .mh-pricing-heading h2 { font-size: 48px; line-height: 50px; }
 .mh-pricing-heading > p { color: var(--mh-muted); font-size: 16px; line-height: 26px; }
-/* The plan ledger (owner 2026-09-14). A comparison matrix, so a reader can
-   answer "what do I get more of" by reading across one row. Real table
-   semantics on desktop; the same DOM collapses to blocks on a phone, where
-   each cell names its plan from `data-plan` rather than a second copy of the
-   markup. */
+/* The plan ledger (owner 2026-09-14, round two).
+ *
+ * Two parts in one bordered box: the plan cards, then the comparison table.
+ * The cards are a flex/grid row rather than the table's head, which is what
+ * lets both CTAs sit on one line with a plain `margin-top: auto` - the earlier
+ * version resolved a percentage height inside a table cell and needed two
+ * fragile things to hold, one of which lost a specificity tie.
+ *
+ * The table keeps a compact header of its own so the plan and its price are
+ * legible beside every row, and the rows are tight: no icons, terse cells, a
+ * filled tick rather than an outlined one. Owner direction from the second
+ * mockup; the reasoning is in COPY.md § 5. */
 .mh-plan-ledger { margin-top: 36px; overflow: hidden; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); background: var(--mh-white); }
-.mh-plan-ledger table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-/* One row of three now that Sponsored has its own band below. `height: 1px`
-   on the CELL is the long-standing way to give a table cell a definite height
-   without shrinking it: the row still grows to its content, and the flex
-   column inside can resolve `height: 100%`, which is what puts both CTAs on
-   one line however long the copy above them runs. On the row instead of the
-   cell it resolves to nothing and the buttons drift apart again. */
-.mh-plan-ledger thead th { height: 1px; width: 32%; padding: 28px; border-bottom: 1px solid var(--mh-line); border-right: 1px solid var(--mh-line); text-align: left; vertical-align: top; font-weight: 400; }
-.mh-plan-ledger thead th:first-child { width: 36%; }
-.mh-plan-ledger-head { display: flex; height: 100%; flex-direction: column; align-items: flex-start; }
-/* `a.` prefix is load-bearing: `.mh-plan-ledger .mh-primary-cta` sets an
-   18px top margin later in the file at the same specificity, and would win
-   the tie on source order, leaving the two buttons on different lines. */
-.mh-plan-ledger-head > a.mh-primary-cta { margin-top: auto; }
-.mh-plan-ledger thead th:last-child { border-right: 0; }
-.mh-plan-ledger thead th > strong { font-family: var(--mh-font-display); font-size: 24px; line-height: 28px; }
-.mh-plan-ledger thead th > strong + p { margin-top: 8px; }
-.mh-plan-ledger thead p { color: var(--mh-muted); font-size: 15px; line-height: 22px; }
+.mh-plan-cards { display: grid; grid-template-columns: 36% minmax(0, 1fr) minmax(0, 1fr); gap: 16px; padding: 24px 24px 28px; background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
+.mh-plan-cards-lede { align-self: center; padding-right: 24px; }
+.mh-plan-cards-lede strong { font-family: var(--mh-font-display); font-size: 22px; line-height: 28px; font-weight: 500; }
+.mh-plan-cards-lede p { margin-top: 8px; }
+.mh-plan-cards > article { display: flex; flex-direction: column; align-items: flex-start; padding: 24px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); }
+.mh-plan-cards > article.is-primary { background: var(--mh-forest); border-color: var(--mh-forest); color: var(--mh-paper); }
+.mh-plan-cards > article > a.mh-primary-cta { width: 100%; min-height: 46px; margin-top: auto; justify-content: center; }
 .mh-plan-ledger-name { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .mh-plan-ledger h3 { font-size: 24px; line-height: 28px; font-weight: 650; letter-spacing: normal; text-transform: none; }
 .mh-plan-ledger b.is-badge { padding: 5px 9px; background: var(--mh-mist); border-radius: var(--mh-radius-pill); color: var(--mh-ink); font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+.mh-plan-cards > article.is-primary b.is-badge { background: rgb(246 244 238 / 16%); color: var(--mh-paper); }
 .mh-plan-ledger .mh-price-value { display: flex; align-items: baseline; gap: 6px; margin-top: 10px; }
 .mh-plan-ledger .mh-price-value b { font-size: 40px; line-height: 1; font-weight: 650; }
 .mh-plan-ledger .mh-price-value small { color: var(--mh-muted); font-size: 15px; }
-.mh-plan-ledger .mh-price-value + p,
-.mh-plan-ledger .mh-plan-ledger-billing + p { margin-top: 8px; }
+.mh-plan-cards p { color: var(--mh-muted); font-size: 15px; line-height: 22px; }
+.mh-plan-cards .mh-price-value + p,
+.mh-plan-cards .mh-plan-ledger-billing + p { margin-top: 8px; margin-bottom: 18px; }
 small.mh-plan-ledger-billing { display: block; margin-top: 8px; font-size: 13px; line-height: 1.5; }
-.mh-plan-ledger .mh-primary-cta { width: 100%; min-height: 46px; margin-top: 18px; justify-content: center; }
-/* Pro is the emphasised column, so its header cell takes the dark treatment
-   the Free card used to carry. The lime CTA is the primary-on-dark rule. */
-.mh-plan-ledger thead th.is-primary { background: var(--mh-forest); color: var(--mh-paper); }
-.mh-plan-ledger thead th.is-primary p,
-.mh-plan-ledger thead th.is-primary .mh-price-value small,
-.mh-plan-ledger thead th.is-primary small.mh-plan-ledger-billing { color: rgb(246 244 238 / 78%); }
-.mh-plan-ledger thead th.is-primary b.is-badge { background: rgb(246 244 238 / 16%); color: var(--mh-paper); }
-/* Forest on light, lime on dark green (DESIGN.md). Without this the CTA is a
-   forest pill on a forest cell: the label reads, the button does not. */
-.mh-plan-ledger thead th.is-primary a.mh-primary-cta { background: var(--mh-lime); color: var(--mh-deep); }
-.mh-plan-ledger thead th.is-primary a.mh-primary-cta:hover { background: var(--mh-lime-hover); }
-.mh-plan-ledger tbody th { padding: 22px 28px; border-bottom: 1px solid var(--mh-line); border-right: 1px solid var(--mh-line); text-align: left; font-weight: 400; vertical-align: top; }
-.mh-plan-ledger tbody th > svg { float: left; width: 22px; height: 22px; margin-right: 12px; color: var(--mh-forest); stroke-width: 1.5; }
-.mh-plan-ledger tbody th > span { display: block; }
-.mh-plan-ledger tbody th strong { font-family: var(--mh-font-display); font-size: 18px; line-height: 24px; }
-.mh-plan-ledger tbody th p { margin-top: 3px; color: var(--mh-muted); font-size: 14px; line-height: 20px; }
-.mh-plan-ledger tbody td { padding: 22px 20px; border-bottom: 1px solid var(--mh-line); border-right: 1px solid var(--mh-line); vertical-align: top; font-size: 14px; line-height: 21px; }
-.mh-plan-ledger tbody td:last-child { border-right: 0; }
-/* stylelint-disable-next-line color-no-hex -- the retired price deck's own
-   one-off muted-sage icon ring, carried over unchanged; not a token-worthy role */
-.mh-plan-ledger tbody td svg { float: left; width: 18px; height: 18px; margin-right: 10px; padding: 3px; border: 1px solid #7f9b92; border-radius: 50%; color: var(--mh-forest); }
-.mh-plan-ledger tbody td > span { display: block; overflow: hidden; }
+.mh-plan-cards > article.is-primary p,
+.mh-plan-cards > article.is-primary .mh-price-value small,
+.mh-plan-cards > article.is-primary small.mh-plan-ledger-billing { color: rgb(246 244 238 / 78%); }
+/* Forest on light, lime on dark green (DESIGN.md). Without this the Pro CTA is
+   a forest pill on a forest card: the label reads, the button does not. */
+.mh-plan-cards > article.is-primary a.mh-primary-cta { background: var(--mh-lime); color: var(--mh-deep); }
+.mh-plan-cards > article.is-primary a.mh-primary-cta:hover { background: var(--mh-lime-hover); }
+
+.mh-plan-ledger table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+/* The table's first column matches the empty cell the cards row leaves, so
+   the comparison reads as a continuation of the cards rather than a second
+   layout. `table-layout: fixed` splits what is left evenly between the two
+   plans. */
+.mh-plan-ledger thead th { padding: 18px 24px; border-bottom: 1px solid var(--mh-line); font-size: 15px; font-weight: 650; text-align: center; }
+.mh-plan-ledger thead th:first-child { width: 36%; text-align: left; }
+.mh-plan-ledger thead th > strong { font-family: var(--mh-font-display); font-size: 30px; line-height: 34px; font-weight: 500; }
+.mh-plan-ledger thead th span { display: block; margin-top: 2px; color: var(--mh-muted); font-size: 13px; font-weight: 400; }
+.mh-plan-ledger tbody th { padding: 14px 24px; border-bottom: 1px solid var(--mh-line); text-align: left; font-weight: 400; vertical-align: middle; }
+.mh-plan-ledger tbody th strong { font-family: var(--mh-font-display); font-size: 17px; line-height: 23px; }
+.mh-plan-ledger tbody th p { margin-top: 1px; color: var(--mh-muted); font-size: 14px; line-height: 20px; }
+.mh-plan-ledger tbody td { padding: 14px 24px; border-bottom: 1px solid var(--mh-line); border-left: 1px solid var(--mh-line); vertical-align: middle; font-size: 14px; line-height: 20px; }
+.mh-plan-ledger tbody td > span { display: inline-block; vertical-align: middle; }
+/* Filled, not outlined (owner 2026-09-14): a tick that reads at a glance is
+   the point of the column. */
+.mh-plan-ledger tbody td svg { display: inline-block; width: 20px; height: 20px; margin-right: 10px; padding: 4px; background: var(--mh-mist); border-radius: 50%; color: var(--mh-forest); vertical-align: middle; }
 .mh-plan-ledger tbody tr:last-child th,
 .mh-plan-ledger tbody tr:last-child td { border-bottom: 0; }
-.mh-plan-ledger .mh-plan-ledger-privacy th,
-.mh-plan-ledger .mh-plan-ledger-privacy td { background: var(--mh-mist); }
+.mh-plan-ledger-privacy td { background: var(--mh-paper); border-left: 0; text-align: center; }
+.mh-plan-ledger-privacy svg { background: none; color: var(--mh-muted); }
+
 /* Sponsored access, out of the table (owner 2026-09-14). Mist rather than
-   white so it reads as a different offer rather than a fourth plan. */
+   white so it reads as a different offer rather than a third plan. */
 .mh-sponsored-band { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: center; margin-top: 16px; padding: 32px; background: var(--mh-mist); border: 1px solid var(--mh-mist-border); border-radius: var(--mh-radius-lg); }
 .mh-sponsored-band > div { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 .mh-sponsored-band p { max-width: 46ch; color: var(--mh-muted); font-size: 15px; line-height: 23px; }
 .mh-sponsored-band .mh-secondary-cta { min-height: 46px; margin-top: 4px; }
 .mh-sponsored-band ul { display: flex; flex-direction: column; gap: 12px; }
 .mh-sponsored-band li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 22px; }
-/* stylelint-disable-next-line color-no-hex -- the same one-off muted-sage icon
-   ring the ledger's ticks use; not a token-worthy role */
-.mh-sponsored-band li svg { width: 18px; height: 18px; flex: 0 0 18px; margin-top: 2px; padding: 3px; border: 1px solid #7f9b92; border-radius: 50%; color: var(--mh-forest); }
+.mh-sponsored-band li svg { width: 20px; height: 20px; flex: 0 0 20px; margin-top: 1px; padding: 4px; background: var(--mh-white); border-radius: 50%; color: var(--mh-forest); }
 
 p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; line-height: 22px; text-align: center; }
 
@@ -528,7 +527,6 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
   .mh-plan-ledger tbody td { border-right: 0; }
   .mh-plan-ledger thead th:first-child { display: none; }
   .mh-plan-ledger thead th { height: auto; }
-  .mh-plan-ledger-head { height: auto; }
   .mh-sponsored-band { grid-template-columns: 1fr; align-items: start; }
   .mh-plan-ledger tbody th { padding-bottom: 12px; border-bottom: 0; }
   .mh-plan-ledger tbody td { padding: 10px 28px 10px 56px; border-bottom: 0; }

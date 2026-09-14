@@ -619,21 +619,20 @@ test.describe("hero headlines keep product names whole", () => {
   }
 });
 
-// The two plan CTAs sit on one line at the bottom of the ledger's header row
-// (owner 2026-09-14), whatever length the copy above them runs to. It is held
-// by a flex column resolving `height: 100%` inside a table cell, which is
-// fragile in two ways this asserts against: the cell needs its own `height`
-// for the percentage to resolve, and `margin-top: auto` loses a specificity
-// tie to the CTA's own `margin-top` unless its selector outranks it. Both
-// failures look like a small vertical drift, well inside the visual suite's
-// 1% tolerance.
+// The two plan CTAs sit on one line at the bottom of their cards (owner
+// 2026-09-14), whatever length the copy above them runs to. Round one held
+// that with a percentage height resolving inside a table cell and needed two
+// fragile things to line up; round two moved the cards out of the table, so a
+// plain `margin-top: auto` in a flex column does it. Still asserted, because
+// the failure is a small vertical drift well inside the visual suite's 1%
+// tolerance.
 test("the pricing plan CTAs stay on one line", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/pricing");
   await page.evaluate(() => document.fonts.ready);
 
   const ctas = await page.evaluate(() =>
-    Array.from(document.querySelectorAll(".mh-plan-ledger thead .mh-primary-cta")).map((el) => {
+    Array.from(document.querySelectorAll(".mh-plan-cards .mh-primary-cta")).map((el) => {
       const box = el.getBoundingClientRect();
       return { label: el.textContent?.trim() ?? "", top: Math.round(box.top), bottom: Math.round(box.bottom) };
     }),

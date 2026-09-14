@@ -3,16 +3,11 @@ import Link from "next/link";
 import {
   ArrowRight,
   Check,
-  ClipboardList,
-  Ghost,
   FileText,
-  Layers,
   ListChecks,
+  Lock,
   MessageSquare,
-  Plug,
   Search,
-  ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 import { Fragment, type ReactNode } from "react";
 
@@ -695,39 +690,41 @@ export function HumanSupportSection({ compact = false }: { compact?: boolean }) 
    run on the monthly credit allowance, about 30 full packets' worth). */
 const PLAN_ROWS = [
   {
-    icon: ClipboardList,
     name: "Search foundation",
     scent: "Plan, track, and stay organized.",
-    free: "Layoff Plan, tracker, benefit facts, and documents",
-    pro: "Everything in Free",
+    free: "Layoff Plan, tracker, documents",
+    pro: "Same as Free",
   },
   {
-    icon: Layers,
     name: "Application Packets",
     scent: "Tailored materials for every opportunity.",
-    free: "One complete packet with every step, then the company and fit reads on every packet after it",
-    pro: "About 30 full packets a month. We email you at 25 and never stop a build without warning.",
+    free: "1 complete packet",
+    pro: "About 30/month",
   },
   {
-    icon: Ghost,
     name: "Ghost checks",
-    scent: "Know whether a posting is real.",
-    free: "3 basic checks a month",
-    pro: "Enriched checks: duplicate postings, employer reviews, salary benchmark",
+    scent: "Find and evaluate opportunities faster.",
+    free: "3 basic/month",
+    /* NOT "Unlimited", which is what the owner's mockup drew. Pro's enriched
+       checks run on the monthly credit allowance; the claim was corrected
+       against the app's server entitlements two days earlier and must not
+       come back. COPY.md § 5 carries the reasoning. */
+    pro: "Enriched, on every packet",
   },
   {
-    icon: Sparkles,
     name: "Ask Lumo",
-    scent: "Guidance that knows your situation.",
-    free: "10 messages a day",
-    pro: "No daily limit, on the advanced model",
+    scent: "Get guidance, practice, and answers.",
+    free: "10/day",
+    /* The site's approved wording. "Unlimited" is true here - a Lumo message
+       costs no credits and Pro lifts the daily cap - but the ledger row and
+       every other page say "no daily limit", so this one does too. */
+    pro: "No daily limit",
   },
   {
-    icon: Plug,
     name: "Connected assistant",
-    scent: "Bring in the AI you already use.",
-    free: "Connect ChatGPT or Claude to read your Offboard and update your tracker",
-    pro: "Your connected assistant can run packets and checks for you",
+    scent: "Bring in the help you already use.",
+    free: "Connect ChatGPT or Claude",
+    pro: "It can run packets and checks",
   },
 ] as const;
 
@@ -751,66 +748,60 @@ export function PricingSection() {
     <section className="mh-pricing mh-section" id="pricing" aria-labelledby="pricing-title">
       <div className="mh-pricing-heading"><div><span className="mh-kicker">Plan ledger</span><h2 id="pricing-title">Start free. Add more support when you need it.</h2></div><p>The same core tools, with more support as your search needs more room, or an organization can sponsor your access.</p></div>
       <div className="mh-plan-ledger" data-reveal="">
+        {/* The two plan cards sit ABOVE the table rather than inside its head
+            (owner 2026-09-14, round two). They share the table's column widths
+            so everything lines up, and being a flex row rather than a table
+            cell is what puts both CTAs on one line - no percentage height
+            resolving inside a table cell, which is the fragile version this
+            replaces. The table then keeps a compact header of its own, so the
+            plan and its price are still legible beside every row. */}
+        <div className="mh-plan-cards">
+          {/* The cards sit over the two plan columns, which leaves the first
+              column empty. It carries the table's own framing line rather than
+              350px of nothing. */}
+          <div className="mh-plan-cards-lede">
+            <strong>Two plans, the same core tools.</strong>
+            <p>Compare what you get with each, then start free.</p>
+          </div>
+          <article>
+            <div className="mh-plan-ledger-name"><h3>Free</h3></div>
+            <p className="mh-price-value"><b>$0</b><small>forever</small></p>
+            <p>Everything you need to run the search.</p>
+            <PrimaryCta />
+          </article>
+          <article className="is-primary">
+            {/* The badge sits beside the heading, not inside it: folding it into
+                the h3 changes the heading's accessible name. */}
+            <div className="mh-plan-ledger-name"><h3>Offboard Pro</h3><b className="is-badge">For active searches</b></div>
+            <p className="mh-price-value"><b>$20</b><small>/month</small></p>
+            <small className="mh-plan-ledger-billing">Or $45 every 3 months, which is $15 a month. Cancel anytime.</small>
+            <p>Offboard does the repeated application work for you.</p>
+            <PrimaryCta>Upgrade to Pro</PrimaryCta>
+          </article>
+        </div>
         <table>
           <caption className="mh-visually-hidden">What each plan includes, compared row by row.</caption>
           <thead>
             <tr>
-              <th scope="col">
-                <strong>Plan ledger</strong>
-                <p>Compare what you get with each plan.</p>
-              </th>
-              {/* Each header cell is a flex column so the two CTAs sit on one
-                  line at the bottom of the row, whatever length the copy above
-                  them runs to (owner 2026-09-14). */}
-              <th scope="col">
-                <div className="mh-plan-ledger-head">
-                  <div className="mh-plan-ledger-name"><h3>Free</h3></div>
-                  <p className="mh-price-value"><b>$0</b><small>forever</small></p>
-                  <p>Everything you need to run the search.</p>
-                  <PrimaryCta />
-                </div>
-              </th>
-              <th scope="col" className="is-primary">
-                <div className="mh-plan-ledger-head">
-                  {/* The badge sits beside the heading, not inside it: it is a label
-                      for the plan, and folding it into the h3 changes the heading's
-                      accessible name to "Offboard Pro For active searches". */}
-                  <div className="mh-plan-ledger-name"><h3>Offboard Pro</h3><b className="is-badge">For active searches</b></div>
-                  <p className="mh-price-value"><b>$20</b><small>/month</small></p>
-                  {/* The quarterly price reads with the price, not under the button
-                      (owner 2026-09-14): below the CTA it pushed the button off the
-                      line Free's sits on and crowded the cell. */}
-                  <small className="mh-plan-ledger-billing">Or $45 every 3 months, which is $15 a month. Cancel anytime.</small>
-                  <p>Offboard does the repeated application work for you.</p>
-                  <PrimaryCta>Upgrade to Pro</PrimaryCta>
-                </div>
-              </th>
+              <th scope="col"><strong>Plan comparison</strong></th>
+              <th scope="col">Free<span>$0 forever</span></th>
+              <th scope="col">Offboard Pro<span>$20/month</span></th>
             </tr>
           </thead>
           <tbody>
-            {PLAN_ROWS.map(({ icon: IconComponent, name, scent, free, pro }) => (
+            {PLAN_ROWS.map(({ name, scent, free, pro }) => (
               <tr key={name}>
                 <th scope="row">
-                  <IconComponent aria-hidden="true" />
-                  <span>
-                    <strong>{name}</strong>
-                    <p>{scent}</p>
-                  </span>
+                  <strong>{name}</strong>
+                  <p>{scent}</p>
                 </th>
                 <PlanCell plan="Free">{free}</PlanCell>
                 <PlanCell plan="Offboard Pro">{pro}</PlanCell>
               </tr>
             ))}
             <tr className="mh-plan-ledger-privacy">
-              <th scope="row">
-                <ShieldCheck aria-hidden="true" />
-                <span>
-                  <strong>Your privacy stays yours</strong>
-                  <p>Your career activity remains private.</p>
-                </span>
-              </th>
-              <td colSpan={2}>
-                <Check aria-hidden="true" />
+              <td colSpan={3}>
+                <Lock aria-hidden="true" />
                 <span>Your private career activity remains yours, on every plan.</span>
               </td>
             </tr>
@@ -818,10 +809,7 @@ export function PricingSection() {
         </table>
       </div>
       {/* Sponsored access is a different transaction: somebody else pays, and
-          what they buy is 90 days of Pro rather than a tier of its own. As a
-          fourth column it repeated "Included" five times and made every other
-          column narrower (owner 2026-09-14). As a band it has room for the
-          three facts the column could not hold. */}
+          what they buy is 90 days of Pro rather than a tier of its own. */}
       <aside className="mh-sponsored-band" aria-labelledby="sponsored-title">
         <div>
           <div className="mh-plan-ledger-name"><h3 id="sponsored-title">Sponsored access</h3><b className="is-badge">May be covered</b></div>

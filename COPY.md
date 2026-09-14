@@ -751,6 +751,14 @@ Final CTA. The two ids are SEO-load-bearing: `next.config.ts` sends
 - Kicker: `Plan ledger` *(was `A simple place to start`)* · H2: `Start free. Add more support when you need it.` *(kept)*
 - Intro: `The same core tools, with more support as your search needs more room, or an organization can sponsor your access.` *(the owner's own line from the mockup; the retired intro was `Begin with a transition plan and the core tools. Add credits or human support only when you choose to go further. You will see the price and what is included before you pay.` Its last sentence already ships in the hero aside, so nothing was lost.)*
 - Table caption, for screen readers only: `What each plan includes, compared row by row.`
+- Beside the two plan cards: `Two plans, the same core tools.` / `Compare what you get with each, then start free.`
+- The table's own header row: `Plan comparison` · `Free` / `$0 forever` · `Offboard Pro` / `$20/month`
+
+**Round two, owner 2026-09-14, from a second mockup.** The cells are terse, the
+rows are tight, the row headers lost their icons, and the tick is filled rather
+than outlined. The plan cards moved ABOVE the table instead of being its head,
+which is also what lets both CTAs sit on one line with a plain `margin-top:
+auto` rather than a percentage height resolving inside a table cell.
 
 **Why a table.** The three cards it replaces listed each tier's features in its
 own order and its own words, so nothing lined up across them and the reader
@@ -785,11 +793,32 @@ days of Pro rather than a tier of its own.
 
 | Row | Scent line | Free | Offboard Pro |
 | --- | --- | --- | --- |
-| `Search foundation` | `Plan, track, and stay organized.` | `Layoff Plan, tracker, benefit facts, and documents` | `Everything in Free` |
-| `Application Packets` | `Tailored materials for every opportunity.` | `One complete packet with every step, then the company and fit reads on every packet after it` | `About 30 full packets a month. We email you at 25 and never stop a build without warning.` |
-| `Ghost checks` *(ghost icon, owner 2026-09-14)* | `Know whether a posting is real.` | `3 basic checks a month` | `Enriched checks: duplicate postings, employer reviews, salary benchmark` |
-| `Ask Lumo` | `Guidance that knows your situation.` | `10 messages a day` | `No daily limit, on the advanced model` |
-| `Connected assistant` | `Bring in the AI you already use.` | `Connect ChatGPT or Claude to read your Offboard and update your tracker` | `Your connected assistant can run packets and checks for you` |
+| `Search foundation` | `Plan, track, and stay organized.` | `Layoff Plan, tracker, documents` | `Same as Free` |
+| `Application Packets` | `Tailored materials for every opportunity.` | `1 complete packet` | `About 30/month` |
+| `Ghost checks` | `Find and evaluate opportunities faster.` | `3 basic/month` | `Enriched, on every packet` |
+| `Ask Lumo` | `Get guidance, practice, and answers.` | `10/day` | `No daily limit` |
+| `Connected assistant` | `Bring in the help you already use.` | `Connect ChatGPT or Claude` | `It can run packets and checks` |
+
+**A third cell from a mockup did not ship.** The second mockup drew
+`Unlimited` against Ghost checks on Pro. Pro's enriched checks run on the
+monthly credit allowance, so nothing there is unlimited; the claim had been
+corrected against the app's server entitlements two days earlier and the cell
+says what the enrichment actually is instead. `MarketingHome.test.tsx` asserts
+the word never returns to that row.
+
+The same mockup drew `Unlimited` against Ask Lumo, where it **is** true: a Lumo
+message costs no credits and Pro lifts the daily cap. The cell still reads `No
+daily limit`, because that is the wording the ledger row and every other page
+use, and one vocabulary beats one shorter cell.
+
+`Search foundation` was not in the second mockup. It stays, because it is the
+row that demonstrates the headline's claim, and it now says so on both sides
+(`Layoff Plan, tracker, documents` / `Same as Free`) rather than showing Free
+as the lesser tier.
+
+The detail the terse packet cell drops - that Free keeps the company and fit
+reads on every packet after the first - is carried by pricing FAQ 2 directly
+below and by `/job-search`'s packet band.
 
 - Full-width closing row: `Your privacy stays yours` / `Your career activity remains private.` — `Your private career activity remains yours, on every plan.` *(the sponsor half of this line moved to the sponsored band, where it belongs, 2026-09-14)*
 - Deck note, unchanged: `Credits pay for the extras outside your search: headshots, the brand kit, voice practice, and paperwork review. Everything in the Application Packet is covered by your plan. Claiming your government benefits is always free, on any tier.`
