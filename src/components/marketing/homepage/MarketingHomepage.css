@@ -465,7 +465,10 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 
 .mh-community { min-height: 480px; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(48px, 5.42vw, 82px); padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
 .mh-page-home .mh-community { min-height: 0; display: block; padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-mist); border-bottom: 0; }
-.mh-page-home .mh-community .mh-copy-block { max-width: 720px; }
+/* Centred (owner 2026-09-13): the three cards under it are a symmetrical
+   row, and a left-aligned intro above them read as a column missing its
+   other half. Only the homepage renders this band. */
+.mh-page-home .mh-community .mh-copy-block { max-width: 720px; margin-inline: auto; align-items: center; text-align: center; }
 .mh-community-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
 .mh-community-cards article { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 28px; background: var(--mh-white); border: 1px solid var(--mh-mist-border); border-radius: var(--mh-radius-card); }
 .mh-community-logo { display: grid; width: 56px; height: 56px; margin-bottom: 8px; place-items: center; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); }
