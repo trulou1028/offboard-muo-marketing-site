@@ -59,6 +59,30 @@ docs and the owner — this doc records what actually ships.
 
 ## Language rules
 
+### Where a hero headline breaks *(owner 2026-09-14)*
+
+`text-wrap: balance` already evens the line lengths of every route hero. That
+is a typographic fact, not a grammatical one, so it happily splits a product
+name. **The rule: a multi-word product name never splits across lines.** It is
+held by a non-breaking space (`balanceHeadline` in `MarketingSite.tsx`) and
+enforced against the real line boxes by `e2e/homepage.spec.ts`, since a
+non-breaking space is invisible in the DOM and in a screenshot.
+
+**The bend:** a headline whose break is a decision passes `titleLines`, one
+entry per line. `/pricing` and `/lumo` use it. `title` stays the name this
+document uses; `titleLines` is only how it renders. The homepage H1 bends it
+the same way, with its own spans.
+
+- `/pricing`: `["Start free. Upgrade", "when you need more support."]`, because balance was ending line one on `when`, which splits the clause that word opens.
+- `/lumo`: `["The AI that", "already understands", "your career."]`, because balance was leaving `understands` alone on a line.
+
+**The bigger rule was tried and rejected.** Gluing every short function word to
+the next was built and measured at 1440 and 390 across ten routes: each glued
+pair is an unbreakable run, so the longest run sets the effective measure and
+the headlines gained lines rather than losing bad breaks (`/job-search` went
+from a clean two lines to three, `/career-context` to four). It is not in the
+code; the measurement is in the commit that removed it.
+
 From the v2 spec §3, enforced by plan 009's sweep and the test harness.
 
 | Say | Never say |
@@ -740,21 +764,34 @@ collapses to blocks on a phone with each cell naming its plan from
 - First column: `Plan ledger` / `Compare what you get with each plan.`
 - **Free**: `$0 forever` — `Everything you need to run the search.` — CTA `Get started free`
 - **Offboard Pro** (badge `For active searches`, the emphasised dark column): `$20/month` — `Offboard does the repeated application work for you.` — CTA `Upgrade to Pro` — billing line `Or $45 every 3 months, which is $15 a month. Cancel anytime.`
-- **Sponsored access** (badge `May be covered`): `Outplacement, modernized. Your former employer, school, or workforce organization may cover 90 days of Offboard Pro.` — CTA `Learn about sponsored access` → `/employers`
-  - `outplacement` is allowed here: § Language rules permits it on `/employers` and in Sponsored-tier copy, and `MarketingHome.test.tsx` asserts it is present.
-  - **90 days** is the sponsored term from `/employers` § 9 (`90 days of full Offboard Pro`), which is what makes every Sponsored cell below read `Included`.
+- The Pro column's billing line, `Or $45 every 3 months, which is $15 a month. Cancel anytime.`, sits **with the price, above the blurb** (owner 2026-09-14). Under the CTA it pushed the button off the line Free's sits on and crowded the cell.
+- Both plan CTAs sit on one line at the **bottom** of the header row, whatever length the copy above them runs to (owner 2026-09-14).
+
+### Sponsored access *(its own full-width band under the ledger, owner 2026-09-14)*
+
+Sponsored access left the table on 2026-09-14. As a fourth column it repeated
+`Included` on all five rows and made every other column narrower for it; it is
+also a different transaction, where somebody else pays and what they buy is 90
+days of Pro rather than a tier of its own.
+
+- Heading `Sponsored access` · badge `May be covered`
+- Body: `Outplacement, modernized. Your former employer, school, or workforce organization may cover 90 days of Offboard Pro.`
+- CTA `Learn about sponsored access` → `/employers`
+- The three facts the single table cell could not hold, restored from the retired deck: `The full sponsored benefit is delivered to you` · `Your private career activity remains yours` · `Sponsors receive aggregate reporting only`
+- `outplacement` is allowed here: § Language rules permits it on `/employers` and in Sponsored-tier copy, and `MarketingHome.test.tsx` asserts it is present.
+- **90 days** is the sponsored term from `/employers` § 9 (`90 days of full Offboard Pro`).
 
 **Rows** — each one checked 2026-09-14 against the ledger row "Consumer tiers" and the app's server entitlements.
 
-| Row | Scent line | Free | Offboard Pro | Sponsored |
-| --- | --- | --- | --- | --- |
-| `Search foundation` | `Plan, track, and stay organized.` | `Layoff Plan, tracker, benefit facts, and documents` | `Everything in Free` | `Included` |
-| `Application Packets` | `Tailored materials for every opportunity.` | `One complete packet with every step, then the company and fit reads on every packet after it` | `About 30 full packets a month. We email you at 25 and never stop a build without warning.` | `Included` |
-| `Ghost checks` | `Know whether a posting is real.` | `3 basic checks a month` | `Enriched checks: duplicate postings, employer reviews, salary benchmark` | `Included` |
-| `Ask Lumo` | `Guidance that knows your situation.` | `10 messages a day` | `No daily limit, on the advanced model` | `Included` |
-| `Connected assistant` | `Bring in the AI you already use.` | `Connect ChatGPT or Claude to read your Offboard and update your tracker` | `Your connected assistant can run packets and checks for you` | `Included` |
+| Row | Scent line | Free | Offboard Pro |
+| --- | --- | --- | --- |
+| `Search foundation` | `Plan, track, and stay organized.` | `Layoff Plan, tracker, benefit facts, and documents` | `Everything in Free` |
+| `Application Packets` | `Tailored materials for every opportunity.` | `One complete packet with every step, then the company and fit reads on every packet after it` | `About 30 full packets a month. We email you at 25 and never stop a build without warning.` |
+| `Ghost checks` *(ghost icon, owner 2026-09-14)* | `Know whether a posting is real.` | `3 basic checks a month` | `Enriched checks: duplicate postings, employer reviews, salary benchmark` |
+| `Ask Lumo` | `Guidance that knows your situation.` | `10 messages a day` | `No daily limit, on the advanced model` |
+| `Connected assistant` | `Bring in the AI you already use.` | `Connect ChatGPT or Claude to read your Offboard and update your tracker` | `Your connected assistant can run packets and checks for you` |
 
-- Full-width closing row: `Your privacy stays yours` / `Your career activity remains private.` — `Your private career activity remains yours. Sponsors receive aggregate reporting only.`
+- Full-width closing row: `Your privacy stays yours` / `Your career activity remains private.` — `Your private career activity remains yours, on every plan.` *(the sponsor half of this line moved to the sponsored band, where it belongs, 2026-09-14)*
 - Deck note, unchanged: `Credits pay for the extras outside your search: headshots, the brand kit, voice practice, and paperwork review. Everything in the Application Packet is covered by your plan. Claiming your government benefits is always free, on any tier.`
 
 **Two cells in the owner's mockup did not ship as drawn**, and both would have been false:
@@ -2232,6 +2269,7 @@ When one ships, move it into its page section above.
 | 2026-09-13 | `/integrations` is called **Integrations**, not `Offboard Everywhere` (owner). Nav row, footer row, meta title, hero kicker, and the three sibling-strip CTAs that named it. The three CTAs read `See the integrations`. No URL or redirect change | this file § 11 |
 | 2026-09-14 | Ghost-check claims corrected against the app's **server** entitlements after an owner-requested re-reference of `lumo-plan-builder`. `/pricing` no longer promises `whether the job is real` on every packet (it is capped at three a month); `/job-search`'s Ghost Check chip reads `3 a month`, not `Pro`. The 2026-09-13 changelog row called this an app-versus-site contradiction needing an owner decision; there was no contradiction, only a misread of `packetSteps.ts`, whose `pro` flag describes the enriched check and is not the entitlement gate. **Interview briefs were checked too and are correctly listed as Pro**: they cost no credits but `generate-interview-briefing` still calls `checkEntitlement` | this file §§ 5 and 14 |
 | 2026-09-14 | `/pricing`'s three-card deck becomes the **plan ledger**, a comparison table, from the owner's own mockup. Same facts, read across one row at a time. Two mockup cells were not shipped because they were false (`Basic tracker` on Free, `Unlimited ghost checks` on Pro) | this file § 5 |
+| 2026-09-14 | Plan ledger round 2 (owner): Sponsored access leaves the table for its own band under it, both plan CTAs bottom-align on one line, the Pro billing line moves up with the price, and Ghost checks takes a ghost icon. Plus a headline rule: a product name never splits across lines, bent per headline with `titleLines` | this file §§ 5 and Language rules |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·

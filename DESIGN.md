@@ -209,6 +209,18 @@ overrides — the smallest heading/gutter/padding step). There's also a
 animations site-wide (and the motion controller adds no reveal classes
 under it, so reduced-motion users get a fully static page).
 
+**Hero headlines break at a phrase, not at the measure** (owner 2026-09-14).
+Route heroes carry `text-wrap: balance`, which evens the line lengths. It knows
+nothing about meaning, so it will split a product name. `balanceHeadline` holds
+multi-word product names together with a non-breaking space, and
+`e2e/homepage.spec.ts` measures the real line boxes to prove it. Where the
+break is a design decision, the page passes `titleLines` to `PageHero`, one
+entry per line, and each becomes a block (`.mh-route-hero h1 span`). The
+homepage H1 has used the same span technique since 2026-09-07. Gluing every
+short function word was measured and rejected: each glued pair is an
+unbreakable run, so the longest one sets the effective measure and headlines
+gain lines instead of losing bad breaks.
+
 **In-page anchors scroll smoothly** (owner 2026-09-13). `scroll-behavior`
 lives in `src/app/globals.css` on `html`, not in the scoped stylesheet: only
 the element that actually scrolls responds to it, and `.marketing-homepage`

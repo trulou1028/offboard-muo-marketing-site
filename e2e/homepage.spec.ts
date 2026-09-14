@@ -553,3 +553,93 @@ test.describe("the /job-search rows stay inside their sections", () => {
     await expect(page.locator(".mh-packet-steps .mh-state-chip", { hasText: /^3 a month$/ })).toHaveCount(1);
   });
 });
+
+// Where a hero headline breaks (owner 2026-09-14). `text-wrap: balance` gives
+// even line lengths, which is a typographic fact and not a grammatical one:
+// measured across the route heroes it was splitting the product name "Career
+// Context" over two lines. The rule is small on purpose - a multi-word product
+// name never splits - and it is enforced here against the real line boxes,
+// because a non-breaking space is invisible in the DOM and in a screenshot.
+//
+// The bigger rule, gluing every short function word, was built and measured
+// and thrown away: each glued pair is an unbreakable run, so the longest run
+// sets the effective measure and headlines gained lines instead of losing bad
+// breaks. See the comment on balanceHeadline in MarketingSite.tsx.
+test.describe("hero headlines keep product names whole", () => {
+  const NAMES = ["Career Context", "Application Packet", "Layoff Plan", "Offboard Pro"];
+
+  for (const width of [1440, 900, 390]) {
+    test(`no product name splits across lines at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      const offenders: string[] = [];
+
+      for (const route of ["/pricing", "/career-context", "/lumo", "/job-search", "/layoff-support", "/integrations"]) {
+        await page.goto(route);
+        await page.evaluate(() => document.fonts.ready);
+
+        const lines: string[] = await page.evaluate(() => {
+          const heading = document.querySelector("main h1");
+          if (!heading) return [];
+          const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+          const out: string[] = [];
+          let current = "";
+          let lastTop = -1;
+          let node: Node | null;
+          while ((node = walker.nextNode())) {
+            for (const match of (node.textContent ?? "").matchAll(/\S+/g)) {
+              const range = document.createRange();
+              range.setStart(node, match.index!);
+              range.setEnd(node, match.index! + match[0].length);
+              const top = Math.round(range.getBoundingClientRect().top);
+              if (lastTop !== -1 && top !== lastTop) {
+                out.push(current.trim());
+                current = "";
+              }
+              lastTop = top;
+              current += `${match[0]} `;
+            }
+          }
+          if (current.trim()) out.push(current.trim());
+          return out;
+        });
+
+        // A name survives if some single line contains it whole. Compare with
+        // the non-breaking spaces normalised, since that is what holds it.
+        const whole = lines.map((line) => line.replace(/ /g, " "));
+        const full = whole.join(" ");
+        for (const name of NAMES) {
+          if (full.includes(name) && !whole.some((line) => line.includes(name))) {
+            offenders.push(`${route}: "${name}" split across ${JSON.stringify(whole)}`);
+          }
+        }
+      }
+
+      expect(offenders).toEqual([]);
+    });
+  }
+});
+
+// The two plan CTAs sit on one line at the bottom of the ledger's header row
+// (owner 2026-09-14), whatever length the copy above them runs to. It is held
+// by a flex column resolving `height: 100%` inside a table cell, which is
+// fragile in two ways this asserts against: the cell needs its own `height`
+// for the percentage to resolve, and `margin-top: auto` loses a specificity
+// tie to the CTA's own `margin-top` unless its selector outranks it. Both
+// failures look like a small vertical drift, well inside the visual suite's
+// 1% tolerance.
+test("the pricing plan CTAs stay on one line", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/pricing");
+  await page.evaluate(() => document.fonts.ready);
+
+  const ctas = await page.evaluate(() =>
+    Array.from(document.querySelectorAll(".mh-plan-ledger thead .mh-primary-cta")).map((el) => {
+      const box = el.getBoundingClientRect();
+      return { label: el.textContent?.trim() ?? "", top: Math.round(box.top), bottom: Math.round(box.bottom) };
+    }),
+  );
+
+  expect(ctas).toHaveLength(2);
+  expect(ctas[0].top).toBe(ctas[1].top);
+  expect(ctas[0].bottom).toBe(ctas[1].bottom);
+});

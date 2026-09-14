@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Check,
   ClipboardList,
+  Ghost,
   FileText,
   Layers,
   ListChecks,
@@ -13,7 +14,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 import { MarketingMobileMenu, MarketingNav } from "./MarketingNav";
 import { MotionController } from "./MotionController";
@@ -274,9 +275,48 @@ export function NumberedRows({ rows }: { rows: readonly (readonly [string, strin
   );
 }
 
+/* Where a hero headline breaks (owner 2026-09-14).
+ *
+ * `text-wrap: balance` gives even line lengths, which is a typographic fact
+ * and not a grammatical one. Measured across ten routes at 1440 and 390 it was
+ * splitting the product name "Career Context" over two lines, leaving
+ * "Start free. Upgrade when / you need more support.", and stranding
+ * "understands" on a line of its own.
+ *
+ * The rule is deliberately small: a multi-word PRODUCT NAME never splits.
+ * That is it.
+ *
+ * The obvious bigger rule - never end a line on a short function word, glued
+ * with non-breaking spaces - was built, measured and thrown away. Every glued
+ * pair is an unbreakable run, so the longest run sets the effective measure
+ * and the headline gains lines rather than losing bad breaks: `/job-search`
+ * went from a clean two lines to three, `/career-context` to four. The
+ * measurement is in the commit that removed it.
+ *
+ * So the bend is authored, not automatic. A headline whose break is a design
+ * decision carries one <span> per line and the CSS makes each a block; the
+ * homepage H1 has worked that way since 2026-09-07. `e2e/homepage.spec.ts`
+ * measures the real line boxes and fails when a product name splits. */
+const HEADLINE_KEEP_WHOLE = [
+  "Career Context",
+  "Application Packet",
+  "Layoff Plan",
+  "Offboard Pro",
+  "Ghost Job Checker",
+] as const;
+
+export function balanceHeadline(title: string): string {
+  let out = title;
+  for (const phrase of HEADLINE_KEEP_WHOLE) {
+    out = out.split(phrase).join(phrase.replace(/ /g, "\u00a0"));
+  }
+  return out;
+}
+
 export function PageHero({
   kicker,
   title,
+  titleLines,
   body,
   current,
   aside,
@@ -290,6 +330,10 @@ export function PageHero({
   title: string;
   body: string;
   current: MarketingRoute;
+  /* The bend. One entry per line, for a headline whose break is a decision
+     rather than wherever the measure lands. `title` stays the name COPY.md
+     uses; these are the lines it renders as. */
+  titleLines?: readonly string[];
   aside?: ReactNode | false;
   /* Plan 046: a product composition in the right column instead of the
      paper aside card. Four product pages opened on 700px of empty green;
@@ -316,7 +360,16 @@ export function PageHero({
       <div>
         {eyebrowVisual ? <span className="mh-hero-eyebrow-visual">{eyebrowVisual}</span> : null}
         <span className="mh-kicker is-lime">{kicker}</span>
-        <h1>{title}</h1>
+        <h1>
+          {titleLines
+            ? titleLines.map((line, index) => (
+                <Fragment key={line}>
+                  {index > 0 ? " " : null}
+                  <span>{balanceHeadline(line)}</span>
+                </Fragment>
+              ))
+            : balanceHeadline(title)}
+        </h1>
         <p>{body}</p>
         {footnote ? <small className="mh-route-hero-footnote">{footnote}</small> : null}
         {ctaNode}
@@ -656,7 +709,7 @@ const PLAN_ROWS = [
     pro: "About 30 full packets a month. We email you at 25 and never stop a build without warning.",
   },
   {
-    icon: Search,
+    icon: Ghost,
     name: "Ghost checks",
     scent: "Know whether a posting is real.",
     free: "3 basic checks a month",
@@ -676,6 +729,12 @@ const PLAN_ROWS = [
     free: "Connect ChatGPT or Claude to read your Offboard and update your tracker",
     pro: "Your connected assistant can run packets and checks for you",
   },
+] as const;
+
+const SPONSORED_FACTS = [
+  "The full sponsored benefit is delivered to you",
+  "Your private career activity remains yours",
+  "Sponsors receive aggregate reporting only",
 ] as const;
 
 function PlanCell({ plan, children }: { plan: string; children: ReactNode }) {
@@ -700,26 +759,31 @@ export function PricingSection() {
                 <strong>Plan ledger</strong>
                 <p>Compare what you get with each plan.</p>
               </th>
+              {/* Each header cell is a flex column so the two CTAs sit on one
+                  line at the bottom of the row, whatever length the copy above
+                  them runs to (owner 2026-09-14). */}
               <th scope="col">
-                <div className="mh-plan-ledger-name"><h3>Free</h3></div>
-                <p className="mh-price-value"><b>$0</b><small>forever</small></p>
-                <p>Everything you need to run the search.</p>
-                <PrimaryCta />
+                <div className="mh-plan-ledger-head">
+                  <div className="mh-plan-ledger-name"><h3>Free</h3></div>
+                  <p className="mh-price-value"><b>$0</b><small>forever</small></p>
+                  <p>Everything you need to run the search.</p>
+                  <PrimaryCta />
+                </div>
               </th>
               <th scope="col" className="is-primary">
-                {/* The badge sits beside the heading, not inside it: it is a label for
-                    the plan, and folding it into the h3 changes the heading's
-                    accessible name to "Offboard Pro For active searches". */}
-                <div className="mh-plan-ledger-name"><h3>Offboard Pro</h3><b className="is-badge">For active searches</b></div>
-                <p className="mh-price-value"><b>$20</b><small>/month</small></p>
-                <p>Offboard does the repeated application work for you.</p>
-                <PrimaryCta>Upgrade to Pro</PrimaryCta>
-                <small>Or $45 every 3 months, which is $15 a month. Cancel anytime.</small>
-              </th>
-              <th scope="col" className="is-sponsored">
-                <div className="mh-plan-ledger-name"><h3>Sponsored access</h3><b className="is-badge">May be covered</b></div>
-                <p>Outplacement, modernized. Your former employer, school, or workforce organization may cover 90 days of Offboard Pro.</p>
-                <Link className="mh-secondary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
+                <div className="mh-plan-ledger-head">
+                  {/* The badge sits beside the heading, not inside it: it is a label
+                      for the plan, and folding it into the h3 changes the heading's
+                      accessible name to "Offboard Pro For active searches". */}
+                  <div className="mh-plan-ledger-name"><h3>Offboard Pro</h3><b className="is-badge">For active searches</b></div>
+                  <p className="mh-price-value"><b>$20</b><small>/month</small></p>
+                  {/* The quarterly price reads with the price, not under the button
+                      (owner 2026-09-14): below the CTA it pushed the button off the
+                      line Free's sits on and crowded the cell. */}
+                  <small className="mh-plan-ledger-billing">Or $45 every 3 months, which is $15 a month. Cancel anytime.</small>
+                  <p>Offboard does the repeated application work for you.</p>
+                  <PrimaryCta>Upgrade to Pro</PrimaryCta>
+                </div>
               </th>
             </tr>
           </thead>
@@ -735,9 +799,6 @@ export function PricingSection() {
                 </th>
                 <PlanCell plan="Free">{free}</PlanCell>
                 <PlanCell plan="Offboard Pro">{pro}</PlanCell>
-                {/* Sponsored is 90 days of Pro, bought by the organization, so
-                    every row is the Pro row. The header cell says so once. */}
-                <PlanCell plan="Sponsored access">Included</PlanCell>
               </tr>
             ))}
             <tr className="mh-plan-ledger-privacy">
@@ -748,14 +809,31 @@ export function PricingSection() {
                   <p>Your career activity remains private.</p>
                 </span>
               </th>
-              <td colSpan={3}>
+              <td colSpan={2}>
                 <Check aria-hidden="true" />
-                <span>Your private career activity remains yours. Sponsors receive aggregate reporting only.</span>
+                <span>Your private career activity remains yours, on every plan.</span>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+      {/* Sponsored access is a different transaction: somebody else pays, and
+          what they buy is 90 days of Pro rather than a tier of its own. As a
+          fourth column it repeated "Included" five times and made every other
+          column narrower (owner 2026-09-14). As a band it has room for the
+          three facts the column could not hold. */}
+      <aside className="mh-sponsored-band" aria-labelledby="sponsored-title">
+        <div>
+          <div className="mh-plan-ledger-name"><h3 id="sponsored-title">Sponsored access</h3><b className="is-badge">May be covered</b></div>
+          <p>Outplacement, modernized. Your former employer, school, or workforce organization may cover 90 days of Offboard Pro.</p>
+          <Link className="mh-secondary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
+        </div>
+        <ul>
+          {SPONSORED_FACTS.map((fact) => (
+            <li key={fact}><Check aria-hidden="true" /><span>{fact}</span></li>
+          ))}
+        </ul>
+      </aside>
       <p className="mh-price-note">Credits pay for the extras outside your search: headshots, the brand kit, voice practice, and paperwork review. Everything in the Application Packet is covered by your plan. Claiming your government benefits is always free, on any tier.</p>
     </section>
   );
