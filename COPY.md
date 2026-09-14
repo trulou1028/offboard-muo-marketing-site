@@ -311,7 +311,7 @@ legacy URLs 301 to it). For Organizations stays a plain link while
 struck through, so un-deferring restores the exact blurb.
 
 - **Product ▾** — *The system:* Lumo `The guide that knows your situation.` ·
-  Offboard Everywhere `Use Offboard from the AI you already use.` · *The
+  Integrations `Use Offboard from the AI you already use.` *(renamed 2026-09-13)* · *The
   work:* Job Search `The whole search as one system.` · Layoff & Benefits
   `Deadlines, coverage, and runway.` · *Featured, "Start here":* **Career
   Context** `One living record of your experience, applications, companies,
@@ -357,7 +357,7 @@ Case while "How it works" and "For employers" were not.
 > Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
 
 Columns (plan 043 trim, plan 045 revision) — **Product:** Career Context,
-Lumo, Job Search, Offboard Everywhere, Layoff & Benefits, Pricing, Guides
+Lumo, Job Search, Integrations, Layoff & Benefits, Pricing, Guides
 ~~, How It Works, Company Transition Centers~~ ·
 **Partners:** For Employers ~~, Workforce & Government, Universities &
 Communities~~ ·
@@ -521,7 +521,7 @@ connections.
 - H2: `Ask anywhere. The answer is about you.`
 - Body: `Lumo reads your Career Context from the first question and tells you what matters first, including the deadlines and the money you may be owed. Prefer ChatGPT or Claude? Connect Offboard and take your context with you.` *(plan 050: the first-week substance now lives here as what Lumo raises first; "may be owed" hedges and promises nothing. Was `Lumo is Offboard's own guide and works from your Career Context from the first question. Prefer ChatGPT or Claude? …`)*
 - Beta note *(ledger-governed)*: `ChatGPT and Claude connections are in beta.`
-- CTA: `See how Offboard Everywhere works` → `/integrations` (the section's only action since `Ask Lumo` was retired in round 4; off the page under plan 043, back under plan 045)
+- CTA: `See the integrations` → `/integrations` *(2026-09-13, with the page's rename; was `See how Offboard Everywhere works`)* (the section's only action since `Ask Lumo` was retired in round 4; off the page under plan 043, back under plan 045)
 - Demo conversation (composition B), unchanged from v2 and complete in the DOM. The earlier exchange sits behind the later one and is cropped by it, so the section shows one exchange at full size while both remain readable in order: You: `How does this role compare with the other opportunities I'm pursuing?` / AI: `Based on your Offboard context, Tesserac looks like one of your stronger opportunities. It aligns closely with your AI product experience and gives you more technical ownership than several of the other roles you're considering.` / You: `Move Tesserac to the interview stage and save that Ruben is my recruiter.` / AI: `Done. Tesserac is now in Interviewing, and I've added Ruben to the opportunity.`
 - Chip on the composition: `Contact saved · Ruben`
 - Retired here: v2's `Powered by Offboard Career Context` callout and the supporting line `Prefer another AI assistant? Connect Offboard and take your context with you.` (its substance is in the body above).
@@ -1236,7 +1236,7 @@ where the record comes from, not a second taxonomy of it. The eight
 ### How Lumo uses it *(an item in the shared `Also part of the system` strip since plan 046; the band is retired)*
 
 - Strip item: `Lumo starts every conversation already caught up.` — `Because it works from your Career Context, you never re-upload a resume or re-explain your goals.` → `See how Lumo works` → `/lumo`
-- Second strip item: `Your context goes with you.` — `Connect ChatGPT or Claude and your Career Context is there too. Save a role or add what you learned from wherever you are working.` → `See how Offboard Everywhere works` → `/integrations`
+- Second strip item: `Your context goes with you.` — `Connect ChatGPT or Claude and your Career Context is there too. Save a role or add what you learned from wherever you are working.` → `See the integrations` → `/integrations`
 - ~~Kicker: `Meet Lumo` (Lumo eyebrow treatment)~~
 - H2: `Lumo starts every conversation already caught up.`
 - Body: `Because Lumo works from your Career Context, you never re-upload a resume, re-explain your goals, or reconstruct what happened with an application. You ask, and the answer starts from everything you have already built.`
@@ -1265,7 +1265,13 @@ where the record comes from, not a second taxonomy of it. The eight
 - Body: `Build your Career Context once and every application, interview, and conversation after it starts further ahead.`
 - CTAs: sitewide primary + `Talk to a person`
 
-# 11 · Offboard Everywhere `/integrations`
+# 11 · Integrations `/integrations`
+
+**Renamed 2026-09-13 (owner): the page is called `Integrations`, not
+`Offboard Everywhere`.** The nav row, the footer row, the meta title, the
+hero kicker and the three sibling-strip CTAs that pointed here by the old
+name all changed in the same PR. The URL was already `/integrations`, so
+nothing redirects.
 
 **Added 2026-08-31 (plan 028, second pillar of the site-architecture
 strategy).** The consumer-facing version of the connected-assistant story.
@@ -1289,14 +1295,14 @@ capability matrix of what a given assistant can and cannot reach, because
 the real authorization model is not settled. When it is, that matrix
 belongs here.
 
-**Meta title:** `Offboard Everywhere | Use Offboard from the AI you already use`
+**Meta title:** `Integrations | Use Offboard from the AI you already use` *(renamed 2026-09-13)*
 **Meta description:** `Connect Offboard to ChatGPT, Claude, and the tools you already use. Save roles, update applications, and add to your Career Context from wherever you are working.`
 
 ### Hero
 
 *Plan 046: the hero's right column shows the five connected marks (Google Calendar, Google Drive, Calendly, ChatGPT, Claude) as tiles with their status chips, nothing clickable.*
 
-- Kicker: `Offboard everywhere`
+- Kicker: `Integrations` *(2026-09-13; was `Offboard everywhere`)*
 - H1: `Use Offboard from the AI you already use.`
 - Body: `Your job search does not live in one tab. Connect Offboard to the assistants you already work in, and save opportunities, update applications, and add to your Career Context from wherever the conversation happens.`
 - CTA: `Get started free` (primary)
@@ -1456,12 +1462,12 @@ line.*
 
 ### Prefer a different assistant *(an item in the shared `Also part of the system` strip since plan 046)*
 
-- Strip item: `Prefer ChatGPT or Claude? That works too.` — `Lumo lives inside Offboard, but it is not the only way in. Connect the assistant you already use and it works from the same record.` → `See how Offboard Everywhere works` → `/integrations`
+- Strip item: `Prefer ChatGPT or Claude? That works too.` — `Lumo lives inside Offboard, but it is not the only way in. Connect the assistant you already use and it works from the same record.` → `See the integrations` → `/integrations`
 - Second strip item: `Everything Lumo knows starts here.` — `Your Career Context is the record every answer is built from. Build it once and every conversation starts further ahead.` → `See what it holds` → `/career-context`
 - ~~Kicker: `Or bring your own`~~
 - H2: `Prefer ChatGPT or Claude? That works too.`
 - Body: `Lumo is the assistant that lives inside Offboard, but it is not the only way in. Connect the assistant you already use and it works from the same record.`
-- Section link: `See how Offboard Everywhere works` → `/integrations`
+- Section link: `See the integrations` → `/integrations` *(2026-09-13)*
 
 ### Final CTA (shared component, overridden copy)
 
@@ -2173,6 +2179,7 @@ When one ships, move it into its page section above.
 | 2026-09-11 | One closing band on every page: the homepage's `FinalCtaV2` and the route pages' three-dot progress mark are retired; `FinalCta` takes kicker, H2, body and small print as props. Homepage gains the kicker and `Talk to a person` | this file § 1 |
 | 2026-09-13 | `/job-search` rebuilt (plan 051): a new Application Packet band carrying the app's six packet steps with Free/Pro chips, the four-column stage grid rebuilt as numbered rows, a new Straight answers band, and the hero CTA doc drift corrected. **Open question for the owner:** `/pricing` FAQ 2 says every packet after the first still runs `whether the job is real`, while the app marks Ghost Check a Pro step. One of the two is wrong | plan 051, this file § 14 |
 | 2026-09-13 | Homepage community band: `Meet with a human` leads the three cards, its CTA becomes `Fill out intake` (was `Say hello`), and the intro block is centred over the row | this file § 1 |
+| 2026-09-13 | `/integrations` is called **Integrations**, not `Offboard Everywhere` (owner). Nav row, footer row, meta title, hero kicker, and the three sibling-strip CTAs that named it. The three CTAs read `See the integrations`. No URL or redirect change | this file § 11 |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·

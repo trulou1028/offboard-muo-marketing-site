@@ -275,7 +275,7 @@ function StepConnect() {
           <span className="mh-kicker is-lime">Step 2 · Talk with Lumo</span>
           <h2 id="connect-title">Ask anywhere. The answer is about you.</h2>
           <p>Lumo reads your Career Context from the first question and tells you what matters first, including the deadlines and the money you may be owed. Prefer ChatGPT or Claude? Connect Offboard and take your context with you.</p>
-          <SecondaryCta href="/integrations">See how Offboard Everywhere works</SecondaryCta>
+          <SecondaryCta href="/integrations">See the integrations</SecondaryCta>
           <small>ChatGPT and Claude connections are in beta.</small>
         </div>
         <ConnectComposition />

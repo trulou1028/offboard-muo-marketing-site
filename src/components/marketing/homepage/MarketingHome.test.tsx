@@ -195,7 +195,7 @@ describe("Offboard marketing routes", () => {
     for (const [name, href] of [
       ["Career Context", "/career-context"],
       ["Lumo", "/lumo"],
-      ["Offboard Everywhere", "/integrations"],
+      ["Integrations", "/integrations"],
       ["Job Search", "/job-search"],
       ["Layoff & Benefits", "/layoff-support"],
       ["For Employers", "/employers"],

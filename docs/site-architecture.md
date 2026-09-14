@@ -70,7 +70,7 @@ COPY.md § 1.
 ## Navigation
 
 Header (fixed since plan 024; mega menus in plan 037; trimmed by plan 043 and
-revised by plan 045): **Product ▾** (The system: Lumo · Offboard Everywhere;
+revised by plan 045): **Product ▾** (The system: Lumo · Integrations;
 The work: Job Search · Layoff & Benefits; featured: Career Context) · **For
 Employers** · **Pricing** · **Resources ▾** (Resources: Guides · Privacy &
 Security; Company: About · Visit Us · Slack Community · Contact; featured:
@@ -78,7 +78,7 @@ the newsletter) · Sign in · Get started free (neon). No Home link: the
 wordmark is home (owner call 2026-09-01). Below 1180px the header swaps to
 the mobile menu, which carries the same entries flattened, including each
 panel's featured card. Footer: Product (Career Context, Lumo, Job Search,
-Offboard Everywhere, Layoff & Benefits, Pricing, Guides) · Partners (For
+Integrations, Layoff & Benefits, Pricing, Guides) · Partners (For
 Employers) · Company (About, Visit Us, Contact) · Legal (Privacy & Security,
 Privacy Policy, Terms).
 
