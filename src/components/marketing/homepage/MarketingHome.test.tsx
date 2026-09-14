@@ -21,6 +21,7 @@ import { getPostBlocks } from "@/content/resources/blocks";
 import { buildResourceSections, getResource } from "@/content/resources/registry";
 
 import MarketingHome from "./MarketingHome";
+import { MarketingJobSearch } from "./MarketingJobSearch";
 
 // Keyed by route so the "every deferred route is covered" assertion below
 // fails when a page joins src/lib/launch.ts without being imported here.
@@ -219,6 +220,42 @@ describe("Offboard marketing routes", () => {
     for (const route of DEFERRED_ROUTES) {
       expect(footerNav.querySelector(`a[href="${route}"]`), `${route} in the footer`).toBeNull();
     }
+  });
+
+  it("gives job search the packet steps, the stage rows, and plain answers", () => {
+    render(<MarketingJobSearch />);
+
+    // The six rows are the app's own packet steps, in the app's order. A chip
+    // per row says whether Free covers it: two free, four Pro (owner decision
+    // 2026-09-13). Both counts are asserted, because a chip that silently
+    // flipped to Free would be a pricing claim nobody reviewed.
+    expect(
+      Array.from(document.querySelectorAll(".mh-packet-steps strong")).map((s) => s.textContent),
+    ).toEqual(["Ghost Check", "Company Intel", "Role Match Analysis", "Tailor Resume", "Cover Letter", "Path to a Person"]);
+    const chips = Array.from(document.querySelectorAll(".mh-packet-steps .mh-state-chip")).map((c) => c.textContent);
+    expect(chips.filter((c) => c === "Free")).toHaveLength(2);
+    expect(chips.filter((c) => c === "Pro")).toHaveLength(4);
+    expect(screen.getByText(/your first complete packet runs every step free/i)).toBeInTheDocument();
+    // The sentence that keeps the Pro chip on Ghost Check from contradicting
+    // /pricing's "3 basic ghost checks a month" on the Free tier.
+    expect(screen.getByText(/three basic ghost checks a month, outside a packet/i)).toBeInTheDocument();
+
+    // The four stages are rows now, not four columns, and they carry the ten
+    // tool descriptions this page owns.
+    expect(document.querySelectorAll(".mh-stage-strip.is-detailed > li")).toHaveLength(4);
+    expect(document.querySelector(".mh-kit-grid")).toBeNull();
+    expect(screen.getByText(/the tenth application starts further ahead than the first/i)).toBeInTheDocument();
+
+    for (const question of [
+      "Where do the job postings come from?",
+      "Does Offboard apply for me?",
+      "What does Free include?",
+      "Where does the tracker get its information?",
+    ]) {
+      expect(screen.getByText(question)).toBeInTheDocument();
+    }
+    // Never-promise rule: the page says what it builds, not that it applies.
+    expect(screen.getByText(/it builds what you send and keeps it with the role/i)).toBeInTheDocument();
   });
 
   it("gives how it works the homepage's four steps, in order, with the toolkit and Lumo", () => {

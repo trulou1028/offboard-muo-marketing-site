@@ -1326,16 +1326,8 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 
 /* Toolkit */
 .mh-kit { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); }
-.mh-kit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 56px; }
-.mh-kit-col { padding-top: 20px; border-top: 1px solid var(--mh-ink); }
-.mh-kit-col svg { width: 20px; height: 20px; color: var(--mh-forest); stroke-width: 1.5; }
-.mh-kit-col h3 { margin-top: 16px; font-size: 22px; font-weight: 500; line-height: 1.2; }
-.mh-kit-tool { margin-top: 18px; }
-.mh-kit-tool strong { font-size: 15px; font-weight: 600; }
-.mh-kit-tool p { margin-top: 4px; color: var(--mh-muted); font-size: 14px; line-height: 1.5; }
 /* /job-search: the one-line "what this stage decides", above the tools it now
    describes (the descriptions moved here from the homepage, 2026-09-02). */
-p.mh-kit-decides { margin-top: 12px; color: var(--mh-muted); font-size: 15px; line-height: 1.5; }
 
 /* Pattern E on the homepage - four stages in one row. Replaces a 2x2 holding
    ten tool descriptions: the homepage names the tools, /job-search describes
@@ -1366,6 +1358,38 @@ ol.mh-stage-strip { margin-top: 48px; counter-reset: mh-stage; border-top: 1px s
 .mh-stage-head h3 { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 500; line-height: 1.2; }
 .mh-stage-head h3 svg { width: 20px; height: 20px; color: var(--mh-forest); stroke-width: 1.5; }
 .mh-stage-head p { margin-top: 6px; color: var(--mh-muted); font-size: 15px; line-height: 1.5; }
+
+/* /job-search's variant of the same row (plan 051). Its tools carry a
+   sentence each, so the tool cell is a list rather than the homepage's pills,
+   and there is no product-state chip to leave room for. */
+.mh-stage-strip.is-detailed > li { grid-template-columns: 56px minmax(190px, 0.8fr) minmax(0, 1.7fr); align-items: start; }
+.mh-stage-strip.is-detailed ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 20px 28px; }
+.mh-stage-strip.is-detailed ul li { padding: 0; border: 0; border-radius: 0; font-size: inherit; font-weight: inherit; }
+.mh-stage-strip.is-detailed ul strong { font-size: 15px; font-weight: 600; }
+.mh-stage-strip.is-detailed ul p { margin-top: 4px; color: var(--mh-muted); font-size: 14px; line-height: 1.5; }
+
+/* The Application Packet band (plan 051). The six rows are the app's own
+   packet steps, in the app's order; the chip says which of them Free covers. */
+.mh-packet { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); }
+.mh-packet .mh-copy-block { max-width: 560px; }
+.mh-packet-visual { position: relative; min-height: 300px; overflow: hidden; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); }
+.mh-packet-visual img { object-fit: cover; object-position: center top; }
+ol.mh-packet-steps { margin-top: 54px; border-top: 1px solid var(--mh-ink); counter-reset: mh-packet-step; }
+.mh-packet-steps > li { display: grid; grid-template-columns: 56px minmax(0, 1fr) 72px; gap: 14px 28px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--mh-line); counter-increment: mh-packet-step; }
+.mh-packet-steps > li:last-child { border-bottom: 0; }
+.mh-packet-steps > li::before { content: counter(mh-packet-step, decimal-leading-zero); font-family: var(--mh-font-display); font-size: 26px; line-height: 1; color: var(--mh-muted); }
+.mh-packet-steps strong { font-size: 18px; font-weight: 600; }
+.mh-packet-steps p { margin-top: 4px; color: var(--mh-muted); font-size: 15px; line-height: 1.5; }
+.mh-packet-steps .mh-state-chip { justify-self: end; }
+/* Forest, never lime: lime is the AI accent on dark, never a marker on paper. */
+.mh-packet-steps .mh-state-chip.is-pro { background: var(--mh-forest); color: var(--mh-paper); }
+small.mh-packet-note { display: block; margin-top: 26px; color: var(--mh-muted); font-size: 13px; line-height: 1.6; }
+
+/* Band rhythm on this page: deep, paper, mist, white, paper-soft, forest.
+   Without these two the stages band would repeat the paper above it and the
+   answers band would repeat the paper-soft of the strip below it. */
+.mh-page-job-search .mh-kit { background: var(--mh-mist); }
+.mh-page-job-search .mh-faq { background: var(--mh-white); }
 /* Tool names as a hairline list, deliberately not a grid: three names beside
    two would read as an orphan the moment anyone gave it equal tracks. */
 .mh-stage-strip ul { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -1613,7 +1637,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 }
 
 @media (max-width: 1180px) {
-  .mh-kit-grid,
   ol.mh-steps,
   .mh-capabilities { grid-template-columns: repeat(2, 1fr); }
   /* The tools drop to their own line under the stage, and the state chip
@@ -1753,12 +1776,15 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-hero2-actions > a { justify-content: center; }
   .mh-capabilities,
   .mh-int-grid,
-  .mh-kit-grid,
   .mh-pro-cards { grid-template-columns: 1fr; }
   /* Phone: the chip has no room beside a two-line stage name, so it drops
      to its own row under the tools, with the extra space that says it is a
      state the app shows rather than an eleventh tool. */
   .mh-stage-strip > li { grid-template-columns: 40px minmax(0, 1fr); }
+  .mh-stage-strip.is-detailed > li { grid-template-columns: 40px minmax(0, 1fr); }
+  .mh-stage-strip.is-detailed ul { grid-column: 2; grid-template-columns: 1fr; }
+  .mh-packet-steps > li { grid-template-columns: 40px minmax(0, 1fr); }
+  .mh-packet-steps .mh-state-chip { grid-row: 2; grid-column: 2; justify-self: start; }
   .mh-stage-strip > li > .mh-state-chip { grid-row: 3; grid-column: 2; justify-self: start; margin-top: 4px; }
   .mh-qblock h3 { font-size: 20px; }
   .marketing-homepage { --mh-gutter: 20px; --mh-h2: 40px; --mh-h2-sm: 32px; }
