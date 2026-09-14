@@ -397,3 +397,56 @@ test.describe("focus indicator contrast", () => {
     }
   });
 });
+
+// Anchor links glide instead of jumping (owner 2026-09-13). Two things can rot
+// here and neither is visible in a screenshot: the property landing on a
+// selector that never scrolls (`.marketing-homepage` is a div inside body, so
+// `scroll-behavior` on it does nothing), and the reduced-motion opt-out being
+// left to the scoped stylesheet's `.marketing-homepage *` rule, which cannot
+// match `html`. Both are asserted on the element the browser actually scrolls.
+test.describe("in-page anchors scroll smoothly", () => {
+  test("the scrolling element opts in, and reduced motion opts back out", async ({ page }) => {
+    await page.goto("/");
+    const scroller = () =>
+      page.evaluate(() => ({
+        // The element the browser scrolls, whatever the markup does above it.
+        isHtml: document.scrollingElement === document.documentElement,
+        behavior: getComputedStyle(document.scrollingElement!).scrollBehavior,
+      }));
+
+    // Both states are emulated rather than assumed: playwright.config.ts runs
+    // the whole suite under `reducedMotion: "reduce"` (plan 024), so a test
+    // that just read the default would be asserting the opt-out twice and
+    // would stay green if the smooth rule were deleted outright.
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    expect(await scroller()).toEqual({ isHtml: true, behavior: "smooth" });
+
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    expect((await scroller()).behavior).toBe("auto");
+  });
+
+  test("an anchor link lands its section clear of the fixed header", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("link", { name: /see the toolkit/i }).click();
+    await expect(page).toHaveURL(/#run$/);
+
+    const clearance = await page.evaluate(async () => {
+      // Wait for the smooth scroll to settle rather than guessing at a delay.
+      await new Promise<void>((resolve) => {
+        let last = -1;
+        const tick = () => {
+          const y = window.scrollY;
+          if (y === last) return resolve();
+          last = y;
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+      const header = document.querySelector(".mh-site-header")!.getBoundingClientRect();
+      const section = document.querySelector("#run")!.getBoundingClientRect();
+      return { sectionTop: Math.round(section.top), headerBottom: Math.round(header.bottom) };
+    });
+    // The section's own top edge sits below the header, not under it.
+    expect(clearance.sectionTop).toBeGreaterThanOrEqual(clearance.headerBottom);
+  });
+});
