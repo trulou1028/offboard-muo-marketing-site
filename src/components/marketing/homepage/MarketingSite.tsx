@@ -738,8 +738,21 @@ export function FaqSection({
    each partner's real mark (public/marketing/logos, sourced in COPY.md § 1),
    restyled to Civic Modern. Three cards in three columns fills its row
    (DESIGN.md R1). No filled button: three primaries in one view would break
-   the one-primary rule, so all three take the outline treatment. */
+   the one-primary rule, so all three take the outline treatment.
+
+   "Meet with a human" leads (owner 2026-09-13). It is the only card that
+   reaches a person and the only one that stays on the site; the two it used
+   to sit behind both send the reader away. */
 const COMMUNITY_ROWS = [
+  {
+    logo: "/marketing/logos/offboard-symbol.png",
+    icon: true,
+    title: "Meet with a human",
+    body: "Stuck on your search? Share where you are and our team reaches out directly. Free.",
+    cta: "Fill out intake",
+    href: HUMAN_SUPPORT_URL,
+    note: "Free, reviewed by our team",
+  },
   {
     logo: "/marketing/logos/beehiiv.png",
     icon: true,
@@ -757,15 +770,6 @@ const COMMUNITY_ROWS = [
     cta: "Join the Slack",
     href: "https://offboard.co/community",
     note: "Free to join",
-  },
-  {
-    logo: "/marketing/logos/offboard-symbol.png",
-    icon: true,
-    title: "Meet with a human",
-    body: "Stuck on your search? Share where you are and our team reaches out directly. Free.",
-    cta: "Say hello",
-    href: HUMAN_SUPPORT_URL,
-    note: "Free, reviewed by our team",
   },
 ] as const;
 

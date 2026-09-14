@@ -68,7 +68,12 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("link", { name: /learn about sponsored access/i })).toHaveAttribute("href", "/employers");
     expect(screen.queryByRole("heading", { name: /job-search support people will actually use/i })).not.toBeInTheDocument();
     // Community: three cards, and "Meet with a human" goes to the intake form.
-    expect(screen.getByRole("link", { name: /say hello/i })).toHaveAttribute("href", "/intake");
+    // It leads the row (owner 2026-09-13): it is the only card that reaches a
+    // person, and the only one that keeps the reader on the site.
+    expect(screen.getByRole("link", { name: /fill out intake/i })).toHaveAttribute("href", "/intake");
+    expect(
+      Array.from(document.querySelectorAll(".mh-community-cards h3")).map((h) => h.textContent),
+    ).toEqual(["Meet with a human", "The Offboard Newsletter", "Slack community"]);
     expect(screen.getByRole("link", { name: /join the slack/i })).toHaveAttribute("href", "https://offboard.co/community");
     expect(screen.getByRole("heading", { name: /you don't need another place to start over/i })).toBeInTheDocument();
 

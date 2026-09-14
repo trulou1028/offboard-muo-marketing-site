@@ -583,10 +583,11 @@ note under it (notes are new, carried over from the live offboard.co site):
 
 - Kicker: `Community` · H2: `Job searching is hard enough without doing it alone.`
 - Body: `Practical job-market intelligence, people navigating the same uncertainty, and a real person when you feel stuck.`
-- Rows:
-  1. beehiiv mark · `The Offboard Newsletter` — `Weekly job-market analysis and honest takes on tech hiring. 5,000+ subscribers.` — `Subscribe free` → `https://newsletter.offboard.co` — note `Free, weekly, unsubscribe anytime`
-  2. Slack mark · `Slack community` — `Job seekers sharing leads, asking questions, and keeping each other accountable.` — `Join the Slack` → `https://offboard.co/community` — note `Free to join`
-  3. Offboard symbol · `Meet with a human` — `Stuck on your search? Share where you are and our team reaches out directly. Free.` — `Say hello` → `/intake` — note `Free, reviewed by our team`
+- The intro block is **centred** over the cards (owner 2026-09-13).
+- Rows, in this order (owner 2026-09-13: `Meet with a human` moved from third to first; it is the only card that reaches a person and the only one that keeps the reader on the site):
+  1. Offboard symbol · `Meet with a human` — `Stuck on your search? Share where you are and our team reaches out directly. Free.` — `Fill out intake` *(owner 2026-09-13; was `Say hello`)* → `/intake` — note `Free, reviewed by our team`
+  2. beehiiv mark · `The Offboard Newsletter` — `Weekly job-market analysis and honest takes on tech hiring. 5,000+ subscribers.` — `Subscribe free` → `https://newsletter.offboard.co` — note `Free, weekly, unsubscribe anytime`
+  3. Slack mark · `Slack community` — `Job seekers sharing leads, asking questions, and keeping each other accountable.` — `Join the Slack` → `https://offboard.co/community` — note `Free to join`
 
 **Brand marks on this page** (`public/marketing/logos/`, owner rule 2026-09-02:
 real files, never drawn): Slack `slack.svg` from Wikimedia Commons
@@ -2171,6 +2172,7 @@ When one ships, move it into its page section above.
 | 2026-09-10 | Context first (plan 050). The homepage and `/how-it-works` tell the app's four Home stages in the app's order: Build your Career Context, Talk with Lumo, Run your search, Follow your layoff plan. "Steady the first week" leaves as a step and becomes step four's content and what Lumo raises first. `Your Path` becomes `Layoff Plan` everywhere the site names the product surface (owner rename 2026-09-10) | plan 050, this file § 1 and § How It Works |
 | 2026-09-11 | One closing band on every page: the homepage's `FinalCtaV2` and the route pages' three-dot progress mark are retired; `FinalCta` takes kicker, H2, body and small print as props. Homepage gains the kicker and `Talk to a person` | this file § 1 |
 | 2026-09-13 | `/job-search` rebuilt (plan 051): a new Application Packet band carrying the app's six packet steps with Free/Pro chips, the four-column stage grid rebuilt as numbered rows, a new Straight answers band, and the hero CTA doc drift corrected. **Open question for the owner:** `/pricing` FAQ 2 says every packet after the first still runs `whether the job is real`, while the app marks Ghost Check a Pro step. One of the two is wrong | plan 051, this file § 14 |
+| 2026-09-13 | Homepage community band: `Meet with a human` leads the three cards, its CTA becomes `Fill out intake` (was `Say hello`), and the intro block is centred over the row | this file § 1 |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·
