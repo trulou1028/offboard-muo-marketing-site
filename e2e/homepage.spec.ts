@@ -290,6 +290,51 @@ test.describe("Offboard marketing site", () => {
     await expect(page).toHaveURL(/\/resources$/);
   });
 
+  // Recovered 2026-09-14 from the owner's Search Console export. These URLs
+  // were returning 404 on this repo: 42 of them, 14 clicks and 2,984
+  // impressions over six months. None appear in offboard.co/sitemap.xml,
+  // because they belong to the older www.offboard.co site, which is why a
+  // sitemap-only pass could not see them. Each pair below is a real indexed
+  // URL and the page it should reach.
+  test("recovers the legacy www URLs that were 404ing", async ({ page }) => {
+    const moves: readonly (readonly [string, RegExp])[] = [
+      // Offboard's own pages in the old tool directory. The ghost checker is
+      // the best-converting page on the site (31%) and was landing on the
+      // guides index with every third-party tool.
+      ["/tools/offboard-ghost-job-checker", /\/job-search$/],
+      ["/tools/offboard-job-packets", /\/job-search$/],
+      ["/tools/offboard-lumo", /\/lumo$/],
+      // The old directory index, and the old article and category trees.
+      ["/tool-directory", /\/resources$/],
+      ["/blog", /\/resources$/],
+      ["/articles/the-mentor-trap-a-silicon-valley-horror-story", /\/resources$/],
+      ["/categories/money-finance", /\/resources$/],
+      ["/article-categories/newsroom", /\/resources$/],
+      // A ported article reached by its old /blog path: one hop, not two.
+      ["/blog/what-is-an-ai-agent", /\/resources\/what-is-an-ai-agent$/],
+      // Subject matches rather than nearest-page guesses.
+      ["/layoff-checklist", /\/layoff-support$/],
+      ["/job-packet-agent", /\/job-search$/],
+      ["/gpt", /\/integrations$/],
+      ["/mission", /\/about$/],
+      ["/for-teams", /\/employers$/],
+      ["/privacy", /\/privacy-security$/],
+      // The homepage, whatever host the suite runs against.
+      ["/index.html", /^https?:\/\/[^/]+\/$/],
+      ["/resources/will-employers-know-your-cover-letter-is-ai", /\/resources\/will-employers-know-cover-letter-is-ai$/],
+    ];
+
+    for (const [from, to] of moves) {
+      await page.goto(from);
+      await expect(page, `${from} should reach ${to}`).toHaveURL(to);
+    }
+
+    // The catch-all still catches everything else in the directory, and the
+    // three rules above have to stay ahead of it: Next matches in order.
+    await page.goto("/tools/hiring-cafe");
+    await expect(page).toHaveURL(/\/resources$/);
+  });
+
   test("keeps /intake a live route, never a redirect", async ({ page }) => {
     const response = await page.goto("/intake");
     expect(response?.status()).toBe(200);
