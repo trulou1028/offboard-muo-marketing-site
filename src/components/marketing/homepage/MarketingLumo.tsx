@@ -114,7 +114,7 @@ export function MarketingLumo() {
         <WhatToAsk />
         <Straight />
         <AlsoStrip items={[
-          { title: "Prefer ChatGPT or Claude? That works too.", body: "Lumo lives inside Offboard, but it is not the only way in. Connect the assistant you already use and it works from the same record.", href: "/integrations", cta: "See how Offboard Everywhere works" },
+          { title: "Prefer ChatGPT or Claude? That works too.", body: "Lumo lives inside Offboard, but it is not the only way in. Connect the assistant you already use and it works from the same record.", href: "/integrations", cta: "See the integrations" },
           { title: "Everything Lumo knows starts here.", body: "Your Career Context is the record every answer is built from. Build it once and every conversation starts further ahead.", href: "/career-context", cta: "See what it holds" },
         ]} />
         <FinalCta

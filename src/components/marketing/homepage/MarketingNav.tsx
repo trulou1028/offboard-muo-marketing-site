@@ -76,7 +76,7 @@ export const NAV_ENTRIES: readonly NavEntry[] = [
         heading: "The system",
         items: [
           { route: "lumo", href: "/lumo", label: "Lumo", blurb: "The guide that knows your situation.", icon: Sparkles },
-          { route: "integrations", href: "/integrations", label: "Offboard Everywhere", blurb: "Use Offboard from the AI you already use.", icon: Plug },
+          { route: "integrations", href: "/integrations", label: "Integrations", blurb: "Use Offboard from the AI you already use.", icon: Plug },
         ],
       },
       {

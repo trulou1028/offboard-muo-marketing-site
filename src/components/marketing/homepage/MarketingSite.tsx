@@ -149,7 +149,7 @@ export function MarketingFooter() {
             <Link href="/career-context">Career Context</Link>
             <Link href="/lumo">Lumo</Link>
             <Link href="/job-search">Job Search</Link>
-            <Link href="/integrations">Offboard Everywhere</Link>
+            <Link href="/integrations">Integrations</Link>
             <Link href="/layoff-support">Layoff &amp; Benefits</Link>
             <Link href="/pricing">Pricing</Link>
             <Link href="/resources">Guides</Link>

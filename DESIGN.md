@@ -407,7 +407,7 @@ copy is still moving. `/integrations`, `/lumo` and `/career-context` keep their
 coded chat compositions.
 
 **R3 · One idea, one section, one CTA.** A concept (Career Context, Lumo,
-Offboard Everywhere) gets one section on a page and one filled button.
+Integrations) gets one section on a page and one filled button.
 Later mentions are a `.mh-section-link`, never a second filled button.
 
 **R4 · Vary the section shape.** No more than two consecutive sections

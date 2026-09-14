@@ -11,7 +11,8 @@ import {
 } from "./MarketingSite";
 import { IntegrationLogo, type IntegrationLogoId } from "./IntegrationLogos";
 
-/* Offboard Everywhere (plan 028, rebuilt as a showcase in plan 033) - the
+/* Integrations (plan 028, rebuilt as a showcase in plan 033, renamed from
+   "Offboard Everywhere" by the owner on 2026-09-13) - the
    second pillar of the owner's site-architecture strategy and the
    consumer-facing version of the connected-assistant story. Deliberately
    never says "MCP". Copy: COPY.md § 11.
@@ -166,7 +167,7 @@ export function MarketingIntegrations() {
     <MarketingShell current="integrations">
       <main id="main-content">
         <PageHero
-          kicker="Offboard everywhere"
+          kicker="Integrations"
           title="Use Offboard from the AI you already use."
           body="Your job search does not live in one tab. Connect Offboard to the assistants you already work in, and save opportunities, update applications, and add to your Career Context from wherever the conversation happens."
           current="integrations"

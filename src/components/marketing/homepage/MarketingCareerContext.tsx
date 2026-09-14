@@ -151,7 +151,7 @@ export function MarketingCareerContext() {
         <OwnershipSection />
         <AlsoStrip items={[
           { title: "Lumo starts every conversation already caught up.", body: "Because it works from your Career Context, you never re-upload a resume or re-explain your goals.", href: "/lumo", cta: "See how Lumo works" },
-          { title: "Your context goes with you.", body: "Connect ChatGPT or Claude and your Career Context is there too. Save a role or add what you learned from wherever you are working.", href: "/integrations", cta: "See how Offboard Everywhere works" },
+          { title: "Your context goes with you.", body: "Connect ChatGPT or Claude and your Career Context is there too. Save a role or add what you learned from wherever you are working.", href: "/integrations", cta: "See the integrations" },
         ]} />
         <FinalCta
           title="Stop starting from scratch."
