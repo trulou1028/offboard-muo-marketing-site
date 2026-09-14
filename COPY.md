@@ -726,7 +726,7 @@ Final CTA. The two ids are SEO-load-bearing: `next.config.ts` sends
 
 - Kicker: `A simple place to start` · H2: `Start free. Add more support when you need it.`
 - Intro: `Begin with a transition plan and the core tools. Add credits or human support only when you choose to go further. You will see the price and what is included before you pay.`
-- **Free** (dark highlight card, per owner decision 2026-08-23): `$0 forever` — `Everything you need to run the search, and one complete Application Packet with every step free.` — features: `Layoff Plan, tracker, benefit facts, and documents` *(was `Your Path, …`, rename 2026-09-10)* · `One complete Application Packet, every step free` · `The assessment on every packet after that: is it real, who is the company, how you fit` · `3 basic ghost checks a month` · `Ask Lumo, 10 messages a day` · `Connect ChatGPT or Claude to read your Offboard and update your tracker`
+- **Free** (dark highlight card, per owner decision 2026-08-23): `$0 forever` — `Everything you need to run the search, and one complete Application Packet with every step free.` — **feature 3 corrected 2026-09-14** to `The assessment on every packet after that: who is the company, how you fit` (was `…: is it real, who is the company, how you fit`). `Is it real` is the ghost check, which is capped at three a month, so promising it on *every* packet over-stated the tier. The very next feature line, `3 basic ghost checks a month`, already said the true thing; the ledger row "Consumer tiers" had it right all along (`the assessment (parse, company intel, role match) on every packet`). — features: `Layoff Plan, tracker, benefit facts, and documents` *(was `Your Path, …`, rename 2026-09-10)* · `One complete Application Packet, every step free` · `The assessment on every packet after that: is it real, who is the company, how you fit` · `3 basic ghost checks a month` · `Ask Lumo, 10 messages a day` · `Connect ChatGPT or Claude to read your Offboard and update your tracker`
 - **Offboard Pro** (badge `For active searches`): `$20/month` · billing line `Or $45 every 3 months, which is $15 a month. Cancel anytime.` — `Offboard does the repeated application work for you, on every packet.` — features: `Tailored resumes, cover letters, interview briefs, and a path to a person on every packet` · `Enriched ghost checks: duplicate postings, employer reviews, salary benchmark` · `Ask Lumo without a daily limit, on the advanced model` · `Your connected assistant can run packets and checks for you` · `About 30 full packets a month. We email you at 25 and never stop a build without warning.`
 - **Sponsored access** (badge `May be covered`): `Outplacement, modernized. Your former employer, school, or workforce organization may cover your access.` — features: `The full sponsored benefit is delivered to you` · `Your private career activity remains yours` · `Sponsors receive aggregate reporting only` — CTA `Learn about sponsored access` → `/employers`
 - Deck note: `Credits pay for the extras outside your search: headshots, the brand kit, voice practice, and paperwork review. Everything in the Application Packet is covered by your plan. Claiming your government benefits is always free, on any tier.`
@@ -743,7 +743,7 @@ Final CTA. The two ids are SEO-load-bearing: `next.config.ts` sends
 ### Pricing FAQ — title `Pricing and support, without surprises.`
 
 1. `Do I need a payment method to start?` — `No. The Free tier is not a trial. You can build your plan, see your runway and deadlines, track applications, and build your first Application Packet without adding a payment method.`
-2. `What happens after my first Application Packet?` — `Every packet after it still runs the assessment: whether the job is real, who the company is, and how you fit. Tailored resumes, cover letters, interview briefs, and the path to a person are part of Pro.` *(plan 047; was `What happens when I run out of credits?` — `The core plan, benefit sheets, and tracking keep working. Credits gate the heavier product work, and they refresh monthly on both tiers.`)*
+2. `What happens after my first Application Packet?` — `Every packet after it still runs the assessment: who the company is and how you fit. Basic ghost checks carry on at three a month. Tailored resumes, cover letters, interview briefs, and the path to a person are part of Pro.` *(corrected 2026-09-14: the old wording promised `whether the job is real` on every packet, which the three-a-month ghost allowance does not cover)* *(plan 047; was `What happens when I run out of credits?` — `The core plan, benefit sheets, and tracking keep working. Credits gate the heavier product work, and they refresh monthly on both tiers.`)*
 3. `Is there a limit on Pro?` — `Pro covers about 30 full packets a month. We email you at 25 and never stop a build without warning. Ask Lumo has no daily limit on Pro.` *(new, plan 047)*
 4. `Can I cancel Pro any time?` — `Yes. Your plan, materials, and history remain yours on the Free tier after you cancel.`
 5. `Is human support included?` — `Availability, format, eligibility, and pricing vary by support option. The booking page shows the current details before you schedule.`
@@ -1643,16 +1643,33 @@ tools form, and the fact that the loop has a memory.
 - Kicker: `Application Packet` · H2: `Paste the posting. The packet does the rest.`
 - Body: `One link becomes a company brief, a fit read, and the materials you send, all kept with the role instead of scattered across six tabs.`
 - Visual: `renders/toolkit-job-packets.webp`, the Application Packet view. `/how-it-works` renders the same file in its flagship block; that page is deferred.
-- **The six rows are the app's own packet steps, verbatim** from `lumo-plan-builder` `origin/main` `src/components/job-packet/packetSteps.ts` (read 2026-09-13), in the app's order, each with the app's one-line description and a chip saying whether Free covers it (owner decision 2026-09-13). Parse Job and Save Application are foundational, never appear in the app's own picker, and are not listed here.
-  1. `Ghost Check` — `Is this posting real and active?` — chip `Pro`
+- **The six rows are the app's own packet steps, verbatim** from `lumo-plan-builder` `origin/main` `src/components/job-packet/packetSteps.ts` (labels and descriptions), in the app's order, with a chip saying what Free covers (owner decision 2026-09-13). **The chips come from the server, not from that file** — see the correction below. Parse Job and Save Application are foundational, never appear in the app's own picker, and are not listed here.
+  1. `Ghost Check` — `Is this posting real and active?` — chip `3 a month` *(corrected 2026-09-14, see below)*
   2. `Company Intel` — `Research the company` — chip `Free`
   3. `Role Match Analysis` — `Score your fit for the role` — chip `Free`
   4. `Tailor Resume` — `Adapt your resume to this job` — chip `Pro`
   5. `Cover Letter` — `Draft a cover letter` — chip `Pro`
   6. `Path to a Person` — `Find someone to reach out to` — chip `Pro`
-- Note under the rows: `Your first complete packet runs every step free. Free also includes three basic ghost checks a month, outside a packet.`
-  - The first sentence is the app's own `FIRST_PACKET_LINE`. The second reconciles the `Pro` chip on Ghost Check with `/pricing`'s Free feature `3 basic ghost checks a month`: the free allowance is the standalone checker, and the enriched check inside a packet is Pro. Without that sentence the chip reads as a contradiction of `/pricing`.
-- Every chip is a claim. Changing one means re-reading `packetSteps.ts` and `/pricing` in the same PR.
+- Note under the rows: `Your first complete packet runs every step free. After that the company and fit reads stay free on every packet, basic ghost checks carry on at three a month, and the rest is Offboard Pro.`
+- Every chip is a claim. Changing one means re-reading the app's **server** entitlements and `/pricing` in the same PR.
+
+**Correction, 2026-09-14.** The Ghost Check chip shipped on 2026-09-13 reading
+`Pro`, and the note said the free allowance was "outside a packet". Both were
+wrong, and so was the conclusion drawn from them (that `/pricing` over-promised
+and should be cut back). The error was reading `packetSteps.ts`, which is the
+client's step-picker config, and treating its `pro: true` flag as the gate. The
+gate is the server. `analyze-ghost-job` runs **two products on one endpoint**:
+an ENRICHED check that costs credits, which is Pro and the one trial packet,
+and a scrape-only **BASIC** verdict that costs nothing and has its own monthly
+allowance, `DEFAULT_FREE_GHOST_CHECKS_PER_MONTH = 3`
+(`supabase/functions/_shared/entitlements.ts`). `build-job-packet` runs the
+ghost step for a Free member **even at a zero credit balance**, and a Deno test
+pins that. So a Free member does get a ghost check inside packets after the
+trial, three times a month.
+
+**The lesson for the next port: `packetSteps.ts` is a picker label, not an
+entitlement.** The authority for who gets what is
+`supabase/functions/_shared/entitlements.ts` and the function that calls it.
 
 ### Why one system *(retired by plan 046: its composition is the hero visual and its payoff line is the hero body's last sentence. Kept for the record.)*
 
@@ -1708,7 +1725,7 @@ The pattern `/lumo` and `/layoff-support` close on. Four questions, the site's d
 
 1. `Where do the job postings come from?` — `You bring them. A board, a referral, a recruiter's email: paste the link and Offboard reads the posting, checks whether it looks real, and builds the application around it.` *(The draft asked `Is Offboard a job board?` and answered `It does not list jobs.` That is false: the app has a Jobs feed, and `/employers` promises `a real job feed for each person`. The question was rewritten rather than the answer softened.)*
 2. `Does Offboard apply for me?` — `No. It builds what you send and keeps it with the role. You send it, so nothing goes out under your name that you have not read.` *(Verified: no auto-apply path exists in `lumo-plan-builder` `origin/main`.)*
-3. `What does Free include?` — `Your first complete Application Packet runs every step free. After that, Free keeps the tracker, your Career Context, and the company and fit reads on every packet. Tailored resumes, cover letters, and the path to a person are Pro.` *(Deliberately says less than `/pricing`'s FAQ 2, which lists `whether the job is real` among what every later packet still runs while `packetSteps.ts` marks Ghost Check Pro. See the open question in the changelog.)*
+3. `What does Free include?` — `Your first complete Application Packet runs every step free. After that, Free keeps the tracker, your Career Context, and the company and fit reads on every packet. Tailored resumes, cover letters, and the path to a person are Pro.` *(Still accurate after the 2026-09-14 correction. It says nothing about ghost checks; the packet band's note carries the three-a-month allowance.)*
 4. `Where does the tracker get its information?` — `From the packets you build and what you add yourself. Offboard does not read your inbox.` *(Ledger row "Live integrations": Gmail is in progress, not live. The answer states the present fact and makes no promise about a future one.)*
 
 ### Final CTA (shared component, overridden copy)
@@ -2180,6 +2197,7 @@ When one ships, move it into its page section above.
 | 2026-09-13 | `/job-search` rebuilt (plan 051): a new Application Packet band carrying the app's six packet steps with Free/Pro chips, the four-column stage grid rebuilt as numbered rows, a new Straight answers band, and the hero CTA doc drift corrected. **Open question for the owner:** `/pricing` FAQ 2 says every packet after the first still runs `whether the job is real`, while the app marks Ghost Check a Pro step. One of the two is wrong | plan 051, this file § 14 |
 | 2026-09-13 | Homepage community band: `Meet with a human` leads the three cards, its CTA becomes `Fill out intake` (was `Say hello`), and the intro block is centred over the row | this file § 1 |
 | 2026-09-13 | `/integrations` is called **Integrations**, not `Offboard Everywhere` (owner). Nav row, footer row, meta title, hero kicker, and the three sibling-strip CTAs that named it. The three CTAs read `See the integrations`. No URL or redirect change | this file § 11 |
+| 2026-09-14 | Ghost-check claims corrected against the app's **server** entitlements after an owner-requested re-reference of `lumo-plan-builder`. `/pricing` no longer promises `whether the job is real` on every packet (it is capped at three a month); `/job-search`'s Ghost Check chip reads `3 a month`, not `Pro`. The 2026-09-13 changelog row called this an app-versus-site contradiction needing an owner decision; there was no contradiction, only a misread of `packetSteps.ts`, whose `pro` flag describes the enriched check and is not the entitlement gate. **Interview briefs were checked too and are correctly listed as Pro**: they cost no credits but `generate-interview-briefing` still calls `checkEntitlement` | this file §§ 5 and 14 |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·

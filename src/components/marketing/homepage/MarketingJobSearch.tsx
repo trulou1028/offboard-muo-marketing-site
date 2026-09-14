@@ -29,18 +29,28 @@ import {
    (`lumo-plan-builder` `origin/main` `src/components/job-packet/packetSteps.ts`,
    read 2026-09-13): the labels, the one-line descriptions, and which of them
    are Pro. Parse Job and Save Application are foundational and never appear in
-   the app's own picker, so they are not listed here either. Two are free and
-   four are Pro; a chip says which, per the owner's decision 2026-09-13.
-   The two lines under the rows are the app's own strings, `FIRST_PACKET_LINE`
-   and the Free tier's basic-ghost-check allowance from `/pricing`. */
+   the app's own picker, so they are not listed here either. A chip per row
+   says what Free covers, per the owner's decision 2026-09-13.
+
+   The Ghost Check row needed the server rather than the picker (corrected
+   2026-09-14). `packetSteps.ts` marks it `pro: true`, but that flag describes
+   the ENRICHED check. `analyze-ghost-job` runs two products on one endpoint:
+   enriched on credits, which is Pro and the one trial packet, and a
+   scrape-only BASIC verdict that costs nothing and has its own allowance of
+   three a month on Free (`supabase/functions/_shared/entitlements.ts`,
+   `DEFAULT_FREE_GHOST_CHECKS_PER_MONTH`). A Free member therefore does get a
+   ghost check after the trial packet, three times a month, and the chip says
+   so rather than reading `Pro`. */
 const PACKET_STEPS = [
-  ["Ghost Check", "Is this posting real and active?", true],
-  ["Company Intel", "Research the company", false],
-  ["Role Match Analysis", "Score your fit for the role", false],
-  ["Tailor Resume", "Adapt your resume to this job", true],
-  ["Cover Letter", "Draft a cover letter", true],
-  ["Path to a Person", "Find someone to reach out to", true],
+  ["Ghost Check", "Is this posting real and active?", "limit"],
+  ["Company Intel", "Research the company", "free"],
+  ["Role Match Analysis", "Score your fit for the role", "free"],
+  ["Tailor Resume", "Adapt your resume to this job", "pro"],
+  ["Cover Letter", "Draft a cover letter", "pro"],
+  ["Path to a Person", "Find someone to reach out to", "pro"],
 ] as const;
+
+const PACKET_STEP_CHIP = { free: "Free", pro: "Pro", limit: "3 a month" } as const;
 
 function PacketBand() {
   return (
@@ -56,17 +66,17 @@ function PacketBand() {
         </figure>
       </div>
       <ol className="mh-packet-steps" data-reveal="">
-        {PACKET_STEPS.map(([label, body, pro]) => (
+        {PACKET_STEPS.map(([label, body, tier]) => (
           <li key={label}>
             <div>
               <strong>{label}</strong>
               <p>{body}</p>
             </div>
-            <em className={`mh-state-chip${pro ? " is-pro" : ""}`}>{pro ? "Pro" : "Free"}</em>
+            <em className={`mh-state-chip${tier === "pro" ? " is-pro" : ""}`}>{PACKET_STEP_CHIP[tier]}</em>
           </li>
         ))}
       </ol>
-      <small className="mh-packet-note">Your first complete packet runs every step free. Free also includes three basic ghost checks a month, outside a packet.</small>
+      <small className="mh-packet-note">Your first complete packet runs every step free. After that the company and fit reads stay free on every packet, basic ghost checks carry on at three a month, and the rest is Offboard Pro.</small>
     </section>
   );
 }

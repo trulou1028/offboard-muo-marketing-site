@@ -1378,7 +1378,7 @@ ol.mh-stage-strip { margin-top: 48px; counter-reset: mh-stage; border-top: 1px s
 .mh-packet-visual { position: relative; min-height: 300px; overflow: hidden; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); }
 .mh-packet-visual img { object-fit: cover; object-position: center top; }
 ol.mh-packet-steps { margin-top: 54px; border-top: 1px solid var(--mh-ink); counter-reset: mh-packet-step; }
-.mh-packet-steps > li { display: grid; grid-template-columns: 56px minmax(0, 1fr) 72px; gap: 14px 28px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--mh-line); counter-increment: mh-packet-step; }
+.mh-packet-steps > li { display: grid; grid-template-columns: 56px minmax(0, 1fr) 96px; gap: 14px 28px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--mh-line); counter-increment: mh-packet-step; }
 .mh-packet-steps > li:last-child { border-bottom: 0; }
 .mh-packet-steps > li::before { content: counter(mh-packet-step, decimal-leading-zero); font-family: var(--mh-font-display); font-size: 26px; line-height: 1; color: var(--mh-muted); }
 .mh-packet-steps strong { font-size: 18px; font-weight: 600; }

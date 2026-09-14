@@ -237,13 +237,13 @@ describe("Offboard marketing routes", () => {
     expect(
       Array.from(document.querySelectorAll(".mh-packet-steps strong")).map((s) => s.textContent),
     ).toEqual(["Ghost Check", "Company Intel", "Role Match Analysis", "Tailor Resume", "Cover Letter", "Path to a Person"]);
+    // Corrected 2026-09-14 against the server rather than the picker: Ghost
+    // Check is not simply Pro. A Free member gets the basic verdict three
+    // times a month, so the chip carries the allowance instead.
     const chips = Array.from(document.querySelectorAll(".mh-packet-steps .mh-state-chip")).map((c) => c.textContent);
-    expect(chips.filter((c) => c === "Free")).toHaveLength(2);
-    expect(chips.filter((c) => c === "Pro")).toHaveLength(4);
+    expect(chips).toEqual(["3 a month", "Free", "Free", "Pro", "Pro", "Pro"]);
     expect(screen.getByText(/your first complete packet runs every step free/i)).toBeInTheDocument();
-    // The sentence that keeps the Pro chip on Ghost Check from contradicting
-    // /pricing's "3 basic ghost checks a month" on the Free tier.
-    expect(screen.getByText(/three basic ghost checks a month, outside a packet/i)).toBeInTheDocument();
+    expect(screen.getByText(/basic ghost checks carry on at three a month/i)).toBeInTheDocument();
 
     // The four stages are rows now, not four columns, and they carry the ten
     // tool descriptions this page owns.
