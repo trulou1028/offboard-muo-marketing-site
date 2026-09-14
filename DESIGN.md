@@ -37,7 +37,7 @@ deleted the override block. There is no longer a per-route palette split.
 
 **The footer is a deliberate third green** (`#07160c`, plan 027). Civic
 Modern ships two greens, but every page ends on a dark band (a forest
-`.mh-final-cta` or a forest-deep `.mh-route-contact` / `.mh-final2`), so a
+`.mh-final-cta` or a forest-deep `.mh-route-contact`), so a
 footer at forest-deep merged into the section above it and stopped reading
 as its own layer. The footer also carries a top hairline, which keeps the
 edge crisp where the step alone is subtle.

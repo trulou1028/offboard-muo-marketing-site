@@ -795,13 +795,22 @@ export function CommunityStrip() {
   );
 }
 
+/* The one closing band, every page (owner 2026-09-11). The homepage carried
+   its own FinalCtaV2 with a different shape, and this one carried a three-dot
+   progress mark under the small print that nothing else on the site used or
+   explained. Both are gone: one component, one shape, and the words change
+   through props. */
 export function FinalCta({
+  kicker = "You do not need the whole plan today",
   title = "Find out first.",
   body = "Bring your situation. In a few minutes you will see how long your money lasts, which deadlines are coming, and what may be waiting for you. Then a clear plan for what to do about it.",
+  note = "Independent support. Start free.",
   photo = false,
 }: {
+  kicker?: string;
   title?: string;
   body?: string;
+  note?: string;
   /* Plan 018 phase 4: the homepage runs six text-only bands between the hero
      photo and the footer. Only the homepage opts in -- the other three routes
      that share this component render exactly the markup they did before, so
@@ -816,12 +825,11 @@ export function FinalCta({
         </div>
       ) : null}
       <div className="mh-final-cta-copy">
-      <span className="mh-kicker is-lime">You do not need the whole plan today</span>
+      <span className="mh-kicker is-lime">{kicker}</span>
       <h2 id="final-title">{title}</h2>
       <p>{body}</p>
       <div><PrimaryCta /><a href={HUMAN_SUPPORT_URL}>Talk to a person</a></div>
-      <small>Independent support. Start free.</small>
-      <div className="mh-progress-mark" aria-hidden="true"><i /><span /><i /><span /><i /></div>
+      <small>{note}</small>
       </div>
     </section>
   );

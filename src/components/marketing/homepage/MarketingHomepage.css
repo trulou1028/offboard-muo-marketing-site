@@ -167,8 +167,7 @@ a.mh-skip-link:focus { transform: translateY(0); }
    ring resolves to ink and lands at 1.2:1 on forest-deep. */
 .mh-hero2,
 .mh-lumo-band,
-.mh-connect,
-.mh-final2 { --mh-focus-ring: var(--mh-paper); }
+.mh-connect { --mh-focus-ring: var(--mh-paper); }
 
 /* Fixed, not absolute (owner decision, plan 024): the nav stays interactive
    while scrolling. inset keeps left/right on the viewport ICB (never 100vw -
@@ -510,13 +509,9 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-final-cta-photo img { object-fit: cover; object-position: 50% 32%; }
 .mh-final-cta h2 { font-size: 60px; line-height: 68px; }
 .mh-final-cta p { max-width: 720px; color: rgb(246 244 238 / 78%); font-size: 18px; line-height: 29px; }
-.mh-final-cta-copy > div:not(.mh-progress-mark) { display: flex; align-items: center; gap: 24px; }
+.mh-final-cta-copy > div { display: flex; align-items: center; gap: 24px; }
 .mh-final-cta-copy > div > a:last-child { font-size: 15px; }
 .mh-final-cta small { color: rgb(246 244 238 / 62%); font-size: 12px; }
-.mh-progress-mark { display: flex; width: 600px; align-items: center; padding-top: 12px; }
-.mh-progress-mark i { width: 10px; height: 10px; flex: 0 0 10px; border: 1px solid var(--mh-paper); border-radius: 50%; }
-.mh-progress-mark i:first-child { background: var(--mh-paper); }
-.mh-progress-mark span { flex: 1; height: 1px; background: rgb(246 244 238 / 34%); }
 
 /* The hairline guarantees a crisp edge even where the section above is also
    dark; the deeper fill does the layering. */
@@ -948,10 +943,6 @@ img.mh-lumo-mark { display: inline-block; width: 28px; height: 28px; flex: 0 0 2
 
 a.mh-secondary-cta { display: inline-flex; min-height: 50px; align-items: center; padding: 0 24px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-pill); color: var(--mh-ink); font-size: 15px; font-weight: 600; transition: border-color var(--mh-dur-base) var(--mh-ease-standard), color var(--mh-dur-base) var(--mh-ease-standard); }
 a.mh-secondary-cta:hover { border-color: var(--mh-ink); }
-a.mh-lumo-cta { display: inline-flex; min-height: 50px; align-items: center; gap: 12px; padding: 0 26px; background: var(--mh-lime); border-radius: var(--mh-radius-pill); color: var(--mh-deep); font-size: 15px; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-base) var(--mh-ease-standard); }
-a.mh-lumo-cta:active { transform: translateY(1px); }
-a.mh-lumo-cta:hover { background: var(--mh-lime-hover); transform: translateY(-1px); }
-.mh-lumo-cta svg { width: 16px; height: 16px; }
 
 /* Hero (owner composition 2026-09-07, refined in Figma). One photograph
    fills the band edge to edge; its subject sits at the right and its dark
@@ -1384,13 +1375,6 @@ ol.mh-stage-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: c
 
 /* Built around you */
 
-/* Final CTA */
-.mh-final2 { display: flex; flex-direction: column; align-items: center; gap: 20px; padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-deep); color: var(--mh-paper); text-align: center; }
-.mh-final2 h2 { max-width: 18ch; font-size: clamp(40px, 4vw, 56px); line-height: 1.05; }
-/* Display-sized headline takes display tracking; outranks the page-level h2 rule. */
-.mh-page-home .mh-final2 h2 { letter-spacing: -0.02em; }
-.mh-final2 > p { max-width: 58ch; color: rgb(246 244 238 / 78%); font-size: 18px; line-height: 1.55; }
-.mh-final2 > small { color: rgb(246 244 238 / 62%); font-size: 13px; }
 
 
 /* ------------------------------------------------------------------ */
@@ -1748,7 +1732,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-kit-grid,
   ol.mh-stage-strip,
   .mh-pro-cards { grid-template-columns: 1fr; }
-  .mh-final2 h2 { font-size: 36px; }
   .mh-qblock h3 { font-size: 20px; }
   .marketing-homepage { --mh-gutter: 20px; --mh-h2: 40px; --mh-h2-sm: 32px; }
   .mh-kicker { font-size: 12px; line-height: 18px; }
@@ -1796,8 +1779,7 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-plan-preview { padding: 22px; }
   .mh-human-photo { min-height: 430px; }
   .mh-price-deck header { align-items: flex-start; flex-direction: column; gap: 8px; }
-  .mh-final-cta-copy > div:not(.mh-progress-mark) { flex-direction: column; }
-  .mh-progress-mark { width: min(100%, 420px); }
+  .mh-final-cta-copy > div { flex-direction: column; }
   .mh-site-footer { padding: 54px var(--mh-gutter) 30px; }
   .mh-site-footer > p { flex-direction: column; gap: 8px; }
 }
