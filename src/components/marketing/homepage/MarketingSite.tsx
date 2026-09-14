@@ -59,7 +59,7 @@ export const PRODUCT_FAQS = [
 
 export const PRICING_FAQS = [
   ["Do I need a payment method to start?", "No. The Free tier is not a trial. You can build your plan, see your runway and deadlines, track applications, and build your first Application Packet without adding a payment method."],
-  ["What happens after my first Application Packet?", "Every packet after it still runs the assessment: whether the job is real, who the company is, and how you fit. Tailored resumes, cover letters, interview briefs, and the path to a person are part of Pro."],
+  ["What happens after my first Application Packet?", "Every packet after it still runs the assessment: who the company is and how you fit. Basic ghost checks carry on at three a month. Tailored resumes, cover letters, interview briefs, and the path to a person are part of Pro."],
   ["Is there a limit on Pro?", "Pro covers about 30 full packets a month. We email you at 25 and never stop a build without warning. Ask Lumo has no daily limit on Pro."],
   ["Can I cancel Pro any time?", "Yes. Your plan, materials, and history remain yours on the Free tier after you cancel."],
   ["Is human support included?", "Availability, format, eligibility, and pricing vary by support option. The booking page shows the current details before you schedule."],
@@ -633,7 +633,7 @@ export function PricingSection() {
           <ul>
             <li><Check aria-hidden="true" />Layoff Plan, tracker, benefit facts, and documents</li>
             <li><Check aria-hidden="true" />One complete Application Packet, every step free</li>
-            <li><Check aria-hidden="true" />The assessment on every packet after that: is it real, who is the company, how you fit</li>
+            <li><Check aria-hidden="true" />The assessment on every packet after that: who is the company, how you fit</li>
             <li><Check aria-hidden="true" />3 basic ghost checks a month</li>
             <li><Check aria-hidden="true" />Ask Lumo, 10 messages a day</li>
             <li><Check aria-hidden="true" />Connect ChatGPT or Claude to read your Offboard and update your tracker</li>

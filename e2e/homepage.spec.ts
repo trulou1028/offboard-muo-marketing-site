@@ -541,13 +541,15 @@ test.describe("the /job-search rows stay inside their sections", () => {
     });
   }
 
-  test("the packet band names the app's six steps and marks two of them free", async ({ page }) => {
+  test("the packet band names the app's six steps and marks what Free covers", async ({ page }) => {
     await page.goto("/job-search");
     // Pinned in the browser as well as in the unit test: these six strings and
     // their two Free chips are a pricing claim, ported from packetSteps.ts in
     // the app repo. A silent flip here is a promise the product does not keep.
     await expect(page.locator(".mh-packet-steps > li")).toHaveCount(6);
     await expect(page.locator(".mh-packet-steps .mh-state-chip", { hasText: /^Free$/ })).toHaveCount(2);
-    await expect(page.locator(".mh-packet-steps .mh-state-chip.is-pro")).toHaveCount(4);
+    await expect(page.locator(".mh-packet-steps .mh-state-chip.is-pro")).toHaveCount(3);
+    // Ghost Check is neither: the basic verdict is free three times a month.
+    await expect(page.locator(".mh-packet-steps .mh-state-chip", { hasText: /^3 a month$/ })).toHaveCount(1);
   });
 });
