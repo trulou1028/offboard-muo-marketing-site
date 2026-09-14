@@ -8,7 +8,25 @@ body {
 
 /* Reserves the scrollbar's width whether or not the page is tall enough to
    need one, so short pages (404, /intake/confirmed) don't shift content
-   horizontally relative to taller pages that do scroll. */
+   horizontally relative to taller pages that do scroll.
+
+   `scroll-behavior` sits here rather than in the scoped stylesheet because it
+   only does anything on the element that actually scrolls, and that is `html`:
+   `.marketing-homepage` is a div inside body and never has its own scrollbar,
+   so the property would be inert there. Anchor targets keep their 96px
+   scroll-margin (MarketingHomepage.css) so the fixed header does not land on
+   top of the heading the reader just asked for. */
 html {
   scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+
+/* Turned off here as well as in the scoped stylesheet: that file's blanket
+   reduced-motion rule is written `.marketing-homepage *`, which cannot match
+   `html`, so without this the one animation a motion-sensitive reader cannot
+   opt out of would be the page sliding under them. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

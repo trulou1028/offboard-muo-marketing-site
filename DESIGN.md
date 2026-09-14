@@ -209,6 +209,15 @@ overrides — the smallest heading/gutter/padding step). There's also a
 animations site-wide (and the motion controller adds no reveal classes
 under it, so reduced-motion users get a fully static page).
 
+**In-page anchors scroll smoothly** (owner 2026-09-13). `scroll-behavior`
+lives in `src/app/globals.css` on `html`, not in the scoped stylesheet: only
+the element that actually scrolls responds to it, and `.marketing-homepage`
+is a div inside body that never has its own scrollbar. That placement is also
+why it carries its **own** `prefers-reduced-motion` opt-out — the scoped
+stylesheet's blanket rule is written `.marketing-homepage *`, which cannot
+match `html`. Anchor targets keep `scroll-margin-top: 96px` so the fixed
+header does not land on the heading the reader just asked for.
+
 Hero top offsets (`148px`/`152px`/`172px`, used for `.mh-hero`,
 `.mh-route-hero`, `.mh-article`, `.mh-intake-page`) are **not** section
 rhythm — they exist to clear the fixed/absolute header — and are not on the
