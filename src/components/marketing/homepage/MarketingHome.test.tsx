@@ -327,7 +327,14 @@ describe("Offboard marketing routes", () => {
       "Connected assistant",
       "Your privacy stays yours",
     ]);
-    expect(ledger.getAllByRole("columnheader")).toHaveLength(4);
+    // Three columns since 2026-09-14: Sponsored access left the table for its
+    // own band, where the three facts a single "Included" cell could not hold
+    // now ship.
+    expect(ledger.getAllByRole("columnheader")).toHaveLength(3);
+    const sponsored = within(document.querySelector(".mh-sponsored-band") as HTMLElement);
+    expect(sponsored.getByRole("heading", { name: "Sponsored access" })).toBeInTheDocument();
+    expect(sponsored.getAllByRole("listitem")).toHaveLength(3);
+    expect(sponsored.getByText(/sponsors receive aggregate reporting only/i)).toBeInTheDocument();
 
     // Two cells in the owner's mockup were not shipped, because both were
     // false against the app. COPY.md records why; this keeps them out.

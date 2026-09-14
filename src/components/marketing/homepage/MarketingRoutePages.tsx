@@ -87,6 +87,7 @@ export function MarketingPricing() {
           current="pricing"
           kicker="Pricing"
           title="Start free. Upgrade when you need more support."
+          titleLines={["Start free. Upgrade", "when you need more support."]}
           body="Begin with the next role in front of you. Move to Pro when your search needs more room, or see whether an organization can sponsor your access."
           aside={<><span>Clear before you pay</span><strong>No hidden starting fee.</strong><p>Free is a real tier, not a trial. You see every price and what is included before you pay.</p></>}
           cta="Get started free"
