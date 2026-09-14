@@ -313,6 +313,29 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByText("$0")).toBeInTheDocument();
     expect(screen.getByText("$20")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Sponsored access" })).toBeInTheDocument();
+
+    // The plan ledger is a real comparison matrix (owner 2026-09-14): one row
+    // per thing, read across. Asserted through table roles, so a rebuild as a
+    // grid of divs fails here rather than silently costing a screen reader the
+    // ability to hear which plan and which row a cell belongs to.
+    const ledger = within(document.querySelector(".mh-plan-ledger") as HTMLElement);
+    expect(ledger.getAllByRole("rowheader").map((h) => h.querySelector("strong")?.textContent)).toEqual([
+      "Search foundation",
+      "Application Packets",
+      "Ghost checks",
+      "Ask Lumo",
+      "Connected assistant",
+      "Your privacy stays yours",
+    ]);
+    expect(ledger.getAllByRole("columnheader")).toHaveLength(4);
+
+    // Two cells in the owner's mockup were not shipped, because both were
+    // false against the app. COPY.md records why; this keeps them out.
+    const ledgerText = (document.querySelector(".mh-plan-ledger") as HTMLElement).textContent ?? "";
+    expect(ledgerText).not.toMatch(/basic tracker/i);
+    expect(ledgerText).not.toMatch(/unlimited ghost/i);
+    // Free keeps the whole foundation; that sameness is the headline's claim.
+    expect(ledgerText).toContain("Everything in Free");
     expect(screen.getByText(/claiming your government benefits is always free/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /learn about sponsored access/i })).toHaveAttribute("href", "/employers");
   });

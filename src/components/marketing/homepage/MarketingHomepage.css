@@ -162,7 +162,7 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-route-contact,
 .mh-act-privacy,
 .mh-employer-price-card,
-.mh-price-deck .is-primary,
+.mh-plan-ledger thead th.is-primary,
 /* Homepage v2's dark bands and forest insets (plan 022). Without these the
    ring resolves to ink and lands at 1.2:1 on forest-deep. */
 .mh-hero2,
@@ -439,29 +439,80 @@ ol.mh-how-first-week-rows { width: 100%; margin-top: 54px; border-top: 1px solid
 .mh-pricing-heading > div { display: flex; flex-direction: column; gap: 12px; }
 .mh-pricing-heading h2 { font-size: 48px; line-height: 50px; }
 .mh-pricing-heading > p { color: var(--mh-muted); font-size: 16px; line-height: 26px; }
-.mh-price-deck { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; min-height: 300px; margin-top: 36px; align-items: stretch; }
-.mh-price-deck > article { display: flex; flex-direction: column; gap: 14px; padding: 28px; background: white; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); }
-.mh-price-deck > article > :last-child { margin-top: auto; }
-.mh-price-deck header { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.mh-price-deck h3 { font-size: 24px; line-height: 28px; font-weight: 650; letter-spacing: normal; text-transform: none; }
-.mh-price-deck p { font-size: 15px; line-height: 22px; }
-.mh-price-deck .mh-price-value { display: flex; align-items: baseline; gap: 6px; }
-.mh-price-deck .mh-price-value b { font-size: 40px; line-height: 1; font-weight: 650; }
-/* The quarterly line under Pro's price (plan 047): the app bills $45 a quarter. */
-small.mh-price-billing { display: block; margin-top: -6px; color: var(--mh-muted); font-size: 13px; line-height: 1.5; }
-.mh-price-deck .mh-price-value small { font-size: 15px; color: var(--mh-muted); }
-.mh-price-deck .mh-primary-cta,
-.mh-price-deck .mh-secondary-cta { width: 100%; min-height: 48px; }
-.mh-price-deck .is-primary { background: var(--mh-forest); border-color: var(--mh-forest); color: var(--mh-paper); }
-.mh-price-deck .is-primary .mh-price-value small { color: rgb(246 244 238 / 70%); }
-.mh-price-deck .is-primary li svg { border-color: rgb(246 244 238 / 55%); }
-.mh-price-deck header b.is-badge { padding: 6px 10px; background: var(--mh-mist); border-radius: var(--mh-radius-pill); color: var(--mh-ink); font-size: 12px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
-.mh-price-deck ul { display: flex; flex-direction: column; gap: 8px; }
-.mh-price-deck li { display: flex; align-items: center; gap: 10px; font-size: 14px; }
-/* stylelint-disable-next-line color-no-hex -- one-off muted-sage icon-ring color, not a token-worthy role */
-.mh-price-deck li svg { width: 18px; height: 18px; flex: 0 0 18px; padding: 3px; border: 1px solid #7f9b92; border-radius: 50%; }
-/* `p.` prefix is load-bearing - see the reset note at the top of this file. */
+/* The plan ledger (owner 2026-09-14). A comparison matrix, so a reader can
+   answer "what do I get more of" by reading across one row. Real table
+   semantics on desktop; the same DOM collapses to blocks on a phone, where
+   each cell names its plan from `data-plan` rather than a second copy of the
+   markup. */
+.mh-plan-ledger { margin-top: 36px; overflow: hidden; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); background: var(--mh-white); }
+.mh-plan-ledger table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.mh-plan-ledger thead th { width: 24.5%; padding: 28px; border-bottom: 1px solid var(--mh-line); border-right: 1px solid var(--mh-line); text-align: left; vertical-align: top; font-weight: 400; }
+.mh-plan-ledger thead th:first-child { width: 26.5%; }
+.mh-plan-ledger thead th:last-child { border-right: 0; }
+.mh-plan-ledger thead th > strong { font-family: var(--mh-font-display); font-size: 24px; line-height: 28px; }
+.mh-plan-ledger thead th > strong + p { margin-top: 8px; }
+.mh-plan-ledger thead p { color: var(--mh-muted); font-size: 15px; line-height: 22px; }
+.mh-plan-ledger-name { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.mh-plan-ledger h3 { font-size: 24px; line-height: 28px; font-weight: 650; letter-spacing: normal; text-transform: none; }
+.mh-plan-ledger b.is-badge { padding: 5px 9px; background: var(--mh-mist); border-radius: var(--mh-radius-pill); color: var(--mh-ink); font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+.mh-plan-ledger .mh-price-value { display: flex; align-items: baseline; gap: 6px; margin-top: 10px; }
+.mh-plan-ledger .mh-price-value b { font-size: 40px; line-height: 1; font-weight: 650; }
+.mh-plan-ledger .mh-price-value small { color: var(--mh-muted); font-size: 15px; }
+.mh-plan-ledger .mh-price-value + p { margin-top: 8px; }
+.mh-plan-ledger .mh-primary-cta,
+.mh-plan-ledger .mh-secondary-cta { width: 100%; min-height: 46px; margin-top: 18px; justify-content: center; }
+.mh-plan-ledger thead th > small { display: block; margin-top: 10px; color: var(--mh-muted); font-size: 13px; line-height: 1.5; }
+/* Pro is the emphasised column, so its header cell takes the dark treatment
+   the Free card used to carry. The lime CTA is the primary-on-dark rule. */
+.mh-plan-ledger thead th.is-primary { background: var(--mh-forest); color: var(--mh-paper); }
+.mh-plan-ledger thead th.is-primary p,
+.mh-plan-ledger thead th.is-primary .mh-price-value small,
+.mh-plan-ledger thead th.is-primary > small { color: rgb(246 244 238 / 78%); }
+.mh-plan-ledger thead th.is-primary b.is-badge { background: rgb(246 244 238 / 16%); color: var(--mh-paper); }
+/* Forest on light, lime on dark green (DESIGN.md). Without this the CTA is a
+   forest pill on a forest cell: the label reads, the button does not. */
+.mh-plan-ledger thead th.is-primary a.mh-primary-cta { background: var(--mh-lime); color: var(--mh-deep); }
+.mh-plan-ledger thead th.is-primary a.mh-primary-cta:hover { background: var(--mh-lime-hover); }
+.mh-plan-ledger thead th.is-sponsored { background: var(--mh-mist); }
+.mh-plan-ledger tbody th { padding: 22px 28px; border-bottom: 1px solid var(--mh-line); border-right: 1px solid var(--mh-line); text-align: left; font-weight: 400; vertical-align: top; }
+.mh-plan-ledger tbody th > svg { float: left; width: 22px; height: 22px; margin-right: 12px; color: var(--mh-forest); stroke-width: 1.5; }
+.mh-plan-ledger tbody th > span { display: block; }
+.mh-plan-ledger tbody th strong { font-family: var(--mh-font-display); font-size: 18px; line-height: 24px; }
+.mh-plan-ledger tbody th p { margin-top: 3px; color: var(--mh-muted); font-size: 14px; line-height: 20px; }
+.mh-plan-ledger tbody td { padding: 22px 20px; border-bottom: 1px solid var(--mh-line); border-right: 1px solid var(--mh-line); vertical-align: top; font-size: 14px; line-height: 21px; }
+.mh-plan-ledger tbody td:last-child { border-right: 0; }
+/* stylelint-disable-next-line color-no-hex -- the retired price deck's own
+   one-off muted-sage icon ring, carried over unchanged; not a token-worthy role */
+.mh-plan-ledger tbody td svg { float: left; width: 18px; height: 18px; margin-right: 10px; padding: 3px; border: 1px solid #7f9b92; border-radius: 50%; color: var(--mh-forest); }
+.mh-plan-ledger tbody td > span { display: block; overflow: hidden; }
+.mh-plan-ledger tbody tr:last-child th,
+.mh-plan-ledger tbody tr:last-child td { border-bottom: 0; }
+.mh-plan-ledger .mh-plan-ledger-privacy th,
+.mh-plan-ledger .mh-plan-ledger-privacy td { background: var(--mh-mist); }
 p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; line-height: 22px; text-align: center; }
+
+/* Phone and small tablet: the same table becomes blocks. Each cell prints the
+   plan it belongs to from `data-plan`, so the copy exists once in the DOM. */
+@media (max-width: 900px) {
+  .mh-plan-ledger table,
+  .mh-plan-ledger thead,
+  .mh-plan-ledger tbody,
+  .mh-plan-ledger tr,
+  .mh-plan-ledger thead th,
+  .mh-plan-ledger tbody th,
+  .mh-plan-ledger tbody td { display: block; width: auto; }
+  .mh-plan-ledger thead th,
+  .mh-plan-ledger tbody th,
+  .mh-plan-ledger tbody td { border-right: 0; }
+  .mh-plan-ledger thead th:first-child { display: none; }
+  .mh-plan-ledger tbody th { padding-bottom: 12px; border-bottom: 0; }
+  .mh-plan-ledger tbody td { padding: 10px 28px 10px 56px; border-bottom: 0; }
+  .mh-plan-ledger tbody td::before { content: attr(data-plan); display: block; margin-bottom: 2px; color: var(--mh-muted); font-size: 12px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+  .mh-plan-ledger tbody td svg { margin-left: -28px; }
+  .mh-plan-ledger tbody tr { padding-bottom: 12px; border-bottom: 1px solid var(--mh-line); }
+  .mh-plan-ledger tbody tr:last-child { border-bottom: 0; }
+  .mh-plan-ledger .mh-plan-ledger-privacy td::before { content: none; }
+}
 
 .mh-community { min-height: 480px; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(48px, 5.42vw, 82px); padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
 .mh-page-home .mh-community { min-height: 0; display: block; padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-mist); border-bottom: 0; }
@@ -1745,7 +1796,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-footer-brand { width: 144px; }
   .mh-split,
   .mh-pricing-heading,
-  .mh-price-deck,
   .mh-faq,
   .mh-site-footer > div { grid-template-columns: 1fr; }
   .mh-human,
@@ -1765,7 +1815,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-how-first-week-rows li { grid-template-columns: 40px 1fr; row-gap: 12px; padding: 24px 0; }
   .mh-how-first-week-rows li > span { width: 40px; flex: 0 0 40px; font-size: 26px; line-height: 32px; }
   .mh-human-photo { min-height: 560px; }
-  .mh-price-deck > article { min-height: 330px; }
   .mh-faq { padding-top: 72px; padding-bottom: 72px; gap: 48px; }
   .mh-site-footer nav { grid-template-columns: repeat(2, 1fr); }
 }
@@ -1835,7 +1884,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-onboarding-card.is-know { top: 144px; right: -24px; }
   .mh-plan-preview { padding: 22px; }
   .mh-human-photo { min-height: 430px; }
-  .mh-price-deck header { align-items: flex-start; flex-direction: column; gap: 8px; }
   .mh-final-cta-copy > div { flex-direction: column; }
   .mh-site-footer { padding: 54px var(--mh-gutter) 30px; }
   .mh-site-footer > p { flex-direction: column; gap: 8px; }

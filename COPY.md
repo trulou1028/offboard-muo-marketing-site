@@ -722,16 +722,49 @@ Final CTA. The two ids are SEO-load-bearing: `next.config.ts` sends
 - CTA: `Start free`
 - Aside: `Clear before you pay / No hidden starting fee. / Free is a real tier, not a trial. You see every price and what is included before you pay.`
 
-### Pricing deck
+### Plan ledger *(the comparison table, owner 2026-09-14; replaces the three-card "Pricing deck")*
 
-- Kicker: `A simple place to start` · H2: `Start free. Add more support when you need it.`
-- Intro: `Begin with a transition plan and the core tools. Add credits or human support only when you choose to go further. You will see the price and what is included before you pay.`
-- **Free** (dark highlight card, per owner decision 2026-08-23): `$0 forever` — `Everything you need to run the search, and one complete Application Packet with every step free.` — **feature 3 corrected 2026-09-14** to `The assessment on every packet after that: who is the company, how you fit` (was `…: is it real, who is the company, how you fit`). `Is it real` is the ghost check, which is capped at three a month, so promising it on *every* packet over-stated the tier. The very next feature line, `3 basic ghost checks a month`, already said the true thing; the ledger row "Consumer tiers" had it right all along (`the assessment (parse, company intel, role match) on every packet`). — features: `Layoff Plan, tracker, benefit facts, and documents` *(was `Your Path, …`, rename 2026-09-10)* · `One complete Application Packet, every step free` · `The assessment on every packet after that: is it real, who is the company, how you fit` · `3 basic ghost checks a month` · `Ask Lumo, 10 messages a day` · `Connect ChatGPT or Claude to read your Offboard and update your tracker`
-- **Offboard Pro** (badge `For active searches`): `$20/month` · billing line `Or $45 every 3 months, which is $15 a month. Cancel anytime.` — `Offboard does the repeated application work for you, on every packet.` — features: `Tailored resumes, cover letters, interview briefs, and a path to a person on every packet` · `Enriched ghost checks: duplicate postings, employer reviews, salary benchmark` · `Ask Lumo without a daily limit, on the advanced model` · `Your connected assistant can run packets and checks for you` · `About 30 full packets a month. We email you at 25 and never stop a build without warning.`
-- **Sponsored access** (badge `May be covered`): `Outplacement, modernized. Your former employer, school, or workforce organization may cover your access.` — features: `The full sponsored benefit is delivered to you` · `Your private career activity remains yours` · `Sponsors receive aggregate reporting only` — CTA `Learn about sponsored access` → `/employers`
-- Deck note: `Credits pay for the extras outside your search: headshots, the brand kit, voice practice, and paperwork review. Everything in the Application Packet is covered by your plan. Claiming your government benefits is always free, on any tier.`
+- Kicker: `Plan ledger` *(was `A simple place to start`)* · H2: `Start free. Add more support when you need it.` *(kept)*
+- Intro: `The same core tools, with more support as your search needs more room, or an organization can sponsor your access.` *(the owner's own line from the mockup; the retired intro was `Begin with a transition plan and the core tools. Add credits or human support only when you choose to go further. You will see the price and what is included before you pay.` Its last sentence already ships in the hero aside, so nothing was lost.)*
+- Table caption, for screen readers only: `What each plan includes, compared row by row.`
 
-*Rewritten by plan 047 (2026-09-07) to the app's pricing reset (Sprints 412 to 414): the wall moved from "how many credits" to "which work". The retired deck for the record: Free `See your plan, your runway, and your benefit deadlines. Then build your first Application Packet.` with `Transition plan & benefit sheets · Runway calculator · First Application Packet free · Application tracking · 3 Lumo messages per day · 30 monthly credits`; Pro (`For active transitions`) `For an active transition that needs more room: research, tailoring, preparation, paperwork review, and unlimited Lumo.` with `Unlimited conversations with Lumo · More room for Application Packets and tailoring · Deeper application and interview support · 300 monthly credits`; note `Quarterly billing details and the full feature comparison are shown at checkout. Claiming your government benefits is always free, on any tier.`*
+**Why a table.** The three cards it replaces listed each tier's features in its
+own order and its own words, so nothing lined up across them and the reader
+could not answer "what do I actually get more of". A matrix answers that by
+construction. It ships as a real `<table>` with row and column headers, and
+collapses to blocks on a phone with each cell naming its plan from
+`data-plan`, so this copy exists once in the DOM.
+
+**Column headers**
+
+- First column: `Plan ledger` / `Compare what you get with each plan.`
+- **Free**: `$0 forever` — `Everything you need to run the search.` — CTA `Get started free`
+- **Offboard Pro** (badge `For active searches`, the emphasised dark column): `$20/month` — `Offboard does the repeated application work for you.` — CTA `Upgrade to Pro` — billing line `Or $45 every 3 months, which is $15 a month. Cancel anytime.`
+- **Sponsored access** (badge `May be covered`): `Outplacement, modernized. Your former employer, school, or workforce organization may cover 90 days of Offboard Pro.` — CTA `Learn about sponsored access` → `/employers`
+  - `outplacement` is allowed here: § Language rules permits it on `/employers` and in Sponsored-tier copy, and `MarketingHome.test.tsx` asserts it is present.
+  - **90 days** is the sponsored term from `/employers` § 9 (`90 days of full Offboard Pro`), which is what makes every Sponsored cell below read `Included`.
+
+**Rows** — each one checked 2026-09-14 against the ledger row "Consumer tiers" and the app's server entitlements.
+
+| Row | Scent line | Free | Offboard Pro | Sponsored |
+| --- | --- | --- | --- | --- |
+| `Search foundation` | `Plan, track, and stay organized.` | `Layoff Plan, tracker, benefit facts, and documents` | `Everything in Free` | `Included` |
+| `Application Packets` | `Tailored materials for every opportunity.` | `One complete packet with every step, then the company and fit reads on every packet after it` | `About 30 full packets a month. We email you at 25 and never stop a build without warning.` | `Included` |
+| `Ghost checks` | `Know whether a posting is real.` | `3 basic checks a month` | `Enriched checks: duplicate postings, employer reviews, salary benchmark` | `Included` |
+| `Ask Lumo` | `Guidance that knows your situation.` | `10 messages a day` | `No daily limit, on the advanced model` | `Included` |
+| `Connected assistant` | `Bring in the AI you already use.` | `Connect ChatGPT or Claude to read your Offboard and update your tracker` | `Your connected assistant can run packets and checks for you` | `Included` |
+
+- Full-width closing row: `Your privacy stays yours` / `Your career activity remains private.` — `Your private career activity remains yours. Sponsors receive aggregate reporting only.`
+- Deck note, unchanged: `Credits pay for the extras outside your search: headshots, the brand kit, voice practice, and paperwork review. Everything in the Application Packet is covered by your plan. Claiming your government benefits is always free, on any tier.`
+
+**Two cells in the owner's mockup did not ship as drawn**, and both would have been false:
+
+1. `Basic tracker` on Free, against `Full plan, tracker, benefit facts, and documents` on Pro. Free gets the whole foundation; the ledger row says so and it is what the headline "the same core tools" means. The row now reads the same thing on both, which is the argument rather than a gap in it.
+2. `Unlimited ghost checks` on Pro. Pro's enriched checks run on the monthly credit allowance, which is about 30 full packets' worth, so nothing on Pro is unlimited except Ask Lumo's daily cap. The row carries what the enrichment actually adds instead.
+
+*The mockup's hand-drawn margin note (`SAME TOOLS. MORE SUPPORT WHEN YOU NEED IT.`) is not built: it needs a handwriting face, and the site self-hosts four variable fonts with no CDN allowed (`AGENTS.md`). Its words are the intro line above.*
+
+*The three-card deck this replaces, for the record: Free `$0 forever` / `Everything you need to run the search, and one complete Application Packet with every step free.` with six feature ticks; Pro with five; Sponsored with three (`The full sponsored benefit is delivered to you` · `Your private career activity remains yours` · `Sponsors receive aggregate reporting only`). Rewritten by plan 047 (2026-09-07) to the app's pricing reset (Sprints 412 to 414): the wall moved from "how many credits" to "which work". The deck before that is in plan 047's own record.*
 
 ### What the plan covers *(was "How credits work"; plan 047)*
 
@@ -2198,6 +2231,7 @@ When one ships, move it into its page section above.
 | 2026-09-13 | Homepage community band: `Meet with a human` leads the three cards, its CTA becomes `Fill out intake` (was `Say hello`), and the intro block is centred over the row | this file § 1 |
 | 2026-09-13 | `/integrations` is called **Integrations**, not `Offboard Everywhere` (owner). Nav row, footer row, meta title, hero kicker, and the three sibling-strip CTAs that named it. The three CTAs read `See the integrations`. No URL or redirect change | this file § 11 |
 | 2026-09-14 | Ghost-check claims corrected against the app's **server** entitlements after an owner-requested re-reference of `lumo-plan-builder`. `/pricing` no longer promises `whether the job is real` on every packet (it is capped at three a month); `/job-search`'s Ghost Check chip reads `3 a month`, not `Pro`. The 2026-09-13 changelog row called this an app-versus-site contradiction needing an owner decision; there was no contradiction, only a misread of `packetSteps.ts`, whose `pro` flag describes the enriched check and is not the entitlement gate. **Interview briefs were checked too and are correctly listed as Pro**: they cost no credits but `generate-interview-briefing` still calls `checkEntitlement` | this file §§ 5 and 14 |
+| 2026-09-14 | `/pricing`'s three-card deck becomes the **plan ledger**, a comparison table, from the owner's own mockup. Same facts, read across one row at a time. Two mockup cells were not shipped because they were false (`Basic tracker` on Free, `Unlimited ghost checks` on Pro) | this file § 5 |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·
