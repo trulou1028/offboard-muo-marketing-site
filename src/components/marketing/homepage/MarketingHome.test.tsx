@@ -325,8 +325,17 @@ describe("Offboard marketing routes", () => {
       "Ghost checks",
       "Ask Lumo",
       "Connected assistant",
-      "Your privacy stays yours",
     ]);
+    // The privacy line is a full-width closing row, not a compared feature.
+    expect(ledger.getByText(/your private career activity remains yours, on every plan/i)).toBeInTheDocument();
+
+    // "Unlimited" on ghost checks is what the owner's second mockup drew and
+    // what the app does not do: Pro's enriched checks run on the monthly
+    // credit allowance. The claim was corrected on 2026-09-14 and this keeps
+    // it corrected.
+    const ghostRow = ledger.getByRole("rowheader", { name: /ghost checks/i }).closest("tr")!;
+    expect(ghostRow.textContent).not.toMatch(/unlimited/i);
+    expect(ghostRow.textContent).toContain("3 basic/month");
     // Three columns since 2026-09-14: Sponsored access left the table for its
     // own band, where the three facts a single "Included" cell could not hold
     // now ship.
@@ -341,8 +350,10 @@ describe("Offboard marketing routes", () => {
     const ledgerText = (document.querySelector(".mh-plan-ledger") as HTMLElement).textContent ?? "";
     expect(ledgerText).not.toMatch(/basic tracker/i);
     expect(ledgerText).not.toMatch(/unlimited ghost/i);
-    // Free keeps the whole foundation; that sameness is the headline's claim.
-    expect(ledgerText).toContain("Everything in Free");
+    // Free keeps the whole foundation; that sameness is the headline's claim,
+    // so the row says so on both sides rather than showing Free as lesser.
+    expect(ledgerText).toContain("Layoff Plan, tracker, documents");
+    expect(ledgerText).toContain("Same as Free");
     expect(screen.getByText(/claiming your government benefits is always free/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /learn about sponsored access/i })).toHaveAttribute("href", "/employers");
   });
