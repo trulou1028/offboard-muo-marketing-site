@@ -3,10 +3,15 @@ import Link from "next/link";
 import {
   ArrowRight,
   Check,
+  ClipboardList,
   FileText,
+  Layers,
   ListChecks,
   MessageSquare,
+  Plug,
   Search,
+  ShieldCheck,
+  Sparkles,
 } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -619,57 +624,137 @@ export function HumanSupportSection({ compact = false }: { compact?: boolean }) 
   );
 }
 
+/* The plan ledger (owner 2026-09-14, from the owner's own comparison mockup).
+   The three cards it replaces listed each tier's features in its own order, so
+   nothing lined up and a reader could not answer "what do I actually get more
+   of". A matrix answers that by construction: one row per thing, read across.
+
+   It is a real <table>, not a grid of divs. A comparison matrix is what tables
+   are for, and it buys the row and column headers a screen reader needs. On a
+   phone the same DOM collapses to blocks and each cell names its own plan
+   through `data-plan`, so there is no second copy of this copy to drift.
+
+   Every cell is a claim, checked 2026-09-14 against the verified-facts ledger
+   row "Consumer tiers" and the app's server entitlements. Two cells in the
+   owner's mockup could not ship as drawn, and COPY.md § 5 records why:
+   "Basic tracker" on Free (Free gets the whole foundation, which is the point
+   of the headline) and "Unlimited ghost checks" on Pro (Pro's enriched checks
+   run on the monthly credit allowance, about 30 full packets' worth). */
+const PLAN_ROWS = [
+  {
+    icon: ClipboardList,
+    name: "Search foundation",
+    scent: "Plan, track, and stay organized.",
+    free: "Layoff Plan, tracker, benefit facts, and documents",
+    pro: "Everything in Free",
+  },
+  {
+    icon: Layers,
+    name: "Application Packets",
+    scent: "Tailored materials for every opportunity.",
+    free: "One complete packet with every step, then the company and fit reads on every packet after it",
+    pro: "About 30 full packets a month. We email you at 25 and never stop a build without warning.",
+  },
+  {
+    icon: Search,
+    name: "Ghost checks",
+    scent: "Know whether a posting is real.",
+    free: "3 basic checks a month",
+    pro: "Enriched checks: duplicate postings, employer reviews, salary benchmark",
+  },
+  {
+    icon: Sparkles,
+    name: "Ask Lumo",
+    scent: "Guidance that knows your situation.",
+    free: "10 messages a day",
+    pro: "No daily limit, on the advanced model",
+  },
+  {
+    icon: Plug,
+    name: "Connected assistant",
+    scent: "Bring in the AI you already use.",
+    free: "Connect ChatGPT or Claude to read your Offboard and update your tracker",
+    pro: "Your connected assistant can run packets and checks for you",
+  },
+] as const;
+
+function PlanCell({ plan, children }: { plan: string; children: ReactNode }) {
+  return (
+    <td data-plan={plan}>
+      <Check aria-hidden="true" />
+      <span>{children}</span>
+    </td>
+  );
+}
+
 export function PricingSection() {
   return (
     <section className="mh-pricing mh-section" id="pricing" aria-labelledby="pricing-title">
-      <div className="mh-pricing-heading"><div><span className="mh-kicker">A simple place to start</span><h2 id="pricing-title">Start free. Add more support when you need it.</h2></div><p>Begin with a transition plan and the core tools. Add credits or human support only when you choose to go further. You will see the price and what is included before you pay.</p></div>
-      <div className="mh-price-deck" data-reveal="">
-        <article className="is-primary">
-          <header>
-            <h3>Free</h3>
-          </header>
-          <p className="mh-price-value"><b>$0</b><small>forever</small></p>
-          <p>Everything you need to run the search, and one complete Application Packet with every step free.</p>
-          <ul>
-            <li><Check aria-hidden="true" />Layoff Plan, tracker, benefit facts, and documents</li>
-            <li><Check aria-hidden="true" />One complete Application Packet, every step free</li>
-            <li><Check aria-hidden="true" />The assessment on every packet after that: who is the company, how you fit</li>
-            <li><Check aria-hidden="true" />3 basic ghost checks a month</li>
-            <li><Check aria-hidden="true" />Ask Lumo, 10 messages a day</li>
-            <li><Check aria-hidden="true" />Connect ChatGPT or Claude to read your Offboard and update your tracker</li>
-          </ul>
-          <PrimaryCta />
-        </article>
-        <article>
-          <header>
-            <h3>Offboard Pro</h3>
-            <b className="is-badge">For active searches</b>
-          </header>
-          <p className="mh-price-value"><b>$20</b><small>/month</small></p>
-          <p>Offboard does the repeated application work for you, on every packet.</p>
-          <ul>
-            <li><Check aria-hidden="true" />Tailored resumes, cover letters, interview briefs, and a path to a person on every packet</li>
-            <li><Check aria-hidden="true" />Enriched ghost checks: duplicate postings, employer reviews, salary benchmark</li>
-            <li><Check aria-hidden="true" />Ask Lumo without a daily limit, on the advanced model</li>
-            <li><Check aria-hidden="true" />Your connected assistant can run packets and checks for you</li>
-            <li><Check aria-hidden="true" />About 30 full packets a month. We email you at 25 and never stop a build without warning.</li>
-          </ul>
-          <small className="mh-price-billing">Or $45 every 3 months, which is $15 a month. Cancel anytime.</small>
-          <PrimaryCta>Upgrade to Pro</PrimaryCta>
-        </article>
-        <article>
-          <header>
-            <h3>Sponsored access</h3>
-            <b className="is-badge">May be covered</b>
-          </header>
-          <p>Outplacement, modernized. Your former employer, school, or workforce organization may cover your access.</p>
-          <ul>
-            <li><Check aria-hidden="true" />The full sponsored benefit is delivered to you</li>
-            <li><Check aria-hidden="true" />Your private career activity remains yours</li>
-            <li><Check aria-hidden="true" />Sponsors receive aggregate reporting only</li>
-          </ul>
-          <Link className="mh-secondary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
-        </article>
+      <div className="mh-pricing-heading"><div><span className="mh-kicker">Plan ledger</span><h2 id="pricing-title">Start free. Add more support when you need it.</h2></div><p>The same core tools, with more support as your search needs more room, or an organization can sponsor your access.</p></div>
+      <div className="mh-plan-ledger" data-reveal="">
+        <table>
+          <caption className="mh-visually-hidden">What each plan includes, compared row by row.</caption>
+          <thead>
+            <tr>
+              <th scope="col">
+                <strong>Plan ledger</strong>
+                <p>Compare what you get with each plan.</p>
+              </th>
+              <th scope="col">
+                <div className="mh-plan-ledger-name"><h3>Free</h3></div>
+                <p className="mh-price-value"><b>$0</b><small>forever</small></p>
+                <p>Everything you need to run the search.</p>
+                <PrimaryCta />
+              </th>
+              <th scope="col" className="is-primary">
+                {/* The badge sits beside the heading, not inside it: it is a label for
+                    the plan, and folding it into the h3 changes the heading's
+                    accessible name to "Offboard Pro For active searches". */}
+                <div className="mh-plan-ledger-name"><h3>Offboard Pro</h3><b className="is-badge">For active searches</b></div>
+                <p className="mh-price-value"><b>$20</b><small>/month</small></p>
+                <p>Offboard does the repeated application work for you.</p>
+                <PrimaryCta>Upgrade to Pro</PrimaryCta>
+                <small>Or $45 every 3 months, which is $15 a month. Cancel anytime.</small>
+              </th>
+              <th scope="col" className="is-sponsored">
+                <div className="mh-plan-ledger-name"><h3>Sponsored access</h3><b className="is-badge">May be covered</b></div>
+                <p>Outplacement, modernized. Your former employer, school, or workforce organization may cover 90 days of Offboard Pro.</p>
+                <Link className="mh-secondary-cta" href="/employers"><span>Learn about sponsored access</span><ArrowRight aria-hidden="true" /></Link>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {PLAN_ROWS.map(({ icon: IconComponent, name, scent, free, pro }) => (
+              <tr key={name}>
+                <th scope="row">
+                  <IconComponent aria-hidden="true" />
+                  <span>
+                    <strong>{name}</strong>
+                    <p>{scent}</p>
+                  </span>
+                </th>
+                <PlanCell plan="Free">{free}</PlanCell>
+                <PlanCell plan="Offboard Pro">{pro}</PlanCell>
+                {/* Sponsored is 90 days of Pro, bought by the organization, so
+                    every row is the Pro row. The header cell says so once. */}
+                <PlanCell plan="Sponsored access">Included</PlanCell>
+              </tr>
+            ))}
+            <tr className="mh-plan-ledger-privacy">
+              <th scope="row">
+                <ShieldCheck aria-hidden="true" />
+                <span>
+                  <strong>Your privacy stays yours</strong>
+                  <p>Your career activity remains private.</p>
+                </span>
+              </th>
+              <td colSpan={3}>
+                <Check aria-hidden="true" />
+                <span>Your private career activity remains yours. Sponsors receive aggregate reporting only.</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <p className="mh-price-note">Credits pay for the extras outside your search: headshots, the brand kit, voice practice, and paperwork review. Everything in the Application Packet is covered by your plan. Claiming your government benefits is always free, on any tier.</p>
     </section>
