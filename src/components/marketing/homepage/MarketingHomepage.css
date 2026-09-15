@@ -1567,16 +1567,13 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 .mh-connect .mh-copy-block > small { margin-top: -8px; color: var(--mh-on-dark-muted); font-size: 13px; }
 .mh-connect .mh-section-link { margin-top: 12px; border-bottom-color: var(--mh-hairline-on-dark); color: var(--mh-paper); }
 
-/* Composition B - the conversation. v2 rendered all four messages in one
-   bordered box, which made the transcript the tallest thing in its section.
-   The earlier exchange now sits behind the later one at full contrast,
-   cropped by the card in front of it: every message stays in the DOM and in
-   reading order, but the composition is the height of one exchange. */
-.mh-connect-comp { padding-top: 100px; }
-.mh-comp-ghost { position: absolute; z-index: 1; top: 0; left: 0; width: calc(100% - 40px); max-height: 100px; overflow: hidden; border-color: transparent; box-shadow: var(--mh-shadow-surface); }
-.mh-connect-comp > .mh-comp-base { margin-left: 40px; }
-.mh-comp-ghost .mh-chat-ai { mask-image: linear-gradient(to bottom, rgb(0 0 0 / 26%), transparent 42%); }
-.mh-comp-marks { top: 78px; left: 68px; display: flex; align-items: center; gap: 10px; padding: 8px 13px; background: var(--mh-white); border-radius: var(--mh-radius-pill); box-shadow: var(--mh-shadow-overlay); }
+/* Composition B - one context-to-answer story. The transparent illustration
+   turns the old stack of similar chat bubbles into a clearer sequence: source
+   context, question, recommendation, opportunity state, and saved contact.
+   The transcript remains in the DOM for assistive technology. */
+.mh-connect-comp { isolation: isolate; }
+.mh-connect-visual { display: block; width: calc(100% + 64px); max-width: none; height: auto; margin: -36px -44px -54px -20px; filter: drop-shadow(0 22px 36px rgb(0 0 0 / 18%)); }
+.mh-comp-marks { top: 2px; right: 4px; display: flex; align-items: center; gap: 10px; padding: 8px 13px; background: var(--mh-white); border-radius: var(--mh-radius-pill); box-shadow: var(--mh-shadow-overlay); }
 .mh-comp-marks .mh-int-logo { width: 26px; height: 26px; border: 0; }
 .mh-comp-marks .mh-int-logo img { width: 22px; height: 22px; }
 .mh-comp-marks .mh-lumo-mark { width: 24px; height: 24px; flex-basis: 24px; }
@@ -1616,11 +1613,9 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   ul.mh-record-sources { position: relative; top: auto; right: auto; order: 1; margin: 0 0 0 18px; }
   .mh-record-card { order: 2; width: 100%; margin-top: -14px; }
 
-  .mh-connect-comp { display: flex; flex-direction: column; padding-top: 0; }
-  .mh-comp-ghost { position: relative; order: 1; width: 100%; max-height: 118px; }
-  .mh-comp-marks { position: relative; top: auto; left: auto; order: 2; align-self: flex-start; margin: -20px 0 0 18px; }
-  .mh-connect-comp > .mh-comp-base { order: 3; margin-top: -14px; margin-left: 0; }
-  .mh-comp-chip { position: relative; right: auto; bottom: auto; order: 4; align-self: flex-end; margin: -16px 14px 0 0; }
+  .mh-connect-comp { margin-top: 12px; }
+  .mh-connect-visual { width: calc(100% + 40px); margin: -20px -20px -30px; }
+  .mh-comp-marks { top: 0; right: 4px; }
 
   .mh-path-comp { display: flex; flex-direction: column; }
   .mh-path-done { position: relative; bottom: auto; left: auto; align-self: flex-start; margin: -16px 0 0 14px; }
