@@ -82,7 +82,12 @@ export async function sendIntakeConfirmationEmail(input: { to: string; firstName
     <p>In the meantime, keep an eye on your inbox. If anything urgent comes up, just reply to this email.</p>
     <p><a href="https://offboard.co" style="color:#004838;">Back to offboard.co</a></p>
   </body></html>`;
-  return sendViaResend({ to: input.to, subject: "We got your intake, Offboard", html });
+  /* "We got your intake, Offboard" until 2026-09-15, which read as though it
+     was addressing the reader as Offboard. The sender name already says who
+     it is from; the subject now greets the person, matching the body's
+     "Hi <first name>,". Found by the launch smoke test, which was the first
+     time anyone read this email as a recipient. */
+  return sendViaResend({ to: input.to, subject: `We got your intake, ${input.firstName}`, html });
 }
 
 export async function sendIntakeNotificationEmail(input: {

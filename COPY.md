@@ -1237,6 +1237,37 @@ dream role` to `I've rewritten my resume 11 times and still don't know what I
 do`). Treat it as its own voice zone; the sitewide language rules apply but
 the register is deliberately looser.
 
+### The two intake emails *(recorded 2026-09-15)*
+
+Both live in `src/lib/email/resend.ts` and are sent by the `/intake` server
+action. They were the only user-facing strings on the site that this document
+did not carry, which is why a subject line addressing every applicant as
+"Offboard" survived from the plan-010 port until the launch smoke test read
+one as a recipient. **A change to either belongs here in the same PR**, the
+same rule as any page.
+
+**1. Confirmation, to the person who submitted.**
+
+- Subject: `We got your intake, <first name>` *(corrected 2026-09-15; was the literal `We got your intake, Offboard`, which read as though it were addressing the reader as Offboard. The sender name already says who it is from, and the body greets by first name, so the subject now does too.)*
+- H1: `Thanks for filling that out`
+- Greeting: `Hi <first name>,` — the first word of what they typed in the name field, which the field's own hint invites (`First name is fine. You're not on trial. Yet.`)
+- Body: `We got your intake and one of us (probably Steph or Louie) will review it and reach out directly, usually within a few days.`
+- Then: `In the meantime, keep an eye on your inbox. If anything urgent comes up, just reply to this email.`
+- Link: `Back to offboard.co` → `https://offboard.co`
+- Two people are named. If either stops reviewing intakes, this line is wrong and this is the place it is written down.
+
+**2. Notification, to the team.**
+
+- Subject: `New intake: <name> (<most recent job title>)`
+- H1: `New intake from <name>`
+- Lede: `Reply directly to <their email>.` — a mailto link, so a reply reaches the person rather than the sending address
+- Then every answered field as a label and value, with `—` where a field was left blank
+- Footer: `Submission ID: <id>`
+
+Both are plain HTML on the site's paper background with the forest link
+colour. Neither carries an unsubscribe link, because neither is marketing:
+each is a direct reply to something the person just did.
+
 ---
 
 # 10 · Career Context `/career-context`
@@ -2299,6 +2330,7 @@ When one ships, move it into its page section above.
 | 2026-09-14 | Ghost-check claims corrected against the app's **server** entitlements after an owner-requested re-reference of `lumo-plan-builder`. `/pricing` no longer promises `whether the job is real` on every packet (it is capped at three a month); `/job-search`'s Ghost Check chip reads `3 a month`, not `Pro`. The 2026-09-13 changelog row called this an app-versus-site contradiction needing an owner decision; there was no contradiction, only a misread of `packetSteps.ts`, whose `pro` flag describes the enriched check and is not the entitlement gate. **Interview briefs were checked too and are correctly listed as Pro**: they cost no credits but `generate-interview-briefing` still calls `checkEntitlement` | this file §§ 5 and 14 |
 | 2026-09-14 | `/pricing`'s three-card deck becomes the **plan ledger**, a comparison table, from the owner's own mockup. Same facts, read across one row at a time. Two mockup cells were not shipped because they were false (`Basic tracker` on Free, `Unlimited ghost checks` on Pro) | this file § 5 |
 | 2026-09-14 | Plan ledger round 2 (owner): Sponsored access leaves the table for its own band under it, both plan CTAs bottom-align on one line, the Pro billing line moves up with the price, and Ghost checks takes a ghost icon. Plus a headline rule: a product name never splits across lines, bent per headline with `titleLines` | this file §§ 5 and Language rules |
+| 2026-09-15 | The two intake emails are recorded in this document for the first time, and the confirmation subject is corrected from the literal `We got your intake, Offboard` to `We got your intake, <first name>`. Found by the launch smoke test; they were the only user-facing strings the copy law did not cover | this file § 9 |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·
