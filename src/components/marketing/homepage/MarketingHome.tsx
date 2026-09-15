@@ -8,7 +8,7 @@ import {
   Search,
 } from "lucide-react";
 import type { ReactNode } from "react";
-import { AiReply, CommunityStrip, FinalCta, LumoMark, MarketingShell, SIGN_UP_URL, StartingPlanPreview, YouBubble } from "./MarketingSite";
+import { CommunityStrip, FinalCta, LumoMark, MarketingShell, SIGN_UP_URL, StartingPlanPreview } from "./MarketingSite";
 import { IntegrationLogo } from "./IntegrationLogos";
 
 /* Homepage v3 (plan 039): the same Civic Modern bands, re-sequenced into one
@@ -245,24 +245,29 @@ function StepContext() {
 function ConnectComposition() {
   return (
     <div className="mh-comp mh-connect-comp">
-      {/* The earlier exchange, cropped by the card in front of it. It stays in
-          the DOM at full contrast rather than being faded or removed: the
-          conversation reads in order for a screen reader, and COPY.md's
-          four-message demo stays whole. */}
-      <div className="mh-chat-card mh-comp-ghost">
-        <YouBubble>How does this role compare with the other opportunities I&apos;m pursuing?</YouBubble>
-        <AiReply>Based on your Offboard context, Tesserac looks like one of your stronger opportunities. It aligns closely with your AI product experience and gives you more technical ownership than several of the other roles you&apos;re considering.</AiReply>
-      </div>
-      <div className="mh-chat-card mh-comp-base">
-        <YouBubble>Move Tesserac to the interview stage and save that Ruben is my recruiter.</YouBubble>
-        <AiReply highlight="Done.">Tesserac is now in Interviewing, and I&apos;ve added Ruben to the opportunity.</AiReply>
+      <Image
+        className="mh-connect-visual"
+        src="/marketing/homepage/graphics-civic-modern/lumo-opportunity-context-civic-modern-v2-transparent.webp"
+        alt=""
+        width={1536}
+        height={1024}
+        sizes="(max-width: 900px) 100vw, 50vw"
+      />
+      {/* The generated visual carries the exact words as pixels. Keep the same
+          story in the DOM so it remains available to assistive technology and
+          COPY.md can continue to govern every user-facing string. */}
+      <div className="mh-visually-hidden">
+        <p>Used role, resume, interview notes</p>
+        <p>You: How does the Figma role compare?</p>
+        <p>Lumo: Strong fit. It matches your AI product work and gives you more ownership.</p>
+        <p>Figma · Senior Product Designer · Interviewing</p>
+        <p>Ruben · Saved</p>
       </div>
       <div className="mh-comp-satellite mh-comp-marks" aria-hidden="true">
         <LumoMark />
         <IntegrationLogo id="chatgpt" />
         <IntegrationLogo id="claude" />
       </div>
-      <div className="mh-comp-satellite mh-comp-chip"><i className="is-sage" aria-hidden="true" />Contact saved · Ruben</div>
     </div>
   );
 }

@@ -103,6 +103,12 @@ describe("Offboard marketing routes", () => {
     // and Claude connections on this page: they ship labelled beta.
     expect(within(screen.getByRole("main")).getByText(/ChatGPT and Claude connections are in beta/i)).toBeInTheDocument();
 
+    // The Step 2 raster repeats its pixel copy in visually hidden DOM text so
+    // the Figma example stays accessible and COPY.md can govern it.
+    expect(screen.getByText("You: How does the Figma role compare?")).toBeInTheDocument();
+    expect(screen.getByText("Lumo: Strong fit. It matches your AI product work and gives you more ownership.")).toBeInTheDocument();
+    expect(document.querySelector<HTMLImageElement>('.mh-connect-visual')?.getAttribute("src")).toContain("lumo-opportunity-context-civic-modern-v2-transparent.webp");
+
     // DESIGN.md R5a: a section intro is an eyebrow, a headline, a description
     // and at most one action pair. Nothing nested and titled, and never a
     // second body paragraph. Scoped to this page on purpose - eight route
