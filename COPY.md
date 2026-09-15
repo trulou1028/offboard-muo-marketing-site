@@ -1264,9 +1264,31 @@ same rule as any page.
 - Then every answered field as a label and value, with `—` where a field was left blank
 - Footer: `Submission ID: <id>`
 
-Both are plain HTML on the site's paper background with the forest link
-colour. Neither carries an unsubscribe link, because neither is marketing:
-each is a direct reply to something the person just did.
+**Both render inside the app's branded shell** (owner 2026-09-15). Until then
+they were plain HTML on the site's paper background, which looked nothing like
+the auth and transactional emails `app.offboard.co` sends, even though both go
+out through the same Resend account from `Offboard <hello@offboard.co>`. The
+shell is ported from `lumo-plan-builder` `origin/main`
+`supabase/functions/_shared/email-templates/branded-shell.tsx`, whose own rule
+(`.lovable/memory/style/email-branded-shell-standard.md`) is that *every*
+Offboard email uses it: grey page, white card, centred logo, dividers, footer,
+copyright.
+
+- Reproduced as plain HTML rather than imported. The app's is React Email in a
+  Deno edge function; this is a Next server module, and two emails do not
+  justify the dependency. The values are copied so the two stay identical.
+  **If the app's shell changes, `src/lib/email/resend.ts` has to follow.**
+- The logo is the **dark** artwork (`offboard-logo-dark.png`). The card is
+  white and the light file is the one for the forest header; measured, it sits
+  at 244 luminance on white and would be invisible.
+- The logo URL is built from Vercel's own production domain, so it is the
+  `.vercel.app` address today and `offboard.co` once the domain is attached.
+  Checked 2026-09-15: `offboard.co/marketing/homepage/offboard-logo-dark.png`
+  is a 404 until cutover, because that domain still serves the retiring site.
+  Pointing the email at `offboard.co` now would ship a broken logo to anyone
+  who submits before the domain moves.
+- Neither carries an unsubscribe link, matching the app's rule: neither is
+  marketing, each is a direct reply to something the person just did.
 
 ---
 

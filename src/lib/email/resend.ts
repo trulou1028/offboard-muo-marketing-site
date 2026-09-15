@@ -39,6 +39,88 @@ function escapeHtml(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
+/* The branded shell, ported from the app (owner 2026-09-15).
+ *
+ * `lumo-plan-builder` `origin/main`
+ * `supabase/functions/_shared/email-templates/branded-shell.tsx` and its
+ * `.lovable/memory/style/email-branded-shell-standard.md`: every Offboard
+ * email, auth and transactional, renders inside one shell so they all look
+ * like they come from the same company. These two did not, because they were
+ * ported from the retiring site before that standard existed.
+ *
+ * Reproduced as plain HTML rather than imported. The app's version is React
+ * Email running in a Deno edge function; this is a Next server module, and two
+ * emails do not justify that dependency. The values below are copied from the
+ * app's `emailStyles` so the two stay visually identical: page #f4f4f5, a white
+ * card at 12px radius and 40px padding, the logo at 140px, #e4e4e7 dividers,
+ * 24px headings in #1a1a1a and 15px body in #55575d. If the app's shell moves,
+ * this is the file that has to follow, and COPY.md § 9 says so.
+ *
+ * The logo is the DARK artwork: the card is white, and the light file is the
+ * one for the forest header (measured, it sits at 244 luminance on white and
+ * would be invisible). The app serves its logo from its own Supabase storage,
+ * which this project does not share, so it is served from this site instead.
+ *
+ * Unsubscribe links are deliberately absent, matching the app's rule: neither
+ * of these is marketing, each is a direct reply to something the person did.
+ */
+const EMAIL_ORIGIN = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : /* Only reached outside Vercel, i.e. a local `next dev` that has a Resend
+       key. Written out rather than imported from src/lib/site.ts so this
+       change and the canonical-URL change can merge in either order; the two
+       collapse into one constant once both are on main, and
+       docs/cutover-checklist.md lists every place the domain is written. */
+    "https://offboard.co";
+
+/* Vercel's own production domain, which is the `.vercel.app` one until
+   offboard.co is attached to the project and the custom domain after. Without
+   it every email sent before the domain cutover would show a broken logo,
+   because offboard.co still serves the retiring site. */
+const LOGO_URL = `${EMAIL_ORIGIN}/marketing/homepage/offboard-logo-dark.png`;
+
+const DARK_MODE_OVERRIDES =
+  ":root{color-scheme:light only}body,.email-page{background-color:#f4f4f5}" +
+  ".email-card{background-color:#ffffff}@media(prefers-color-scheme:dark){" +
+  "body,.email-page{background-color:#f4f4f5!important;color:#1a1a1a!important}" +
+  ".email-card{background-color:#ffffff!important;color:#1a1a1a!important}}";
+
+const FONT_STACK =
+  "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif";
+
+export const emailStyles = {
+  h1: `font-size:24px;font-weight:600;color:#1a1a1a;margin:0 0 16px;line-height:1.3;`,
+  text: `font-size:15px;color:#55575d;line-height:1.6;margin:0 0 16px;`,
+  subtext: `font-size:13px;color:#71717a;line-height:1.6;margin:0 0 8px;`,
+  link: `color:#1a1a1a;text-decoration:underline;`,
+  divider: `border:0;border-top:1px solid #e4e4e7;margin:24px 0;`,
+  noteLabel: `font-size:12px;color:#71717a;text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px;`,
+  noteText: `font-size:15px;color:#1a1a1a;line-height:1.5;margin:0;white-space:pre-wrap;`,
+} as const;
+
+/** Wraps content in the same white card every Offboard email uses. */
+function brandedShell(input: { preview: string; body: string; footerText?: string }): string {
+  return `<!doctype html><html lang="en" dir="ltr"><head>
+<meta charset="utf-8" />
+<meta name="color-scheme" content="light only" />
+<meta name="supported-color-modes" content="light" />
+<style>${DARK_MODE_OVERRIDES}</style>
+</head>
+<body class="email-page" style="background-color:#f4f4f5;font-family:${FONT_STACK};padding:48px 24px;margin:0;">
+<span style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeHtml(input.preview)}</span>
+<div style="max-width:600px;margin:0 auto;">
+  <div class="email-card" style="background-color:#ffffff;border-radius:12px;padding:40px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+    <img src="${LOGO_URL}" alt="Offboard" width="140" style="display:block;margin:0 auto 8px;" />
+    <hr style="${emailStyles.divider}" />
+    ${input.body}
+    <hr style="${emailStyles.divider}" />
+    ${input.footerText ? `<div style="font-size:12px;color:#a1a1aa;line-height:1.5;margin:0 0 8px;text-align:center;">${input.footerText}</div>` : ""}
+    <div style="font-size:12px;color:#a1a1aa;text-align:center;margin:0;">&copy; ${new Date().getFullYear()} Offboard</div>
+  </div>
+</div>
+</body></html>`;
+}
+
 async function sendViaResend(input: { to: string | string[]; subject: string; html: string }) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -75,13 +157,15 @@ async function sendViaResend(input: { to: string | string[]; subject: string; ht
 }
 
 export async function sendIntakeConfirmationEmail(input: { to: string; firstName: string }) {
-  const html = `<!doctype html><html><body style="font-family:Georgia,serif;background:#f7f4ec;padding:32px;color:#15211d;">
-    <h1 style="font-size:24px;">Thanks for filling that out</h1>
-    <p>Hi ${escapeHtml(input.firstName)},</p>
-    <p>We got your intake and one of us (probably Steph or Louie) will review it and reach out directly, usually within a few days.</p>
-    <p>In the meantime, keep an eye on your inbox. If anything urgent comes up, just reply to this email.</p>
-    <p><a href="https://offboard.co" style="color:#004838;">Back to offboard.co</a></p>
-  </body></html>`;
+  const html = brandedShell({
+    preview: "We got your intake and will reach out directly.",
+    body: `
+    <h1 style="${emailStyles.h1}">Thanks for filling that out</h1>
+    <p style="${emailStyles.text}">Hi ${escapeHtml(input.firstName)},</p>
+    <p style="${emailStyles.text}">We got your intake and one of us (probably Steph or Louie) will review it and reach out directly, usually within a few days.</p>
+    <p style="${emailStyles.text}">In the meantime, keep an eye on your inbox. If anything urgent comes up, just reply to this email.</p>
+    <p style="${emailStyles.text}"><a href="${EMAIL_ORIGIN}" style="${emailStyles.link}">Back to offboard.co</a></p>`,
+  });
   /* "We got your intake, Offboard" until 2026-09-15, which read as though it
      was addressing the reader as Offboard. The sender name already says who
      it is from; the subject now greets the person, matching the body's
@@ -101,24 +185,23 @@ export async function sendIntakeNotificationEmail(input: {
   const rows = input.fields
     .map(
       (f) =>
-        `<div style="margin-bottom:14px;"><p style="margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#40534c;">${escapeHtml(
+        `<div style="margin-bottom:16px;"><p style="${emailStyles.noteLabel}">${escapeHtml(
           f.label,
-        )}</p><p style="margin:0;font-size:15px;line-height:22px;color:#15211d;white-space:pre-wrap;">${escapeHtml(
-          f.value || "—",
-        )}</p></div>`,
+        )}</p><p style="${emailStyles.noteText}">${escapeHtml(f.value || "—")}</p></div>`,
     )
     .join("");
 
-  const html = `<!doctype html><html><body style="font-family:Georgia,serif;background:#f7f4ec;padding:32px;color:#15211d;">
-    <h1 style="font-size:24px;">New intake from ${escapeHtml(input.submitterName)}</h1>
-    <p>Reply directly to <a href="mailto:${escapeHtml(input.submitterEmail)}" style="color:#004838;">${escapeHtml(
+  const html = brandedShell({
+    preview: `New intake from ${input.submitterName}.`,
+    body: `
+    <h1 style="${emailStyles.h1}">New intake from ${escapeHtml(input.submitterName)}</h1>
+    <p style="${emailStyles.text}">Reply directly to <a href="mailto:${escapeHtml(
       input.submitterEmail,
-    )}</a>.</p>
-    <hr style="border-color:#d7d3c8;margin:20px 0;" />
-    ${rows}
-    <hr style="border-color:#d7d3c8;margin:20px 0 12px;" />
-    <p style="font-size:12px;color:#40534c;margin:0;">Submission ID: ${escapeHtml(input.submissionId)}</p>
-  </body></html>`;
+    )}" style="${emailStyles.link}">${escapeHtml(input.submitterEmail)}</a>.</p>
+    <hr style="${emailStyles.divider}" />
+    ${rows}`,
+    footerText: `Submission ID: ${escapeHtml(input.submissionId)}`,
+  });
 
   return sendViaResend({
     to: input.to,

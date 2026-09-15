@@ -57,6 +57,36 @@ describe("the intake emails match the copy law", () => {
     }
   });
 
+  it("renders both emails inside the app's branded shell", () => {
+    // Ported from lumo-plan-builder's branded-shell.tsx, whose own standard is
+    // that every Offboard email uses it. Before this, these two were plain
+    // HTML on a paper background and looked nothing like the auth emails the
+    // app sends from the same Resend account.
+    expect(CODE).toContain("brandedShell({");
+    expect((CODE.match(/brandedShell\(\{/g) ?? []).length).toBe(2);
+
+    // The tokens that have to match the app's emailStyles for the two to look
+    // the same. A drift here is invisible until someone opens an inbox.
+    for (const token of ["#f4f4f5", "#e4e4e7", "#1a1a1a", "#55575d", "border-radius:12px", "padding:40px"]) {
+      expect(CODE, `the shell lost ${token}`).toContain(token);
+    }
+
+    // The card is white, so the logo must be the dark artwork. The light file
+    // measures 244 luminance on white: present, and invisible.
+    expect(CODE).toContain("offboard-logo-dark.png");
+    expect(CODE).not.toContain("offboard-logo-light.png");
+
+    // Built from Vercel's production domain, so it is the .vercel.app address
+    // today and offboard.co after the cutover. Hardcoding offboard.co would
+    // ship a broken logo to anyone who submits before the domain moves.
+    expect(CODE).toContain("VERCEL_PROJECT_PRODUCTION_URL");
+
+    // The app's rule: neither email is marketing, so neither unsubscribes.
+    expect(CODE.toLowerCase()).not.toContain("unsubscribe");
+
+    expect(COPY_DOC).toContain("Both render inside the app's branded shell");
+  });
+
   it("still names two reviewers, because the email promises them by name", () => {
     // If either stops reviewing intakes, this sentence is a false promise to
     // a person who just asked for help. COPY.md § 9 says the same.
