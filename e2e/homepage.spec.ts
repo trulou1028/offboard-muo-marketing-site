@@ -277,11 +277,19 @@ test.describe("Offboard marketing site", () => {
   });
 
   test("redirects legacy production URLs to their new destinations", async ({ page }) => {
+    // Repointed 2026-09-15: these used to land on /how-it-works, which is
+    // deferred and serves noindex, so the inbound value had nowhere to go.
     await page.goto("/product");
-    await expect(page).toHaveURL(/\/how-it-works$/);
+    await expect(page).toHaveURL(/\/#how-it-works$/);
+
+    await page.goto("/why-offboard");
+    await expect(page).toHaveURL(/\/about$/);
+
+    await page.goto("/job-packet");
+    await expect(page).toHaveURL(/\/job-search$/);
 
     await page.goto("/faq");
-    await expect(page).toHaveURL(/\/how-it-works#faq$/);
+    await expect(page).toHaveURL(/\/about#faq$/);
 
     await page.goto("/community");
     await expect(page).toHaveURL(/\/#community$/);
@@ -714,4 +722,28 @@ test("every route's canonical points at its own address on the real domain", asy
     if (href !== expected) wrong.push(`${route}: ${href ?? "(no canonical)"} — expected ${expected}`);
   }
   expect(wrong).toEqual([]);
+});
+
+// No legacy URL may 301 into a page that is hidden from search. A redirect
+// into a noindexed destination gives the inbound value nowhere to land and the
+// destination cannot rank, so it is worse than useless: it looks handled.
+// Four redirects sat in exactly that state until 2026-09-15, when the owner
+// ruled out un-deferring /how-it-works and they were repointed at live pages.
+test("no redirect lands on a page that is hidden from search", async ({ page }) => {
+  const sources = [
+    "/product", "/why-offboard", "/job-packet", "/faq", "/product/wellbeing",
+    "/community", "/founder-story", "/security", "/for-organizations",
+    "/for-recruiters", "/gift", "/tools", "/tool-directory", "/blog",
+    "/layoff-checklist", "/mission", "/for-teams", "/privacy", "/gpt",
+    "/ai-job-matchmaker", "/job-packet-agent",
+  ];
+
+  const landingOnHidden: string[] = [];
+  for (const source of sources) {
+    const response = await page.goto(source);
+    expect(response?.status(), `${source} should resolve`).toBe(200);
+    const robots = await page.locator('meta[name="robots"]').getAttribute("content");
+    if (robots === DEFERRED_ROBOTS) landingOnHidden.push(`${source} -> ${new URL(page.url()).pathname}`);
+  }
+  expect(landingOnHidden).toEqual([]);
 });

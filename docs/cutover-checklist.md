@@ -155,14 +155,17 @@ that value is lost unless the destination is genuinely equivalent.
 
 ### The three fixable problems
 
-- [ ] **Four legacy URLs redirect onto a noindexed page.** `/product`,
-      `/why-offboard`, `/job-packet` and `/faq` all 301 to `/how-it-works`,
-      which is in `DEFERRED_ROUTES` and serves `noindex, nofollow`. A 301 into
-      a noindexed page gives the inbound value nowhere to land and the
-      destination cannot rank. Fix before cutover by either un-deferring
-      `/how-it-works` or repointing the four at live pages. Plan 045 kept
-      `/how-it-works` routable *because* of these redirects; routable is not
-      enough once the site is indexed.
+- [x] **Done 2026-09-15. Owner ruled out un-deferring `/how-it-works`**, so the
+      four were repointed at the live page that answers the same question:
+      `/product` → `/#how-it-works` (the homepage's four-step strip is that
+      story now), `/why-offboard` → `/about`, `/job-packet` → `/job-search`
+      (the Application Packet has its own band there since plan 051), and
+      `/faq` → `/about#faq`, whose "Fair questions" is the live general FAQ and
+      shares a question word for word with the hidden page's. `/product/:slug*`
+      follows its parent. **`e2e/homepage.spec.ts` now walks every redirect
+      source and fails if any lands on a page carrying `DEFERRED_ROBOTS`**, so
+      this cannot come back by deferring a route later.
+      ~~Four legacy URLs redirect onto a noindexed page.~~
 - [ ] **Three of the collapsed tool pages are Offboard's own products.**
       `/tools/offboard-lumo`, `/tools/offboard-job-packets` and
       `/tools/offboard-ghost-job-checker` currently land on `/resources`.
