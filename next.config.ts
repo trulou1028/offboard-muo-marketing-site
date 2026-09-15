@@ -12,10 +12,21 @@ const nextConfig: NextConfig = {
   // a redirect here would shadow it.
   async redirects() {
     return [
-      { source: "/product", destination: "/how-it-works", permanent: true },
-      { source: "/why-offboard", destination: "/how-it-works", permanent: true },
-      { source: "/job-packet", destination: "/how-it-works#toolkit", permanent: true },
-      { source: "/faq", destination: "/how-it-works#faq", permanent: true },
+      // These four used to land on /how-it-works. That page is deferred and
+      // serves `noindex`, so a 301 into it gave the inbound value nowhere to
+      // go and the destination could not rank (docs/cutover-checklist.md).
+      // The owner ruled out bringing the page back on 2026-09-15, so each one
+      // now points at the live page that answers the same question.
+      //
+      // /product and /why-offboard described what Offboard is; the homepage's
+      // four-step strip is that story now, and `#how-it-works` is its id.
+      { source: "/product", destination: "/#how-it-works", permanent: true },
+      { source: "/why-offboard", destination: "/about", permanent: true },
+      // The Application Packet has its own band on /job-search since plan 051.
+      { source: "/job-packet", destination: "/job-search", permanent: true },
+      // /about's "Fair questions" is the live general FAQ, and one of its five
+      // questions is word for word one of the hidden page's.
+      { source: "/faq", destination: "/about#faq", permanent: true },
       { source: "/community", destination: "/#community", permanent: true },
       { source: "/founder-story", destination: "/about", permanent: true },
       // Retargeted from /about in plan 034, now that a real trust page exists.
@@ -66,11 +77,9 @@ const nextConfig: NextConfig = {
       { source: "/mission", destination: "/about", permanent: true },
       { source: "/for-teams", destination: "/employers", permanent: true },
       { source: "/privacy", destination: "/privacy-security", permanent: true },
-      // /product already 301s; its children did not, and /product/wellbeing
-      // carries 89 impressions. Kept consistent with the parent rather than
-      // pointed somewhere better, because the four /how-it-works redirects are
-      // one open decision and should move together.
-      { source: "/product/:slug*", destination: "/how-it-works", permanent: true },
+      // Follows its parent, which is the whole reason it was left pointing at
+      // /how-it-works until that decision was made.
+      { source: "/product/:slug*", destination: "/#how-it-works", permanent: true },
       { source: "/index.html", destination: "/", permanent: true },
       // A Webflow leftover with no subject of its own.
       { source: "/wireframe/:slug*", destination: "/", permanent: true },
