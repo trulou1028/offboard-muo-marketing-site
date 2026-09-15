@@ -87,6 +87,33 @@ describe("the intake emails match the copy law", () => {
     expect(COPY_DOC).toContain("Both render inside the app's branded shell");
   });
 
+  it("builds the card as a table cell, so the content cannot escape it", () => {
+    /* The defect this replaces, 2026-09-15: the shell was ported as nested
+       <div>s carrying the app's style values. Chromium rendered it correctly
+       and Gmail did not — it closed the white card straight after the logo and
+       dropped the heading and body onto the client's own background, black in
+       dark mode. The app avoids this because React Email's Container and
+       Section are tables, which is the reason email templates use them.
+
+       Nothing escapes a <td>. These assertions are on the markup strategy, not
+       the styling, because the styling was already right. */
+    expect(CODE).toContain("<table role=\"presentation\"");
+    expect(CODE).toContain('class="email-card" style="background-color:#ffffff');
+    // The card is a cell, never a div.
+    expect(CODE).not.toMatch(/<div[^>]*class="email-card"/);
+
+    // The body, both dividers and the footer all sit between the card cell's
+    // open and close tags. A future edit that moves any of them out is the
+    // original bug returning.
+    const card = CODE.indexOf('class="email-card"');
+    const close = CODE.indexOf("</td>", card);
+    expect(card, "the card cell is gone").toBeGreaterThan(-1);
+    const inside = CODE.slice(card, close);
+    for (const part of ["${input.body}", "${divider}", "input.footerText", "Offboard</div>"]) {
+      expect(inside, `"${part}" is outside the card cell`).toContain(part);
+    }
+  });
+
   it("still names two reviewers, because the email promises them by name", () => {
     // If either stops reviewing intakes, this sentence is a false promise to
     // a person who just asked for help. COPY.md § 9 says the same.

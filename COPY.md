@@ -1278,6 +1278,13 @@ copyright.
   Deno edge function; this is a Next server module, and two emails do not
   justify the dependency. The values are copied so the two stay identical.
   **If the app's shell changes, `src/lib/email/resend.ts` has to follow.**
+- **The card is a table cell, not a div** (corrected 2026-09-15). The first
+  version carried the app's style values on nested `<div>`s. Chromium rendered
+  it correctly; Gmail closed the white card straight after the logo and put the
+  heading and body on the client's own background, black in dark mode. React
+  Email's `Container` and `Section` are tables, which is the entire reason
+  email templates use them, and copying the styling without the markup was the
+  mistake. Nothing escapes a `<td>`.
 - The logo is the **dark** artwork (`offboard-logo-dark.png`). The card is
   white and the light file is the one for the forest header; measured, it sits
   at 244 luminance on white and would be invisible.
@@ -2353,6 +2360,7 @@ When one ships, move it into its page section above.
 | 2026-09-14 | `/pricing`'s three-card deck becomes the **plan ledger**, a comparison table, from the owner's own mockup. Same facts, read across one row at a time. Two mockup cells were not shipped because they were false (`Basic tracker` on Free, `Unlimited ghost checks` on Pro) | this file § 5 |
 | 2026-09-14 | Plan ledger round 2 (owner): Sponsored access leaves the table for its own band under it, both plan CTAs bottom-align on one line, the Pro billing line moves up with the price, and Ghost checks takes a ghost icon. Plus a headline rule: a product name never splits across lines, bent per headline with `titleLines` | this file §§ 5 and Language rules |
 | 2026-09-15 | The two intake emails are recorded in this document for the first time, and the confirmation subject is corrected from the literal `We got your intake, Offboard` to `We got your intake, <first name>`. Found by the launch smoke test; they were the only user-facing strings the copy law did not cover | this file § 9 |
+| 2026-09-15 | The intake emails' branded card is rebuilt on a table. Ported as divs the same morning, it rendered correctly in a browser and broke in Gmail, which closed the card after the logo and dropped the text onto the client's background | this file § 9 |
 
 **Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
 tighten About FAQ #4 toward the beachhead · verify logos-band claims ·

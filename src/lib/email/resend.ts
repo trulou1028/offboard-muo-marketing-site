@@ -93,31 +93,52 @@ export const emailStyles = {
   text: `font-size:15px;color:#55575d;line-height:1.6;margin:0 0 16px;`,
   subtext: `font-size:13px;color:#71717a;line-height:1.6;margin:0 0 8px;`,
   link: `color:#1a1a1a;text-decoration:underline;`,
-  divider: `border:0;border-top:1px solid #e4e4e7;margin:24px 0;`,
+  divider: `border-top:1px solid #e4e4e7;font-size:0;line-height:0;margin:24px 0;`,
   noteLabel: `font-size:12px;color:#71717a;text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px;`,
   noteText: `font-size:15px;color:#1a1a1a;line-height:1.5;margin:0;white-space:pre-wrap;`,
 } as const;
 
-/** Wraps content in the same white card every Offboard email uses. */
+/** Wraps content in the same white card every Offboard email uses.
+ *
+ * TABLES, not divs (corrected 2026-09-15). The first port copied the app's
+ * style values onto plain `<div>`s and Gmail closed the white card straight
+ * after the logo, leaving the heading and body sitting on the client's own
+ * background, which in dark mode was black. The app does not have that problem
+ * because React Email's `<Container>` and `<Section>` render as tables; that is
+ * the reason email templates use them at all. Reproducing the styles without
+ * reproducing the markup was the mistake.
+ *
+ * So the card is a table cell. Nothing can escape a `<td>`, in any client.
+ */
 function brandedShell(input: { preview: string; body: string; footerText?: string }): string {
+  const divider = `<div style="${emailStyles.divider}"></div>`;
   return `<!doctype html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="color-scheme" content="light only" />
 <meta name="supported-color-modes" content="light" />
 <style>${DARK_MODE_OVERRIDES}</style>
 </head>
-<body class="email-page" style="background-color:#f4f4f5;font-family:${FONT_STACK};padding:48px 24px;margin:0;">
+<body class="email-page" style="margin:0;padding:0;background-color:#f4f4f5;font-family:${FONT_STACK};">
 <span style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeHtml(input.preview)}</span>
-<div style="max-width:600px;margin:0 auto;">
-  <div class="email-card" style="background-color:#ffffff;border-radius:12px;padding:40px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
-    <img src="${LOGO_URL}" alt="Offboard" width="140" style="display:block;margin:0 auto 8px;" />
-    <hr style="${emailStyles.divider}" />
-    ${input.body}
-    <hr style="${emailStyles.divider}" />
-    ${input.footerText ? `<div style="font-size:12px;color:#a1a1aa;line-height:1.5;margin:0 0 8px;text-align:center;">${input.footerText}</div>` : ""}
-    <div style="font-size:12px;color:#a1a1aa;text-align:center;margin:0;">&copy; ${new Date().getFullYear()} Offboard</div>
-  </div>
-</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f5;">
+  <tr>
+    <td align="center" style="padding:48px 24px;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;">
+        <tr>
+          <td class="email-card" style="background-color:#ffffff;border-radius:12px;padding:40px;font-family:${FONT_STACK};">
+            <img src="${LOGO_URL}" alt="Offboard" width="140" style="display:block;margin:0 auto 8px;border:0;" />
+            ${divider}
+            ${input.body}
+            ${divider}
+            ${input.footerText ? `<div style="font-size:12px;color:#a1a1aa;line-height:1.5;margin:0 0 8px;text-align:center;">${input.footerText}</div>` : ""}
+            <div style="font-size:12px;color:#a1a1aa;text-align:center;margin:0;">&copy; ${new Date().getFullYear()} Offboard</div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
 </body></html>`;
 }
 
