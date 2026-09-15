@@ -167,9 +167,15 @@ that value is lost unless the destination is genuinely equivalent.
       `/tools/offboard-lumo`, `/tools/offboard-job-packets` and
       `/tools/offboard-ghost-job-checker` currently land on `/resources`.
       `/lumo` and `/job-search` are their subjects. Three redirect rules.
-- [ ] **No page declares a canonical URL.** There is no `metadataBase` and no
-      `alternates.canonical` in `src/app/layout.tsx`, so no page states which
-      address is its real home. Add both before the domain moves, so that a
+- [x] **Done 2026-09-14.** Every route declares its own canonical on
+      `https://offboard.co`, and `e2e/homepage.spec.ts` checks the rendered tag
+      on all 20. `metadataBase` is in the root layout; the canonical is per
+      route because in this version of Next a relative canonical resolves
+      against `metadataBase` rather than the current path, so one `./` in the
+      layout would have pointed every page at the homepage while still
+      rendering a tag on each. **If the domain ever changes, `SITE_ORIGIN` in
+      `src/lib/site.ts` and `BASE_URL` in `src/app/sitemap.ts` move together.**
+      ~~No page declares a canonical URL.~~ Add both before the domain moves, so that a
       crawl of `offboard-muo-marketing-site.vercel.app` (which is public and
       serves the whole site, held back only by the site-wide `noindex`) points
       at `offboard.co` rather than competing with it.

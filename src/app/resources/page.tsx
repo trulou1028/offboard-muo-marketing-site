@@ -7,6 +7,7 @@ import { MarketingResources } from "@/components/marketing/homepage/MarketingRou
 export const revalidate = 300;
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/resources" },
   title: "Guides & resources | Offboard",
   description: "Reported essays, practical guides, and the slow work of making layoffs less brutal.",
 };
