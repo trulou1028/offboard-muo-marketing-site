@@ -4,6 +4,7 @@ import { MarketingShell } from "@/components/marketing/homepage/MarketingSite";
 import { IntakeForm } from "@/components/marketing/intake/IntakeForm";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/intake" },
   title: "Intake | Offboard",
   description:
     "Tell us a bit about your offboarding story. Our team reviews every intake and reaches out directly.",

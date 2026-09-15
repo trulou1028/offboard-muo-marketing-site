@@ -687,3 +687,31 @@ test("the pricing plan CTAs stay on one line", async ({ page }) => {
   expect(ctas[0].top).toBe(ctas[1].top);
   expect(ctas[0].bottom).toBe(ctas[1].bottom);
 });
+
+// Every page names its real home (owner 2026-09-14). The same content answers
+// at offboard.co and at the public Vercel production URL; without a canonical
+// a crawl of the second competes with the first instead of handing it the
+// credit. Checked against the rendered tag on every route, because the pitfall
+// here is silent: in this version of Next a relative canonical resolves
+// against `metadataBase`, not the current path, so a single `./` in the root
+// layout would point all 20 routes at the homepage and every one of them would
+// still have a tag.
+test("every route's canonical points at its own address on the real domain", async ({ page }) => {
+  const ROUTES = [
+    "/", "/about", "/act", "/career-context", "/communities", "/companies",
+    "/employers", "/how-it-works", "/integrations", "/intake",
+    "/intake/confirmed", "/job-search", "/layoff-support", "/lumo", "/pricing",
+    "/privacy-security", "/resources", "/workforce",
+    "/companies/airtable",
+    "/resources/first-week-after-a-layoff",
+  ];
+
+  const wrong: string[] = [];
+  for (const route of ROUTES) {
+    await page.goto(route);
+    const href = await page.locator('link[rel="canonical"]').getAttribute("href");
+    const expected = route === "/" ? "https://offboard.co" : `https://offboard.co${route}`;
+    if (href !== expected) wrong.push(`${route}: ${href ?? "(no canonical)"} — expected ${expected}`);
+  }
+  expect(wrong).toEqual([]);
+});

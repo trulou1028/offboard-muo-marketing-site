@@ -4,6 +4,7 @@ import { MarketingCommunities } from "@/components/marketing/homepage/MarketingC
 import { DEFERRED_ROBOTS } from "@/lib/launch";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/communities" },
   title: "Universities & Communities | Offboard",
   description:
     "For universities, alumni organizations, associations, and nonprofits: sponsor Offboard so your members keep a career record that outlasts a single workshop, appointment, or program year.",

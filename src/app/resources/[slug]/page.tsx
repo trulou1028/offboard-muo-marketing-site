@@ -27,6 +27,9 @@ export async function generateMetadata({
   return {
     title: `${lookup.post.title} | Offboard`,
     description: lookup.post.excerpt,
+    /* The article's own slug, not the requested one: a retired slug 308s to
+       /resources, so only a rendering page reaches here. */
+    alternates: { canonical: `/resources/${lookup.post.slug}` },
   };
 }
 

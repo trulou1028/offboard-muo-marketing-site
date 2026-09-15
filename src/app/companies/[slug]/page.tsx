@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `Laid off from ${company.name}? Start here | Offboard`,
     description: company.summary,
+    alternates: { canonical: `/companies/${slug}` },
     robots: DEFERRED_ROBOTS,
   };
 }
