@@ -142,7 +142,7 @@ export function MarketingCareerContext() {
           title="Build your Career Context once. Use it everywhere."
           body="One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use."
           current="career-context"
-          visual={<Shot plain src="/marketing/site-imagery/product-compositions/career-context-sources-civic-modern-v2-transparent.webp" alt="A Career Context card: a completeness score of 71 out of 100, rows for experience, applications, interviews and goals, and the sources it is built from, a resume, LinkedIn and chat history" width={1536} height={1024} />}
+          visual={<Shot plain src="/marketing/site-imagery/product-compositions/career-context-card-civic-modern-v3-transparent.webp" alt="A layered Career Context card with rows for experience, applications, interviews and goals, built from a resume and interview notes" width={1536} height={1024} />}
           cta="Get started free"
         />
         <ProblemSection />

@@ -59,7 +59,8 @@ do framing work.
 | `homepage/graphics-civic-modern/lumo-interview-context-civic-modern-v1` | A Lumo exchange about preparing for an interview, with the sources it used and the brief marked ready | `/lumo` hero |
 | `homepage/graphics-civic-modern/lumo-opportunity-context-civic-modern-v2-transparent` | A Figma opportunity comparison that brings role, resume and interview-note context into one recommendation and updated application state | Homepage § Talk with Lumo |
 | `homepage/graphics-civic-modern/career-context-civic-modern-v1` | A Career Context card with Resume, Applications and Interview notes sources | **unplaced** — superseded by the v2 below, which carries the score and richer sources |
-| `site-imagery/product-compositions/career-context-sources-civic-modern-v2` | A Career Context card: 71 of 100, the four record rows, and the sources it is built from | `/career-context` hero |
+| `site-imagery/product-compositions/career-context-sources-civic-modern-v2` | A Career Context card: 71 of 100, the four record rows, and the sources it is built from | **unplaced** — superseded by the cleaner v3 below |
+| `site-imagery/product-compositions/career-context-card-civic-modern-v3-transparent` | A layered Career Context card with four record rows, a resume and interview notes | `/career-context` hero |
 | `site-imagery/product-compositions/connected-tools-permissions-civic-modern-v1` | Connected tools with their scopes, permission granted, revocable at any time | `/integrations` § Permissions |
 | `site-imagery/product-compositions/first-week-plan-civic-modern-v1` | A first-week plan: separation agreement, unemployment claim, health coverage, key deadlines | `/layoff-support` hero |
 

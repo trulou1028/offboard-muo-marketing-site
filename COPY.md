@@ -1317,7 +1317,7 @@ Product column.
 - Body: `One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use.` *(round 5: the hero, the next H2, and that section's body all made the same resume argument before the page said anything new; the hero now states the promise and section two carries the argument)*
 - CTA: `Create my Career Context` (primary)
 
-*Plan 049 (owner 2026-09-08): the hero's right column is the Civic Modern composition `career-context-sources-civic-modern-v2-transparent.webp`. It reads: `Your Career Context` · `Always evolving. Available whenever you use Offboard.` · a completeness bar at `71/100` · rows `Experience` / `Applications` / `Interviews` / `Goals` · sources `Resume`, `LinkedIn`, `Chat history` · state `Context updated`. Pixels; this is the record. It replaces plan 048's app screenshot, and the plan-042 paper aside stays retired.*
+*Owner revision 2026-09-15: the hero's right column is the cleaner Civic Modern composition `career-context-card-civic-modern-v3-transparent.webp`. It reads: `Your Career Context` · `One living record.` · rows `Experience` / `Applications` / `Interviews` / `Goals` · sources `Resume`, `Interview notes` · state `Context updated`. Pixels; this is the record. It replaces plan 049's score-heavy composition, and the plan-042 paper aside stays retired.*
 
 *Hero aside added by plan 042. The page is about an object and the hero
 never showed it: it shipped `aside={false}`. The aside is the standard
