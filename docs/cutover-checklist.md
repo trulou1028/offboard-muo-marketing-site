@@ -92,12 +92,15 @@ disaster.
 
 ### What is actually worth saving, ranked
 
-- [ ] **`/tools/offboard-ghost-job-checker` — 10 clicks from 32 impressions, a
+- [x] **Done 2026-09-14.** **`/tools/offboard-ghost-job-checker` — 10 clicks from 32 impressions, a
       31% clickthrough.** The best-converting page on the whole site, and it is
       Offboard's own product. It currently redirects to `/resources`. Send it,
       `/tools/offboard-job-packets` and `/tools/offboard-lumo` to `/job-search`
       and `/lumo`. Three rules.
-- [ ] **Catch the old `www` patterns that 404.** 42 URLs, 14 clicks and 2,984
+- [x] **Done 2026-09-14**, and verified by requesting every one of the 42.
+      Four garbled slugs are left 404ing on purpose: they are Google's own
+      URL guesses at the cover-letter article, one impression each, no clicks.
+      **Catch the old `www` patterns that 404.** 42 URLs, 14 clicks and 2,984
       impressions, none of them covered by `next.config.ts`: `/tool-directory`,
       `/blog` and `/blog/:slug*`, `/categories/:slug*`,
       `/article-categories/:slug*`, `/articles/:slug*`, `/gpt`,
