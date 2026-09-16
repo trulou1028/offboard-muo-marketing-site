@@ -436,6 +436,16 @@ describe("plan 042: the retired numbered grid stays retired", () => {
     expect(text).not.toContain("Applications & contacts");
   });
 
+  it("/career-context uses the cleaner v3 hero composition", () => {
+    const { container } = render(<MarketingCareerContext />);
+    const heroImage = container.querySelector<HTMLImageElement>('.mh-route-hero-visual img');
+    expect(heroImage?.getAttribute("src")).toContain("career-context-card-civic-modern-v3-transparent.webp");
+    expect(heroImage).toHaveAttribute(
+      "alt",
+      "A layered Career Context card with rows for experience, applications, interviews and goals, built from a resume and interview notes",
+    );
+  });
+
   // Numbering is a CSS counter now, so it must not be back in the strings.
   it("/career-context ownership copy carries no baked-in numbering", () => {
     const text = renderedText(<MarketingCareerContext />);
