@@ -265,15 +265,21 @@ function ConnectedAssistants() {
 function HonestPart() {
   return (
     <section className="mh-privacy-honest mh-section" aria-labelledby="honest-title">
-      <div className="mh-copy-block">
-        <span className="mh-kicker is-lime">The honest part</span>
-        <h2 id="honest-title">Where the line actually sits.</h2>
-      </div>
-      <div className="mh-privacy-honest-body" data-reveal="">
-        <p>Offboard does not use end-to-end encryption. Our AI features need to read your text as text: a resume tailor cannot rewrite a bullet it cannot see. That means our servers process your data in readable form, and, like every cloud product, the company that hosts our database and the people who hold our service keys could technically reach it.</p>
-        <p>We weighed the alternatives. On-device AI is not good enough yet to do this work. A key only you hold would mean one forgotten password erases your record forever, and it would break everything that helps you while you are away, like reminders and weekly summaries. So we chose readable processing plus strict access control, and we tell you exactly where the line sits. If that ever changes, it will change on this page first.</p>
-        <p>What stands between that technical possibility and a person reading your record: no admin read paths exist in the product, identifiers are minimized in our server logs, admin actions are written to an audit log, and every sentence on this page is tied to a control in our claims register.</p>
-        <p className="mh-privacy-certs">We do not hold a SOC 2 or ISO certification, and we will not imply otherwise. When that changes, it will say so here.</p>
+      <div className="mh-privacy-honest-layout">
+        <div className="mh-privacy-honest-heading">
+          <span className="mh-kicker is-lime">The honest part</span>
+          <h2 id="honest-title">Where the line actually sits.</h2>
+        </div>
+        <div className="mh-privacy-honest-content" data-reveal="">
+          <div className="mh-privacy-honest-body">
+            <p>Offboard does not use end-to-end encryption. Our AI features need to read your text as text: a resume tailor cannot rewrite a bullet it cannot see. That means our servers process your data in readable form, and, like every cloud product, the company that hosts our database and the people who hold our service keys could technically reach it.</p>
+            <p>We weighed the alternatives. On-device AI is not good enough yet to do this work. A key only you hold would mean one forgotten password erases your record forever, and it would break everything that helps you while you are away, like reminders and weekly summaries. So we chose readable processing plus strict access control, and we tell you exactly where the line sits. If that ever changes, it will change on this page first.</p>
+          </div>
+          <div className="mh-privacy-honest-ledger">
+            <p>What stands between that technical possibility and a person reading your record: no admin read paths exist in the product, identifiers are minimized in our server logs, admin actions are written to an audit log, and every sentence on this page is tied to a control in our claims register.</p>
+            <p className="mh-privacy-certs">We do not hold a SOC 2 or ISO certification, and we will not imply otherwise. When that changes, it will say so here.</p>
+          </div>
+        </div>
       </div>
     </section>
   );
