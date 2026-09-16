@@ -6,6 +6,7 @@ Date: 2026-09-16
 
 - `/application-packet` route promotion and hero composition
 - `/layoff-support` hero composition
+- Product and Resources mega-menu hierarchy
 - Product navigation and footer route updates
 - Desktop, tablet, and mobile layout containment
 
@@ -21,7 +22,9 @@ Reviewed result screenshots:
 
 ## Checks
 
-- Both refreshed heroes preserve the documentary subject while presenting the product UI as one layered white-card system.
+- Both refreshed heroes present the product UI as one layered white-card system. The final revision removes the documentary photo layer and gives that UI the full visual column.
+- Both desktop mega menus lead with navigation columns and reserve the third column for the featured guide or newsletter.
+- Career Context is visible in The system alongside Lumo and Integrations; the Product feature promotes the published first-week guide instead of duplicating a product destination.
 - Floating status chips remain clear of card titles and labels at all three viewports.
 - The Application Packet headline, artwork, and CTA stay within the mobile viewport without clipping or horizontal overflow.
 - `/job-search` redirects to the canonical `/application-packet` route, and shared navigation points directly to the canonical route.

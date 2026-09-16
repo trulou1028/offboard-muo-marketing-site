@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   BarChart3,
   Building2,
@@ -76,20 +75,15 @@ function StatusChip({ item, position }: { item: readonly [LucideIcon, string]; p
 
 export function LayeredProductHero({
   variant,
-  photo,
   label,
 }: {
   variant: HeroVariant;
-  photo: string;
   label: string;
 }) {
   const content = CONTENT[variant];
 
   return (
     <figure className={`mh-hero-image-composition is-${variant}`} aria-label={label}>
-      <span className="mh-hero-image-composition-photo">
-        <Image src={photo} alt="" fill sizes="(max-width: 900px) 100vw, 42vw" priority />
-      </span>
       <div className={`mh-layered-product is-${variant}`} aria-hidden="true">
         <BackCard item={content.leftCard} side="left" />
         <BackCard item={content.rightCard} side="right" />

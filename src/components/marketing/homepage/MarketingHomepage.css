@@ -232,12 +232,12 @@ a.mh-skip-link:focus { transform: translateY(0); }
    page container: a one-column panel spanning 1200px read as forced space
    (owner review). Column tracks are fixed so the width is determinate; the
    clamp keeps it inside the page gutters on narrow desktops. */
-.mh-nav-panel { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: calc(100% + 12px); left: 50%; display: grid; grid-template-columns: 400px repeat(2, 300px); max-width: calc(100vw - 2 * var(--mh-page-x)); min-height: 400px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); translate: -50% 0; }
+.mh-nav-panel { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: calc(100% + 12px); left: 50%; display: grid; grid-template-columns: repeat(2, 300px) 400px; max-width: calc(100vw - 2 * var(--mh-page-x)); min-height: 400px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); translate: -50% 0; }
 /* No panel renders data-columns="1" since plan 043's launch trim left
    Resources as the only group, and it has two columns. Kept, not deleted:
    For Organizations was the one-column panel and comes back with
    /workforce and /communities. */
-.mh-nav-panel[data-columns="1"] { grid-template-columns: 400px 340px; }
+.mh-nav-panel[data-columns="1"] { grid-template-columns: 340px 400px; }
 /* The `hidden` attribute alone does NOT close these panels: `display: grid`
    above is an author rule and beats the user-agent's `[hidden] {display:none}`,
    so all three panels rendered at once and overlapped. Caught in a screenshot,
@@ -247,9 +247,6 @@ a.mh-skip-link:focus { transform: translateY(0); }
    pointer does not fire mouseleave and close the panel under the cursor. */
 .mh-nav-panel::before { position: absolute; top: -12px; right: 0; left: 0; height: 12px; content: ""; }
 .mh-nav-column { display: grid; align-content: start; gap: 2px; padding: 28px 20px 28px 26px; border-right: 1px solid var(--mh-line); }
-/* The feature leads (owner 2026-09-08), so the rule now falls between the
-   link columns and never on the panel's own right edge. */
-.mh-nav-column:last-child { border-right: 0; }
 .mh-nav-heading { padding: 0 12px 10px; color: var(--mh-secondary); font-size: 11px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
 .mh-nav-column a { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; align-items: start; padding: 10px 12px; border-radius: var(--mh-radius-sm); }
 .mh-nav-column a svg { width: 20px; height: 20px; margin-top: 1px; color: var(--mh-forest); }
@@ -261,7 +258,7 @@ a.mh-skip-link:focus { transform: translateY(0); }
 .mh-nav-column a[aria-current="page"] strong { color: var(--mh-forest); }
 /* The featured card: light on light, per the owner. The render inside is
    the only dark thing in the panel, and it is an image, not a surface. */
-a.mh-nav-feature { display: grid; align-content: start; gap: 6px; padding: 28px; background: var(--mh-paper-soft); border-radius: var(--mh-radius-lg) 0 0 var(--mh-radius-lg); transition: background-color var(--mh-dur-base) var(--mh-ease-standard); }
+a.mh-nav-feature { display: grid; align-content: start; gap: 6px; padding: 28px; background: var(--mh-paper-soft); border-radius: 0 var(--mh-radius-lg) var(--mh-radius-lg) 0; transition: background-color var(--mh-dur-base) var(--mh-ease-standard); }
 a.mh-nav-feature:hover { background: var(--mh-sand); }
 /* Taller than a thumbnail: the render is the card's hero, not its icon. */
 .mh-nav-feature-visual { order: -2; position: relative; display: block; height: 190px; margin-bottom: 10px; overflow: hidden; border-radius: var(--mh-radius-md); }
@@ -1089,12 +1086,8 @@ a.mh-secondary-cta:hover { border-color: var(--mh-ink); }
    The UI is rendered as layered DOM cards so it can share the dimensional
    treatment established by the Career Context composition while staying
    legible and responsive. */
-figure.mh-hero-image-composition { position: relative; width: min(590px, 100%); min-height: 480px; margin-left: auto; }
-.mh-hero-image-composition-photo { position: absolute; inset: 0 8% 15% 0; overflow: hidden; border: 1px solid var(--mh-hairline-on-dark); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); }
-.mh-hero-image-composition-photo img { object-fit: cover; }
-.mh-hero-image-composition.is-first-week .mh-hero-image-composition-photo img { object-position: 56% center; }
-.mh-hero-image-composition.is-application-packet .mh-hero-image-composition-photo img { object-position: 42% center; }
-.mh-layered-product { position: absolute; z-index: 2; right: -6%; bottom: -2%; width: 84%; height: 292px; color: var(--mh-ink); }
+figure.mh-hero-image-composition { position: relative; width: min(590px, 100%); min-height: 390px; margin-left: auto; }
+.mh-layered-product { position: absolute; z-index: 2; right: 0; bottom: 8%; width: 100%; height: 315px; color: var(--mh-ink); }
 .mh-layered-product-back,
 .mh-layered-product-main,
 .mh-layered-product-chip { background: var(--mh-white); border: 1px solid var(--mh-line); box-shadow: var(--mh-shadow-overlay); }
@@ -1120,7 +1113,7 @@ figure.mh-hero-image-composition { position: relative; width: min(590px, 100%); 
 .mh-layered-product-chip > span { display: grid; width: 30px; height: 30px; place-items: center; background: var(--mh-paper-soft); border-radius: var(--mh-radius-pill); color: var(--mh-forest); }
 .mh-layered-product-chip svg { width: 17px; height: 17px; }
 .mh-layered-product-chip strong { font-size: 11px; font-weight: 680; white-space: nowrap; }
-.mh-layered-product.is-first-week { height: 315px; }
+.mh-layered-product.is-first-week { height: 340px; }
 .mh-layered-product.is-first-week .mh-layered-product-chip.is-top { top: 42px; }
 /* The payoff line that used to close ContrastSection, now inside a copy block. */
 strong.mh-payoff { max-width: 52ch; padding-top: 18px; border-top: 1px solid var(--mh-line); color: var(--mh-ink); font-size: 16px; font-weight: 650; line-height: 26px; }
@@ -1811,7 +1804,7 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
      so it won on phones and squeezed the copy column to nothing. */
   .mh-route-hero.is-visual { grid-template-columns: 1fr; }
   .mh-route-hero-visual { max-width: 560px; }
-  figure.mh-hero-image-composition { min-height: 430px; margin: 0 auto; }
+  figure.mh-hero-image-composition { min-height: 390px; margin: 0 auto; }
   ul.mh-int-hero-marks { margin: 12px auto 0; }
   .mh-also-list,
   .mh-inout,
@@ -1930,8 +1923,7 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-page-application-packet .mh-route-hero h1 { font-size: 42px; }
   .mh-route-hero > div > p { font-size: 18px; line-height: 28px; }
   .mh-route-hero aside { padding: 24px; }
-  figure.mh-hero-image-composition { min-height: 340px; }
-  .mh-hero-image-composition-photo { inset: 0 4% 18% 0; }
+  figure.mh-hero-image-composition { min-height: 285px; }
   .mh-layered-product { right: 0; bottom: 0; width: 100%; height: 230px; }
   .mh-layered-product.is-first-week { height: 248px; }
   .mh-layered-product-back { min-height: 96px; padding: 12px; }

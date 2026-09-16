@@ -75,6 +75,7 @@ export const NAV_ENTRIES: readonly NavEntry[] = [
       {
         heading: "The system",
         items: [
+          { route: "career-context", href: "/career-context", label: "Career Context", blurb: "One living record, used everywhere.", icon: BookOpen },
           { route: "lumo", href: "/lumo", label: "Lumo", blurb: "The guide that knows your situation.", icon: Sparkles },
           { route: "integrations", href: "/integrations", label: "Integrations", blurb: "Use Offboard from the AI you already use.", icon: Plug },
         ],
@@ -87,18 +88,13 @@ export const NAV_ENTRIES: readonly NavEntry[] = [
         ],
       },
     ],
-    /* Career Context is the featured card, not a column row: it is the
-       record every other product page reads from, and plan 037's featured
-       slot went to How It Works, which the owner retired from the nav on
-       2026-09-07 (plan 045). */
     feature: {
-      kicker: "Start here",
-      title: "Career Context",
-      body: "One living record of your experience, applications, companies, interviews, and goals, put to work in every tool you use.",
-      cta: "See what it holds",
-      href: "/career-context",
-      route: "career-context",
-      image: "/marketing/homepage/renders/path-stage.webp",
+      kicker: "Featured guide",
+      title: "What to do in your first week after a layoff",
+      body: "A calm, ordered checklist for the first seven days, so the urgent things get handled and the rest can wait.",
+      cta: "Read the guide",
+      href: "/resources/first-week-after-a-layoff",
+      image: "/marketing/homepage/raw/system-desk.webp",
     },
   },
   { kind: "link", route: "employers", href: "/employers", label: "For Employers" },
@@ -246,9 +242,6 @@ function NavGroup({
         <ChevronDown aria-hidden="true" />
       </button>
       <div className="mh-nav-panel" id={panelId} hidden={!open} data-columns={entry.columns.length}>
-        {/* The featured card leads the panel (owner 2026-09-08), in the DOM
-            as well as visually, so reading order matches what is on screen. */}
-        <Feature feature={entry.feature} current={current} onFollow={follow} />
         {entry.columns.map((column) => (
           <div className="mh-nav-column" key={column.heading}>
             <span className="mh-nav-heading">{column.heading}</span>
@@ -257,6 +250,7 @@ function NavGroup({
             ))}
           </div>
         ))}
+        <Feature feature={entry.feature} current={current} onFollow={follow} />
       </div>
     </div>
   );
@@ -335,15 +329,6 @@ export function MarketingMobileMenu({ current, signInUrl }: { current: Marketing
           ) : (
             <div className="mh-mobile-group" key={entry.id}>
               <strong>{entry.label}</strong>
-              {/* Was product-only, which left the Resources panel's
-                  featured newsletter with no entry on a phone. */}
-              {entry.feature.external ? (
-                <a href={entry.feature.href}>{entry.feature.title}</a>
-              ) : (
-                <Link href={entry.feature.href} aria-current={current === entry.feature.route ? "page" : undefined}>
-                  {entry.feature.title}
-                </Link>
-              )}
               {entry.columns.flatMap((column) => column.items).map((item) =>
                 item.external ? (
                   <a key={item.label} href={item.href}>{item.label}</a>
@@ -352,6 +337,13 @@ export function MarketingMobileMenu({ current, signInUrl }: { current: Marketing
                     {item.label}
                   </Link>
                 ),
+              )}
+              {entry.feature.external ? (
+                <a href={entry.feature.href}>{entry.feature.title}</a>
+              ) : (
+                <Link href={entry.feature.href} aria-current={current === entry.feature.route ? "page" : undefined}>
+                  {entry.feature.title}
+                </Link>
               )}
             </div>
           ),

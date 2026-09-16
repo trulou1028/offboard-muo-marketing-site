@@ -211,12 +211,12 @@ test.describe("Offboard marketing site", () => {
     await expect(menu.getByRole("link", { name: "For Employers" })).toBeVisible();
     await expect(menu.getByRole("link", { name: "Privacy & Security" })).toBeVisible();
     // The featured destinations are plain links on a phone, so nothing that
-    // only the desktop panel carries is lost here - including the newsletter,
-    // which had no phone entry until plan 043 generalized the feature link.
+    // only the desktop panel carries is lost here.
     await expect(menu.getByRole("link", { name: "Career Context" })).toBeVisible();
     await expect(menu.getByRole("link", { name: "Layoff & Benefits" })).toBeVisible();
     await expect(menu.getByRole("link", { name: "About" })).toBeVisible();
     await expect(menu.getByRole("link", { name: "The Offboard Newsletter" })).toBeVisible();
+    await expect(menu.getByRole("link", { name: "What to do in your first week after a layoff" })).toBeVisible();
     for (const route of DEFERRED_ROUTES) {
       expect(await menu.locator(`a[href="${route}"]`).count(), `${route} in the mobile menu`).toBe(0);
     }

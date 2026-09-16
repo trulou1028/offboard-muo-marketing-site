@@ -214,6 +214,7 @@ describe("Offboard marketing routes", () => {
       ["About", "/about"],
       ["Visit Us", "/intake"],
       ["The Offboard Newsletter", "https://newsletter.offboard.co"],
+      ["What to do in your first week after a layoff", "/resources/first-week-after-a-layoff"],
     ] as const) {
       const matches = within(headerNav).getAllByRole("link", { name: new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`), hidden: true });
       expect(matches.length, `${name} in the header nav`).toBeGreaterThan(0);

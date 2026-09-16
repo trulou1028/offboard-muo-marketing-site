@@ -336,15 +336,15 @@ legacy URLs 301 to it). For Organizations stays a plain link while
 `/workforce` and `/communities` are deferred; its panel is preserved below,
 struck through, so un-deferring restores the exact blurb.
 
-- **Product ▾** — *The system:* Lumo `The guide that knows your situation.` ·
-  Integrations `Use Offboard from the AI you already use.` *(renamed 2026-09-13)* · *The
+- **Product ▾** — *The system:* Career Context `One living record, used everywhere.` ·
+  Lumo `The guide that knows your situation.` · Integrations `Use Offboard from the AI you already use.` *(renamed 2026-09-13)* · *The
   work:* Application Packet `One job link becomes everything you send.` · Layoff & Benefits
-  `Deadlines, coverage, and runway.` · *Featured, "Start here":* **Career
-  Context** `One living record of your experience, applications, companies,
-  interviews, and goals, put to work in every tool you use.` → `See what it
-  holds` → `/career-context` *(plan 045: Career Context moved from the first
-  column to the featured slot, which plan 037 gave to How It Works; the
-  render is the same `path-stage` image)*
+  `Deadlines, coverage, and runway.` · *Featured guide:* **What to do in your
+  first week after a layoff** `A calm, ordered checklist for the first seven
+  days, so the urgent things get handled and the rest can wait.` → `Read the
+  guide` → `/resources/first-week-after-a-layoff` *(owner revision 2026-09-16:
+  Career Context returns to The system and both mega-menu feature cards move
+  to the third column, after the navigational lists.)*
 - ~~**For Organizations ▾** — *Who you serve:* For Employers `Sponsor a group
   through a layoff.` · Workforce & Government `Agencies, boards, and public
   programs.` · Universities & Communities `Alumni, members, and career
@@ -2382,6 +2382,7 @@ When one ships, move it into its page section above.
 | 2026-09-16 | Launch review: replaced the community redirect with the owner-supplied Slack invite, shortened long metadata descriptions, verified the SB 617 aside against California EDD guidance, and aligned connected-assistant copy to the app's live Full access, Read only, and Off controls | this file §§ 1, 7, 8, 11, 15 and facts ledger |
 | 2026-09-16 | Four resource articles now use `Career Context`, `system`, and `context` instead of the sitewide never-say terms `career memory` and `workspace` | resource block source files and Language rules |
 | 2026-09-16 | `/job-search` becomes `/application-packet`, reflecting the flagship product already carried by the page. The old route and packet aliases permanently redirect to it. The Application Packet and Layoff & Benefits heroes replace flat raster overlays with layered live UI compositions. | owner direction, this file §§ 1, 13, 14 |
+| 2026-09-16 | Product and Resources mega menus now lead with their link columns and place the promotional feature third. Career Context returns to The system; the Product feature becomes the published first-week guide. The Application Packet and Layoff & Benefits hero compositions drop their documentary photo layer and keep the product UI alone. | owner direction, this file § Header + nav |
 
 **Open owner items:** optionally tighten About FAQ #4 toward the beachhead ·
 Steph's essay editorial pass · execute the gift lane (plan 015) · yes/no

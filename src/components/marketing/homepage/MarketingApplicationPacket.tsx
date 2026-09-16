@@ -171,8 +171,7 @@ export function MarketingApplicationPacket() {
           visual={(
             <LayeredProductHero
               variant="application-packet"
-              photo="/marketing/site-imagery/documentary/interview-prep-at-home-civic-modern-v1.webp"
-              label="A person preparing an application beside a layered Offboard Application Packet"
+              label="A layered Offboard Application Packet with company intel, role match, and a tailored resume"
             />
           )}
           cta="Get started free"

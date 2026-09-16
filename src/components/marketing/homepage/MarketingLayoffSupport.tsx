@@ -224,8 +224,7 @@ export function MarketingLayoffSupport() {
           visual={(
             <LayeredProductHero
               variant="first-week"
-              photo="/marketing/homepage/raw/system-desk.webp"
-              label="A person organizing paperwork beside a layered Offboard first-week plan"
+              label="A layered Offboard first-week plan for paperwork, benefits, health coverage, and deadlines"
             />
           )}
           cta="Get started free"
