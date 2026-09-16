@@ -1320,7 +1320,7 @@ Product column.
 - Body: `One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use.` *(round 5: the hero, the next H2, and that section's body all made the same resume argument before the page said anything new; the hero now states the promise and section two carries the argument)*
 - CTA: `Create my Career Context` (primary)
 
-*Plan 049 (owner 2026-09-08): the hero's right column is the Civic Modern composition `career-context-sources-civic-modern-v2-transparent.webp`. It reads: `Your Career Context` · `Always evolving. Available whenever you use Offboard.` · a completeness bar at `71/100` · rows `Experience` / `Applications` / `Interviews` / `Goals` · sources `Resume`, `LinkedIn`, `Chat history` · state `Context updated`. Pixels; this is the record. It replaces plan 048's app screenshot, and the plan-042 paper aside stays retired.*
+*Owner revision 2026-09-15: the hero's right column is the cleaner Civic Modern composition `career-context-card-civic-modern-v3-transparent.webp`. It reads: `Your Career Context` · `One living record.` · rows `Experience` / `Applications` / `Interviews` / `Goals` · sources `Resume`, `Interview notes` · state `Context updated`. Pixels; this is the record. It replaces plan 049's score-heavy composition, and the plan-042 paper aside stays retired.*
 
 *Hero aside added by plan 042. The page is about an object and the hero
 never showed it: it shipped `aside={false}`. The aside is the standard
@@ -1469,18 +1469,17 @@ belongs here.
 - Body: `Your job search does not live in one tab. Connect Offboard to the assistants you already work in, and save opportunities, update applications, and add to your Career Context from wherever the conversation happens.`
 - CTA: `Get started free` (primary)
 
-### What connects (the showcase constellation)
+### What connects (the integrations grid)
 
 - Kicker: `What connects`
 - H2: `Offboard holds the record. You choose the interface.`
 - ~~Body: `Connect the tools you already work in. Offboard keeps one record of your search, and a connection reads and updates it with your permission.`~~ *(cut by plan 045: the H2 says it, and Permissions below owns "with your permission")*
-- Group heading: `Connected today`
+- One four-column grid, with each card's status label communicating its state:
   1. **Google Calendar** · `Live` — `Interviews and deadlines land on the calendar you already keep.`
   2. **Google Drive** · `Live` — `Save resumes and cover letters straight to your Drive.`
   3. **Calendly** · `Live` — `Book networking calls and coffee chats without leaving your search.`
   4. **ChatGPT** · `Beta` — `Save a role, move an application forward, or add to your Career Context from a ChatGPT conversation.`
   5. **Claude** · `Beta` — `Work through a project or an interview in Claude and have what you decide land back in your record.`
-- Group heading: `In progress`
   6. **Gmail** · `In progress` — `Follow application email and replies without hunting through your inbox.`
   7. **Notion** · `In progress` — `Export your job search record to Notion.`
 - Note under the grid: `ChatGPT and Claude are in beta. They work today and we are still refining them. The ones marked in progress are being built, and we do not put dates on them.`
@@ -2365,6 +2364,7 @@ When one ships, move it into its page section above.
 | 2026-09-14 | Plan ledger round 2 (owner): Sponsored access leaves the table for its own band under it, both plan CTAs bottom-align on one line, the Pro billing line moves up with the price, and Ghost checks takes a ghost icon. Plus a headline rule: a product name never splits across lines, bent per headline with `titleLines` | this file §§ 5 and Language rules |
 | 2026-09-15 | The two intake emails are recorded in this document for the first time, and the confirmation subject is corrected from the literal `We got your intake, Offboard` to `We got your intake, <first name>`. Found by the launch smoke test; they were the only user-facing strings the copy law did not cover | this file § 9 |
 | 2026-09-15 | `/lumo` reuses the homepage's Figma comparison composition; `/integrations` gets real Google, Calendly, Gmail, and Notion marks plus layered hero, showcase, and conversation compositions; the shared footer replaces duplicated legal copy with a short company description and `Built for the work between jobs.` | owner direction, this file §§ 1, 11, 12 |
+| 2026-09-15 | `/integrations` collects every integration in one formal four-column grid, with availability carried by each card's status label. `/career-context` replaces the score-heavy hero with the cleaner layered record composition. | owner direction, this file §§ 10, 11 |
 | 2026-09-15 | The intake emails' branded card is rebuilt on a table. Ported as divs the same morning, it rendered correctly in a browser and broke in Gmail, which closed the card after the logo and dropped the text onto the client's background | this file § 9 |
 | 2026-09-15 | The four legacy URLs that 301'd into the deferred, noindexed `/how-it-works` now point at live pages (owner ruled out bringing that page back): `/product` and `/product/*` to the homepage's four-step strip, `/why-offboard` to `/about`, `/job-packet` to `/job-search`, `/faq` to `/about#faq` | `next.config.ts`, docs/cutover-checklist.md |
 

@@ -44,6 +44,8 @@ const IN_PROGRESS: readonly Integration[] = [
   { id: "notion", name: "Notion", status: "In progress", body: "Export your job search record to Notion." },
 ];
 
+const ALL_INTEGRATIONS: readonly Integration[] = [...CONNECTED, ...IN_PROGRESS];
+
 const PERMISSIONS = [
   "01 A connection is scoped. An assistant works with the parts of your Career Context you authorize, not everything in your account.",
   "02 You can review and change what a connected assistant can reach.",
@@ -88,13 +90,8 @@ function Showcase() {
         <span className="mh-kicker">What connects</span>
         <h2 id="showcase-title">Offboard holds the record. You choose the interface.</h2>
       </div>
-      <h3 className="mh-int-grouphead">Connected today</h3>
-      <div className="mh-int-constellation" data-reveal="">
-        {CONNECTED.map((integration) => <IntegrationCard key={integration.id} integration={integration} />)}
-      </div>
-      <h3 className="mh-int-grouphead">In progress</h3>
-      <div className="mh-int-next" data-reveal="">
-        {IN_PROGRESS.map((integration) => <IntegrationCard key={integration.id} integration={integration} />)}
+      <div className="mh-int-grid" data-reveal="">
+        {ALL_INTEGRATIONS.map((integration) => <IntegrationCard key={integration.id} integration={integration} />)}
       </div>
       <p className="mh-int-note">ChatGPT and Claude are in beta. They work today and we are still refining them. The ones marked in progress are being built, and we do not put dates on them.</p>
     </section>
