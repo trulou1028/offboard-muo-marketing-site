@@ -108,7 +108,7 @@ export function MarketingLumo() {
           titleLines={["The AI that", "already understands", "your career."]}
           body="Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window. You spend the conversation on the decision instead of on context."
           current="lumo"
-          visual={<Shot plain src="/marketing/homepage/graphics-civic-modern/lumo-interview-context-civic-modern-v1-transparent.webp" alt="A conversation with Lumo. Asked how to prepare for an interview, it notes it used the role, the resume and the interview notes, answers to start with the role, and marks the interview brief ready" width={1536} height={1024} />}
+          visual={<Shot plain src="/marketing/homepage/graphics-civic-modern/lumo-opportunity-context-civic-modern-v2-transparent.webp" alt="A conversation with Lumo comparing a senior product designer role at Figma with the person's experience, resume, and interview notes, then saving the recruiter Ruben" width={1586} height={992} />}
           cta="Get started free"
         />
         <WhatItKnows />

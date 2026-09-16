@@ -378,7 +378,10 @@ Case while "How it works" and "For employers" were not.
 **Footer**
 
 > **Offboard**
-> Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
+> Offboard is the company behind the Modern Unemployment Office, one connected system for benefits, job search, and the work of starting again.
+
+`/act` keeps its B2G language firewall and uses this footer description instead:
+`Offboard helps people organize the practical work of a job transition, from benefits and deadlines to the search ahead.`
 
 Columns (plan 043 trim, plan 045 revision) — **Product:** Career Context,
 Lumo, Job Search, Integrations, Layoff & Benefits, Pricing, Guides
@@ -393,7 +396,7 @@ The struck-through entries are the deferred pages (`src/lib/launch.ts`). Each
 returns to the column it left. The four columns stay so un-deferring is purely
 additive.
 
-> © 2026 Offboard · Independent support for life after a layoff
+> © 2026 Offboard · Built for the work between jobs.
 
 ---
 
@@ -1459,14 +1462,14 @@ belongs here.
 
 ### Hero
 
-*Plan 046: the hero's right column shows the five connected marks (Google Calendar, Google Drive, Calendly, ChatGPT, Claude) as tiles with their status chips, nothing clickable.*
+*The hero's right column shows the five connected marks (Google Calendar, Google Drive, Calendly, ChatGPT, Claude) as an overlapping stack with their status chips, nothing clickable.*
 
 - Kicker: `Integrations` *(2026-09-13; was `Offboard everywhere`)*
 - H1: `Use Offboard from the AI you already use.`
 - Body: `Your job search does not live in one tab. Connect Offboard to the assistants you already work in, and save opportunities, update applications, and add to your Career Context from wherever the conversation happens.`
 - CTA: `Get started free` (primary)
 
-### What connects (the showcase grid)
+### What connects (the showcase constellation)
 
 - Kicker: `What connects`
 - H2: `Offboard holds the record. You choose the interface.`
@@ -1482,11 +1485,12 @@ belongs here.
   7. **Notion** · `In progress` — `Export your job search record to Notion.`
 - Note under the grid: `ChatGPT and Claude are in beta. They work today and we are still refining them. The ones marked in progress are being built, and we do not put dates on them.`
 
-The cards are a showcase, not links: nothing in the grid is clickable. The
-ChatGPT and Claude marks are the partners' real files (sources in § 1); the
-Google, Calendly and Notion marks are still hand-authored SVG
-(`IntegrationLogos.tsx`) and are tracked for replacement under the owner's
-2026-09-02 rule. Partner marks are the one place on the site allowed
+The cards are a showcase, not links: nothing in the composition is clickable.
+Every partner mark is a self-hosted real asset. Google Calendar, Google Drive,
+and Gmail come from Google Workspace's official brand artwork; Calendly comes
+from Calendly's current site mark; Notion comes from Notion's official app
+icon; ChatGPT and Claude use the partner files recorded in § 1. Partner marks
+are the one place on the site allowed
 outside the Civic Modern palette. Statuses are governed by the verified-facts ledger
 row "Live integrations": changing what ships here changes that row in the
 same PR.
@@ -1555,7 +1559,7 @@ a resume into a general assistant. Not in header nav yet.
 - Kicker: `Meet Lumo`
 - H1: `The AI that already understands your career.`
 - Body: `Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window. You spend the conversation on the decision instead of on context.` *(plan 046: the last sentence is the retired "difference" section's payoff line)*
-- Hero visual *(plan 049; was plan 048's app screenshot of the Ask LUMO panel, now unused)*: the Civic Modern composition `lumo-interview-context-civic-modern-v1-transparent.webp`. It reads: chip `Used role, resume, interview notes` · question `How should I prepare for this interview?` · answer `Start with the role.` (highlighted) `I pulled the requirements, your strongest examples, and the company context.` · state `Interview brief · Ready`. Pixels, so no test can read them; this is the record.
+- Hero visual: the homepage's Civic Modern composition `lumo-opportunity-context-civic-modern-v2-transparent.webp`. It compares a senior product designer role at Figma using the role, resume, and interview-note context, then saves recruiter Ruben. Pixels, so no test can read them; this is the record.
 - CTA: `Get started free` (primary)
 
 ### What Lumo knows *(rebuilt by plan 045, plan 040 finding 10: the eight cards re-listed `/career-context`'s eight kinds of record)*
@@ -2360,6 +2364,7 @@ When one ships, move it into its page section above.
 | 2026-09-14 | `/pricing`'s three-card deck becomes the **plan ledger**, a comparison table, from the owner's own mockup. Same facts, read across one row at a time. Two mockup cells were not shipped because they were false (`Basic tracker` on Free, `Unlimited ghost checks` on Pro) | this file § 5 |
 | 2026-09-14 | Plan ledger round 2 (owner): Sponsored access leaves the table for its own band under it, both plan CTAs bottom-align on one line, the Pro billing line moves up with the price, and Ghost checks takes a ghost icon. Plus a headline rule: a product name never splits across lines, bent per headline with `titleLines` | this file §§ 5 and Language rules |
 | 2026-09-15 | The two intake emails are recorded in this document for the first time, and the confirmation subject is corrected from the literal `We got your intake, Offboard` to `We got your intake, <first name>`. Found by the launch smoke test; they were the only user-facing strings the copy law did not cover | this file § 9 |
+| 2026-09-15 | `/lumo` reuses the homepage's Figma comparison composition; `/integrations` gets real Google, Calendly, Gmail, and Notion marks plus layered hero, showcase, and conversation compositions; the shared footer replaces duplicated legal copy with a short company description and `Built for the work between jobs.` | owner direction, this file §§ 1, 11, 12 |
 | 2026-09-15 | The intake emails' branded card is rebuilt on a table. Ported as divs the same morning, it rendered correctly in a browser and broke in Gmail, which closed the card after the logo and dropped the text onto the client's background | this file § 9 |
 | 2026-09-15 | The four legacy URLs that 301'd into the deferred, noindexed `/how-it-works` now point at live pages (owner ruled out bringing that page back): `/product` and `/product/*` to the homepage's four-step strip, `/why-offboard` to `/about`, `/job-packet` to `/job-search`, `/faq` to `/about#faq` | `next.config.ts`, docs/cutover-checklist.md |
 

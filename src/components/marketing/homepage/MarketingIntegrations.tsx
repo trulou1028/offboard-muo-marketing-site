@@ -3,6 +3,7 @@ import {
   AiReply,
   AlsoStrip,
   FinalCta,
+  LumoMark,
   MarketingShell,
   PageHero,
   Shot,
@@ -88,11 +89,11 @@ function Showcase() {
         <h2 id="showcase-title">Offboard holds the record. You choose the interface.</h2>
       </div>
       <h3 className="mh-int-grouphead">Connected today</h3>
-      <div className="mh-int-grid" data-reveal="">
+      <div className="mh-int-constellation" data-reveal="">
         {CONNECTED.map((integration) => <IntegrationCard key={integration.id} integration={integration} />)}
       </div>
       <h3 className="mh-int-grouphead">In progress</h3>
-      <div className="mh-int-grid is-quiet" data-reveal="">
+      <div className="mh-int-next" data-reveal="">
         {IN_PROGRESS.map((integration) => <IntegrationCard key={integration.id} integration={integration} />)}
       </div>
       <p className="mh-int-note">ChatGPT and Claude are in beta. They work today and we are still refining them. The ones marked in progress are being built, and we do not put dates on them.</p>
@@ -100,10 +101,10 @@ function Showcase() {
   );
 }
 
-function Demo({ label, children }: { label: string; children: ReactNode }) {
+function Demo({ label, logo, children }: { label: string; logo: ReactNode; children: ReactNode }) {
   return (
-    <div>
-      <span className="mh-qblock-feature">{label}</span>
+    <div className="mh-int-demo">
+      <span className="mh-int-demo-label">{logo}<strong>{label}</strong></span>
       <div className="mh-chat-card" aria-label={`Example ${label} conversation with Offboard connected`}>
         {children}
       </div>
@@ -118,18 +119,18 @@ function Demos() {
         <span className="mh-kicker">In practice</span>
         <h2 id="demos-title">The same record, from wherever you are working.</h2>
       </div>
-      <div className="mh-qgrid" data-reveal="">
-        <Demo label="ChatGPT">
+      <div className="mh-int-demo-stack" data-reveal="">
+        <Demo label="ChatGPT" logo={<IntegrationLogo id="chatgpt" />}>
           <YouBubble>I think I&apos;m going to apply to this. Add it to Offboard.</YouBubble>
           <AiReply highlight="Done." card={<TrackerCard />}>
             I&apos;ve added the role to your Offboard tracker and saved the company context.
           </AiReply>
         </Demo>
-        <Demo label="Claude">
+        <Demo label="Claude" logo={<IntegrationLogo id="claude" />}>
           <YouBubble>Add the project outcomes we just discussed to my Career Context.</YouBubble>
           <AiReply highlight="Done.">I&apos;ve added the migration project and its results to your experience.</AiReply>
         </Demo>
-        <Demo label="Lumo">
+        <Demo label="Lumo" logo={<span className="mh-int-lumo-logo"><LumoMark /></span>}>
           <YouBubble>Which applications need attention today?</YouBubble>
           <AiReply>Three need follow-up. Tesserac has an interview on Thursday, and two applications have been open for more than two weeks without a reply.</AiReply>
         </Demo>

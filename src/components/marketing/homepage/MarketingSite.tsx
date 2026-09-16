@@ -124,7 +124,11 @@ export function MarketingHeader({ current }: { current: MarketingRoute }) {
   );
 }
 
-export function MarketingFooter() {
+export function MarketingFooter({ current }: { current: MarketingRoute }) {
+  const description = current === "act"
+    ? "Offboard helps people organize the practical work of a job transition, from benefits and deadlines to the search ahead."
+    : "Offboard is the company behind the Modern Unemployment Office, one connected system for benefits, job search, and the work of starting again.";
+
   return (
     <footer className="mh-site-footer">
       <div>
@@ -137,9 +141,7 @@ export function MarketingFooter() {
             height={106}
             loading="lazy"
           />
-          <p>
-            Offboard is an independent company, not a government agency. We help you navigate the official programs. Your benefits are yours, and claiming them is always free. Information provided by Offboard is general and does not replace guidance from government agencies or qualified legal, tax, financial, or healthcare professionals.
-          </p>
+          <p>{description}</p>
         </div>
         <nav aria-label="Footer navigation">
           <div>
@@ -175,7 +177,7 @@ export function MarketingFooter() {
       </div>
       <p>
         <span>© 2026 Offboard</span>
-        <span>Independent support for life after a layoff</span>
+        <span>Built for the work between jobs.</span>
       </p>
     </footer>
   );
@@ -194,7 +196,7 @@ export function MarketingShell({
       <a className="mh-skip-link" href="#main-content">Skip to content</a>
       <MarketingHeader current={current} />
       {children}
-      <MarketingFooter />
+      <MarketingFooter current={current} />
     </div>
   );
 }

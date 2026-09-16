@@ -171,8 +171,11 @@ describe("Offboard marketing routes", () => {
     expect(screen.queryByRole("heading", { name: "Where are you right now?" })).not.toBeInTheDocument();
     expect(screen.queryByRole("tablist", { name: "Job search stages" })).not.toBeInTheDocument();
 
-    // Independence disclaimer: benefits section small print + footer.
-    expect(screen.getAllByText(/not a government agency/i).length).toBeGreaterThanOrEqual(2);
+    // Independence stays beside the relevant benefits claim. The footer now
+    // carries the short company description instead of duplicating legal copy.
+    expect(screen.getByText(/not a government agency/i)).toBeInTheDocument();
+    expect(screen.getByText(/company behind the Modern Unemployment Office/i)).toBeInTheDocument();
+    expect(screen.getByText(/built for the work between jobs/i)).toBeInTheDocument();
     // Built at runtime (rather than as a literal string) so this file itself
     // never contains the retired footer phrase — a repo-wide grep for it is
     // part of this plan's done criteria.
