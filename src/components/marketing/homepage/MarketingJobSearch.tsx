@@ -6,7 +6,6 @@ import {
   FinalCta,
   MarketingShell,
   PageHero,
-  Shot,
 } from "./MarketingSite";
 
 /* Job Search pillar page (plan 031, the last of phase 2).
@@ -167,7 +166,14 @@ export function MarketingJobSearch() {
           title="A job search that works as one system."
           body="Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, so nothing has to be re-explained at the next step. The tenth application takes less effort than the first."
           current="job-search"
-          visual={<Shot plain src="/marketing/homepage/graphics-civic-modern/application-packet-civic-modern-v1-transparent.webp" alt="An Application Packet card: company intel, role match and tailored resume all ticked, a strong-fit reading, and the packet marked ready for review" width={1536} height={1024} />}
+          visual={(
+            <figure className="mh-hero-image-composition is-job-search" aria-label="A person preparing for an interview beside an Offboard application packet">
+              <span className="mh-hero-image-composition-photo">
+                <Image src="/marketing/site-imagery/documentary/interview-prep-at-home-civic-modern-v1.webp" alt="" fill sizes="(max-width: 900px) 100vw, 42vw" priority />
+              </span>
+              <Image className="mh-hero-image-composition-card" src="/marketing/homepage/graphics-civic-modern/application-packet-civic-modern-v1-transparent.webp" alt="" width={1536} height={1024} priority />
+            </figure>
+          )}
           cta="Get started free"
         />
         <PacketBand />

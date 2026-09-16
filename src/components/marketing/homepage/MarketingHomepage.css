@@ -515,6 +515,9 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 /* Phone and small tablet: the same table becomes blocks. Each cell prints the
    plan it belongs to from `data-plan`, so the copy exists once in the DOM. */
 @media (max-width: 900px) {
+  .mh-plan-cards { grid-template-columns: 1fr; padding: 20px; }
+  .mh-plan-cards-lede { padding: 4px 4px 10px; }
+  .mh-plan-cards > article { min-width: 0; padding: 22px; }
   .mh-plan-ledger table,
   .mh-plan-ledger thead,
   .mh-plan-ledger tbody,
@@ -1081,6 +1084,16 @@ a.mh-secondary-cta:hover { border-color: var(--mh-ink); }
    more room than the paper aside card did. */
 .mh-route-hero.is-visual { grid-template-columns: minmax(0, 1.1fr) minmax(380px, .9fr); }
 .mh-route-hero-visual .mh-comp { padding-bottom: 32px; }
+
+/* Product pages pair a real-life moment with the Offboard output it creates.
+   Both layers stay as images, so the composition remains concrete and scales
+   without rebuilding product UI in CSS. */
+figure.mh-hero-image-composition { position: relative; width: min(590px, 100%); min-height: 460px; margin-left: auto; }
+.mh-hero-image-composition-photo { position: absolute; inset: 0 8% 13% 0; overflow: hidden; border: 1px solid var(--mh-hairline-on-dark); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); }
+.mh-hero-image-composition-photo img { object-fit: cover; }
+.mh-hero-image-composition.is-layoff .mh-hero-image-composition-photo img { object-position: 56% center; }
+.mh-hero-image-composition.is-job-search .mh-hero-image-composition-photo img { object-position: 42% center; }
+.mh-hero-image-composition-card { position: absolute; z-index: 1; right: -7%; bottom: -2%; width: 78%; height: auto; filter: drop-shadow(0 24px 42px rgb(0 0 0 / 26%)); }
 /* The payoff line that used to close ContrastSection, now inside a copy block. */
 strong.mh-payoff { max-width: 52ch; padding-top: 18px; border-top: 1px solid var(--mh-line); color: var(--mh-ink); font-size: 16px; font-weight: 650; line-height: 26px; }
 /* /integrations hero: one compact cluster of connected tools. Each card
@@ -1391,6 +1404,14 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 .mh-int-demo-label .mh-int-logo img,
 .mh-int-lumo-logo .mh-lumo-mark { width: 20px; height: 20px; }
 .mh-int-demo .mh-chat-card { flex: 1; border: 0; border-radius: 0; box-shadow: none; }
+
+.mh-permission-levels { overflow: hidden; padding: 26px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); }
+.mh-permission-levels > span { display: block; padding-bottom: 16px; border-bottom: 1px solid var(--mh-line); color: var(--mh-secondary); font-size: 11px; font-weight: 650; letter-spacing: .09em; text-transform: uppercase; }
+.mh-permission-levels article { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 14px; align-items: start; padding: 18px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-permission-levels article svg { width: 42px; height: 42px; padding: 11px; background: var(--mh-mist); border-radius: var(--mh-radius-md); color: var(--mh-forest); }
+.mh-permission-levels article strong { display: block; font-size: 15px; font-weight: 650; }
+.mh-permission-levels article p { margin-top: 4px; color: var(--mh-muted); font-size: 13px; line-height: 1.5; }
+.mh-permission-levels > small { display: block; padding-top: 16px; color: var(--mh-secondary); font-size: 12px; }
 
 /* Meet Lumo */
 /* Mid forest, not forest-deep: the hero and the final CTA are the page's two
@@ -1762,6 +1783,7 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
      so it won on phones and squeezed the copy column to nothing. */
   .mh-route-hero.is-visual { grid-template-columns: 1fr; }
   .mh-route-hero-visual { max-width: 560px; }
+  figure.mh-hero-image-composition { min-height: 430px; margin: 0 auto; }
   ul.mh-int-hero-marks { margin: 12px auto 0; }
   .mh-also-list,
   .mh-inout,
@@ -1879,6 +1901,9 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-route-hero h1 { font-size: 48px; line-height: 1.02; }
   .mh-route-hero > div > p { font-size: 18px; line-height: 28px; }
   .mh-route-hero aside { padding: 24px; }
+  figure.mh-hero-image-composition { min-height: 340px; }
+  .mh-hero-image-composition-photo { inset: 0 4% 15% 0; }
+  .mh-hero-image-composition-card { right: -4%; bottom: 0; width: 84%; }
   .mh-route-content,
   .mh-route-independence,
   .mh-route-contact,

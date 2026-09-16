@@ -74,7 +74,7 @@ describe("Offboard marketing routes", () => {
     expect(
       Array.from(document.querySelectorAll(".mh-community-cards h3")).map((h) => h.textContent),
     ).toEqual(["Meet with a human", "The Offboard Newsletter", "Slack community"]);
-    expect(screen.getByRole("link", { name: /join the slack/i })).toHaveAttribute("href", "https://offboard.co/community");
+    expect(screen.getByRole("link", { name: /join the slack/i })).toHaveAttribute("href", "https://join.slack.com/t/offboardco/shared_invite/zt-34fsjpgfn-BcbibJ3d86P5RztYnHsA9w");
     expect(screen.getByRole("heading", { name: /you don't need another place to start over/i })).toBeInTheDocument();
 
     // The four steps are the page's spine, in the app's order (plan 050:

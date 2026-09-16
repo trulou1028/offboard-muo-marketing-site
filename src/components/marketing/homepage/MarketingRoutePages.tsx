@@ -293,7 +293,7 @@ export function MarketingEmployers() {
         <aside className="mh-employer-sb617 mh-section" aria-label="California SB 617">
           <div>
             <span className="mh-kicker">New in California</span>
-            <p>Under SB 617, companies filing a WARN notice now have to state in writing whether they&apos;ll coordinate transition services for the people affected. The &quot;severance and silence&quot; default now gets documented as a choice, and you have to write down that the answer is no.</p>
+            <p>Beginning January 1, 2026, California employers covered by Cal-WARN must say whether they will coordinate services through the local workforce board, another provider, or not at all. If they choose to coordinate, those services must be arranged within 30 days.</p>
             <p>Making that answer an easy yes is exactly what sponsorship is for.</p>
           </div>
         </aside>
@@ -434,4 +434,3 @@ export function MarketingAct() {
     </MarketingShell>
   );
 }
-

@@ -117,7 +117,7 @@
   {
     "type": "p",
     "runs": [
-      "Offboard's cover letter generator starts from your career memory and the role you are applying to, then asks you to add one specific thing only you could write. The point is not to bypass detection. It is to make sure the letter sounds like you on your best day, every time."
+      "Offboard's cover letter generator starts from your Career Context and the role you are applying to, then asks you to add one specific thing only you could write. The point is not to bypass detection. It is to make sure the letter sounds like you on your best day, every time."
     ]
   }
 ]

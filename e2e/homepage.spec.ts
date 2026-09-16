@@ -94,6 +94,18 @@ test.describe("Offboard marketing site", () => {
     }
   });
 
+  test("publishes crawler guidance and social sharing metadata before cutover", async ({ page, request }) => {
+    const robots = await request.get("/robots.txt");
+    expect(robots.status()).toBe(200);
+    expect(await robots.text()).toContain("Sitemap: https://offboard.co/sitemap.xml");
+
+    await page.goto("/");
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /living-room\.webp$/);
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
+    // Indexing remains a deliberate launch gate until the custom domain is live.
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow, noarchive");
+  });
+
   // Plan 043 trimmed plan 037's four tabs to three top-level links and one
   // mega-menu trigger. What is asserted here is the shape and the guardrails:
   // the panel opens and closes, the deferred set is absent from both nav

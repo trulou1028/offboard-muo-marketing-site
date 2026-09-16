@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/act" },
   title: "ACT pilot | Offboard",
   description:
-    "ACT is a resident-first pilot: eligible residents in Alameda County get sponsored access to Offboard and can start a job search the same day, while the program sees aggregate engagement only.",
+    "ACT gives eligible Alameda County residents sponsored Offboard access and a same-day job-search start, while programs see aggregate engagement only.",
 };
 
 export default function Page() {

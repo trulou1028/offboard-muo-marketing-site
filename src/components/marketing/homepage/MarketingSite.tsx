@@ -921,7 +921,7 @@ const COMMUNITY_ROWS = [
     title: "Slack community",
     body: "Job seekers sharing leads, asking questions, and keeping each other accountable.",
     cta: "Join the Slack",
-    href: "https://offboard.co/community",
+    href: "https://join.slack.com/t/offboardco/shared_invite/zt-34fsjpgfn-BcbibJ3d86P5RztYnHsA9w",
     note: "Free to join",
   },
 ] as const;

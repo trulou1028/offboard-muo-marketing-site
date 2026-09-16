@@ -120,7 +120,7 @@ export const NAV_ENTRIES: readonly NavEntry[] = [
         items: [
           { route: "about", href: "/about", label: "About", blurb: "Why Offboard exists, and who is behind it.", icon: Info },
           { route: "intake", href: "/intake", label: "Visit Us", blurb: "Talk to a person, online or in Concord.", icon: MapPin },
-          { href: "https://offboard.co/community", label: "Slack Community", blurb: "People searching alongside you.", icon: MessageCircle, external: true },
+          { href: "https://join.slack.com/t/offboardco/shared_invite/zt-34fsjpgfn-BcbibJ3d86P5RztYnHsA9w", label: "Slack Community", blurb: "People searching alongside you.", icon: MessageCircle, external: true },
           { href: "mailto:hello@offboard.co", label: "Contact", blurb: "hello@offboard.co. A human reads it.", icon: Mail, external: true },
         ],
       },

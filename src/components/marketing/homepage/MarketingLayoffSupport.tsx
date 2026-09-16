@@ -220,7 +220,14 @@ export function MarketingLayoffSupport() {
           title="Losing your job creates a lot of problems at once."
           body="The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in the order that matters to you."
           current="layoff-support"
-          visual={<Shot plain src="/marketing/site-imagery/product-compositions/first-week-plan-civic-modern-v1-transparent.webp" alt="A first-week plan card: review the separation agreement, file the unemployment claim, check health coverage and save key deadlines, with two deadlines saved and the paperwork marked reviewed" width={1536} height={1024} />}
+          visual={(
+            <figure className="mh-hero-image-composition is-layoff" aria-label="A person organizing paperwork at a desk beside an Offboard first-week plan">
+              <span className="mh-hero-image-composition-photo">
+                <Image src="/marketing/homepage/raw/system-desk.webp" alt="" fill sizes="(max-width: 900px) 100vw, 42vw" priority />
+              </span>
+              <Image className="mh-hero-image-composition-card" src="/marketing/site-imagery/product-compositions/first-week-plan-civic-modern-v1-transparent.webp" alt="" width={1536} height={1024} priority />
+            </figure>
+          )}
           cta="Get started free"
         />
         <FirstWeek />

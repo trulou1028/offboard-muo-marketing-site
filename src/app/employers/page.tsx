@@ -5,7 +5,7 @@ import { MarketingEmployers } from "@/components/marketing/homepage/MarketingRou
 export const metadata: Metadata = {
   alternates: { canonical: "/employers" },
   title: "Transition support for employers | Offboard",
-  description: "Sponsor outplacement, modernized: $199 per employee, one-time, with self-serve setup, a private member experience, free job postings, and a public and workforce partner program.",
+  description: "Sponsor modern outplacement for $199 per employee, with self-serve setup, private member support, free job postings, and public partner programs.",
 };
 
 export default function Page() {

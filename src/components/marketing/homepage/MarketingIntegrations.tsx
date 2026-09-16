@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Eye, Power, ShieldCheck } from "lucide-react";
 import {
   AiReply,
   AlsoStrip,
@@ -6,7 +7,6 @@ import {
   LumoMark,
   MarketingShell,
   PageHero,
-  Shot,
   TrackerCard,
   YouBubble,
 } from "./MarketingSite";
@@ -21,8 +21,8 @@ import { IntegrationLogo, type IntegrationLogoId } from "./IntegrationLogos";
    Plan 033 (owner direction 2026-09-01): the page leads with the card grid of
    real integrations instead of a long prose section. The "The idea" editorial
    block was cut and its thesis moved onto the grid's own H2. ChatGPT and
-   Claude are confirmed live in beta, which closes the first of plan 028's two
-   owner-verification flags; the permissions model is still principle-only. */
+   Claude are confirmed live in beta. The permissions model was verified
+   against the app's Full access, Read only, and Off controls on 2026-09-16. */
 
 type Integration = {
   id: IntegrationLogoId;
@@ -47,10 +47,17 @@ const IN_PROGRESS: readonly Integration[] = [
 const ALL_INTEGRATIONS: readonly Integration[] = [...CONNECTED, ...IN_PROGRESS];
 
 const PERMISSIONS = [
-  "01 A connection is scoped. An assistant works with the parts of your Career Context you authorize, not everything in your account.",
-  "02 You can review and change what a connected assistant can reach.",
-  "03 You can disconnect an assistant at any time. Your record stays with Offboard.",
-  "04 Sponsors never see your record. Sponsored access reports participation in aggregate only.",
+  "01 Every connected assistant has its own access level.",
+  "02 Read only can see your account, but cannot change anything or spend credits.",
+  "03 Full access can read, write, and run the tools that spend credits.",
+  "04 Turn an assistant off at any time. Your record stays with Offboard.",
+  "05 Sponsors never see your record. Sponsored access reports participation in aggregate only.",
+] as const;
+
+const ACCESS_LEVELS = [
+  { icon: ShieldCheck, name: "Full access", detail: "Read, write, and run tools that spend credits." },
+  { icon: Eye, name: "Read only", detail: "See your account without changing it or spending credits." },
+  { icon: Power, name: "Off", detail: "No access. Your Offboard record stays in place." },
 ] as const;
 
 /* Plan 046: the hero shows what connects before the page says it. Five
@@ -145,15 +152,22 @@ function Permissions() {
       <div className="mh-split">
         <div className="mh-copy-block">
           <span className="mh-kicker">Permissions</span>
-          <h2 id="permissions-title">You decide what a connected assistant can reach.</h2>
-          <p>Connecting an assistant does not hand over your whole account. You authorize what it can read and what it can change, and the connection is yours to end.</p>
+          <h2 id="permissions-title">You decide what a connected assistant can do.</h2>
+          <p>Give each connected assistant full access, read-only access, or no access. You can change that level at any time in Settings.</p>
           <ul className="mh-plain-list ruled" data-reveal="">
             {PERMISSIONS.map((line) => <li key={line}>{line}</li>)}
           </ul>
         </div>
-        {/* Plan 049: the band was four rules of text on a page about a thing
-            you grant and can take back. The picture shows the grant. */}
-        <Shot plain src="/marketing/site-imagery/product-compositions/connected-tools-permissions-civic-modern-v1-transparent.webp" alt="A connected tools card: calendar limited to deadlines only, Drive to selected files, and an AI assistant able to ask with context, marked permission granted and revocable at any time" width={1536} height={1024} />
+        <div className="mh-permission-levels" aria-label="Connected assistant access levels" data-reveal="">
+          <span>Access level</span>
+          {ACCESS_LEVELS.map(({ icon: Icon, name, detail }) => (
+            <article key={name}>
+              <Icon aria-hidden="true" />
+              <div><strong>{name}</strong><p>{detail}</p></div>
+            </article>
+          ))}
+          <small>Change access any time in Settings.</small>
+        </div>
       </div>
     </section>
   );
