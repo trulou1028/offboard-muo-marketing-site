@@ -25,6 +25,7 @@ convenience that other tools can ignore without losing any rule.
 | Any user-facing string, language rules, facts ledger | `COPY.md` |
 | Colors, type, spacing, design tokens | `DESIGN.md` |
 | Page roles, sitemap, section order, redirect map | `docs/site-architecture.md` |
+| Relume component sourcing, adaptation, and page manifests | `docs/relume/README.md` |
 | Future `/resources` article strategy | `docs/content-roadmap.md` |
 | Domain cutover gates | `docs/cutover-checklist.md` |
 | Backlog plans + executor protocol | `plans/README.md` |
