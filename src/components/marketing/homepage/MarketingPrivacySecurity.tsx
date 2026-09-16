@@ -114,10 +114,20 @@ const SPONSOR_NEVER = [
 ] as const;
 
 const RIGHTS = [
-  "01 See and edit everything you have put in, at any time.",
-  "02 Delete a single document, a single entry, or your whole account. Account deletion removes your files too.",
-  "03 Export your resumes and documents whenever you want.",
-  "04 We do not sell your data. To power AI features it passes through OpenAI and Anthropic only, under the retention and no-training terms above.",
+  ["01", "See and edit everything you have put in, at any time."],
+  ["02", "Delete a single document, a single entry, or your whole account. Account deletion removes your files too."],
+  ["03", "Export your resumes and documents whenever you want."],
+  ["04", "We do not sell your data. To power AI features it passes through OpenAI and Anthropic only, under the retention and no-training terms above."],
+] as const;
+
+const PAGE_INDEX = [
+  ["Who can see what", "#who-can-see"],
+  ["The receipts", "#receipts"],
+  ["Sponsored access", "#sponsored-access"],
+  ["Connected assistants", "#connected-assistants"],
+  ["The honest part", "#honest-limits"],
+  ["Good questions", "#faq"],
+  ["Your data, your call", "#your-data"],
 ] as const;
 
 const SPECIFICS = [
@@ -134,7 +144,7 @@ const ACCESS_WORD: Record<Access, string> = { yes: "Yes.", no: "No.", limited: "
 
 function WhoSeesWhat() {
   return (
-    <section className="mh-privacy-who mh-section" aria-labelledby="who-title">
+    <section className="mh-privacy-who mh-section" id="who-can-see" aria-labelledby="who-title">
       <div className="mh-copy-block">
         <span className="mh-kicker">The short answer</span>
         <h2 id="who-title">Who can see what.</h2>
@@ -202,16 +212,35 @@ function WhoSeesWhat() {
   );
 }
 
+function PageIndex() {
+  return (
+    <nav className="mh-privacy-index mh-section" aria-label="On this page">
+      <strong>On this page</strong>
+      <ol>
+        {PAGE_INDEX.map(([label, href], index) => (
+          <li key={href}>
+            <a href={href}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              {label}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
 function Receipts() {
   return (
-    <section className="mh-ctx mh-section" aria-labelledby="receipts-title">
+    <section className="mh-ctx mh-privacy-receipts mh-section" id="receipts" aria-labelledby="receipts-title">
       <div className="mh-copy-block">
         <span className="mh-kicker">The receipts</span>
         <h2 id="receipts-title">Four things we can show you, not just say.</h2>
       </div>
       <div className="mh-capabilities" data-reveal="">
-        {RECEIPTS.map(([title, body]) => (
+        {RECEIPTS.map(([title, body], index) => (
           <div className="mh-capability" key={title}>
+            <span className="mh-privacy-proof-index">{String(index + 1).padStart(2, "0")}</span>
             <h3>{title}</h3>
             <p>{body}</p>
           </div>
@@ -223,7 +252,7 @@ function Receipts() {
 
 function Sponsors() {
   return (
-    <section className="mh-privacy-sponsor mh-section" aria-labelledby="sponsor-title">
+    <section className="mh-privacy-sponsor mh-section" id="sponsored-access" aria-labelledby="sponsor-title">
       <div className="mh-copy-block">
         <span className="mh-kicker is-lime">Sponsored access</span>
         <h2 id="sponsor-title">A sponsor sees a number. A sponsor never sees you.</h2>
@@ -231,13 +260,13 @@ function Sponsors() {
         <p className="mh-privacy-contractual">That privacy line is contractual, not a preference. Not the CEO, not HR, nobody.</p>
       </div>
       <div className="mh-privacy-split" data-reveal="">
-        <div>
+        <div className="mh-privacy-comparison-card is-visible">
           <h3>What a sponsor sees</h3>
           <ul className="mh-plain-list ruled">
             {SPONSOR_SEES.map((line) => <li key={line}>{line}</li>)}
           </ul>
         </div>
-        <div>
+        <div className="mh-privacy-comparison-card is-private">
           <h3>What a sponsor never sees</h3>
           <ul className="mh-plain-list ruled">
             {SPONSOR_NEVER.map((line) => <li key={line}>{line}</li>)}
@@ -250,10 +279,12 @@ function Sponsors() {
 
 function ConnectedAssistants() {
   return (
-    <section className="mh-wherever mh-section" aria-labelledby="connected-title">
-      <div className="mh-copy-block">
+    <section className="mh-wherever mh-privacy-connected mh-section" id="connected-assistants" aria-labelledby="connected-title">
+      <div className="mh-privacy-connected-heading">
         <span className="mh-kicker">Connected assistants</span>
         <h2 id="connected-title">A connection you authorize sends your record somewhere we do not run.</h2>
+      </div>
+      <div className="mh-privacy-connected-body" data-reveal="">
         <p>Offboard can connect to assistants you already use. When you authorize one, the parts of your record you allow are read into that conversation, and from that point the conversation lives in your account with that provider, under that provider&apos;s terms. Offboard&apos;s own retention terms cover the requests Offboard makes, not the ones you make inside someone else&apos;s product.</p>
         <p>A connection is scoped to what you authorize, and you can end it at any time. Your record stays with Offboard.</p>
         <Link className="mh-section-link" href="/integrations">See how connections work <ArrowRight aria-hidden="true" /></Link>
@@ -264,7 +295,7 @@ function ConnectedAssistants() {
 
 function HonestPart() {
   return (
-    <section className="mh-privacy-honest mh-section" aria-labelledby="honest-title">
+    <section className="mh-privacy-honest mh-section" id="honest-limits" aria-labelledby="honest-title">
       <div className="mh-privacy-honest-layout">
         <div className="mh-privacy-honest-heading">
           <span className="mh-kicker is-lime">The honest part</span>
@@ -287,15 +318,20 @@ function HonestPart() {
 
 function YourCall() {
   return (
-    <section className="mh-route-privacy mh-section" aria-labelledby="rights-title">
+    <section className="mh-route-privacy mh-privacy-rights mh-section" id="your-data" aria-labelledby="rights-title">
       <div className="mh-copy-block">
         <span className="mh-kicker">Your data, your call</span>
         <h2 id="rights-title">These are product features, not legal concessions.</h2>
         <p>You do not need to cite a regulation to use any of them.</p>
       </div>
-      <ul className="mh-plain-list ruled" data-reveal="">
-        {RIGHTS.map((line) => <li key={line}>{line}</li>)}
-      </ul>
+      <ol className="mh-privacy-rights-grid" data-reveal="">
+        {RIGHTS.map(([number, line]) => (
+          <li key={number}>
+            <span>{number}</span>
+            <p>{line}</p>
+          </li>
+        ))}
+      </ol>
       <p className="mh-privacy-note">These map to the rights GDPR and CCPA give you, wherever you live. Found something, or have a question this page does not answer? Email <a href="mailto:hello@offboard.co">hello@offboard.co</a>. A human reads it.</p>
     </section>
   );
@@ -314,6 +350,7 @@ export function MarketingPrivacySecurity() {
           cta="Get started free"
           footnote="Every claim below maps to a specific control in our code. We keep a claims register, audited it in July 2026, and fixed what did not hold up."
         />
+        <PageIndex />
         <WhoSeesWhat />
         <Receipts />
         <Sponsors />

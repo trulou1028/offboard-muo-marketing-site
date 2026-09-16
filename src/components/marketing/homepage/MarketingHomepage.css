@@ -1264,6 +1264,32 @@ p.mh-privacy-note { max-width: 74ch; margin-top: 26px; color: var(--mh-secondary
 .mh-privacy-note a { border-bottom: 1px solid currentcolor; }
 .mh-sr-only { position: absolute; overflow: hidden; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; clip-path: inset(50%); white-space: nowrap; }
 
+/* Relume Content 28, translated into a compact route index rather than a
+   sticky article sidebar. The page is long enough to need wayfinding, but its
+   bands must stay full-width and independent. */
+.mh-privacy-index { display: grid; grid-template-columns: minmax(150px, .32fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; padding-top: 32px; padding-bottom: 32px; background: var(--mh-paper-soft); border-bottom: 1px solid var(--mh-line); }
+.mh-privacy-index > strong { padding-top: 15px; color: var(--mh-forest); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.mh-privacy-index ol { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; }
+.mh-privacy-index li { border-top: 1px solid var(--mh-line); }
+.mh-privacy-index li:first-child { grid-column: span 2; }
+.mh-privacy-index a { display: flex; min-height: 54px; align-items: center; gap: 12px; padding: 12px 0; color: var(--mh-muted); font-size: 13px; font-weight: 600; line-height: 1.35; transition: color var(--mh-dur-base) var(--mh-ease-standard); }
+.mh-privacy-index a:hover { color: var(--mh-forest); }
+.mh-privacy-index a > span { color: var(--mh-secondary); font-size: 11px; font-weight: 650; letter-spacing: .08em; }
+.mh-privacy-who,
+.mh-privacy-receipts,
+.mh-privacy-sponsor,
+.mh-privacy-connected,
+.mh-privacy-honest,
+.mh-faq,
+.mh-privacy-rights { scroll-margin-top: 88px; }
+
+/* Layout 294's four proof columns, kept open and editorial rather than turned
+   into generic cards. Numerals replace its decorative icon slot. */
+.mh-privacy-receipts .mh-capabilities { gap: clamp(24px, 3vw, 42px); }
+.mh-privacy-receipts .mh-capability { padding-top: 0; border-top: 0; }
+.mh-privacy-proof-index { display: block; padding-bottom: 18px; border-bottom: 1px solid var(--mh-line); color: var(--mh-forest); font-family: var(--mh-font-display); font-size: 36px; font-weight: 500; letter-spacing: -.03em; line-height: 1; }
+.mh-privacy-receipts .mh-capability h3 { margin-top: 22px; }
+
 /* The sponsor rule gets a dark band of its own. The strategy doc asks for it
    to be the most visible thing on the page after the table, and a column in
    the table would have done the opposite. */
@@ -1277,6 +1303,8 @@ p.mh-privacy-contractual { margin-top: 14px; color: var(--mh-paper); font-size: 
 .mh-privacy-sponsor .mh-section-link { border-bottom-color: var(--mh-paper); color: var(--mh-paper); }
 .mh-privacy-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 4vw, 64px); margin-top: 52px; }
 .mh-privacy-split h3 { font-family: var(--mh-font-body); font-size: 12px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+.mh-privacy-comparison-card { padding: clamp(24px, 3vw, 36px); background: var(--mh-surface-on-dark); border: 1px solid var(--mh-border-on-dark); border-radius: var(--mh-radius-lg); }
+.mh-privacy-comparison-card.is-private { background: transparent; }
 /* stylelint-disable-next-line selector-class-pattern -- .ruled predates the mh-/is- naming contract, see the note at .mh-plain-list */
 .mh-privacy-split .mh-plain-list.ruled { margin-top: 18px; border-top-color: var(--mh-hairline-on-dark); }
 /* stylelint-disable-next-line selector-class-pattern -- see above */
@@ -1294,6 +1322,24 @@ p.mh-privacy-contractual { margin-top: 14px; color: var(--mh-paper); font-size: 
 .mh-privacy-honest-ledger { margin-top: 48px; border-top: 1px solid var(--mh-ink); }
 .mh-privacy-honest-ledger > p { padding: 22px 0; border-bottom: 1px solid var(--mh-line); color: var(--mh-muted); font-size: 15px; line-height: 1.65; }
 .mh-privacy-honest-ledger > p.mh-privacy-certs { color: var(--mh-ink); font-weight: 650; }
+
+/* Content 17: the heading is the left anchor and the explanation becomes the
+   wider reading column. This section intentionally echoes, but does not reuse,
+   Content 22's more detailed disclosure ledger below it. */
+.mh-privacy-connected { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: clamp(48px, 6vw, 96px); align-items: start; }
+.mh-privacy-connected-heading { display: flex; max-width: 500px; flex-direction: column; gap: 16px; }
+.mh-privacy-connected-heading h2 { font-size: var(--mh-h2-sm); line-height: 1.08; }
+.mh-privacy-connected-body { max-width: 760px; color: var(--mh-muted); font-size: 17px; line-height: 1.7; }
+.mh-privacy-connected-body > p + p { margin-top: 20px; }
+
+/* Description List 1, adapted into an actual rights ledger. The numbered
+   entries form two open columns on desktop and retain source order on mobile. */
+.mh-privacy-rights .mh-copy-block { margin-bottom: 50px; }
+.mh-privacy-rights-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(36px, 5vw, 72px); max-width: 1040px; }
+.mh-privacy-rights-grid li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 18px; align-items: start; padding: 24px 0; border-top: 1px solid var(--mh-line); }
+.mh-privacy-rights-grid li > span { color: var(--mh-forest); font-family: var(--mh-font-display); font-size: 24px; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; }
+.mh-privacy-rights-grid p { color: var(--mh-muted); font-size: 15px; line-height: 1.6; }
+.mh-privacy-rights > .mh-privacy-note { margin-top: 34px; }
 
 small.mh-route-hero-footnote { display: block; max-width: 60ch; margin-top: 18px; color: var(--mh-on-dark-muted); font-size: 13px; line-height: 1.6; }
 
@@ -1722,6 +1768,7 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 @media (max-width: 1180px) {
   ol.mh-steps,
   .mh-capabilities { grid-template-columns: repeat(2, 1fr); }
+  .mh-privacy-index ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   /* The tools drop to their own line under the stage, and the state chip
      rides up beside the stage name. Every child is placed by hand: leave the
      chip to auto-placement and it lands in the number column on a third row,
@@ -1775,6 +1822,7 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-route-story-photo.is-short { min-height: 320px; }
   .mh-wherever-grid,
   .mh-privacy-split,
+  .mh-privacy-connected,
   .mh-privacy-honest-layout,
   .mh-workforce-pilot,
   .mh-company-state-grid,
@@ -1847,6 +1895,8 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-human-photo { min-height: 560px; }
   .mh-faq { padding-top: 72px; padding-bottom: 72px; gap: 48px; }
   .mh-privacy-honest-layout { gap: 42px; }
+  .mh-privacy-connected { gap: 42px; }
+  .mh-privacy-rights-grid { grid-template-columns: 1fr; }
   .mh-site-footer nav { grid-template-columns: repeat(2, 1fr); }
   .mh-int-demo-stack { grid-template-columns: 1fr; }
 }
@@ -1860,6 +1910,11 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-hero2-actions > a { justify-content: center; }
   .mh-capabilities,
   .mh-pro-cards { grid-template-columns: 1fr; }
+  .mh-privacy-index { grid-template-columns: 1fr; gap: 8px; padding-top: 24px; padding-bottom: 24px; }
+  .mh-privacy-index > strong { padding-top: 0; }
+  .mh-privacy-index ol { grid-template-columns: 1fr; }
+  .mh-privacy-index li:first-child { grid-column: auto; }
+  .mh-privacy-index a { min-height: 48px; }
   ul.mh-int-hero-marks { min-height: 320px; transform: scale(.86); transform-origin: top left; width: 116%; margin-bottom: -36px; }
   .mh-int-hero-marks li { width: 188px; padding: 13px; }
   .mh-int-hero-marks li:nth-child(2) { left: 28%; }
@@ -1897,6 +1952,8 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-route-ethos,
   .mh-route-privacy,
   .mh-act-privacy { padding-top: 72px; padding-bottom: 72px; }
+  .mh-privacy-comparison-card { padding: 24px; }
+  .mh-privacy-rights-grid li { grid-template-columns: 42px minmax(0, 1fr); gap: 14px; }
   .mh-route-content-heading h2,
   .mh-route-independence h2,
   .mh-route-contact h2 { line-height: 46px; }

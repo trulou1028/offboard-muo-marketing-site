@@ -1959,6 +1959,11 @@ add the connection to the register.
 - Small: `Every claim below maps to a specific control in our code. We keep a claims register, audited it in July 2026, and fixed what did not hold up.`
 - CTA: `Build my free transition plan` (primary)
 
+### On this page
+
+- Label: `On this page`
+- Links: `Who can see what` · `The receipts` · `Sponsored access` · `Connected assistants` · `The honest part` · `Good questions` · `Your data, your call`
+
 ### Who can see what
 
 - Kicker: `The short answer`
