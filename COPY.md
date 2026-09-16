@@ -972,7 +972,7 @@ below and by `/job-search`'s packet band.
 - Body: `Glassdoor reviews, boomerang hires, and references are written in the last week of employment. Sponsorship is the part of a layoff people actually tell other people about.`
 - Items: `The line item people remember` — `Glassdoor reviews, boomerang hires, and references are written in the last week of employment.` · `A product people actually use` — `It is a product laid-off workers actually use, not a PDF library.` · `Proof, not promises` — `No placement guarantees, no inflated promises. You see real aggregate usage and claims activity, so you know the support landed.`
 
-### SB 617 aside *(plan 012 — OWNER: re-verify statute currency before relying on this in campaigns)*
+### SB 617 aside *(plan 012; re-verified against the enrolled bill on 2026-09-16)*
 
 - Kicker: `New in California`
 - `Under SB 617, companies filing a WARN notice now have to state in writing whether they'll coordinate transition services for the people affected. The "severance and silence" default now gets documented as a choice, and you have to write down that the answer is no.`
