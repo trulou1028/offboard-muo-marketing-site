@@ -19,7 +19,7 @@ const ROUTES = [
   "/integrations",
   "/lumo",
   "/layoff-support",
-  "/job-search",
+  "/application-packet",
   "/privacy-security",
   "/about",
   "/employers",

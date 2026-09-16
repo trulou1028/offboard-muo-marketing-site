@@ -638,7 +638,7 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 
 .mh-route-hero { min-height: 720px; padding-top: 172px; padding-bottom: var(--mh-section-y); background: var(--mh-deep); color: var(--mh-paper); display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(340px, .55fr); gap: clamp(60px, 8vw, 126px); align-items: center; }
 .mh-route-hero.is-single { grid-template-columns: 1fr; min-height: 0; padding-bottom: var(--mh-section-y-tight); }
-.mh-route-hero > div { max-width: 810px; }
+.mh-route-hero > div { min-width: 0; max-width: 810px; }
 .mh-route-hero h1 { margin-top: 24px; font-size: var(--mh-h1); line-height: 1.02; text-wrap: balance; }
 /* An authored headline sets its own lines, so each one is a block and balance
    has nothing left to decide. Same technique as the homepage H1. */
@@ -699,7 +699,7 @@ ul.mh-feature-rows { width: 100%; margin-top: 48px; border-top: 1px solid var(--
    argument. The lines are bars, not lorem: fake resume prose would be one
    more thing to keep true. */
 
-/* /job-search. One connected packet, and the tools that each ask again,
+/* /application-packet. One connected packet, and the tools that each ask again,
    dwarfed beside it. */
 
 /* /lumo. The record is the base because it is what Lumo starts from; the
@@ -1086,14 +1086,42 @@ a.mh-secondary-cta:hover { border-color: var(--mh-ink); }
 .mh-route-hero-visual .mh-comp { padding-bottom: 32px; }
 
 /* Product pages pair a real-life moment with the Offboard output it creates.
-   Both layers stay as images, so the composition remains concrete and scales
-   without rebuilding product UI in CSS. */
-figure.mh-hero-image-composition { position: relative; width: min(590px, 100%); min-height: 460px; margin-left: auto; }
-.mh-hero-image-composition-photo { position: absolute; inset: 0 8% 13% 0; overflow: hidden; border: 1px solid var(--mh-hairline-on-dark); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); }
+   The UI is rendered as layered DOM cards so it can share the dimensional
+   treatment established by the Career Context composition while staying
+   legible and responsive. */
+figure.mh-hero-image-composition { position: relative; width: min(590px, 100%); min-height: 480px; margin-left: auto; }
+.mh-hero-image-composition-photo { position: absolute; inset: 0 8% 15% 0; overflow: hidden; border: 1px solid var(--mh-hairline-on-dark); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); }
 .mh-hero-image-composition-photo img { object-fit: cover; }
-.mh-hero-image-composition.is-layoff .mh-hero-image-composition-photo img { object-position: 56% center; }
-.mh-hero-image-composition.is-job-search .mh-hero-image-composition-photo img { object-position: 42% center; }
-.mh-hero-image-composition-card { position: absolute; z-index: 1; right: -7%; bottom: -2%; width: 78%; height: auto; filter: drop-shadow(0 24px 42px rgb(0 0 0 / 26%)); }
+.mh-hero-image-composition.is-first-week .mh-hero-image-composition-photo img { object-position: 56% center; }
+.mh-hero-image-composition.is-application-packet .mh-hero-image-composition-photo img { object-position: 42% center; }
+.mh-layered-product { position: absolute; z-index: 2; right: -6%; bottom: -2%; width: 84%; height: 292px; color: var(--mh-ink); }
+.mh-layered-product-back,
+.mh-layered-product-main,
+.mh-layered-product-chip { background: var(--mh-white); border: 1px solid var(--mh-line); box-shadow: var(--mh-shadow-overlay); }
+.mh-layered-product-back { position: absolute; top: 0; z-index: 1; display: grid; width: 50%; min-height: 118px; grid-template-columns: 34px minmax(0, 1fr); gap: 8px 10px; padding: 16px; border-radius: var(--mh-radius-lg); }
+.mh-layered-product-back.is-left { left: 2%; transform: rotate(-4deg); }
+.mh-layered-product-back.is-right { right: 2%; transform: rotate(4deg); }
+.mh-layered-product-back > span { display: grid; width: 32px; height: 32px; grid-row: 1; place-items: center; background: var(--mh-paper-soft); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-sm); }
+.mh-layered-product-back svg { width: 17px; height: 17px; }
+.mh-layered-product-back strong { align-self: center; font-size: 12px; font-weight: 650; line-height: 1.2; }
+.mh-layered-product-back i { grid-column: 1 / -1; display: block; height: 7px; background: var(--mh-paper-soft); border-radius: var(--mh-radius-pill); }
+.mh-layered-product-back i:nth-of-type(2) { width: 86%; }
+.mh-layered-product-back i:nth-of-type(3) { width: 68%; }
+.mh-layered-product-main { position: absolute; z-index: 2; right: 4%; bottom: 0; left: 8%; padding: 22px 24px; border-radius: var(--mh-radius-lg); }
+.mh-layered-product-main > strong { display: block; font-size: 21px; font-weight: 680; letter-spacing: -.025em; line-height: 1.15; }
+.mh-layered-product-main ul { margin-top: 14px; }
+.mh-layered-product-main li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; align-items: center; padding: 9px 0; border-top: 1px solid var(--mh-line); }
+.mh-layered-product-main li > svg { width: 16px; height: 16px; color: var(--mh-forest); stroke-width: 2.5; }
+.mh-layered-product-main li > span { display: flex; align-items: center; gap: 9px; font-size: 12px; font-weight: 620; }
+.mh-layered-product-main li > span svg { width: 16px; height: 16px; }
+.mh-layered-product-chip { position: absolute; z-index: 3; display: flex; align-items: center; gap: 9px; padding: 11px 15px; border-radius: var(--mh-radius-pill); }
+.mh-layered-product-chip.is-top { top: 48px; right: -1%; }
+.mh-layered-product-chip.is-bottom { bottom: -15px; left: 0; }
+.mh-layered-product-chip > span { display: grid; width: 30px; height: 30px; place-items: center; background: var(--mh-paper-soft); border-radius: var(--mh-radius-pill); color: var(--mh-forest); }
+.mh-layered-product-chip svg { width: 17px; height: 17px; }
+.mh-layered-product-chip strong { font-size: 11px; font-weight: 680; white-space: nowrap; }
+.mh-layered-product.is-first-week { height: 315px; }
+.mh-layered-product.is-first-week .mh-layered-product-chip.is-top { top: 42px; }
 /* The payoff line that used to close ContrastSection, now inside a copy block. */
 strong.mh-payoff { max-width: 52ch; padding-top: 18px; border-top: 1px solid var(--mh-line); color: var(--mh-ink); font-size: 16px; font-weight: 650; line-height: 26px; }
 /* /integrations hero: one compact cluster of connected tools. Each card
@@ -1131,7 +1159,7 @@ ul.mh-also-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32p
 .mh-lumo-prompts.is-bubbles > span { grid-column: 1 / -1; }
 .mh-lumo-prompts .mh-chat-you { max-width: none; align-self: auto; background: var(--mh-white); border: 1px solid var(--mh-line); }
 .mh-lumo-band .mh-route-story-photo { min-height: 480px; }
-/* /job-search: a shorter photo beside the stages intro. */
+/* /application-packet: a shorter photo beside the stages intro. */
 .mh-route-story-photo.is-short { min-height: 380px; }
 .mh-kit .mh-split { align-items: center; }
 
@@ -1430,11 +1458,11 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 
 /* Toolkit */
 .mh-kit { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); }
-/* /job-search: the one-line "what this stage decides", above the tools it now
+/* /application-packet: the one-line "what this stage decides", above the tools it now
    describes (the descriptions moved here from the homepage, 2026-09-02). */
 
 /* Pattern E on the homepage - four stages in one row. Replaces a 2x2 holding
-   ten tool descriptions: the homepage names the tools, /job-search describes
+   ten tool descriptions: the homepage names the tools, /application-packet describes
    them. Four items in four equal tracks fill the row, and at 1180 it halves
    to a 2x2, which also fills (R1). Never three tracks - four items would
    orphan two cells, and e2e/composition.spec.ts only measures 1440.
@@ -1463,7 +1491,7 @@ ol.mh-stage-strip { margin-top: 48px; counter-reset: mh-stage; border-top: 1px s
 .mh-stage-head h3 svg { width: 20px; height: 20px; color: var(--mh-forest); stroke-width: 1.5; }
 .mh-stage-head p { margin-top: 6px; color: var(--mh-muted); font-size: 15px; line-height: 1.5; }
 
-/* /job-search's variant of the same row (plan 051). Its tools carry a
+/* /application-packet's variant of the same row (plan 051). Its tools carry a
    sentence each, so the tool cell is a list rather than the homepage's pills,
    and there is no product-state chip to leave room for. */
 .mh-stage-strip.is-detailed > li { grid-template-columns: 56px minmax(190px, 0.8fr) minmax(0, 1.7fr); align-items: start; }
@@ -1492,8 +1520,8 @@ small.mh-packet-note { display: block; margin-top: 26px; color: var(--mh-muted);
 /* Band rhythm on this page: deep, paper, mist, white, paper-soft, forest.
    Without these two the stages band would repeat the paper above it and the
    answers band would repeat the paper-soft of the strip below it. */
-.mh-page-job-search .mh-kit { background: var(--mh-mist); }
-.mh-page-job-search .mh-faq { background: var(--mh-white); }
+.mh-page-application-packet .mh-kit { background: var(--mh-mist); }
+.mh-page-application-packet .mh-faq { background: var(--mh-white); }
 /* Tool names as a hairline list, deliberately not a grid: three names beside
    two would read as an orphan the moment anyone gave it equal tracks. */
 .mh-stage-strip ul { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -1899,11 +1927,27 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-mobile-menu > div { right: -152px; }
   .mh-route-hero { padding-top: 118px; }
   .mh-route-hero h1 { font-size: 48px; line-height: 1.02; }
+  .mh-page-application-packet .mh-route-hero h1 { font-size: 42px; }
   .mh-route-hero > div > p { font-size: 18px; line-height: 28px; }
   .mh-route-hero aside { padding: 24px; }
   figure.mh-hero-image-composition { min-height: 340px; }
-  .mh-hero-image-composition-photo { inset: 0 4% 15% 0; }
-  .mh-hero-image-composition-card { right: -4%; bottom: 0; width: 84%; }
+  .mh-hero-image-composition-photo { inset: 0 4% 18% 0; }
+  .mh-layered-product { right: 0; bottom: 0; width: 100%; height: 230px; }
+  .mh-layered-product.is-first-week { height: 248px; }
+  .mh-layered-product-back { min-height: 96px; padding: 12px; }
+  .mh-layered-product-back > span { width: 27px; height: 27px; }
+  .mh-layered-product-back strong { font-size: 10px; }
+  .mh-layered-product-back i { height: 5px; }
+  .mh-layered-product-main { right: 3%; left: 7%; padding: 16px 17px; }
+  .mh-layered-product-main > strong { font-size: 18px; }
+  .mh-layered-product-main li { gap: 8px; padding: 6px 0; }
+  .mh-layered-product-main li > span { gap: 7px; font-size: 10px; }
+  .mh-layered-product-chip { gap: 7px; padding: 8px 11px; }
+  .mh-layered-product-chip.is-top,
+  .mh-layered-product.is-first-week .mh-layered-product-chip.is-top { top: 42px; right: 0; }
+  .mh-layered-product-chip.is-bottom { bottom: -10px; }
+  .mh-layered-product-chip > span { width: 24px; height: 24px; }
+  .mh-layered-product-chip strong { font-size: 9px; }
   .mh-route-content,
   .mh-route-independence,
   .mh-route-contact,

@@ -7,7 +7,7 @@ import { expect, test } from "@playwright/test";
    R1 (no orphan cells) — a repeating grid must fill its last row. The audit
    found four: the homepage question grid (5 items in 3 columns), the homepage
    toolkit (3/3/2/2 columns), and `EditorialGrid` wherever a caller passed an
-   odd number of items (/career-context, /lumo, /job-search, /employers).
+   odd number of items (/career-context, /lumo, /application-packet, /employers).
 
    R10 (mobile budget) — no homepage section may exceed the budget at 390
    wide. The pre-plan page ran to 17,096px total with a 2,896px section.
@@ -22,7 +22,7 @@ const ROUTES = [
   "/pricing",
   "/career-context",
   "/lumo",
-  "/job-search",
+  "/application-packet",
   "/layoff-support",
   "/integrations",
   "/resources",

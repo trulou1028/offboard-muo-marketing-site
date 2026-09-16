@@ -4,33 +4,29 @@ Date: 2026-09-16
 
 ## Scope
 
-- Mobile pricing plan cards
-- `/integrations` permissions section
+- `/application-packet` route promotion and hero composition
 - `/layoff-support` hero composition
-- `/job-search` hero composition
-- `/privacy-security` connected-assistant copy reflow
+- Product navigation and footer route updates
+- Desktop, tablet, and mobile layout containment
 
 ## Reference and result
 
-The committed Playwright screenshots in `e2e/visual.spec.ts-snapshots/` were the pre-change reference. The updated screenshots use the same Chromium environment and the same desktop, tablet, and mobile viewports.
+The committed Playwright screenshots in `e2e/visual.spec.ts-snapshots/` were the pre-change reference. The updated screenshots use the same Chromium environment and the same desktop, tablet, and mobile viewports. The old `job-search` baselines were retired when the canonical route became `/application-packet`.
 
 Reviewed result screenshots:
 
-- `pricing-tablet-chromium-darwin.png`
-- `pricing-mobile-chromium-darwin.png`
-- `integrations-{desktop,tablet,mobile}-chromium-darwin.png`
+- `application-packet-{desktop,tablet,mobile}-chromium-darwin.png`
 - `layoff-support-{desktop,tablet,mobile}-chromium-darwin.png`
-- `job-search-{desktop,tablet,mobile}-chromium-darwin.png`
-- `privacy-security-mobile-chromium-darwin.png`
+- The full visual baseline set for the updated Application Packet label and destination in shared navigation and footer surfaces
 
 ## Checks
 
-- Pricing cards stack at small widths without clipped headings, compressed prices, or overlapping CTAs.
-- Both refreshed heroes preserve the subject, keep the product card readable, and stay within the hero column at all three viewports.
-- The integrations access-level panel aligns with the adjacent copy and stacks cleanly on mobile.
-- No changed route has horizontal overflow.
-- The CSS reset-shadowing suite reports no spacing rules that fail to render.
-- The full Playwright suite completed with 129 passing tests and no browser-console regressions.
+- Both refreshed heroes preserve the documentary subject while presenting the product UI as one layered white-card system.
+- Floating status chips remain clear of card titles and labels at all three viewports.
+- The Application Packet headline, artwork, and CTA stay within the mobile viewport without clipping or horizontal overflow.
+- `/job-search` redirects to the canonical `/application-packet` route, and shared navigation points directly to the canonical route.
+- The production visual harness completed with 65 passing screenshot and alignment checks.
+- The full production-browser suite completed with 129 passing tests and no browser-console regressions.
 
 ## Final result
 

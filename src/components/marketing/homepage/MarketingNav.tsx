@@ -82,7 +82,7 @@ export const NAV_ENTRIES: readonly NavEntry[] = [
       {
         heading: "The work",
         items: [
-          { route: "job-search", href: "/job-search", label: "Job Search", blurb: "The whole search as one system.", icon: Briefcase },
+          { route: "application-packet", href: "/application-packet", label: "Application Packet", blurb: "One job link becomes everything you send.", icon: Briefcase },
           { route: "layoff-support", href: "/layoff-support", label: "Layoff & Benefits", blurb: "Deadlines, coverage, and runway.", icon: LifeBuoy },
         ],
       },

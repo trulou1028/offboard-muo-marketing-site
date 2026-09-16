@@ -297,8 +297,11 @@ test.describe("Offboard marketing site", () => {
     await page.goto("/why-offboard");
     await expect(page).toHaveURL(/\/about$/);
 
+    await page.goto("/job-search");
+    await expect(page).toHaveURL(/\/application-packet$/);
+
     await page.goto("/job-packet");
-    await expect(page).toHaveURL(/\/job-search$/);
+    await expect(page).toHaveURL(/\/application-packet$/);
 
     await page.goto("/faq");
     await expect(page).toHaveURL(/\/about#faq$/);
@@ -321,8 +324,8 @@ test.describe("Offboard marketing site", () => {
       // Offboard's own pages in the old tool directory. The ghost checker is
       // the best-converting page on the site (31%) and was landing on the
       // guides index with every third-party tool.
-      ["/tools/offboard-ghost-job-checker", /\/job-search$/],
-      ["/tools/offboard-job-packets", /\/job-search$/],
+      ["/tools/offboard-ghost-job-checker", /\/application-packet$/],
+      ["/tools/offboard-job-packets", /\/application-packet$/],
       ["/tools/offboard-lumo", /\/lumo$/],
       // The old directory index, and the old article and category trees.
       ["/tool-directory", /\/resources$/],
@@ -334,7 +337,7 @@ test.describe("Offboard marketing site", () => {
       ["/blog/what-is-an-ai-agent", /\/resources\/what-is-an-ai-agent$/],
       // Subject matches rather than nearest-page guesses.
       ["/layoff-checklist", /\/layoff-support$/],
-      ["/job-packet-agent", /\/job-search$/],
+      ["/job-packet-agent", /\/application-packet$/],
       ["/gpt", /\/integrations$/],
       ["/mission", /\/about$/],
       ["/for-teams", /\/employers$/],
@@ -571,16 +574,16 @@ test.describe("the Run your search rows stay inside their section", () => {
   });
 });
 
-// /job-search carries two more hand-placed row grids (plan 051): the packet
+// /application-packet carries two more hand-placed row grids (plan 051): the packet
 // steps and the detailed stage rows. Same failure mode as the homepage's, and
 // the same reason the visual suite is weak evidence for it - a chip escaping
 // its column is a few hundred pixels on a 4,900px page, well inside the 1%
 // screenshot tolerance.
-test.describe("the /job-search rows stay inside their sections", () => {
+test.describe("the /application-packet rows stay inside their sections", () => {
   for (const width of [1440, 1100, 901, 768, 390]) {
     test(`nothing escapes at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
-      await page.goto("/job-search");
+      await page.goto("/application-packet");
       await page.evaluate(() => document.fonts.ready);
 
       const escaped = await page.evaluate(() => {
@@ -607,7 +610,7 @@ test.describe("the /job-search rows stay inside their sections", () => {
   }
 
   test("the packet band names the app's six steps and marks what Free covers", async ({ page }) => {
-    await page.goto("/job-search");
+    await page.goto("/application-packet");
     // Pinned in the browser as well as in the unit test: these six strings and
     // their two Free chips are a pricing claim, ported from packetSteps.ts in
     // the app repo. A silent flip here is a promise the product does not keep.
@@ -638,7 +641,7 @@ test.describe("hero headlines keep product names whole", () => {
       await page.setViewportSize({ width, height: 900 });
       const offenders: string[] = [];
 
-      for (const route of ["/pricing", "/career-context", "/lumo", "/job-search", "/layoff-support", "/integrations"]) {
+      for (const route of ["/pricing", "/career-context", "/lumo", "/application-packet", "/layoff-support", "/integrations"]) {
         await page.goto(route);
         await page.evaluate(() => document.fonts.ready);
 
@@ -720,7 +723,7 @@ test("every route's canonical points at its own address on the real domain", asy
   const ROUTES = [
     "/", "/about", "/act", "/career-context", "/communities", "/companies",
     "/employers", "/how-it-works", "/integrations", "/intake",
-    "/intake/confirmed", "/job-search", "/layoff-support", "/lumo", "/pricing",
+    "/intake/confirmed", "/application-packet", "/layoff-support", "/lumo", "/pricing",
     "/privacy-security", "/resources", "/workforce",
     "/companies/airtable",
     "/resources/first-week-after-a-layoff",

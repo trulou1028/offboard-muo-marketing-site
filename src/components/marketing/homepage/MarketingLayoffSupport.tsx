@@ -9,6 +9,7 @@ import {
   SIGN_UP_URL,
   VerifiedFactsStrip,
 } from "./MarketingSite";
+import { LayeredProductHero } from "./LayeredProductHero";
 
 /* Layoff & Benefits pillar page (plan 030, rebuilt by plan 041). The strategy
    doc calls this the strategically important one: without it the product
@@ -221,12 +222,11 @@ export function MarketingLayoffSupport() {
           body="The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in the order that matters to you."
           current="layoff-support"
           visual={(
-            <figure className="mh-hero-image-composition is-layoff" aria-label="A person organizing paperwork at a desk beside an Offboard first-week plan">
-              <span className="mh-hero-image-composition-photo">
-                <Image src="/marketing/homepage/raw/system-desk.webp" alt="" fill sizes="(max-width: 900px) 100vw, 42vw" priority />
-              </span>
-              <Image className="mh-hero-image-composition-card" src="/marketing/site-imagery/product-compositions/first-week-plan-civic-modern-v1-transparent.webp" alt="" width={1536} height={1024} priority />
-            </figure>
+            <LayeredProductHero
+              variant="first-week"
+              photo="/marketing/homepage/raw/system-desk.webp"
+              label="A person organizing paperwork beside a layered Offboard first-week plan"
+            />
           )}
           cta="Get started free"
         />
@@ -238,7 +238,7 @@ export function MarketingLayoffSupport() {
         <VerifiedFactsStrip />
         <StraightAnswers />
         <AlsoStrip items={[
-          { title: "When the paperwork is handled, the search is still there.", body: "Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other.", href: "/job-search", cta: "See how the search runs" },
+          { title: "When the paperwork is handled, the application is still there.", body: "Offboard keeps the money side and the application side in the same place, so the work you do on one does not get lost when you turn to the other.", href: "/application-packet", cta: "See the Application Packet" },
           { title: "It all lands in one record.", body: "Your situation, your dates, your documents, and every decision you make here become part of your Career Context, so the search starts from what actually happened.", href: "/career-context", cta: "See what it holds" },
         ]} />
         <FinalCta

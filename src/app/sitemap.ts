@@ -13,7 +13,7 @@ import { DEFERRED_ROUTES, isDeferredRoute } from "@/lib/launch";
 // Console" step in docs/cutover-checklist.md so flipping robots off is the
 // only remaining step, not also writing this file.
 const STATIC_ROUTES = ["/", "/how-it-works", "/pricing",
-  "/career-context", "/integrations", "/lumo", "/layoff-support", "/job-search", "/about", "/employers", "/workforce", "/communities", "/act", "/resources", "/privacy-security", "/companies"] as const;
+  "/career-context", "/integrations", "/lumo", "/layoff-support", "/application-packet", "/about", "/employers", "/workforce", "/communities", "/act", "/resources", "/privacy-security", "/companies"] as const;
 
 // Plan 043 filters the deferred routes out rather than deleting them: the
 // list above stays complete, and a page re-enters the sitemap the moment it
