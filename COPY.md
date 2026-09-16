@@ -1462,7 +1462,7 @@ belongs here.
 
 ### Hero
 
-*The hero's right column shows the five connected marks (Google Calendar, Google Drive, Calendly, ChatGPT, Claude) as an overlapping stack with their status chips, nothing clickable.*
+*The hero's right column shows the five connected marks (Google Calendar, Google Drive, Calendly, ChatGPT, Claude) as one compact overlapping cluster with their status chips, nothing clickable.*
 
 - Kicker: `Integrations` *(2026-09-13; was `Offboard everywhere`)*
 - H1: `Use Offboard from the AI you already use.`
@@ -1485,6 +1485,9 @@ belongs here.
 - Note under the grid: `ChatGPT and Claude are in beta. They work today and we are still refining them. The ones marked in progress are being built, and we do not put dates on them.`
 
 The cards are a showcase, not links: nothing in the composition is clickable.
+Each card is one continuous white surface. The logo and status share the card
+without a separate color band or dividing rule, and the integration name uses
+the interface sans serif.
 Every partner mark is a self-hosted real asset. Google Calendar, Google Drive,
 and Gmail come from Google Workspace's official brand artwork; Calendly comes
 from Calendly's current site mark; Notion comes from Notion's official app
@@ -1501,6 +1504,10 @@ structured record" body). Cut for length on owner direction; the H2 it
 carried moved to the grid above.
 
 ### Demos
+
+*The three examples share one contained comparison grid. Each platform name
+is a simple card header above its conversation, with no rotation, overlap, or
+floating shadow.*
 
 - Kicker: `In practice`
 - H2: `The same record, from wherever you are working.`
@@ -2365,6 +2372,7 @@ When one ships, move it into its page section above.
 | 2026-09-15 | The two intake emails are recorded in this document for the first time, and the confirmation subject is corrected from the literal `We got your intake, Offboard` to `We got your intake, <first name>`. Found by the launch smoke test; they were the only user-facing strings the copy law did not cover | this file § 9 |
 | 2026-09-15 | `/lumo` reuses the homepage's Figma comparison composition; `/integrations` gets real Google, Calendly, Gmail, and Notion marks plus layered hero, showcase, and conversation compositions; the shared footer replaces duplicated legal copy with a short company description and `Built for the work between jobs.` | owner direction, this file §§ 1, 11, 12 |
 | 2026-09-15 | `/integrations` collects every integration in one formal four-column grid, with availability carried by each card's status label. `/career-context` replaces the score-heavy hero with the cleaner layered record composition. | owner direction, this file §§ 10, 11 |
+| 2026-09-15 | `/integrations` unifies each catalog card into one white surface, closes the gap inside the hero cluster, and presents the three conversation examples as an orderly comparison grid. | owner direction, this file § 11 |
 | 2026-09-15 | The intake emails' branded card is rebuilt on a table. Ported as divs the same morning, it rendered correctly in a browser and broke in Gmail, which closed the card after the logo and dropped the text onto the client's background | this file § 9 |
 | 2026-09-15 | The four legacy URLs that 301'd into the deferred, noindexed `/how-it-works` now point at live pages (owner ruled out bringing that page back): `/product` and `/product/*` to the homepage's four-step strip, `/why-offboard` to `/about`, `/job-packet` to `/job-search`, `/faq` to `/about#faq` | `next.config.ts`, docs/cutover-checklist.md |
 
