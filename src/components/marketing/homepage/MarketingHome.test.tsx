@@ -387,8 +387,9 @@ describe("Offboard marketing routes", () => {
   it("gives employers and public partners distinct messages and CTAs", () => {
     const employerView = render(<MarketingEmployers />);
     expect(screen.getByRole("heading", { level: 1, name: /outplacement, modernized/i })).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /talk about sponsored access/i })[0]).toHaveAttribute("href", expect.stringContaining("Employer%20support"));
-    expect(screen.getByRole("link", { name: /post a role/i })).toHaveAttribute("href", expect.stringContaining("intent=recruit"));
+    const employerCtas = within(screen.getByRole("main")).getAllByRole("link", { name: /get started free/i });
+    expect(employerCtas).toHaveLength(3);
+    employerCtas.forEach((cta) => expect(cta).toHaveAttribute("href", "https://app.offboard.co/auth?tab=signup"));
     // The public-sector section left /employers for /workforce in plan 035,
     // and plan 043's launch trim took the crosslink with it: /workforce is
     // deferred, so a buyer must not be sent there from here.

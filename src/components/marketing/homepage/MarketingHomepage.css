@@ -828,7 +828,7 @@ ol.mh-employer-timeline { position: relative; display: grid; grid-template-colum
 .mh-route-sponsor-card.is-member { background: var(--mh-mist); border-color: var(--mh-mist-border); }
 .mh-route-sponsor-card.is-sponsor { background: var(--mh-paper-soft); }
 .mh-route-sponsor-card span { color: var(--mh-muted); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.mh-route-sponsor-card strong { max-width: 330px; margin-top: auto; font-family: var(--mh-font-display); font-size: 30px; font-weight: 500; letter-spacing: -.025em; line-height: 1.08; }
+.mh-route-sponsor-card strong { max-width: 330px; margin-top: 24px; font-family: var(--mh-font-display); font-size: 30px; font-weight: 500; letter-spacing: -.025em; line-height: 1.08; }
 .mh-route-sponsor-card p { max-width: 520px; margin-top: 18px; color: var(--mh-muted); font-size: 15px; line-height: 24px; }
 .mh-employer-privacy-quote { max-width: 940px; margin-top: 34px; padding: 26px 0 4px 34px; border-left: 3px solid var(--mh-forest); }
 .mh-employer-privacy-quote p { color: var(--mh-ink); font-family: var(--mh-font-display); font-size: clamp(23px, 2vw, 29px); letter-spacing: -.02em; line-height: 1.28; text-wrap: pretty; }
@@ -851,10 +851,7 @@ ol.mh-employer-reason-grid { display: grid; grid-template-columns: repeat(3, 1fr
 .mh-route-hiring-copy > p { max-width: 620px; margin-top: 22px; color: var(--mh-muted); font-size: 17px; line-height: 27px; }
 .mh-route-hiring-photo { position: relative; min-height: 480px; overflow: hidden; }
 .mh-route-hiring-photo img { object-fit: cover; object-position: center; }
-.mh-route-hiring .mh-section-link { border-bottom-color: var(--mh-ink); color: var(--mh-ink); }
-p.mh-employer-hiring-actions { display: flex; flex-wrap: wrap; align-items: baseline; gap: 16px; margin-top: 34px; }
-.mh-employer-hiring-actions .mh-section-link { margin-top: 0; }
-.mh-employer-hiring-secondary { color: var(--mh-muted); font-size: 15px; text-decoration: underline; text-underline-offset: 4px; }
+p.mh-employer-hiring-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 34px; }
 
 .mh-employer-faq { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
 .mh-employer-faq-heading { max-width: 620px; }

@@ -73,6 +73,7 @@ No transparent variant; these are photographs.
 | `site-imagery/documentary/career-context-reflection-civic-modern-v1` | A woman at her dining table with a laptop, notebook and printed pages, thinking | `/career-context` § The problem |
 | `site-imagery/documentary/first-week-paperwork-civic-modern-v1` | A woman at her kitchen table reading a printed notice, pen in hand | `/layoff-support` § The first week |
 | `site-imagery/documentary/interview-prep-at-home-civic-modern-v1` | A man at his kitchen table talking an answer through aloud | `/job-search` § The toolkit |
+| `site-imagery/documentary/employer-transition-support-civic-modern-v1` | Two colleagues reviewing a transition-support plan in a daylight office | `/employers` § The member experience |
 
 ## Rules that apply to every file here
 

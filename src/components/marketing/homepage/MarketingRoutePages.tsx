@@ -22,12 +22,11 @@ import {
   PricingSection,
   PRICING_FAQS,
   PRODUCT_FAQS,
+  SIGN_UP_URL,
   HowStepContext,
   ToolkitSection,
   VerifiedFactsStrip,
 } from "./MarketingSite";
-
-const RECRUIT_URL = "https://app.offboard.co/workspace/new?intent=recruit";
 
 const SPONSORSHIP_STEPS = [
   ["Upload a roster", "Two people or two hundred. No minimum, no contract."],
@@ -64,7 +63,7 @@ function EmployerHero() {
         <span className="mh-kicker is-lime">For employers</span>
         <h1 id="employer-hero-title">Outplacement, modernized.</h1>
         <p>Give the people you&apos;re letting go a real starting point: the modern unemployment office in their pocket. Sponsored access is self-serve, priced one-time per employee, and private by design for the people who use it.</p>
-        <a className="mh-primary-cta" href="mailto:hello@offboard.co?subject=Employer%20support"><span>Talk about sponsored access</span><ArrowRight aria-hidden="true" /></a>
+        <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Get started free</span><ArrowRight aria-hidden="true" /></a>
       </div>
       <aside className="mh-employer-hero-brief" aria-label="How sponsorship works">
         <div>
@@ -93,8 +92,8 @@ function EmployerMemberExperience() {
         <p>A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Application Packets, and human support options.</p>
       </div>
       <div className="mh-employer-member-layout" data-reveal="">
-        <div className="mh-employer-member-visual" aria-hidden="true">
-          <Image src="/marketing/homepage/renders/path-stage.webp" alt="" fill sizes="(max-width: 900px) 100vw, 48vw" />
+        <div className="mh-employer-member-visual">
+          <Image src="/marketing/site-imagery/documentary/employer-transition-support-civic-modern-v1.webp" alt="Two colleagues review a transition support plan together in a daylight office." fill sizes="(max-width: 900px) 100vw, 48vw" />
         </div>
         <ol className="mh-employer-member-list">
           {EMPLOYER_MEMBER_ITEMS.map((item, index) => (
@@ -223,8 +222,7 @@ function EmployerHiring() {
         <h2 id="employer-hiring-title">Hiring? Post roles free.</h2>
         <p>Offboard employers can post open roles at no cost. Postings reach members actively searching, with materials prepared and context attached.</p>
         <p className="mh-employer-hiring-actions">
-          <a className="mh-section-link" href={RECRUIT_URL}>Post a role <ArrowRight aria-hidden="true" /></a>
-          <a className="mh-employer-hiring-secondary" href="mailto:hello@offboard.co?subject=Hiring%20on%20Offboard">or email us</a>
+          <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Get started free</span><ArrowRight aria-hidden="true" /></a>
         </p>
       </div>
       <div className="mh-route-hiring-photo"><Image src="/marketing/homepage/raw/strip-walking-in.webp" alt="A person walking into an office building for an interview, bag on shoulder" fill sizes="(max-width: 900px) 100vw, 50vw" /></div>
@@ -251,8 +249,8 @@ function EmployerFaq() {
 function EmployerContact() {
   return (
     <section className="mh-route-contact mh-employer-contact mh-section" aria-labelledby="employer-contact-title">
-      <div><span className="mh-kicker is-lime">Sponsored access</span><h2 id="employer-contact-title">Talk about sponsoring a group.</h2></div>
-      <div><p>Tell us how many people are affected and when. Setup is self-serve, and we can walk you through it.</p><a className="mh-primary-cta" href="mailto:hello@offboard.co?subject=Employer%20support"><span>Talk about sponsored access</span><ArrowRight aria-hidden="true" /></a></div>
+      <div><span className="mh-kicker is-lime">Sponsored access</span><h2 id="employer-contact-title">Explore Offboard before you sponsor a group.</h2></div>
+      <div><p>Create a free account and try the product yourself. There is no sales call or setup required.</p><a className="mh-primary-cta" href={SIGN_UP_URL}><span>Get started free</span><ArrowRight aria-hidden="true" /></a></div>
     </section>
   );
 }
