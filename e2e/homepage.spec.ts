@@ -84,17 +84,16 @@ test.describe("Offboard marketing site", () => {
     for (const [route, heading] of routes) {
       await page.goto(route);
       await expect(page.getByRole("heading", { level: 1, name: heading })).toBeVisible();
-      // Deferred routes (plan 043) override the layout value with their own,
-      // so this asserts whichever one the route is supposed to render rather
-      // than accepting either.
-      const expectedRobots = DEFERRED_ROUTES.some((deferred) => route.startsWith(deferred))
-        ? DEFERRED_ROBOTS
-        : "noindex, nofollow, noarchive";
-      await expect(page.locator('meta[name="robots"]'), `${route} robots`).toHaveAttribute("content", expectedRobots);
+      const robots = page.locator('meta[name="robots"]');
+      if (DEFERRED_ROUTES.some((deferred) => route.startsWith(deferred))) {
+        await expect(robots, `${route} robots`).toHaveAttribute("content", DEFERRED_ROBOTS);
+      } else {
+        await expect(robots, `${route} robots`).toHaveCount(0);
+      }
     }
   });
 
-  test("publishes crawler guidance and social sharing metadata before cutover", async ({ page, request }) => {
+  test("publishes crawler guidance and social sharing metadata after launch", async ({ page, request }) => {
     const robots = await request.get("/robots.txt");
     expect(robots.status()).toBe(200);
     expect(await robots.text()).toContain("Sitemap: https://offboard.co/sitemap.xml");
@@ -102,8 +101,7 @@ test.describe("Offboard marketing site", () => {
     await page.goto("/");
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /living-room\.webp$/);
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
-    // Indexing remains a deliberate launch gate until the custom domain is live.
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow, noarchive");
+    await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
   });
 
   // Plan 043 trimmed plan 037's four tabs to three top-level links and one
@@ -263,7 +261,7 @@ test.describe("Offboard marketing site", () => {
     await page.getByRole("link", { name: /read the guide/i }).first().click();
     await expect(page).toHaveURL(/\/resources\/first-week-after-a-layoff$/);
     await expect(page.getByRole("heading", { level: 1, name: "What to do in your first week after a layoff" })).toBeVisible();
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow, noarchive");
+    await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
     expect(backendRequests).toEqual([]);
     expect(consoleErrors).toEqual([]);
   });
@@ -758,7 +756,8 @@ test("no redirect lands on a page that is hidden from search", async ({ page }) 
   for (const source of sources) {
     const response = await page.goto(source);
     expect(response?.status(), `${source} should resolve`).toBe(200);
-    const robots = await page.locator('meta[name="robots"]').getAttribute("content");
+    const robotsMeta = page.locator('meta[name="robots"]');
+    const robots = (await robotsMeta.count()) === 0 ? null : await robotsMeta.getAttribute("content");
     if (robots === DEFERRED_ROBOTS) landingOnHidden.push(`${source} -> ${new URL(page.url()).pathname}`);
   }
   expect(landingOnHidden).toEqual([]);

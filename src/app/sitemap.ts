@@ -7,11 +7,6 @@ import { DEFERRED_ROUTES, isDeferredRoute } from "@/lib/launch";
 // deliberately absent until they leave noindex (plan 038). Deliberately excludes /intake
 // and /intake/confirmed: those are a form and its transactional confirmation,
 // not content anyone should land on from search.
-//
-// This sitemap is inert while every route carries `robots: noindex` (see
-// src/app/layout.tsx) — it pre-builds the "submit the new sitemap in Search
-// Console" step in docs/cutover-checklist.md so flipping robots off is the
-// only remaining step, not also writing this file.
 const STATIC_ROUTES = ["/", "/how-it-works", "/pricing",
   "/career-context", "/integrations", "/lumo", "/layoff-support", "/application-packet", "/about", "/employers", "/workforce", "/communities", "/act", "/resources", "/privacy-security", "/companies"] as const;
 

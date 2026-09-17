@@ -23,14 +23,8 @@ export const DEFERRED_ROUTES = [
   "/companies",
 ] as const;
 
-/* Deliberately NOT the layout's "noindex, nofollow, noarchive".
- *
- * Every route inherits that value today, so an assertion that a deferred page
- * is noindexed would pass whether or not its own override is wired up — the
- * silent-fallback trap in AGENTS.md. A distinct string means
- * e2e/homepage.spec.ts can prove the per-route override is the one rendering,
- * and it keeps proving it after the operator flips the layout value at
- * cutover (docs/cutover-checklist.md).
+/* This value is owned by each deferred route. The root layout is indexable, so
+ * losing one of these overrides would expose an unfinished route to search.
  */
 export const DEFERRED_ROBOTS = "noindex, nofollow";
 

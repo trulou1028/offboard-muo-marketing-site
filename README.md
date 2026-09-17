@@ -53,8 +53,9 @@ GitHub `main` is the source of truth. Pushing a feature branch creates a Vercel
 preview. Merging a verified pull request to `main` deploys to production
 automatically:
 
-**https://offboard-muo-marketing-site.vercel.app** — the shareable team preview.
-Public (no login) but `noindex`, so it stays out of search while we build.
+**https://offboard.co** is the canonical production domain. The public
+`offboard-muo-marketing-site.vercel.app` alias serves the same deployment, and
+every route points search engines back to its canonical `offboard.co` URL.
 
 Branch pushes get their own preview URLs, but those are gated behind Vercel SSO —
 only team members signed into Vercel can open them.
@@ -72,14 +73,11 @@ Release workflow:
 4. Merge the pull request to `main`.
 5. Confirm the production deployment commit matches GitHub `main`.
 
-At launch: point `offboard.co` at this project (the apex is on Framer today) and
-flip the robots tag noted below.
-
 ## Notes
 
 - The page is deliberately backend-free — a test asserts zero network calls.
-- `robots` is `noindex, nofollow, noarchive` while the site is pre-launch; flip it
-  in [src/app/page.tsx](src/app/page.tsx) (and the test + e2e assertions) at launch.
+- Public routes are indexable. Deferred routes keep their own `noindex, nofollow`
+  metadata until they are ready to enter the sitemap.
 - `lucide-react` is pinned to the app repo's version so icon artwork matches.
 - **This page has now diverged from the app repo.** It was last synced from
   `lumo-plan-builder` commit `88751f7a`, then rebuilt here (2026-08-12) to the

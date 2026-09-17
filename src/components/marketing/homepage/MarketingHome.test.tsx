@@ -412,19 +412,12 @@ describe("Offboard marketing routes", () => {
     expect(screen.getAllByRole("link", { name: /start a partnership conversation/i })[0]).toHaveAttribute("href", expect.stringContaining("Workforce%20partnership"));
   });
 
-  it("keeps every route out of search indexes while the site is pre-launch", () => {
-    // Every page.tsx used to repeat this string in its own metadata export;
-    // it now lives once on the root layout and every route inherits it, so
-    // this asserts the single source of truth rather than 8 hand-copied ones.
-    expect(layoutMetadata.robots).toBe("noindex, nofollow, noarchive");
+  it("keeps the root layout indexable after launch", () => {
+    expect(layoutMetadata.robots).toBeUndefined();
   });
 
   it("keeps the deferred routes noindexed by their own metadata, not the layout's", () => {
-    // The operator flips the layout value at cutover; these eight pages have
-    // to stay hidden through that. Asserting the distinct DEFERRED_ROBOTS
-    // string (not merely "is it noindexed") is what makes this fail if a
-    // page loses its override and silently falls back to the layout.
-    expect(DEFERRED_ROBOTS).not.toBe(layoutMetadata.robots);
+    // These pages stay hidden after the root layout becomes indexable.
     for (const [route, metadata] of Object.entries(deferredMetadata)) {
       expect(metadata.robots, `${route} carries its own robots value`).toBe(DEFERRED_ROBOTS);
     }
