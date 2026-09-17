@@ -6,7 +6,7 @@
 // data row (eventually a Supabase column, see plan 016) rendered by
 // src/components/marketing/resources/RenderBlocks.tsx.
 //
-// Two constructs were discovered while converting the 11 ported posts that
+// Four constructs were discovered while converting the 17 ported posts that
 // the plan's initial sketch did not cover, and were added as the minimal
 // extension needed for byte-for-byte fidelity (see ArticleFidelity.test.tsx):
 //
@@ -17,10 +17,11 @@
 // 2. The `h2` block carries an optional `id`. GuideH2 accepts an optional
 //    `id` prop that becomes the heading's DOM id (used for anchor links in
 //    that same post); omitting it would silently drop a real HTML attribute.
+// 3. `code` preserves the founder essays' inline code styling.
+// 4. An inline `list` preserves the one nested list in the founder essays.
 //
-// No other extension was needed: the corpus's vocabulary is exactly
-// p / h2 / h3 / list / callout / blockquote / divider / inline b / i / a / br,
-// confirmed by a full read of all 11 posts during the plan 015 conversion.
+// The corpus's vocabulary is now exactly p / h2 / h3 / list / callout /
+// blockquote / divider / inline b / i / a / code / nested list / br.
 
 import { z } from "zod";
 
@@ -31,6 +32,8 @@ export type InlineRun =
   | { b: InlineRun[] }
   | { i: InlineRun[] }
   | { a: { text: string; href: string } }
+  | { code: string }
+  | { list: { ordered: boolean; items: InlineRun[][] } }
   | { br: true };
 
 const inlineRunSchema: z.ZodType<InlineRun> = z.lazy(() =>
@@ -39,6 +42,13 @@ const inlineRunSchema: z.ZodType<InlineRun> = z.lazy(() =>
     z.object({ b: z.array(inlineRunSchema) }),
     z.object({ i: z.array(inlineRunSchema) }),
     z.object({ a: z.object({ text: z.string(), href: z.string() }) }),
+    z.object({ code: z.string() }),
+    z.object({
+      list: z.object({
+        ordered: z.boolean(),
+        items: z.array(z.array(inlineRunSchema)),
+      }),
+    }),
     z.object({ br: z.literal(true) }),
   ]),
 );

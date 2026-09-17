@@ -89,10 +89,10 @@ const nextConfig: NextConfig = {
       { source: "/terms", destination: "https://app.offboard.co/terms", permanent: true },
       { source: "/user-account", destination: "https://app.offboard.co/", permanent: true },
       { source: "/update-password", destination: "https://app.offboard.co/", permanent: true },
-      // The 7 per-slug /resources/<essay> redirects that used to live here
-      // (plan 013) are gone as of plan 016: those slugs are now seeded as
-      // `retired` posts in the CMS, and src/app/resources/[slug]/page.tsx
-      // issues the same permanent redirect at the route level (via
+      // Per-slug /resources redirects that used to live here are gone as of
+      // plan 016. A slug retained as `retired` in the CMS, currently the
+      // Alameda policy article, receives the same permanent redirect from
+      // src/app/resources/[slug]/page.tsx at the route level (via
       // permanentRedirect() from next/navigation) after looking up the
       // slug's status — see docs/cms-architecture.md "One publish state,
       // not three" and "Decisions" #3.

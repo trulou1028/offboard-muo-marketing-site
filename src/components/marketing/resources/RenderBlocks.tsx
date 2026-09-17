@@ -42,6 +42,18 @@ function renderInlineRun(run: InlineRun, key: number): ReactNode {
       </em>
     );
   }
+  if ("code" in run) {
+    return <code key={key}>{run.code}</code>;
+  }
+  if ("list" in run) {
+    return (
+      <GuideList
+        key={key}
+        ordered={run.list.ordered}
+        items={run.list.items.map((runs) => renderRunsFlat(runs))}
+      />
+    );
+  }
   // "a" in run
   return (
     <GuideLink key={key} href={run.a.href}>

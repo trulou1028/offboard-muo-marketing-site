@@ -443,17 +443,22 @@ describe("Offboard marketing routes", () => {
   });
 
   it("gives resources a real library with local article routes", () => {
-    render(<MarketingResources sections={buildResourceSections()} />);
+    const { container } = render(<MarketingResources sections={buildResourceSections()} />);
 
     expect(screen.getByRole("heading", { level: 1, name: "Guides & resources" })).toBeInTheDocument();
     expect(screen.getByText(/reported essays, practical guides/i)).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2, name: "Guides" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2, name: "AI & Technology" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "Essays" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "What to do in your first week after a layoff" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "This Is Not Charity. It Is Reconstruction." })).toBeInTheDocument();
 
     const guideLink = screen.getAllByRole("link", { name: /read the guide/i })[0];
     expect(guideLink).toHaveAttribute("href", "/resources/first-week-after-a-layoff");
     expect(screen.queryByText(/https:\/\/offboard\.co\/resources/)).not.toBeInTheDocument();
+    expect(
+      container.querySelector('a[href="/resources/this-is-not-charity-it-is-reconstruction"]'),
+    ).toBeInTheDocument();
   });
 
   it("renders a ported article page with its title and body content", () => {

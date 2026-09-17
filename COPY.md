@@ -33,7 +33,7 @@ resolves. The A/B variants that already exist on record are listed in
 | Per-route page compositions and route-only sections | `src/components/marketing/homepage/MarketingRoutePages.tsx` |
 | Homepage composition | `src/components/marketing/homepage/MarketingHome.tsx` |
 | Article registry (titles, excerpts, categories, guest authors) | `src/content/resources/registry.ts` |
-| Article bodies (11 ported, verbatim from legacy site) | `src/content/resources/posts/*.tsx` |
+| Article bodies (17 ported from the legacy site) | `src/content/resources/blocks/*.json` |
 | Page metadata (titles, descriptions) | `src/app/*/page.tsx` |
 | Intake form copy | `src/components/marketing/intake/IntakeForm.tsx` |
 | Redirect map | `next.config.ts` |
@@ -1029,10 +1029,10 @@ Category descriptions:
 
 - **Guides** — `Practical, calm how-tos for the moments right after a layoff.`
 - **AI & Technology** — `Clear explainers on AI, agents, and how hiring is actually changing.`
-- **Essays** — `Founder notes on layoffs, work, and why Offboard exists.` *(none ported yet)*
+- **Essays** — `Founder notes on layoffs, work, and why Offboard exists.`
 - **Policy & Accountability** — `Reported opinion on how public money meets (or misses) laid-off workers, and what measurable accountability looks like.` *(none ported yet)*
 
-**Ported (11 local articles, prose byte-faithful from the legacy site):**
+**Ported (17 local articles, prose preserved from the legacy site):**
 Guides — What to do in your first week after a layoff · How to read and
 negotiate your severance · Rebuild your resume after a layoff · The Career
 Changer's Guide to Job Offer Negotiations *(guest post: Gerta & Alex,
@@ -1041,11 +1041,15 @@ a layoff: COBRA, ACA, and the cheaper options people miss · How to announce a
 layoff on LinkedIn (with three templates) · Best job application trackers in
 2026. AI & Technology — How AI Is Changing the Job Search in 2026 · What Is
 an AI Agent? · The 7 Levels of AI Agent Capability · Will employers know your
-cover letter is AI?
+cover letter is AI? Essays — This Is Not Charity. It Is Reconstruction. · A
+Series of Fortunate Events · They Think an Idea is Bulletproof. They Are
+Wrong. · We Forgot to Reinforce the Foundations · The Mentor Trap: A Silicon
+Valley Horror Story · The Valley's Hypocrisy Hustle Exposed by the
+Overemployed.
 
-**Not ported (7 slugs 301 to `/resources` until Steph's editorial pass):**
-the six founder essays + the Alameda D2 policy piece. Their registry entries
-(and original punctuation) are preserved for when they return.
+**Not ported (1 slug redirects to `/resources` until Steph's editorial pass):**
+the Alameda D2 policy piece. Its registry entry is preserved for when it
+returns.
 
 ### Article page chrome *(plan 017)*
 
@@ -2285,8 +2289,8 @@ and the page says so in its summary line rather than implying one.
 `/#community` · `/founder-story` → `/about` · `/security` → `/privacy-security` ·
 `/for-organizations`, `/for-recruiters` → `/employers` ·
 `/public-partners` → `/workforce` (plan 035) · `/gift` → `/pricing`
-· `/tools`, `/tools/:slug*` → `/resources` · 7 unported essay/policy slugs →
-`/resources`. Kept live, no redirect: `/intake`, `/act`.
+· `/tools`, `/tools/:slug*` → `/resources` · the unported Alameda policy slug
+→ `/resources`. Kept live, no redirect: `/intake`, `/act`.
 
 `/public-partners` → `/workforce` shipped in plan 035, in the same PR as
 `/workforce` itself (owner decision 2026-09-01, plan 026 decision 1). The
@@ -2314,8 +2318,8 @@ When one ships, move it into its page section above.
 3. **Logos band** (v7): `Our members come from teams at` Snowflake · Airtable
    · Autodesk · GoPro · General Motors · YouTube. **Blocked on owner
    verifying the membership claims are current and safe to publish.**
-4. **The 6 founder essays + Alameda policy piece** on `/resources` — blocked
-   on Steph's editorial pass; registry entries preserved.
+4. **Alameda policy piece** on `/resources` — blocked on Steph's editorial
+   pass; its registry entry is preserved.
 5. **State-by-state program pages** (`What [state] owes you after a layoff`)
    — held per strategy docs, gated on an SEO reality check and revenue; see
    `docs/content-roadmap.md`.

@@ -15,8 +15,8 @@
  * migration file's policy comment): a `ported: true` entry becomes
  * `published` with its body from blocks/<slug>.json. A `ported: false`
  * entry becomes `retired`, not `draft` — these 7 slugs are the site's
- * existing unported essays/policy pieces, which next.config.ts currently
- * 301-redirects to /resources today (plan 013). Seeding them as `retired`
+ * existing unported policy pieces, which the article route currently
+ * redirects to /resources today (plan 013). Seeding them as `retired`
  * (body: []) preserves that redirect behavior once plan 016 step 4 deletes
  * the per-slug next.config.ts entries in favor of route-level status
  * handling; seeding them as `draft` would silently turn a 301 into a 404 the

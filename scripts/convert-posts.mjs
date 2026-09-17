@@ -35,8 +35,16 @@ import { fileURLToPath } from "node:url";
 import ts from "typescript";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const POSTS_DIR = path.join(__dirname, "..", "src", "content", "resources", "posts");
+const POSTS_DIR = process.env.RESOURCE_POSTS_DIR
+  ? path.resolve(process.env.RESOURCE_POSTS_DIR)
+  : path.join(__dirname, "..", "src", "content", "resources", "posts");
 const BLOCKS_DIR = path.join(__dirname, "..", "src", "content", "resources", "blocks");
+const ONLY_SLUGS = new Set(
+  (process.env.RESOURCE_POST_SLUGS ?? "")
+    .split(",")
+    .map((slug) => slug.trim())
+    .filter(Boolean),
+);
 
 const FRAGMENT = Symbol("Fragment");
 
@@ -67,6 +75,7 @@ const MODULE_STUBS = {
     Fragment: FRAGMENT,
   },
   [GUIDE_ARTICLE_MODULE_PATH]: GUIDE_STUBS,
+  "@/components/guide-article": GUIDE_STUBS,
 };
 
 function compileAndRun(filePath) {
@@ -133,6 +142,17 @@ function toInlineRuns(children) {
   if (children.type === "br") {
     return [{ br: true }];
   }
+  if (children.type === "code") {
+    return [{ code: textOnly(children.props.children) }];
+  }
+  if (children.type === "GuideList") {
+    return [{
+      list: {
+        ordered: Boolean(children.props.ordered),
+        items: children.props.items.map((item) => toInlineRuns(item)),
+      },
+    }];
+  }
   if (children.type === "GuideLink") {
     return [{ a: { text: textOnly(children.props.children), href: children.props.href } }];
   }
@@ -146,6 +166,9 @@ function textOnly(children) {
   if (typeof children === "number") return String(children);
   if (Array.isArray(children)) return children.map(textOnly).join("");
   if (isNode(children) && children.type === FRAGMENT) return textOnly(children.props.children);
+  if (isNode(children) && (children.type === "strong" || children.type === "em")) {
+    return textOnly(children.props.children);
+  }
   throw new Error(`Expected plain text, got: ${JSON.stringify(children)}`);
 }
 
@@ -194,7 +217,10 @@ function convertOne(filePath, slug) {
 }
 
 function main() {
-  const files = readdirSync(POSTS_DIR).filter((f) => f.endsWith(".tsx"));
+  const files = readdirSync(POSTS_DIR).filter((file) => {
+    if (!file.endsWith(".tsx")) return false;
+    return ONLY_SLUGS.size === 0 || ONLY_SLUGS.has(file.replace(/\.tsx$/, ""));
+  });
   for (const file of files) {
     const slug = file.replace(/\.tsx$/, "");
     const filePath = path.join(POSTS_DIR, file);

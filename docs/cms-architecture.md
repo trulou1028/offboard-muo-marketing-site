@@ -214,12 +214,12 @@ create table posts (
 - `body jsonb not null` is exactly the shape of `Block[]` as defined in
   `src/content/resources/schema.ts:50-63` (and validated by
   `parsePostBody` in that same file, `:94-107`) — the same shape already
-  living in every file under `src/content/resources/blocks/*.json` since
-  plan 015 converted the 11 ported posts from TSX components to this JSON
-  block format. No transformation is needed between a block file's contents
-  and this column's value.
+  living in every file under `src/content/resources/blocks/*.json`. Plan 015
+  converted the original 11 posts from TSX components, and the six founder
+  essays later joined them in the same JSON block format. No transformation
+  is needed between a block file's contents and this column's value.
 - The `image` (`schema.ts:60`) and `cta` (`schema.ts:63`) block types are
-  already defined in that schema but are **unused by all 11 current posts**
+  already defined in that schema but are **unused by all 17 current posts**
   (per the comment at `schema.ts:58-63`, added for the content roadmap's
   planned funnel articles). Because `body` is schemaless jsonb, no migration
   will be needed when a future article actually uses an `image` or `cta`
