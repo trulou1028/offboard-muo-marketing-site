@@ -95,8 +95,8 @@ disaster.
 - [x] **Done 2026-09-14.** **`/tools/offboard-ghost-job-checker` — 10 clicks from 32 impressions, a
       31% clickthrough.** The best-converting page on the whole site, and it is
       Offboard's own product. It currently redirects to `/resources`. Send it,
-      `/tools/offboard-job-packets` and `/tools/offboard-lumo` to `/job-search`
-      and `/lumo`. Three rules.
+      `/tools/offboard-job-packets` to `/application-packet`, and
+      `/tools/offboard-lumo` to `/lumo`. Three rules.
 - [x] **Done 2026-09-14**, and verified by requesting every one of the 42.
       Four garbled slugs are left 404ing on purpose: they are Google's own
       URL guesses at the cover-letter article, one impression each, no clicks.
@@ -158,8 +158,8 @@ that value is lost unless the destination is genuinely equivalent.
 - [x] **Done 2026-09-15. Owner ruled out un-deferring `/how-it-works`**, so the
       four were repointed at the live page that answers the same question:
       `/product` → `/#how-it-works` (the homepage's four-step strip is that
-      story now), `/why-offboard` → `/about`, `/job-packet` → `/job-search`
-      (the Application Packet has its own band there since plan 051), and
+      story now), `/why-offboard` → `/about`, `/job-packet` →
+      `/application-packet`, and
       `/faq` → `/about#faq`, whose "Fair questions" is the live general FAQ and
       shares a question word for word with the hidden page's. `/product/:slug*`
       follows its parent. **`e2e/homepage.spec.ts` now walks every redirect
@@ -169,7 +169,7 @@ that value is lost unless the destination is genuinely equivalent.
 - [ ] **Three of the collapsed tool pages are Offboard's own products.**
       `/tools/offboard-lumo`, `/tools/offboard-job-packets` and
       `/tools/offboard-ghost-job-checker` currently land on `/resources`.
-      `/lumo` and `/job-search` are their subjects. Three redirect rules.
+      `/lumo` and `/application-packet` are their subjects. Three redirect rules.
 - [x] **Done 2026-09-14.** Every route declares its own canonical on
       `https://offboard.co`, and `e2e/homepage.spec.ts` checks the rendered tag
       on all 20. `metadataBase` is in the root layout; the canonical is per

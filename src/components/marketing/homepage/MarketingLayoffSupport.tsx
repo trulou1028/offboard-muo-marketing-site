@@ -9,6 +9,7 @@ import {
   SIGN_UP_URL,
   VerifiedFactsStrip,
 } from "./MarketingSite";
+import { LayeredProductHero } from "./LayeredProductHero";
 
 /* Layoff & Benefits pillar page (plan 030, rebuilt by plan 041). The strategy
    doc calls this the strategically important one: without it the product
@@ -220,7 +221,12 @@ export function MarketingLayoffSupport() {
           title="Losing your job creates a lot of problems at once."
           body="The job search is the visible one. Underneath it are benefit deadlines, health coverage decisions, a shrinking runway, and paperwork written for an agency rather than for you. Offboard helps you take them in the order that matters to you."
           current="layoff-support"
-          visual={<Shot plain src="/marketing/site-imagery/product-compositions/first-week-plan-civic-modern-v1-transparent.webp" alt="A first-week plan card: review the separation agreement, file the unemployment claim, check health coverage and save key deadlines, with two deadlines saved and the paperwork marked reviewed" width={1536} height={1024} />}
+          visual={(
+            <LayeredProductHero
+              variant="first-week"
+              label="A layered Offboard first-week plan for paperwork, benefits, health coverage, and deadlines"
+            />
+          )}
           cta="Get started free"
         />
         <FirstWeek />
@@ -231,7 +237,7 @@ export function MarketingLayoffSupport() {
         <VerifiedFactsStrip />
         <StraightAnswers />
         <AlsoStrip items={[
-          { title: "When the paperwork is handled, the search is still there.", body: "Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other.", href: "/job-search", cta: "See how the search runs" },
+          { title: "When the paperwork is handled, the application is still there.", body: "Offboard keeps the money side and the application side in the same place, so the work you do on one does not get lost when you turn to the other.", href: "/application-packet", cta: "See the Application Packet" },
           { title: "It all lands in one record.", body: "Your situation, your dates, your documents, and every decision you make here become part of your Career Context, so the search starts from what actually happened.", href: "/career-context", cta: "See what it holds" },
         ]} />
         <FinalCta

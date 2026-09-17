@@ -34,7 +34,7 @@ export type MarketingRoute =
   | "integrations"
   | "lumo"
   | "layoff-support"
-  | "job-search"
+  | "application-packet"
   | "privacy-security";
 
 const HUMAN_STEPS = [
@@ -151,7 +151,7 @@ export function MarketingFooter({ current }: { current: MarketingRoute }) {
             <strong>Product</strong>
             <Link href="/career-context">Career Context</Link>
             <Link href="/lumo">Lumo</Link>
-            <Link href="/job-search">Job Search</Link>
+            <Link href="/application-packet">Application Packet</Link>
             <Link href="/integrations">Integrations</Link>
             <Link href="/layoff-support">Layoff &amp; Benefits</Link>
             <Link href="/pricing">Pricing</Link>
@@ -286,7 +286,8 @@ export function NumberedRows({ rows }: { rows: readonly (readonly [string, strin
  * The obvious bigger rule - never end a line on a short function word, glued
  * with non-breaking spaces - was built, measured and thrown away. Every glued
  * pair is an unbreakable run, so the longest run sets the effective measure
- * and the headline gains lines rather than losing bad breaks: `/job-search`
+ * and the headline gains lines rather than losing bad breaks: the former
+ * `/job-search` headline
  * went from a clean two lines to three, `/career-context` to four. The
  * measurement is in the commit that removed it.
  *
@@ -921,7 +922,7 @@ const COMMUNITY_ROWS = [
     title: "Slack community",
     body: "Job seekers sharing leads, asking questions, and keeping each other accountable.",
     cta: "Join the Slack",
-    href: "https://offboard.co/community",
+    href: "https://join.slack.com/t/offboardco/shared_invite/zt-34fsjpgfn-BcbibJ3d86P5RztYnHsA9w",
     note: "Free to join",
   },
 ] as const;

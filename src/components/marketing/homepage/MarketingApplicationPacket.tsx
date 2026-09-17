@@ -6,11 +6,12 @@ import {
   FinalCta,
   MarketingShell,
   PageHero,
-  Shot,
 } from "./MarketingSite";
+import { LayeredProductHero } from "./LayeredProductHero";
 
-/* Job Search pillar page (plan 031, the last of phase 2).
-
+/* Application Packet pillar page. It began as the Job Search page in plan
+   031, then became the canonical home for the packet in plan 051. The route
+   now names the product that already carries most of the page's substance.
    Owner direction 2026-09-02 inverted the split with the homepage: the
    homepage now names the ten tools and THIS page describes them, because a
    reader who wants the detail is already on their way here. The ten
@@ -57,8 +58,8 @@ function PacketBand() {
     <section className="mh-packet mh-section" aria-labelledby="packet-title">
       <div className="mh-split">
         <div className="mh-copy-block">
-          <span className="mh-kicker">Application Packet</span>
-          <h2 id="packet-title">Paste the posting. The packet does the rest.</h2>
+          <span className="mh-kicker">Inside the packet</span>
+          <h2 id="packet-title">The role, the research, and what you send, connected.</h2>
           <p>One link becomes a company brief, a fit read, and the materials you send, all kept with the role instead of scattered across six tabs.</p>
         </div>
         <figure className="mh-packet-visual">
@@ -123,9 +124,9 @@ function Stages() {
     <section className="mh-kit mh-section" aria-labelledby="stages-title">
       <div className="mh-split">
         <div className="mh-copy-block">
-          <span className="mh-kicker">The toolkit</span>
-          <h2 id="stages-title">Four stages, and what each one decides.</h2>
-          <p>Every tool reads from your Career Context and writes back to it, so the tenth application starts further ahead than the first.</p>
+          <span className="mh-kicker">After you apply</span>
+          <h2 id="stages-title">The packet keeps working after you send it.</h2>
+          <p>The same record follows the role into interviews and follow-up, so the tenth application starts further ahead than the first.</p>
         </div>
         {/* Plan 046: the first photograph on this page, at the human moment
             the stages lead to. */}
@@ -158,28 +159,33 @@ function Stages() {
   );
 }
 
-export function MarketingJobSearch() {
+export function MarketingApplicationPacket() {
   return (
-    <MarketingShell current="job-search">
+    <MarketingShell current="application-packet">
       <main id="main-content">
         <PageHero
-          kicker="Job search"
-          title="A job search that works as one system."
-          body="Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, so nothing has to be re-explained at the next step. The tenth application takes less effort than the first."
-          current="job-search"
-          visual={<Shot plain src="/marketing/homepage/graphics-civic-modern/application-packet-civic-modern-v1-transparent.webp" alt="An Application Packet card: company intel, role match and tailored resume all ticked, a strong-fit reading, and the packet marked ready for review" width={1536} height={1024} />}
+          kicker="Application Packet"
+          title="One job link. An entire Application Packet."
+          body="Offboard reads the role, checks the company and fit, and builds the materials around your Career Context. Your first complete packet runs every step free."
+          current="application-packet"
+          visual={(
+            <LayeredProductHero
+              variant="application-packet"
+              label="A layered Offboard Application Packet with company intel, role match, and a tailored resume"
+            />
+          )}
           cta="Get started free"
         />
         <PacketBand />
         <Stages />
-        <FaqSection title="Straight answers about the search." items={JOB_SEARCH_FAQS} />
+        <FaqSection title="Straight answers about Application Packets." items={JOB_SEARCH_FAQS} />
         <AlsoStrip items={[
           { title: "The last step feeds the first.", body: "Every stage reads from your Career Context and writes back to it: what you learn in one interview is already there for the next application.", href: "/career-context", cta: "See what your Career Context holds" },
           { title: "Ask about the whole search, not one application.", body: "Lumo works from every stage at once, so it can tell you what needs attention today and what pattern it sees across your search.", href: "/lumo", cta: "See how Lumo works" },
         ]} />
         <FinalCta
-          title="Run the whole search in one place."
-          body="Start with the role in front of you, and let everything you learn stay where the next application can use it."
+          title="Start with one job link."
+          body="Build the first complete packet free, then keep every role, decision, and next step connected."
         />
       </main>
     </MarketingShell>

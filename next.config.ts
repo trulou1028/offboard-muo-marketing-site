@@ -22,8 +22,10 @@ const nextConfig: NextConfig = {
       // four-step strip is that story now, and `#how-it-works` is its id.
       { source: "/product", destination: "/#how-it-works", permanent: true },
       { source: "/why-offboard", destination: "/about", permanent: true },
-      // The Application Packet has its own band on /job-search since plan 051.
-      { source: "/job-packet", destination: "/job-search", permanent: true },
+      // The former /job-search page became the product-led Application Packet
+      // page. Keep every older entry point on one permanent destination.
+      { source: "/job-search", destination: "/application-packet", permanent: true },
+      { source: "/job-packet", destination: "/application-packet", permanent: true },
       // /about's "Fair questions" is the live general FAQ, and one of its five
       // questions is word for word one of the hidden page's.
       { source: "/faq", destination: "/about#faq", permanent: true },
@@ -43,8 +45,8 @@ const nextConfig: NextConfig = {
       // months to 2026-09-14). The ghost checker is the best-converting page
       // on the whole site - 10 clicks from 32 impressions, a 31% clickthrough
       // - and it was landing on the guides index.
-      { source: "/tools/offboard-ghost-job-checker", destination: "/job-search", permanent: true },
-      { source: "/tools/offboard-job-packets", destination: "/job-search", permanent: true },
+      { source: "/tools/offboard-ghost-job-checker", destination: "/application-packet", permanent: true },
+      { source: "/tools/offboard-job-packets", destination: "/application-packet", permanent: true },
       { source: "/tools/offboard-lumo", destination: "/lumo", permanent: true },
       { source: "/tools/:slug*", destination: "/resources", permanent: true },
       { source: "/tool-directory", destination: "/resources", permanent: true },
@@ -71,8 +73,8 @@ const nextConfig: NextConfig = {
       { source: "/resources/will-employers-know-your-cover-letter-is-ai", destination: "/resources/will-employers-know-cover-letter-is-ai", permanent: true },
       // Subject matches, not nearest-page guesses.
       { source: "/layoff-checklist", destination: "/layoff-support", permanent: true },
-      { source: "/job-packet-agent", destination: "/job-search", permanent: true },
-      { source: "/ai-job-matchmaker", destination: "/job-search", permanent: true },
+      { source: "/job-packet-agent", destination: "/application-packet", permanent: true },
+      { source: "/ai-job-matchmaker", destination: "/application-packet", permanent: true },
       { source: "/gpt", destination: "/integrations", permanent: true },
       { source: "/mission", destination: "/about", permanent: true },
       { source: "/for-teams", destination: "/employers", permanent: true },

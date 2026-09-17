@@ -10,7 +10,7 @@ import { buildResourceSections } from "@/content/resources/registry";
 
 import { MarketingCareerContext } from "./MarketingCareerContext";
 import { MarketingIntegrations } from "./MarketingIntegrations";
-import { MarketingJobSearch } from "./MarketingJobSearch";
+import { MarketingApplicationPacket } from "./MarketingApplicationPacket";
 import { MarketingLayoffSupport } from "./MarketingLayoffSupport";
 import { MarketingLumo } from "./MarketingLumo";
 import { MarketingPrivacySecurity } from "./MarketingPrivacySecurity";
@@ -157,7 +157,7 @@ describe("verified-facts ledger matches shipped copy", () => {
     // rewrite did not quietly reintroduce the search as a headline topic.
     it("keeps the job search to its own band, not the benefits sections", () => {
       const text = renderedText(<MarketingLayoffSupport />);
-      expect(text).toContain("When the paperwork is handled, the search is still there.");
+      expect(text).toContain("When the paperwork is handled, the application is still there.");
       expect(text).not.toContain("How do I find another job?");
     });
   });
@@ -378,7 +378,7 @@ const SWEPT_PAGES: ReadonlyArray<[string, () => ReactElement]> = [
   ["MarketingIntegrations", () => <MarketingIntegrations />],
   ["MarketingLumo", () => <MarketingLumo />],
   ["MarketingLayoffSupport", () => <MarketingLayoffSupport />],
-  ["MarketingJobSearch", () => <MarketingJobSearch />],
+  ["MarketingApplicationPacket", () => <MarketingApplicationPacket />],
   ["MarketingPrivacySecurity", () => <MarketingPrivacySecurity />],
   ["MarketingHowItWorks", () => <MarketingHowItWorks />],
   ["MarketingPricing", () => <MarketingPricing />],
@@ -413,7 +413,7 @@ describe("plan 042: the retired numbered grid stays retired", () => {
   it.each([
     ["MarketingCareerContext", () => <MarketingCareerContext />, "Every time you explain yourself to a new tool"],
     ["MarketingLumo", () => <MarketingLumo />, "You spend the conversation on the decision instead of on context"],
-    ["MarketingJobSearch", () => <MarketingJobSearch />, "The tenth application takes less effort than the first"],
+    ["MarketingApplicationPacket", () => <MarketingApplicationPacket />, "the tenth application starts further ahead than the first"],
   ] as const)("%s keeps its contrast payoff line", (_name, factory, payoff) => {
     expect(renderedText(factory())).toContain(payoff);
   });
@@ -494,7 +494,7 @@ describe("language rules hold on shipped pages", () => {
     ["MarketingIntegrations", () => <MarketingIntegrations />],
     ["MarketingLumo", () => <MarketingLumo />],
     ["MarketingLayoffSupport", () => <MarketingLayoffSupport />],
-    ["MarketingJobSearch", () => <MarketingJobSearch />],
+    ["MarketingApplicationPacket", () => <MarketingApplicationPacket />],
     ["MarketingPrivacySecurity", () => <MarketingPrivacySecurity />],
     ["MarketingAbout", () => <MarketingAbout />],
     ["MarketingAct", () => <MarketingAct />],
