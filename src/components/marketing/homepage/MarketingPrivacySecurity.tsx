@@ -254,8 +254,8 @@ function ConnectedAssistants() {
       <div className="mh-copy-block">
         <span className="mh-kicker">Connected assistants</span>
         <h2 id="connected-title">A connection you authorize sends your record somewhere we do not run.</h2>
-        <p>Offboard can connect to assistants you already use. When you authorize one, the parts of your record you allow are read into that conversation, and from that point the conversation lives in your account with that provider, under that provider&apos;s terms. Offboard&apos;s own retention terms cover the requests Offboard makes, not the ones you make inside someone else&apos;s product.</p>
-        <p>A connection is scoped to what you authorize, and you can end it at any time. Your record stays with Offboard.</p>
+        <p>Offboard can connect to assistants you already use. Each one gets its own access level: full access, read only, or off. Full access can read and update your account and run tools that spend credits. Read only can see your account but cannot change it or spend credits.</p>
+        <p>From that point, the conversation lives in your account with that provider, under that provider&apos;s terms. You can change or turn off access at any time in Settings. Your record stays with Offboard.</p>
         <Link className="mh-section-link" href="/integrations">See how connections work <ArrowRight aria-hidden="true" /></Link>
       </div>
     </section>

@@ -21,7 +21,7 @@ import { getPostBlocks } from "@/content/resources/blocks";
 import { buildResourceSections, getResource } from "@/content/resources/registry";
 
 import MarketingHome from "./MarketingHome";
-import { MarketingJobSearch } from "./MarketingJobSearch";
+import { MarketingApplicationPacket } from "./MarketingApplicationPacket";
 
 // Keyed by route so the "every deferred route is covered" assertion below
 // fails when a page joins src/lib/launch.ts without being imported here.
@@ -74,7 +74,7 @@ describe("Offboard marketing routes", () => {
     expect(
       Array.from(document.querySelectorAll(".mh-community-cards h3")).map((h) => h.textContent),
     ).toEqual(["Meet with a human", "The Offboard Newsletter", "Slack community"]);
-    expect(screen.getByRole("link", { name: /join the slack/i })).toHaveAttribute("href", "https://offboard.co/community");
+    expect(screen.getByRole("link", { name: /join the slack/i })).toHaveAttribute("href", "https://join.slack.com/t/offboardco/shared_invite/zt-34fsjpgfn-BcbibJ3d86P5RztYnHsA9w");
     expect(screen.getByRole("heading", { name: /you don't need another place to start over/i })).toBeInTheDocument();
 
     // The four steps are the page's spine, in the app's order (plan 050:
@@ -205,7 +205,7 @@ describe("Offboard marketing routes", () => {
       ["Career Context", "/career-context"],
       ["Lumo", "/lumo"],
       ["Integrations", "/integrations"],
-      ["Job Search", "/job-search"],
+      ["Application Packet", "/application-packet"],
       ["Layoff & Benefits", "/layoff-support"],
       ["For Employers", "/employers"],
       ["Pricing", "/pricing"],
@@ -214,6 +214,7 @@ describe("Offboard marketing routes", () => {
       ["About", "/about"],
       ["Visit Us", "/intake"],
       ["The Offboard Newsletter", "https://newsletter.offboard.co"],
+      ["What to do in your first week after a layoff", "/resources/first-week-after-a-layoff"],
     ] as const) {
       const matches = within(headerNav).getAllByRole("link", { name: new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`), hidden: true });
       expect(matches.length, `${name} in the header nav`).toBeGreaterThan(0);
@@ -236,8 +237,11 @@ describe("Offboard marketing routes", () => {
     }
   });
 
-  it("gives job search the packet steps, the stage rows, and plain answers", () => {
-    render(<MarketingJobSearch />);
+  it("gives the Application Packet its steps, follow-through rows, and plain answers", () => {
+    render(<MarketingApplicationPacket />);
+
+    expect(screen.getByRole("heading", { level: 1, name: /One job link\. An entire Application.Packet\./ })).toBeInTheDocument();
+    expect(screen.getAllByText(/your first complete packet runs every step free/i).length).toBeGreaterThanOrEqual(2);
 
     // The six rows are the app's own packet steps, in the app's order. A chip
     // per row says whether Free covers it: two free, four Pro (owner decision
@@ -251,7 +255,6 @@ describe("Offboard marketing routes", () => {
     // times a month, so the chip carries the allowance instead.
     const chips = Array.from(document.querySelectorAll(".mh-packet-steps .mh-state-chip")).map((c) => c.textContent);
     expect(chips).toEqual(["3 a month", "Free", "Free", "Pro", "Pro", "Pro"]);
-    expect(screen.getByText(/your first complete packet runs every step free/i)).toBeInTheDocument();
     expect(screen.getByText(/basic ghost checks carry on at three a month/i)).toBeInTheDocument();
 
     // The four stages are rows now, not four columns, and they carry the ten

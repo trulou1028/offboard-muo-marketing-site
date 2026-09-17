@@ -54,7 +54,7 @@ do framing work.
 
 | File | Shows | Placed on |
 | --- | --- | --- |
-| `homepage/graphics-civic-modern/application-packet-civic-modern-v1` | An Application Packet: company intel, role match and tailored resume ticked, a strong-fit reading, ready for review | `/job-search` hero |
+| `homepage/graphics-civic-modern/application-packet-civic-modern-v1` | An Application Packet: company intel, role match and tailored resume ticked, a strong-fit reading, ready for review | **unplaced** - superseded by the live layered composition on `/application-packet` |
 | `homepage/graphics-civic-modern/benefits-summary-civic-modern-v1` | A benefits summary: California training benefits as a possible match, file the claim first, time-sensitive, sourced to California EDD | `/layoff-support` § The money side |
 | `homepage/graphics-civic-modern/lumo-interview-context-civic-modern-v1` | A Lumo exchange about preparing for an interview, with the sources it used and the brief marked ready | **unplaced** |
 | `homepage/graphics-civic-modern/lumo-opportunity-context-civic-modern-v2-transparent` | A Figma opportunity comparison that brings role, resume and interview-note context into one recommendation and updated application state | Homepage § Talk with Lumo and `/lumo` hero |
@@ -62,7 +62,7 @@ do framing work.
 | `site-imagery/product-compositions/career-context-sources-civic-modern-v2` | A Career Context card: 71 of 100, the four record rows, and the sources it is built from | **unplaced** — superseded by the cleaner v3 below |
 | `site-imagery/product-compositions/career-context-card-civic-modern-v3-transparent` | A layered Career Context card with four record rows, a resume and interview notes | `/career-context` hero |
 | `site-imagery/product-compositions/connected-tools-permissions-civic-modern-v1` | Connected tools with their scopes, permission granted, revocable at any time | `/integrations` § Permissions |
-| `site-imagery/product-compositions/first-week-plan-civic-modern-v1` | A first-week plan: separation agreement, unemployment claim, health coverage, key deadlines | `/layoff-support` hero |
+| `site-imagery/product-compositions/first-week-plan-civic-modern-v1` | A first-week plan: separation agreement, unemployment claim, health coverage, key deadlines | **unplaced** - superseded by the live layered composition on `/layoff-support` |
 
 ## Documentary photography
 
@@ -72,7 +72,7 @@ No transparent variant; these are photographs.
 | --- | --- | --- |
 | `site-imagery/documentary/career-context-reflection-civic-modern-v1` | A woman at her dining table with a laptop, notebook and printed pages, thinking | `/career-context` § The problem |
 | `site-imagery/documentary/first-week-paperwork-civic-modern-v1` | A woman at her kitchen table reading a printed notice, pen in hand | `/layoff-support` § The first week |
-| `site-imagery/documentary/interview-prep-at-home-civic-modern-v1` | A man at his kitchen table talking an answer through aloud | `/job-search` § The toolkit |
+| `site-imagery/documentary/interview-prep-at-home-civic-modern-v1` | A man at his kitchen table talking an answer through aloud | `/application-packet` hero and follow-through section |
 | `site-imagery/documentary/employer-transition-support-civic-modern-v1` | Two colleagues reviewing a transition-support plan in a daylight office | `/employers` § The member experience |
 
 ## Rules that apply to every file here

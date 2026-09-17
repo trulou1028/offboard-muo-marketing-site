@@ -79,7 +79,7 @@ the same way, with its own spans.
 **The bigger rule was tried and rejected.** Gluing every short function word to
 the next was built and measured at 1440 and 390 across ten routes: each glued
 pair is an unbreakable run, so the longest run sets the effective measure and
-the headlines gained lines rather than losing bad breaks (`/job-search` went
+the headlines gained lines rather than losing bad breaks (the former `/job-search` headline went
 from a clean two lines to three, `/career-context` to four). It is not in the
 code; the measurement is in the commit that removed it.
 
@@ -251,7 +251,7 @@ Site and product now use one name.
 repo to check (see the note under the tool glossary heading); if the two ever
 read differently to a member, that is the thing to re-check first.*
 
-**The count.** The homepage and `/job-search` say "ten tools" and name the
+**The count.** The homepage and `/application-packet` say "ten tools" and name the
 same ten: Role Match, Ghost Job Checker, Company Intel, Application
 Packets, Resume Tailoring, Cover Letters, Interview Prep, Voice Practice,
 Application Tracker, Career Context. `/how-it-works` listed a different set and could not claim a number until plan 044 (2026-09-07) rebuilt its toolkit on the same four stages and the same ten; it now says "ten tools" too.
@@ -277,7 +277,9 @@ and everywhere it appears in the same PR.
 | Sponsored access duration | **90 days of full Offboard Pro** | | Employers, ACT |
 | Consumer tiers | **Free $0 forever · Pro $20/month, or $45 every 3 months ($15/month)**. Free: one complete Application Packet with every step free, then the assessment (parse, company intel, role match) on every packet; 3 basic ghost checks a month; Ask Lumo 10 messages a day; ChatGPT/Claude connection reads and updates the tracker. Pro: tailored resumes, cover letters, interview briefs, path to a person on every packet; enriched ghost checks; Ask Lumo unlimited on the advanced model; the connected assistant can run packets and checks; about 30 full packets a month with an email at 25. Credits pay only for extras (headshots, brand kit, voice practice, paperwork review) on every tier; the site no longer prints credit counts | Read from the app at `origin/main` 2026-09-07 (`src/pages/Pricing.tsx`, `product-spec.md` § 6, Sprints 412 to 414, owner-approved pricing reset of 2026-09-06). Replaces the 2026-08-21 row (30/300 credits, 3 Lumo messages) | Home, Pricing, Lumo (message limit only) |
 | Gift Pro prices | 1 mo $20 · 3 mo $54 · 6 mo $99 | **Not yet on site** (plan 015 unexecuted); see § Approved but unshipped | — |
-| SB 617 (California WARN-notice statement) | Shipped verbatim from the founder's public LinkedIn post | **Owner to re-verify the statute stays current**; drop the aside if stale | Employers |
+| SB 617 (California WARN-notice statement) | California EDD WSIN25-14 and WARN guidance, verified 2026-09-16 | Effective January 1, 2026: covered employers state whether services will be coordinated through a local workforce board, another entity, or not at all; coordinated services must be arranged within 30 days | Employers |
+
+SB 617 sources: [California EDD WSIN25-14](https://edd.ca.gov/en/jobs_and_training/Information_Notices/wsin25-14/) · [California EDD WARN](https://edd.ca.gov/warn)
 | ACT suggested pilot shape | One jurisdiction or cohort · 25 to 100 residents · 3-month sponsored access · first review after 30 days | "Suggested", never a claim about actual participation | ACT |
 | Office location | Concord, California | | About, How it works |
 
@@ -334,15 +336,15 @@ legacy URLs 301 to it). For Organizations stays a plain link while
 `/workforce` and `/communities` are deferred; its panel is preserved below,
 struck through, so un-deferring restores the exact blurb.
 
-- **Product ▾** — *The system:* Lumo `The guide that knows your situation.` ·
-  Integrations `Use Offboard from the AI you already use.` *(renamed 2026-09-13)* · *The
-  work:* Job Search `The whole search as one system.` · Layoff & Benefits
-  `Deadlines, coverage, and runway.` · *Featured, "Start here":* **Career
-  Context** `One living record of your experience, applications, companies,
-  interviews, and goals, put to work in every tool you use.` → `See what it
-  holds` → `/career-context` *(plan 045: Career Context moved from the first
-  column to the featured slot, which plan 037 gave to How It Works; the
-  render is the same `path-stage` image)*
+- **Product ▾** — *The system:* Career Context `One living record, used everywhere.` ·
+  Lumo `The guide that knows your situation.` · Integrations `Use Offboard from the AI you already use.` *(renamed 2026-09-13)* · *The
+  work:* Application Packet `One job link becomes everything you send.` · Layoff & Benefits
+  `Deadlines, coverage, and runway.` · *Featured guide:* **What to do in your
+  first week after a layoff** `A calm, ordered checklist for the first seven
+  days, so the urgent things get handled and the rest can wait.` → `Read the
+  guide` → `/resources/first-week-after-a-layoff` *(owner revision 2026-09-16:
+  Career Context returns to The system and both mega-menu feature cards move
+  to the third column, after the navigational lists.)*
 - ~~**For Organizations ▾** — *Who you serve:* For Employers `Sponsor a group
   through a layoff.` · Workforce & Government `Agencies, boards, and public
   programs.` · Universities & Communities `Alumni, members, and career
@@ -357,7 +359,7 @@ struck through, so un-deferring restores the exact blurb.
   there.` (joined in plan 038, deferred by 043)~~
   · *Company:* About `Why Offboard exists, and who is behind it.` · Visit Us
   `Talk to a person, online or in Concord.` → `/intake` · Slack Community
-  `People searching alongside you.` → `https://offboard.co/community` ·
+  `People searching alongside you.` → `https://join.slack.com/t/offboardco/shared_invite/zt-34fsjpgfn-BcbibJ3d86P5RztYnHsA9w` ·
   Contact `hello@offboard.co. A human reads it.` → mailto · *Featured, "The
   newsletter":* **The Offboard Newsletter** `Weekly job-market analysis and
   honest takes on tech hiring. 5,000+ subscribers.` → `Subscribe free` →
@@ -384,7 +386,7 @@ Case while "How it works" and "For employers" were not.
 `Offboard helps people organize the practical work of a job transition, from benefits and deadlines to the search ahead.`
 
 Columns (plan 043 trim, plan 045 revision) — **Product:** Career Context,
-Lumo, Job Search, Integrations, Layoff & Benefits, Pricing, Guides
+Lumo, Application Packet, Integrations, Layoff & Benefits, Pricing, Guides
 ~~, How It Works, Company Transition Centers~~ ·
 **Partners:** For Employers ~~, Workforce & Government, Universities &
 Communities~~ ·
@@ -410,7 +412,7 @@ Career Context, talk with Lumo, run your search, follow your layoff plan
 are `DESIGN.md` § "Composition rules" (R1 to R10).
 
 **Meta title:** `Offboard | The modern unemployment office`
-**Meta description:** `Offboard is the modern unemployment office: one calm place for your benefits, deadlines, runway, funded training, and next job. Verified facts, AI guidance, and a plan that starts where you are. Independent, not a government agency.`
+**Meta description:** `Offboard is the modern unemployment office for benefits, deadlines, runway, funded training, and your next job. Independent, not a government agency.`
 
 Section order: Hero → The four steps → Step 1 Career Context → Step 2 Talk
 with Lumo → Step 3 Toolkit → Step 4 Follow your layoff plan → Plans (Free,
@@ -448,7 +450,7 @@ them.** Owner direction: several sections were "cramming in extra information
 when their main goal is to create enough interest to learn more." Nothing was
 deleted without a new home or a recorded retirement.
 
-- **Moved to `/job-search` (§ 14):** the ten per-tool description sentences.
+- **Moved to the page now at `/application-packet` (§ 14):** the ten per-tool description sentences.
   The homepage now carries the four stage names, each stage's one-line "what
   it decides" (already approved on that page), its product-state chip, and the
   ten tool names. This inverts the previous split, which that page's header
@@ -558,8 +560,8 @@ connections.
 - Kicker: `Step 3 · Run your search` *(plan 050; was step 4)*
 - H2: `The tools you run your search with.` *(round 4; the previous `Everything you need when the next opportunity appears.` read as a promise rather than a label, and the eyebrow already carries the plain one)*
 - Lead *(the right half of the two-column intro)*: `Ten tools that read from the same context, so nothing is retyped and nothing is forgotten.`
-- Section link: `See what each tool does` → `/job-search` *(off the page under plan 043, back under plan 045)*
-- Four stages, each with the one-line decision already approved on `/job-search`: **Decide** `Whether this one deserves your week.` · **Apply** `What you actually send.` · **Interview** `Walking in prepared, not rehearsed.` · **Organize** `Where all of it is kept.`
+- Section link: `See the Application Packet` → `/application-packet`
+- Four stages, each with the one-line decision carried on `/application-packet`: **Decide** `Whether this one deserves your week.` · **Apply** `What you actually send.` · **Interview** `Walking in prepared, not rehearsed.` · **Organize** `Where all of it is kept.`
 - Tool names unchanged: **Decide** (`Role Match` · `Ghost Job Checker` · `Company Intel`) · **Apply** (`Application Packets` · `Resume Tailoring` · `Cover Letters`) · **Interview** (`Interview Prep` · `Voice Practice`) · **Organize** (`Application Tracker` · `Career Context`). Their ten descriptions moved to § 14 in round 4.
 - Each group carries one product-state chip (`DESIGN.md` R8). Every one is a string the product actually produces, checked against `lumo-plan-builder` `origin/main` at `b8cb77ec`: Decide `Strong fit` (the Role Match label at a score of 80 or above) · Apply `Ready for review` (a job packet's `review_ready` status) · Interview `Prep ready` (the interview prep state) · Organize `Saved to tracker` (the save-a-job confirmation).
   - **Plan 039 proposed two chips that do not exist in the product** — `Thursday · Prep done` and `12 tracked`. Both were dropped rather than invented. Adding a chip here means finding it in the app first.
@@ -614,7 +616,7 @@ note under it (notes are new, carried over from the live offboard.co site):
 - Rows, in this order (owner 2026-09-13: `Meet with a human` moved from third to first; it is the only card that reaches a person and the only one that keeps the reader on the site):
   1. Offboard symbol · `Meet with a human` — `Stuck on your search? Share where you are and our team reaches out directly. Free.` — `Fill out intake` *(owner 2026-09-13; was `Say hello`)* → `/intake` — note `Free, reviewed by our team`
   2. beehiiv mark · `The Offboard Newsletter` — `Weekly job-market analysis and honest takes on tech hiring. 5,000+ subscribers.` — `Subscribe free` → `https://newsletter.offboard.co` — note `Free, weekly, unsubscribe anytime`
-  3. Slack mark · `Slack community` — `Job seekers sharing leads, asking questions, and keeping each other accountable.` — `Join the Slack` → `https://offboard.co/community` — note `Free to join`
+  3. Slack mark · `Slack community` — `Job seekers sharing leads, asking questions, and keeping each other accountable.` — `Join the Slack` → `https://join.slack.com/t/offboardco/shared_invite/zt-34fsjpgfn-BcbibJ3d86P5RztYnHsA9w` — note `Free to join`
 
 **Brand marks on this page** (`public/marketing/logos/`, owner rule 2026-09-02:
 real files, never drawn): Slack `slack.svg` from Wikimedia Commons
@@ -823,7 +825,7 @@ as the lesser tier.
 
 The detail the terse packet cell drops - that Free keeps the company and fit
 reads on every packet after the first - is carried by pricing FAQ 2 directly
-below and by `/job-search`'s packet band.
+below and by `/application-packet`'s packet band.
 
 - Full-width closing row: `Your privacy stays yours` / `Your career activity remains private.` — `Your private career activity remains yours, on every plan.` *(the sponsor half of this line moved to the sponsored band, where it belongs, 2026-09-14)*
 - Deck note, unchanged: `Credits pay for the extras outside your search: headshots, the brand kit, voice practice, and paperwork review. Everything in the Application Packet is covered by your plan. Claiming your government benefits is always free, on any tier.`
@@ -929,7 +931,7 @@ below and by `/job-search`'s packet band.
 # 5 · For employers `/employers`
 
 **Meta title:** `Transition support for employers | Offboard`
-**Meta description:** `Sponsor outplacement, modernized: $199 per employee, one-time, with self-serve setup, a private member experience, free job postings, and a public and workforce partner program.`
+**Meta description:** `Sponsor modern outplacement for $199 per employee, with self-serve setup, private member support, free job postings, and public partner programs.`
 
 *Scoped exception: this is the one page allowed to say "outplacement".*
 
@@ -973,10 +975,10 @@ below and by `/job-search`'s packet band.
 - Body: `Glassdoor reviews, boomerang hires, and references are written in the last week of employment. Sponsorship is the part of a layoff people actually tell other people about.`
 - Items: `The line item people remember` — `Glassdoor reviews, boomerang hires, and references are written in the last week of employment.` · `A product people actually use` — `It is a product laid-off workers actually use, not a PDF library.` · `Proof, not promises` — `No placement guarantees, no inflated promises. You see real aggregate usage and claims activity, so you know the support landed.`
 
-### SB 617 aside *(plan 012; re-verified against the enrolled bill on 2026-09-16)*
+### SB 617 aside *(verified against California EDD guidance 2026-09-16)*
 
 - Kicker: `New in California`
-- `Under SB 617, companies filing a WARN notice now have to state in writing whether they'll coordinate transition services for the people affected. The "severance and silence" default now gets documented as a choice, and you have to write down that the answer is no.`
+- `Beginning January 1, 2026, California employers covered by Cal-WARN must say whether they will coordinate services through the local workforce board, another provider, or not at all. If they choose to coordinate, those services must be arranged within 30 days.`
 - `Making that answer an easy yes is exactly what sponsorship is for.`
 
 ### Hiring? Post roles free.
@@ -1072,7 +1074,7 @@ guides" footer link, as a pair of cards linking to those articles.
 # 7 · ACT pilot `/act` *(out of nav; no redirect; plan 017)*
 
 **Meta title:** `ACT pilot | Offboard`
-**Meta description:** `ACT is a resident-first pilot: eligible residents in Alameda County get sponsored access to Offboard and can start a job search the same day, while the program sees aggregate engagement only.`
+**Meta description:** `ACT gives eligible Alameda County residents sponsored Offboard access and a same-day job-search start, while programs see aggregate engagement only.`
 
 *Scoped exception page: may say "career transition" and "workspace"; the
 category claim and all endorsement language are banned here (see Language
@@ -1168,7 +1170,7 @@ pricing is volume-based and procurement-dependent, and has no owner
 approval for public display, so this page ends in a conversation.
 
 **Meta title:** `Workforce & Government | Offboard`
-**Meta description:** `For workforce boards, counties, and public programs: Offboard organizes the practical transition work around the official system and routes residents to the responsible agency for decisions. Agencies decide. Offboard helps people prepare and continue.`
+**Meta description:** `Offboard helps workforce boards, counties, and public programs organize transition work around official systems while agencies keep every eligibility decision.`
 
 ### Hero
 
@@ -1464,7 +1466,7 @@ the real authorization model is not settled. When it is, that matrix
 belongs here.
 
 **Meta title:** `Integrations | Use Offboard from the AI you already use` *(renamed 2026-09-13)*
-**Meta description:** `Connect Offboard to ChatGPT, Claude, and the tools you already use. Save roles, update applications, and add to your Career Context from wherever you are working.`
+**Meta description:** `Connect Offboard to ChatGPT, Claude, and the tools you already use. Save roles, update applications, and build your Career Context from any conversation.`
 
 ### Hero
 
@@ -1532,13 +1534,14 @@ floating shadow.*
 ### Permissions
 
 - Kicker: `Permissions`
-- H2: `You decide what a connected assistant can reach.`
-- Body: `Connecting an assistant does not hand over your whole account. You authorize what it can read and what it can change, and the connection is yours to end.`
+- H2: `You decide what a connected assistant can do.`
+- Body: `Give each connected assistant full access, read-only access, or no access. You can change that level at any time in Settings.`
 - List:
-  1. `A connection is scoped. An assistant works with the parts of your Career Context you authorize, not everything in your account.`
-  2. `You can review and change what a connected assistant can reach.`
-  3. `You can disconnect an assistant at any time. Your record stays with Offboard.`
-  4. `Sponsors never see your record. Sponsored access reports participation in aggregate only.`
+  1. `Every connected assistant has its own access level.`
+  2. `Read only can see your account, but cannot change anything or spend credits.`
+  3. `Full access can read, write, and run the tools that spend credits.`
+  4. `Turn an assistant off at any time. Your record stays with Offboard.`
+  5. `Sponsors never see your record. Sponsored access reports participation in aggregate only.`
 
 ### Prefer to stay in Offboard *(an item in the shared `Also part of the system` strip since plan 046)*
 
@@ -1777,9 +1780,9 @@ the three columns including `4,000+` state-approved California programs.
 - Line: `We never promise funding. We show you the exact path to find out.`
 - Line: `Claiming your benefits is always free, and Offboard never charges for access to a public program.`
 
-### Then the search *(an item in the shared `Also part of the system` strip since plan 046)*
+### Then the application *(an item in the shared `Also part of the system` strip since plan 046)*
 
-- Strip item: `When the paperwork is handled, the search is still there.` — `Offboard keeps the money side and the search side in the same place, so the work you do on one does not get lost when you turn to the other.` → `See how the search runs` → `/job-search`
+- Strip item: `When the paperwork is handled, the application is still there.` — `Offboard keeps the money side and the application side in the same place, so the work you do on one does not get lost when you turn to the other.` → `See the Application Packet` → `/application-packet`
 - Second strip item: `It all lands in one record.` — `Your situation, your dates, your documents, and every decision you make here become part of your Career Context, so the search starts from what actually happened.` → `See what it holds` → `/career-context`
 - ~~Kicker: `And then the job`~~
 - H2: `When the paperwork is handled, the search is still there.`
@@ -1794,28 +1797,29 @@ the three columns including `4,000+` state-approved California programs.
 - Body: `Tell Offboard what happened and get a plan that covers the money, the benefits, and the search, in the order they actually matter.`
 - CTAs: sitewide primary + `Talk to a person`
 
-# 14 · Job Search `/job-search`
+# 14 · Application Packet `/application-packet`
 
-**Added 2026-08-31 (plan 031, fifth and final phase-2 pillar).** The
-strategy doc's job for this page is to show why Offboard beats a bag of AI
-tools. The homepage toolkit already names the ten tools, so this page does
-**not** repeat that list as feature copy. Its argument is the loop those
-tools form, and the fact that the loop has a memory.
+**Promoted 2026-09-16 from `/job-search`.** No separate Application Packet
+route existed in the repo history. Plan 051 had already made the packet the
+page's main product, so the route and hero now name the flagship directly.
+`/job-search`, `/job-packet`, and the older tool URLs permanently redirect
+here. The detailed search stages remain below the packet because they show
+what its shared record feeds after a person applies.
 
-**Meta title:** `Job Search | Offboard`
-**Meta description:** `A job search that works as one system: decide, apply, interview, and organize with ten tools that all read from the same Career Context.`
+**Meta title:** `Application Packet | Offboard`
+**Meta description:** `Paste a job link and build one complete Application Packet with company intel, role match, resume tailoring, a cover letter, and a path to a person.`
 
 ### Hero
 
-- Kicker: `Job search`
-- H1: `A job search that works as one system.`
-- Body: `Most job-search tools solve one step and forget the rest. Offboard connects the whole loop, so nothing has to be re-explained at the next step. The tenth application takes less effort than the first.` *(plan 045 trimmed the middle clause; plan 046 added the retired "difference" section's payoff line)*
-- Hero visual *(plan 049; was plan 048's app screenshot of the packet builder, now unused)*: the Civic Modern composition `application-packet-civic-modern-v1-transparent.webp`. It reads: `Your Application Packet` · `Company intel` / `Role match` / `Tailored resume`, each ticked · chip `Strong fit` · state `Ready for review`. Pixels; this is the record.
+- Kicker: `Application Packet`
+- H1: `One job link. An entire Application Packet.`
+- Body: `Offboard reads the role, checks the company and fit, and builds the materials around your Career Context. Your first complete packet runs every step free.`
+- Hero visual: the documentary application photo with a layered, live UI composition. A central `Your Application Packet` card carries `Company intel`, `Role match`, and `Tailored resume`; `Ghost check` and `Cover letter` cards sit behind it; `Strong fit` and `Ready for review` chips break the edges.
 - CTA: `Get started free` (primary) *(corrected 2026-09-13: the doc carried `Build my free transition plan` while the code shipped the sitewide label from plan 040 finding 3. The code was right.)*
 
-### The Application Packet *(new, plan 051)*
+### Inside the packet
 
-- Kicker: `Application Packet` · H2: `Paste the posting. The packet does the rest.`
+- Kicker: `Inside the packet` · H2: `The role, the research, and what you send, connected.`
 - Body: `One link becomes a company brief, a fit read, and the materials you send, all kept with the role instead of scattered across six tabs.`
 - Visual: `renders/toolkit-job-packets.webp`, the Application Packet view. `/how-it-works` renders the same file in its flagship block; that page is deferred.
 - **The six rows are the app's own packet steps, verbatim** from `lumo-plan-builder` `origin/main` `src/components/job-packet/packetSteps.ts` (labels and descriptions), in the app's order, with a chip saying what Free covers (owner decision 2026-09-13). **The chips come from the server, not from that file** — see the correction below. Parse Job and Save Application are foundational, never appear in the app's own picker, and are not listed here.
@@ -1873,11 +1877,11 @@ line.*
   7. `Record what happened` — `Questions asked, what you answered, and what to do next.`
   8. `Your Career Context improves` — `Which is why the next role starts further ahead than this one did.`
 
-### What each stage gives you
+### After you apply
 
-- Kicker: `The toolkit`
-- H2: `Four stages, and what each one decides.`
-- Lead *(plan 051; was plan 046's `The same ten tools the homepage names, described. Every one reads from your Career Context and writes back to it.`, which described the website rather than the reader)*: `Every tool reads from your Career Context and writes back to it, so the tenth application starts further ahead than the first.`
+- Kicker: `After you apply`
+- H2: `The packet keeps working after you send it.`
+- Lead: `The same record follows the role into interviews and follow-up, so the tenth application starts further ahead than the first.`
 - **Layout, plan 051:** four numbered full-width rows, the pattern the homepage's step 3 took on 2026-09-11, not the four equal columns this section shipped until then. Same reasons: equal columns read as four unrelated buckets rather than the order a search runs in, and 3/3/2/2 tools left two of them ending short. · Photo beside it: `raw/strip-interview-prep.webp` (a woman practicing interview answers in front of a mirror). The four stage names carry the homepage strip's icons.
 - Groups, each stage's decision line followed by its tools. **The ten tool descriptions moved here from § 1 in round 4 (2026-09-02): the homepage names the tools, this page describes them.**
   1. `Decide` — `Whether this one deserves your week.` — `Role Match` `Understand how an opportunity matches your experience, strengths, and goals.` · `Ghost Job Checker` `Look for signals that a posting may not represent an actively hiring role.` · `Company Intel` `Know who you're applying to before you invest your time.`
@@ -1894,7 +1898,7 @@ line.*
 - Body: `Every stage reads from your Career Context and writes back to it: what you learn in one interview is already there for the next application. That is the difference between tools that happen to sit in one account and a search that gets better the longer you run it.`
 - Section link: `Learn more about Career Context` → `/career-context`
 
-### Straight answers about the search *(new, plan 051)*
+### Straight answers about Application Packets
 
 The pattern `/lumo` and `/layoff-support` close on. Four questions, the site's disclosure list. Every answer is checked against the app or a ledger row; the checks are recorded beside each one.
 
@@ -1905,8 +1909,8 @@ The pattern `/lumo` and `/layoff-support` close on. Four questions, the site's d
 
 ### Final CTA (shared component, overridden copy)
 
-- H2: `Run the whole search in one place.`
-- Body: `Start with the role in front of you, and let everything you learn stay where the next application can use it.`
+- H2: `Start with one job link.`
+- Body: `Build the first complete packet free, then keep every role, decision, and next step connected.`
 - CTAs: sitewide primary + `Talk to a person`
 
 # 15 · Privacy & Security `/privacy-security`
@@ -1955,7 +1959,7 @@ makes no claim about what those terms are). Confirm it before launch, and
 add the connection to the register.
 
 **Meta title:** `Privacy & Security | Who can see your Offboard record`
-**Meta description:** `Offboard holds your severance math, your runway, and your career history. This page says plainly who can see it, who cannot, where the honest limits are, and what you can delete.`
+**Meta description:** `See who can access your Offboard record, who cannot, how your data is protected, where the limits are, and what you can delete.`
 
 ### Hero
 
@@ -2002,8 +2006,8 @@ add the connection to the register.
 
 - Kicker: `Connected assistants`
 - H2: `A connection you authorize sends your record somewhere we do not run.`
-- Body: `Offboard can connect to assistants you already use. When you authorize one, the parts of your record you allow are read into that conversation, and from that point the conversation lives in your account with that provider, under that provider's terms. Offboard's own retention terms cover the requests Offboard makes, not the ones you make inside someone else's product.`
-- Line: `A connection is scoped to what you authorize, and you can end it at any time. Your record stays with Offboard.`
+- Body: `Offboard can connect to assistants you already use. Each one gets its own access level: full access, read only, or off. Full access can read and update your account and run tools that spend credits. Read only can see your account but cannot change it or spend credits.`
+- Line: `From that point, the conversation lives in your account with that provider, under that provider's terms. You can change or turn off access at any time in Settings. Your record stays with Offboard.`
 - Section link: `See how connections work` → `/integrations`
 
 ### The honest part
@@ -2383,11 +2387,12 @@ When one ships, move it into its page section above.
 | 2026-09-15 | `/integrations` unifies each catalog card into one white surface, closes the gap inside the hero cluster, and presents the three conversation examples as an orderly comparison grid. | owner direction, this file § 11 |
 | 2026-09-15 | The intake emails' branded card is rebuilt on a table. Ported as divs the same morning, it rendered correctly in a browser and broke in Gmail, which closed the card after the logo and dropped the text onto the client's background | this file § 9 |
 | 2026-09-15 | The four legacy URLs that 301'd into the deferred, noindexed `/how-it-works` now point at live pages (owner ruled out bringing that page back): `/product` and `/product/*` to the homepage's four-step strip, `/why-offboard` to `/about`, `/job-packet` to `/job-search`, `/faq` to `/about#faq` | `next.config.ts`, docs/cutover-checklist.md |
+| 2026-09-16 | Launch review: replaced the community redirect with the owner-supplied Slack invite, shortened long metadata descriptions, verified the SB 617 aside against California EDD guidance, and aligned connected-assistant copy to the app's live Full access, Read only, and Off controls | this file §§ 1, 7, 8, 11, 15 and facts ledger |
+| 2026-09-16 | Four resource articles now use `Career Context`, `system`, and `context` instead of the sitewide never-say terms `career memory` and `workspace` | resource block source files and Language rules |
+| 2026-09-16 | `/job-search` becomes `/application-packet`, reflecting the flagship product already carried by the page. The old route and packet aliases permanently redirect to it. The Application Packet and Layoff & Benefits heroes replace flat raster overlays with layered live UI compositions. | owner direction, this file §§ 1, 13, 14 |
+| 2026-09-16 | Product and Resources mega menus now lead with their link columns and place the promotional feature third. Career Context returns to The system; the Product feature becomes the published first-week guide. The Application Packet and Layoff & Benefits hero compositions drop their documentary photo layer and keep the product UI alone. | owner direction, this file § Header + nav |
 
-**Open owner items:** re-verify SB 617 currency (`/employers`) · optionally
-tighten About FAQ #4 toward the beachhead · verify logos-band claims ·
-Steph's essay editorial pass · execute the gift lane (plan 015) · the real
-permissions model for `/integrations` (plan 028 flag 2, still open) · yes/no
+**Open owner items:** optionally tighten About FAQ #4 toward the beachhead ·
+Steph's essay editorial pass · execute the gift lane (plan 015) · yes/no
 on the `2,000+ job centers` framing for `/layoff-support` · confirm the
-connected-assistant section on `/privacy-security` and add that connection
-to the app repo's claims register.
+connected-assistant controls in the app repo's claims register.

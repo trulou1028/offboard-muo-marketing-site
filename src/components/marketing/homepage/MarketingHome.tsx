@@ -291,18 +291,17 @@ function StepConnect() {
 
 /* ---------------------------------------------------------------- */
 /* 5 · Step 3, the toolkit (paper). Ten tools each with a sentence   */
-/* was a wall of text. Four stages carry the names; /job-search      */
-/* carries the descriptions, which is where a reader who wants them  */
-/* is already going (owner, 2026-09-02 - this inverts the split, and */
-/* that page's header comment was updated to match).                 */
+/* was a wall of text. Four stages carry the names;                  */
+/* /application-packet carries the descriptions, which is where a   */
+/* reader who wants them is already going (owner, 2026-09-02).       */
 /*                                                                   */
 /* Four rows, not four columns (owner 2026-09-11): equal columns read */
 /* as four unrelated buckets, and 3/3/2/2 tools left two of them      */
 /* ending short. Numbered full-width rows read as the order the       */
 /* search actually happens in, and no row can end ragged.             */
 /*                                                                    */
-/* The one-line "what it decides" for each stage is /job-search's    */
-/* own approved copy. Every chip is a string the product actually    */
+/* The one-line "what it decides" for each stage is the              */
+/* Application Packet page's approved copy. Every chip is a string   */
 /* produces, checked against lumo-plan-builder origin/main b8cb77ec: */
 /*   "Strong fit"       - roleFit label at score >= 80               */
 /*   "Ready for review" - job packet status review_ready             */
@@ -326,7 +325,7 @@ function StepSearch() {
         </div>
         <div>
           <p>Ten tools that read from the same context, so nothing is retyped and nothing is forgotten.</p>
-          <Link className="mh-section-link" href="/job-search">See what each tool does <ArrowRight aria-hidden="true" /></Link>
+          <Link className="mh-section-link" href="/application-packet">See the Application Packet <ArrowRight aria-hidden="true" /></Link>
         </div>
       </div>
       <ol className="mh-stage-strip" data-reveal="">

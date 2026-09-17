@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: "Offboard | The modern unemployment office",
   description:
-    "Offboard is the modern unemployment office: one calm place for your benefits, deadlines, runway, funded training, and next job. Verified facts, AI guidance, and a plan that starts where you are. Independent, not a government agency.",
+    "Offboard is the modern unemployment office for benefits, deadlines, runway, funded training, and your next job. Independent, not a government agency.",
 };
 
 export default function Page() {

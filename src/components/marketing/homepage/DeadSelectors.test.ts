@@ -38,7 +38,7 @@ const MARKETING_ROUTES = [
   "integrations",
   "lumo",
   "layoff-support",
-  "job-search",
+  "application-packet",
   "privacy-security",
 ] as const;
 

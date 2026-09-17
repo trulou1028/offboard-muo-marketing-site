@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/workforce" },
   title: "Workforce & Government | Offboard",
   description:
-    "For workforce boards, counties, and public programs: Offboard organizes the practical transition work around the official system and routes residents to the responsible agency for decisions. Agencies decide. Offboard helps people prepare and continue.",
+    "Offboard helps workforce boards, counties, and public programs organize transition work around official systems while agencies keep every eligibility decision.",
   // Deferred at launch (plan 043). Remove this line to un-defer.
   robots: DEFERRED_ROBOTS,
 };
