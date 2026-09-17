@@ -267,6 +267,7 @@ export function MarketingHowItWorks() {
       <main id="main-content">
         <PageHero
           current="how-it-works"
+          layout="relume-47"
           kicker="How it works"
           title="One system that starts where you are."
           body="Whether you were laid off yesterday, have been searching for months, or are still employed and reading the room: build your Career Context, talk it through with Lumo, run your search from it, and follow your layoff plan."
@@ -300,6 +301,7 @@ export function MarketingPricing() {
       <main id="main-content">
         <PageHero
           current="pricing"
+          layout="relume-47"
           kicker="Pricing"
           title="Start free. Upgrade when you need more support."
           titleLines={["Start free. Upgrade", "when you need more support."]}
@@ -329,17 +331,26 @@ function categoryHeadingId(category: string): string {
   return `resources-${category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}-title`;
 }
 
+/* Relume Header 49, translated into Civic Modern rather than importing its
+   Tailwind implementation. Resources is an editorial index, so the compact
+   no-CTA variant keeps the library itself as the next action. */
+function ResourcesHero() {
+  return (
+    <section className="mh-resources-hero mh-section" aria-labelledby="resources-hero-title">
+      <div>
+        <span className="mh-kicker is-lime">The library</span>
+        <h1 id="resources-hero-title">Guides &amp; resources</h1>
+      </div>
+      <p>Reported essays, practical guides, and the slow work of making layoffs less brutal.</p>
+    </section>
+  );
+}
+
 export function MarketingResources({ sections }: { sections: ResourceSection[] }) {
   return (
     <MarketingShell current="resources">
       <main id="main-content">
-        <PageHero
-          current="resources"
-          kicker="The library"
-          title="Guides & resources"
-          body="Reported essays, practical guides, and the slow work of making layoffs less brutal."
-          aside={<><span>Written from experience</span><strong>Practical, not theoretical.</strong><p>Guides drawn from the newsletter, the community, and the questions people actually ask.</p></>}
-        />
+        <ResourcesHero />
         {sections.map(({ category, posts }) => {
           const headingId = categoryHeadingId(category);
           return (
@@ -374,12 +385,12 @@ export function MarketingAbout() {
       <main id="main-content">
         <PageHero
           current="about"
+          layout="relume-49"
           kicker="Why Offboard exists"
           title="Built for the moment work stops making sense."
           body="Losing a job changes more than a resume. It can change your routine, confidence, finances, relationships, and sense of what comes next. Offboard was built to meet that whole moment with a clear plan, verified facts, and human support."
-          cta="Talk to the team"
-          ctaHref="mailto:hello@offboard.co"
-          aside={<><span>Our role</span><strong>A quiet companion for the work ahead.</strong><p>Independent support that helps you decide what deserves attention next.</p></>}
+          cta={false}
+          aside={false}
         />
         <section className="mh-route-story mh-section mh-split" aria-labelledby="about-origin-title">
           <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/strip-kitchen-table.webp" alt="A man at his desk with coffee and paperwork, looking out the window" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>

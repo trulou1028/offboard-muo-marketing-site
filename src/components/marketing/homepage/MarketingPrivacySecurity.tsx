@@ -300,6 +300,7 @@ export function MarketingPrivacySecurity() {
     <MarketingShell current="privacy-security">
       <main id="main-content">
         <PageHero
+          layout="relume-47"
           kicker="Privacy and security"
           title="You are trusting us with more than a resume."
           body="Severance math. Runway numbers. The things you would only write down at 1am. This page answers the question that actually matters: who can see it, and who cannot."

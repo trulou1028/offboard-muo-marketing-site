@@ -7,6 +7,20 @@ import { getResource, portedResources } from "@/content/resources/registry";
 import { GuideArticle } from "./GuideArticle";
 import { RenderBlocks } from "./RenderBlocks";
 
+const PRE_CONVERSION_BASELINE_SLUGS = [
+  "7-levels-ai-agent-capability",
+  "best-job-application-trackers-2026",
+  "career-changers-guide-to-job-offer-negotiations",
+  "first-week-after-a-layoff",
+  "health-insurance-after-a-layoff",
+  "how-ai-is-changing-the-job-search-in-2026",
+  "how-to-announce-a-layoff-on-linkedin",
+  "negotiating-your-severance",
+  "rebuild-your-resume-after-a-layoff",
+  "what-is-an-ai-agent",
+  "will-employers-know-cover-letter-is-ai",
+] as const;
+
 // Characterization baseline for plan 015 (make article content portable).
 //
 // This snapshot file is the permanent acceptance oracle for the plan: it was
@@ -39,7 +53,7 @@ function normalizeReactIds(html: string): string {
   return html.replace(/_[rR]_[a-z0-9]+_/g, "_reactId_");
 }
 
-describe.each(portedResources.map((post) => post.slug))("article fidelity: %s", (slug) => {
+describe.each(PRE_CONVERSION_BASELINE_SLUGS)("article fidelity: %s", (slug) => {
   it("matches the pre-conversion baseline and has substantial body text", () => {
     const post = getResource(slug);
     if (!post) throw new Error(`registry has no entry for ${slug}`);
@@ -61,5 +75,23 @@ describe.each(portedResources.map((post) => post.slug))("article fidelity: %s", 
 
     expect(container.textContent?.length ?? 0).toBeGreaterThan(1000);
     expect(normalizeReactIds(normalizeBetweenTags(container.innerHTML))).toMatchSnapshot();
+  });
+});
+
+describe("founder essay imports", () => {
+  const essays = portedResources.filter((post) => post.category === "Essays");
+
+  it("publishes all six essays with substantial portable bodies", () => {
+    expect(essays).toHaveLength(6);
+    for (const essay of essays) {
+      const blocks = getPostBlocks(essay.slug);
+      expect(blocks, `${essay.slug} has no portable body`).toBeDefined();
+      expect(JSON.stringify(blocks).length, `${essay.slug} body appears truncated`).toBeGreaterThan(1000);
+      const { container, unmount } = render(<RenderBlocks blocks={blocks ?? []} />);
+      expect(container.textContent?.length ?? 0, `${essay.slug} rendered body appears truncated`).toBeGreaterThan(
+        1000,
+      );
+      unmount();
+    }
   });
 });

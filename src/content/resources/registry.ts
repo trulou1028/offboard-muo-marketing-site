@@ -25,7 +25,7 @@ export type ResourcePost = {
   author?: { name: string; role: string };
   guestAuthor?: { name: string; bio: string; company: string; url: string };
   related?: string[];
-  /** True once the article body has been ported into src/content/resources/posts/. */
+  /** True once the article body has been ported into src/content/resources/blocks/. */
   ported: boolean;
 };
 
@@ -182,19 +182,19 @@ export const resources: ResourcePost[] = [
   },
 
   // ---------------------------------------------------------------- Essays
-  // Not ported yet: these await an owner editorial pass before republication
-  // under the new shell. See next.config.ts for their 301s to /resources.
+  // Founder essays imported from the legacy site into the CMS-compatible
+  // block format so they remain visible, durable, and directly linkable.
   {
     slug: "this-is-not-charity-it-is-reconstruction",
     title: "This Is Not Charity. It Is Reconstruction.",
     category: "Essays",
     excerpt:
-      "A raw, personal account of life after layoff — the rage, the despair, and the third path between torching everything and disappearing. Why Offboard exists.",
+      "A raw, personal account of life after layoff: the rage, the despair, and the third path between torching everything and disappearing. Why Offboard exists.",
     readingTime: "4 min read",
     date: "2026-04-16",
     author: { name: "Steph", role: "Founder" },
     related: ["we-forgot-to-reinforce-the-foundations", "they-think-an-idea-is-bulletproof-they-are-wrong"],
-    ported: false,
+    ported: true,
   },
   {
     slug: "a-series-of-fortunate-events",
@@ -206,7 +206,7 @@ export const resources: ResourcePost[] = [
     date: "2025-12-30",
     author: { name: "Steph", role: "Founder" },
     related: ["this-is-not-charity-it-is-reconstruction", "the-mentor-trap-a-silicon-valley-horror-story"],
-    ported: false,
+    ported: true,
   },
   {
     slug: "they-think-an-idea-is-bulletproof-they-are-wrong",
@@ -218,7 +218,7 @@ export const resources: ResourcePost[] = [
     date: "2025-09-29",
     author: { name: "Steph", role: "Founder" },
     related: ["we-forgot-to-reinforce-the-foundations", "the-valleys-hypocrisy-hustle-exposed-by-the-overemployed"],
-    ported: false,
+    ported: true,
   },
   {
     slug: "we-forgot-to-reinforce-the-foundations",
@@ -230,7 +230,7 @@ export const resources: ResourcePost[] = [
     date: "2025-08-20",
     author: { name: "Steph", role: "Founder" },
     related: ["this-is-not-charity-it-is-reconstruction", "they-think-an-idea-is-bulletproof-they-are-wrong"],
-    ported: false,
+    ported: true,
   },
   {
     slug: "the-mentor-trap-a-silicon-valley-horror-story",
@@ -242,7 +242,7 @@ export const resources: ResourcePost[] = [
     date: "2025-07-27",
     author: { name: "Steph", role: "Founder" },
     related: ["the-valleys-hypocrisy-hustle-exposed-by-the-overemployed", "a-series-of-fortunate-events"],
-    ported: false,
+    ported: true,
   },
   {
     slug: "the-valleys-hypocrisy-hustle-exposed-by-the-overemployed",
@@ -254,7 +254,7 @@ export const resources: ResourcePost[] = [
     date: "2025-07-23",
     author: { name: "Steph", role: "Founder" },
     related: ["the-mentor-trap-a-silicon-valley-horror-story", "they-think-an-idea-is-bulletproof-they-are-wrong"],
-    ported: false,
+    ported: true,
   },
 
   // ------------------------------------------------- Policy & Accountability

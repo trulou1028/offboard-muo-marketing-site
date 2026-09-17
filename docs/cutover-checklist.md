@@ -120,9 +120,10 @@ disaster.
 
 ### Two things the export settled that the estimate got wrong
 
-1. **The seven unported essays are worth 3 clicks in six months.** The earlier
-   note treated them as a real loss. They are not; the editorial pass can take
-   its time.
+1. **The seven then-unported essay and policy URLs were worth 3 clicks in six
+   months.** The six founder essays have since been restored because keeping
+   the founder's writing live and linkable matters independently of traffic.
+   The Alameda policy article still awaits its editorial pass.
 2. **The 404s matter more than the redirects.** 42 URLs nobody had mapped,
    because they are on the older `www` site and never appeared in
    `offboard.co/sitemap.xml`. The sitemap-only analysis could not see them.
@@ -197,8 +198,8 @@ Ranked by what the export would settle:
 
 1. Do any of the 44 `/tools/*` pages earn clicks? If a handful do, porting
    those few is cheap and keeps the traffic.
-2. Do any of the 7 unported essays earn clicks? They are held for an editorial
-   pass, not deleted; porting restores the URL exactly.
+2. Does the remaining unported Alameda policy article earn clicks? Its URL and
+   metadata are held for an editorial pass, not deleted.
 3. Which top-level pages carry the most impressions? Those are the ones to
    watch daily during the 30-day window below.
 
@@ -215,10 +216,9 @@ sits on two domains with the wrong one already known. Owner decision recorded
 - [ ] Crawl the 301 map live against the production domain (every source
       path in `next.config.ts` `redirects()`) and confirm each returns the
       expected 301/308 and destination.
-- [ ] Confirm the 11 ported `/resources/:slug` article URLs return 200 (see
-      plan 013's ported-slug list in `docs/content-roadmap.md` context and
-      `src/content/resources/registry.ts`), and the 7 unported Essays /
-      Policy & Accountability slugs return 301/308 to `/resources`.
+- [ ] Confirm the 17 ported `/resources/:slug` article URLs return 200 (see
+      `src/content/resources/registry.ts`), and the one unported Policy &
+      Accountability slug returns 301/308 to `/resources`.
 - [ ] Crawl `/intake` and `/act` live against the production domain and
       confirm each returns 200, not a 3xx.
 - [ ] Submit the new sitemap in Search Console.

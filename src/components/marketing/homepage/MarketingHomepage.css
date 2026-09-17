@@ -649,6 +649,24 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 .mh-route-hero aside > strong { margin-top: 18px; font-family: var(--mh-font-display); font-size: 34px; font-weight: 500; letter-spacing: -.03em; line-height: 1.12; }
 .mh-route-hero aside > p { margin-top: 18px; color: var(--mh-muted); font-size: 15px; line-height: 24px; }
 
+.mh-resources-hero { display: grid; grid-template-columns: minmax(0, .82fr) minmax(380px, 1.18fr); gap: clamp(48px, 8vw, 126px); align-items: start; padding-top: 154px; padding-bottom: 72px; background: var(--mh-deep); color: var(--mh-paper); }
+.mh-resources-hero h1 { max-width: 620px; margin-top: 16px; font-size: clamp(52px, 5.5vw, 76px); line-height: 1; text-wrap: balance; }
+.mh-resources-hero > p { max-width: 650px; color: var(--mh-on-dark-muted); font-size: 19px; line-height: 30px; text-wrap: pretty; }
+
+/* Relume Header 47/49, translated into Civic Modern. These compact route
+   headers preserve the library components' top-aligned two-column structure
+   without importing their Tailwind styling or creating a second token set. */
+.mh-route-hero.mh-compact-route-hero { min-height: 0; grid-template-columns: minmax(0, .82fr) minmax(380px, 1.18fr); gap: clamp(48px, 8vw, 126px); align-items: start; padding-top: 154px; padding-bottom: 72px; }
+.mh-route-hero.mh-compact-route-hero > div { max-width: none; }
+.mh-compact-route-hero h1 { max-width: 650px; margin-top: 16px; font-size: clamp(48px, 4.7vw, 68px); line-height: 1; }
+.mh-route-hero .mh-compact-route-hero-content > p { max-width: 650px; margin-top: 0; color: var(--mh-on-dark-muted); font-size: 19px; line-height: 30px; text-wrap: pretty; }
+.mh-compact-route-hero-content .mh-route-hero-footnote { max-width: 650px; }
+.mh-compact-route-hero-content .mh-primary-cta { margin-top: 28px; }
+.mh-route-hero .mh-compact-route-hero-content aside { display: block; min-height: 0; margin-top: 24px; padding: 20px 0 0; border-top: 1px solid color-mix(in srgb, var(--mh-paper) 22%, transparent); border-radius: 0; background: transparent; color: var(--mh-paper); transform: none; }
+.mh-route-hero .mh-compact-route-hero-content aside > span { color: var(--mh-on-dark-muted); }
+.mh-route-hero .mh-compact-route-hero-content aside > strong { display: block; max-width: 620px; margin-top: 10px; font-size: 24px; line-height: 1.16; }
+.mh-route-hero .mh-compact-route-hero-content aside > p { max-width: 650px; margin-top: 10px; color: var(--mh-on-dark-muted); font-size: 15px; line-height: 24px; }
+
 
 .mh-route-content { padding-top: var(--mh-section-y-loose); padding-bottom: var(--mh-section-y-loose); background: var(--mh-paper); border-bottom: 1px solid var(--mh-line); }
 .mh-route-content-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, .7fr); column-gap: 80px; }
@@ -1901,6 +1919,10 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-header-actions .mh-primary-cta { min-height: 42px; padding-inline: 16px; }
   .mh-route-hero { min-height: auto; grid-template-columns: 1fr; gap: 50px; padding-top: 138px; padding-bottom: 72px; }
   .mh-route-hero aside { min-height: 240px; transform: none; }
+  .mh-resources-hero { grid-template-columns: 1fr; gap: 28px; padding-top: 132px; padding-bottom: 64px; }
+  .mh-resources-hero > p { max-width: 620px; padding-bottom: 0; }
+  .mh-route-hero.mh-compact-route-hero { grid-template-columns: 1fr; gap: 28px; padding-top: 132px; padding-bottom: 64px; }
+  .mh-route-hero .mh-compact-route-hero-content aside { min-height: 0; }
   .mh-employer-hero { min-height: 0; grid-template-columns: 1fr; gap: 46px; padding-top: 132px; padding-bottom: 72px; }
   .mh-employer-hero-brief { max-width: 620px; }
   .mh-employer-section-intro,
@@ -2024,6 +2046,13 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-page-application-packet .mh-route-hero h1 { font-size: 42px; }
   .mh-route-hero > div > p { font-size: 18px; line-height: 28px; }
   .mh-route-hero aside { padding: 24px; }
+  .mh-resources-hero { gap: 22px; padding-top: 112px; padding-bottom: 52px; }
+  .mh-resources-hero h1 { font-size: 46px; line-height: 1.02; }
+  .mh-resources-hero > p { font-size: 17px; line-height: 27px; }
+  .mh-route-hero.mh-compact-route-hero { gap: 22px; padding-top: 112px; padding-bottom: 52px; }
+  .mh-compact-route-hero h1 { font-size: 46px; line-height: 1.02; }
+  .mh-route-hero .mh-compact-route-hero-content > p { font-size: 17px; line-height: 27px; }
+  .mh-route-hero .mh-compact-route-hero-content aside { padding: 18px 0 0; }
   figure.mh-hero-image-composition { min-height: 285px; }
   .mh-layered-product { right: 0; bottom: 0; width: 100%; height: 230px; }
   .mh-layered-product.is-first-week { height: 248px; }

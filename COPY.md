@@ -33,7 +33,7 @@ resolves. The A/B variants that already exist on record are listed in
 | Per-route page compositions and route-only sections | `src/components/marketing/homepage/MarketingRoutePages.tsx` |
 | Homepage composition | `src/components/marketing/homepage/MarketingHome.tsx` |
 | Article registry (titles, excerpts, categories, guest authors) | `src/content/resources/registry.ts` |
-| Article bodies (11 ported, verbatim from legacy site) | `src/content/resources/posts/*.tsx` |
+| Article bodies (17 ported from the legacy site) | `src/content/resources/blocks/*.json` |
 | Page metadata (titles, descriptions) | `src/app/*/page.tsx` |
 | Intake form copy | `src/components/marketing/intake/IntakeForm.tsx` |
 | Redirect map | `next.config.ts` |
@@ -676,6 +676,7 @@ Final CTA. The two ids are SEO-load-bearing: `next.config.ts` sends
 
 ### Hero
 
+- Layout: Relume Header 47 structure, translated into Civic Modern. Title left; body, supporting note, and CTA in a top-aligned right column.
 - Kicker: `How it works` · H1: `One system that starts where you are.` *(owner pick B, 2026-09-07; was `One plan that starts where you are.`, and `system` is the homepage hero's own noun)*
 - Body: `Whether you were laid off yesterday, have been searching for months, or are still employed and reading the room: build your Career Context, talk it through with Lumo, run your search from it, and follow your layoff plan.` *(names the four steps in order so the reader has the map before the detail; plan 050 order)*
 - CTA: `Get started free` *(the doc had `Build my free transition plan` while the code shipped the sitewide label since plan 040 finding 3; the code was right)*
@@ -746,6 +747,7 @@ Final CTA. The two ids are SEO-load-bearing: `next.config.ts` sends
 
 ### Hero
 
+- Layout: Relume Header 47 structure, translated into Civic Modern. Title left; body, pricing reassurance, and CTA in a top-aligned right column.
 - Kicker: `Pricing` · H1: `Start free. Upgrade when you need more support.`
 - Body: `Begin with the next role in front of you. Move to Pro when your search needs more room, or see whether an organization can sponsor your access.`
 - CTA: `Start free`
@@ -866,10 +868,9 @@ below and by `/application-packet`'s packet band.
 
 ### Hero
 
+- Layout: Relume Header 49 structure, translated into Civic Modern. Title left and body top-aligned right; the founder story below is the next action.
 - Kicker: `Why Offboard exists` · H1: `Built for the moment work stops making sense.`
 - Body: `Losing a job changes more than a resume. It can change your routine, confidence, finances, relationships, and sense of what comes next. Offboard was built to meet that whole moment with a clear plan, verified facts, and human support.`
-- CTA: `Talk to the team` → `mailto:hello@offboard.co`
-- Aside: `Our role / A quiet companion for the work ahead. / Independent support that helps you decide what deserves attention next.`
 
 ### The origin — founder story *(plan 014; owner sign-off 2026-08-23; every sentence traces to approved public sources)*
 
@@ -1017,7 +1018,7 @@ below and by `/application-packet`'s packet band.
 
 - Kicker: `The library` · H1: `Guides & resources`
 - Body: `Reported essays, practical guides, and the slow work of making layoffs less brutal.`
-- Aside: `Written from experience / Practical, not theoretical. / Guides drawn from the newsletter, the community, and the questions people actually ask.`
+- Layout: Relume Header 49 structure, translated into Civic Modern: compact two-column heading and body, with no hero CTA. The persistent site CTA and the page's closing CTA handle conversion without competing with the library.
 
 ### Library structure *(plan 013)*
 
@@ -1031,10 +1032,10 @@ Category descriptions:
 
 - **Guides** — `Practical, calm how-tos for the moments right after a layoff.`
 - **AI & Technology** — `Clear explainers on AI, agents, and how hiring is actually changing.`
-- **Essays** — `Founder notes on layoffs, work, and why Offboard exists.` *(none ported yet)*
+- **Essays** — `Founder notes on layoffs, work, and why Offboard exists.`
 - **Policy & Accountability** — `Reported opinion on how public money meets (or misses) laid-off workers, and what measurable accountability looks like.` *(none ported yet)*
 
-**Ported (11 local articles, prose byte-faithful from the legacy site):**
+**Ported (17 local articles, prose preserved from the legacy site):**
 Guides — What to do in your first week after a layoff · How to read and
 negotiate your severance · Rebuild your resume after a layoff · The Career
 Changer's Guide to Job Offer Negotiations *(guest post: Gerta & Alex,
@@ -1043,11 +1044,15 @@ a layoff: COBRA, ACA, and the cheaper options people miss · How to announce a
 layoff on LinkedIn (with three templates) · Best job application trackers in
 2026. AI & Technology — How AI Is Changing the Job Search in 2026 · What Is
 an AI Agent? · The 7 Levels of AI Agent Capability · Will employers know your
-cover letter is AI?
+cover letter is AI? Essays — This Is Not Charity. It Is Reconstruction. · A
+Series of Fortunate Events · They Think an Idea is Bulletproof. They Are
+Wrong. · We Forgot to Reinforce the Foundations · The Mentor Trap: A Silicon
+Valley Horror Story · The Valley's Hypocrisy Hustle Exposed by the
+Overemployed.
 
-**Not ported (7 slugs 301 to `/resources` until Steph's editorial pass):**
-the six founder essays + the Alameda D2 policy piece. Their registry entries
-(and original punctuation) are preserved for when they return.
+**Not ported (1 slug redirects to `/resources` until Steph's editorial pass):**
+the Alameda D2 policy piece. Its registry entry is preserved for when it
+returns.
 
 ### Article page chrome *(plan 017)*
 
@@ -1169,6 +1174,7 @@ approval for public display, so this page ends in a conversation.
 
 ### Hero
 
+- Layout: Relume Header 47 structure, translated into Civic Modern. Title left; body, boundary note, and CTA in a top-aligned right column.
 - Kicker: `Workforce and government`
 - H1: `Agencies decide. Offboard helps residents prepare and continue.`
 - Body: `Residents lose weeks to forms, phone trees, and appointment windows before anyone helps them plan. Offboard gives them a private place to organize the practical work and routes them back to the responsible agency for every official decision.`
@@ -1957,6 +1963,7 @@ add the connection to the register.
 
 ### Hero
 
+- Layout: Relume Header 47 structure, translated into Civic Modern. Title left; body, claims note, and CTA in a top-aligned right column.
 - Kicker: `Privacy and security`
 - H1: `You are trusting us with more than a resume.`
 - Body: `Severance math. Runway numbers. The things you would only write down at 1am. This page answers the question that actually matters: who can see it, and who cannot.`
@@ -2078,6 +2085,7 @@ and not Sponsored-tier copy) and the page is in the CopyDrift absence list.
 
 ### Hero
 
+- Layout: Relume Header 47 structure, translated into Civic Modern. Title left; body, sponsorship privacy note, and CTA in a top-aligned right column.
 - Kicker: `Universities and communities`
 - H1: `The workshop ends. The career does not.`
 - Body: `Career offices and member programs do good work in a narrow window: a session, an appointment, a program year. What the member leaves with is a folder and a memory. Offboard gives them a record that keeps working after your program is over, and keeps working when they come back.`
@@ -2194,11 +2202,11 @@ and the page says so in its summary line rather than implying one.
 
 ### Index hero
 
+- Layout: Relume Header 49 structure, translated into Civic Modern. Title left and body plus sourcing note top-aligned right; the company list is the next action.
 - Kicker: `Company Transition Centers`
 - H1: `Laid off from a company in the news? Start with its page.`
 - Body: `One page per company, built from the public record: what happened, with a source next to every figure, what to do this week, and what your state owes you. Nothing here is an estimate and nothing here is a promise.`
 - Footnote: `Offboard has no relationship with any company listed. Each page says when it was last checked.`
-- CTA: `Build my free transition plan`
 - List section: kicker `Pages` · H2 `Six companies, newest first.` · each card: month and year, name, summary line, `Open the <Company> page`
 
 ### Company page template
@@ -2289,8 +2297,8 @@ and the page says so in its summary line rather than implying one.
 `/#community` · `/founder-story` → `/about` · `/security` → `/privacy-security` ·
 `/for-organizations`, `/for-recruiters` → `/employers` ·
 `/public-partners` → `/workforce` (plan 035) · `/gift` → `/pricing`
-· `/tools`, `/tools/:slug*` → `/resources` · 7 unported essay/policy slugs →
-`/resources`. Kept live, no redirect: `/intake`, `/act`.
+· `/tools`, `/tools/:slug*` → `/resources` · the unported Alameda policy slug
+→ `/resources`. Kept live, no redirect: `/intake`, `/act`.
 
 `/public-partners` → `/workforce` shipped in plan 035, in the same PR as
 `/workforce` itself (owner decision 2026-09-01, plan 026 decision 1). The
@@ -2318,8 +2326,8 @@ When one ships, move it into its page section above.
 3. **Logos band** (v7): `Our members come from teams at` Snowflake · Airtable
    · Autodesk · GoPro · General Motors · YouTube. **Blocked on owner
    verifying the membership claims are current and safe to publish.**
-4. **The 6 founder essays + Alameda policy piece** on `/resources` — blocked
-   on Steph's editorial pass; registry entries preserved.
+4. **Alameda policy piece** on `/resources` — blocked on Steph's editorial
+   pass; its registry entry is preserved.
 5. **State-by-state program pages** (`What [state] owes you after a layoff`)
    — held per strategy docs, gated on an SEO reality check and revenue; see
    `docs/content-roadmap.md`.

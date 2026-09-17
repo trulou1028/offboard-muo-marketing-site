@@ -47,6 +47,13 @@ in that commit, but because CI has no credentials to reach Supabase at all.
   loader must fall back to the JSON block files already committed under
   `src/content/resources/blocks/*.json` (and an equivalent committed
   snapshot for `categories`), not fail the build.
+- **Preview deployments also include newly committed published resources.**
+  A review branch can contain a CMS migration that production has not applied
+  yet. On Vercel Preview only, database-published rows remain primary and any
+  additional `ported: true` committed resources are layered in so reviewers
+  can see and navigate the exact content the migration will publish. Production
+  never uses this overlay: Supabase remains its single publish state, and the
+  owner-run `supabase db push` is still required before release.
 - **Future work, not designed here:** on-demand revalidation via
   `revalidatePath`, triggered by a Supabase database webhook when a row's
   `status` changes. This would drop the up-to-5-minute publish delay to
@@ -214,12 +221,12 @@ create table posts (
 - `body jsonb not null` is exactly the shape of `Block[]` as defined in
   `src/content/resources/schema.ts:50-63` (and validated by
   `parsePostBody` in that same file, `:94-107`) — the same shape already
-  living in every file under `src/content/resources/blocks/*.json` since
-  plan 015 converted the 11 ported posts from TSX components to this JSON
-  block format. No transformation is needed between a block file's contents
-  and this column's value.
+  living in every file under `src/content/resources/blocks/*.json`. Plan 015
+  converted the original 11 posts from TSX components, and the six founder
+  essays later joined them in the same JSON block format. No transformation
+  is needed between a block file's contents and this column's value.
 - The `image` (`schema.ts:60`) and `cta` (`schema.ts:63`) block types are
-  already defined in that schema but are **unused by all 11 current posts**
+  already defined in that schema but are **unused by all 17 current posts**
   (per the comment at `schema.ts:58-63`, added for the content roadmap's
   planned funnel articles). Because `body` is schemaless jsonb, no migration
   will be needed when a future article actually uses an `image` or `cta`

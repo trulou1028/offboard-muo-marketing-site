@@ -1,0 +1,190 @@
+[
+  {
+    "type": "h2",
+    "text": "Hello, friend."
+  },
+  {
+    "type": "p",
+    "runs": [
+      "You're reading this on a screen. Maybe it's the one you use to code, to design, to strategize, to deploy. The one that glows with the promise of disruption. The one that just delivered a terse, HR-sanctioned email that began, “As part of a strategic restructuring…”"
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "Yeah. I know."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "Look around. The air in the tech sphere is getting thin. Can you feel it?"
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "That low, persistent hum isn't just the server farm downstairs. It's the collective anxiety of an entire industry holding its breath, waiting for the next shoe to drop. We built this digital empire on lines of code and promises of changing the world, but we forgot to reinforce the foundations."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "The human ones."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "They call it a “headcount reduction.” A “right-sizing.” A “correction.” They use clean, sterile language that scrubs away the messiness of a shattered identity, the cold sweat of a mortgage payment with no income, the silent scream into a pillow after updating a LinkedIn profile for the hundredth time."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "This is not a correction. This is a mass psychic event. A silent, sanctioned crash. And they're just… ignoring it. They're offering severance packages and generic transition help like a bandage on a gunshot wound. They're talking about “leaning out” and “doing more with less” while the “less” are people who gave their twenties, their health, their passion to building someone else's dream."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "I see them. I talk to them every day at Offboard. They're not just resumes in a database. They're the brilliant minds who architected the systems we can't live without."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "They're the legacy talent."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "The ones with the institutional memory that can't be forked and merged from a GitHub repo. And they are hurting. Right under our noses. In the Slack channels that just went quiet. In the 1:1s that got abruptly canceled. In the apartment down the hall, where a person is actively fighting the thought that they are now, and perhaps always were, a line item to be cut."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "This system is sick. And it's making us sick."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "We can't just wait for the C-suite to develop a conscience. They're optimizing for shareholder value, not sanity. So we have to do what we've always done."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "We have to build a patch."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "A human patch."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "I'm calling for volunteers. Not for a hackathon. For a lifeline."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      {
+        "b": [
+          "Journalists."
+        ]
+      },
+      " We need you. Not for another think-piece about market trends. We need you to be scribes for the truth. To document the human cost. To give a voice to the ones who signed NDAs along with their termination papers. Shine a light into the dark corners of the non-disparagement clauses. Tell their stories. Make it impossible to ignore."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      {
+        "b": [
+          "Therapists."
+        ]
+      },
+      " We need you. Your skills are more critical than any new JavaScript framework. We need you to volunteer your time, your expertise, and your empathy. We need pro-bono sessions, group workshops, and crisis resources tailored to the specific, soul-crushing paradox of being deemed “redundant” when you've never worked harder in your life. Help them understand they are not the error. The system is."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "This is the call: ",
+      {
+        "b": [
+          "be there"
+        ]
+      },
+      " for those who are hurting the most. You don't need to look far. They are your former colleagues. Your network. Your friends."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      {
+        "i": [
+          "They're the ones who just got very, very quiet."
+        ]
+      }
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "Don't just send a “Hey, hope you're ok” LinkedIn message.",
+      " ",
+      {
+        "b": [
+          "Call."
+        ]
+      },
+      " ",
+      {
+        "i": [
+          "Show up"
+        ]
+      },
+      ".",
+      " ",
+      {
+        "b": [
+          "Listen"
+        ]
+      },
+      ". Buy them coffee and let them not talk about LeetCode. Remind them that their worth was never stored in a Jira ticket."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "We have to keep this talent in the arena. Because the next hit… the next hit could put them out for good. And we can't afford to lose them. We just can't see it yet."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "The attack is on the human spirit. It's time we fought back."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "Be there."
+    ]
+  },
+  {
+    "type": "p",
+    "runs": [
+      "(You know where to find us.)"
+    ]
+  }
+]
