@@ -22,12 +22,11 @@ import {
   PricingSection,
   PRICING_FAQS,
   PRODUCT_FAQS,
+  SIGN_UP_URL,
   HowStepContext,
   ToolkitSection,
   VerifiedFactsStrip,
 } from "./MarketingSite";
-
-const RECRUIT_URL = "https://app.offboard.co/workspace/new?intent=recruit";
 
 const SPONSORSHIP_STEPS = [
   ["Upload a roster", "Two people or two hundred. No minimum, no contract."],
@@ -36,11 +35,227 @@ const SPONSORSHIP_STEPS = [
   ["You see aggregate engagement only", "Individual job-search activity is always private. That privacy line is contractual, not a preference."],
 ] as const;
 
+const EMPLOYER_MEMBER_ITEMS = [
+  { title: "A plan from day one", body: "Members start from their situation and state, and see what deserves attention first." },
+  { title: "Verified benefit facts", body: "Deadlines and dollar figures checked by people, with official links. Claiming benefits is always free." },
+  { title: "The full toolkit", body: "Application Packets, resume tailoring, interview prep, application tracking, and Lumo." },
+] as const;
+
 const WHY_COMPANIES_ITEMS = [
   { title: "The line item people remember", body: "Glassdoor reviews, boomerang hires, and references are written in the last week of employment." },
   { title: "A product people actually use", body: "It is a product laid-off workers actually use, not a PDF library." },
   { title: "Proof, not promises", body: "No placement guarantees, no inflated promises. You see real aggregate usage and claims activity, so you know the support landed." },
 ] as const;
+
+/* Relume page pass, 2026-09-16. The source slugs are recorded here so the
+   chosen architecture stays auditable without bringing Relume's Tailwind or
+   primitives into this repository.
+
+   Hero: Header 93                     Member experience: Layout 682
+   Pricing: Pricing 11                 Setup: Timeline 1
+   Sponsor terms: Comparison 15        Why companies: Stats 2
+   California note: Banner 3           Hiring: CTA 59
+   FAQ: FAQ 9                           Close: CTA 13 */
+function EmployerHero() {
+  return (
+    <section className="mh-employer-hero mh-section" aria-labelledby="employer-hero-title">
+      <div className="mh-employer-hero-copy">
+        <span className="mh-kicker is-lime">For employers</span>
+        <h1 id="employer-hero-title">Outplacement, modernized.</h1>
+        <p>Give the people you&apos;re letting go a real starting point: the modern unemployment office in their pocket. Sponsored access is self-serve, priced one-time per employee, and private by design for the people who use it.</p>
+        <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Get started free</span><ArrowRight aria-hidden="true" /></a>
+      </div>
+      <aside className="mh-employer-hero-brief" aria-label="How sponsorship works">
+        <div>
+          <span>How sponsorship works</span>
+          <strong>Self-serve. One-time per employee.</strong>
+          <p>Buy seats for a departing group, send invitations, and see aggregate program reporting. No enterprise contract.</p>
+        </div>
+        <ol aria-hidden="true">
+          <li><span>01</span></li>
+          <li><span>02</span></li>
+          <li><span>03</span></li>
+        </ol>
+      </aside>
+    </section>
+  );
+}
+
+function EmployerMemberExperience() {
+  return (
+    <section className="mh-employer-member mh-section" aria-labelledby="employer-member-title">
+      <div className="mh-employer-section-intro">
+        <div>
+          <span className="mh-kicker">The member experience</span>
+          <h2 id="employer-member-title">Support for the whole transition, not only the resume.</h2>
+        </div>
+        <p>A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Application Packets, and human support options.</p>
+      </div>
+      <div className="mh-employer-member-layout" data-reveal="">
+        <div className="mh-employer-member-visual">
+          <Image src="/marketing/site-imagery/documentary/employer-transition-support-civic-modern-v1.webp" alt="Two colleagues review a transition support plan together in a daylight office." fill sizes="(max-width: 900px) 100vw, 48vw" />
+        </div>
+        <ol className="mh-employer-member-list">
+          {EMPLOYER_MEMBER_ITEMS.map((item, index) => (
+            <li key={item.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div><h3>{item.title}</h3><p>{item.body}</p></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function EmployerPricing() {
+  return (
+    <section className="mh-employer-pricing mh-section" aria-labelledby="employer-pricing-title">
+      <div className="mh-section-heading">
+        <span className="mh-kicker">Pricing</span>
+        <h2 id="employer-pricing-title">Real outplacement at $199 a head, not $5,000.</h2>
+      </div>
+      <div className="mh-employer-pricing-layout" data-reveal="">
+        <article className="mh-employer-price-card">
+          <span>Sponsored access</span>
+          <p className="mh-price-value"><b>$199</b><small>per employee, one-time</small></p>
+          <ul>
+            <li><Check aria-hidden="true" />$169 per seat at 50 or more</li>
+            <li><Check aria-hidden="true" />Card or NET-30 invoice</li>
+            <li><Check aria-hidden="true" />No minimum, no renewal, no SOW, no procurement cycle.</li>
+          </ul>
+        </article>
+        <article className="mh-employer-pricing-context">
+          <span>Legacy comparison</span>
+          <strong>$3,000 to $7,000</strong>
+          <p className="mh-employer-pricing-comparison">For comparison: legacy outplacement runs $3,000 to $7,000 per head, and most firms will not take a layoff under 50 people. The size of your layoff should not determine whether your people get help.</p>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+function EmployerTimeline() {
+  return (
+    <section className="mh-employer-steps mh-section" aria-labelledby="employer-steps-title">
+      <div className="mh-employer-timeline-layout">
+        <div className="mh-employer-timeline-intro">
+          <span className="mh-kicker">How sponsorship works</span>
+          <h2 id="employer-steps-title">Setup takes minutes, not weeks.</h2>
+        </div>
+        <ol className="mh-employer-timeline" data-reveal="">
+          {SPONSORSHIP_STEPS.map(([title, body], index) => (
+            <li key={title}>
+              <i aria-hidden="true" />
+              <div><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{body}</p></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function EmployerPrivacy() {
+  return (
+    <section className="mh-route-sponsor mh-section" aria-labelledby="employer-privacy-title">
+      <div className="mh-employer-section-intro">
+        <div>
+          <span className="mh-kicker">Clear sponsor terms</span>
+          <h2 id="employer-privacy-title">People should know what a sponsor can see.</h2>
+        </div>
+        <p>Before a sponsored member enrolls, Offboard explains what the program sponsor can and cannot see. Visibility depends on the program notice. Personal benefit decisions remain with responsible agencies and providers.</p>
+      </div>
+      <div className="mh-employer-privacy-grid" data-reveal="">
+        <article className="mh-route-sponsor-card is-member">
+          <span>Member view</span>
+          <strong>Chosen by the member</strong>
+          <p>Transition details, saved roles, documents, and requested support stay in the member experience according to the applicable notice.</p>
+        </article>
+        <article className="mh-route-sponsor-card is-sponsor">
+          <span>Sponsor view</span>
+          <strong>Explained before enrollment</strong>
+          <p>Program reporting and visibility are defined before participation begins. Sponsors receive aggregate participation and outcome reporting, never individual applications, conversations, finances, or reflections.</p>
+        </article>
+      </div>
+      <blockquote className="mh-employer-privacy-quote"><p>A sponsor can see that 19 of 24 people claimed access and 14 are active. They can&apos;t see anyone&apos;s resume, anyone&apos;s applications, or anyone&apos;s conversations. Not the CEO, not HR, nobody.</p></blockquote>
+    </section>
+  );
+}
+
+function EmployerReasons() {
+  return (
+    <section className="mh-employer-reasons mh-section" aria-labelledby="employer-reasons-title">
+      <div className="mh-employer-section-intro">
+        <div>
+          <span className="mh-kicker is-sand">Why companies do this</span>
+          <h2 id="employer-reasons-title">The cheapest line item in the layoff, and the one people remember.</h2>
+        </div>
+        <p>Glassdoor reviews, boomerang hires, and references are written in the last week of employment. Sponsorship is the part of a layoff people actually tell other people about.</p>
+      </div>
+      <ol className="mh-employer-reason-grid" data-reveal="">
+        {WHY_COMPANIES_ITEMS.map((item, index) => (
+          <li key={item.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.body}</p></li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function EmployerCaliforniaNote() {
+  return (
+    <aside className="mh-employer-sb617 mh-section" aria-label="California SB 617">
+      <div className="mh-employer-sb617-inner">
+        <div><span className="mh-kicker">New in California</span></div>
+        <div>
+          <p>Beginning January 1, 2026, California employers covered by Cal-WARN must say whether they will coordinate services through the local workforce board, another provider, or not at all. If they choose to coordinate, those services must be arranged within 30 days.</p>
+          <p>Making that answer an easy yes is exactly what sponsorship is for.</p>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+function EmployerHiring() {
+  return (
+    <section className="mh-route-hiring mh-section" aria-labelledby="employer-hiring-title">
+      <div className="mh-route-hiring-copy">
+        <span className="mh-kicker">Also for employers</span>
+        <h2 id="employer-hiring-title">Hiring? Post roles free.</h2>
+        <p>Offboard employers can post open roles at no cost. Postings reach members actively searching, with materials prepared and context attached.</p>
+        <p className="mh-employer-hiring-actions">
+          <a className="mh-primary-cta" href={SIGN_UP_URL}><span>Get started free</span><ArrowRight aria-hidden="true" /></a>
+        </p>
+      </div>
+      <div className="mh-route-hiring-photo"><Image src="/marketing/homepage/raw/strip-walking-in.webp" alt="A person walking into an office building for an interview, bag on shoulder" fill sizes="(max-width: 900px) 100vw, 50vw" /></div>
+    </section>
+  );
+}
+
+function EmployerFaq() {
+  return (
+    <section className="mh-employer-faq mh-section" aria-labelledby="employer-faq-title">
+      <div className="mh-employer-faq-heading">
+        <span className="mh-kicker">Good questions</span>
+        <h2 id="employer-faq-title">What employers ask.</h2>
+      </div>
+      <dl className="mh-employer-faq-list">
+        {EMPLOYER_FAQS.map(([question, answer]) => (
+          <div key={question}><dt>{question}</dt><dd>{answer}</dd></div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
+function EmployerContact() {
+  return (
+    <section className="mh-route-contact mh-employer-contact mh-section" aria-labelledby="employer-contact-title">
+      <div><span className="mh-kicker is-lime">Sponsored access</span><h2 id="employer-contact-title">Explore Offboard before you sponsor a group.</h2></div>
+      <div><p>Create a free account and try the product yourself. There is no sales call or setup required.</p><a className="mh-primary-cta" href={SIGN_UP_URL}><span>Get started free</span><ArrowRight aria-hidden="true" /></a></div>
+    </section>
+  );
+}
 
 /* Plan 044 (owner 2026-09-07), reordered by plan 050 (owner 2026-09-10): the
    long form of the homepage's four steps, same names, same order, same kickers, so a visitor arriving from the
@@ -231,89 +446,20 @@ export function MarketingAbout() {
 export function MarketingEmployers() {
   return (
     <MarketingShell current="employers">
-      <main id="main-content">
-        <PageHero
-          current="employers"
-          kicker="For employers"
-          title="Outplacement, modernized."
-          body="Give the people you're letting go a real starting point: the modern unemployment office in their pocket. Sponsored access is self-serve, priced one-time per employee, and private by design for the people who use it."
-          cta="Talk about sponsored access"
-          ctaHref="mailto:hello@offboard.co?subject=Employer%20support"
-          aside={<><span>How sponsorship works</span><strong>Self-serve. One-time per employee.</strong><p>Buy seats for a departing group, send invitations, and see aggregate program reporting. No enterprise contract.</p></>}
-        />
-        <FeatureRows
-          kicker="The member experience"
-          title="Support for the whole transition, not only the resume."
-          body="A layoff creates benefits, money, and job-search work all at once. Sponsored members get the full product: a personal plan, verified benefit deadlines, Application Packets, and human support options."
-          items={[
-            { title: "A plan from day one", body: "Members start from their situation and state, and see what deserves attention first." },
-            { title: "Verified benefit facts", body: "Deadlines and dollar figures checked by people, with official links. Claiming benefits is always free." },
-            { title: "The full toolkit", body: "Application Packets, resume tailoring, interview prep, application tracking, and Lumo." },
-          ]}
-        />
-        <section className="mh-employer-pricing mh-section" aria-labelledby="employer-pricing-title">
-          <div className="mh-section-heading">
-            <span className="mh-kicker">Pricing</span>
-            <h2 id="employer-pricing-title">Real outplacement at $199 a head, not $5,000.</h2>
-          </div>
-          <div className="mh-employer-pricing-layout">
-            <article className="mh-employer-price-card">
-              <p className="mh-price-value"><b>$199</b><small>per employee, one-time</small></p>
-              <ul>
-                <li><Check aria-hidden="true" />$169 per seat at 50 or more</li>
-                <li><Check aria-hidden="true" />Card or NET-30 invoice</li>
-                <li><Check aria-hidden="true" />No minimum, no renewal, no SOW, no procurement cycle.</li>
-              </ul>
-            </article>
-            <p className="mh-employer-pricing-comparison">For comparison: legacy outplacement runs $3,000 to $7,000 per head, and most firms will not take a layoff under 50 people. The size of your layoff should not determine whether your people get help.</p>
-          </div>
-        </section>
-        <section className="mh-employer-steps mh-section" aria-labelledby="employer-steps-title">
-          <div className="mh-section-heading">
-            <span className="mh-kicker">How sponsorship works</span>
-            <h2 id="employer-steps-title">Setup takes minutes, not weeks.</h2>
-          </div>
-          <NumberedRows rows={SPONSORSHIP_STEPS} />
-        </section>
-        <section className="mh-route-sponsor mh-section mh-split" aria-labelledby="employer-privacy-title">
-          <div className="mh-copy-block">
-            <span className="mh-kicker">Clear sponsor terms</span>
-            <h2 id="employer-privacy-title">People should know what a sponsor can see.</h2>
-            <p>Before a sponsored member enrolls, Offboard explains what the program sponsor can and cannot see. Visibility depends on the program notice. Personal benefit decisions remain with responsible agencies and providers.</p>
-            <blockquote className="mh-employer-privacy-quote"><p>A sponsor can see that 19 of 24 people claimed access and 14 are active. They can&apos;t see anyone&apos;s resume, anyone&apos;s applications, or anyone&apos;s conversations. Not the CEO, not HR, nobody.</p></blockquote>
-          </div>
-          <div className="mh-route-sponsor-card"><span>Member view</span><strong>Chosen by the member</strong><p>Transition details, saved roles, documents, and requested support stay in the member experience according to the applicable notice.</p><span>Sponsor view</span><strong>Explained before enrollment</strong><p>Program reporting and visibility are defined before participation begins. Sponsors receive aggregate participation and outcome reporting, never individual applications, conversations, finances, or reflections.</p></div>
-        </section>
-        <Statements
-          kicker="Why companies do this"
-          title="The cheapest line item in the layoff, and the one people remember."
-          body="Glassdoor reviews, boomerang hires, and references are written in the last week of employment. Sponsorship is the part of a layoff people actually tell other people about."
-          items={WHY_COMPANIES_ITEMS}
-        />
-        <aside className="mh-employer-sb617 mh-section" aria-label="California SB 617">
-          <div>
-            <span className="mh-kicker">New in California</span>
-            <p>Beginning January 1, 2026, California employers covered by Cal-WARN must say whether they will coordinate services through the local workforce board, another provider, or not at all. If they choose to coordinate, those services must be arranged within 30 days.</p>
-            <p>Making that answer an easy yes is exactly what sponsorship is for.</p>
-          </div>
-        </aside>
-        <section className="mh-route-hiring mh-section mh-split" aria-labelledby="employer-hiring-title">
-          <div className="mh-copy-block">
-            <span className="mh-kicker">Also for employers</span>
-            <h2 id="employer-hiring-title">Hiring? Post roles free.</h2>
-            <p>Offboard employers can post open roles at no cost. Postings reach members actively searching, with materials prepared and context attached.</p>
-            <p className="mh-employer-hiring-actions">
-              <a className="mh-section-link" href={RECRUIT_URL}>Post a role <ArrowRight aria-hidden="true" /></a>
-              <a className="mh-employer-hiring-secondary" href="mailto:hello@offboard.co?subject=Hiring%20on%20Offboard">or email us</a>
-            </p>
-          </div>
-          <div className="mh-route-story-photo"><Image src="/marketing/homepage/raw/strip-walking-in.webp" alt="A person walking into an office building for an interview, bag on shoulder" fill sizes="(max-width: 900px) 100vw, 44vw" /></div>
-        </section>
+      <main id="main-content" className="mh-employers-page">
+        <EmployerHero />
+        <EmployerMemberExperience />
+        <EmployerPricing />
+        <EmployerTimeline />
+        <EmployerPrivacy />
+        <EmployerReasons />
+        <EmployerCaliforniaNote />
+        <EmployerHiring />
         {/* The public-sector crosslink section (plan 035) left with
             /workforce at plan 043's launch trim: it sent a buyer to a page
             the owner is holding back. It returns when /workforce does. */}
-        <FaqSection title="What employers ask." items={EMPLOYER_FAQS} />
-        <ContactBand kicker="Sponsored access" title="Talk about sponsoring a group." body="Tell us how many people are affected and when. Setup is self-serve, and we can walk you through it." cta="Talk about sponsored access" href="mailto:hello@offboard.co?subject=Employer%20support" />
+        <EmployerFaq />
+        <EmployerContact />
       </main>
     </MarketingShell>
   );

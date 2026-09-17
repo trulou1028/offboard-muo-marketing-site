@@ -938,7 +938,7 @@ below and by `/application-packet`'s packet band.
 
 - Kicker: `For employers` · H1: `Outplacement, modernized.`
 - Body: `Give the people you're letting go a real starting point: the modern unemployment office in their pocket. Sponsored access is self-serve, priced one-time per employee, and private by design for the people who use it.`
-- CTA: `Talk about sponsored access` → `mailto:hello@offboard.co?subject=Employer support`
+- CTA: `Get started free` → `https://app.offboard.co/auth?tab=signup`
 - Aside: `How sponsorship works / Self-serve. One-time per employee. / Buy seats for a departing group, send invitations, and see aggregate program reporting. No enterprise contract.`
 
 ### The member experience
@@ -984,7 +984,7 @@ below and by `/application-packet`'s packet band.
 
 - Kicker: `Also for employers` · H2: `Hiring? Post roles free.`
 - Body: `Offboard employers can post open roles at no cost. Postings reach members actively searching, with materials prepared and context attached.`
-- CTA: `Post a role` → `https://app.offboard.co/workspace/new?intent=recruit` *(hard URL contract with the app; never relative, never renamed unilaterally)* · secondary `or email us` → mailto
+- CTA: `Get started free` → `https://app.offboard.co/auth?tab=signup`
 
 ### Public & workforce partners *(moved to `/workforce` in plan 035; the crosslink that stayed behind was removed by plan 043, because `/workforce` is deferred and a buyer must not be sent to a page being held back. The whole section returns when `/workforce` does.)*
 
@@ -1002,9 +1002,9 @@ below and by `/application-packet`'s packet band.
 
 ### Contact band *(retargeted to employers in plan 035; the public-partner version moved to `/workforce`)*
 
-- Kicker: `Sponsored access` · H2: `Talk about sponsoring a group.`
-- Body: `Tell us how many people are affected and when. Setup is self-serve, and we can walk you through it.`
-- CTA: `Talk about sponsored access` → `mailto:hello@offboard.co?subject=Employer support`
+- Kicker: `Sponsored access` · H2: `Explore Offboard before you sponsor a group.`
+- Body: `Create a free account and try the product yourself. There is no sales call or setup required.`
+- CTA: `Get started free` → `https://app.offboard.co/auth?tab=signup`
 
 ---
 
