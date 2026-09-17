@@ -4,7 +4,7 @@ Operator-run items for switching `offboard.co` from the current production
 site to this repo. None of these are automated by plan 006; they are listed
 here for the operator to execute deliberately, in order.
 
-- [ ] Confirm `/intake` handling: this repo's `/intake` is the live,
+- [x] Confirm `/intake` handling: this repo's `/intake` is the live,
       working member-intake form (ported by plan 010). Do not add a
       redirect for it. Verify one more time on the deployed preview before
       cutover that `/intake` returns 200, not a 3xx.
@@ -13,18 +13,11 @@ here for the operator to execute deliberately, in order.
       no redirect and stays out of the nav by design. Verify one more time
       on the deployed preview before cutover that `/act` returns 200, not
       a 3xx.
-- [ ] Remove `noindex`: the site is hidden from search engines by ONE
-      `robots: "noindex, nofollow, noarchive"` export in
-      `src/app/layout.tsx`, which every route inherits. Change that single
-      value once the cutover is confirmed; there is nothing per-route to
-      edit. This is a separate, deliberate operator decision, not part of
-      any plan commit. Two things to know before flipping it:
-      `e2e/homepage.spec.ts` asserts the string verbatim and will fail until
-      it is updated in the same change, and `src/app/sitemap.ts` is inert
-      while `noindex` is set, so the sitemap only becomes meaningful after
-      this step. *(Corrected 2026-08-26: this step used to say "on every
-      route", describing the per-page mechanism plan 017 replaced.)*
-- [ ] Point the domain at the Vercel project for this repo.
+- [x] Remove `noindex`: completed after the production-domain cutover was
+      verified on 2026-09-17. Public routes no longer inherit a robots block;
+      deferred routes keep their own `noindex, nofollow` metadata, and the
+      sitemap is now active.
+- [x] Point the domain at the Vercel project for this repo.
 - [ ] Archive the old production deployment (do not delete outright until
       the post-cutover monitoring window below has passed).
 - [ ] Export historical `intake_submissions` rows from the old Supabase
@@ -181,8 +174,8 @@ that value is lost unless the destination is genuinely equivalent.
       `src/lib/site.ts` and `BASE_URL` in `src/app/sitemap.ts` move together.**
       ~~No page declares a canonical URL.~~ Add both before the domain moves, so that a
       crawl of `offboard-muo-marketing-site.vercel.app` (which is public and
-      serves the whole site, held back only by the site-wide `noindex`) points
-      at `offboard.co` rather than competing with it.
+      serves the whole site) points at `offboard.co` rather than competing
+      with it.
 
 ### The measurement this analysis is missing
 
@@ -209,7 +202,8 @@ The site-wide `noindex` comes off **after** `offboard.co` points here, never
 before. Until DNS moves, the only public address is the `.vercel.app` one, so
 flipping early invites Google to index that instead, and then the same content
 sits on two domains with the wrong one already known. Owner decision recorded
-2026-09-14: not flipping yet.
+2026-09-17: indexing confirmed after DNS, HTTPS, canonical, `/intake`, and `/act`
+were verified on the production domain.
 
 ## Post-cutover
 

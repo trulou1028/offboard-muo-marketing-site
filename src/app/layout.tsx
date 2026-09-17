@@ -7,12 +7,7 @@ import type { Metadata } from "next";
 import { SITE_ORIGIN } from "@/lib/site";
 import type { ReactNode } from "react";
 
-// robots stays the literal string form so the rendered meta tag is exactly
-// "noindex, nofollow, noarchive" — the e2e suite asserts it verbatim. Every
-// route inherits this from the root layout; a route needing different robots
-// behavior would override it in its own metadata export (none does today).
 export const metadata: Metadata = {
-  robots: "noindex, nofollow, noarchive",
   /* Makes every URL-based metadata field absolute against the real domain.
      The canonical tag itself is per route (see src/lib/site.ts): a relative
      canonical here would resolve against this base, not the current path,

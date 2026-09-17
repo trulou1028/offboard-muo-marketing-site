@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import MarketingHome from "@/components/marketing/homepage/MarketingHome";
 
-// robots is inherited from the root layout (src/app/layout.tsx).
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: "Offboard | The modern unemployment office",

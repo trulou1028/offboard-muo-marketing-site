@@ -1,8 +1,7 @@
 /* The site's real home (canonical origin).
  *
  * The same pages answer at more than one address today: `offboard.co`, and the
- * Vercel production URL, which is publicly reachable and serves the whole site
- * (held back from search only by the site-wide `noindex` in `app/layout.tsx`).
+ * Vercel production URL, which is publicly reachable and serves the whole site.
  * Without a canonical, a crawl of the Vercel address would compete with the
  * real domain rather than hand it the credit.
  *
