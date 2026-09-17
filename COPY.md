@@ -936,7 +936,7 @@ below and by `/job-search`'s packet band.
 
 - Kicker: `For employers` · H1: `Outplacement, modernized.`
 - Body: `Give the people you're letting go a real starting point: the modern unemployment office in their pocket. Sponsored access is self-serve, priced one-time per employee, and private by design for the people who use it.`
-- CTA: `Talk about sponsored access` → `mailto:hello@offboard.co?subject=Employer support`
+- CTA: `Get started free` → `https://app.offboard.co/auth?tab=signup`
 - Aside: `How sponsorship works / Self-serve. One-time per employee. / Buy seats for a departing group, send invitations, and see aggregate program reporting. No enterprise contract.`
 
 ### The member experience
@@ -972,7 +972,7 @@ below and by `/job-search`'s packet band.
 - Body: `Glassdoor reviews, boomerang hires, and references are written in the last week of employment. Sponsorship is the part of a layoff people actually tell other people about.`
 - Items: `The line item people remember` — `Glassdoor reviews, boomerang hires, and references are written in the last week of employment.` · `A product people actually use` — `It is a product laid-off workers actually use, not a PDF library.` · `Proof, not promises` — `No placement guarantees, no inflated promises. You see real aggregate usage and claims activity, so you know the support landed.`
 
-### SB 617 aside *(plan 012 — OWNER: re-verify statute currency before relying on this in campaigns)*
+### SB 617 aside *(plan 012; re-verified against the enrolled bill on 2026-09-16)*
 
 - Kicker: `New in California`
 - `Under SB 617, companies filing a WARN notice now have to state in writing whether they'll coordinate transition services for the people affected. The "severance and silence" default now gets documented as a choice, and you have to write down that the answer is no.`
@@ -982,7 +982,7 @@ below and by `/job-search`'s packet band.
 
 - Kicker: `Also for employers` · H2: `Hiring? Post roles free.`
 - Body: `Offboard employers can post open roles at no cost. Postings reach members actively searching, with materials prepared and context attached.`
-- CTA: `Post a role` → `https://app.offboard.co/workspace/new?intent=recruit` *(hard URL contract with the app; never relative, never renamed unilaterally)* · secondary `or email us` → mailto
+- CTA: `Get started free` → `https://app.offboard.co/auth?tab=signup`
 
 ### Public & workforce partners *(moved to `/workforce` in plan 035; the crosslink that stayed behind was removed by plan 043, because `/workforce` is deferred and a buyer must not be sent to a page being held back. The whole section returns when `/workforce` does.)*
 
@@ -1000,9 +1000,9 @@ below and by `/job-search`'s packet band.
 
 ### Contact band *(retargeted to employers in plan 035; the public-partner version moved to `/workforce`)*
 
-- Kicker: `Sponsored access` · H2: `Talk about sponsoring a group.`
-- Body: `Tell us how many people are affected and when. Setup is self-serve, and we can walk you through it.`
-- CTA: `Talk about sponsored access` → `mailto:hello@offboard.co?subject=Employer support`
+- Kicker: `Sponsored access` · H2: `Explore Offboard before you sponsor a group.`
+- Body: `Create a free account and try the product yourself. There is no sales call or setup required.`
+- CTA: `Get started free` → `https://app.offboard.co/auth?tab=signup`
 
 ---
 
