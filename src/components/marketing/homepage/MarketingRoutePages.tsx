@@ -329,17 +329,26 @@ function categoryHeadingId(category: string): string {
   return `resources-${category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}-title`;
 }
 
+/* Relume Header 49, translated into Civic Modern rather than importing its
+   Tailwind implementation. Resources is an editorial index, so the compact
+   no-CTA variant keeps the library itself as the next action. */
+function ResourcesHero() {
+  return (
+    <section className="mh-resources-hero mh-section" aria-labelledby="resources-hero-title">
+      <div>
+        <span className="mh-kicker is-lime">The library</span>
+        <h1 id="resources-hero-title">Guides &amp; resources</h1>
+      </div>
+      <p>Reported essays, practical guides, and the slow work of making layoffs less brutal.</p>
+    </section>
+  );
+}
+
 export function MarketingResources({ sections }: { sections: ResourceSection[] }) {
   return (
     <MarketingShell current="resources">
       <main id="main-content">
-        <PageHero
-          current="resources"
-          kicker="The library"
-          title="Guides & resources"
-          body="Reported essays, practical guides, and the slow work of making layoffs less brutal."
-          aside={<><span>Written from experience</span><strong>Practical, not theoretical.</strong><p>Guides drawn from the newsletter, the community, and the questions people actually ask.</p></>}
-        />
+        <ResourcesHero />
         {sections.map(({ category, posts }) => {
           const headingId = categoryHeadingId(category);
           return (

@@ -21,11 +21,12 @@ vi.mock("./supabase-read", () => ({
 }));
 
 import { supabaseSelect } from "./supabase-read";
-import { __resetContentSourceLatches, getCategories, getPublishedPosts } from "./posts";
+import { __resetContentSourceLatches, getCategories, getPostBySlug, getPublishedPosts, getResourceSections } from "./posts";
 
 const mockedSelect = vi.mocked(supabaseSelect);
 
 const originalPhase = process.env.NEXT_PHASE;
+const originalVercelEnv = process.env.VERCEL_ENV;
 
 beforeEach(() => {
   __resetContentSourceLatches();
@@ -38,6 +39,8 @@ afterEach(() => {
   vi.restoreAllMocks();
   if (originalPhase === undefined) delete process.env.NEXT_PHASE;
   else process.env.NEXT_PHASE = originalPhase;
+  if (originalVercelEnv === undefined) delete process.env.VERCEL_ENV;
+  else process.env.VERCEL_ENV = originalVercelEnv;
 });
 
 describe("no credentials configured", () => {
@@ -122,5 +125,68 @@ describe("the database answers", () => {
     expect(posts).toHaveLength(1);
     expect(posts[0].title).toBe("A title that exists only in the database");
     expect(console.error).not.toHaveBeenCalled();
+  });
+});
+
+describe("a Vercel branch preview is ahead of the production CMS", () => {
+  const essaySlug = "this-is-not-charity-it-is-reconstruction";
+
+  beforeEach(() => {
+    process.env.VERCEL_ENV = "preview";
+  });
+
+  it("adds committed published essays to the navigable Resources sections", async () => {
+    mockedSelect.mockImplementation(async (table: string) => {
+      if (table === "categories") {
+        return {
+          ok: true as const,
+          data: [
+            { slug: "guides", name: "Guides", description: "d", sort_order: 0 },
+            { slug: "ai-technology", name: "AI & Technology", description: "d", sort_order: 1 },
+            { slug: "essays", name: "Essays", description: "d", sort_order: 2 },
+          ],
+        };
+      }
+      return { ok: true as const, data: [] };
+    });
+
+    const sections = await getResourceSections();
+    const essays = sections.find((section) => section.category === "Essays");
+
+    expect(essays?.posts.map((post) => post.slug)).toContain(essaySlug);
+  });
+
+  it("serves a committed essay when the production CMS still marks it retired", async () => {
+    mockedSelect.mockImplementation(async (table: string) => {
+      if (table === "categories") {
+        return {
+          ok: true as const,
+          data: [{ slug: "essays", name: "Essays", description: "d", sort_order: 2 }],
+        };
+      }
+      return {
+        ok: true as const,
+        data: [{
+          slug: essaySlug,
+          title: "This Is Not Charity. It Is Reconstruction.",
+          category_slug: "essays",
+          excerpt: "e",
+          reading_time: "5 min",
+          date: null,
+          author_name: null,
+          author_role: null,
+          guest_author: null,
+          related: null,
+          status: "retired",
+          sort_order: 11,
+          body: [],
+        }],
+      };
+    });
+
+    const lookup = await getPostBySlug(essaySlug);
+
+    expect(lookup.kind).toBe("published");
+    if (lookup.kind === "published") expect(lookup.body.length).toBeGreaterThan(0);
   });
 });

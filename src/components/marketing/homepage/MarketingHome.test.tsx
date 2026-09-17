@@ -447,6 +447,7 @@ describe("Offboard marketing routes", () => {
 
     expect(screen.getByRole("heading", { level: 1, name: "Guides & resources" })).toBeInTheDocument();
     expect(screen.getByText(/reported essays, practical guides/i)).toBeInTheDocument();
+    expect(container.querySelector(".mh-resources-hero .mh-primary-cta")).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2, name: "Guides" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2, name: "AI & Technology" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2, name: "Essays" })).toBeInTheDocument();

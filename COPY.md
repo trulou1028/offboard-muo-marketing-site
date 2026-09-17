@@ -1015,7 +1015,7 @@ below and by `/job-search`'s packet band.
 
 - Kicker: `The library` · H1: `Guides & resources`
 - Body: `Reported essays, practical guides, and the slow work of making layoffs less brutal.`
-- Aside: `Written from experience / Practical, not theoretical. / Guides drawn from the newsletter, the community, and the questions people actually ask.`
+- Layout: Relume Header 49 structure, translated into Civic Modern: compact two-column heading and body, with no hero CTA. The persistent site CTA and the page's closing CTA handle conversion without competing with the library.
 
 ### Library structure *(plan 013)*
 

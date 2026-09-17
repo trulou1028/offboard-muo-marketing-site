@@ -193,6 +193,34 @@ function rowToResourcePost(row: PostListRow, category: ResourceCategory): Resour
   };
 }
 
+// A branch preview must be able to review content and schema changes together,
+// before the owner applies the migration to the production database. This seam
+// is deliberately Vercel Preview-only: production keeps Supabase as the single
+// publish state promised by docs/cms-architecture.md contract 2.
+function includesCommittedPreviewContent(): boolean {
+  return process.env.VERCEL_ENV === "preview";
+}
+
+function withCommittedPreviewPosts(databasePosts: ResourcePost[]): ResourcePost[] {
+  if (!includesCommittedPreviewContent()) return databasePosts;
+
+  const merged = [...databasePosts];
+  const existingSlugs = new Set(databasePosts.map((post) => post.slug));
+  for (const post of portedResources) {
+    if (!existingSlugs.has(post.slug)) merged.push(post);
+  }
+  return merged;
+}
+
+function committedPreviewLookup(slug: string): PostLookup | undefined {
+  if (!includesCommittedPreviewContent()) return undefined;
+  const post = getResource(slug);
+  if (!post?.ported) return undefined;
+  const body = getPostBlocks(slug);
+  if (!body) return undefined;
+  return { kind: "published", post, body };
+}
+
 // ------------------------------------------------------------- Public API
 
 /** Published posts only — the set that gets a real, prerendered route. */
@@ -202,9 +230,10 @@ export async function getPublishedPosts(): Promise<ResourcePost[]> {
 
   if (categoryRows && postRows) {
     logSource("db");
-    return postRows
+    const published = postRows
       .filter((row) => row.status === "published")
       .map((row) => rowToResourcePost(row, categoryNameFromSlug(categoryRows, row.category_slug)));
+    return withCommittedPreviewPosts(published);
   }
 
   logSource("fallback");
@@ -248,9 +277,11 @@ export async function getResourceSections(): Promise<ResourceSection[]> {
       .sort((a, b) => a.sort_order - b.sort_order)
       .map((categoryRow) => ({
         category: categoryRow.name as ResourceCategory,
-        posts: published
-          .filter((row) => row.category_slug === categoryRow.slug)
-          .map((row) => rowToResourcePost(row, categoryRow.name as ResourceCategory)),
+        posts: withCommittedPreviewPosts(
+          published
+            .filter((row) => row.category_slug === categoryRow.slug)
+            .map((row) => rowToResourcePost(row, categoryRow.name as ResourceCategory)),
+        ).filter((post) => post.category === categoryRow.name),
       }))
       .filter((section) => section.posts.length > 0);
   }
@@ -279,14 +310,15 @@ export async function getPostBySlug(slug: string): Promise<PostLookup> {
   if (categoryRows && postResult?.ok) {
     logSource("db");
     const row = postResult.row;
+    const previewLookup = committedPreviewLookup(slug);
     // No row: genuinely unknown slug, or a draft — the anon RLS policy
     // already excludes 'draft' rows entirely (see the migration's policy
     // comment), so a draft slug reaches this exact branch too. Either way,
     // notFound() is correct and the two cases are indistinguishable to the
     // reader on purpose.
-    if (!row) return { kind: "not-found" };
-    if (row.status === "draft") return { kind: "not-found" };
-    if (row.status === "retired") return { kind: "retired" };
+    if (!row) return previewLookup ?? { kind: "not-found" };
+    if (row.status === "draft") return previewLookup ?? { kind: "not-found" };
+    if (row.status === "retired") return previewLookup ?? { kind: "retired" };
     const category = categoryNameFromSlug(categoryRows, row.category_slug);
     return { kind: "published", post: rowToResourcePost(row, category), body: parsePostBody(row.body, slug) };
   }

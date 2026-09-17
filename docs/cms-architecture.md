@@ -47,6 +47,13 @@ in that commit, but because CI has no credentials to reach Supabase at all.
   loader must fall back to the JSON block files already committed under
   `src/content/resources/blocks/*.json` (and an equivalent committed
   snapshot for `categories`), not fail the build.
+- **Preview deployments also include newly committed published resources.**
+  A review branch can contain a CMS migration that production has not applied
+  yet. On Vercel Preview only, database-published rows remain primary and any
+  additional `ported: true` committed resources are layered in so reviewers
+  can see and navigate the exact content the migration will publish. Production
+  never uses this overlay: Supabase remains its single publish state, and the
+  owner-run `supabase db push` is still required before release.
 - **Future work, not designed here:** on-demand revalidation via
   `revalidatePath`, triggered by a Supabase database webhook when a row's
   `status` changes. This would drop the up-to-5-minute publish delay to
