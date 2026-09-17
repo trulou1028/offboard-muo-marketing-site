@@ -52,7 +52,7 @@ const WHY_COMPANIES_ITEMS = [
    primitives into this repository.
 
    Hero: Header 93                     Member experience: Layout 682
-   Pricing: Pricing 11                 Setup: Timeline 20
+   Pricing: Pricing 11                 Setup: Timeline 1
    Sponsor terms: Comparison 15        Why companies: Stats 2
    California note: Banner 3           Hiring: CTA 59
    FAQ: FAQ 9                           Close: CTA 13 */
@@ -138,18 +138,20 @@ function EmployerPricing() {
 function EmployerTimeline() {
   return (
     <section className="mh-employer-steps mh-section" aria-labelledby="employer-steps-title">
-      <div className="mh-section-heading">
-        <span className="mh-kicker">How sponsorship works</span>
-        <h2 id="employer-steps-title">Setup takes minutes, not weeks.</h2>
+      <div className="mh-employer-timeline-layout">
+        <div className="mh-employer-timeline-intro">
+          <span className="mh-kicker">How sponsorship works</span>
+          <h2 id="employer-steps-title">Setup takes minutes, not weeks.</h2>
+        </div>
+        <ol className="mh-employer-timeline" data-reveal="">
+          {SPONSORSHIP_STEPS.map(([title, body], index) => (
+            <li key={title}>
+              <i aria-hidden="true" />
+              <div><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{body}</p></div>
+            </li>
+          ))}
+        </ol>
       </div>
-      <ol className="mh-employer-timeline" data-reveal="">
-        {SPONSORSHIP_STEPS.map(([title, body], index) => (
-          <li key={title}>
-            <div><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{body}</p></div>
-            <i aria-hidden="true" />
-          </li>
-        ))}
-      </ol>
     </section>
   );
 }
