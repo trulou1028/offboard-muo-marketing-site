@@ -322,6 +322,7 @@ export function PageHero({
   footnote,
   eyebrowVisual,
   visual,
+  layout = "standard",
 }: {
   kicker: string;
   title: string;
@@ -345,12 +346,43 @@ export function PageHero({
      own mark identifies the page's subject; the hero's footnote carries the
      "no relationship" line directly beneath it. */
   eyebrowVisual?: ReactNode;
+  /* Relume Header 47/49, translated into Civic Modern. Compact variants
+     keep the page title on the left and move supporting content to a
+     top-aligned right column. Header 47 retains a CTA; Header 49 does not. */
+  layout?: "standard" | "relume-47" | "relume-49";
 }) {
   const ctaNode = cta === false ? null : ctaHref.startsWith("/") ? (
     <Link className="mh-primary-cta" href={ctaHref}><span>{cta}</span><ArrowRight aria-hidden="true" /></Link>
   ) : (
     <a className="mh-primary-cta" href={ctaHref}><span>{cta}</span><ArrowRight aria-hidden="true" /></a>
   );
+
+  if (layout !== "standard") {
+    return (
+      <section className={`mh-route-hero mh-compact-route-hero is-${layout} mh-section`}>
+        <div className="mh-compact-route-hero-title">
+          {eyebrowVisual ? <span className="mh-hero-eyebrow-visual">{eyebrowVisual}</span> : null}
+          <span className="mh-kicker is-lime">{kicker}</span>
+          <h1>
+            {titleLines
+              ? titleLines.map((line, index) => (
+                  <Fragment key={line}>
+                    {index > 0 ? " " : null}
+                    <span>{balanceHeadline(line)}</span>
+                  </Fragment>
+                ))
+              : balanceHeadline(title)}
+          </h1>
+        </div>
+        <div className="mh-compact-route-hero-content">
+          <p>{body}</p>
+          {aside !== false && aside ? <aside aria-label={`${current} summary`}>{aside}</aside> : null}
+          {footnote ? <small className="mh-route-hero-footnote">{footnote}</small> : null}
+          {layout === "relume-47" ? ctaNode : null}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className={`mh-route-hero mh-section${aside === false && !visual ? " is-single" : ""}${visual ? " is-visual" : ""}`}>

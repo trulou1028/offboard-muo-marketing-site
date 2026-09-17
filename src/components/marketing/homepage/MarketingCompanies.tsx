@@ -19,10 +19,11 @@ export function MarketingCompanies() {
       <main id="main-content">
         <PageHero
           current="companies"
+          layout="relume-49"
           kicker="Company Transition Centers"
           title="Laid off from a company in the news? Start with its page."
           body="One page per company, built from the public record: what happened, with a source next to every figure, what to do this week, and what your state owes you. Nothing here is an estimate and nothing here is a promise."
-          cta="Get started free"
+          cta={false}
           footnote="Offboard has no relationship with any company listed. Each page says when it was last checked."
           aside={false}
         />

@@ -113,6 +113,7 @@ export function MarketingCommunities() {
       <main id="main-content">
         <PageHero
           current="communities"
+          layout="relume-47"
           kicker="Universities and communities"
           title="The workshop ends. The career does not."
           body="Career offices and member programs do good work in a narrow window: a session, an appointment, a program year. What the member leaves with is a folder and a memory. Offboard gives them a record that keeps working after your program is over, and keeps working when they come back."

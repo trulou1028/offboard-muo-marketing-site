@@ -19,12 +19,12 @@ represents systems, not features.
 | `/how-it-works` | Jobseekers | What happens after I sign up | See my starting plan |
 | `/pricing` | Jobseekers | Start free; what Pro adds | Start free |
 | `/resources` + `/resources/:slug` | Jobseekers, SEO | Practical guides | Read the guide |
-| `/about` | Everyone | Why Offboard exists; independence | Talk to the team |
+| `/about` | Everyone | Why Offboard exists; independence | Read the founder story |
 | `/employers` | B2B buyers | Outplacement, modernized ($199/seat) | Talk about sponsored access |
 | `/communities` | Universities, alumni orgs, associations, nonprofits | Sponsor a record that outlasts a single workshop, appointment, or program year | Start a sponsorship conversation |
 | `/workforce` | Workforce boards, counties, public programs | Agencies decide, Offboard helps residents prepare and continue; reporting boundary and pilot shape | Start a partnership conversation |
 | `/privacy-security` | Jobseekers, sponsors, buyers | Who can see your record, who cannot, and where the honest limits are; claims ported from the app repo's `SECURITY_CLAIMS.md` | Build my free transition plan |
-| `/companies` + `/companies/:slug` | Jobseekers arriving from a "<company> layoffs" search; HR at that company | One page per company from the public record: sourced facts, this week, what your state owes you; the same page is the sponsorship email's attachment | Build my free transition plan |
+| `/companies` + `/companies/:slug` | Jobseekers arriving from a "<company> layoffs" search; HR at that company | One page per company from the public record: sourced facts, this week, what your state owes you; the same page is the sponsorship email's attachment | Open a company page; company detail pages retain the free-plan CTA |
 | `/act` | ACT pilot residents | Pilot landing (out of nav, B2G firewall) | Apply for pilot access |
 | `/intake` (+ `/confirmed`) | Members | Native intake form (never redirect) | Submit |
 

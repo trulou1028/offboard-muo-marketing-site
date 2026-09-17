@@ -153,6 +153,7 @@ export function MarketingWorkforce() {
       <main id="main-content">
         <PageHero
           current="workforce"
+          layout="relume-47"
           kicker="Workforce and government"
           title="Agencies decide. Offboard helps residents prepare and continue."
           body="Residents lose weeks to forms, phone trees, and appointment windows before anyone helps them plan. Offboard gives them a private place to organize the practical work and routes them back to the responsible agency for every official decision."
