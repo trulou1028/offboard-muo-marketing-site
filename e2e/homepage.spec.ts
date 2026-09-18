@@ -610,7 +610,7 @@ test.describe("the /application-packet rows stay inside their sections", () => {
             continue;
           }
           const box = band.getBoundingClientRect();
-          band.querySelectorAll(".mh-packet-steps *, .mh-stage-strip *").forEach((el) => {
+          band.querySelectorAll(".mh-packet-demo *, .mh-stage-strip *").forEach((el) => {
             const r = el.getBoundingClientRect();
             if (!r.width) return;
             if (r.left < box.left - 0.5 || r.right > box.right + 0.5) {
@@ -629,15 +629,14 @@ test.describe("the /application-packet rows stay inside their sections", () => {
     // Pinned in the browser as well as in the unit test: these six strings and
     // their two Free chips are a pricing claim, ported from packetSteps.ts in
     // the app repo. A silent flip here is a promise the product does not keep.
-    await expect(page.locator(".mh-packet-steps > li")).toHaveCount(6);
-    await expect(page.locator(".mh-packet-steps .mh-state-chip", { hasText: /^Free$/ })).toHaveCount(2);
-    await expect(page.locator(".mh-packet-steps .mh-state-chip.is-pro")).toHaveCount(3);
+    await expect(page.locator(".mh-packet-summary > li")).toHaveCount(6);
+    await expect(page.locator(".mh-packet-summary .mh-state-chip", { hasText: /^Free$/ })).toHaveCount(2);
+    await expect(page.locator(".mh-packet-summary .mh-state-chip.is-pro")).toHaveCount(3);
     // Ghost Check is neither: the basic verdict is free three times a month.
-    await expect(page.locator(".mh-packet-steps .mh-state-chip", { hasText: /^3 a month$/ })).toHaveCount(1);
+    await expect(page.locator(".mh-packet-summary .mh-state-chip", { hasText: /^3 a month$/ })).toHaveCount(1);
   });
 
-  test("the example supports direct inspection, playback interruption, and no backend calls", async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: "no-preference" });
+  test("the example stays in one complete view and makes no backend calls", async ({ page }) => {
     const backendRequests: string[] = [];
     page.on("request", (request) => {
       if (/supabase\.co|api\.offboard\.co/i.test(request.url())) backendRequests.push(request.url());
@@ -645,69 +644,24 @@ test.describe("the /application-packet rows stay inside their sections", () => {
     await page.goto("/application-packet");
 
     await expect(page.getByLabel("Complete packet example")).toContainText("One role, six connected outputs.");
-    const coverLetter = page.getByRole("button", { name: /Cover Letter Draft a cover letter/ });
-    await coverLetter.focus();
-    await coverLetter.click();
-    await expect(coverLetter).toHaveAttribute("aria-pressed", "true");
-    await expect(coverLetter).toBeFocused();
-    await expect(page.getByLabel("Cover Letter example output")).toContainText("Example excerpt");
-
-    await page.getByRole("button", { name: "Play example" }).click();
-    await expect(page.getByRole("button", { name: /Ghost Check/ })).toHaveAttribute("aria-pressed", "true");
-    await page.getByRole("button", { name: /Path to a Person/ }).click();
-    await page.waitForTimeout(2600);
-    await expect(page.getByRole("button", { name: /Path to a Person/ })).toHaveAttribute("aria-pressed", "true");
-    await expect(page.getByLabel("Path to a Person example output")).toContainText("Customer Success Operations leader");
-
-    await page.getByRole("button", { name: "Show complete packet" }).click();
-    await expect(page.getByLabel("Complete packet example")).toBeVisible();
+    await expect(page.locator(".mh-packet-summary > li")).toHaveCount(6);
+    await expect(page.locator(".mh-packet-demo button")).toHaveCount(0);
+    await expect(page.locator(".mh-packet-demo [role=tab]")).toHaveCount(0);
     expect(backendRequests).toEqual([]);
   });
 
-  test("reduced motion keeps direct inspection and removes the timed walkthrough", async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto("/application-packet");
-
-    await expect(page.getByText("Motion reduced. Choose any step or show the complete packet.")).toBeVisible();
-    await expect(page.getByRole("button", { name: "Play example" })).toHaveCount(0);
-    await page.getByRole("button", { name: /Role Match Analysis/ }).click();
-    await expect(page.getByLabel("Role Match Analysis example output")).toContainText("Gap to address");
-  });
-
-  test("the useful packet summary and step descriptions survive without JavaScript", async ({ browser }) => {
+  test("the useful packet summary survives without JavaScript", async ({ browser }) => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
     await page.goto("/application-packet");
 
     await expect(page.getByLabel("Complete packet example")).toContainText("One role, six connected outputs.");
-    await expect(page.locator(".mh-packet-steps > li")).toHaveCount(6);
-    await expect(page.locator(".mh-packet-steps button")).toHaveCount(0);
+    await expect(page.locator(".mh-packet-summary > li")).toHaveCount(6);
+    await expect(page.locator(".mh-packet-demo button")).toHaveCount(0);
     await expect(page.getByText("Illustrative example. No live job is being checked.")).toBeVisible();
     await context.close();
   });
 
-  test("hydration and direct selection do not shift the page", async ({ page }) => {
-    await page.addInitScript(() => {
-      (window as Window & { __packetCls?: number }).__packetCls = 0;
-      new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          const shift = entry as PerformanceEntry & { hadRecentInput: boolean; value: number };
-          if (!shift.hadRecentInput) {
-            (window as Window & { __packetCls?: number }).__packetCls =
-              ((window as Window & { __packetCls?: number }).__packetCls ?? 0) + shift.value;
-          }
-        }
-      }).observe({ type: "layout-shift", buffered: true });
-    });
-    await page.goto("/application-packet");
-    await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(300);
-    await page.getByRole("button", { name: /Company Intel/ }).click();
-    await page.waitForTimeout(700);
-
-    const cls = await page.evaluate(() => (window as Window & { __packetCls?: number }).__packetCls ?? 0);
-    expect(cls).toBeLessThan(0.01);
-  });
 });
 
 // Where a hero headline breaks (owner 2026-09-14). `text-wrap: balance` gives

@@ -54,7 +54,7 @@ function PacketBand() {
         </div>
         <div className="mh-packet-band-intro">
           <span>One example role</span>
-          <p>Inspect each step or play the short walkthrough. Nothing here runs a live check or sends an application.</p>
+          <p>See how one example role connects research, fit, and application materials. Nothing here runs a live check or sends an application.</p>
         </div>
       </div>
       <ApplicationPacketDemo />

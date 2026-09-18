@@ -8,6 +8,12 @@ Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc`.
 Planning branch: `codex/motion-polish-plans`. Depends on plan 052's shared motion
 contract/runtime. Execute after 052; this does not depend on plan 054.
 
+**Owner refinement, 2026-09-18:** ship the complete example as one static view,
+matching the reviewed two-card composition. Remove the six selectors, playback,
+and individual output states. This direction supersedes the interaction and
+motion requirements below while retaining the verified labels, tiers, fictional
+source record, review boundary, responsive checks, and performance budget.
+
 ## Outcome and placement
 
 On `/application-packet`, let a visitor inspect how one example role connects to
@@ -179,11 +185,10 @@ Implemented 2026-09-18. Product evidence was refreshed from
 `src/components/job-packet/packetSteps.ts`, the application output renderers,
 and `supabase/functions/_shared/entitlements.ts`.
 
-The production `/application-packet` script set is 11,811 uncompressed bytes
-larger than the same route on marketing `origin/main`, below the 20 KB route
-budget. Browser verification asserts layout shift below 0.01 through hydration
-and direct selection. The complete example remains in server-rendered HTML;
-interactive controls appear only after hydration.
+Following the owner refinement, the example is a server-rendered, single-view
+composition with no client state, timers, selectors, playback, or route-specific
+motion runtime. The final route script comparison is recorded in the PR after
+the revised production build.
 
 All local CI-equivalent commands pass. Vercel built the preview successfully.
 The three GitHub-hosted jobs reported failure without starting a step; their

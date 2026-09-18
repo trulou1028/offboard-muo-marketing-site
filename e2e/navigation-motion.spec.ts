@@ -98,8 +98,6 @@ test.describe("reduced-motion navigation", () => {
     await expect(panel).toHaveCSS("transform", "none");
     await expect(panel.getByRole("link", { name: /Career Context/ })).toBeVisible();
 
-    await page.emulateMedia({ reducedMotion: "no-preference" });
-    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.keyboard.press("Escape");
     await expect(product).toBeFocused();
     await expect(

@@ -76,20 +76,18 @@ describe("COPY.md is readable and structured as expected", () => {
 });
 
 describe("Application Packet example copy stays governed", () => {
-  it("records the permanent disclosure, fixture source, controls, and review boundary", () => {
+  it("records the permanent disclosure, fixture source, summary, and review boundary", () => {
     const text = renderedText(<MarketingApplicationPacket />);
     for (const line of [
       "Illustrative example. No live job is being checked.",
       "Built an onboarding playbook adopted by a 12-person support team and reduced handoff time by 20%.",
       "Alex reviews and sends every application material.",
-      "Play example",
+      "See how one example role connects research, fit, and application materials.",
     ]) {
       expect(COPY_DOC).toContain(line);
       expect(text).toContain(line);
     }
-    for (const statefulControl of ["Pause", "Replay example", "Show complete packet"]) {
-      expect(COPY_DOC).toContain(statefulControl);
-    }
+    expect(text).not.toContain("Play example");
   });
 });
 

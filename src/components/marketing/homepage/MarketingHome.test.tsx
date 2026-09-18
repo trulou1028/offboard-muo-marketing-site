@@ -243,17 +243,16 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("heading", { level: 1, name: /One job link\. An entire Application.Packet\./ })).toBeInTheDocument();
     expect(screen.getAllByText(/your first complete packet runs every step free/i).length).toBeGreaterThanOrEqual(2);
 
-    // The six rows are the app's own packet steps, in the app's order. A chip
-    // per row says whether Free covers it: two free, four Pro (owner decision
-    // 2026-09-13). Both counts are asserted, because a chip that silently
+    // The six summary rows use the app's own packet-step labels and order. A
+    // chip per row says what Free covers. Both counts are asserted because a chip that silently
     // flipped to Free would be a pricing claim nobody reviewed.
     expect(
-      Array.from(document.querySelectorAll(".mh-packet-steps strong")).map((s) => s.textContent),
+      Array.from(document.querySelectorAll(".mh-packet-summary strong")).map((s) => s.textContent),
     ).toEqual(["Ghost Check", "Company Intel", "Role Match Analysis", "Tailor Resume", "Cover Letter", "Path to a Person"]);
     // Corrected 2026-09-14 against the server rather than the picker: Ghost
     // Check is not simply Pro. A Free member gets the basic verdict three
     // times a month, so the chip carries the allowance instead.
-    const chips = Array.from(document.querySelectorAll(".mh-packet-steps .mh-state-chip")).map((c) => c.textContent);
+    const chips = Array.from(document.querySelectorAll(".mh-packet-summary .mh-state-chip")).map((c) => c.textContent);
     expect(chips).toEqual(["3 a month", "Free", "Free", "Pro", "Pro", "Pro"]);
     expect(screen.getByText(/basic ghost checks carry on at three a month/i)).toBeInTheDocument();
     expect(screen.getByText("Illustrative example. No live job is being checked.")).toBeInTheDocument();

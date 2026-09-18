@@ -824,7 +824,7 @@ implementation authorized or started.** Source baseline: freshly fetched
 | Plan | Title | Priority | Effort | Depends on | Status |
 | --- | --- | --- | --- | --- | --- |
 | 052 | [Polished navigation and shared motion foundation](052-polished-navigation-and-motion-foundation.md) | P1 | M | Current main | MERGED 2026-09-18 via [PR #121](https://github.com/trulou1028/offboard-muo-marketing-site/pull/121) at `edf86a7`. Full React Motion failed the 25 KB budget (+37.4 KB); `motion/mini` passes at +4.0 KB with zero layout shift. |
-| 053 | [Application Packet demonstration](053-application-packet-demonstration.md) | P1 | M | 052 shared foundation | READY FOR REVIEW on `codex/plan-053-application-packet-demo`; local checks, Vercel, and reviewed visual baselines green; merge blocked by GitHub Actions account billing/spend limit |
+| 053 | [Application Packet demonstration](053-application-packet-demonstration.md) | P1 | M | 052 shared foundation | READY FOR REVIEW on `codex/plan-053-application-packet-demo`; owner-refined single-view example, local checks, and reviewed visual baselines green; merge blocked by GitHub Actions account billing/spend limit |
 | 054 | [Interactive Career Context example](054-interactive-career-context-example.md) | P1 | M | 052 shared foundation | TODO - plan drafted; awaiting planning review on `codex/motion-polish-plans` |
 
 Recommended execution order: **052 -> 053 -> 054**, one implementation PR at a
