@@ -6,6 +6,7 @@ export const metadata = marketingMetadata({
   path: "/intake/confirmed",
   title: "Intake received | Offboard",
   description: "Thanks for filling that out. We'll review your intake and reach out directly.",
+  socialTitle: { parent: "Support", page: "Intake Received" },
 });
 
 export default function Page() {

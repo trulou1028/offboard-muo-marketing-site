@@ -5,6 +5,7 @@ export const metadata = marketingMetadata({
   path: "/about",
   title: "Why Offboard exists | About Offboard",
   description: "Offboard was built by founders who went through their own layoffs. Independent, private, and built to get you out of here.",
+  socialTitle: { parent: "Company", page: "Why Offboard Exists" },
 });
 
 export default function Page() {

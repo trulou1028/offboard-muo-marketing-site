@@ -11,6 +11,10 @@ type MarketingMetadataInput = {
   path: string;
   title: string;
   description: string;
+  socialTitle: {
+    parent: string;
+    page: string;
+  };
   robots?: Metadata["robots"];
   type?: "website" | "article";
 };
@@ -20,9 +24,12 @@ export function marketingMetadata({
   path,
   title,
   description,
+  socialTitle,
   robots,
   type = "website",
 }: MarketingMetadataInput): Metadata {
+  const cardTitle = `${socialTitle.parent} | ${socialTitle.page}`;
+
   return {
     alternates: { canonical: path },
     title,
@@ -32,13 +39,13 @@ export function marketingMetadata({
       type,
       siteName: "Offboard",
       url: path,
-      title,
+      title: cardTitle,
       description,
       images: [SOCIAL_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: cardTitle,
       description,
       images: [{ url: SOCIAL_IMAGE.url, alt: SOCIAL_IMAGE.alt }],
     },

@@ -27,12 +27,14 @@ export async function generateMetadata({
       path: "/resources",
       title: "Guides & resources | Offboard",
       description: "Reported essays, practical guides, and the slow work of making layoffs less brutal.",
+      socialTitle: { parent: "Resources", page: "Guides" },
     });
   }
   return marketingMetadata({
     path: `/resources/${lookup.post.slug}`,
     title: `${lookup.post.title} | Offboard`,
     description: lookup.post.excerpt,
+    socialTitle: { parent: "Resources", page: lookup.post.title },
     type: "article",
     /* The article's own slug, not the requested one: a retired slug 308s to
        /resources, so only a rendering page reaches here. */

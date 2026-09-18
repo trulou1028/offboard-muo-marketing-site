@@ -743,23 +743,36 @@ test("every route's canonical points at its own address on the real domain", asy
   expect(wrong).toEqual([]);
 });
 
-// Social cards reuse the page's actual browser title and description rather
-// than the homepage fallback. Keeping this loop beside the canonical sweep
-// makes every public route prove its complete share-card contract.
-test("every route's social card matches that page's title and description", async ({ page }) => {
-  const ROUTES = [
-    "/", "/about", "/act", "/career-context", "/communities", "/companies",
-    "/employers", "/how-it-works", "/integrations", "/intake",
-    "/intake/confirmed", "/application-packet", "/layoff-support", "/lumo", "/pricing",
-    "/privacy-security", "/resources", "/workforce",
-    "/companies/airtable",
-    "/resources/first-week-after-a-layoff",
-  ];
+// Social cards use a scannable parent | page title while keeping the route's
+// real description. Keeping this map beside the canonical sweep makes every
+// public route prove its complete share-card contract and taxonomy.
+test("every route's social card uses its parent category and page-specific copy", async ({ page }) => {
+  const ROUTES: Record<string, string> = {
+    "/": "Offboard | The Modern Unemployment Office",
+    "/about": "Company | Why Offboard Exists",
+    "/act": "Programs | ACT Pilot",
+    "/application-packet": "Product | Application Packet",
+    "/career-context": "Product | Career Context",
+    "/communities": "Partners | Universities & Communities",
+    "/companies": "Layoff Support | Company Transition Centers",
+    "/companies/airtable": "Company Transition Center | Airtable",
+    "/employers": "Partners | Employers",
+    "/how-it-works": "Product | How Offboard Works",
+    "/intake": "Support | Talk to a Person",
+    "/intake/confirmed": "Support | Intake Received",
+    "/integrations": "Product | Integrations",
+    "/layoff-support": "Layoff Support | Benefits, Coverage & Runway",
+    "/lumo": "Product | Lumo",
+    "/pricing": "Product | Pricing",
+    "/privacy-security": "Company | Privacy & Security",
+    "/resources": "Resources | Guides",
+    "/resources/first-week-after-a-layoff": "Resources | What to do in your first week after a layoff",
+    "/workforce": "Partners | Workforce & Government",
+  };
 
   const wrong: string[] = [];
-  for (const route of ROUTES) {
+  for (const [route, expectedTitle] of Object.entries(ROUTES)) {
     await page.goto(route);
-    const title = await page.title();
     const description = await page.locator('meta[name="description"]').getAttribute("content");
     const social = await page.locator("head").evaluate(() => ({
       ogTitle: document.querySelector<HTMLMetaElement>('meta[property="og:title"]')?.content,
@@ -770,9 +783,9 @@ test("every route's social card matches that page's title and description", asyn
       twitterImage: document.querySelector<HTMLMetaElement>('meta[name="twitter:image"]')?.content,
     }));
 
-    if (social.ogTitle !== title) wrong.push(`${route}: Open Graph title does not match the page title`);
+    if (social.ogTitle !== expectedTitle) wrong.push(`${route}: Open Graph title is ${social.ogTitle ?? "missing"}`);
     if (social.ogDescription !== description) wrong.push(`${route}: Open Graph description does not match the page description`);
-    if (social.twitterTitle !== title) wrong.push(`${route}: Twitter title does not match the page title`);
+    if (social.twitterTitle !== expectedTitle) wrong.push(`${route}: Twitter title is ${social.twitterTitle ?? "missing"}`);
     if (social.twitterDescription !== description) wrong.push(`${route}: Twitter description does not match the page description`);
     if (!social.ogImage?.endsWith("/marketing/social/offboard-social-card.jpg")) {
       wrong.push(`${route}: Open Graph image is ${social.ogImage ?? "missing"}`);
