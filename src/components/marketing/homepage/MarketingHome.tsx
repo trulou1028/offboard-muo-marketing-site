@@ -95,6 +95,7 @@ function HomeHero() {
         alt={HERO_PHOTO.alt}
         fill
         sizes="100vw"
+        quality={85}
         priority
       />
       <div className="mh-hero2-copy">

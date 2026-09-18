@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  images: {
+    // Keep the site-wide default at 75, while allowing the full-bleed homepage
+    // hero to opt into a modestly higher-quality responsive derivative.
+    qualities: [75, 85],
+  },
   // A stray package-lock.json exists in the home directory; without this,
   // Turbopack infers the workspace root as ~ and warns on every build.
   turbopack: {
