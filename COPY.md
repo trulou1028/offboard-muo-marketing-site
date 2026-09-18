@@ -1305,9 +1305,10 @@ same rule as any page.
 **Both render inside the app's branded shell** (owner 2026-09-15). Until then
 they were plain HTML on the site's paper background, which looked nothing like
 the auth and transactional emails `app.offboard.co` sends, even though both go
-out through the same Resend account from `Offboard <info@offboard.co>`. The
-reply-to address is `info@offboard.co`, so a direct reply reaches the public
-contact inbox. The shell is ported from `lumo-plan-builder` `origin/main`
+out through the same Resend account from `Offboard <hello@offboard.co>`. This
+is a sending alias, not a monitored inbox. The reply-to address is `info@offboard.co`,
+so a direct reply reaches the public contact inbox. The
+shell is ported from `lumo-plan-builder` `origin/main`
 `supabase/functions/_shared/email-templates/branded-shell.tsx`, whose own rule
 (`.lovable/memory/style/email-branded-shell-standard.md`) is that *every*
 Offboard email uses it: grey page, white card, centred logo, dividers, footer,

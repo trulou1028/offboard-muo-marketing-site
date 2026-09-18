@@ -13,7 +13,7 @@ import "server-only";
 // (see plans/010-intake-form-port.md "Key availability"). Absence never
 // throws: submission success only depends on the Supabase insert.
 
-const FROM = "Offboard <info@offboard.co>";
+const FROM = "Offboard <hello@offboard.co>";
 const REPLY_TO = "info@offboard.co";
 
 async function logSendFailure(res: Response): Promise<void> {
