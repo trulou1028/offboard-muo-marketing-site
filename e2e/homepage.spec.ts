@@ -13,7 +13,20 @@ test.describe("Offboard marketing site", () => {
       if (/supabase\.co|api\.offboard\.co/i.test(request.url())) backendRequests.push(request.url());
     });
 
+    await page.setViewportSize({ width: 1920, height: 1080 });
     await page.goto("/");
+    const heroImage = page.getByAltText(
+      "A woman sits cross-legged on her bed with a laptop at dusk, with modern artwork above the bed.",
+    );
+    await expect(heroImage).toHaveJSProperty("complete", true);
+    const heroDelivery = await heroImage.evaluate((image: HTMLImageElement) => ({
+      currentSrc: image.currentSrc,
+      naturalWidth: image.naturalWidth,
+      sizes: image.sizes,
+    }));
+    expect(heroDelivery.currentSrc).toContain("q=85");
+    expect(heroDelivery.naturalWidth).toBeGreaterThanOrEqual(1920);
+    expect(heroDelivery.sizes).toBe("100vw");
     // Homepage v3 (plan 039): the Career Context narrative as three numbered
     // steps, COPY.md § 1.
     await expect(page.getByRole("heading", { level: 1, name: /modern unemployment office/i })).toBeVisible();

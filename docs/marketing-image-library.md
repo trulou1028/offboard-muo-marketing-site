@@ -17,6 +17,12 @@ right-weighted composition fits the page.
 | `coworking.webp` | South Asian woman in her 40s, coworking space | A woman works on her laptop at a communal table in a daylight-filled coworking space. |
 | `public-library.webp` | White man in his late 50s, public library | A man works on his laptop with notes and reading glasses at a public library table. |
 
+`bedroom.webp` is the homepage's high-density master at 2880 × 1801. It was
+upscaled from the approved composition with light sharpening, then encoded as
+WebP. The homepage requests Next.js quality 85 for this image only. Responsive
+image sizing remains enabled, so narrow screens receive a smaller derivative
+rather than downloading the full master.
+
 The share-card derivative lives at
 `public/marketing/social/offboard-social-card.jpg`. It is a 1200 × 630 crop of
 `bedroom.webp` with the official light Offboard wordmark in the upper left.
