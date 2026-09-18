@@ -5,6 +5,7 @@ export const metadata = marketingMetadata({
   path: "/application-packet",
   title: "Application Packet | Offboard",
   description: "Paste a job link and build one complete Application Packet with company intel, role match, resume tailoring, a cover letter, and a path to a person.",
+  socialTitle: { parent: "Product", page: "Application Packet" },
 });
 
 export default function Page() {

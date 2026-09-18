@@ -20,9 +20,11 @@ right-weighted composition fits the page.
 The share-card derivative lives at
 `public/marketing/social/offboard-social-card.jpg`. It is a 1200 × 630 crop of
 `bedroom.webp` with the official light Offboard wordmark in the upper left.
-Unlike the reusable source photographs below, this export is intentionally
-branded for Open Graph and Twitter cards. Page-specific titles and descriptions
-stay in metadata instead of being baked into the image.
+The derivative is composed directly from the untouched source photograph and
+the transparent production logo, with no generative repainting or texture
+changes. Unlike the reusable source photographs below, this export is
+intentionally branded for Open Graph and Twitter cards. Page-specific titles
+and descriptions stay in metadata instead of being baked into the image.
 
 ## Usage
 

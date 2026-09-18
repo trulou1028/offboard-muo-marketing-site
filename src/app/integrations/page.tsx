@@ -5,6 +5,7 @@ export const metadata = marketingMetadata({
   path: "/integrations",
   title: "Integrations | Use Offboard from the AI you already use",
   description: "Connect Offboard to ChatGPT, Claude, and the tools you already use. Save roles, update applications, and build your Career Context from any conversation.",
+  socialTitle: { parent: "Product", page: "Integrations" },
 });
 
 export default function Page() {

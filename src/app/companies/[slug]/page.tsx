@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: "Company Transition Centers | Offboard",
       description:
         "One page per company that has just had a layoff, built from the public record: what happened, with a source next to every figure, what to do this week, and what your state owes you.",
+      socialTitle: { parent: "Layoff Support", page: "Company Transition Centers" },
       robots: DEFERRED_ROBOTS,
     });
   }
@@ -31,6 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     path: `/companies/${slug}`,
     title: `Laid off from ${company.name}? Start here | Offboard`,
     description: company.summary,
+    socialTitle: { parent: "Company Transition Center", page: company.name },
     robots: DEFERRED_ROBOTS,
   });
 }

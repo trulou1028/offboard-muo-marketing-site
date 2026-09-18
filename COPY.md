@@ -508,7 +508,32 @@ it did not):
 
   The photo `alt` shipping today: `A woman sits cross-legged on her bed with a laptop at dusk, with modern artwork above the bed.`
 
-  The site-wide social preview image is `public/marketing/social/offboard-social-card.jpg`: a 1200 × 630 crop of the bedroom scene with the official light Offboard wordmark in the upper left. No page title or description is baked into the image. Each preview card's title and description must match that route's own metadata. Image alt: `A woman sits cross-legged on her bed with a laptop at dusk, with the Offboard logo on the wall beside her.`
+  The site-wide social preview image is `public/marketing/social/offboard-social-card.jpg`: a deterministic 1200 × 630 crop of the untouched `bedroom.webp` source with the official light Offboard wordmark overlaid in the upper left. It is not an AI-regenerated version of the photograph. No page title or description is baked into the image. Image alt: `A woman sits cross-legged on her bed with a laptop at dusk, with the Offboard logo on the wall beside her.`
+
+  Social titles use `Parent category | Specific page`; descriptions remain the route's own metadata description. The browser/SEO title stays independent. Fixed social titles:
+
+  | Route | Social title |
+  | --- | --- |
+  | `/` | `Offboard | The Modern Unemployment Office` |
+  | `/about` | `Company | Why Offboard Exists` |
+  | `/act` | `Programs | ACT Pilot` |
+  | `/application-packet` | `Product | Application Packet` |
+  | `/career-context` | `Product | Career Context` |
+  | `/communities` | `Partners | Universities & Communities` |
+  | `/companies` | `Layoff Support | Company Transition Centers` |
+  | `/employers` | `Partners | Employers` |
+  | `/how-it-works` | `Product | How Offboard Works` |
+  | `/intake` | `Support | Talk to a Person` |
+  | `/intake/confirmed` | `Support | Intake Received` |
+  | `/integrations` | `Product | Integrations` |
+  | `/layoff-support` | `Layoff Support | Benefits, Coverage & Runway` |
+  | `/lumo` | `Product | Lumo` |
+  | `/pricing` | `Product | Pricing` |
+  | `/privacy-security` | `Company | Privacy & Security` |
+  | `/resources` | `Resources | Guides` |
+  | `/workforce` | `Partners | Workforce & Government` |
+
+  Dynamic pages follow the same rule: company pages use `Company Transition Center | {company name}` and articles use `Resources | {article title}`.
 
   The exchange over the photo's lower right is `public/marketing/homepage/hero/lumo-chat.png`, one transparent image at 2x. It is not markup and it is not built from these strings; a change to it is a new export, not a code edit. Member bubble: `@offboard What should I focus on today?` (the handle in lime). Lumo's card, with Lumo's face beside it: a context chip `Used profile, applications, interviews, integrations`, then `Got it! Two things deserve your attention today.`, then two rows: `Prepare for your Figma interview` / `Senior Product Design at Figma` and `Update application status` / `Product Engineer at Stripe`. The 2026-09-03 Paper export (`hero-composition.avif`, the kitchen-table photo with the save-an-application exchange) is retired.
 

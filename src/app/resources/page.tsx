@@ -9,6 +9,7 @@ export const metadata = marketingMetadata({
   path: "/resources",
   title: "Guides & resources | Offboard",
   description: "Reported essays, practical guides, and the slow work of making layoffs less brutal.",
+  socialTitle: { parent: "Resources", page: "Guides" },
 });
 
 export default async function Page() {

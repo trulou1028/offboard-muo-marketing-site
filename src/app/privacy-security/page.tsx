@@ -6,6 +6,7 @@ export const metadata = marketingMetadata({
   title: "Privacy & Security | Who can see your Offboard record",
   description:
     "See who can access your Offboard record, who cannot, how your data is protected, where the limits are, and what you can delete.",
+  socialTitle: { parent: "Company", page: "Privacy & Security" },
 });
 
 export default function Page() {

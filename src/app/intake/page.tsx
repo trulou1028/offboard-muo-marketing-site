@@ -7,6 +7,7 @@ export const metadata = marketingMetadata({
   title: "Intake | Offboard",
   description:
     "Tell us a bit about your offboarding story. Our team reviews every intake and reaches out directly.",
+  socialTitle: { parent: "Support", page: "Talk to a Person" },
 });
 
 export default function Page() {
