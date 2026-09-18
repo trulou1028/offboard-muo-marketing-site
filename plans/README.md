@@ -812,3 +812,26 @@ plan-preview card (real product state) is folded into v2's "More than a job
 search" section, beside the question it answers. 018's shared work - the
 final-CTA photo treatment, the secondary-CTA role, the focus-ring a11y fix -
 is untouched and still ships on every route.
+
+---
+
+## Motion and interactive product examples (2026-09-18)
+
+Requested by Louie after the motion-polish brainstorm. **Planning only; no
+implementation authorized or started.** Source baseline: freshly fetched
+`origin/main` at `5dfebdc`. Planning branch: `codex/motion-polish-plans`.
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+| --- | --- | --- | --- | --- | --- |
+| 052 | [Polished navigation and shared motion foundation](052-polished-navigation-and-motion-foundation.md) | P1 | M | Current main | TODO - plan drafted; awaiting planning review on `codex/motion-polish-plans` |
+| 053 | [Application Packet demonstration](053-application-packet-demonstration.md) | P1 | M | 052 shared foundation | TODO - plan drafted; awaiting planning review on `codex/motion-polish-plans` |
+| 054 | [Interactive Career Context example](054-interactive-career-context-example.md) | P1 | M | 052 shared foundation | TODO - plan drafted; awaiting planning review on `codex/motion-polish-plans` |
+
+Recommended execution order: **052 -> 053 -> 054**, one implementation PR at a
+time because these changes share the stylesheet, motion conventions, and copy
+regressions. 053 and 054 do not require each other's interaction components.
+052 owns the shared motion, performance, and verification contract; read it before
+either demo. Each plan carries dated recommendations for both Codex and Claude
+Code. Implementation requires a subsequent instruction; every visible change
+requires its own real Vercel preview and Louie's go before merge. This planning
+PR has no visual change and needs no site preview.
