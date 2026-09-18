@@ -1850,16 +1850,35 @@ what its shared record feeds after a person applies.
 
 - Kicker: `Inside the packet` · H2: `The role, the research, and what you send, connected.`
 - Body: `One link becomes a company brief, a fit read, and the materials you send, all kept with the role instead of scattered across six tabs.`
-- Visual: `renders/toolkit-job-packets.webp`, the Application Packet view. `/how-it-works` renders the same file in its flagship block; that page is deferred.
-- **The six rows are the app's own packet steps, verbatim** from `lumo-plan-builder` `origin/main` `src/components/job-packet/packetSteps.ts` (labels and descriptions), in the app's order, with a chip saying what Free covers (owner decision 2026-09-13). **The chips come from the server, not from that file** — see the correction below. Parse Job and Save Application are foundational, never appear in the app's own picker, and are not listed here.
-  1. `Ghost Check` — `Is this posting real and active?` — chip `3 a month` *(corrected 2026-09-14, see below)*
-  2. `Company Intel` — `Research the company` — chip `Free`
-  3. `Role Match Analysis` — `Score your fit for the role` — chip `Free`
-  4. `Tailor Resume` — `Adapt your resume to this job` — chip `Pro`
-  5. `Cover Letter` — `Draft a cover letter` — chip `Pro`
-  6. `Path to a Person` — `Find someone to reach out to` — chip `Pro`
-- Note under the rows: `Your first complete packet runs every step free. After that the company and fit reads stay free on every packet, basic ghost checks carry on at three a month, and the rest is Offboard Pro.`
+- Demonstration introduction: `One example role` · `See how one example role connects research, fit, and application materials. Nothing here runs a live check or sends an application.`
+- The static Application Packet image is replaced here by a fixed, single-view example. `/how-it-works` continues to render `renders/toolkit-job-packets.webp` in its flagship block.
+- **The six summary rows use the app's own packet-step labels** from `lumo-plan-builder` `origin/main` `src/components/job-packet/packetSteps.ts`, in the app's order, with a chip saying what Free covers (owner decision 2026-09-13). **The chips come from the server, not from that file** - see the correction below. Parse Job and Save Application are foundational, never appear in the app's own picker, and are not listed here.
+- Note under the example: `Your first complete packet runs every step free. After that the company and fit reads stay free on every packet, basic ghost checks carry on at three a month, and the rest is Offboard Pro.`
 - Every chip is a claim. Changing one means re-reading the app's **server** entitlements and `/pricing` in the same PR.
+
+#### Single-view example *(plan 053, refined 2026-09-18)*
+
+The demonstration uses invented fixture data. It performs no job check, research,
+generation, contact lookup, upload, or send action. The complete packet summary
+and its six outputs render as one static view, with no tabs, selectors, or
+playback controls.
+
+- Permanent labels: `Illustrative example` · `Illustrative example. No live job is being checked.` · `Complete example`
+- Example candidate: `Alex Morgan` · `Customer operations specialist`
+- Example role: `Customer Success Manager` at `Example Co.`
+- Role summary: `Own onboarding for new accounts, improve customer handoffs, and help the team build repeatable retention practices.`
+- `Example source record`: `Built an onboarding playbook adopted by a 12-person support team and reduced handoff time by 20%.`
+
+**Complete packet view**
+
+- H3: `One role, six connected outputs.` · status `Ready to review`
+- Ghost Check: `Signals collected for review`
+- Company Intel: `Company brief ready`
+- Role Match Analysis: `Alignment and gap identified`
+- Tailor Resume: `One grounded revision ready`
+- Cover Letter: `Short excerpt ready to review`
+- Path to a Person: `Relevant outreach path found`
+- Review line: `Alex reviews and sends every application material.`
 
 **Correction, 2026-09-14.** The Ghost Check chip shipped on 2026-09-13 reading
 `Pro`, and the note said the free allowance was "outside a packet". Both were

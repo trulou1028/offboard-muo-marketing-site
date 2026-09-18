@@ -1586,21 +1586,48 @@ ol.mh-stage-strip { margin-top: 48px; counter-reset: mh-stage; border-top: 1px s
 .mh-stage-strip.is-detailed ul strong { font-size: 15px; font-weight: 600; }
 .mh-stage-strip.is-detailed ul p { margin-top: 4px; color: var(--mh-muted); font-size: 14px; line-height: 1.5; }
 
-/* The Application Packet band (plan 051). The six rows are the app's own
-   packet steps, in the app's order; the chip says which of them Free covers. */
+/* The Application Packet band (plans 051 and 053). The six rows are the app's
+   own packet steps, in the app's order; the chip says which of them Free
+   covers. Plan 053 presents one fixed, illustrative packet in a single view. */
 .mh-packet { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); }
 .mh-packet .mh-copy-block { max-width: 560px; }
-.mh-packet-visual { position: relative; min-height: 300px; overflow: hidden; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); }
-.mh-packet-visual img { object-fit: cover; object-position: center top; }
-ol.mh-packet-steps { margin-top: 54px; border-top: 1px solid var(--mh-ink); counter-reset: mh-packet-step; }
-.mh-packet-steps > li { display: grid; grid-template-columns: 56px minmax(0, 1fr) 96px; gap: 14px 28px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--mh-line); counter-increment: mh-packet-step; }
-.mh-packet-steps > li:last-child { border-bottom: 0; }
-.mh-packet-steps > li::before { content: counter(mh-packet-step, decimal-leading-zero); font-family: var(--mh-font-display); font-size: 26px; line-height: 1; color: var(--mh-muted); }
-.mh-packet-steps strong { font-size: 18px; font-weight: 600; }
-.mh-packet-steps p { margin-top: 4px; color: var(--mh-muted); font-size: 15px; line-height: 1.5; }
-.mh-packet-steps .mh-state-chip { justify-self: end; }
-/* Forest, never lime: lime is the AI accent on dark, never a marker on paper. */
-.mh-packet-steps .mh-state-chip.is-pro { background: var(--mh-forest); color: var(--mh-paper); }
+.mh-packet-band-intro { align-self: end; max-width: 440px; padding: 24px 0 4px 28px; border-left: 1px solid var(--mh-line); }
+.mh-packet-band-intro span { color: var(--mh-forest); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.mh-packet-band-intro p { margin-top: 10px; color: var(--mh-muted); font-size: 15px; line-height: 1.6; }
+.mh-packet-demo { margin-top: 54px; }
+.mh-packet-demo-stage { display: grid; grid-template-columns: minmax(260px, .72fr) minmax(0, 1.28fr); gap: 18px; align-items: stretch; }
+.mh-packet-example-role,
+.mh-packet-output { min-width: 0; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); }
+.mh-packet-example-role { display: flex; min-height: 510px; flex-direction: column; padding: 30px; background: var(--mh-paper-soft); }
+.mh-packet-example-label,
+.mh-packet-output-kicker,
+.mh-packet-source-record > span { color: var(--mh-forest); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+.mh-packet-persona { display: flex; align-items: center; gap: 13px; margin-top: 24px; }
+.mh-packet-persona > span { display: grid; width: 42px; height: 42px; flex: 0 0 42px; place-items: center; background: var(--mh-forest); border-radius: 50%; color: var(--mh-paper); font-size: 12px; font-weight: 700; }
+.mh-packet-persona strong { font-size: 16px; font-weight: 650; }
+.mh-packet-persona p { color: var(--mh-muted); font-size: 13px; }
+.mh-packet-example-role dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 28px 0 0; }
+.mh-packet-example-role dl > div { padding-top: 12px; border-top: 1px solid var(--mh-line); }
+.mh-packet-example-role dt { color: var(--mh-muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.mh-packet-example-role dd { margin: 5px 0 0; font-size: 14px; font-weight: 650; }
+.mh-packet-example-role > p { margin-top: 22px; color: var(--mh-muted); font-size: 14px; line-height: 1.6; }
+.mh-packet-source-record { margin-top: 22px; padding: 16px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-md); }
+.mh-packet-source-record p { margin-top: 7px; font-size: 13px; line-height: 1.55; }
+.mh-packet-example-role > small { margin-top: auto; padding-top: 24px; color: var(--mh-muted); font-size: 12px; line-height: 1.5; }
+.mh-packet-output { min-height: 510px; padding: 30px; overflow: hidden; background: var(--mh-white); box-shadow: var(--mh-shadow-surface); }
+.mh-packet-output-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding-bottom: 22px; border-bottom: 1px solid var(--mh-line); }
+.mh-packet-output-head h3 { margin-top: 5px; font-size: 27px; line-height: 1.12; }
+.mh-packet-complete-mark { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 7px; padding: 7px 10px; background: var(--mh-mist); border-radius: var(--mh-radius-pill); color: var(--mh-forest); font-size: 11px; font-weight: 700; }
+.mh-packet-complete-mark svg { width: 14px; height: 14px; }
+ul.mh-packet-summary { margin-top: 10px; }
+.mh-packet-summary li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--mh-line); }
+.mh-packet-summary li > div { display: grid; gap: 2px; min-width: 0; }
+.mh-packet-summary strong { font-size: 14px; font-weight: 650; }
+.mh-packet-summary li span { color: var(--mh-muted); font-size: 12px; }
+.mh-packet-summary .mh-state-chip { flex: 0 0 auto; }
+.mh-packet-summary .mh-state-chip.is-pro { background: var(--mh-forest); color: var(--mh-paper); }
+p.mh-packet-review-note { display: flex; align-items: center; gap: 8px; margin-top: 18px; color: var(--mh-forest); font-size: 13px; font-weight: 650; }
+.mh-packet-review-note::before { width: 7px; height: 7px; background: var(--mh-sage); border-radius: 50%; content: ""; }
 small.mh-packet-note { display: block; margin-top: 26px; color: var(--mh-muted); font-size: 13px; line-height: 1.6; }
 
 /* Band rhythm on this page: deep, paper, mist, white, paper-soft, forest.
@@ -1983,6 +2010,10 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-pricing-heading,
   .mh-faq,
   .mh-site-footer > div { grid-template-columns: 1fr; }
+  .mh-packet-band-intro { align-self: start; max-width: 620px; padding: 20px 0 0; border-top: 1px solid var(--mh-line); border-left: 0; }
+  .mh-packet-demo-stage { grid-template-columns: 1fr; }
+  .mh-packet-example-role { min-height: 0; }
+  .mh-packet-output { min-height: 460px; }
   .mh-human,
   .mh-pricing,
   .mh-verified,
@@ -2028,8 +2059,11 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-stage-strip > li { grid-template-columns: 40px minmax(0, 1fr); }
   .mh-stage-strip.is-detailed > li { grid-template-columns: 40px minmax(0, 1fr); }
   .mh-stage-strip.is-detailed ul { grid-column: 2; grid-template-columns: 1fr; }
-  .mh-packet-steps > li { grid-template-columns: 40px minmax(0, 1fr); }
-  .mh-packet-steps .mh-state-chip { grid-row: 2; grid-column: 2; justify-self: start; }
+  .mh-packet-example-role,
+  .mh-packet-output { padding: 22px; }
+  .mh-packet-output { min-height: 440px; }
+  .mh-packet-output-head { flex-direction: column; gap: 12px; }
+  .mh-packet-summary li { align-items: flex-start; }
   .mh-stage-strip > li > .mh-state-chip { grid-row: 3; grid-column: 2; justify-self: start; margin-top: 4px; }
   .mh-qblock h3 { font-size: 20px; }
   .marketing-homepage { --mh-gutter: 20px; --mh-h2: 40px; --mh-h2-sm: 32px; }

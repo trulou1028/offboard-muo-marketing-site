@@ -8,6 +8,7 @@ import {
   PageHero,
 } from "./MarketingSite";
 import { LayeredProductHero } from "./LayeredProductHero";
+import { ApplicationPacketDemo } from "./ApplicationPacketDemo";
 
 /* Application Packet pillar page. It began as the Job Search page in plan
    031, then became the canonical home for the packet in plan 051. The route
@@ -42,17 +43,6 @@ import { LayeredProductHero } from "./LayeredProductHero";
    `DEFAULT_FREE_GHOST_CHECKS_PER_MONTH`). A Free member therefore does get a
    ghost check after the trial packet, three times a month, and the chip says
    so rather than reading `Pro`. */
-const PACKET_STEPS = [
-  ["Ghost Check", "Is this posting real and active?", "limit"],
-  ["Company Intel", "Research the company", "free"],
-  ["Role Match Analysis", "Score your fit for the role", "free"],
-  ["Tailor Resume", "Adapt your resume to this job", "pro"],
-  ["Cover Letter", "Draft a cover letter", "pro"],
-  ["Path to a Person", "Find someone to reach out to", "pro"],
-] as const;
-
-const PACKET_STEP_CHIP = { free: "Free", pro: "Pro", limit: "3 a month" } as const;
-
 function PacketBand() {
   return (
     <section className="mh-packet mh-section" aria-labelledby="packet-title">
@@ -62,21 +52,12 @@ function PacketBand() {
           <h2 id="packet-title">The role, the research, and what you send, connected.</h2>
           <p>One link becomes a company brief, a fit read, and the materials you send, all kept with the role instead of scattered across six tabs.</p>
         </div>
-        <figure className="mh-packet-visual">
-          <Image src="/marketing/homepage/renders/toolkit-job-packets.webp" alt="The Application Packet view in Offboard, a job posting linked to the materials built from it" fill sizes="(max-width: 900px) 100vw, 44vw" />
-        </figure>
+        <div className="mh-packet-band-intro">
+          <span>One example role</span>
+          <p>See how one example role connects research, fit, and application materials. Nothing here runs a live check or sends an application.</p>
+        </div>
       </div>
-      <ol className="mh-packet-steps" data-reveal="">
-        {PACKET_STEPS.map(([label, body, tier]) => (
-          <li key={label}>
-            <div>
-              <strong>{label}</strong>
-              <p>{body}</p>
-            </div>
-            <em className={`mh-state-chip${tier === "pro" ? " is-pro" : ""}`}>{PACKET_STEP_CHIP[tier]}</em>
-          </li>
-        ))}
-      </ol>
+      <ApplicationPacketDemo />
       <small className="mh-packet-note">Your first complete packet runs every step free. After that the company and fit reads stay free on every packet, basic ghost checks carry on at three a month, and the rest is Offboard Pro.</small>
     </section>
   );

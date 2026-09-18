@@ -610,7 +610,7 @@ test.describe("the /application-packet rows stay inside their sections", () => {
             continue;
           }
           const box = band.getBoundingClientRect();
-          band.querySelectorAll(".mh-packet-steps *, .mh-stage-strip *").forEach((el) => {
+          band.querySelectorAll(".mh-packet-demo *, .mh-stage-strip *").forEach((el) => {
             const r = el.getBoundingClientRect();
             if (!r.width) return;
             if (r.left < box.left - 0.5 || r.right > box.right + 0.5) {
@@ -629,12 +629,39 @@ test.describe("the /application-packet rows stay inside their sections", () => {
     // Pinned in the browser as well as in the unit test: these six strings and
     // their two Free chips are a pricing claim, ported from packetSteps.ts in
     // the app repo. A silent flip here is a promise the product does not keep.
-    await expect(page.locator(".mh-packet-steps > li")).toHaveCount(6);
-    await expect(page.locator(".mh-packet-steps .mh-state-chip", { hasText: /^Free$/ })).toHaveCount(2);
-    await expect(page.locator(".mh-packet-steps .mh-state-chip.is-pro")).toHaveCount(3);
+    await expect(page.locator(".mh-packet-summary > li")).toHaveCount(6);
+    await expect(page.locator(".mh-packet-summary .mh-state-chip", { hasText: /^Free$/ })).toHaveCount(2);
+    await expect(page.locator(".mh-packet-summary .mh-state-chip.is-pro")).toHaveCount(3);
     // Ghost Check is neither: the basic verdict is free three times a month.
-    await expect(page.locator(".mh-packet-steps .mh-state-chip", { hasText: /^3 a month$/ })).toHaveCount(1);
+    await expect(page.locator(".mh-packet-summary .mh-state-chip", { hasText: /^3 a month$/ })).toHaveCount(1);
   });
+
+  test("the example stays in one complete view and makes no backend calls", async ({ page }) => {
+    const backendRequests: string[] = [];
+    page.on("request", (request) => {
+      if (/supabase\.co|api\.offboard\.co/i.test(request.url())) backendRequests.push(request.url());
+    });
+    await page.goto("/application-packet");
+
+    await expect(page.getByLabel("Complete packet example")).toContainText("One role, six connected outputs.");
+    await expect(page.locator(".mh-packet-summary > li")).toHaveCount(6);
+    await expect(page.locator(".mh-packet-demo button")).toHaveCount(0);
+    await expect(page.locator(".mh-packet-demo [role=tab]")).toHaveCount(0);
+    expect(backendRequests).toEqual([]);
+  });
+
+  test("the useful packet summary survives without JavaScript", async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+    await page.goto("/application-packet");
+
+    await expect(page.getByLabel("Complete packet example")).toContainText("One role, six connected outputs.");
+    await expect(page.locator(".mh-packet-summary > li")).toHaveCount(6);
+    await expect(page.locator(".mh-packet-demo button")).toHaveCount(0);
+    await expect(page.getByText("Illustrative example. No live job is being checked.")).toBeVisible();
+    await context.close();
+  });
+
 });
 
 // Where a hero headline breaks (owner 2026-09-14). `text-wrap: balance` gives

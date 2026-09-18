@@ -75,6 +75,22 @@ describe("COPY.md is readable and structured as expected", () => {
   });
 });
 
+describe("Application Packet example copy stays governed", () => {
+  it("records the permanent disclosure, fixture source, summary, and review boundary", () => {
+    const text = renderedText(<MarketingApplicationPacket />);
+    for (const line of [
+      "Illustrative example. No live job is being checked.",
+      "Built an onboarding playbook adopted by a 12-person support team and reduced handoff time by 20%.",
+      "Alex reviews and sends every application material.",
+      "See how one example role connects research, fit, and application materials.",
+    ]) {
+      expect(COPY_DOC).toContain(line);
+      expect(text).toContain(line);
+    }
+    expect(text).not.toContain("Play example");
+  });
+});
+
 describe("verified-facts ledger matches shipped copy", () => {
   it("Employer seat price: $199 and $169 appear in the ledger and on /employers", () => {
     const row = ledgerRow("Employer seat price");

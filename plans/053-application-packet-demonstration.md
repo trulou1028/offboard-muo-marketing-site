@@ -1,10 +1,18 @@
 # Plan 053: An Application Packet demonstration
 > **Execute with:** Fable 5.1 · high - Product claims and Free/Pro boundaries must remain accurate while the demonstration is added.
 
-Status: TODO. Planning only; implementation has not been authorized.
+Status: READY FOR REVIEW on `codex/plan-053-application-packet-demo`. Local,
+GitHub Actions, database-contract, and Vercel checks are green. Awaiting owner
+preview approval before merge.
 Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc`.
 Planning branch: `codex/motion-polish-plans`. Depends on plan 052's shared motion
 contract/runtime. Execute after 052; this does not depend on plan 054.
+
+**Owner refinement, 2026-09-18:** ship the complete example as one static view,
+matching the reviewed two-card composition. Remove the six selectors, playback,
+and individual output states. This direction supersedes the interaction and
+motion requirements below while retaining the verified labels, tiers, fictional
+source record, review boundary, responsive checks, and performance budget.
 
 ## Outcome and placement
 
@@ -168,3 +176,19 @@ approval of this planning PR as approval to implement or ship.
 
 Rollback: revert the route-specific implementation PR to restore the static band;
 retain 052's shared dependency while another surface uses it.
+
+## Implementation record
+
+Implemented 2026-09-18. Product evidence was refreshed from
+`lumo-plan-builder` `origin/main` at
+`d1b3306e5a98f59fb8b3d2856a5a4a8f6f488f6f`, including
+`src/components/job-packet/packetSteps.ts`, the application output renderers,
+and `supabase/functions/_shared/entitlements.ts`.
+
+Following the owner refinement, the example is a server-rendered, single-view
+composition with no client state, timers, selectors, playback, or route-specific
+motion runtime. The final route script comparison is recorded in the PR after
+the revised production build.
+
+All local CI-equivalent commands pass. Vercel built the preview successfully,
+and the GitHub-hosted browser, test-and-build, and database-contract jobs pass.
