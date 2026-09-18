@@ -508,6 +508,8 @@ it did not):
 
   The photo `alt` shipping today: `A woman sits cross-legged on her bed with a laptop at dusk, with modern artwork above the bed.`
 
+  The site-wide social preview image is `public/marketing/social/offboard-social-card.jpg`: a 1200 × 630 crop of the bedroom scene with the official light Offboard wordmark in the upper left. No page title or description is baked into the image. Each preview card's title and description must match that route's own metadata. Image alt: `A woman sits cross-legged on her bed with a laptop at dusk, with the Offboard logo on the wall beside her.`
+
   The exchange over the photo's lower right is `public/marketing/homepage/hero/lumo-chat.png`, one transparent image at 2x. It is not markup and it is not built from these strings; a change to it is a new export, not a code edit. Member bubble: `@offboard What should I focus on today?` (the handle in lime). Lumo's card, with Lumo's face beside it: a context chip `Used profile, applications, interviews, integrations`, then `Got it! Two things deserve your attention today.`, then two rows: `Prepare for your Figma interview` / `Senior Product Design at Figma` and `Update application status` / `Product Engineer at Stripe`. The 2026-09-03 Paper export (`hero-composition.avif`, the kitchen-table photo with the save-an-application exchange) is retired.
 
   **Two known copy-law breaches inside this image, and they are pixels, so no test can see them.** `CopyDrift.test.tsx` reads the DOM, and this text is not in the DOM — this entry is the only record of it. Recorded rather than fixed because the image reproduces the owner's Figma composition as drawn (2026-09-07); fixing either means a new export:

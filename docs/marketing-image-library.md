@@ -17,6 +17,13 @@ right-weighted composition fits the page.
 | `coworking.webp` | South Asian woman in her 40s, coworking space | A woman works on her laptop at a communal table in a daylight-filled coworking space. |
 | `public-library.webp` | White man in his late 50s, public library | A man works on his laptop with notes and reading glasses at a public library table. |
 
+The share-card derivative lives at
+`public/marketing/social/offboard-social-card.jpg`. It is a 1200 × 630 crop of
+`bedroom.webp` with the official light Offboard wordmark in the upper left.
+Unlike the reusable source photographs below, this export is intentionally
+branded for Open Graph and Twitter cards. Page-specific titles and descriptions
+stay in metadata instead of being baked into the image.
+
 ## Usage
 
 - For full-width hero use, start with `object-fit: cover` and
