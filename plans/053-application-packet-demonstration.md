@@ -1,7 +1,7 @@
 # Plan 053: An Application Packet demonstration
 > **Execute with:** Fable 5.1 · high - Product claims and Free/Pro boundaries must remain accurate while the demonstration is added.
 
-Status: TODO. Planning only; implementation has not been authorized.
+Status: READY FOR REVIEW on `codex/plan-053-application-packet-demo`.
 Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc`.
 Planning branch: `codex/motion-polish-plans`. Depends on plan 052's shared motion
 contract/runtime. Execute after 052; this does not depend on plan 054.
@@ -168,3 +168,17 @@ approval of this planning PR as approval to implement or ship.
 
 Rollback: revert the route-specific implementation PR to restore the static band;
 retain 052's shared dependency while another surface uses it.
+
+## Implementation record
+
+Implemented 2026-09-18. Product evidence was refreshed from
+`lumo-plan-builder` `origin/main` at
+`d1b3306e5a98f59fb8b3d2856a5a4a8f6f488f6f`, including
+`src/components/job-packet/packetSteps.ts`, the application output renderers,
+and `supabase/functions/_shared/entitlements.ts`.
+
+The production `/application-packet` script set is 11,811 uncompressed bytes
+larger than the same route on marketing `origin/main`, below the 20 KB route
+budget. Browser verification asserts layout shift below 0.01 through hydration
+and direct selection. The complete example remains in server-rendered HTML;
+interactive controls appear only after hydration.

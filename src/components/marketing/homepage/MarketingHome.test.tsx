@@ -256,6 +256,9 @@ describe("Offboard marketing routes", () => {
     const chips = Array.from(document.querySelectorAll(".mh-packet-steps .mh-state-chip")).map((c) => c.textContent);
     expect(chips).toEqual(["3 a month", "Free", "Free", "Pro", "Pro", "Pro"]);
     expect(screen.getByText(/basic ghost checks carry on at three a month/i)).toBeInTheDocument();
+    expect(screen.getByText("Illustrative example. No live job is being checked.")).toBeInTheDocument();
+    expect(screen.getByLabelText("Complete packet example")).toHaveTextContent("One role, six connected outputs.");
+    expect(screen.getByText("Alex reviews and sends every application material.")).toBeInTheDocument();
 
     // The four stages are rows now, not four columns, and they carry the ten
     // tool descriptions this page owns.

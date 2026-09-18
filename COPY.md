@@ -1850,7 +1850,8 @@ what its shared record feeds after a person applies.
 
 - Kicker: `Inside the packet` · H2: `The role, the research, and what you send, connected.`
 - Body: `One link becomes a company brief, a fit read, and the materials you send, all kept with the role instead of scattered across six tabs.`
-- Visual: `renders/toolkit-job-packets.webp`, the Application Packet view. `/how-it-works` renders the same file in its flagship block; that page is deferred.
+- Demonstration introduction: `One example role` · `Inspect each step or play the short walkthrough. Nothing here runs a live check or sends an application.`
+- The static Application Packet image is replaced here by an interactive, fixed example. `/how-it-works` continues to render `renders/toolkit-job-packets.webp` in its flagship block.
 - **The six rows are the app's own packet steps, verbatim** from `lumo-plan-builder` `origin/main` `src/components/job-packet/packetSteps.ts` (labels and descriptions), in the app's order, with a chip saying what Free covers (owner decision 2026-09-13). **The chips come from the server, not from that file** — see the correction below. Parse Job and Save Application are foundational, never appear in the app's own picker, and are not listed here.
   1. `Ghost Check` — `Is this posting real and active?` — chip `3 a month` *(corrected 2026-09-14, see below)*
   2. `Company Intel` — `Research the company` — chip `Free`
@@ -1860,6 +1861,69 @@ what its shared record feeds after a person applies.
   6. `Path to a Person` — `Find someone to reach out to` — chip `Pro`
 - Note under the rows: `Your first complete packet runs every step free. After that the company and fit reads stay free on every packet, basic ghost checks carry on at three a month, and the rest is Offboard Pro.`
 - Every chip is a claim. Changing one means re-reading the app's **server** entitlements and `/pricing` in the same PR.
+
+#### Interactive example *(plan 053)*
+
+The demonstration uses invented fixture data. It performs no job check, research,
+generation, contact lookup, upload, or send action. The complete packet summary
+and the six descriptions render before JavaScript. After hydration, the same six
+rows become buttons that inspect the fixed outputs below.
+
+- Permanent labels and controls: `Illustrative example` · `Illustrative example. No live job is being checked.` · `Example output` · `Complete example` · `Play example` · `Pause` · `Replay example` · `Show complete packet`
+- Reduced-motion help: `Motion reduced. Choose any step or show the complete packet.`
+- Concise live-status messages: `Showing [step name] example.` · `Example walkthrough started.` · `Example walkthrough paused.` · `Complete packet shown.`
+- Example candidate: `Alex Morgan` · `Customer operations specialist`
+- Example role: `Customer Success Manager` at `Example Co.`
+- Role summary: `Own onboarding for new accounts, improve customer handoffs, and help the team build repeatable retention practices.`
+- `Example source record`: `Built an onboarding playbook adopted by a 12-person support team and reduced handoff time by 20%.`
+
+**Complete packet view**
+
+- H3: `One role, six connected outputs.` · status `Ready to review`
+- Ghost Check: `Signals collected for review`
+- Company Intel: `Company brief ready`
+- Role Match Analysis: `Alignment and gap identified`
+- Tailor Resume: `One grounded revision ready`
+- Cover Letter: `Short excerpt ready to review`
+- Path to a Person: `Relevant outreach path found`
+- Review line: `Alex reviews and sends every application material.`
+
+**Ghost Check example**
+
+- Status: `Review carefully`
+- Explanation: `This example shows signals to consider, not a guarantee that a role is active.`
+- `Posting signal`: `Specific team and onboarding responsibilities are named.`
+- `Missing signal`: `No closing date appears in the example listing.`
+- `Source status`: `Illustrative listing details only.`
+
+**Company Intel example**
+
+- `Example Co. at a glance`: `A fictional scheduling software company serving local service businesses.`
+- `Role context`: `The customer team owns onboarding and ongoing account support.`
+- `What to explore`: `How Success and Support divide onboarding ownership.`
+
+**Role Match Analysis example**
+
+- `Role requirement`: `Lead onboarding for new accounts.`
+- `Experience evidence`: the exact example source record above.
+- `Gap to address`: `No direct ownership of renewal forecasting is recorded.`
+
+**Tailor Resume example**
+
+- `Before`: `Helped improve onboarding and supported customer accounts.`
+- `Grounded revision`: the exact example source record above.
+- Grounding note: `Every detail in the revision comes from Alex's example source record.`
+
+**Cover Letter example**
+
+- `Example excerpt`: `At Northstar Support, I built an onboarding playbook adopted by a 12-person team and reduced handoff time by 20%. I would bring that same operational focus to customer onboarding at Example Co.`
+- Review note: `Alex reviews and edits the letter before using it.`
+
+**Path to a Person example**
+
+- `Relevant path`: `Customer Success Operations leader`
+- Outreach angle: `Ask how onboarding ownership is divided between Success and Support.`
+- Disclosure: `No real person or contact details appear in this example.`
 
 **Correction, 2026-09-14.** The Ghost Check chip shipped on 2026-09-13 reading
 `Pro`, and the note said the free allowance was "outside a packet". Both were
