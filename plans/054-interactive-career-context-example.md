@@ -1,8 +1,9 @@
 # Plan 054: An interactive Career Context example
 > **Execute with:** Fable 5.1 · high - The example must explain context reuse without inventing product or privacy capabilities.
 
-Status: READY FOR REVIEW on `codex/plan-054-career-context-demo`. Full local gate
-green; awaiting Vercel preview and owner approval before merge.
+Status: READY FOR REVIEW in [PR #125](https://github.com/trulou1028/offboard-muo-marketing-site/pull/125)
+on `codex/plan-054-career-context-demo`. Full local gate green; awaiting Vercel
+preview and owner approval before merge.
 Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc`.
 Planning branch: `codex/motion-polish-plans`. Depends on plan 052's shared motion
 contract/runtime. Recommended order: 052, 053, 054; 053 is not a hard dependency.
