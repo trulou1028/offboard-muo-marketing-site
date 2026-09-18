@@ -817,15 +817,14 @@ is untouched and still ships on every route.
 
 ## Motion and interactive product examples (2026-09-18)
 
-Requested by Louie after the motion-polish brainstorm. **Planning only; no
-implementation authorized or started.** Source baseline: freshly fetched
-`origin/main` at `5dfebdc`. Planning branch: `codex/motion-polish-plans`.
+Requested by Louie after the motion-polish brainstorm. Plans 052 and 053 are
+merged; plan 054 is implemented and awaiting owner preview approval.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 | --- | --- | --- | --- | --- | --- |
 | 052 | [Polished navigation and shared motion foundation](052-polished-navigation-and-motion-foundation.md) | P1 | M | Current main | MERGED 2026-09-18 via [PR #121](https://github.com/trulou1028/offboard-muo-marketing-site/pull/121) at `edf86a7`. Full React Motion failed the 25 KB budget (+37.4 KB); `motion/mini` passes at +4.0 KB with zero layout shift. |
-| 053 | [Application Packet demonstration](053-application-packet-demonstration.md) | P1 | M | 052 shared foundation | READY FOR REVIEW on `codex/plan-053-application-packet-demo`; owner-refined single-view example, local checks, GitHub Actions, Vercel, and reviewed visual baselines green; awaiting owner preview approval |
-| 054 | [Interactive Career Context example](054-interactive-career-context-example.md) | P1 | M | 052 shared foundation | TODO - plan drafted; awaiting planning review on `codex/motion-polish-plans` |
+| 053 | [Application Packet demonstration](053-application-packet-demonstration.md) | P1 | M | 052 shared foundation | MERGED 2026-09-18 via [PR #123](https://github.com/trulou1028/offboard-muo-marketing-site/pull/123) at `eda3db7`; owner-refined single-view example with static fallback and reviewed responsive baselines. |
+| 054 | [Interactive Career Context example](054-interactive-career-context-example.md) | P1 | M | 052 shared foundation | READY FOR REVIEW on `codex/plan-054-career-context-demo`; local lint, CSS lint, typecheck, 212 unit tests, build, 138 browser tests, motion/no-JS coverage, and reviewed responsive baselines green; awaiting Vercel and owner preview approval. |
 
 Recommended execution order: **052 -> 053 -> 054**, one implementation PR at a
 time because these changes share the stylesheet, motion conventions, and copy

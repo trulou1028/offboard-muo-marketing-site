@@ -1,7 +1,8 @@
 # Plan 054: An interactive Career Context example
 > **Execute with:** Fable 5.1 · high - The example must explain context reuse without inventing product or privacy capabilities.
 
-Status: TODO. Planning only; implementation has not been authorized.
+Status: READY FOR REVIEW on `codex/plan-054-career-context-demo`. Full local gate
+green; awaiting Vercel preview and owner approval before merge.
 Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc`.
 Planning branch: `codex/motion-polish-plans`. Depends on plan 052's shared motion
 contract/runtime. Recommended order: 052, 053, 054; 053 is not a hard dependency.
@@ -169,3 +170,34 @@ within scope; approval of these plans is not authorization to implement.
 
 Rollback by reverting this route's implementation PR; preserve shared motion and
 fixtures still consumed by other pages.
+
+## Implementation record (2026-09-18)
+
+- Refreshed `lumo-plan-builder` `origin/main` at `b63297c523f75b2349232f636feff5c00a2dbb7d`.
+  The example shapes are grounded in `src/pages/Context.tsx`,
+  `src/components/settings/ContextPanel.tsx`,
+  `src/components/profile/PreferencesTab.tsx`,
+  `supabase/functions/tailor-resume-v2/schemas.ts`,
+  `supabase/functions/generate-interview-briefing/schema.ts`, and
+  `supabase/functions/_shared/roleMatch.ts`. The UI remains explicitly
+  illustrative and does not claim an exact reasoning trace.
+- Added the narrow `CareerContextExample` client boundary. The initial resume
+  example is server rendered; usable controls replace the static selector labels
+  after hydration. All three scenarios reuse one fictional record, retain button
+  focus, and update source emphasis with the output.
+- Added a 200ms output transition through the shared `motion/mini` foundation.
+  A live reduced-motion preference change cancels subsequent animation. The
+  route-specific client chunk is 7,308 bytes raw and 2,432 bytes gzipped.
+- Preserved the three input explanations and all four output categories beneath
+  the example. At phone width, only the relevant source details remain open and
+  the complete record moves into a native disclosure.
+- Recorded every new string and the interaction contract in `COPY.md`. No route,
+  section-order, privacy, or architecture contract changed.
+- Final local verification: `npm run lint`, `npm run lint:css`,
+  `npm run typecheck`, `npm test` (212 tests), `npm run build`, and
+  `npm run e2e` (138 browser tests) all pass. The focused browser coverage also
+  proves no-JavaScript content, latest-selection behavior, focus retention,
+  390px overflow, motion under `no-preference`, and a dynamic switch to reduced
+  motion. The three reviewed `/career-context` visual baselines were updated.
+  The Docker-backed `cms-contract` job remains CI-authoritative and is unrelated
+  to this route-only change.

@@ -8,6 +8,7 @@ import {
   PageHero,
   Shot,
 } from "./MarketingSite";
+import { CareerContextExample } from "./CareerContextExample";
 
 /* Career Context pillar page (plan 025; restructured by plan 042 around the
    record; visual pass by plan 046). Copy: COPY.md § 10.
@@ -103,8 +104,10 @@ function InOutSection() {
       <div className="mh-copy-block">
         <span className="mh-kicker is-sand">In and out</span>
         <h2 id="inout-title">Every step makes it smarter. Every output starts from it.</h2>
+        <p>Choose a task to see which parts of one fictional record matter and what they help produce.</p>
       </div>
-      <div className="mh-inout" data-reveal="">
+      <CareerContextExample />
+      <div className="mh-inout mh-inout-support" data-reveal="">
         <div>
           <span>What goes in</span>
           <ul>{GOES_IN.map(([title, body]) => <li key={title}><strong>{title}</strong><p>{body}</p></li>)}</ul>

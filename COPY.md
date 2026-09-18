@@ -1411,7 +1411,27 @@ where the record comes from, not a second taxonomy of it. The eight
 ### In and out *(plan 046 merged "It gets better as you go" and "What it powers": two thin ruled sections back to back, one inputs and one outputs)*
 
 - Kicker: `In and out` · H2: `Every step makes it smarter. Every output starts from it.`
-- Two columns, labelled `What goes in` (the three blocks below, question and body, the feature label dropped) and `What comes out` (the four capabilities from the next entry).
+- Intro: `Choose a task to see which parts of one fictional record matter and what they help produce.`
+- The interactive example precedes two compact supporting columns labelled `What goes in` (the three blocks below, question and body, the feature label dropped) and `What comes out` (the four capabilities from the next entry).
+
+#### Interactive Career Context example *(plan 054)*
+
+- Permanent disclosure: `Fictional example. Explore how the same context can inform different tasks.`
+- Task selector label: `Choose an example task` · static fallback label: `Example tasks`
+- Task selectors: `Tailored resume` · `Interview preparation` · `Compare an opportunity`
+- Source card: `Fictional source record` · `Alex Morgan's Career Context` · `5 saved details`
+- Source details:
+  1. `Experience` — `Led customer onboarding and coordinated support handoffs.`
+  2. `Accomplishment` — `Reduced average onboarding time from 14 to 10 days.`
+  3. `Interview story` — `Resolved a stalled rollout through cross-team coordination.`
+  4. `Preference` — `Remote work with predictable collaboration hours.`
+  5. `Goal` — `Move into customer success work with more ownership of adoption.`
+- Source state labels: `Used here` · mobile summary `Used for this example` · mobile disclosure `View the full fictional record`
+- Output card labels: `Resulting task` · `Grounded in context`
+- Tailored resume output: `Illustrative resume bullet` · `Led customer onboarding and coordinated support handoffs, reducing average onboarding time from 14 to 10 days.` · `Uses the experience and accomplishment. No new result was added.`
+- Interview output: `Practice question` · `Tell me about a time you got a stalled customer rollout moving again.` · `Answer outline` · `Situation` / `A customer rollout had stalled.` · `Action` / `Coordinated the teams responsible for the handoff.` · `Result` / `Resolved the rollout and restored a clear path forward.` · `Uses the interview story and experience already saved in the record.`
+- Opportunity comparison output: `Fictional role requirement` · `Own customer adoption after onboarding, with three fixed office days each week.` · `Alignment` / `The ownership of adoption matches Alex's goal for the next role.` · `Question to resolve` / `The role is hybrid. Alex prefers remote work with predictable collaboration hours, so the schedule needs clarification.` · `Uses the preference and goal to make the tradeoff visible, without deciding for Alex.`
+- Interaction contract: the first view is fully server rendered. Once the selector is usable, each button retains focus, reports its state with `aria-pressed`, and controls the adjacent labeled output region. The pressed state provides the concise selection feedback, so the full output is not automatically announced. A selection emphasizes the exact source details it uses and replaces the output with a 200ms crossfade and short vertical settle. Reduced-motion preference changes are honored immediately. There is no autoplay, typing simulation, live check, account data, scoring, or network request.
 
 ### It gets better as you go *(the "What goes in" column since plan 046)*
 

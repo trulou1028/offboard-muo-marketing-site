@@ -91,6 +91,21 @@ describe("Application Packet example copy stays governed", () => {
   });
 });
 
+describe("Career Context example copy stays governed", () => {
+  it("records the disclosure, fictional source, and all three grounded tasks", () => {
+    for (const line of [
+      "Fictional example. Explore how the same context can inform different tasks.",
+      "Led customer onboarding and coordinated support handoffs.",
+      "Reduced average onboarding time from 14 to 10 days.",
+      "Tell me about a time you got a stalled customer rollout moving again.",
+      "Own customer adoption after onboarding, with three fixed office days each week.",
+      "The role is hybrid. Alex prefers remote work with predictable collaboration hours, so the schedule needs clarification.",
+    ]) {
+      expect(COPY_DOC).toContain(line);
+    }
+  });
+});
+
 describe("verified-facts ledger matches shipped copy", () => {
   it("Employer seat price: $199 and $169 appear in the ledger and on /employers", () => {
     const row = ledgerRow("Employer seat price");
