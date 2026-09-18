@@ -1,9 +1,9 @@
 # Plan 053: An Application Packet demonstration
 > **Execute with:** Fable 5.1 · high - Product claims and Free/Pro boundaries must remain accurate while the demonstration is added.
 
-Status: READY FOR REVIEW on `codex/plan-053-application-packet-demo`. Merge is
-blocked until GitHub Actions can start after the account billing or spending
-limit issue is resolved.
+Status: READY FOR REVIEW on `codex/plan-053-application-packet-demo`. Local,
+GitHub Actions, database-contract, and Vercel checks are green. Awaiting owner
+preview approval before merge.
 Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc`.
 Planning branch: `codex/motion-polish-plans`. Depends on plan 052's shared motion
 contract/runtime. Execute after 052; this does not depend on plan 054.
@@ -190,8 +190,5 @@ composition with no client state, timers, selectors, playback, or route-specific
 motion runtime. The final route script comparison is recorded in the PR after
 the revised production build.
 
-All local CI-equivalent commands pass. Vercel built the preview successfully.
-The three GitHub-hosted jobs reported failure without starting a step; their
-check annotations say recent account payments failed or the Actions spending
-limit must be increased. Re-run the required jobs after that account setting is
-fixed before merging.
+All local CI-equivalent commands pass. Vercel built the preview successfully,
+and the GitHub-hosted browser, test-and-build, and database-contract jobs pass.
