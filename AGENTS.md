@@ -68,7 +68,12 @@ supersedes the app repo's strategy docs.
   in `public/fonts` — no font CDNs. Never import the design-system export's
   `tokens/fonts.css` (it is a Google Fonts CDN `@import`).
 
-## Definition of done — you run the checks, unprompted
+## Definition of done — final gate, not the iteration loop
+
+The checks below define the final reviewable state. During implementation, do
+not rerun the entire gate after every reversible visual adjustment. Use the
+risk-matched cadence below, then run this full gate once when the feature is
+settled on its final code.
 
 1. **Always:** `npm test`, `npm run lint`, `npm run lint:css` and
    `npm run build` green. Never report work as done on a red suite; if
@@ -91,6 +96,30 @@ supersedes the app repo's strategy docs.
    spec (see "Verification rules" below). Claude Code additionally has a launch
    config `marketing-site` on port 3000.
 4. **Copy change?** → COPY.md + drift/regression tests updated, same PR (above).
+
+### Fast cadence for visual implementation
+
+- Keep each feature as its own implementation cycle. Do not combine unrelated
+  visual work merely to reduce the number of test runs.
+- While iterating, run focused component, copy, lint, or browser checks that
+  exercise the surface being changed. Render the affected view at desktop and
+  mobile widths. Save the complete unit/build/browser gate for the settled
+  implementation.
+- Push a coherent review candidate as soon as targeted checks and direct visual
+  inspection are green. Let Vercel and GitHub CI run alongside owner review;
+  share the real preview as soon as Vercel is ready and name any required checks
+  that are still pending. Pending work is reviewable, but it is not done or
+  mergeable yet.
+- Update visual baselines only after the direction is settled, and only after
+  inspecting the intentional differences. Do not regenerate baselines for each
+  intermediate variation.
+- Run the full Definition of done gate once on the final implementation before
+  merge. Repeat a full command only when a later code, copy, style, or test
+  change could invalidate its evidence, or when a failure needs confirmation.
+  A plan/status-only documentation correction does not require rerunning local
+  product suites, although hosted CI may still run automatically.
+- Finish plan and PR status text before the final push when practical. Avoid a
+  documentation-only follow-up that needlessly restarts deployment and CI.
 
 ## Verification rules — every agent, every tool
 
