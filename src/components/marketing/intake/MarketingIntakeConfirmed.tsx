@@ -16,7 +16,7 @@ export function MarketingIntakeConfirmed() {
       <section className="mh-section mh-intake-confirmed">
         <p>
           A confirmation is on its way to your inbox. If it doesn&apos;t land within a few minutes, check spam or
-          email <a href="mailto:hello@offboard.co">hello@offboard.co</a>.
+          email <a href="mailto:info@offboard.co">info@offboard.co</a>.
         </p>
         <Link href="/" className="mh-intake-confirmed-back">
           Back to offboard.co

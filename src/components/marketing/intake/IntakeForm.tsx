@@ -236,7 +236,7 @@ export function IntakeForm() {
       setSubmitError(result.error);
     } catch (err) {
       console.error(err);
-      setSubmitError("Something went wrong. Please try again, or email hello@offboard.co.");
+      setSubmitError("Something went wrong. Please try again, or email info@offboard.co.");
     } finally {
       setSubmitting(false);
     }

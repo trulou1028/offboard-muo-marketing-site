@@ -85,10 +85,10 @@ jobseeker-first items, and rebuilds `/about` around the founder story.
 - `src/components/marketing/homepage/MarketingRoutePages.tsx`:
   - `MarketingEmployers()` (~line 137) — PageHero + two `EditorialGrid`s +
     an inline sponsor-visibility section + `ContactBand`. Contact CTAs are
-    `mailto:hello@offboard.co?subject=Employer%20support`.
+    `mailto:info@offboard.co?subject=Employer%20support`.
   - `MarketingPublicPartners()` (~line 176) — PageHero + `EditorialGrid` +
     inline boundary section + `EditorialGrid` + `ContactBand`, CTAs
-    `mailto:hello@offboard.co?subject=Public%20partner%20support`.
+    `mailto:info@offboard.co?subject=Public%20partner%20support`.
   - `MarketingAbout()` (~line 90) — PageHero, an origin-story split section
     with a photo (`raw/maya-walking.webp` after plan 001), an
     `EditorialGrid` of product principles, an independence section, and a
@@ -133,7 +133,7 @@ add one line to the sponsor-view paragraph: `Sponsors receive aggregate particip
 **Section: hiring (new, short)** — kicker `Also for employers`; H2
 `Hiring? Post roles free.`; body
 `Offboard employers can post open roles at no cost. Postings reach members actively searching, with materials prepared and context attached.`
-CTA link `Post a role` → `mailto:hello@offboard.co?subject=Hiring%20on%20Offboard`.
+CTA link `Post a role` → `mailto:info@offboard.co?subject=Hiring%20on%20Offboard`.
 
 **Section: public and workforce partners (absorbs the old page)** — kicker
 `Public & workforce partners`; H2

@@ -71,7 +71,7 @@ export async function submitIntake(input: unknown): Promise<SubmitIntakeResult> 
   if (!inserted.ok) {
     return {
       ok: false,
-      error: "Something went wrong. Please try again, or email hello@offboard.co.",
+      error: "Something went wrong. Please try again, or email info@offboard.co.",
     };
   }
 

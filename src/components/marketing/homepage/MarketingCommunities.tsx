@@ -118,7 +118,7 @@ export function MarketingCommunities() {
           title="The workshop ends. The career does not."
           body="Career offices and member programs do good work in a narrow window: a session, an appointment, a program year. What the member leaves with is a folder and a memory. Offboard gives them a record that keeps working after your program is over, and keeps working when they come back."
           cta="Start a sponsorship conversation"
-          ctaHref="mailto:hello@offboard.co?subject=Community%20sponsorship"
+          ctaHref="mailto:info@offboard.co?subject=Community%20sponsorship"
           aside={<><span>What sponsorship covers</span><strong>The account, not a view into it.</strong><p>You sponsor access for your members. What they build inside it stays theirs, and your reporting is aggregate only.</p></>}
         />
         <FeatureRows
@@ -139,7 +139,7 @@ export function MarketingCommunities() {
           title="Talk about sponsoring your members."
           body="Tell us who your members are, how many you would start with, and what your team already runs. We will scope it with you."
           cta="Start a sponsorship conversation"
-          href="mailto:hello@offboard.co?subject=Community%20sponsorship"
+          href="mailto:info@offboard.co?subject=Community%20sponsorship"
         />
       </main>
     </MarketingShell>

@@ -14,7 +14,7 @@ import "server-only";
 // throws: submission success only depends on the Supabase insert.
 
 const FROM = "Offboard <hello@offboard.co>";
-const REPLY_TO = "hello@offboard.co";
+const REPLY_TO = "info@offboard.co";
 
 async function logSendFailure(res: Response): Promise<void> {
   let parsed: { name?: unknown; message?: unknown } | undefined;

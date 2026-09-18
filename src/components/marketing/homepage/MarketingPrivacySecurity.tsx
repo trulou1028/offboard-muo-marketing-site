@@ -290,7 +290,7 @@ function YourCall() {
       <ul className="mh-plain-list ruled" data-reveal="">
         {RIGHTS.map((line) => <li key={line}>{line}</li>)}
       </ul>
-      <p className="mh-privacy-note">These map to the rights GDPR and CCPA give you, wherever you live. Found something, or have a question this page does not answer? Email <a href="mailto:hello@offboard.co">hello@offboard.co</a>. A human reads it.</p>
+      <p className="mh-privacy-note">These map to the rights GDPR and CCPA give you, wherever you live. Found something, or have a question this page does not answer? Email <a href="mailto:info@offboard.co">info@offboard.co</a>. A human reads it.</p>
     </section>
   );
 }
