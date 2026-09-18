@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 
 import type { MarketingRoute } from "./MarketingSite";
+import { animateNavigationPanel, usePrefersReducedMotion } from "./MarketingMotion";
 
 /* The navigation (plan 037's mega menu, trimmed to the launch set by plan
    043 on 2026-09-07).
@@ -139,6 +140,10 @@ function groupHoldsCurrent(entry: NavEntry, current: MarketingRoute): boolean {
 }
 
 type OpenSource = "hover" | "click";
+type SetOpen = (id: string | null, by: OpenSource) => void;
+
+const HOVER_OPEN_DELAY_MS = 100;
+const HOVER_CLOSE_DELAY_MS = 120;
 
 function LeafLink({ item, current, onFollow }: { item: NavLeaf; current: MarketingRoute; onFollow: () => void }) {
   const Icon = item.icon;
@@ -184,20 +189,126 @@ function Feature({ feature, current, onFollow }: { feature: NavFeature; current:
   );
 }
 
+function NavPanel({
+  entry,
+  current,
+  panelId,
+  onFollow,
+  triggerRef,
+  open,
+  reduceMotion,
+}: {
+  entry: Extract<NavEntry, { kind: "group" }>;
+  current: MarketingRoute;
+  panelId: string;
+  onFollow: () => void;
+  triggerRef: RefObject<HTMLButtonElement | null>;
+  open: boolean;
+  reduceMotion: boolean;
+}) {
+  const [presence, setPresence] = useState({ open, present: open });
+  const panelRef = useRef<HTMLDivElement>(null);
+  const animationRun = useRef(0);
+  const animatedPanelNode = useRef<HTMLDivElement | null>(null);
+
+  if (presence.open !== open) {
+    setPresence({ open, present: open || !reduceMotion });
+  } else if (!open && presence.present && reduceMotion) {
+    setPresence({ open: false, present: false });
+  }
+
+  useLayoutEffect(() => {
+    if (!panelRef.current) return;
+    const panel = panelRef.current;
+
+    if (!presence.present) {
+      panel.style.opacity = "";
+      panel.style.transform = "";
+      animatedPanelNode.current = null;
+      return;
+    }
+
+    const run = animationRun.current + 1;
+    animationRun.current = run;
+
+    if (open) {
+      if (reduceMotion) {
+        panel.style.opacity = "1";
+        panel.style.transform = "none";
+        animatedPanelNode.current = panel;
+        return;
+      }
+
+      if (animatedPanelNode.current !== panel) {
+        panel.style.opacity = "0";
+        panel.style.transform = "translateY(-6px)";
+        animatedPanelNode.current = panel;
+      }
+      const controls = animateNavigationPanel(panel, "enter");
+      return () => {
+        animationRun.current += 1;
+        controls.stop();
+      };
+    }
+
+    if (panel.contains(document.activeElement)) triggerRef.current?.focus();
+    const controls = animateNavigationPanel(panel, "exit");
+    void controls.then(() => {
+      if (animationRun.current !== run) return;
+      setPresence({ open: false, present: false });
+    });
+    return () => {
+      animationRun.current += 1;
+      controls.stop();
+    };
+  }, [open, presence.present, reduceMotion, triggerRef]);
+
+  return (
+    <div
+      ref={panelRef}
+      className="mh-nav-panel"
+      id={panelId}
+      hidden={!presence.present}
+      data-columns={entry.columns.length}
+      aria-hidden={presence.present && !open ? true : undefined}
+      inert={presence.present && !open}
+    >
+      {entry.columns.map((column) => (
+        <div className="mh-nav-column" key={column.heading}>
+          <span className="mh-nav-heading">{column.heading}</span>
+          {column.items.map((item) => (
+            <LeafLink key={item.label} item={item} current={current} onFollow={onFollow} />
+          ))}
+        </div>
+      ))}
+      <Feature feature={entry.feature} current={current} onFollow={onFollow} />
+    </div>
+  );
+}
+
 function NavGroup({
   entry,
   current,
   open,
   openBy,
   setOpen,
+  requestHoverOpen,
+  requestHoverClose,
+  cancelHoverClose,
+  reduceMotion,
 }: {
   entry: Extract<NavEntry, { kind: "group" }>;
   current: MarketingRoute;
   open: boolean;
   openBy: OpenSource;
-  setOpen: (id: string | null, by: OpenSource) => void;
+  setOpen: SetOpen;
+  requestHoverOpen: (id: string) => void;
+  requestHoverClose: (id: string) => void;
+  cancelHoverClose: () => void;
+  reduceMotion: boolean;
 }) {
   const panelId = `${useId()}-panel`;
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const active = groupHoldsCurrent(entry, current);
   const follow = () => setOpen(null, "click");
 
@@ -205,12 +316,11 @@ function NavGroup({
     <div
       className="mh-nav-group"
       data-open={open ? "" : undefined}
-      onMouseEnter={() => setOpen(entry.id, "hover")}
-      onMouseLeave={() => {
-        // A panel the visitor opened by clicking survives the pointer
-        // leaving; only a hover-opened one follows the pointer out.
-        if (openBy === "hover") setOpen(null, "hover");
+      onPointerEnter={() => {
+        cancelHoverClose();
+        requestHoverOpen(entry.id);
       }}
+      onPointerLeave={() => requestHoverClose(entry.id)}
       onBlur={(event) => {
         // Closes when focus leaves the group entirely, so tabbing past the
         // last link does not strand an open panel behind the next section.
@@ -218,6 +328,7 @@ function NavGroup({
       }}
     >
       <button
+        ref={triggerRef}
         type="button"
         className="mh-nav-trigger"
         aria-expanded={open}
@@ -241,17 +352,15 @@ function NavGroup({
         <span>{entry.label}</span>
         <ChevronDown aria-hidden="true" />
       </button>
-      <div className="mh-nav-panel" id={panelId} hidden={!open} data-columns={entry.columns.length}>
-        {entry.columns.map((column) => (
-          <div className="mh-nav-column" key={column.heading}>
-            <span className="mh-nav-heading">{column.heading}</span>
-            {column.items.map((item) => (
-              <LeafLink key={item.label} item={item} current={current} onFollow={follow} />
-            ))}
-          </div>
-        ))}
-        <Feature feature={entry.feature} current={current} onFollow={follow} />
-      </div>
+      <NavPanel
+        entry={entry}
+        current={current}
+        panelId={panelId}
+        onFollow={follow}
+        triggerRef={triggerRef}
+        open={open}
+        reduceMotion={reduceMotion}
+      />
     </div>
   );
 }
@@ -259,10 +368,51 @@ function NavGroup({
 export function MarketingNav({ current }: { current: MarketingRoute }) {
   const [openState, setOpenState] = useState<{ id: string | null; by: OpenSource }>({ id: null, by: "hover" });
   const navRef = useRef<HTMLElement>(null);
+  const hoverOpenTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hoverCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const reduceMotion = usePrefersReducedMotion();
   const { id: openId, by: openBy } = openState;
 
-  const setOpen = useCallback((id: string | null, by: OpenSource) => setOpenState({ id, by }), []);
-  const close = useCallback(() => setOpenState({ id: null, by: "hover" }), []);
+  const clearHoverTimers = useCallback(() => {
+    if (hoverOpenTimer.current !== null) clearTimeout(hoverOpenTimer.current);
+    if (hoverCloseTimer.current !== null) clearTimeout(hoverCloseTimer.current);
+    hoverOpenTimer.current = null;
+    hoverCloseTimer.current = null;
+  }, []);
+
+  const setOpen = useCallback<SetOpen>((id, by) => {
+    clearHoverTimers();
+    setOpenState({ id, by });
+  }, [clearHoverTimers]);
+  const close = useCallback(() => setOpen(null, "hover"), [setOpen]);
+
+  const cancelHoverClose = useCallback(() => {
+    if (hoverCloseTimer.current !== null) clearTimeout(hoverCloseTimer.current);
+    hoverCloseTimer.current = null;
+  }, []);
+
+  const requestHoverOpen = useCallback((id: string) => {
+    if (!window.matchMedia?.("(hover: hover) and (pointer: fine)").matches) return;
+    clearHoverTimers();
+    hoverOpenTimer.current = setTimeout(() => {
+      setOpenState((state) => state.id === id && state.by === "click"
+        ? state
+        : { id, by: "hover" });
+      hoverOpenTimer.current = null;
+    }, HOVER_OPEN_DELAY_MS);
+  }, [clearHoverTimers]);
+
+  const requestHoverClose = useCallback((id: string) => {
+    if (hoverOpenTimer.current !== null) clearTimeout(hoverOpenTimer.current);
+    hoverOpenTimer.current = null;
+    if (!window.matchMedia?.("(hover: hover) and (pointer: fine)").matches) return;
+    hoverCloseTimer.current = setTimeout(() => {
+      setOpenState((state) => state.id === id && state.by === "hover"
+        ? { id: null, by: "hover" }
+        : state);
+      hoverCloseTimer.current = null;
+    }, HOVER_CLOSE_DELAY_MS);
+  }, []);
 
   useEffect(() => {
     if (openId === null) return;
@@ -287,6 +437,17 @@ export function MarketingNav({ current }: { current: MarketingRoute }) {
     };
   }, [openId, close]);
 
+  useEffect(() => {
+    if (typeof window.matchMedia !== "function") return clearHoverTimers;
+    const desktop = window.matchMedia("(min-width: 1181px)");
+    const onBreakpointChange = () => close();
+    desktop.addEventListener("change", onBreakpointChange);
+    return () => {
+      desktop.removeEventListener("change", onBreakpointChange);
+      clearHoverTimers();
+    };
+  }, [clearHoverTimers, close]);
+
   return (
     <nav className="mh-site-nav" aria-label="Marketing navigation" ref={navRef}>
       {NAV_ENTRIES.map((entry) =>
@@ -306,6 +467,10 @@ export function MarketingNav({ current }: { current: MarketingRoute }) {
             open={openId === entry.id}
             openBy={openBy}
             setOpen={setOpen}
+            requestHoverOpen={requestHoverOpen}
+            requestHoverClose={requestHoverClose}
+            cancelHoverClose={cancelHoverClose}
+            reduceMotion={reduceMotion}
           />
         ),
       )}

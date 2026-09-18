@@ -272,6 +272,45 @@ signal to add the token.
 
 ## Interaction & focus
 
+### Motion contract (plan 052)
+
+Motion supports hierarchy and state changes; it does not run for decoration.
+Simple hover, focus, pressed, and color feedback stays in CSS. Coordinated
+enter/exit uses the `motion` package's mini animation engine behind the shared
+`MarketingMotion` helpers. The full React runtime added 37.4 KB in plan 052's
+production comparison, above the 25 KB shared budget, so it is not part of the
+default client bundle. The mini integration finished at a measured 4.0 KB
+transfer increase with no added request and zero layout shift. Future product
+demonstrations may add a narrow React motion boundary only after their measured
+route cost fits the stated budget.
+Layout, type, color, spacing, and responsive behavior remain in the scoped
+stylesheet.
+
+- Use `--mh-dur-fast` (120ms) for control feedback, `--mh-dur-base` (180ms)
+  for navigation and state changes, and `--mh-dur-reveal` (400ms) only for
+  one-time section entrances.
+- Use `--mh-ease-standard`; motion-library transitions mirror its
+  `cubic-bezier(0.2, 0, 0, 1)` curve.
+- Animate opacity and transforms. Do not animate page layout dimensions, scale
+  readable text, add bounce, loop continuously, or simulate processing time.
+- `prefers-reduced-motion` is live state. CSS disables CSS animation and
+  transitions; `MarketingMotion` helpers and each timed interaction must reduce
+  spatial movement and finish immediately when the preference is active.
+- Interactive content remains understandable in server-rendered HTML. A
+  closing surface becomes inert and hidden from assistive technology before
+  its visual exit finishes. Motion never moves focus unless closing a surface
+  would otherwise leave focus inside an inert subtree.
+- Do not combine `data-reveal` with a second entrance system on the same node.
+  Cancel timers and sequences on unmount, breakpoint changes, hidden tabs, or
+  when their content leaves the viewport.
+- Treat 25 KiB gzip-equivalent client JavaScript as the provisional shared
+  motion budget and 20 KiB per future demonstration beyond that shared runtime.
+  Measure identical production builds before accepting an increase.
+
+The desktop mega menu is the first consumer: 100ms pointer intent, 120ms exit
+grace, and a 180ms opacity/6px settle. Click, keyboard, and touch activation
+remain immediate. The mobile menu retains its native `details` behavior.
+
 ### CTA roles (plan 018 phase 4)
 | Class | Role | Looks like |
 |---|---|---|
