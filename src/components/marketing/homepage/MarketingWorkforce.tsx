@@ -158,7 +158,7 @@ export function MarketingWorkforce() {
           title="Agencies decide. Offboard helps residents prepare and continue."
           body="Residents lose weeks to forms, phone trees, and appointment windows before anyone helps them plan. Offboard gives them a private place to organize the practical work and routes them back to the responsible agency for every official decision."
           cta="Start a partnership conversation"
-          ctaHref="mailto:hello@offboard.co?subject=Workforce%20partnership"
+          ctaHref="mailto:info@offboard.co?subject=Workforce%20partnership"
           aside={<><span>A clear boundary</span><strong>Planning support, not an eligibility authority.</strong><p>Offboard organizes the practical work and routes residents to the responsible agency or provider for official decisions and applications.</p></>}
         />
         <SequenceSection
@@ -180,7 +180,7 @@ export function MarketingWorkforce() {
           title="Build a clearer route through the transition."
           body="Tell us which residents you serve, which systems they navigate, and where the current handoff breaks down."
           cta="Start a partnership conversation"
-          href="mailto:hello@offboard.co?subject=Workforce%20partnership"
+          href="mailto:info@offboard.co?subject=Workforce%20partnership"
         />
       </main>
     </MarketingShell>

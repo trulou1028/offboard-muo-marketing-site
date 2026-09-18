@@ -165,7 +165,7 @@ export function MarketingFooter({ current }: { current: MarketingRoute }) {
             <strong>Company</strong>
             <Link href="/about">About</Link>
             <a href={HUMAN_SUPPORT_URL}>Visit Us</a>
-            <a href="mailto:hello@offboard.co">Contact</a>
+            <a href="mailto:info@offboard.co">Contact</a>
           </div>
           <div>
             <strong>Legal</strong>

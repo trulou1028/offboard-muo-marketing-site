@@ -585,7 +585,7 @@ export function MarketingAct() {
           title="Bring ACT to your jurisdiction."
           body="Tell us which residents you serve and where sponsored access could help most. We will follow up to scope a pilot."
           cta="Start a pilot conversation"
-          href="mailto:hello@offboard.co?subject=ACT%20pilot"
+          href="mailto:info@offboard.co?subject=ACT%20pilot"
         />
       </main>
     </MarketingShell>

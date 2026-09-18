@@ -360,7 +360,7 @@ struck through, so un-deferring restores the exact blurb.
   · *Company:* About `Why Offboard exists, and who is behind it.` · Visit Us
   `Talk to a person, online or in Concord.` → `/intake` · Slack Community
   `People searching alongside you.` → `https://join.slack.com/t/offboardco/shared_invite/zt-34fsjpgfn-BcbibJ3d86P5RztYnHsA9w` ·
-  Contact `hello@offboard.co. A human reads it.` → mailto · *Featured, "The
+  Contact `info@offboard.co. A human reads it.` → mailto · *Featured, "The
   newsletter":* **The Offboard Newsletter** `Weekly job-market analysis and
   honest takes on tech hiring. 5,000+ subscribers.` → `Subscribe free` →
   `https://newsletter.offboard.co` *(the featured card is a plain link in the
@@ -391,7 +391,7 @@ Lumo, Application Packet, Integrations, Layoff & Benefits, Pricing, Guides
 **Partners:** For Employers ~~, Workforce & Government, Universities &
 Communities~~ ·
 **Company:** About, Visit Us
-(`/intake`), Contact (`mailto:hello@offboard.co`) · **Legal:** Privacy &
+(`/intake`), Contact (`mailto:info@offboard.co`) · **Legal:** Privacy &
 Security (`/privacy-security`), Privacy Policy, Terms (app.offboard.co).
 
 The struck-through entries are the deferred pages (`src/lib/launch.ts`). Each
@@ -1154,7 +1154,7 @@ rules).*
 
 - Kicker: `Pilot inquiries` · H2: `Bring ACT to your jurisdiction.`
 - Body: `Tell us which residents you serve and where sponsored access could help most. We will follow up to scope a pilot.`
-- CTA: `Start a pilot conversation` → `mailto:hello@offboard.co?subject=ACT pilot`
+- CTA: `Start a pilot conversation` → `mailto:info@offboard.co?subject=ACT pilot`
 
 ---
 
@@ -1205,7 +1205,7 @@ approval for public display, so this page ends in a conversation.
 - Kicker: `Workforce and government`
 - H1: `Agencies decide. Offboard helps residents prepare and continue.`
 - Body: `Residents lose weeks to forms, phone trees, and appointment windows before anyone helps them plan. Offboard gives them a private place to organize the practical work and routes them back to the responsible agency for every official decision.`
-- CTA: `Start a partnership conversation` → `mailto:hello@offboard.co?subject=Workforce partnership`
+- CTA: `Start a partnership conversation` → `mailto:info@offboard.co?subject=Workforce partnership`
 - Aside: `A clear boundary` / `Planning support, not an eligibility authority.` / `Offboard organizes the practical work and routes residents to the responsible agency or provider for official decisions and applications.`
 
 ### What Offboard does beside your program *(moved verbatim from `/employers`, plan 005 copy)*
@@ -1259,7 +1259,7 @@ approval for public display, so this page ends in a conversation.
 - Kicker: `Partnership inquiries`
 - H2: `Build a clearer route through the transition.`
 - Body: `Tell us which residents you serve, which systems they navigate, and where the current handoff breaks down.`
-- CTA: `Start a partnership conversation` → `mailto:hello@offboard.co?subject=Workforce partnership`
+- CTA: `Start a partnership conversation` → `mailto:info@offboard.co?subject=Workforce partnership`
 
 # 9 · Intake `/intake` *(live member-intake form; never redirect)*
 
@@ -1305,8 +1305,9 @@ same rule as any page.
 **Both render inside the app's branded shell** (owner 2026-09-15). Until then
 they were plain HTML on the site's paper background, which looked nothing like
 the auth and transactional emails `app.offboard.co` sends, even though both go
-out through the same Resend account from `Offboard <hello@offboard.co>`. The
-shell is ported from `lumo-plan-builder` `origin/main`
+out through the same Resend account from `Offboard <info@offboard.co>`. The
+reply-to address is `info@offboard.co`, so a direct reply reaches the public
+contact inbox. The shell is ported from `lumo-plan-builder` `origin/main`
 `supabase/functions/_shared/email-templates/branded-shell.tsx`, whose own rule
 (`.lovable/memory/style/email-branded-shell-standard.md`) is that *every*
 Offboard email uses it: grey page, white card, centred logo, dividers, footer,
@@ -2067,7 +2068,7 @@ add the connection to the register.
   3. `Export your resumes and documents whenever you want.`
   4. `We do not sell your data. To power AI features it passes through OpenAI and Anthropic only, under the retention and no-training terms above.`
 - Small: `These map to the rights GDPR and CCPA give you, wherever you live.`
-- Line: `Found something, or have a question this page does not answer? Email hello@offboard.co. A human reads it.`
+- Line: `Found something, or have a question this page does not answer? Email info@offboard.co. A human reads it.`
 
 ### Final CTA (shared component, overridden copy)
 
@@ -2116,7 +2117,7 @@ and not Sponsored-tier copy) and the page is in the CopyDrift absence list.
 - Kicker: `Universities and communities`
 - H1: `The workshop ends. The career does not.`
 - Body: `Career offices and member programs do good work in a narrow window: a session, an appointment, a program year. What the member leaves with is a folder and a memory. Offboard gives them a record that keeps working after your program is over, and keeps working when they come back.`
-- CTA: `Start a sponsorship conversation` → `mailto:hello@offboard.co?subject=Community sponsorship`
+- CTA: `Start a sponsorship conversation` → `mailto:info@offboard.co?subject=Community sponsorship`
 - Aside: `What sponsorship covers` / `The account, not a view into it.` / `You sponsor access for your members. What they build inside it stays theirs, and your reporting is aggregate only.`
 
 ### Who this is for
@@ -2162,7 +2163,7 @@ and not Sponsored-tier copy) and the page is in the CopyDrift absence list.
 - Kicker: `Sponsorship inquiries`
 - H2: `Talk about sponsoring your members.`
 - Body: `Tell us who your members are, how many you would start with, and what your team already runs. We will scope it with you.`
-- CTA: `Start a sponsorship conversation` → `mailto:hello@offboard.co?subject=Community sponsorship`
+- CTA: `Start a sponsorship conversation` → `mailto:info@offboard.co?subject=Community sponsorship`
 
 # 17 · Company Transition Centers `/companies` and `/companies/<slug>`
 

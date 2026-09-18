@@ -22,6 +22,15 @@ const COPY_DOC = readFileSync(path.join(process.cwd(), "COPY.md"), "utf8");
 const CODE = SOURCE.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
 
 describe("the intake emails match the copy law", () => {
+  it("sends from and replies to the public contact address", () => {
+    expect(SOURCE).toContain('const FROM = "Offboard <info@offboard.co>"');
+    expect(SOURCE).toContain('const REPLY_TO = "info@offboard.co"');
+    expect(COPY_DOC).toContain("from `Offboard <info@offboard.co>`");
+    expect(COPY_DOC).toContain("reply-to address is `info@offboard.co`");
+    expect(SOURCE).not.toContain("hello@offboard.co");
+    expect(COPY_DOC).not.toContain("hello@offboard.co");
+  });
+
   it("greets the person in the confirmation subject, and never the company", () => {
     expect(SOURCE).toContain("subject: `We got your intake, ${input.firstName}`");
 
