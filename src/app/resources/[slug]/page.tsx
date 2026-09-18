@@ -4,6 +4,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { GuideArticle } from "@/components/marketing/resources/GuideArticle";
 import { RenderBlocks } from "@/components/marketing/resources/RenderBlocks";
 import { getPostBySlug, getPublishedPosts } from "@/lib/content/posts";
+import { marketingMetadata } from "@/lib/metadata";
 
 // Publish becomes visible within 5 minutes without a redeploy (plan 016,
 // docs/cms-architecture.md contract 1 / "Decisions" #2).
@@ -22,15 +23,20 @@ export async function generateMetadata({
   const { slug } = await params;
   const lookup = await getPostBySlug(slug);
   if (lookup.kind !== "published") {
-    return { title: "Guides & resources | Offboard" };
+    return marketingMetadata({
+      path: "/resources",
+      title: "Guides & resources | Offboard",
+      description: "Reported essays, practical guides, and the slow work of making layoffs less brutal.",
+    });
   }
-  return {
+  return marketingMetadata({
+    path: `/resources/${lookup.post.slug}`,
     title: `${lookup.post.title} | Offboard`,
     description: lookup.post.excerpt,
+    type: "article",
     /* The article's own slug, not the requested one: a retired slug 308s to
        /resources, so only a rendering page reaches here. */
-    alternates: { canonical: `/resources/${lookup.post.slug}` },
-  };
+  });
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {

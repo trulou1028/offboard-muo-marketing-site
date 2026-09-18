@@ -13,24 +13,6 @@ export const metadata: Metadata = {
      canonical here would resolve against this base, not the current path,
      and point every page at the homepage. */
   metadataBase: new URL(SITE_ORIGIN),
-  openGraph: {
-    type: "website",
-    siteName: "Offboard",
-    title: "Offboard | The modern unemployment office",
-    description: "Offboard is the modern unemployment office for benefits, deadlines, runway, funded training, and your next job. Independent, not a government agency.",
-    images: [{
-      url: "/marketing/homepage/hero/living-room.webp",
-      width: 1586,
-      height: 992,
-      alt: "A person working at home with Offboard",
-    }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Offboard | The modern unemployment office",
-    description: "Offboard is the modern unemployment office for benefits, deadlines, runway, funded training, and your next job.",
-    images: ["/marketing/homepage/hero/living-room.webp"],
-  },
 };
 
 // `fallback` + `adjustFontFallback` (both supported for next/font/local per

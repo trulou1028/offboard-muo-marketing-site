@@ -99,7 +99,12 @@ test.describe("Offboard marketing site", () => {
     expect(await robots.text()).toContain("Sitemap: https://offboard.co/sitemap.xml");
 
     await page.goto("/");
-    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /living-room\.webp$/);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+      "content",
+      /marketing\/social\/offboard-social-card\.jpg$/,
+    );
+    await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute("content", "1200");
+    await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute("content", "630");
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
     await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
   });
@@ -734,6 +739,47 @@ test("every route's canonical points at its own address on the real domain", asy
     const href = await page.locator('link[rel="canonical"]').getAttribute("href");
     const expected = route === "/" ? "https://offboard.co" : `https://offboard.co${route}`;
     if (href !== expected) wrong.push(`${route}: ${href ?? "(no canonical)"} — expected ${expected}`);
+  }
+  expect(wrong).toEqual([]);
+});
+
+// Social cards reuse the page's actual browser title and description rather
+// than the homepage fallback. Keeping this loop beside the canonical sweep
+// makes every public route prove its complete share-card contract.
+test("every route's social card matches that page's title and description", async ({ page }) => {
+  const ROUTES = [
+    "/", "/about", "/act", "/career-context", "/communities", "/companies",
+    "/employers", "/how-it-works", "/integrations", "/intake",
+    "/intake/confirmed", "/application-packet", "/layoff-support", "/lumo", "/pricing",
+    "/privacy-security", "/resources", "/workforce",
+    "/companies/airtable",
+    "/resources/first-week-after-a-layoff",
+  ];
+
+  const wrong: string[] = [];
+  for (const route of ROUTES) {
+    await page.goto(route);
+    const title = await page.title();
+    const description = await page.locator('meta[name="description"]').getAttribute("content");
+    const social = await page.locator("head").evaluate(() => ({
+      ogTitle: document.querySelector<HTMLMetaElement>('meta[property="og:title"]')?.content,
+      ogDescription: document.querySelector<HTMLMetaElement>('meta[property="og:description"]')?.content,
+      ogImage: document.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.content,
+      twitterTitle: document.querySelector<HTMLMetaElement>('meta[name="twitter:title"]')?.content,
+      twitterDescription: document.querySelector<HTMLMetaElement>('meta[name="twitter:description"]')?.content,
+      twitterImage: document.querySelector<HTMLMetaElement>('meta[name="twitter:image"]')?.content,
+    }));
+
+    if (social.ogTitle !== title) wrong.push(`${route}: Open Graph title does not match the page title`);
+    if (social.ogDescription !== description) wrong.push(`${route}: Open Graph description does not match the page description`);
+    if (social.twitterTitle !== title) wrong.push(`${route}: Twitter title does not match the page title`);
+    if (social.twitterDescription !== description) wrong.push(`${route}: Twitter description does not match the page description`);
+    if (!social.ogImage?.endsWith("/marketing/social/offboard-social-card.jpg")) {
+      wrong.push(`${route}: Open Graph image is ${social.ogImage ?? "missing"}`);
+    }
+    if (!social.twitterImage?.endsWith("/marketing/social/offboard-social-card.jpg")) {
+      wrong.push(`${route}: Twitter image is ${social.twitterImage ?? "missing"}`);
+    }
   }
   expect(wrong).toEqual([]);
 });

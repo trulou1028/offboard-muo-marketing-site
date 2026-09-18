@@ -1,16 +1,15 @@
-import type { Metadata } from "next";
-
 import { MarketingResources } from "@/components/marketing/homepage/MarketingRoutePages";
+import { marketingMetadata } from "@/lib/metadata";
 
 // Publish becomes visible within 5 minutes without a redeploy (plan 016,
 // docs/cms-architecture.md contract 1 / "Decisions" #2).
 export const revalidate = 300;
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/resources" },
+export const metadata = marketingMetadata({
+  path: "/resources",
   title: "Guides & resources | Offboard",
   description: "Reported essays, practical guides, and the slow work of making layoffs less brutal.",
-};
+});
 
 export default async function Page() {
   // Dynamic import, deliberately not a top-level one: src/lib/content/posts.ts

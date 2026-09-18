@@ -1,14 +1,13 @@
-import type { Metadata } from "next";
-
 import { MarketingShell } from "@/components/marketing/homepage/MarketingSite";
 import { IntakeForm } from "@/components/marketing/intake/IntakeForm";
+import { marketingMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/intake" },
+export const metadata = marketingMetadata({
+  path: "/intake",
   title: "Intake | Offboard",
   description:
     "Tell us a bit about your offboarding story. Our team reviews every intake and reaches out directly.",
-};
+});
 
 export default function Page() {
   return (
