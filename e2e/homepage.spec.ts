@@ -136,23 +136,21 @@ test.describe("Offboard marketing site", () => {
     await expect(headerNav.getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
     expect(await page.locator('.mh-site-header a[href="/act"]').count()).toBe(0);
 
-    const visiblePanels = () =>
-      page.locator(".mh-nav-panel").evaluateAll(
-        (els) => els.filter((el) => getComputedStyle(el).display !== "none").length,
-      );
+    const activePanels = () =>
+      page.locator(".mh-nav-panel:not([hidden]):not([aria-hidden='true'])").count();
 
-    expect(await visiblePanels()).toBe(0);
+    expect(await activePanels()).toBe(0);
     const product = headerNav.getByRole("button", { name: "Product" });
     await product.click();
     await expect(product).toHaveAttribute("aria-expanded", "true");
-    expect(await visiblePanels()).toBe(1);
+    expect(await activePanels()).toBe(1);
 
     await headerNav.getByRole("button", { name: "Resources" }).click();
     await expect(product).toHaveAttribute("aria-expanded", "false");
-    expect(await visiblePanels()).toBe(1);
+    expect(await activePanels()).toBe(1);
 
     await page.keyboard.press("Escape");
-    expect(await visiblePanels()).toBe(0);
+    expect(await activePanels()).toBe(0);
 
     const footerNav = page.getByRole("navigation", { name: "Footer navigation" });
     await expect(footerNav.getByRole("link", { name: "For Employers" })).toBeVisible();

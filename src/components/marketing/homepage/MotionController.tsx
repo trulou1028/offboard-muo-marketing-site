@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 
-/* The marketing tree's one client component (plan 024). Renders nothing; it
-   drives two behaviors after hydration:
+/* The marketing tree's global motion controller (plan 024). Renders nothing;
+   it drives two document-level behaviors after hydration:
 
    1. Header scroll state - always on, even under reduced motion: a shadow on
       the fixed header once the page has scrolled is state, not motion.

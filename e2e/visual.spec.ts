@@ -60,7 +60,10 @@ test.describe("Marketing site visual baseline", () => {
         await page.setViewportSize({ width: viewport.width, height: viewport.height });
         await page.goto(route);
         await page.evaluate(() => document.fonts.ready);
-        await page.waitForLoadState("networkidle");
+        // `page.goto` already waits for the load event, and toHaveScreenshot
+        // waits for two consecutive stable renders. Network-idle is not a
+        // visual-readiness signal; under the parallel full suite it could
+        // remain busy on image traffic after the page was fully rendered.
 
         await expect(page).toHaveScreenshot(`${routeLabel}-${viewport.name}.png`, {
           fullPage: true,

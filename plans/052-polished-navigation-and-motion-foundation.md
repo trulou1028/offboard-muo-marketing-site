@@ -1,9 +1,15 @@
 # Plan 052: Polished navigation and a shared motion foundation
 > **Execute with:** Fable 5.1 · high - Navigation focus, dismissal, and animated exits are accessibility-critical.
 
-Status: TODO. Planning only; implementation has not been authorized.
+Status: BUILT 2026-09-18 on `codex/plan-052-navigation-motion`; review PR pending.
 Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc` (freshly fetched, matching this checkout).
 Planning branch: `codex/motion-polish-plans`.
+
+Execution note: Louie authorized implementation on 2026-09-18 and the active
+Codex GPT-5 session executed it. The full React Motion runtime measured 37.4 KB
+over baseline, so the implementation uses `motion/mini` and a shared reduced
+motion helper instead; the final production comparison adds 4.0 KB, produces
+zero layout shift, and keeps logical panel response under 10ms in the local run.
 
 ## Outcome and scope
 
@@ -84,9 +90,9 @@ body locking is needed for a nonmodal disclosure.
 
 ## Shared motion contract for 052-054
 
-1. Prefer CSS for simple control states. Use the `motion` package, imported via
-   its React entrypoint, for coordinated state transitions. Install and lock a
-   version compatible with the installed React/Next versions at execution.
+1. Prefer CSS for simple control states. Use the `motion` package's mini engine
+   for coordinated navigation transitions. A future React entrypoint must be a
+   narrow, measured boundary. Lock a version compatible with installed React/Next.
 2. Keep layout, typography, color, spacing, and responsive styles in the scoped
    `MarketingHomepage.css` using `--mh-*` tokens. Motion may write runtime
    transform/opacity values; that is animation plumbing, not permission for a

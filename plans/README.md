@@ -823,7 +823,7 @@ implementation authorized or started.** Source baseline: freshly fetched
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 | --- | --- | --- | --- | --- | --- |
-| 052 | [Polished navigation and shared motion foundation](052-polished-navigation-and-motion-foundation.md) | P1 | M | Current main | TODO - plan drafted; awaiting planning review on `codex/motion-polish-plans` |
+| 052 | [Polished navigation and shared motion foundation](052-polished-navigation-and-motion-foundation.md) | P1 | M | Current main | BUILT 2026-09-18 on `codex/plan-052-navigation-motion`; review PR pending. Full React Motion failed the 25 KB budget (+37.4 KB); `motion/mini` passes at +4.0 KB with zero layout shift. |
 | 053 | [Application Packet demonstration](053-application-packet-demonstration.md) | P1 | M | 052 shared foundation | TODO - plan drafted; awaiting planning review on `codex/motion-polish-plans` |
 | 054 | [Interactive Career Context example](054-interactive-career-context-example.md) | P1 | M | 052 shared foundation | TODO - plan drafted; awaiting planning review on `codex/motion-polish-plans` |
 

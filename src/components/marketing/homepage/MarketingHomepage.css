@@ -234,15 +234,14 @@ a.mh-skip-link:focus { transform: translateY(0); }
    (owner review). Column tracks are fixed so the width is determinate; the
    clamp keeps it inside the page gutters on narrow desktops. */
 .mh-nav-panel { --mh-focus-ring: var(--mh-ink); position: absolute; z-index: 30; top: calc(100% + 12px); left: 50%; display: grid; grid-template-columns: repeat(2, 300px) 400px; max-width: calc(100vw - 2 * var(--mh-page-x)); min-height: 400px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); translate: -50% 0; }
+.mh-nav-panel[aria-hidden="true"] { pointer-events: none; }
 /* No panel renders data-columns="1" since plan 043's launch trim left
    Resources as the only group, and it has two columns. Kept, not deleted:
    For Organizations was the one-column panel and comes back with
    /workforce and /communities. */
 .mh-nav-panel[data-columns="1"] { grid-template-columns: 340px 400px; }
-/* The `hidden` attribute alone does NOT close these panels: `display: grid`
-   above is an author rule and beats the user-agent's `[hidden] {display:none}`,
-   so all three panels rendered at once and overlapped. Caught in a screenshot,
-   not by the attribute assertion that was passing next to it. */
+/* The panel stays in the server-rendered DOM for no-JS parity and copy
+   fidelity. During an animated exit `hidden` waits until the links are inert. */
 .mh-nav-panel[hidden] { display: none; }
 /* Bridges the gap between the bar and the panel so crossing it with the
    pointer does not fire mouseleave and close the panel under the cursor. */
@@ -606,7 +605,8 @@ p.mh-price-note { margin-top: 28px; color: var(--mh-muted); font-size: 14px; lin
 
 .mh-site-nav > a[aria-current="page"]::after { transform: scaleX(1); }
 .mh-mobile-menu { display: none; position: relative; }
-.mh-mobile-menu summary { padding: 6px 10px; border: 1px solid transparent; border-radius: var(--mh-radius-sm); cursor: pointer; list-style: none; font-weight: 600; transition: background-color 180ms ease-out, border-color 180ms ease-out; }
+.mh-mobile-menu summary { padding: 6px 10px; border: 1px solid transparent; border-radius: var(--mh-radius-sm); cursor: pointer; list-style: none; font-weight: 600; transition: background-color var(--mh-dur-base) var(--mh-ease-standard), border-color var(--mh-dur-base) var(--mh-ease-standard), transform var(--mh-dur-fast) var(--mh-ease-standard); }
+.mh-mobile-menu summary:active { transform: translateY(1px); }
 /* Open state: without it the trigger looked identical whether the panel was
    showing or not. */
 .mh-mobile-menu[open] summary { background: var(--mh-surface-on-dark); border-color: var(--mh-border-on-dark); color: var(--mh-paper); }
@@ -1800,10 +1800,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
    flash). Playwright's animations:"disabled" fast-forwards `both`-fill
    animations to their visible end state. */
 @media (prefers-reduced-motion: no-preference) {
-  /* One short settle when a panel opens. Keyframes, not a transition,
-     because the closed state is display:none and cannot transition. */
-  .mh-nav-panel:not([hidden]) { animation: mh-nav-in var(--mh-dur-base) var(--mh-ease-standard); }
-
   @keyframes mh-rise { from { opacity: 0; transform: translateY(12px); } }
   .mh-hero2-copy > *,
   .mh-hero2-visual,
@@ -2137,8 +2133,4 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .marketing-homepage *,
   .marketing-homepage *::before,
   .marketing-homepage *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
-}
-
-@keyframes mh-nav-in {
-  from { opacity: 0; translate: -50% -6px; }
 }
