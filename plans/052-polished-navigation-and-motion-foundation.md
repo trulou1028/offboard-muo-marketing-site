@@ -1,7 +1,7 @@
 # Plan 052: Polished navigation and a shared motion foundation
 > **Execute with:** Fable 5.1 · high - Navigation focus, dismissal, and animated exits are accessibility-critical.
 
-Status: BUILT 2026-09-18 on `codex/plan-052-navigation-motion`; [PR #121](https://github.com/trulou1028/offboard-muo-marketing-site/pull/121) awaiting owner review.
+Status: MERGED 2026-09-18 via [PR #121](https://github.com/trulou1028/offboard-muo-marketing-site/pull/121) at `edf86a7`.
 Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc` (freshly fetched, matching this checkout).
 Planning branch: `codex/motion-polish-plans`.
 
