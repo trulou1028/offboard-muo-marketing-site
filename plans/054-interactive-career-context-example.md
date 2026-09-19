@@ -228,3 +228,7 @@ fixtures still consumed by other pages.
   `npm run typecheck`, `npm test` (209 tests), `npm run build`, and
   `npm run e2e` (135 browser tests) pass. Desktop, tablet, and mobile page
   baselines were reviewed and updated for this replacement.
+- Owner refinement: replaced the literal app screenshot with a simplified
+  editorial abstraction of one central Career Context connected to experience,
+  goals, applications, and interviews. The neon dark theme remains, with
+  separate landscape and portrait compositions.

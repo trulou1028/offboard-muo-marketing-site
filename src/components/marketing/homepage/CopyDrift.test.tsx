@@ -95,14 +95,14 @@ describe("Career Context example copy stays governed", () => {
   it("records the product-view introduction, caption, and image description", () => {
     for (const line of [
       "See how one Career Context brings your experience, goals, and connected sources into one working record.",
-      "Illustrative Career Context screen with fictional information.",
-      "Career Context app screen showing a context score, resume status, job search target, layoff details, and connected sources",
+      "Illustrative view of the information that forms a Career Context.",
+      "Abstract Career Context illustration showing Experience, Goals, Applications, and Interviews connected to one central record",
     ]) {
       expect(COPY_DOC).toContain(line);
     }
 
     const text = renderedText(<MarketingCareerContext />);
-    expect(text).toContain("Illustrative Career Context screen with fictional information.");
+    expect(text).toContain("Illustrative view of the information that forms a Career Context.");
     expect(text).not.toContain("Choose an example task");
   });
 });

@@ -98,7 +98,7 @@ function HoldsSection() {
 }
 
 function InOutSection() {
-  const contextScreenshotAlt = "Career Context app screen showing a context score, resume status, job search target, layoff details, and connected sources";
+  const contextIllustrationAlt = "Abstract Career Context illustration showing Experience, Goals, Applications, and Interviews connected to one central record";
 
   return (
     <section className="mh-morethan mh-section" aria-labelledby="inout-title">
@@ -111,22 +111,22 @@ function InOutSection() {
         <div className="mh-context-product-shot-frame">
           <Image
             className="is-desktop"
-            src="/marketing/app/career-context-neon.webp"
-            alt={contextScreenshotAlt}
-            width={1627}
-            height={967}
+            src="/marketing/app/career-context-abstract-v2.webp"
+            alt={contextIllustrationAlt}
+            width={1672}
+            height={941}
             sizes="(max-width: 1280px) calc(100vw - 64px), 1200px"
           />
           <Image
             className="is-mobile"
-            src="/marketing/app/career-context-neon-mobile-v2.webp"
-            alt={contextScreenshotAlt}
+            src="/marketing/app/career-context-abstract-mobile-v2.webp"
+            alt={contextIllustrationAlt}
             width={941}
             height={1672}
             sizes="calc(100vw - 40px)"
           />
         </div>
-        <figcaption>Illustrative Career Context screen with fictional information.</figcaption>
+        <figcaption>Illustrative view of the information that forms a Career Context.</figcaption>
       </figure>
       <div className="mh-inout mh-inout-support" data-reveal="">
         <div>
