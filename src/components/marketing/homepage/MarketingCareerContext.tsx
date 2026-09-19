@@ -8,7 +8,6 @@ import {
   PageHero,
   Shot,
 } from "./MarketingSite";
-import { CareerContextExample } from "./CareerContextExample";
 
 /* Career Context pillar page (plan 025; restructured by plan 042 around the
    record; visual pass by plan 046). Copy: COPY.md § 10.
@@ -99,14 +98,36 @@ function HoldsSection() {
 }
 
 function InOutSection() {
+  const contextScreenshotAlt = "Career Context app screen showing a context score, resume status, job search target, layoff details, and connected sources";
+
   return (
     <section className="mh-morethan mh-section" aria-labelledby="inout-title">
       <div className="mh-copy-block">
         <span className="mh-kicker is-sand">In and out</span>
         <h2 id="inout-title">Every step makes it smarter. Every output starts from it.</h2>
-        <p>Choose a task to see which parts of one fictional record matter and what they help produce.</p>
+        <p>See how one Career Context brings your experience, goals, and connected sources into one working record.</p>
       </div>
-      <CareerContextExample />
+      <figure className="mh-context-product-shot" data-reveal="">
+        <div className="mh-context-product-shot-frame">
+          <Image
+            className="is-desktop"
+            src="/marketing/app/career-context-neon.webp"
+            alt={contextScreenshotAlt}
+            width={1627}
+            height={967}
+            sizes="(max-width: 1280px) calc(100vw - 64px), 1200px"
+          />
+          <Image
+            className="is-mobile"
+            src="/marketing/app/career-context-neon-mobile-v2.webp"
+            alt={contextScreenshotAlt}
+            width={941}
+            height={1672}
+            sizes="calc(100vw - 40px)"
+          />
+        </div>
+        <figcaption>Illustrative Career Context screen with fictional information.</figcaption>
+      </figure>
       <div className="mh-inout mh-inout-support" data-reveal="">
         <div>
           <span>What goes in</span>

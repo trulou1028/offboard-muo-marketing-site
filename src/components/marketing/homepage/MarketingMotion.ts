@@ -7,7 +7,6 @@ const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
 export const MARKETING_MOTION = {
   navigationDuration: 0.18,
-  contextExampleDuration: 0.2,
   navigationEase: [0.2, 0, 0, 1] as [number, number, number, number],
 } as const;
 
@@ -34,17 +33,6 @@ export function animateNavigationPanel(panel: HTMLElement, phase: "enter" | "exi
       : { opacity: 0, transform: "translateY(-4px)" },
     {
       duration: MARKETING_MOTION.navigationDuration,
-      ease: MARKETING_MOTION.navigationEase,
-    },
-  );
-}
-
-export function animateContextExample(output: HTMLElement) {
-  return animate(
-    output,
-    { opacity: [0.58, 1], transform: ["translateY(4px)", "translateY(0px)"] },
-    {
-      duration: MARKETING_MOTION.contextExampleDuration,
       ease: MARKETING_MOTION.navigationEase,
     },
   );

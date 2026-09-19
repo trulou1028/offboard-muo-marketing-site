@@ -1,14 +1,25 @@
-# Plan 054: An interactive Career Context example
-> **Execute with:** Fable 5.1 · high - The example must explain context reuse without inventing product or privacy capabilities.
+# Plan 054: A Career Context product view
+> **Execute with:** Fable 5.1 · high - The product view must explain context reuse without inventing product or privacy capabilities.
 
 Status: READY FOR REVIEW in [PR #125](https://github.com/trulou1028/offboard-muo-marketing-site/pull/125)
-on `codex/plan-054-career-context-demo`. Full local gate green; awaiting Vercel
-preview and owner approval before merge.
+on `codex/plan-054-career-context-demo`. The owner-requested single product view
+is locally verified; awaiting the refreshed Vercel preview and owner approval.
 Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc`.
 Planning branch: `codex/motion-polish-plans`. Depends on plan 052's shared motion
 contract/runtime. Recommended order: 052, 053, 054; 053 is not a hard dependency.
 
-## Outcome and placement
+## Owner revision (2026-09-19)
+
+Replace the interactive source-and-output composition with a single, legible
+Career Context app view. Base it on the real app information architecture and
+show the evolving neon yellow-green primary accent. Keep the compact `What goes
+in` and `What comes out` explanations underneath. The screen is illustrative,
+uses fictional information, and has no controls or simulated behavior.
+
+The original interactive direction below is retained as planning history. This
+owner revision supersedes its selector, animation, and interaction requirements.
+
+## Original outcome and placement
 
 Let visitors see how the same fictional career record supports different tasks:
 a tailored resume, interview preparation, and comparing an opportunity against
@@ -202,3 +213,18 @@ fixtures still consumed by other pages.
   motion. The three reviewed `/career-context` visual baselines were updated.
   The Docker-backed `cms-contract` job remains CI-authoritative and is unrelated
   to this route-only change.
+
+## Owner revision implementation record (2026-09-19)
+
+- Removed the three-state interactive example, its route client boundary,
+  route-specific motion, and interaction tests.
+- Replaced it with one Career Context product view based on the current app
+  structure and restyled with the requested neon yellow-green primary accent.
+  The desktop view uses the full landscape composition and mobile reflows the
+  same score and About You cards into a legible narrow-screen composition.
+- Preserved the existing `What goes in` and `What comes out` explanations and
+  recorded the revised introduction, caption, and image description in `COPY.md`.
+- Final local verification: `npm run lint`, `npm run lint:css`,
+  `npm run typecheck`, `npm test` (209 tests), `npm run build`, and
+  `npm run e2e` (135 browser tests) pass. Desktop, tablet, and mobile page
+  baselines were reviewed and updated for this replacement.

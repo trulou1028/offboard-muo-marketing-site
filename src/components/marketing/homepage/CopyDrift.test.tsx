@@ -92,17 +92,18 @@ describe("Application Packet example copy stays governed", () => {
 });
 
 describe("Career Context example copy stays governed", () => {
-  it("records the disclosure, fictional source, and all three grounded tasks", () => {
+  it("records the product-view introduction, caption, and image description", () => {
     for (const line of [
-      "Fictional example. Explore how the same context can inform different tasks.",
-      "Led customer onboarding and coordinated support handoffs.",
-      "Reduced average onboarding time from 14 to 10 days.",
-      "Tell me about a time you got a stalled customer rollout moving again.",
-      "Own customer adoption after onboarding, with three fixed office days each week.",
-      "The role is hybrid. Alex prefers remote work with predictable collaboration hours, so the schedule needs clarification.",
+      "See how one Career Context brings your experience, goals, and connected sources into one working record.",
+      "Illustrative Career Context screen with fictional information.",
+      "Career Context app screen showing a context score, resume status, job search target, layoff details, and connected sources",
     ]) {
       expect(COPY_DOC).toContain(line);
     }
+
+    const text = renderedText(<MarketingCareerContext />);
+    expect(text).toContain("Illustrative Career Context screen with fictional information.");
+    expect(text).not.toContain("Choose an example task");
   });
 });
 
