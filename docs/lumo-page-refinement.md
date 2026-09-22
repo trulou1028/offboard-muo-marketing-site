@@ -31,3 +31,11 @@ Career Context, Lumo, and Integrations use centered heroes with 144px visual
 overlap on desktop and 64px on mobile. Extra hero padding keeps the CTA clear.
 Lumo presents its screenshot before the supporting copy; Integrations presents
 its existing integration marks in an overlapping panel. No copy changes.
+
+## Owner screenshot replacement, 2026-09-22
+
+The owner supplied full 3024 x 1620 screenshots for Lumo and Integrations.
+`lumo-tracker-live-v1.png` and `integrations-live-v1.png` are unchanged copies
+of those attachments. Both render at the same wide hero-overlap size as Career
+Context. The prompt-library capture and integration marks are replaced.
+The generated concept graphics were rejected and are not used on the site.

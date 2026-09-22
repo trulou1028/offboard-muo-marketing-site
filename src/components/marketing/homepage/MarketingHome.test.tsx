@@ -505,7 +505,7 @@ describe("Offboard marketing routes", () => {
 it("Lumo leads with a real product capture and three useful examples", async () => {
   const { MarketingLumo } = await import("./MarketingLumo");
   const { container } = render(<MarketingLumo />);
-  expect(container.querySelector(".mh-lumo-product-shot img")?.getAttribute("src")).toContain("lumo-prompts-live-v1.jpg");
+  expect(container.querySelector(".mh-lumo-product-shot img")?.getAttribute("src")).toContain("lumo-tracker-live-v1.png");
   expect(container.querySelectorAll(".mh-lumo-use-grid article")).toHaveLength(3);
 });
 

@@ -25,8 +25,8 @@ export function MarketingLumo() {
         />
         <div className="mh-product-overlap mh-section">
           <figure className="mh-lumo-product-shot">
-            <Image src="/marketing/app/lumo-prompts-live-v1.jpg" alt="Lumo's prompt library in the Offboard app, with options to track a job, update an application, prepare for an interview, review progress, add a contact, and check a posting" width={672} height={624} sizes="(max-width: 800px) calc(100vw - 48px), 600px" />
-            <figcaption>Inside Lumo: the prompt library.</figcaption>
+            <Image src="/marketing/app/lumo-tracker-live-v1.png" alt="Lumo showing an application confirmation card for a role, with Add to Tracker and Cancel controls" width={3024} height={1620} sizes="(max-width: 1280px) calc(100vw - 48px), 1200px" />
+            <figcaption>Inside Lumo: review a role before adding it to your tracker.</figcaption>
           </figure>
         </div>
         <section className="mh-lumo-product mh-section" aria-labelledby="product-title">

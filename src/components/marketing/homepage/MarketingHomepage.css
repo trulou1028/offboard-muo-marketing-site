@@ -1202,15 +1202,6 @@ figure.mh-hero-image-composition { position: relative; width: min(590px, 100%); 
 .mh-layered-product.is-first-week .mh-layered-product-chip.is-top { top: 42px; }
 /* /integrations hero: one compact cluster of connected tools. Each card
    stays in the DOM order shown in the connected list. */
-ul.mh-int-hero-marks { position: relative; width: min(540px, 100%); min-height: 340px; margin-left: auto; list-style: none; }
-.mh-int-hero-marks li { position: absolute; z-index: 1; display: grid; width: 206px; grid-template-columns: 58px minmax(0, 1fr); gap: 4px 13px; align-items: center; padding: 16px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-lg); box-shadow: var(--mh-shadow-overlay); color: var(--mh-ink); }
-.mh-int-hero-marks li:nth-child(1) { top: 76px; left: 0; transform: rotate(-5deg); }
-.mh-int-hero-marks li:nth-child(2) { top: 18px; left: 32%; z-index: 2; transform: rotate(2.5deg); }
-.mh-int-hero-marks li:nth-child(3) { top: 78px; right: 0; transform: rotate(6deg); }
-.mh-int-hero-marks li:nth-child(4) { top: 176px; left: 17%; z-index: 3; transform: rotate(-2.5deg); }
-.mh-int-hero-marks li:nth-child(5) { top: 170px; right: 7%; z-index: 4; transform: rotate(3deg); }
-.mh-int-hero-marks strong { align-self: end; font-size: 13px; font-weight: 650; line-height: 1.25; }
-.mh-int-hero-marks .mh-int-status { grid-column: 2; place-self: start; padding: 4px 8px; font-size: 9px; }
 /* The shared "also part of the system" strip. */
 .mh-also { padding-top: var(--mh-section-y-tight); padding-bottom: var(--mh-section-y-tight); background: var(--mh-paper-soft); border-top: 1px solid var(--mh-line); }
 ul.mh-also-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px clamp(32px, 4vw, 64px); margin-top: 24px; }
@@ -1887,7 +1878,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-route-hero.is-visual { grid-template-columns: 1fr; }
   .mh-route-hero-visual { max-width: 560px; }
   figure.mh-hero-image-composition { min-height: 390px; margin: 0 auto; }
-  ul.mh-int-hero-marks { margin: 12px auto 0; }
   .mh-also-list { grid-template-columns: 1fr; }
   .mh-route-story-photo.is-short { min-height: 320px; }
   .mh-privacy-split,
@@ -2007,11 +1997,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-hero2-actions > a { justify-content: center; }
   .mh-capabilities,
   .mh-pro-cards { grid-template-columns: 1fr; }
-  ul.mh-int-hero-marks { min-height: 320px; transform: scale(.86); transform-origin: top left; width: 116%; margin-bottom: -36px; }
-  .mh-int-hero-marks li { width: 188px; padding: 13px; }
-  .mh-int-hero-marks li:nth-child(2) { left: 28%; }
-  .mh-int-hero-marks li:nth-child(4) { left: 4%; }
-  .mh-int-hero-marks li:nth-child(5) { right: 2%; }
   .mh-int-grid { grid-template-columns: 1fr; }
   .mh-int-grid .mh-int-card:last-child { grid-column: auto; }
   /* Phone: the chip has no room beside a two-line stage name, so it drops
@@ -2197,18 +2182,11 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
 .marketing-homepage .mh-overlap-page .mh-route-hero h1 { font-size: clamp(38px, 4.4vw, 64px); }
 .marketing-homepage .mh-overlap-page .mh-route-hero p { max-width: 720px; margin-inline: auto; }
 .marketing-homepage .mh-overlap-page .mh-product-overlap { position: relative; margin-top: calc(-1 * var(--mh-hero-overlap)); padding-top: 0; padding-bottom: 32px; }
-.marketing-homepage .mh-page-lumo .mh-product-overlap { max-width: 920px; margin-inline: auto; }
 .marketing-homepage .mh-page-lumo .mh-lumo-product { display: block; padding-top: 48px; }
 .marketing-homepage .mh-page-lumo .mh-lumo-product > .mh-copy-block { max-width: 720px; margin-inline: auto; align-items: center; text-align: center; }
-.marketing-homepage .mh-integrations-preview .mh-int-hero-marks { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; width: 100%; min-height: 0; margin: 0; padding: 32px; background: var(--mh-paper); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); box-shadow: var(--mh-shadow-overlay); }
-.marketing-homepage .mh-integrations-preview .mh-int-hero-marks li { position: static; display: flex; flex-direction: column; justify-content: center; gap: 16px; width: auto; padding: 24px 12px; transform: none; box-shadow: none; }
-.marketing-homepage .mh-integrations-preview .mh-int-hero-marks strong,
-.marketing-homepage .mh-integrations-preview .mh-int-status { align-self: center; }
 
 @media (max-width: 800px) {
   .marketing-homepage .mh-overlap-page { --mh-hero-overlap: 64px; }
   .marketing-homepage .mh-overlap-page .mh-route-hero { padding-top: 116px; padding-bottom: calc(var(--mh-hero-overlap) + 48px); }
   .marketing-homepage .mh-overlap-page .mh-route-hero p { font-size: 18px; line-height: 1.6; }
-  .marketing-homepage .mh-integrations-preview .mh-int-hero-marks { grid-template-columns: repeat(2, 1fr); padding: 16px; gap: 12px; }
-  .marketing-homepage .mh-integrations-preview .mh-int-hero-marks li:last-child { grid-column: 1 / -1; }
 }

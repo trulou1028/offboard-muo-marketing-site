@@ -1551,10 +1551,9 @@ promo strip. Relume MCP Layout 27 and Layout 237 inform the compositions.
 - Body: `Ask in your own words, or choose a prompt to track a role, prepare for an interview, or review your progress.`
 - Callout: `Built into Offboard`
 - Link: `See what Lumo works from` → `/career-context`
-- Caption: `Inside Lumo: the prompt library.`
-- Alt: `Lumo's prompt library in the Offboard app, with options to track a job, update an application, prepare for an interview, review progress, add a contact, and check a posting`
-- Actual screenshot captured from the live app on 2026-09-22, cropped to the
-  prompt library. No account information or chat history. No generated UI.
+- Caption: `Inside Lumo: review a role before adding it to your tracker.`
+- Alt: `Lumo showing an application confirmation card for a role, with Add to Tracker and Cancel controls`
+- Actual app screenshot supplied by the owner on 2026-09-22. No generated UI.
 
 ### Useful questions (Relume Layout 237)
 
@@ -2344,3 +2343,9 @@ When one ships, move it into its page section above.
 Steph's essay editorial pass · execute the gift lane (plan 015) · yes/no
 on the `2,000+ job centers` framing for `/layoff-support` · confirm the
 connected-assistant controls in the app repo's claims register.
+
+### Owner-supplied Integrations product screenshot (2026-09-22)
+
+Alt: `Offboard integration settings showing Google Calendar, Google Drive, Calendly, and upcoming Gmail and Notion connections`
+
+The hero overlap uses the actual app screenshot supplied by the owner.

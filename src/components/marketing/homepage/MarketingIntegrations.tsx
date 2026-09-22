@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { Eye, Power, ShieldCheck } from "lucide-react";
 import {
@@ -59,22 +60,6 @@ const ACCESS_LEVELS = [
   { icon: Eye, name: "Read only", detail: "See your account without changing it or spending credits." },
   { icon: Power, name: "Off", detail: "No access. Your Offboard record stays in place." },
 ] as const;
-
-/* Plan 046: the hero shows what connects before the page says it. Five
-   marks, the two beta chips, nothing clickable (same contract as the grid). */
-function HeroMarks() {
-  return (
-    <ul className="mh-int-hero-marks" aria-label="What connects to Offboard">
-      {CONNECTED.map(({ id, name, status }) => (
-        <li key={id}>
-          <IntegrationLogo id={id} />
-          <strong>{name}</strong>
-          <em className={`mh-int-status is-${status.toLowerCase()}`}>{status}</em>
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 function IntegrationCard({ integration }: { integration: Integration }) {
   const { id, name, status, body } = integration;
@@ -186,7 +171,7 @@ export function MarketingIntegrations() {
           aside={false}
           cta="Get started free"
         />
-        <div className="mh-product-overlap mh-integrations-preview mh-section"><HeroMarks /></div>
+        <div className="mh-product-overlap mh-integrations-preview mh-section"><figure className="mh-lumo-product-shot"><Image src="/marketing/app/integrations-live-v1.png" alt="Offboard integration settings showing Google Calendar, Google Drive, Calendly, and upcoming Gmail and Notion connections" width={3024} height={1620} sizes="(max-width: 1280px) calc(100vw - 48px), 1200px" /></figure></div>
         <Showcase />
         <Demos />
         <Permissions />
