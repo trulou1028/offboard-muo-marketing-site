@@ -428,7 +428,6 @@ describe("plan 042: the retired numbered grid stays retired", () => {
   // the one caller that is a real sequence (/workforce) kept them.
   it.each([
     ["MarketingCareerContext", () => <MarketingCareerContext />, "Every time you explain yourself to a new tool"],
-    ["MarketingLumo", () => <MarketingLumo />, "You spend the conversation on the decision instead of on context"],
     ["MarketingApplicationPacket", () => <MarketingApplicationPacket />, "the tenth application starts further ahead than the first"],
   ] as const)("%s keeps its contrast payoff line", (_name, factory, payoff) => {
     expect(renderedText(factory())).toContain(payoff);

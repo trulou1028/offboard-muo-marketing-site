@@ -501,3 +501,10 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("link", { name: "YourNegotiations" })).toHaveAttribute("href", "https://yournegotiations.com");
   });
 });
+
+it("Lumo leads with a real product capture and three useful examples", async () => {
+  const { MarketingLumo } = await import("./MarketingLumo");
+  const { container } = render(<MarketingLumo />);
+  expect(container.querySelector(".mh-lumo-product-shot img")?.getAttribute("src")).toContain("lumo-prompts-live-v1.jpg");
+  expect(container.querySelectorAll(".mh-lumo-use-grid article")).toHaveLength(3);
+});

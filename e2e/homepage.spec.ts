@@ -859,3 +859,19 @@ test("no redirect lands on a page that is hidden from search", async ({ page }) 
   }
   expect(landingOnHidden).toEqual([]);
 });
+
+test("Lumo product view renders at desktop and mobile widths", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/lumo");
+    const shot = page.locator(".mh-lumo-product-shot img");
+    await expect(shot).toBeVisible();
+    await expect(shot).toHaveJSProperty("complete", true);
+    await expect(page.getByRole("heading", { name: "Less setup. More progress." })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+  }
+  expect(errors).toEqual([]);
+});

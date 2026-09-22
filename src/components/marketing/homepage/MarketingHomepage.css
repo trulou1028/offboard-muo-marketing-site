@@ -167,7 +167,6 @@ a.mh-skip-link:focus { transform: translateY(0); }
 /* Homepage v2's dark bands and forest insets (plan 022). Without these the
    ring resolves to ink and lands at 1.2:1 on forest-deep. */
 .mh-hero2,
-.mh-lumo-band,
 .mh-connect { --mh-focus-ring: var(--mh-paper); }
 
 /* Fixed, not absolute (owner decision, plan 024): the nav stays interactive
@@ -1241,17 +1240,12 @@ ul.mh-also-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32p
 .mh-inout p { margin-top: 4px; color: var(--mh-muted); font-size: 14px; line-height: 1.5; }
 .mh-route-privacy .mh-section-link { margin-top: 28px; }
 /* /lumo: prompts as messages, and the photo on the forest band. */
-.mh-lumo-prompts.is-bubbles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.mh-lumo-prompts.is-bubbles > span { grid-column: 1 / -1; }
-.mh-lumo-prompts .mh-chat-you { max-width: none; align-self: auto; background: var(--mh-white); border: 1px solid var(--mh-line); }
-.mh-lumo-band .mh-route-story-photo { min-height: 480px; }
 /* /application-packet: a shorter photo beside the stages intro. */
 .mh-route-story-photo.is-short { min-height: 380px; }
 .mh-kit .mh-split { align-items: center; }
 
 /* Wherever you work */
 .mh-wherever { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-mist); border-bottom: 1px solid var(--mh-mist-border); }
-.mh-wherever-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(40px, 4vw, 64px); align-items: center; }
 .mh-context-callout { display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; color: var(--mh-ink); font-size: 13px; font-weight: 600; }
 .mh-context-callout .mh-lumo-mark { width: 18px; height: 18px; flex-basis: 18px; }
 .mh-capabilities { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 56px; }
@@ -1273,11 +1267,6 @@ ul.mh-also-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32p
 .mh-morethan .mh-disclosure p { font-size: 15px; line-height: 1.55; }
 /* The first question sits beside the plan-preview card that answers it. The
    card is a light island, so it carries its own ink color on the sand band. */
-.mh-qgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; margin-top: 56px; }
-.mh-qblock { padding-top: 20px; border-top: 1px solid var(--mh-ink); }
-.mh-qblock h3 { font-size: 24px; font-weight: 500; line-height: 1.2; }
-.mh-qblock-feature { display: block; margin-top: 10px; color: var(--mh-forest); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
-.mh-qblock p { max-width: 46ch; margin-top: 10px; color: var(--mh-muted); font-size: 15px; line-height: 1.55; }
 .mh-morethan-note { display: block; margin-top: 44px; color: var(--mh-muted); font-size: 13px; line-height: 1.5; }
 
 /* Workforce & Government (/workforce, plan 035). Two columns on a light
@@ -1531,16 +1520,8 @@ p.mh-int-note { max-width: 74ch; margin-top: 30px; color: var(--mh-secondary); f
 /* Mid forest, not forest-deep: the hero and the final CTA are the page's two
    forest-deep anchors (design system rhythm rule), so the AI band takes the
    lighter of the two greens to stay distinct from them. */
-.mh-lumo-band { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-forest); color: var(--mh-paper); }
-.mh-lumo-band .mh-copy-block > p { color: var(--mh-on-dark-muted); }
-.mh-lumo-band .mh-copy-block > small { color: var(--mh-on-dark-muted); font-size: 13px; }
-.mh-lumo-prompts { display: flex; flex-direction: column; gap: 12px; }
-.mh-lumo-prompts > span { color: var(--mh-on-dark-muted); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
-.mh-lumo-prompts p { padding: 16px 20px; border: 1px solid var(--mh-hairline-on-dark); border-radius: var(--mh-radius-md); font-size: 16px; line-height: 1.4; }
 /* /lumo renders the prompt list on the light mist band, where the on-dark
    label was invisible and the hairline vanished (plan 045 polish). */
-.mh-wherever .mh-lumo-prompts > span { color: var(--mh-muted); }
-.mh-wherever .mh-lumo-prompts p { background: var(--mh-white); border-color: var(--mh-line); }
 
 /* Toolkit */
 .mh-kit { padding-top: var(--mh-section-y); padding-bottom: var(--mh-section-y); background: var(--mh-paper); }
@@ -1856,7 +1837,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
    follows the white step-4 band, where deep still steps cleanly. */
 .mh-page-how-it-works .mh-human { background: var(--mh-paper-soft); }
 .mh-page-pricing .mh-route-content { background: var(--mh-white); }
-.mh-page-integrations .mh-lumo-band { background: var(--mh-deep); }
 .mh-route-resources + .mh-route-resources { background: var(--mh-paper); }
 
 /* Seven top-level items plus three chevrons stop fitting beside the brand and
@@ -1923,18 +1903,14 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   figure.mh-hero-image-composition { min-height: 390px; margin: 0 auto; }
   ul.mh-int-hero-marks { margin: 12px auto 0; }
   .mh-also-list,
-  .mh-inout,
-  .mh-lumo-prompts.is-bubbles { grid-template-columns: 1fr; }
-  .mh-lumo-band .mh-route-story-photo,
+  .mh-inout { grid-template-columns: 1fr; }
   .mh-route-story-photo.is-short { min-height: 320px; }
-  .mh-wherever-grid,
   .mh-privacy-split,
   .mh-workforce-pilot,
   .mh-company-state-grid,
   ul.mh-company-list,
   .mh-pro-cards { grid-template-columns: 1fr; }
   .mh-company-facts > div { grid-template-columns: 1fr; gap: 6px; }
-  .mh-qgrid { grid-template-columns: 1fr; gap: 28px; }
   .marketing-homepage { --mh-gutter: 24px; --mh-section-y: 72px; --mh-section-y-loose: 72px; --mh-section-y-tight: 56px; }
   .mh-employers-page { --mh-section-y: 76px; --mh-section-y-tight: 56px; }
   .mh-site-header { height: 68px; }
@@ -2065,7 +2041,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-packet-output-head { flex-direction: column; gap: 12px; }
   .mh-packet-summary li { align-items: flex-start; }
   .mh-stage-strip > li > .mh-state-chip { grid-row: 3; grid-column: 2; justify-self: start; margin-top: 4px; }
-  .mh-qblock h3 { font-size: 20px; }
   .marketing-homepage { --mh-gutter: 20px; --mh-h2: 40px; --mh-h2-sm: 32px; }
   .mh-kicker { font-size: 12px; line-height: 18px; }
   .mh-header-actions .mh-primary-cta span { font-size: 13px; }
@@ -2167,4 +2142,33 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .marketing-homepage *,
   .marketing-homepage *::before,
   .marketing-homepage *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+}
+
+/* Lumo: Relume Layout 27 product split and Layout 237 question grid. */
+.marketing-homepage .mh-page-lumo .mh-route-hero { padding-top: 144px; padding-bottom: 64px; text-align: center; }
+.marketing-homepage .mh-page-lumo .mh-route-hero > div { width: 100%; max-width: 1200px; margin-inline: auto; }
+.marketing-homepage .mh-page-lumo .mh-route-hero h1 { font-size: clamp(38px, 4.4vw, 64px); }
+.marketing-homepage .mh-page-lumo .mh-route-hero p { max-width: 680px; margin-inline: auto; }
+.marketing-homepage .mh-lumo-product { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(40px, 7vw, 100px); align-items: center; padding-block: var(--mh-section-y); }
+.marketing-homepage .mh-lumo-product-shot { margin: 0; }
+.marketing-homepage .mh-lumo-product-shot img { width: 100%; height: auto; border-radius: var(--mh-radius-card); box-shadow: var(--mh-shadow-overlay); }
+.marketing-homepage .mh-lumo-product-shot figcaption { margin-top: 14px; color: var(--mh-muted); font-size: 13px; }
+.marketing-homepage .mh-lumo-use-cases { padding-block: var(--mh-section-y); background: var(--mh-paper-soft); }
+.marketing-homepage .mh-lumo-use-cases > .mh-copy-block { max-width: 720px; margin-inline: auto; text-align: center; align-items: center; }
+.marketing-homepage .mh-lumo-use-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 48px; }
+.marketing-homepage .mh-lumo-use-grid article { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.marketing-homepage .mh-lumo-use-grid svg { width: 32px; height: 32px; color: var(--mh-forest); margin-bottom: 24px; }
+.marketing-homepage .mh-lumo-use-grid h3 { font-size: 26px; line-height: 1.2; }
+.marketing-homepage .mh-lumo-use-grid p { margin-top: 16px; margin-bottom: 24px; color: var(--mh-muted); line-height: 1.6; }
+.marketing-homepage .mh-lumo-use-grid blockquote { width: 100%; margin-top: auto; padding: 20px; background: var(--mh-white); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); font-size: 15px; }
+.marketing-homepage .mh-lumo-assurance { padding-block: var(--mh-section-y); background: var(--mh-white); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 100px); }
+.marketing-homepage .mh-lumo-assurance h3 { font-size: 24px; }
+.marketing-homepage .mh-lumo-assurance h3:not(:first-child) { margin-top: 24px; }
+
+@media (max-width: 800px) {
+  .marketing-homepage .mh-page-lumo .mh-route-hero { padding-top: 116px; padding-bottom: 48px; }
+  .marketing-homepage .mh-page-lumo .mh-route-hero p { font-size: 18px; line-height: 1.6; }
+  .marketing-homepage .mh-lumo-product,
+  .marketing-homepage .mh-lumo-use-grid,
+  .marketing-homepage .mh-lumo-assurance { grid-template-columns: 1fr; gap: 40px; }
 }
