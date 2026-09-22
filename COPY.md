@@ -1350,119 +1350,52 @@ Product column.
 **Meta title:** `Career Context | Offboard`
 **Meta description:** `Build your Career Context once: one living record of your experience, applications, interviews, and goals that every Offboard tool and connected AI reads from.` *(plan 046 trimmed all five product descriptions under 160 characters)*
 
+### Current page copy (owner simplification, 2026-09-22)
+
+The page now leads with the hero and the complete card-grid illustration. The
+resume problem section, eight-category inventory, input descriptions, old hero
+illustration, and sibling promotional paragraphs are retired.
+
 ### Hero
 
 - Kicker: `Career Context`
-- H1: `Build your Career Context once. Use it everywhere.` *(round 5: the product noun is capitalised when it means the product)*
-- Body: `One living record of your experience, applications, companies, interviews, and goals. Offboard builds it with you and puts it to work in every tool you use.` *(round 5: the hero, the next H2, and that section's body all made the same resume argument before the page said anything new; the hero now states the promise and section two carries the argument)*
-- CTA: `Create my Career Context` (primary)
+- H1: `Build your Career Context once. Use it everywhere.`
+- Body: `Your experience, goals, and job search in one record, ready for your next application or interview.`
+- CTA: `Get started free`
 
-*Owner revision 2026-09-15: the hero's right column is the cleaner Civic Modern composition `career-context-card-civic-modern-v3-transparent.webp`. It reads: `Your Career Context` · `One living record.` · rows `Experience` / `Applications` / `Interviews` / `Goals` · sources `Resume`, `Interview notes` · state `Context updated`. Pixels; this is the record. It replaces plan 049's score-heavy composition, and the plan-042 paper aside stays retired.*
+### Product illustration, directly below the hero
 
-*Hero aside added by plan 042. The page is about an object and the hero
-never showed it: it shipped `aside={false}`. The aside is the standard
-hero card with a three-row record inside it — `Your Career Context` /
-`One living record.` / `Experience` — `Roles, projects, and outcomes` ·
-`Applications` — `Tesserac · Interviewing` · `Interviews` —
-`Thursday · Prep ready`. Sample rows, the same contract as every other
-product sample on the site.*
+- Caption: `Illustrative example`
+- Alt: `Illustrative Offboard dashboard with left navigation, top toolbar, and all six About You and Connected Sources cards`
+- Static illustration with complete About You and Connected Sources groups.
+  The full dashboard shell includes left navigation and a top toolbar with a
+  fictional Alex Morgan account. Both three-card groups stay visible. No context
+  score or live controls. The same complete composition scales on mobile.
 
-### Why a resume isn't enough *(rebuilt by plan 042; a photo split since plan 046)*
+### Benefits (Relume MCP Layout 78 adaptation)
 
-*Plan 046 (owner 2026-09-07): the resume-sheet composition is retired and the section is a split with a photograph, `raw/system-desk.webp` (a man at a desk by a window, writing beside a laptop), on the left. The copy is unchanged; the payoff line keeps its rule above it.*
+- Kicker: `Built from your experience`
+- Intro: `Bring your resume, add what matters, and use that context across your search.`
+- H2: `Put your experience to work.`
+- `Tailored resumes`: `Bring forward the experience that fits each role.`
+- `Application Packets`: `Keep research and application materials together.`
+- `Interview prep`: `Prepare with examples from your own experience.`
+- Links: `See how Lumo works` → `/lumo`; `See the integrations` → `/integrations`
 
-- Kicker: `The problem`
-- H2: `A resume is a fraction of your career.`
-- Body: `A resume compresses years of work into one page for one audience. It leaves out the projects that went well, the numbers behind them, the people you worked with, what you learned in interviews, and what you actually want next. So every new tool, and every new conversation, starts from scratch.`
-- Payoff line: `Every time you explain yourself to a new tool or a new chat window, the context evaporates when the tab closes.`
-- Composition (R2/R13): a `RESUME.PDF` sheet as the base, drawn as bars rather than fake prose, with three chips breaking its left edge: `Project · Billing migration` · `Story · Why we cut scope` · `Goal · Staff role, remote`.
+### Ownership (Relume MCP Layout 27 adaptation)
 
-*This section used to be a three-cell numbered grid, and it was the worst
-instance of that pattern on the site: the odd-count rule promoted cell 01,
-`What a resume holds`, to full width, which made the resume the visual hero
-of a section arguing the resume is the small thing. Cells 1 and 2
-(`What a resume holds`, `What your career holds`) are retired: the body
-paragraph above already says everything they said, and the composition now
-shows it. Cell 3, `What keeps getting lost`, survives verbatim as the
-payoff line.*
+- Kicker: `Yours to shape`
+- `Keep it current`: `Update your record as your experience and goals change.`
+- `Take it with you`: `Export what you have built. It is yours.`
+- Photo alt: `A woman at her dining table reviewing her experience with a laptop, notebook, and printed pages`
+- H2: `Your context. Your control.`
+- Body: `Choose what you add. Edit, remove, or export it.`
+- Link: `See exactly who can see what` → `/privacy-security`
 
-### What goes in *(merged into "What it holds" by plan 042)*
-
-*This section was an eight-card grid sitting directly above another
-eight-card grid, sixteen identical cards in a row, and the two lists
-overlapped: `Goals & preferences` against `Preferences` plus `Goals`,
-`Applications & contacts` against `Applications` plus `Contacts`, and
-`Resume import` against `Experience` plus `Documents`. The sources are now
-a chip row under the one grid that matters, which is what they always were:
-where the record comes from, not a second taxonomy of it. The eight
-`Bring what you already have` cards are retired.*
-
-### What it holds *(moved here from § 1 in round 4, 2026-09-02; rendered as the record itself since plan 046)*
-
-*Plan 046: the eight icon cards are one record card, `Your Career Context` / `One living record.` with eight rows (name left, description right), beside the copy. Same shape as the hero card and the Lumo page's card, so the page shows the record three times in one shape. The source chips sit under the copy.*
-
-- Kicker: `What it holds` · H2: `Eight kinds of record, one place.`
-- `Experience` — `Roles, skills, accomplishments, and outcomes.` · `Applications` — `Every opportunity and what happened with it.` · `Companies` — `Research, notes, people, and hiring signals.` · `Contacts` — `Recruiters, hiring managers, and referrals.` · `Documents` — `Resumes, job descriptions, and other files.` · `Interviews` — `Conversations, preparation, notes, and next steps.` · `Preferences` — `The work you want, where, and on what terms.` · `Goals` — `What you are working toward and what needs attention.`
-- `Preferences` keeps the wording already used by `Goals & preferences` in § What goes in, rather than a second phrasing of the same idea.
-
-- Body *(added by plan 042, carrying the retired "What goes in" lede)*: `Offboard builds the first version from the things you already have, in minutes, and it keeps getting better as you use it.`
-- Source chips, under the grid: label `Built from what you already have` · `Resume` · `LinkedIn` · `ChatGPT history` · `Portfolio and documents` · `Interview stories`
-
-### In and out *(plan 046 merged "It gets better as you go" and "What it powers": two thin ruled sections back to back, one inputs and one outputs)*
-
-- Kicker: `In and out` · H2: `Every step makes it smarter. Every output starts from it.`
-- Two columns, labelled `What goes in` (the three blocks below, question and body, the feature label dropped) and `What comes out` (the four capabilities from the next entry).
-
-### It gets better as you go *(the "What goes in" column since plan 046)*
-
-- ~~Kicker: `Always evolving`~~
-- ~~H2: `Every step of your search makes it smarter.`~~
-- Question blocks:
-  1. `You apply to a role` — **Applications** — `The role, the company research, and the materials you used stay connected to the outcome.`
-  2. `You finish an interview` — **Interviews** — `Questions asked, answers given, and what to prepare next become part of the record.`
-  3. `You talk it through` — **Conversations** — `Decisions and updates you make in conversation, with Lumo or a connected assistant, land in your Career Context instead of vanishing.`
-
-### What it powers *(the "What comes out" column since plan 046)*
-
-- ~~Kicker: `Put it to work`~~
-- ~~H2: `One record. Every output.`~~
-- Capabilities:
-  1. `Tailored resumes` — `Resume versions built from your real history, tuned to the role in front of you.`
-  2. `Application Packets` — `The role, the company, your positioning, and your materials in one place.` *(glossary casing, plan 045)*
-  3. `Interview preparation` — `Prep plans and practice grounded in your actual experience and the actual role.`
-  4. `Better decisions` — `Compare opportunities against your experience, preferences, and how your search is going.`
-
-### How Lumo uses it *(an item in the shared `Also part of the system` strip since plan 046; the band is retired)*
-
-- Strip item: `Lumo starts every conversation already caught up.` — `Because it works from your Career Context, you never re-upload a resume or re-explain your goals.` → `See how Lumo works` → `/lumo`
-- Second strip item: `Your context goes with you.` — `Connect ChatGPT or Claude and your Career Context is there too. Save a role or add what you learned from wherever you are working.` → `See the integrations` → `/integrations`
-- ~~Kicker: `Meet Lumo` (Lumo eyebrow treatment)~~
-- H2: `Lumo starts every conversation already caught up.`
-- Body: `Because Lumo works from your Career Context, you never re-upload a resume, re-explain your goals, or reconstruct what happened with an application. You ask, and the answer starts from everything you have already built.`
-- CTA: `Ask Lumo` (AI button)
-
-### Works with the AI you already use *(retired from this page by plan 045's messaging pass, 2026-09-07: it restated `/integrations`, and it sat directly under a Lumo band that already hands the reader on. Kept for the record.)*
-
-- ~~Kicker: `Offboard, wherever you work`~~
-- H2: `Your context goes with you.` *(round 5: this H2 shipped on two pages; it stays on `/integrations`, where it titles the grid)*
-- Body: `Connect Offboard to supported AI assistants and your Career Context goes with you. Save an opportunity from a conversation, update an application, or add what you just learned, from whichever tool you are already in.`
-- Demo conversation: You: `Save the interview questions I just worked through, and what I answered.` / AI: `Done. I have added them to your interview stories.` *(varied 2026-08-31 so it does not duplicate the /integrations demo, which owns the project-outcomes line)*
-
-### Yours, and private *(numbering moved to CSS by plan 042)*
-
-- Kicker: `Private by default`
-- H2: `Your Career Context belongs to you.`
-- List *(three rows since plan 046; rows 2 and 3 were also rows on `/integrations` and the whole answer lives on `/privacy-security`)*:
-  1. `You choose what goes in, and you can edit or remove anything.`
-  2. `Connected assistants and sponsors see only what you authorize, never the whole record.`
-  3. `You can export what you have built. It is yours.`
-- Section link: `See exactly who can see what` → `/privacy-security`
-
-### Final CTA (shared component, overridden copy)
+### Final CTA
 
 - H2: `Stop starting from scratch.`
-- Body: `Build your Career Context once and every application, interview, and conversation after it starts further ahead.`
-- CTAs: sitewide primary + `Talk to a person`
+- No body paragraph. Shared CTA, kicker, and note remain.
 
 # 11 · Integrations `/integrations`
 
@@ -1598,89 +1531,55 @@ a resume into a general assistant. Not in header nav yet.
 **Meta title:** `Lumo | The AI that already understands your career`
 **Meta description:** `Lumo is Offboard's AI assistant. It starts every conversation from your Career Context, your applications, and your plan, so you never explain yourself first.`
 
+### Current page (owner refinement, 2026-09-22)
+
+Centered hero, real product capture, three useful examples, and a compact trust
+section. Retires the repeated context inventory, eight-prompt wall, and sibling
+promo strip. Relume MCP Layout 27 and Layout 237 inform the compositions.
+
 ### Hero
 
 - Kicker: `Meet Lumo`
 - H1: `The AI that already understands your career.`
-- Body: `Lumo is Offboard's assistant. It works from the record you have already built, so a question about your search starts from your actual situation instead of a blank chat window. You spend the conversation on the decision instead of on context.` *(plan 046: the last sentence is the retired "difference" section's payoff line)*
-- Hero visual: the homepage's Civic Modern composition `lumo-opportunity-context-civic-modern-v2-transparent.webp`. It compares a senior product designer role at Figma using the role, resume, and interview-note context, then saves recruiter Ruben. Pixels, so no test can read them; this is the record.
-- CTA: `Get started free` (primary)
+- Body: `Ask about your next move. Lumo works from your Career Context, applications, and plan to help you move forward.`
+- CTA: `Get started free`
 
-### What Lumo knows *(rebuilt by plan 045, plan 040 finding 10: the eight cards re-listed `/career-context`'s eight kinds of record)*
+### Product view (Relume Layout 27)
 
-- Kicker: `What it knows`
-- H2: `It starts from your record, not a blank page.`
-- Body: `Everything in your Career Context is already there: your experience, applications, companies, interviews, and goals. Lumo also carries three things no other assistant has.`
-- Section link: `See what your Career Context holds` → `/career-context`
-- Three blocks (Pattern H): `Your plan` — *Layoff Plan* *(was Your Path, owner rename 2026-09-10)* — `What needs attention now, what can wait, and what comes next.` · `Benefits context` — *The practical side* — `Where you are with deadlines, coverage, and runway, so the answer fits the week you are actually in.` · `Previous conversations` — *Memory* — `What you already worked out together, so you are not repeating it.`
-- ~~Cards (the eight, retired):~~
-  1. `Your Career Context` — `Experience, projects, outcomes, and the stories you reach for in interviews.`
-  2. `Your applications` — `What you applied to, what stage it is at, and what happened.`
-  3. `Companies` — `What you researched and learned about the teams you are talking to.`
-  4. `Interviews` — `Questions asked, answers given, and what to prepare next.`
-  5. `Your goals` — `The work you want, and what you said you were optimizing for.`
-  6. `Your plan` — `What needs attention now, what can wait, and what comes next.`
-  7. `Benefits context` — `Where you are in the practical side of a transition.`
-  8. `Previous conversations` — `What you already worked out together, so you are not repeating it.`
+- Kicker: `Ask Lumo`
+- H2: `Start with what you need.`
+- Body: `Ask in your own words, or choose a prompt to track a role, prepare for an interview, or review your progress.`
+- Callout: `Built into Offboard`
+- Link: `See what Lumo works from` → `/career-context`
+- Caption: `Inside Lumo: review a role before adding it to your tracker.`
+- Alt: `Lumo showing an application confirmation card for a role, with Add to Tracker and Cancel controls`
+- Actual app screenshot supplied by the owner on 2026-09-22. No generated UI.
 
-### What you can ask
+### Useful questions (Relume Layout 237)
 
-- Kicker: `What to ask`
-- H2: `Questions that would take a stranger an hour to answer.`
-- Rendered as chat bubbles in two columns since plan 046.
-- Prompts:
-  1. `What should I focus on today?`
-  2. `Is this opportunity worth my time?`
-  3. `Help me prepare for tomorrow's interview.`
-  4. `What support might I qualify for?`
-  5. `How do I make this application stronger?`
-  6. `What patterns do you see across my search?`
-  7. `Add what we just worked out to my Career Context.`
-  8. `Move Tesserac to the interview stage.`
+- Kicker: `A few ways to begin`
+- H2: `Less setup. More progress.`
+- `Find your next step`: `Sort through priorities and decide what needs attention today.`
+  Example: `What should I focus on today?`
+- `Work through a role`: `Evaluate an opportunity, strengthen an application, or plan a follow-up.`
+  Example: `How do I make this application stronger?`
+- `Prepare for the conversation`: `Practice for an interview with your experience and the role in mind.`
+  Example: `Help me prepare for tomorrow's interview.`
 
-### Why this is different *(retired by plan 046: its composition is the hero visual and its payoff line is the hero body's last sentence. Kept for the record.)*
+### Trust and access
 
-- ~~Kicker: `The difference`~~
-- H2: `Not a smarter chatbot. A better starting point.`
-- Body: `The difference is not a smarter model. It is what the conversation starts from: your Career Context, kept current, instead of whatever you can paste into a message box.` *(plan 045; was `Lumo is not claiming to out-think a general assistant. The difference is what it is working from: the structured, continuously updated state of your career, rather than whatever you can paste into a message box.`, the "cooler register" plan 040 flagged)*
-- Payoff line *(plan 042)*: `You spend the conversation on the decision instead of on context, and the answer is about your search rather than job searching in general.`
-- Composition *(plan 042, R2/R13)*: the Career Context record card as the base, because it is what Lumo starts from, with a blank composer breaking its left edge: `Any other assistant` / `Tell me about yourself...`
+- Kicker: `You stay in charge`
+- H2: `Support for your decisions.`
+- Body: `Lumo helps you prepare. You review the details and decide what to send.`
+- Pricing link: `Free includes 10 Lumo messages a day. Pro removes the limit.` → `/pricing`
+- `Clear about benefits`: `Benefits guidance draws on human-verified state facts. Agencies and providers decide eligibility and amounts. Offboard is independent, not a government agency.`
+- `Use the assistant you prefer`: `You can also connect ChatGPT or Claude to your Offboard record.`
+- Link: `See the integrations` → `/integrations`
 
-*Was a three-cell numbered grid. Cells 1 and 2 (`Pasting a resume into a
-chat`, `Asking Lumo`) described the two starting points; the composition
-shows them. Cell 3, `What that changes`, survives verbatim as the payoff
-line.*
-- Contrast blocks:
-  1. `Pasting a resume into a chat` — `One document, no history, and none of it is there tomorrow. Every conversation restarts from zero.`
-  2. `Asking Lumo` — `Your experience, applications, interviews, and goals are already there, and what you decide together is saved back.`
-  3. `What that changes` — `You spend the conversation on the decision instead of on context, and the answer is about your search rather than job searching in general.`
+### Final CTA
 
-### What Lumo will not do
-
-*Plan 046: a photo split; `raw/hero-kitchen-table.webp` (a man at his kitchen table with a laptop, coffee, and a notebook) on the left of the forest band.*
-
-- Kicker: `Straight answers`
-- H2: `It works from verified facts, and it does not decide anything for you.`
-- List:
-  1. `When Lumo talks about benefits, it reads from state facts a person verified. It does not invent a dollar figure or a deadline.`
-  2. `Offboard is independent, not a government agency. Agencies and providers decide eligibility and benefit amounts.`
-  3. `Lumo helps you do the work. It does not replace your review and judgment on anything you send out.`
-  4. `Free includes 10 Lumo messages a day. Pro removes the limit.` → `/pricing` *(plan 047: the app's daily allowance is 10 since Sprint 413)*
-
-### Prefer a different assistant *(an item in the shared `Also part of the system` strip since plan 046)*
-
-- Strip item: `Prefer ChatGPT or Claude? That works too.` — `Lumo lives inside Offboard, but it is not the only way in. Connect the assistant you already use and it works from the same record.` → `See the integrations` → `/integrations`
-- Second strip item: `Everything Lumo knows starts here.` — `Your Career Context is the record every answer is built from. Build it once and every conversation starts further ahead.` → `See what it holds` → `/career-context`
-- ~~Kicker: `Or bring your own`~~
-- H2: `Prefer ChatGPT or Claude? That works too.`
-- Body: `Lumo is the assistant that lives inside Offboard, but it is not the only way in. Connect the assistant you already use and it works from the same record.`
-- Section link: `See the integrations` → `/integrations` *(2026-09-13)*
-
-### Final CTA (shared component, overridden copy)
-
-- H2: `Ask something only your own record could answer.`
-- Body: `Build your Career Context, then ask Lumo what to do about it.`
-- CTAs: sitewide primary + `Talk to a person`
+- H2: `Start with your next question.`
+- Body: `Bring your experience. Lumo helps you put it to work.`
 
 # 13 · Layoff & Benefits `/layoff-support`
 
@@ -2444,3 +2343,9 @@ When one ships, move it into its page section above.
 Steph's essay editorial pass · execute the gift lane (plan 015) · yes/no
 on the `2,000+ job centers` framing for `/layoff-support` · confirm the
 connected-assistant controls in the app repo's claims register.
+
+### Owner-supplied Integrations product screenshot (2026-09-22)
+
+Alt: `Offboard integration settings showing Google Calendar, Google Drive, Calendly, and upcoming Gmail and Notion connections`
+
+The hero overlap uses the actual app screenshot supplied by the owner.

@@ -1,12 +1,45 @@
-# Plan 054: An interactive Career Context example
-> **Execute with:** Fable 5.1 · high - The example must explain context reuse without inventing product or privacy capabilities.
+# Plan 054: A Career Context product view
+> **Execute with:** Fable 5.1 · high - The product view must explain context reuse without inventing product or privacy capabilities.
 
-Status: TODO. Planning only; implementation has not been authorized.
+Status: READY FOR REVIEW in [PR #125](https://github.com/trulou1028/offboard-muo-marketing-site/pull/125)
+on `codex/plan-054-career-context-demo`. The owner-requested single product view
+is locally verified; awaiting the refreshed Vercel preview and owner approval.
 Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc`.
 Planning branch: `codex/motion-polish-plans`. Depends on plan 052's shared motion
 contract/runtime. Recommended order: 052, 053, 054; 053 is not a hard dependency.
 
-## Outcome and placement
+## Owner revision (2026-09-22): dashboard and complete supporting layouts
+
+Replace the card-only illustration with a full dashboard shell, including left
+navigation and the top toolbar. Keep both context card groups visible and omit
+the score. The account is fictional. Use a full-width centered hero with authored
+sentence breaks. Benefits adapt Relume MCP Layout 78's two-column composition;
+ownership adapts Layout 27 with concise control details and a documentary photo.
+Both are translated to Civic Modern CSS, with no Tailwind or new dependencies.
+This supersedes the earlier bare supporting-section layout, while retaining the
+shorter content hierarchy. Review remains in PR #125.
+
+## Owner revision (2026-09-22): simplify the page
+
+The approved audit supersedes the earlier supporting-copy direction. Put the
+static card grid immediately below a compact text hero. Remove the resume
+problem/photo, eight-category inventory, input descriptions, older hero image,
+and sibling promo paragraphs. Keep three short benefits, compact Lumo and
+integrations links, ownership copy, and a final CTA without a repeated body.
+Copy remains governed by COPY.md § 10. Review remains in PR #125.
+
+## Owner revision (2026-09-19)
+
+Replace the interactive source-and-output composition with a single, legible
+Career Context app view. Base it on the real app information architecture and
+show the evolving neon yellow-green primary accent. Keep the compact `What goes
+in` and `What comes out` explanations underneath. The screen is illustrative,
+uses fictional information, and has no controls or simulated behavior.
+
+The original interactive direction below is retained as planning history. This
+owner revision supersedes its selector, animation, and interaction requirements.
+
+## Original outcome and placement
 
 Let visitors see how the same fictional career record supports different tasks:
 a tailored resume, interview preparation, and comparing an opportunity against
@@ -169,3 +202,57 @@ within scope; approval of these plans is not authorization to implement.
 
 Rollback by reverting this route's implementation PR; preserve shared motion and
 fixtures still consumed by other pages.
+
+## Implementation record (2026-09-18)
+
+- Refreshed `lumo-plan-builder` `origin/main` at `b63297c523f75b2349232f636feff5c00a2dbb7d`.
+  The example shapes are grounded in `src/pages/Context.tsx`,
+  `src/components/settings/ContextPanel.tsx`,
+  `src/components/profile/PreferencesTab.tsx`,
+  `supabase/functions/tailor-resume-v2/schemas.ts`,
+  `supabase/functions/generate-interview-briefing/schema.ts`, and
+  `supabase/functions/_shared/roleMatch.ts`. The UI remains explicitly
+  illustrative and does not claim an exact reasoning trace.
+- Added the narrow `CareerContextExample` client boundary. The initial resume
+  example is server rendered; usable controls replace the static selector labels
+  after hydration. All three scenarios reuse one fictional record, retain button
+  focus, and update source emphasis with the output.
+- Added a 200ms output transition through the shared `motion/mini` foundation.
+  A live reduced-motion preference change cancels subsequent animation. The
+  route-specific client chunk is 7,308 bytes raw and 2,432 bytes gzipped.
+- Preserved the three input explanations and all four output categories beneath
+  the example. At phone width, only the relevant source details remain open and
+  the complete record moves into a native disclosure.
+- Recorded every new string and the interaction contract in `COPY.md`. No route,
+  section-order, privacy, or architecture contract changed.
+- Final local verification: `npm run lint`, `npm run lint:css`,
+  `npm run typecheck`, `npm test` (212 tests), `npm run build`, and
+  `npm run e2e` (138 browser tests) all pass. The focused browser coverage also
+  proves no-JavaScript content, latest-selection behavior, focus retention,
+  390px overflow, motion under `no-preference`, and a dynamic switch to reduced
+  motion. The three reviewed `/career-context` visual baselines were updated.
+  The Docker-backed `cms-contract` job remains CI-authoritative and is unrelated
+  to this route-only change.
+
+## Owner revision implementation record (2026-09-19)
+
+- Removed the three-state interactive example, its route client boundary,
+  route-specific motion, and interaction tests.
+- Replaced it with one Career Context product view based on the current app
+  structure and restyled with the requested neon yellow-green primary accent.
+  The desktop view uses the full landscape composition and mobile reflows the
+  same score and About You cards into a legible narrow-screen composition.
+- Preserved the existing `What goes in` and `What comes out` explanations and
+  recorded the revised introduction, caption, and image description in `COPY.md`.
+- Final local verification: `npm run lint`, `npm run lint:css`,
+  `npm run typecheck`, `npm test` (209 tests), `npm run build`, and
+  `npm run e2e` (135 browser tests) pass. Desktop, tablet, and mobile page
+  baselines were reviewed and updated for this replacement.
+- Owner refinement: replaced the literal app screenshot with a simplified
+  editorial abstraction of one central Career Context connected to experience,
+  goals, applications, and interviews. The neon dark theme remains, with
+  separate landscape and portrait compositions.
+- Owner refinement 2026-09-22: returned to the actual Career Context card grid
+  and removed the page title, description, and context score from the image.
+  Both `About You` and `Connected Sources` now appear completely in the same
+  frame, with a compact dedicated mobile arrangement.

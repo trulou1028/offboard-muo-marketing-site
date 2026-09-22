@@ -1018,7 +1018,7 @@ export function FinalCta({
       <div className="mh-final-cta-copy">
       <span className="mh-kicker is-lime">{kicker}</span>
       <h2 id="final-title">{title}</h2>
-      <p>{body}</p>
+      {body ? <p>{body}</p> : null}
       <div><PrimaryCta /><a href={HUMAN_SUPPORT_URL}>Talk to a person</a></div>
       <small>{note}</small>
       </div>

@@ -501,3 +501,19 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("link", { name: "YourNegotiations" })).toHaveAttribute("href", "https://yournegotiations.com");
   });
 });
+
+it("Lumo leads with a real product capture and three useful examples", async () => {
+  const { MarketingLumo } = await import("./MarketingLumo");
+  const { container } = render(<MarketingLumo />);
+  expect(container.querySelector(".mh-lumo-product-shot img")?.getAttribute("src")).toContain("lumo-tracker-live-v1.png");
+  expect(container.querySelectorAll(".mh-lumo-use-grid article")).toHaveLength(3);
+});
+
+// Product pages keep the shared conversion area concise when no body is supplied.
+describe("compact final call to action", () => {
+  it("omits the empty body paragraph", async () => {
+    const { FinalCta } = await import("./MarketingSite");
+    const { container } = render(<FinalCta title="Stop starting from scratch." body="" />);
+    expect(container.querySelector(".mh-final-cta-copy > p")).toBeNull();
+  });
+});
