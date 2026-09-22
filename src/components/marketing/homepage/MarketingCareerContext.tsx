@@ -98,7 +98,7 @@ function HoldsSection() {
 }
 
 function InOutSection() {
-  const contextIllustrationAlt = "Abstract Career Context illustration showing Experience, Goals, Applications, and Interviews connected to one central record";
+  const contextGridAlt = "Career Context grid showing Resume, Job search target, Layoff and urgency, Resume or profile source, Email, and ChatGPT cards";
 
   return (
     <section className="mh-morethan mh-section" aria-labelledby="inout-title">
@@ -111,22 +111,22 @@ function InOutSection() {
         <div className="mh-context-product-shot-frame">
           <Image
             className="is-desktop"
-            src="/marketing/app/career-context-abstract-v2.webp"
-            alt={contextIllustrationAlt}
+            src="/marketing/app/career-context-grid-v3.webp"
+            alt={contextGridAlt}
             width={1672}
             height={941}
             sizes="(max-width: 1280px) calc(100vw - 64px), 1200px"
           />
           <Image
             className="is-mobile"
-            src="/marketing/app/career-context-abstract-mobile-v2.webp"
-            alt={contextIllustrationAlt}
+            src="/marketing/app/career-context-grid-mobile-v3.webp"
+            alt={contextGridAlt}
             width={941}
             height={1672}
             sizes="calc(100vw - 40px)"
           />
         </div>
-        <figcaption>Illustrative view of the information that forms a Career Context.</figcaption>
+        <figcaption>Illustrative Career Context grid with About You and Connected Sources cards.</figcaption>
       </figure>
       <div className="mh-inout mh-inout-support" data-reveal="">
         <div>

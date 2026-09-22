@@ -1414,11 +1414,11 @@ where the record comes from, not a second taxonomy of it. The eight
 - Intro: `See how one Career Context brings your experience, goals, and connected sources into one working record.`
 - A single product view precedes two compact supporting columns labelled `What goes in` (the three blocks below, question and body, the feature label dropped) and `What comes out` (the four capabilities from the next entry).
 
-#### Career Context product illustration *(plan 054, owner revision 2026-09-19)*
+#### Career Context card grid *(plan 054, owner revision 2026-09-22)*
 
-- Figure caption: `Illustrative view of the information that forms a Career Context.`
-- Image alt: `Abstract Career Context illustration showing Experience, Goals, Applications, and Interviews connected to one central record`
-- The abstract composition represents the real Career Context information model without reproducing a literal app screen. A central record and strength indicator connect experience, goals, applications, and interviews. Desktop uses a spacious landscape composition; mobile rearranges the same elements into a legible portrait composition. The illustration has no controls or simulated behavior.
+- Figure caption: `Illustrative Career Context grid with About You and Connected Sources cards.`
+- Image alt: `Career Context grid showing Resume, Job search target, Layoff and urgency, Resume or profile source, Email, and ChatGPT cards`
+- The composition removes the app page title, description, and context score so the complete `About You` and `Connected Sources` grids fit in one view. Desktop shows two complete three-card rows. Mobile uses two cards followed by a full-width third card in each section. The image is illustrative and has no live controls.
 
 ### It gets better as you go *(the "What goes in" column since plan 046)*
 

@@ -232,3 +232,7 @@ fixtures still consumed by other pages.
   editorial abstraction of one central Career Context connected to experience,
   goals, applications, and interviews. The neon dark theme remains, with
   separate landscape and portrait compositions.
+- Owner refinement 2026-09-22: returned to the actual Career Context card grid
+  and removed the page title, description, and context score from the image.
+  Both `About You` and `Connected Sources` now appear completely in the same
+  frame, with a compact dedicated mobile arrangement.
