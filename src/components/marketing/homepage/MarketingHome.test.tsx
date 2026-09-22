@@ -501,3 +501,12 @@ describe("Offboard marketing routes", () => {
     expect(screen.getByRole("link", { name: "YourNegotiations" })).toHaveAttribute("href", "https://yournegotiations.com");
   });
 });
+
+// Product pages keep the shared conversion area concise when no body is supplied.
+describe("compact final call to action", () => {
+  it("omits the empty body paragraph", async () => {
+    const { FinalCta } = await import("./MarketingSite");
+    const { container } = render(<FinalCta title="Stop starting from scratch." body="" />);
+    expect(container.querySelector(".mh-final-cta-copy > p")).toBeNull();
+  });
+});

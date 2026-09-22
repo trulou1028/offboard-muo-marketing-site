@@ -94,15 +94,15 @@ describe("Application Packet example copy stays governed", () => {
 describe("Career Context example copy stays governed", () => {
   it("records the product-view introduction, caption, and image description", () => {
     for (const line of [
-      "See how one Career Context brings your experience, goals, and connected sources into one working record.",
-      "Illustrative Career Context grid with About You and Connected Sources cards.",
+      "Your experience, goals, and job search in one record, ready for your next application or interview.",
+      "Illustrative example",
       "Career Context grid showing Resume, Job search target, Layoff and urgency, Resume or profile source, Email, and ChatGPT cards",
     ]) {
       expect(COPY_DOC).toContain(line);
     }
 
     const text = renderedText(<MarketingCareerContext />);
-    expect(text).toContain("Illustrative Career Context grid with About You and Connected Sources cards.");
+    expect(text).toContain("Illustrative example");
     expect(text).not.toContain("Choose an example task");
   });
 });
@@ -443,7 +443,6 @@ describe("plan 042: the retired numbered grid stays retired", () => {
   // R11. Numerals promise an order. Every contrast section lost them, and
   // the one caller that is a real sequence (/workforce) kept them.
   it.each([
-    ["MarketingCareerContext", () => <MarketingCareerContext />, "Every time you explain yourself to a new tool"],
     ["MarketingLumo", () => <MarketingLumo />, "You spend the conversation on the decision instead of on context"],
     ["MarketingApplicationPacket", () => <MarketingApplicationPacket />, "the tenth application starts further ahead than the first"],
   ] as const)("%s keeps its contrast payoff line", (_name, factory, payoff) => {
@@ -457,33 +456,18 @@ describe("plan 042: the retired numbered grid stays retired", () => {
     expect(text).toContain("Follow through");
   });
 
-  // The two eight-card grids that sat back to back on /career-context, and
-  // overlapped each other, are one grid plus a chip row now.
-  it("/career-context no longer ships the duplicate import grid", () => {
-    const text = renderedText(<MarketingCareerContext />);
-    expect(text).toContain("Eight kinds of record, one place.");
-    expect(text).toContain("Built from what you already have");
-    expect(text).not.toContain("Bring what you already have.");
-    expect(text).not.toContain("Goals & preferences");
-    expect(text).not.toContain("Applications & contacts");
-  });
-
-  it("/career-context uses the cleaner v3 hero composition", () => {
+  it("/career-context keeps the simplified story and puts the graphic after the hero", () => {
     const { container } = render(<MarketingCareerContext />);
-    const heroImage = container.querySelector<HTMLImageElement>('.mh-route-hero-visual img');
-    expect(heroImage?.getAttribute("src")).toContain("career-context-card-civic-modern-v3-transparent.webp");
-    expect(heroImage).toHaveAttribute(
-      "alt",
-      "A layered Career Context card with rows for experience, applications, interviews and goals, built from a resume and interview notes",
-    );
+    expect(container.querySelector(".mh-route-hero")?.nextElementSibling).toHaveClass("mh-context-preview");
+    expect(container.querySelector(".mh-route-hero-visual")).toBeNull();
+    const text = renderedText(<MarketingCareerContext />);
+    expect(text).toContain("Put your experience to work.");
+    expect(text).toContain("Choose what you add. Edit, remove, or export it.");
+    expect(text).not.toContain("Eight kinds of record");
+    expect(text).not.toContain("A resume is a fraction");
+    expect(text).not.toContain("What goes in");
   });
 
-  // Numbering is a CSS counter now, so it must not be back in the strings.
-  it("/career-context ownership copy carries no baked-in numbering", () => {
-    const text = renderedText(<MarketingCareerContext />);
-    expect(text).toContain("You choose what goes in, and you can edit or remove anything.");
-    expect(text).not.toMatch(/0[1-4] You choose what goes in/);
-  });
 });
 
 describe("language rules hold on shipped pages", () => {

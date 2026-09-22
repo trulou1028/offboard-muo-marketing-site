@@ -8,6 +8,15 @@ Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc`.
 Planning branch: `codex/motion-polish-plans`. Depends on plan 052's shared motion
 contract/runtime. Recommended order: 052, 053, 054; 053 is not a hard dependency.
 
+## Owner revision (2026-09-22): simplify the page
+
+The approved audit supersedes the earlier supporting-copy direction. Put the
+static card grid immediately below a compact text hero. Remove the resume
+problem/photo, eight-category inventory, input descriptions, older hero image,
+and sibling promo paragraphs. Keep three short benefits, compact Lumo and
+integrations links, ownership copy, and a final CTA without a repeated body.
+Copy remains governed by COPY.md § 10. Review remains in PR #125.
+
 ## Owner revision (2026-09-19)
 
 Replace the interactive source-and-output composition with a single, legible

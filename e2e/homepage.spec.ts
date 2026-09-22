@@ -859,3 +859,10 @@ test("no redirect lands on a page that is hidden from search", async ({ page }) 
   }
   expect(landingOnHidden).toEqual([]);
 });
+
+test("Career Context presents the product before its benefits", async ({ page }) => {
+  await page.goto("/career-context");
+  await expect(page.locator(".mh-route-hero + .mh-context-preview")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Put your experience to work." })).toBeVisible();
+  await expect(page.getByText("A resume is a fraction of your career.", { exact: true })).toHaveCount(0);
+});
