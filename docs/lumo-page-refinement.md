@@ -1,7 +1,7 @@
 # Lumo page refinement, 2026-09-22
 
-Owner-directed implementation on `codex/lumo-page-polish`, independent of the
-Career Context review branch. Apply its approved design direction: centered
+Owner-directed implementation on `codex/lumo-page-polish`, now combined with the
+Career Context review branch for the shared hero-overlap treatment. Apply its approved design direction: centered
 hero, concise copy, visible product, and complete supporting compositions.
 
 - Relume MCP `section_layout27`: product-view split with introduction and real screenshot.
@@ -24,3 +24,10 @@ to Career Context after capture.
 COPY.md § 12 governs the copy. Desktop, tablet, and mobile render checks are
 required, with deliberate updates only to the three Lumo visual baselines.
 The screenshot is static; the prompts shown on the marketing page are examples.
+
+## Shared hero treatment
+
+Career Context, Lumo, and Integrations use centered heroes with 144px visual
+overlap on desktop and 64px on mobile. Extra hero padding keeps the CTA clear.
+Lumo presents its screenshot before the supporting copy; Integrations presents
+its existing integration marks in an overlapping panel. No copy changes.

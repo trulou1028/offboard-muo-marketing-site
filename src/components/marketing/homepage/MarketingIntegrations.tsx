@@ -177,15 +177,16 @@ function Permissions() {
 export function MarketingIntegrations() {
   return (
     <MarketingShell current="integrations">
-      <main id="main-content">
+      <main id="main-content" className="mh-page-integrations mh-overlap-page">
         <PageHero
           kicker="Integrations"
           title="Use Offboard from the AI you already use."
           body="Your job search does not live in one tab. Connect Offboard to the assistants you already work in, and save opportunities, update applications, and add to your Career Context from wherever the conversation happens."
           current="integrations"
-          visual={<HeroMarks />}
+          aside={false}
           cta="Get started free"
         />
+        <div className="mh-product-overlap mh-integrations-preview mh-section"><HeroMarks /></div>
         <Showcase />
         <Demos />
         <Permissions />

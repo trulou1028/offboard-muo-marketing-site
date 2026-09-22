@@ -875,3 +875,32 @@ test("Lumo product view renders at desktop and mobile widths", async ({ page }) 
   }
   expect(errors).toEqual([]);
 });
+
+test("Career Context presents the product before its benefits", async ({ page }) => {
+  await page.goto("/career-context");
+  await expect(page.locator(".mh-route-hero + .mh-context-preview")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Put your experience to work." })).toBeVisible();
+  await expect(page.getByText("A resume is a fraction of your career.", { exact: true })).toHaveCount(0);
+});
+
+test("product visuals overlap the hero without covering its CTA", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", error => errors.push(error.message));
+  page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of ["/career-context", "/lumo", "/integrations"]) {
+      await page.goto(route);
+      const hero = await page.locator(".mh-route-hero").boundingBox();
+      const visual = await page.locator(".mh-product-overlap").boundingBox();
+      const cta = await page.locator(".mh-route-hero .mh-primary-cta").boundingBox();
+      expect(hero).not.toBeNull();
+      expect(visual).not.toBeNull();
+      expect(cta).not.toBeNull();
+      expect(visual!.y).toBeLessThan(hero!.y + hero!.height);
+      expect(visual!.y).toBeGreaterThan(cta!.y + cta!.height + 24);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+    }
+  }
+  expect(errors).toEqual([]);
+});

@@ -13,7 +13,7 @@ const USE_CASES = [
 export function MarketingLumo() {
   return (
     <MarketingShell current="lumo">
-      <main id="main-content" className="mh-page-lumo">
+      <main id="main-content" className="mh-page-lumo mh-overlap-page">
         <PageHero
           kicker="Meet Lumo"
           title="The AI that already understands your career."
@@ -23,6 +23,12 @@ export function MarketingLumo() {
           aside={false}
           cta="Get started free"
         />
+        <div className="mh-product-overlap mh-section">
+          <figure className="mh-lumo-product-shot">
+            <Image src="/marketing/app/lumo-prompts-live-v1.jpg" alt="Lumo's prompt library in the Offboard app, with options to track a job, update an application, prepare for an interview, review progress, add a contact, and check a posting" width={672} height={624} sizes="(max-width: 800px) calc(100vw - 48px), 600px" />
+            <figcaption>Inside Lumo: the prompt library.</figcaption>
+          </figure>
+        </div>
         <section className="mh-lumo-product mh-section" aria-labelledby="product-title">
           <div className="mh-copy-block">
             <span className="mh-kicker">Ask Lumo</span>
@@ -31,10 +37,7 @@ export function MarketingLumo() {
             <span className="mh-context-callout"><LumoMark />Built into Offboard</span>
             <Link className="mh-section-link" href="/career-context">See what Lumo works from <ArrowRight aria-hidden="true" /></Link>
           </div>
-          <figure className="mh-lumo-product-shot">
-            <Image src="/marketing/app/lumo-prompts-live-v1.jpg" alt="Lumo's prompt library in the Offboard app, with options to track a job, update an application, prepare for an interview, review progress, add a contact, and check a posting" width={672} height={624} sizes="(max-width: 800px) calc(100vw - 48px), 600px" />
-            <figcaption>Inside Lumo: the prompt library.</figcaption>
-          </figure>
+
         </section>
         <section className="mh-lumo-use-cases mh-section" aria-labelledby="ask-title">
           <div className="mh-copy-block">
