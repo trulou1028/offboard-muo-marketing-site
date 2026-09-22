@@ -1224,7 +1224,6 @@ ul.mh-also-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32p
 figure.mh-context-product-shot { margin-top: clamp(36px, 4vw, 52px); }
 .mh-context-product-shot-frame { overflow: hidden; background: var(--mh-ink); border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); box-shadow: var(--mh-shadow-overlay); }
 .mh-context-product-shot img { display: block; width: 100%; height: auto; }
-.mh-context-product-shot img.is-mobile { display: none; }
 .mh-context-product-shot figcaption { margin-top: 12px; color: var(--mh-muted); font-size: 13px; line-height: 1.5; }
 .mh-route-privacy .mh-section-link { margin-top: 28px; }
 /* /lumo: prompts as messages, and the photo on the forest band. */
@@ -2050,8 +2049,6 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .mh-packet-output { min-height: 440px; }
   .mh-packet-output-head { flex-direction: column; gap: 12px; }
   .mh-packet-summary li { align-items: flex-start; }
-  .mh-context-product-shot img.is-desktop { display: none; }
-  .mh-context-product-shot img.is-mobile { display: block; }
   .mh-stage-strip > li > .mh-state-chip { grid-row: 3; grid-column: 2; justify-self: start; margin-top: 4px; }
   .mh-qblock h3 { font-size: 20px; }
   .marketing-homepage { --mh-gutter: 20px; --mh-h2: 40px; --mh-h2-sm: 32px; }
@@ -2157,19 +2154,34 @@ ul.mh-record-sources { top: 24px; right: 0; display: flex; }
   .marketing-homepage *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }
 
-/* Career Context: show the record before explaining its benefits. */
+/* Relume Layout 78 / 27 structure, adapted to Civic Modern. */
+.marketing-homepage .mh-page-context .mh-route-hero { padding-top: 144px; padding-bottom: 64px; text-align: center; }
+.marketing-homepage .mh-page-context .mh-route-hero > div { width: 100%; max-width: 1200px; margin-inline: auto; }
+.marketing-homepage .mh-page-context .mh-route-hero h1 { font-size: clamp(38px, 4.4vw, 64px); }
+.marketing-homepage .mh-page-context .mh-route-hero p { max-width: 680px; margin-inline: auto; }
 .marketing-homepage .mh-context-preview { padding-top: 32px; padding-bottom: 32px; }
 .marketing-homepage .mh-context-preview figure { margin-top: 0; }
-.marketing-homepage .mh-context-benefits { padding-top: 32px; padding-bottom: var(--mh-section-y-tight); }
-.marketing-homepage .mh-context-benefits > h2 { font-size: var(--mh-h2); line-height: 1.15; }
-.marketing-homepage .mh-context-benefit-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; }
-.marketing-homepage .mh-context-benefit-list li { padding-top: 20px; border-top: 1px solid var(--mh-line); }
-.marketing-homepage .mh-context-benefit-list h3 { font-size: 20px; }
-.marketing-homepage .mh-context-benefit-list p { margin-top: 12px; color: var(--mh-muted); }
-.marketing-homepage .mh-context-links { display: flex; flex-wrap: wrap; gap: 16px 32px; margin-top: 32px; }
-
+.marketing-homepage .mh-context-benefits { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 7vw, 112px); align-items: start; padding-block: var(--mh-section-y); }
+.marketing-homepage .mh-context-benefit-list { display: grid; gap: 28px; }
+.marketing-homepage .mh-context-benefit-list li { display: grid; grid-template-columns: 48px 1fr; gap: 24px; padding-bottom: 28px; border-bottom: 1px solid var(--mh-line); }
+.marketing-homepage .mh-context-benefit-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+.marketing-homepage .mh-context-feature-icon { display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--mh-line); border-radius: var(--mh-radius-card); color: var(--mh-forest); }
+.marketing-homepage .mh-context-benefit-list h3 { font-size: 26px; }
+.marketing-homepage .mh-context-benefit-list p { margin-top: 10px; color: var(--mh-muted); line-height: 1.6; }
+.marketing-homepage .mh-context-links { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 16px; }
 .marketing-homepage .mh-context-links .mh-section-link { margin-top: 0; }
+.marketing-homepage .mh-context-ownership { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 7vw, 112px); align-items: center; padding-block: var(--mh-section-y); background: var(--mh-white); }
+.marketing-homepage .mh-context-control-points { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 20px; }
+.marketing-homepage .mh-context-control-points svg { width: 24px; height: 24px; color: var(--mh-forest); }
+.marketing-homepage .mh-context-control-points h3 { margin-top: 16px; font-size: 22px; }
+.marketing-homepage .mh-context-control-points p { margin-top: 8px; font-size: 15px; line-height: 1.6; color: var(--mh-muted); }
+.marketing-homepage .mh-context-ownership-photo { position: relative; min-height: 520px; overflow: hidden; border-radius: var(--mh-radius-card); }
+.marketing-homepage .mh-context-ownership-photo img { object-fit: cover; }
 
-@media (max-width: 700px) {
-  .marketing-homepage .mh-context-benefit-list { grid-template-columns: 1fr; gap: 24px; }
+@media (max-width: 800px) {
+  .marketing-homepage .mh-page-context .mh-route-hero { padding-top: 116px; padding-bottom: 48px; }
+  .marketing-homepage .mh-page-context .mh-route-hero p { font-size: 18px; line-height: 1.6; }
+  .marketing-homepage .mh-context-benefits,
+  .marketing-homepage .mh-context-ownership { grid-template-columns: 1fr; gap: 40px; }
+  .marketing-homepage .mh-context-ownership-photo { min-height: 360px; }
 }

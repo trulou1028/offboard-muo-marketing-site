@@ -96,7 +96,7 @@ describe("Career Context example copy stays governed", () => {
     for (const line of [
       "Your experience, goals, and job search in one record, ready for your next application or interview.",
       "Illustrative example",
-      "Career Context grid showing Resume, Job search target, Layoff and urgency, Resume or profile source, Email, and ChatGPT cards",
+      "Illustrative Offboard dashboard with left navigation, top toolbar, and all six About You and Connected Sources cards",
     ]) {
       expect(COPY_DOC).toContain(line);
     }

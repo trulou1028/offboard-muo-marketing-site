@@ -8,6 +8,17 @@ Authored: 2026-09-18. Source baseline: marketing `origin/main` at `5dfebdc`.
 Planning branch: `codex/motion-polish-plans`. Depends on plan 052's shared motion
 contract/runtime. Recommended order: 052, 053, 054; 053 is not a hard dependency.
 
+## Owner revision (2026-09-22): dashboard and complete supporting layouts
+
+Replace the card-only illustration with a full dashboard shell, including left
+navigation and the top toolbar. Keep both context card groups visible and omit
+the score. The account is fictional. Use a full-width centered hero with authored
+sentence breaks. Benefits adapt Relume MCP Layout 78's two-column composition;
+ownership adapts Layout 27 with concise control details and a documentary photo.
+Both are translated to Civic Modern CSS, with no Tailwind or new dependencies.
+This supersedes the earlier bare supporting-section layout, while retaining the
+shorter content hierarchy. Review remains in PR #125.
+
 ## Owner revision (2026-09-22): simplify the page
 
 The approved audit supersedes the earlier supporting-copy direction. Put the

@@ -1366,21 +1366,28 @@ illustration, and sibling promotional paragraphs are retired.
 ### Product illustration, directly below the hero
 
 - Caption: `Illustrative example`
-- Alt: `Career Context grid showing Resume, Job search target, Layoff and urgency, Resume or profile source, Email, and ChatGPT cards`
+- Alt: `Illustrative Offboard dashboard with left navigation, top toolbar, and all six About You and Connected Sources cards`
 - Static illustration with complete About You and Connected Sources groups.
-  Desktop has two three-card rows; mobile uses two cards and a full-width third
-  card per group. No app headline, context score, or live controls.
+  The full dashboard shell includes left navigation and a top toolbar with a
+  fictional Alex Morgan account. Both three-card groups stay visible. No context
+  score or live controls. The same complete composition scales on mobile.
 
-### Benefits
+### Benefits (Relume MCP Layout 78 adaptation)
 
+- Kicker: `Built from your experience`
+- Intro: `Bring your resume, add what matters, and use that context across your search.`
 - H2: `Put your experience to work.`
 - `Tailored resumes`: `Bring forward the experience that fits each role.`
 - `Application Packets`: `Keep research and application materials together.`
 - `Interview prep`: `Prepare with examples from your own experience.`
 - Links: `See how Lumo works` → `/lumo`; `See the integrations` → `/integrations`
 
-### Ownership
+### Ownership (Relume MCP Layout 27 adaptation)
 
+- Kicker: `Yours to shape`
+- `Keep it current`: `Update your record as your experience and goals change.`
+- `Take it with you`: `Export what you have built. It is yours.`
+- Photo alt: `A woman at her dining table reviewing her experience with a laptop, notebook, and printed pages`
 - H2: `Your context. Your control.`
 - Body: `Choose what you add. Edit, remove, or export it.`
 - Link: `See exactly who can see what` → `/privacy-security`

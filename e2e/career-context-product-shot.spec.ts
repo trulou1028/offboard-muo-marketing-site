@@ -12,12 +12,11 @@ test.describe("Career Context card grid", () => {
     await expect(figure).toBeVisible();
     await expect(figure.locator("figcaption")).toHaveText("Illustrative example");
     await expect(section.getByRole("button")).toHaveCount(0);
-    await expect(figure.locator("img.is-desktop")).toBeVisible();
-    await expect(figure.locator("img.is-mobile")).toBeHidden();
+    await expect(figure.locator("img")).toBeVisible();
+    await expect(figure.locator("img")).toHaveJSProperty("complete", true);
 
     await page.setViewportSize({ width: 390, height: 844 });
-    await expect(figure.locator("img.is-desktop")).toBeHidden();
-    await expect(figure.locator("img.is-mobile")).toBeVisible();
+    await expect(figure.locator("img")).toBeVisible();
     const pageWidth = await page.evaluate(() => document.documentElement.scrollWidth);
     expect(pageWidth).toBeLessThanOrEqual(390);
     expect(errors).toEqual([]);
